@@ -3,16 +3,17 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/commons-collections-2.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-lang-2.3.jar"/>
-	<classpathentry kind="lib" path="lib/commons-lang-2.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="lib/commons-lang-2.3-sources.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.0.4.jar"/>
-	<classpathentry kind="lib" path="lib/log4j-1.2.15.jar"/>
-	<classpathentry kind="lib" path="lib/domkee.jar"/>
-	<classpathentry kind="lib" path="lib/itext-2.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/utilix.jar"/>
-	<classpathentry kind="lib" path="lib/vallia.jar"/>
-	<classpathentry kind="lib" path="lib/junit4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/_JRimum/lib/commons-collections-2.1.1.jar"/>
+	<classpathentry kind="lib" path="/_JRimum/lib/commons-lang-2.3.jar" sourcepath="/_JRimum/lib/commons-lang-2.3-sources.jar"/>
+	<classpathentry kind="lib" path="/_JRimum/lib/commons-lang-2.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="/_JRimum/lib/commons-lang-2.3-sources.jar"/>
+	<classpathentry kind="lib" path="/_JRimum/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/_JRimum/lib/itext-2.0.1.jar" sourcepath="D:/Gilmatryx/TDS/Java/LIB/itext-docs-2.0.1"/>
+	<classpathentry kind="lib" path="/_JRimum/lib/log4j-1.2.15.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/_JRimum"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Domkee"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Utilix"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Vallia"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
