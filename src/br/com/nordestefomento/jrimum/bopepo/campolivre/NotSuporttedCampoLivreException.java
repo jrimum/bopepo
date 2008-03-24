@@ -1,6 +1,8 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-public class NotSuporttedCampoLivreException extends Exception {
+import br.com.nordestefomento.jrimum.JRimumException;
+
+public class NotSuporttedCampoLivreException extends JRimumException {
 
 	/**
 	 * 
@@ -9,22 +11,22 @@ public class NotSuporttedCampoLivreException extends Exception {
 
 	public NotSuporttedCampoLivreException() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public NotSuporttedCampoLivreException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public NotSuporttedCampoLivreException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public NotSuporttedCampoLivreException(Throwable cause) {
 		super(cause);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	

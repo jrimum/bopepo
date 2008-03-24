@@ -1,11 +1,14 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-public class NotSuporttedBancoException extends Exception {
+import br.com.nordestefomento.jrimum.JRimumException;
+
+public class NotSuporttedBancoException extends JRimumException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private static String msg = "Banco não suportado por não haver " +
 								"implementações de Campo Livre para " +
 								"o mesmo.";
@@ -13,25 +16,19 @@ public class NotSuporttedBancoException extends Exception {
 	
 	public NotSuporttedBancoException() {
 		super(msg);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@SuppressWarnings("unused")
 	private NotSuporttedBancoException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Auto-generated constructor stub
 	}
 	@SuppressWarnings("unused")
 	private NotSuporttedBancoException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public NotSuporttedBancoException(Throwable cause) {
 		super(msg, cause);
-		// TODO Auto-generated constructor stub
 	}
 	
-	
-
 }
