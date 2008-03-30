@@ -1,38 +1,32 @@
 /*
- * Copyright 2007, JMatryx Group
+ * Copyright 2008 JRimum Project
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
- * the License at
+ * the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by
+ * applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+ * OF ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
  * 
- * <a href="http://www.apache.org/licenses/LICENSE-2.0">
- * http://www.apache.org/licenses/LICENSE-2.0 </a>
+ * Created at: 30/03/2008 - 18:04:06
  * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
+ * ================================================================================
  * 
- * Copyright 2007, Grupo JMatryx
+ * Direitos autorais 2008 JRimum Project
  * 
- * Licenciado sob a licença da Apache, versão 2.0 (a “licença”); você não pode
- * usar este arquivo exceto na conformidade com a licença. Você pode obter uma
- * cópia da licença em
+ * Licenciado sob a Licença Apache, Versão 2.0 ("LICENÇA"); você não pode usar
+ * esse arquivo exceto em conformidade com a esta LICENÇA. Você pode obter uma
+ * cópia desta LICENÇA em http://www.apache.org/licenses/LICENSE-2.0 A menos que
+ * haja exigência legal ou acordo por escrito, a distribuição de software sob
+ * esta LICENÇA se dará “COMO ESTÁ”, SEM GARANTIAS OU CONDIÇÕES DE QUALQUER
+ * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
+ * reger permissões e limitações sob esta LICENÇA.
  * 
- * <a href="http://www.apache.org/licenses/LICENSE-2.0">
- * http://www.apache.org/licenses/LICENSE-2.0 </a>
- * 
- * A menos que seja requerido pela aplicação da lei ou esteja de acordo com a
- * escrita, o software distribuído sob esta licença é distribuído “COMO É”
- * BASE,SEM AS GARANTIAS OU às CONDIÇÕES DO TIPO, expresso ou implicado. Veja a
- * licença para as permissões sobre a línguagem específica e limitações quando
- * sob licença.
- * 
- * 
- * Created at / Criado em : 17/03/2007 - 17:34:31
+ * Criado em: 30/03/2008 - 18:04:06
  * 
  */
+
 
 package br.com.nordestefomento.jrimum.bopepo;
 
