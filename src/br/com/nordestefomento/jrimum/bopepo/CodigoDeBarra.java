@@ -49,7 +49,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.LineOfFields;
-import br.com.nordestefomento.jrimum.utilix.Operator4Date;
+import br.com.nordestefomento.jrimum.utilix.Util4Date;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.DV4BoletoCodigoDeBarra;
 
 
@@ -292,7 +292,7 @@ public final class CodigoDeBarra extends LineOfFields{
 	 */
 	private void calculateAndSetFatorDeVencimento(Date vencimento) {
 
-		fatorDeVencimento.setField(new Long(Operator4Date.calcularDiferencaEmDias(
+		fatorDeVencimento.setField(new Long(Util4Date.calcularDiferencaEmDias(
 				DATA_BASE_DO_FATOR_DE_VENCIMENTO, vencimento)).intValue());
 	}
 

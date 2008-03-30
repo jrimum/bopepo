@@ -39,7 +39,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.utilix.Operator4String;
+import br.com.nordestefomento.jrimum.utilix.Util4String;
 
 /**
  * 
@@ -128,7 +128,7 @@ class CLBancoReal extends ACLBancoReal {
 		clBancoReal.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
 		clBancoReal.add(new Field<String>(conta.getNumeroDaConta().getDigitoDaConta(), 1, Filler.ZERO_LEFT));
 		
-		clBancoReal.add(new Field<String>(Operator4String.eliminateSymbols(titulo.getNumeroDoDocumento()), 13, Filler.ZERO_LEFT));
+		clBancoReal.add(new Field<String>(Util4String.eliminateSymbols(titulo.getNumeroDoDocumento()), 13, Filler.ZERO_LEFT));
 		
 		return clBancoReal;
 	}

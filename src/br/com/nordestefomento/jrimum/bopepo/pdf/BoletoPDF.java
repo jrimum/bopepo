@@ -63,8 +63,8 @@ import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.type.Localidade;
 import br.com.nordestefomento.jrimum.domkee.type.Logradouro;
 import br.com.nordestefomento.jrimum.utilix.Documento;
-import br.com.nordestefomento.jrimum.utilix.Operator4Date;
-import br.com.nordestefomento.jrimum.utilix.Operator4Monetary;
+import br.com.nordestefomento.jrimum.utilix.Util4Date;
+import br.com.nordestefomento.jrimum.utilix.Util4Monetary;
 
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.DocumentException;
@@ -683,7 +683,7 @@ public class BoletoPDF extends Documento {
 		boletoPDF.contentByte.setTextMatrix(p.x,p.y);	   
 		
 		if(isNotNull(boleto.getDataDeProcessamento()))
-			boletoPDF.contentByte.showText(Operator4Date.fmt_dd_MM_yyyy.format(boleto.getDataDeProcessamento()));
+			boletoPDF.contentByte.showText(Util4Date.fmt_dd_MM_yyyy.format(boleto.getDataDeProcessamento()));
 		
 	}
 
@@ -731,7 +731,7 @@ public class BoletoPDF extends Documento {
 		boletoPDF.contentByte.setTextMatrix(p.x,p.y);	  
 		
 		if(isNotNull(boleto.getTitulo().getDataDoDocumento()))
-			boletoPDF.contentByte.showText(Operator4Date.fmt_dd_MM_yyyy.format(boleto.getTitulo().getDataDoDocumento()));
+			boletoPDF.contentByte.showText(Util4Date.fmt_dd_MM_yyyy.format(boleto.getTitulo().getDataDoDocumento()));
 		
 	}
 	
@@ -763,7 +763,7 @@ public class BoletoPDF extends Documento {
 		boletoPDF.contentByte.setTextMatrix(p.x,p.y);
 		
 		if(isNotNull(boleto.getTitulo().getValor()))
-			boletoPDF.contentByte.showText(Operator4Monetary.fmt_Real.format(boleto.getTitulo().getValor()));
+			boletoPDF.contentByte.showText(Util4Monetary.fmt_Real.format(boleto.getTitulo().getValor()));
 		
 	}
 
@@ -777,7 +777,7 @@ public class BoletoPDF extends Documento {
 		boletoPDF.contentByte.setTextMatrix(p.x,p.y);
 		
 		if(isNotNull(boleto.getTitulo().getDataDoVencimento()))
-				boletoPDF.contentByte.showText(Operator4Date.fmt_dd_MM_yyyy.format(boleto.getTitulo().getDataDoVencimento()));
+				boletoPDF.contentByte.showText(Util4Date.fmt_dd_MM_yyyy.format(boleto.getTitulo().getDataDoVencimento()));
 		
 	}
 

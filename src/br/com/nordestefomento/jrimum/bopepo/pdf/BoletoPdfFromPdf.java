@@ -35,8 +35,8 @@ import br.com.nordestefomento.jrimum.domkee.type.EnumTitulo;
 import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.type.Localidade;
 import br.com.nordestefomento.jrimum.domkee.type.Logradouro;
-import br.com.nordestefomento.jrimum.utilix.Operator4Date;
-import br.com.nordestefomento.jrimum.utilix.Operator4Monetary;
+import br.com.nordestefomento.jrimum.utilix.Util4Date;
+import br.com.nordestefomento.jrimum.utilix.Util4Monetary;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;
@@ -176,7 +176,7 @@ public class BoletoPdfFromPdf extends ACurbitaObject {
 
 	private void setDataProcessamento() throws IOException, DocumentException {
 		// TODO Auto-generated method stub		
-		form.setField("txtFcDataProcessamento", Operator4Date.fmt_dd_MM_yyyy.format(boleto.getDataDeProcessamento()));
+		form.setField("txtFcDataProcessamento", Util4Date.fmt_dd_MM_yyyy.format(boleto.getDataDeProcessamento()));
 	}
 
 
@@ -194,7 +194,7 @@ public class BoletoPdfFromPdf extends ACurbitaObject {
 
 	private void setDataDocumento() throws IOException, DocumentException {
 		// TODO Auto-generated method stub
-		form.setField("txtFcDataDocumento", Operator4Date.fmt_dd_MM_yyyy.format(boleto.getTitulo().getDataDoDocumento()));			
+		form.setField("txtFcDataDocumento", Util4Date.fmt_dd_MM_yyyy.format(boleto.getTitulo().getDataDoDocumento()));			
 		
 	}
 
@@ -362,15 +362,15 @@ public class BoletoPdfFromPdf extends ACurbitaObject {
 
 	private void setValorDocumento() throws IOException, DocumentException {
 		// TODO Auto-generated method stub
-		form.setField("txtRsValorDocumento", Operator4Monetary.fmt_Real.format(boleto.getTitulo().getValor()));		
-		form.setField("txtFcValorDocumento", Operator4Monetary.fmt_Real.format(boleto.getTitulo().getValor()));		
+		form.setField("txtRsValorDocumento", Util4Monetary.fmt_Real.format(boleto.getTitulo().getValor()));		
+		form.setField("txtFcValorDocumento", Util4Monetary.fmt_Real.format(boleto.getTitulo().getValor()));		
 	}
 
 
 	private void setDataVencimeto() throws IOException, DocumentException {
 		// TODO Auto-generated method stub
-		form.setField("txtRsDataVencimento", Operator4Date.fmt_dd_MM_yyyy.format(boleto.getTitulo().getDataDoVencimento()));		
-		form.setField("txtFcDataVencimento", Operator4Date.fmt_dd_MM_yyyy.format(boleto.getTitulo().getDataDoVencimento()));		
+		form.setField("txtRsDataVencimento", Util4Date.fmt_dd_MM_yyyy.format(boleto.getTitulo().getDataDoVencimento()));		
+		form.setField("txtFcDataVencimento", Util4Date.fmt_dd_MM_yyyy.format(boleto.getTitulo().getDataDoVencimento()));		
 	}
 
 

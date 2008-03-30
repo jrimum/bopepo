@@ -40,7 +40,7 @@ import org.apache.commons.lang.StringUtils;
 
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.LineOfFields;
-import br.com.nordestefomento.jrimum.utilix.Operator4String;
+import br.com.nordestefomento.jrimum.utilix.Util4String;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.DV4BoletoLinhaDigitavel;
 
 
@@ -279,13 +279,13 @@ public final class LinhaDigitavel extends LineOfFields {
 	public String write(){
 		
 		return new StringBuilder(campo1.write()).
-		append(Operator4String.WHITE_SPACE).
+		append(Util4String.WHITE_SPACE).
 		append(campo2.write()).
-		append(Operator4String.WHITE_SPACE).
+		append(Util4String.WHITE_SPACE).
 		append(campo3.write()).
-		append(Operator4String.WHITE_SPACE).
+		append(Util4String.WHITE_SPACE).
 		append(campo4.write()).
-		append(Operator4String.WHITE_SPACE).
+		append(Util4String.WHITE_SPACE).
 		append(campo5.write()).toString();
 
 	}

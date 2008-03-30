@@ -19,7 +19,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.domkee.type.EnumBanco;
 import br.com.nordestefomento.jrimum.domkee.type.EnumMoeda;
-import br.com.nordestefomento.jrimum.utilix.Operator4Date;
+import br.com.nordestefomento.jrimum.utilix.Util4Date;
 
 
 /**
@@ -112,7 +112,7 @@ public class TestBoleto extends TestCase {
 		
 		Date agora = new Date();
 		
-		assertEquals(Operator4Date.fmt_dd_MM_yyyy.format(agora), Operator4Date.fmt_dd_MM_yyyy.format(boleto.getDataDeProcessamento()));
+		assertEquals(Util4Date.fmt_dd_MM_yyyy.format(agora), Util4Date.fmt_dd_MM_yyyy.format(boleto.getDataDeProcessamento()));
 		
 	}
 
