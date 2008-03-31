@@ -31,10 +31,6 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import junit.framework.TestCase;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.FactoryCampoLivre;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
@@ -95,8 +91,19 @@ public class TestCLCaixaEconomicaFederalSINCO extends TestCase {
 		//Nosso número > 17:
 		titulo.setNossoNumero("010000000020061732");
 		
-		clCaixaSINCO = FactoryCampoLivre.getInstance(titulo);
-		assertNull(clCaixaSINCO);
+		try{
+			
+			clCaixaSINCO = FactoryCampoLivre.getInstance(titulo);
+			
+			assertTrue(false);
+			
+			fail("Teste Falho!");
+			
+		} catch(NotSuporttedCampoLivreException e){
+			assertTrue(true);
+		}
+		
+		
 	}
 
 	public void testWrite() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {

@@ -44,7 +44,7 @@ import br.com.nordestefomento.jrimum.bopepo.campolivre.FactoryCampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
-import br.com.nordestefomento.jrimum.bopepo.pdf.BoletoPdfFromPdf;
+import br.com.nordestefomento.jrimum.bopepo.pdf.BoletoPDF;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Util4Date;
 
@@ -208,33 +208,33 @@ public final class Boleto extends ACurbitaObject{
 	
 	public File getAsPDF(String pathName)throws IllegalArgumentException, IOException, DocumentException{
 
-		BoletoPdfFromPdf boletoPdfFromPdf = BoletoPdfFromPdf.getInstance(this);
+		BoletoPDF boletoPDF = BoletoPDF.getInstance(this);
 		
 		if(log.isDebugEnabled())
-			log.debug("documento instance : " + boletoPdfFromPdf);
+			log.debug("documento instance : " + boletoPDF);
 		
-		return boletoPdfFromPdf.getFile(pathName);
+		return boletoPDF.getFile(pathName);
 	}
 	
 	public ByteArrayOutputStream getAsStream() throws IOException, DocumentException{
 		
-		BoletoPdfFromPdf boletoPdfFromPdf = BoletoPdfFromPdf.getInstance(this);
+		BoletoPDF boletoPDF = BoletoPDF.getInstance(this);
 		
 		if(log.isDebugEnabled())
-			log.debug("documento instance : "+boletoPdfFromPdf);
+			log.debug("documento instance : "+boletoPDF);
 		
-		return boletoPdfFromPdf.getStream();
+		return boletoPDF.getStream();
 		
 	}
 	
 	public byte[] getAsByteArray() throws IOException, DocumentException{
 		
-		BoletoPdfFromPdf boletoPdfFromPdf = BoletoPdfFromPdf.getInstance(this);
+		BoletoPDF boletoPDF = BoletoPDF.getInstance(this);
 		
 		if(log.isDebugEnabled())
-			log.debug("documento instance : "+boletoPdfFromPdf);
+			log.debug("documento instance : "+boletoPDF);
 		
-		return boletoPdfFromPdf.getBytes();
+		return boletoPDF.getBytes();
 	}
 	
 	private void load(){

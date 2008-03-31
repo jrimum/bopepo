@@ -109,7 +109,7 @@ public class TestCLBancoDoBrasilNN17 extends TestCase {
 		
 		titulo.getCedente().addContaBancaria(contaBancaria);
 		
-		titulo.setNossoNumero("000000000001");
+		titulo.setNossoNumero("00000000000000001");
 		
 		clBancoDoBrasil = FactoryCampoLivre.getInstance(titulo);
 		

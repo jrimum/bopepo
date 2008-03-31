@@ -32,7 +32,6 @@ package br.com.nordestefomento.jrimum.bopepo.pdf;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
@@ -64,6 +63,7 @@ import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.type.Localidade;
 import br.com.nordestefomento.jrimum.domkee.type.Logradouro;
 import br.com.nordestefomento.jrimum.utilix.Util4Date;
+import br.com.nordestefomento.jrimum.utilix.Util4File;
 import br.com.nordestefomento.jrimum.utilix.Util4Monetary;
 
 import com.lowagie.text.DocumentException;
@@ -75,7 +75,7 @@ import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
 
-public class BoletoPdfFromPdf extends ACurbitaObject {
+public class BoletoPDF extends ACurbitaObject {
 
 	/**
 	 * 
@@ -89,15 +89,15 @@ public class BoletoPdfFromPdf extends ACurbitaObject {
 	private ByteArrayOutputStream outputStream;
 	private Boleto boleto;
 	
-	private  BoletoPdfFromPdf (Boleto boleto) {
+	private  BoletoPDF (Boleto boleto) {
 		super();
 		this.boleto = boleto;
 	}
 	
 	
-	public static BoletoPdfFromPdf getInstance(Boleto boleto) throws IOException, DocumentException {
+	public static BoletoPDF getInstance(Boleto boleto) throws IOException, DocumentException {
 		
-		BoletoPdfFromPdf boletoPdf = new BoletoPdfFromPdf(boleto);
+		BoletoPDF boletoPdf = new BoletoPDF(boleto);
 
 		boletoPdf.inicializar();
 		boletoPdf.preencher();
@@ -538,7 +538,7 @@ public class BoletoPdfFromPdf extends ACurbitaObject {
 		
 		if(isNotNull(conta.getAgencia().getDigitoDaAgencia()) && StringUtils.isNotBlank(conta.getAgencia().getDigitoDaAgencia())){
 			
-			sb.append(BoletoPdfFromPdf.SEPERADOR);
+			sb.append(BoletoPDF.SEPERADOR);
 			sb.append(conta.getAgencia().getDigitoDaAgencia());
 		}
 		
@@ -550,7 +550,7 @@ public class BoletoPdfFromPdf extends ACurbitaObject {
 			
 			if(isNotNull(conta.getNumeroDaConta().getDigitoDaConta())){
 				
-				sb.append(BoletoPdfFromPdf.SEPERADOR);
+				sb.append(BoletoPDF.SEPERADOR);
 				sb.append(conta.getNumeroDaConta().getDigitoDaConta());
 			}
 		}
@@ -566,7 +566,7 @@ public class BoletoPdfFromPdf extends ACurbitaObject {
 		if(isNotNull(boleto.getTitulo().getNossoNumero()))
 			sb.append(boleto.getTitulo().getNossoNumero());
 		if(isNotNull(boleto.getTitulo().getDigitoDoNossoNumero()))
-			sb.append(BoletoPdfFromPdf.SEPERADOR + boleto.getTitulo().getDigitoDoNossoNumero());
+			sb.append(BoletoPDF.SEPERADOR + boleto.getTitulo().getDigitoDoNossoNumero());
 		
 		form.setField("txtRsNossoNumero", sb.toString());
 		form.setField("txtFcNossoNumero", sb.toString());				
@@ -575,34 +575,13 @@ public class BoletoPdfFromPdf extends ACurbitaObject {
 	
 	
 	public File getFile(String pathName)throws IllegalArgumentException, IOException{
-		File file = null;
 		
-		if(StringUtils.isNotBlank(pathName)){
-			file = new File(pathName);
-			FileOutputStream fout = new FileOutputStream(file);
-			fout.write(outputStream.toByteArray());
-			
-			fout.flush();
-			fout.close();
-			
-		}else{
-			IllegalArgumentException e = new IllegalArgumentException("Path File [ "+pathName+" ] não permitido !");
-			log.error("Valor Não Permitido!",e);
-			throw e;
-		}
-		
-		return file;
+		return Util4File.bytes2File(pathName, outputStream.toByteArray());
 	}
 	
 	public ByteArrayOutputStream getStream() throws IOException{
 		
-		ByteArrayOutputStream outPuted = null;
-		
-		outPuted = new ByteArrayOutputStream();
-		
-		outPuted.write(outputStream.toByteArray());
-		
-		return outPuted;
+		return Util4File.bytes2Stream(outputStream.toByteArray());
 	}
 	
 	public byte[] getBytes(){
@@ -701,7 +680,7 @@ public class BoletoPdfFromPdf extends ACurbitaObject {
 		//boleto.getListaCamposExtra().put("txtNew", "Puta que pariu...");
 		
 		boleto.getAsPDF("testeBoletoPdfFromPdf.pdf");
-		//BoletoPdfFromPdf b = BoletoPdfFromPdf.getInstance(boleto);
+		//BoletoPDF b = BoletoPDF.getInstance(boleto);
 		//b.getFile("testeBoletoPdfFromPdf.pdf");
 	}
 	
