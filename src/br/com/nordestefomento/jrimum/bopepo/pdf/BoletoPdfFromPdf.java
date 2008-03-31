@@ -51,14 +51,12 @@ import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
-import br.com.nordestefomento.jrimum.domkee.entity.Banco;
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo.E_Aceite;
 import br.com.nordestefomento.jrimum.domkee.type.CEP;
-import br.com.nordestefomento.jrimum.domkee.type.CNPJ;
 import br.com.nordestefomento.jrimum.domkee.type.Endereco;
 import br.com.nordestefomento.jrimum.domkee.type.EnumBanco;
 import br.com.nordestefomento.jrimum.domkee.type.EnumTitulo;
@@ -191,13 +189,13 @@ public class BoletoPdfFromPdf extends ACurbitaObject {
 		Image imgBarCode = barCode.createImageWithBarcode(cb, null,null);
 		
 		//imgBarCode.scaleToFit(medidaField.width(), medidaField.height());
-		imgBarCode.scaleAbsolute(medidaField.width(), medidaField.height());
+		imgBarCode.scaleAbsolute(medidaField.getWidth(), medidaField.getHeight());
 		
 		//imgBarCode.setAbsolutePosition(posicaoField[1], posicaoField[2]);
 		
 		imgBarCode.setAbsolutePosition(
-										posicaoField[1] + (medidaField.width() - imgBarCode.scaledWidth()) / 2,
-										posicaoField[2] + (medidaField.height() - imgBarCode.scaledHeight()) / 2
+										posicaoField[1] + (medidaField.getWidth() - imgBarCode.getScaledWidth()) / 2,
+										posicaoField[2] + (medidaField.getHeight() - imgBarCode.getScaledHeight()) / 2
 									  );
 		
 		cb.addImage(imgBarCode);		
@@ -483,7 +481,7 @@ public class BoletoPdfFromPdf extends ACurbitaObject {
 				
 				// Ajustando o tamanho da imagem de acordo com o tamanho do campo.
 				//img.scaleToFit(imagemMedida.width(), imagemMedida.height());
-				imgLogoBanco.scaleAbsolute(medidaField.width(), medidaField.height());
+				imgLogoBanco.scaleAbsolute(medidaField.getWidth(), medidaField.getHeight());
 				
 				// A rotina abaixo tem por objetivo deixar a imagem posicionada no centro
 				// do field, tanto na perspectiva horizontal como na vertical. 
@@ -491,8 +489,8 @@ public class BoletoPdfFromPdf extends ACurbitaObject {
 				// efetuar a chamada a seguir:
 				// "img.setAbsolutePosition	(posicaoField[1], posicaoField[2]);"
 				imgLogoBanco.setAbsolutePosition(
-													posicaoField[1] + (medidaField.width() - imgLogoBanco.scaledWidth()) / 2,
-													posicaoField[2] + (medidaField.height() - imgLogoBanco.scaledHeight()) / 2
+													posicaoField[1] + (medidaField.getWidth() - imgLogoBanco.getScaledWidth()) / 2,
+													posicaoField[2] + (medidaField.getHeight() - imgLogoBanco.getScaledHeight()) / 2
 												);
 				
 				//cb = stamper.getUnderContent((int)posicaoField[0]);
@@ -503,10 +501,10 @@ public class BoletoPdfFromPdf extends ACurbitaObject {
 				// FICHA DE COMPENSAÇÃO
 				posicaoField = form.getFieldPositions("txtFcLogoBanco");
 				medidaField = new Rectangle(posicaoField[1], posicaoField[2], posicaoField[3], posicaoField[4]);		
-				imgLogoBanco.scaleAbsolute(medidaField.width(), medidaField.height());
+				imgLogoBanco.scaleAbsolute(medidaField.getWidth(), medidaField.getHeight());
 				imgLogoBanco.setAbsolutePosition(
-													posicaoField[1] + (medidaField.width() - imgLogoBanco.scaledWidth()) / 2,
-													posicaoField[2] + (medidaField.height() - imgLogoBanco.scaledHeight()) / 2
+													posicaoField[1] + (medidaField.getWidth() - imgLogoBanco.getScaledWidth()) / 2,
+													posicaoField[2] + (medidaField.getHeight() - imgLogoBanco.getScaledHeight()) / 2
 												);
 				cb = stamper.getOverContent((int)posicaoField[0]);
 				cb.addImage(imgLogoBanco);				
