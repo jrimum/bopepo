@@ -62,13 +62,14 @@ import br.com.nordestefomento.jrimum.domkee.type.EnumTitulo;
 import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.type.Localidade;
 import br.com.nordestefomento.jrimum.domkee.type.Logradouro;
+import br.com.nordestefomento.jrimum.utilix.RectanglePDF;
 import br.com.nordestefomento.jrimum.utilix.Util4Date;
 import br.com.nordestefomento.jrimum.utilix.Util4File;
 import br.com.nordestefomento.jrimum.utilix.Util4Monetary;
+import br.com.nordestefomento.jrimum.utilix.Util4PDF;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;
-import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.AcroFields;
 import com.lowagie.text.pdf.BarcodeInter25;
 import com.lowagie.text.pdf.PdfContentByte;
@@ -176,29 +177,14 @@ public class BoletoPDF extends ACurbitaObject {
 		barCode.setFont(null);
 		barCode.setN(3);
 		
-		// Variáveis necessárias para saber a posicao e as medidas do campo texto que será
-		// usado como base para a adição da imagem com o código de barras.
-		float[] posicaoField = null;
-		Rectangle medidaField  = null;
 		PdfContentByte cb = null;
 		
 		// FICHA DE COMPENSAÇÃO
-		posicaoField = form.getFieldPositions("txtFcCodigoBarra");
-		medidaField = new Rectangle(posicaoField[1], posicaoField[2], posicaoField[3], posicaoField[4]);		
-		cb = stamper.getOverContent((int)posicaoField[0]);
+		RectanglePDF field = new RectanglePDF(form.getFieldPositions("txtFcCodigoBarra"));		
+		cb = stamper.getOverContent(field.getPage());
 		Image imgBarCode = barCode.createImageWithBarcode(cb, null,null);
 		
-		//imgBarCode.scaleToFit(medidaField.width(), medidaField.height());
-		imgBarCode.scaleAbsolute(medidaField.getWidth(), medidaField.getHeight());
-		
-		//imgBarCode.setAbsolutePosition(posicaoField[1], posicaoField[2]);
-		
-		imgBarCode.setAbsolutePosition(
-										posicaoField[1] + (medidaField.getWidth() - imgBarCode.getScaledWidth()) / 2,
-										posicaoField[2] + (medidaField.getHeight() - imgBarCode.getScaledHeight()) / 2
-									  );
-		
-		cb.addImage(imgBarCode);		
+		Util4PDF.changeField2Image(stamper, field, imgBarCode);
 	}
 
 
@@ -469,47 +455,11 @@ public class BoletoPDF extends ACurbitaObject {
 						log.debug("Banco sem imagem da logo informada. Com base no código do banco, uma imagem foi encontrada no resource e esta sendo utilizada.");
 				}
 				
-				// Variáveis necessárias para saber a posicao e as medidas do campo texto que será
-				// usado como base para a adição da imagem com a logo do banco.
-				float[] posicaoField = null;
-				Rectangle medidaField  = null;
-				PdfContentByte cb = null;
-				
 				// RECIBO DO SACADO
-				posicaoField = form.getFieldPositions("txtRsLogoBanco");
-				medidaField = new Rectangle(posicaoField[1], posicaoField[2], posicaoField[3], posicaoField[4]);		
-				
-				// Ajustando o tamanho da imagem de acordo com o tamanho do campo.
-				//img.scaleToFit(imagemMedida.width(), imagemMedida.height());
-				imgLogoBanco.scaleAbsolute(medidaField.getWidth(), medidaField.getHeight());
-				
-				// A rotina abaixo tem por objetivo deixar a imagem posicionada no centro
-				// do field, tanto na perspectiva horizontal como na vertical. 
-				// Caso não se queira mais posicionar a imagem no centro do field, basta
-				// efetuar a chamada a seguir:
-				// "img.setAbsolutePosition	(posicaoField[1], posicaoField[2]);"
-				imgLogoBanco.setAbsolutePosition(
-													posicaoField[1] + (medidaField.getWidth() - imgLogoBanco.getScaledWidth()) / 2,
-													posicaoField[2] + (medidaField.getHeight() - imgLogoBanco.getScaledHeight()) / 2
-												);
-				
-				//cb = stamper.getUnderContent((int)posicaoField[0]);
-				cb = stamper.getOverContent((int)posicaoField[0]);
-				cb.addImage(imgLogoBanco);
-				
+				Util4PDF.changeField2Image(stamper, form.getFieldPositions("txtRsLogoBanco"), imgLogoBanco);		
 				
 				// FICHA DE COMPENSAÇÃO
-				posicaoField = form.getFieldPositions("txtFcLogoBanco");
-				medidaField = new Rectangle(posicaoField[1], posicaoField[2], posicaoField[3], posicaoField[4]);		
-				imgLogoBanco.scaleAbsolute(medidaField.getWidth(), medidaField.getHeight());
-				imgLogoBanco.setAbsolutePosition(
-													posicaoField[1] + (medidaField.getWidth() - imgLogoBanco.getScaledWidth()) / 2,
-													posicaoField[2] + (medidaField.getHeight() - imgLogoBanco.getScaledHeight()) / 2
-												);
-				cb = stamper.getOverContent((int)posicaoField[0]);
-				cb.addImage(imgLogoBanco);				
-				
-				
+				Util4PDF.changeField2Image(stamper, form.getFieldPositions("txtFcLogoBanco"), imgLogoBanco);		
 			} 
 			else {
 				// Caso nenhuma imagem seja encontrada, um alerta é exibido.
