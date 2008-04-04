@@ -42,6 +42,8 @@ import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -55,6 +57,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo.E_Aceite;
+import br.com.nordestefomento.jrimum.domkee.ientity.IBanco;
 import br.com.nordestefomento.jrimum.domkee.type.CEP;
 import br.com.nordestefomento.jrimum.domkee.type.Endereco;
 import br.com.nordestefomento.jrimum.domkee.type.EnumBanco;
@@ -222,7 +225,7 @@ public class BoletoPDF extends ACurbitaObject {
 	private void setSacado() throws IOException, DocumentException {
 
 		// TODO Auto-generated method stub
-		StringBuilder sb = new StringBuilder("");
+		StringBuilder sb = new StringBuilder(StringUtils.EMPTY);
 		Pessoa sacado = boleto.getTitulo().getSacado();
 		
 
@@ -434,25 +437,28 @@ public class BoletoPDF extends ACurbitaObject {
 		// no código do banco.
 		ContaBancaria conta = boleto.getTitulo().getCedente().getContasBancarias().iterator().next();	
 		
-		// Verificando se há uma imagem e logo informada no objeto banco.
-		Image imgLogoBanco = conta.getBanco().getImgLogo(); 
-		
 		// Caso não exista, com base no código do banco será feita
 		// uma busca pela imagem no resource.img.
-		if ( imgLogoBanco == null) {			
-			URL url = this.getClass().getResource("/resource/img/" + conta.getBanco().getCodigoDeCompensacao()+".png"); 
+		if (conta.getBanco().getImgLogo() == null) {
+			
+			Image imgLogoBanco = null;
+			URL url = this.getClass().getResource("/resource/img/" + conta.getBanco().getCodigoDeCompensacao() + ".png");
+			
 			if (url != null)
 				imgLogoBanco = Image.getInstance(url);
 			
-			
 			if (imgLogoBanco != null) {
-				conta.getBanco().setImgLogo(imgLogoBanco);
+				
+				// Esta imagem gerada aqui é do tipo java.awt.Image
+				conta.getBanco().setImgLogo(ImageIO.read(url));
 				
 				// Se o banco em questão não é suportado nativamente pelo componente,
 				// então um alerta será exibido.
 				if (!(conta.getBanco() instanceof EnumBanco)) {
 					if(log.isDebugEnabled())
-						log.debug("Banco sem imagem da logo informada. Com base no código do banco, uma imagem foi encontrada no resource e esta sendo utilizada.");
+						log.debug("Banco sem imagem da logo informada. " +
+								"Com base no código do banco, uma imagem foi " +
+								"encontrada no resource e esta sendo utilizada.");
 				}
 				
 				// RECIBO DO SACADO
@@ -464,7 +470,8 @@ public class BoletoPDF extends ACurbitaObject {
 			else {
 				// Caso nenhuma imagem seja encontrada, um alerta é exibido.
 				if (log.isDebugEnabled())
-					log.debug("Banco sem imagem definida. No caso será utilizada o nome da instiuição ao invés da logo.");
+					log.debug("Banco sem imagem definida. No caso será utilizada" +
+							" o nome da instiuição ao invés da logo.");
 				
 				form.setField("txtRsLogoBanco", conta.getBanco().getInstituicao());
 				form.setField("txtFcLogoBanco", conta.getBanco().getInstituicao());			
@@ -474,13 +481,15 @@ public class BoletoPDF extends ACurbitaObject {
 	
 	
 	private void setCodigoBanco() throws IOException, DocumentException {
+		
 		ContaBancaria conta = boleto.getTitulo().getCedente().getContasBancarias().iterator().next();
 		form.setField("txtRsCodBanco", conta.getBanco().getCodigoDeCompensacao());
 		form.setField("txtFcCodBanco", conta.getBanco().getCodigoDeCompensacao());
 	}
 	
 	private void setAgenciaCondigoCedente() throws IOException, DocumentException {
-		StringBuilder sb = new StringBuilder("");
+		
+		StringBuilder sb = new StringBuilder(StringUtils.EMPTY);
 		ContaBancaria conta = boleto.getTitulo().getCedente().getContasBancarias().iterator().next();
 		
 		if(isNotNull(conta.getAgencia().getCodigoDaAgencia()))
@@ -511,10 +520,12 @@ public class BoletoPDF extends ACurbitaObject {
 	
 	
 	private void setNossoNumero() throws IOException, DocumentException {
-		StringBuilder sb = new StringBuilder("");
+		
+		StringBuilder sb = new StringBuilder(StringUtils.EMPTY);
 		
 		if(isNotNull(boleto.getTitulo().getNossoNumero()))
 			sb.append(boleto.getTitulo().getNossoNumero());
+		
 		if(isNotNull(boleto.getTitulo().getDigitoDoNossoNumero()))
 			sb.append(BoletoPDF.SEPERADOR + boleto.getTitulo().getDigitoDoNossoNumero());
 		
@@ -579,8 +590,13 @@ public class BoletoPDF extends ACurbitaObject {
 		
 		Pessoa cedente = new Pessoa("Empresa Lucrativa para Todo Sempre Ilimitada", "00.000.208/0001-00");
 		
-		ContaBancaria contaBancaria = new ContaBancaria(EnumBanco.BANCO_DO_BRASIL);
-		//ContaBancaria contaBancaria = new ContaBancaria(  new Banco("035", "Misael Bank", new CNPJ("00.000.208/0001-00"), "Seg" )  );
+//		ContaBancaria contaBancaria = new ContaBancaria(new Banco("035", 
+//				"Misael Bank", new CNPJ("00.000.208/0001-00"), "Seg"));
+		
+		IBanco banco = EnumBanco.BANCO_DO_BRASIL.getBanco();
+		banco.setImgLogo(ImageIO.read(new File("C:/Java/novo_banco.png")));
+		ContaBancaria contaBancaria = new ContaBancaria(banco);
+		
 		contaBancaria.setAgencia(new Agencia(1234, "67"));
 		contaBancaria.setCodigoDaCarteira(5);
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(6789, "12"));
