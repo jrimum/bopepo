@@ -32,21 +32,46 @@ package br.com.nordestefomento.jrimum.bopepo;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
 
 import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.ACurbitaObject;
+import br.com.nordestefomento.jrimum.JRimumException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.FactoryCampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.bopepo.pdf.BoletoPDF;
+import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
+import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
+import br.com.nordestefomento.jrimum.domkee.entity.Titulo.E_Aceite;
+import br.com.nordestefomento.jrimum.domkee.ientity.IBanco;
+import br.com.nordestefomento.jrimum.domkee.type.CEP;
+import br.com.nordestefomento.jrimum.domkee.type.Endereco;
+import br.com.nordestefomento.jrimum.domkee.type.EnumBanco;
+import br.com.nordestefomento.jrimum.domkee.type.EnumTitulo;
+import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
+import br.com.nordestefomento.jrimum.domkee.type.Localidade;
+import br.com.nordestefomento.jrimum.domkee.type.Logradouro;
 import br.com.nordestefomento.jrimum.utilix.Util4Date;
+import br.com.nordestefomento.jrimum.utilix.Util4File;
+import br.com.nordestefomento.jrimum.utilix.Util4PDF;
 
 import com.lowagie.text.DocumentException;
 
@@ -135,7 +160,128 @@ public final class Boleto extends ACurbitaObject{
 		
 		getInstance(titulo, campoLivre);
 	}
+	
+	public static void main(String[] args) throws FileNotFoundException, IOException, DocumentException {
+		
+		List<Boleto> boletos = new ArrayList<Boleto>(5);
+		
+		Titulo titulo;
 
+		final Date VENCIMENTO = new GregorianCalendar(2000, Calendar.JULY, 3)
+				.getTime();
+		
+		final Date DATA_DO_DOCUMENTO =  new GregorianCalendar(2000, Calendar.APRIL, 14)
+		.getTime();
+
+		Pessoa sacado = new Pessoa("Fulano da Silva Sauro Perdido e Desempregado", "222.222.222-22");
+		
+		Endereco endereco = new Endereco();
+		endereco.setUf(EnumUnidadeFederativa.RN);
+		endereco.setLocalidade(new Localidade("Natal"));
+		endereco.setCep(new CEP("59064-120"));
+		endereco.setBairro("Grande Centro");
+		endereco.setLogradouro(new Logradouro("Rua Poeta das Princesas"));
+		endereco.setNumero("1");
+		
+		sacado.addEndereco(endereco);
+		
+		Pessoa cedente = new Pessoa("Empresa Lucrativa para Todo Sempre Ilimitada", "00.000.208/0001-00");
+	
+		ContaBancaria contaBancaria = new ContaBancaria(EnumBanco.BANCO_DO_BRASIL);
+		
+		contaBancaria.setAgencia(new Agencia(1234, "67"));
+		contaBancaria.setCodigoDaCarteira(5);
+		contaBancaria.setNumeroDaConta(new NumeroDaConta(6789, "12"));
+
+		cedente.addContaBancaria(contaBancaria);
+		
+		Pessoa sacadorAvalista = new Pessoa("Banco do Brasil", "00.000.000/0001-91");
+		
+		Endereco endereco2 = new Endereco();
+		endereco2.setUf(EnumUnidadeFederativa.DF);
+		endereco2.setLocalidade(new Localidade("Brasília"));
+		endereco2.setCep(new CEP("00000-000"));
+		endereco2.setBairro("Grande Centro");
+		endereco2.setLogradouro(new Logradouro("Rua Principal Para Sempre"));
+		endereco2.setNumero("001");
+
+		sacadorAvalista.addEndereco(endereco2);
+		
+		//Fim Código em teste
+
+		titulo = Titulo.getInstance(sacado, cedente, sacadorAvalista);
+		titulo.setNumeroDoDocumento("123456789");
+		titulo.setNossoNumero("1234567890");
+		titulo.setDigitoDoNossoNumero("5");
+		titulo.setValor(BigDecimal.valueOf(100.23));
+		titulo.setDataDoDocumento(DATA_DO_DOCUMENTO);
+		titulo.setDataDoVencimento(VENCIMENTO);
+		titulo.setTipoDeDocumento(EnumTitulo.DM_DUPLICATA_MERCANTIL);
+		titulo.setAceite(E_Aceite.A);
+	
+		Boleto b1,b2,b3,b4,b5;
+		b1 = Boleto.getInstance(titulo);
+		
+		b1.setLocalPagamento("Pagável preferencialmente na Rede X ou em qualquer Banco até o Vencimento.");
+		b1.setInsturcaoAoSacado("Senhor sacado, sabemos sim que o valor cobrado é injusto e esperamos seu pagamento assim mesmo.");
+		b1.setInstrucao1("PARA PAGAMENTO 1 ");
+	
+		b2 = Boleto.getInstance(titulo);
+		
+		b2.setLocalPagamento(b1.getLocalPagamento());
+		b2.setInsturcaoAoSacado(b1.getInsturcaoAoSacado());
+		b2.setInstrucao1("PARA PAGAMENTO 2 ");
+		
+		b3 = Boleto.getInstance(titulo);
+		
+		b3.setLocalPagamento(b1.getLocalPagamento());
+		b3.setInsturcaoAoSacado(b1.getInsturcaoAoSacado());
+		b3.setInstrucao1("PARA PAGAMENTO 3 ");
+		
+		b4 = Boleto.getInstance(titulo);
+		
+		b4.setLocalPagamento(b1.getLocalPagamento());
+		b4.setInsturcaoAoSacado(b1.getInsturcaoAoSacado());
+		b4.setInstrucao1("PARA PAGAMENTO 4 ");
+		
+		b5 = Boleto.getInstance(titulo);
+		
+		b5.setLocalPagamento(b1.getLocalPagamento());
+		b5.setInsturcaoAoSacado(b1.getInsturcaoAoSacado());
+		b5.setInstrucao1("PARA PAGAMENTO 5 ");
+		
+		boletos.add(b1);
+		boletos.add(b2);
+		boletos.add(b3);
+		boletos.add(b4);
+		boletos.add(b5);
+		
+		int cont = 0;
+		
+		for (Boleto bop : boletos){
+			
+			cont++;
+			//Util4File.bytes2File("t"+cont+".pdf",bop.getAsByteArray()); }
+			bop.getAsPDF("t"+cont+".pdf");
+		}
+		//Boleto.groupInOnePDF("TesteVariosEmUm.pdf", boletos);		
+	}
+
+	public static File groupInOnePDF(String pathName, List<Boleto> boletos)throws JRimumException{
+		
+		File arq = null;
+		
+		try{
+			
+			arq = BoletoPDF.groupInOnePDF(pathName, boletos);
+			
+		}catch(Exception e){
+			throw new JRimumException("Arquivo nao gerado!",e);
+		}
+		
+		return arq;
+	}
+	
 	public static Boleto getInstance(Titulo titulo)throws IllegalArgumentException, NotSuporttedBancoException, NotSuporttedCampoLivreException{
 		
 		Boleto boleto = null;

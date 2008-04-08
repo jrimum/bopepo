@@ -36,9 +36,11 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -110,6 +112,26 @@ public class BoletoPDF extends ACurbitaObject {
 		return boletoPdf;
 	}
 	
+	public static File groupInOnePDF(String pathName, List<Boleto> boletos)
+			throws IOException, DocumentException {
+
+		File arq = null;
+
+		if (!isNull(pathName, "pathName") && !isNull(boletos, "boletos")) {
+
+			List<byte[]> boletosEmBytes = new ArrayList<byte[]>(boletos.size());
+			
+			for (Boleto bop : boletos){
+				boletosEmBytes.add(bop.getAsByteArray());
+			}
+
+			arq = Util4File.bytes2File(pathName + ".pdf", Util4PDF
+					.mergeFiles(boletosEmBytes));
+		}
+
+		return arq;
+
+	}
 	
 	private void inicializar() throws IOException, DocumentException {
 		//reader = new PdfReader(this.getClass().getResource("/resource/pdf/BoletoTemplate.pdf"));
@@ -436,12 +458,23 @@ public class BoletoPDF extends ACurbitaObject {
 		// Através da conta bancária será descoberto a imagem que representa o banco, com base
 		// no código do banco.
 		ContaBancaria conta = boleto.getTitulo().getCedente().getContasBancarias().iterator().next();	
+		Image imgLogoBanco = null;
 		
-		// Caso não exista, com base no código do banco será feita
-		// uma busca pela imagem no resource.img.
-		if (conta.getBanco().getImgLogo() == null) {
+		if (conta.getBanco().getImgLogo() != null) {
 			
-			Image imgLogoBanco = null;
+			imgLogoBanco = Image.getInstance(conta.getBanco().getImgLogo(), null);
+			
+			// RECIBO DO SACADO
+			Util4PDF.changeField2Image(stamper, form.getFieldPositions("txtRsLogoBanco"), imgLogoBanco);		
+			
+			// FICHA DE COMPENSAÇÃO
+			Util4PDF.changeField2Image(stamper, form.getFieldPositions("txtFcLogoBanco"), imgLogoBanco);
+		
+		}else{
+
+			// Caso não exista, com base no código do banco será feita
+			// uma busca pela imagem no resource.img.
+			
 			URL url = this.getClass().getResource("/resource/img/" + conta.getBanco().getCodigoDeCompensacao() + ".png");
 			
 			if (url != null)
@@ -465,9 +498,9 @@ public class BoletoPDF extends ACurbitaObject {
 				Util4PDF.changeField2Image(stamper, form.getFieldPositions("txtRsLogoBanco"), imgLogoBanco);		
 				
 				// FICHA DE COMPENSAÇÃO
-				Util4PDF.changeField2Image(stamper, form.getFieldPositions("txtFcLogoBanco"), imgLogoBanco);		
-			} 
-			else {
+				Util4PDF.changeField2Image(stamper, form.getFieldPositions("txtFcLogoBanco"), imgLogoBanco);
+				
+			}else {
 				// Caso nenhuma imagem seja encontrada, um alerta é exibido.
 				if (log.isDebugEnabled())
 					log.debug("Banco sem imagem definida. No caso será utilizada" +
@@ -475,7 +508,7 @@ public class BoletoPDF extends ACurbitaObject {
 				
 				form.setField("txtRsLogoBanco", conta.getBanco().getInstituicao());
 				form.setField("txtFcLogoBanco", conta.getBanco().getInstituicao());			
-			}	
+			}
 		}
 	}
 	
@@ -594,7 +627,7 @@ public class BoletoPDF extends ACurbitaObject {
 //				"Misael Bank", new CNPJ("00.000.208/0001-00"), "Seg"));
 		
 		IBanco banco = EnumBanco.BANCO_DO_BRASIL.getBanco();
-		banco.setImgLogo(ImageIO.read(new File("C:/Java/novo_banco.png")));
+		//banco.setImgLogo(ImageIO.read(new File("C:/Java/novo_banco.png")));
 		ContaBancaria contaBancaria = new ContaBancaria(banco);
 		
 		contaBancaria.setAgencia(new Agencia(1234, "67"));
