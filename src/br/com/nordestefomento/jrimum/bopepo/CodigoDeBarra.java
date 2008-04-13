@@ -184,7 +184,7 @@ public final class CodigoDeBarra extends LineOfFields{
 	private CodigoDeBarra(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);	
 
-		codigoDoBanco = new Field<String>("0", 3, Filler.STR_ZERO_LEFT );
+		codigoDoBanco = new Field<String>("0", 3, Filler.ZERO_LEFT );
 		codigoDaMoeda = new Field<Integer>(0, 1, Filler.ZERO_LEFT);
 		digitoVerificadorGeral = new Field<Integer>(0, 1, Filler.ZERO_LEFT);
 		fatorDeVencimento = new Field<Integer>(0, 4, Filler.ZERO_LEFT);
