@@ -51,7 +51,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import br.com.nordestefomento.jrimum.ACurbitaObject;
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
-import br.com.nordestefomento.jrimum.bopepo.EnumBanco;
+import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
@@ -460,56 +460,67 @@ public class BoletoPDF extends ACurbitaObject {
 		ContaBancaria conta = boleto.getTitulo().getCedente().getContasBancarias().iterator().next();	
 		Image imgLogoBanco = null;
 		
-		if (conta.getBanco().getImgLogo() != null) {
+		if (isNotNull(conta.getBanco().getImgLogo())) {
 			
 			imgLogoBanco = Image.getInstance(conta.getBanco().getImgLogo(), null);
 			
-			// RECIBO DO SACADO
-			Util4PDF.changeField2Image(stamper, form.getFieldPositions("txtRsLogoBanco"), imgLogoBanco);		
-			
-			// FICHA DE COMPENSAÇÃO
-			Util4PDF.changeField2Image(stamper, form.getFieldPositions("txtFcLogoBanco"), imgLogoBanco);
+			setImageLogo(imgLogoBanco);
 		
 		}else{
 
-			// Caso não exista, com base no código do banco será feita
-			// uma busca pela imagem no resource.img.
-			
-			URL url = this.getClass().getResource("/resource/img/" + conta.getBanco().getCodigoDeCompensacao() + ".png");
-			
-			if (url != null)
-				imgLogoBanco = Image.getInstance(url);
-			
-			if (imgLogoBanco != null) {
+			if(EnumBancos.isSuportado(conta.getBanco().getCodigoDeCompensacao())){
 				
-				// Esta imagem gerada aqui é do tipo java.awt.Image
-				conta.getBanco().setImgLogo(ImageIO.read(url));
+				URL url = this.getClass().getResource("/resource/img/" + conta.getBanco().getCodigoDeCompensacao() + ".png");
 				
-				// Se o banco em questão não é suportado nativamente pelo componente,
+				if (url != null)
+					imgLogoBanco = Image.getInstance(url);
+				
+				if (imgLogoBanco != null){
+					
+					// Esta imagem gerada aqui é do tipo java.awt.Image
+					conta.getBanco().setImgLogo(ImageIO.read(url));
+				}
+				
+				// Se o banco em questão é suportado nativamente pelo componente,
 				// então um alerta será exibido.
-				if (!(conta.getBanco() instanceof EnumBanco)) {
 					if(log.isDebugEnabled())
 						log.debug("Banco sem imagem da logo informada. " +
 								"Com base no código do banco, uma imagem foi " +
 								"encontrada no resource e esta sendo utilizada.");
-				}
+
+					setImageLogo(imgLogoBanco);			
 				
-				// RECIBO DO SACADO
-				Util4PDF.changeField2Image(stamper, form.getFieldPositions("txtRsLogoBanco"), imgLogoBanco);		
-				
-				// FICHA DE COMPENSAÇÃO
-				Util4PDF.changeField2Image(stamper, form.getFieldPositions("txtFcLogoBanco"), imgLogoBanco);
-				
-			}else {
-				// Caso nenhuma imagem seja encontrada, um alerta é exibido.
-				if (log.isDebugEnabled())
-					log.debug("Banco sem imagem definida. No caso será utilizada" +
-							" o nome da instiuição ao invés da logo.");
+			}else{
+			
+				// Sem imagem, um alerta é exibido.
+				log.warn("Banco sem imagem definida. O nome da instiuição será usado como logo.");
 				
 				form.setField("txtRsLogoBanco", conta.getBanco().getInstituicao());
 				form.setField("txtFcLogoBanco", conta.getBanco().getInstituicao());			
-			}
+
+			}				
 		}
+	}
+
+
+	
+	/**
+	 * <p>
+	 * Coloca a logo do passada na ficha de compensação do boleto e no recibo do sacado.
+	 * </p>
+	 * 
+	 * @param imgLogoBanco
+	 * @throws DocumentException
+	 * 
+	 * @since 0.2
+	 */
+	private void setImageLogo(Image imgLogoBanco) throws DocumentException {
+		
+		// RECIBO DO SACADO
+		Util4PDF.changeField2Image(stamper, form.getFieldPositions("txtRsLogoBanco"), imgLogoBanco);		
+		
+		// FICHA DE COMPENSAÇÃO
+		Util4PDF.changeField2Image(stamper, form.getFieldPositions("txtFcLogoBanco"), imgLogoBanco);
 	}
 	
 	
@@ -623,11 +634,12 @@ public class BoletoPDF extends ACurbitaObject {
 		
 		Pessoa cedente = new Pessoa("Empresa Lucrativa para Todo Sempre Ilimitada", "00.000.208/0001-00");
 		
-//		ContaBancaria contaBancaria = new ContaBancaria(new Banco("035", 
-//				"Misael Bank", new CNPJ("00.000.208/0001-00"), "Seg"));
+		//ContaBancaria contaBancaria = new ContaBancaria(new Banco("035", 
+		//	"Misael Bank", new CNPJ("00.000.208/0001-00"), "Seg"));
+		//contaBancaria.getBanco().setImgLogo(ImageIO.read(new File("C:/Java/SP_A0021.jpg")));
 		
-		IBanco banco = EnumBanco.BANCO_DO_BRASIL.getBanco();
-		//banco.setImgLogo(ImageIO.read(new File("C:/Java/novo_banco.png")));
+		IBanco banco = EnumBancos.BANCO_DO_BRASIL.newInstance();
+		banco.setImgLogo(ImageIO.read(new File("C:/Java/SP_A0021.jpg")));
 		ContaBancaria contaBancaria = new ContaBancaria(banco);
 		
 		contaBancaria.setAgencia(new Agencia(1234, "67"));

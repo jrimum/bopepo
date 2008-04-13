@@ -31,7 +31,7 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import junit.framework.TestCase;
-import br.com.nordestefomento.jrimum.bopepo.EnumBanco;
+import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
@@ -70,7 +70,7 @@ public class TestCLCaixaEconomicaFederalSINCO extends TestCase {
 		numeroDaConta.setCodigoDaConta(2);
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		
-		contaBancaria.setBanco(EnumBanco.CAIXA_ECONOMICA_FEDERAL);
+		contaBancaria.setBanco(EnumBancos.CAIXA_ECONOMICA_FEDERAL.newInstance());
 		
 		cedente.addContaBancaria(contaBancaria);
 		

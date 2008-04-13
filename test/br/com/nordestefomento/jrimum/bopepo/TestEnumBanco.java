@@ -30,7 +30,7 @@
 
 package br.com.nordestefomento.jrimum.bopepo;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBanco;
+import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 
 import junit.framework.TestCase;
 
@@ -42,18 +42,15 @@ public class TestEnumBanco extends TestCase {
 
 
 	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.EnumBanco#getCodigo()}.
+	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.EnumBancos#getCodigo()}.
 	 */
 	public void testGetCodigo() {
 		
 		//bancos implementados
-		EnumBanco bancoDoBrasil = EnumBanco.BANCO_DO_BRASIL;
-		EnumBanco bradesco = EnumBanco.BANCO_BRADESCO;
-		EnumBanco caixa = EnumBanco.CAIXA_ECONOMICA_FEDERAL;
 		
-		assertEquals(bancoDoBrasil.getCodigoDeCompensacao(), "001");
-		assertEquals(bradesco.getCodigoDeCompensacao(), "237");
-		assertEquals(caixa.getCodigoDeCompensacao(), "104");
+		assertEquals(EnumBancos.BANCO_DO_BRASIL.newInstance().getCodigoDeCompensacao(), "001");
+		assertEquals(EnumBancos.BANCO_BRADESCO.newInstance().getCodigoDeCompensacao(), "237");
+		assertEquals(EnumBancos.CAIXA_ECONOMICA_FEDERAL.newInstance().getCodigoDeCompensacao(), "104");
 		
 	}
 

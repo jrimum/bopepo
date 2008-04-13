@@ -27,14 +27,13 @@
  * 
  */
 
-
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBanco;
+import static br.com.nordestefomento.jrimum.domkee.entity.Banco.isCodigoDeCompensacaoOK;
+import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.utilix.LineOfFields;
-
 
 /**
  * 
@@ -55,67 +54,80 @@ import br.com.nordestefomento.jrimum.utilix.LineOfFields;
  * 
  * @author Gabriel Guimarães
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author Misael Barreto 
+ * @author Misael Barreto
  * @author Rômulo Augusto
- * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
+ * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento
+ *         Mercantil</a>
  * 
  * @since JMatryx 1.0
  * 
  * @version 1.0
  */
 abstract class ACampoLivre extends LineOfFields implements ICampoLivre{
-	
+
 	protected ACampoLivre(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
-	
-	
-	static ICampoLivre getInstance(Titulo titulo) throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
-		if(log.isTraceEnabled())
-			log.trace("Instanciando Field livre");
-		if(log.isDebugEnabled())
-			log.debug("titulo instance : "+titulo);
-		
+
+	static ICampoLivre getInstance(Titulo titulo)
+			throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
+
+		if (log.isTraceEnabled())
+			log.trace("Instanciando Campo livre");
+		if (log.isDebugEnabled())
+			log.debug("titulo instance : " + titulo);
+
 		ICampoLivre campoLivre = null;
 		ContaBancaria contaBancaria = null;
-		EnumBanco banco = null;
-		
-		
-		if(titulo.getCedente().hasContaBancaria()) {
-			contaBancaria = titulo.getCedente().getContasBancarias().iterator().next();
-			
-			if(log.isDebugEnabled())
-				log.debug("Campo Livre do Banco: " + contaBancaria.getBanco().getInstituicao());	
-			
-			if (contaBancaria.getBanco() instanceof EnumBanco) {
-				banco = (EnumBanco)contaBancaria.getBanco();
-				switch (banco) {
+		EnumBancos enumBanco = null;
+
+		if (titulo.getCedente().hasContaBancaria()) {
+			contaBancaria = titulo.getCedente().getContasBancarias().iterator()
+					.next();
+
+			if (log.isDebugEnabled())
+				log.debug("Campo Livre do Banco: "
+						+ contaBancaria.getBanco().getInstituicao());
+
+			/*
+			 * A conta bancária passada não é sincronizada.
+			 */
+			if (isContaBacariaOK(contaBancaria)) {
+
+				if (EnumBancos.isSuportado(contaBancaria.getBanco().getCodigoDeCompensacao())){
+					
+					enumBanco = EnumBancos.suportados.get(contaBancaria.getBanco().getCodigoDeCompensacao());
+
+					switch (enumBanco) {
+
 					case BANCO_BRADESCO:
 						campoLivre = ACLBradesco.getInstance(titulo);
-						break;	
-						
+						break;
+
 					case BANCO_DO_BRASIL:
 						campoLivre = ACLBancoDoBrasil.getInstance(titulo);
 						break;
-						
+
 					case BANCO_ABN_AMRO_REAL:
 						campoLivre = ACLBancoReal.getInstance(titulo);
 						break;
-						
+
 					case CAIXA_ECONOMICA_FEDERAL:
-						campoLivre = ACLCaixaEconomicaFederal.getInstance(titulo);
+						campoLivre = ACLCaixaEconomicaFederal
+								.getInstance(titulo);
 						break;
-					
+
+					}
+				} else {
 					/*
 					 * Se chegar até este ponto, é sinal de que para o banco em
-					 * em questão, apesar de estar definido no EnumBanco, não
-					 * há implementações de campo livre, logo considera-se o
-					 * banco com não suportado.
+					 * em questão, apesar de estar definido no EnumBancos, não há
+					 * implementações de campo livre, logo considera-se o banco
+					 * com não suportado.
 					 */
-					default:
-						throw new NotSuporttedBancoException();
+					throw new NotSuporttedBancoException();
 				}
-				
+
 				/*
 				 * Se chegar neste ponto e nenhum campo livre foi definido,
 				 * então é sinal de que existe implementações de campo livre
@@ -126,27 +138,40 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre{
 				 * em último caso.
 				 */
 				if (campoLivre == null) {
-					throw new NotSuporttedCampoLivreException (
-						"Não há implementações de campo livre para o banco " +
-						banco.getInstituicao() + " compatíveis com as " +
-						"caracteríticas do título informado."
-					);
+					throw new NotSuporttedCampoLivreException(
+							"Não há implementações de campo livre para o banco "
+									+ contaBancaria.getBanco()
+											.getCodigoDeCompensacao()
+									+ " compatíveis com as "
+									+ "caracteríticas do título informado.");
 				}
 			}
-			/*
-			 * Senão é sinal de que o banco em questão não esté definido em
-			 * EnumBanco, logo não haverá implementações de campo livre para
-			 * o mesmo, então considera-se o banco com não suportado.
-			 */
-			else {
-				throw new NotSuporttedBancoException();
-			}
 		}
-		
-		if(log.isDebugEnabled() || log.isTraceEnabled())
-			log.trace("Field Livre Instanciado : "+campoLivre);
 
-		
+		if (log.isDebugEnabled() || log.isTraceEnabled())
+			log.trace("Campo Livre Instanciado : " + campoLivre);
+
 		return campoLivre;
 	}
+
+	/**
+	 * <p>
+	 * Verifica se a conta bancária passada está ok em relação aos atributos
+	 * usados nessa na composição do campo livre.
+	 * </p>
+	 * 
+	 * @param conta
+	 * @return se ok.
+	 * 
+	 * @since 0.2
+	 */
+
+	private static boolean isContaBacariaOK(ContaBancaria conta) {
+
+		return (!isNull(conta, "contaBancaria")
+				&& !isNull(conta.getBanco(), "Banco") && isCodigoDeCompensacaoOK(conta
+				.getBanco().getCodigoDeCompensacao()));
+
+	}
+
 }

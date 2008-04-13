@@ -57,7 +57,8 @@ public class NotSuporttedBancoException extends JRimumException {
 		super(message);
 	}
 	
-	public NotSuporttedBancoException(Throwable cause) {
+	@SuppressWarnings("unused")
+	private NotSuporttedBancoException(Throwable cause) {
 		super(msg, cause);
 	}
 	

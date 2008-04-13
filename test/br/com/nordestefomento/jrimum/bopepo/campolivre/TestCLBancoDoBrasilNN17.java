@@ -31,7 +31,7 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import junit.framework.TestCase;
-import br.com.nordestefomento.jrimum.bopepo.EnumBanco;
+import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.FactoryCampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
@@ -70,7 +70,7 @@ public class TestCLBancoDoBrasilNN17 extends TestCase {
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBanco.BANCO_DO_BRASIL);
+		contaBancaria.setBanco(EnumBancos.BANCO_DO_BRASIL.newInstance());
 		
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
 		numeroDaConta.setCodigoDaConta(123456);
@@ -101,7 +101,7 @@ public class TestCLBancoDoBrasilNN17 extends TestCase {
 		
 		//Infeliz básico
 		ContaBancaria contaBancaria = titulo.getCedente().getContasBancarias().iterator().next();
-		contaBancaria.setBanco(EnumBanco.BANCO_DO_BRASIL);
+		contaBancaria.setBanco(EnumBancos.BANCO_DO_BRASIL.newInstance());
 
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
 		numeroDaConta.setCodigoDaConta(0);

@@ -66,7 +66,7 @@ import br.com.nordestefomento.jrimum.domkee.type.Localidade;
 import br.com.nordestefomento.jrimum.domkee.type.Logradouro;
 import br.com.nordestefomento.jrimum.utilix.Util4Date;
 
-import static br.com.nordestefomento.jrimum.bopepo.EnumBanco.BANCO_DO_BRASIL;
+import static br.com.nordestefomento.jrimum.bopepo.EnumBancos.BANCO_DO_BRASIL;
 
 import com.lowagie.text.DocumentException;
 
@@ -182,7 +182,7 @@ public final class Boleto extends ACurbitaObject{
 		
 		Pessoa cedente = new Pessoa("Empresa Lucrativa para Todo Sempre Ilimitada", "00.000.208/0001-00");
 	
-		ContaBancaria contaBancaria = new ContaBancaria(BANCO_DO_BRASIL);
+		ContaBancaria contaBancaria = new ContaBancaria(BANCO_DO_BRASIL.newInstance());
 		
 		contaBancaria.setAgencia(new Agencia(1234, "67"));
 		contaBancaria.setCodigoDaCarteira(5);

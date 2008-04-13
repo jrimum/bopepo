@@ -78,7 +78,7 @@ public class TestCodigoDeBarra extends TestCase {
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBanco.BANCO_BRADESCO);
+		contaBancaria.setBanco(EnumBancos.BANCO_BRADESCO.newInstance());
 		
 		Agencia agencia = new Agencia();
 		agencia.setCodigoDaAgencia(1234);

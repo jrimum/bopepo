@@ -30,6 +30,7 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
+import br.com.nordestefomento.jrimum.bopepo.ICodigosDeBancos;
 import br.com.nordestefomento.jrimum.utilix.ITextStream;
 
 /**
@@ -38,7 +39,7 @@ import br.com.nordestefomento.jrimum.utilix.ITextStream;
  * @author Gilmar
  *
  */
-public interface ICampoLivre extends ITextStream{
+public interface ICampoLivre extends ITextStream, ICodigosDeBancos{
 	
 	/**
 	 * Tamanho do Campo Livre, igual para qualquer que seja o banco.

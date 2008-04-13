@@ -31,7 +31,7 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import junit.framework.TestCase;
-import br.com.nordestefomento.jrimum.bopepo.EnumBanco;
+import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.FactoryCampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
@@ -54,7 +54,7 @@ public class TestCLBradesco extends TestCase {
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBanco.BANCO_BRADESCO);
+		contaBancaria.setBanco(EnumBancos.BANCO_BRADESCO.newInstance());
 		
 		Agencia agencia = new Agencia();
 		agencia.setCodigoDaAgencia(1234);
@@ -91,7 +91,7 @@ public class TestCLBradesco extends TestCase {
 		
 		//Infeliz básico
 		ContaBancaria contaBancaria = titulo.getCedente().getContasBancarias().iterator().next();
-		contaBancaria.setBanco(EnumBanco.BANCO_BRADESCO);
+		contaBancaria.setBanco(EnumBancos.BANCO_BRADESCO.newInstance());
 		
 		Agencia agencia = new Agencia();
 		agencia.setCodigoDaAgencia(0);
