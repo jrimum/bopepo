@@ -45,7 +45,6 @@ import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
-import br.com.nordestefomento.jrimum.domkee.type.EnumBanco;
 import br.com.nordestefomento.jrimum.domkee.type.EnumMoeda;
 
 /**

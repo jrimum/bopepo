@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  * 
- * Created at: 30/03/2008 - 18:12:28
+ * Created at: 30/03/2008 - 19:11:33
  * 
  * ================================================================================
  * 
@@ -23,35 +23,38 @@
  * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
  * reger permissões e limitações sob esta LICENÇA.
  * 
- * Criado em: 30/03/2008 - 18:12:28
+ * Criado em: 30/03/2008 - 19:11:33
  * 
  */
 
 
 package br.com.nordestefomento.jrimum.bopepo;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN11;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN17;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBradesco;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLCaixaEconomicaFederalSINCO;
+import br.com.nordestefomento.jrimum.bopepo.EnumBanco;
 
-public class TestSuiteBopepo {
+import junit.framework.TestCase;
 
-public static Test suite() {
-	    
-		TestSuite suite= new TestSuite();
+/**
+ * @author Gilmar
+ *
+ */
+public class TestEnumBanco extends TestCase {
+
+
+	/**
+	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.EnumBanco#getCodigo()}.
+	 */
+	public void testGetCodigo() {
 		
-		suite.addTestSuite(TestEnumBanco.class);
-		suite.addTestSuite(TestBoleto.class);
-		suite.addTestSuite(TestCodigoDeBarra.class);
-		suite.addTestSuite(TestLinhaDigitavel.class);
-		suite.addTestSuite(TestCLBancoDoBrasilNN11.class);
-		suite.addTestSuite(TestCLBancoDoBrasilNN17.class);
-		suite.addTestSuite(TestCLBradesco.class);
-		suite.addTestSuite(TestCLCaixaEconomicaFederalSINCO.class);
-	    
-	    return suite;
+		//bancos implementados
+		EnumBanco bancoDoBrasil = EnumBanco.BANCO_DO_BRASIL;
+		EnumBanco bradesco = EnumBanco.BANCO_BRADESCO;
+		EnumBanco caixa = EnumBanco.CAIXA_ECONOMICA_FEDERAL;
+		
+		assertEquals(bancoDoBrasil.getCodigoDeCompensacao(), "001");
+		assertEquals(bradesco.getCodigoDeCompensacao(), "237");
+		assertEquals(caixa.getCodigoDeCompensacao(), "104");
+		
 	}
+
 }

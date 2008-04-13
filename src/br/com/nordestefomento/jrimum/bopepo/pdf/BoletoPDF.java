@@ -51,6 +51,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import br.com.nordestefomento.jrimum.ACurbitaObject;
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
+import br.com.nordestefomento.jrimum.bopepo.EnumBanco;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
@@ -62,7 +63,6 @@ import br.com.nordestefomento.jrimum.domkee.entity.Titulo.E_Aceite;
 import br.com.nordestefomento.jrimum.domkee.ientity.IBanco;
 import br.com.nordestefomento.jrimum.domkee.type.CEP;
 import br.com.nordestefomento.jrimum.domkee.type.Endereco;
-import br.com.nordestefomento.jrimum.domkee.type.EnumBanco;
 import br.com.nordestefomento.jrimum.domkee.type.EnumTitulo;
 import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.type.Localidade;

@@ -36,15 +36,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
 
 import org.apache.log4j.Logger;
 
@@ -61,17 +58,15 @@ import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo.E_Aceite;
-import br.com.nordestefomento.jrimum.domkee.ientity.IBanco;
 import br.com.nordestefomento.jrimum.domkee.type.CEP;
 import br.com.nordestefomento.jrimum.domkee.type.Endereco;
-import br.com.nordestefomento.jrimum.domkee.type.EnumBanco;
 import br.com.nordestefomento.jrimum.domkee.type.EnumTitulo;
 import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.type.Localidade;
 import br.com.nordestefomento.jrimum.domkee.type.Logradouro;
 import br.com.nordestefomento.jrimum.utilix.Util4Date;
-import br.com.nordestefomento.jrimum.utilix.Util4File;
-import br.com.nordestefomento.jrimum.utilix.Util4PDF;
+
+import static br.com.nordestefomento.jrimum.bopepo.EnumBanco.BANCO_DO_BRASIL;
 
 import com.lowagie.text.DocumentException;
 
@@ -187,7 +182,7 @@ public final class Boleto extends ACurbitaObject{
 		
 		Pessoa cedente = new Pessoa("Empresa Lucrativa para Todo Sempre Ilimitada", "00.000.208/0001-00");
 	
-		ContaBancaria contaBancaria = new ContaBancaria(EnumBanco.BANCO_DO_BRASIL);
+		ContaBancaria contaBancaria = new ContaBancaria(BANCO_DO_BRASIL);
 		
 		contaBancaria.setAgencia(new Agencia(1234, "67"));
 		contaBancaria.setCodigoDaCarteira(5);
