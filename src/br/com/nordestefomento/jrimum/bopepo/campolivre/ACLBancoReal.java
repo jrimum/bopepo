@@ -32,23 +32,27 @@ package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 
+
+
+
 /**
  * 
- * Descrição:
+ * <p>
+ * Interface comum para todos os campos livres do Banco Real que venham a existir.
+ * </p>
  * 
  * 
- * @author Gabriel Guimarães
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * @author Misael Barreto
  * @author Rômulo Augusto
- * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento
- *         Mercantil</a>
  * 
- * @since JMatryx 1.0
+ * @see ACampoLivre
  * 
- * @version 1.0
+ * @since 0.2 
+ * 
+ * @version 0.2
  */
-
+	
 abstract class ACLBancoReal extends ACampoLivre {
 
 	protected ACLBancoReal(Integer fieldsLength, Integer stringLength) {

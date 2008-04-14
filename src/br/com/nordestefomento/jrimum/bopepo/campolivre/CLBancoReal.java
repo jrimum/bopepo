@@ -35,6 +35,8 @@ import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.Util4String;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.AModulo;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.EnumModulo;
 
 /**
  * 
@@ -74,18 +76,15 @@ import br.com.nordestefomento.jrimum.utilix.Util4String;
  * </tr>
  * </table>
  * 
- * 
- * @author Gabriel Guimarães
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * @author Misael Barreto
  * @author Rômulo Augusto
- * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento
- *         Mercantil</a>
  * 
- * @since JMatryx 1.0
+ * @since 0.2
  * 
- * @version 1.0
+ * @version 0.2
  */
+	
 class CLBancoReal extends ACLBancoReal {
 
 	/**
@@ -94,7 +93,7 @@ class CLBancoReal extends ACLBancoReal {
 	private static final long serialVersionUID = -5294809022535972391L;
 	
 	/**
-	 * 
+	 * Tamanho deste campo.
 	 */
 	private static final Integer FIELDS_LENGTH = 4;
 	
@@ -121,10 +120,81 @@ class CLBancoReal extends ACLBancoReal {
 		//TODO Código em teste
 		clBancoReal.add(new Field<Integer>(conta.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
 		clBancoReal.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
-		clBancoReal.add(new Field<String>(conta.getNumeroDaConta().getDigitoDaConta(), 1, Filler.ZERO_LEFT));
+		clBancoReal.add(new Field<String>(calcularDigitoDaPosicao31(titulo.getNumeroDoDocumento(), conta.getAgencia().getCodigoDaAgencia(), conta.getNumeroDaConta().getCodigoDaConta()), 1, Filler.ZERO_LEFT));
 		
 		clBancoReal.add(new Field<String>(Util4String.eliminateSymbols(titulo.getNumeroDoDocumento()), 13, Filler.ZERO_LEFT));
 		
 		return clBancoReal;
 	}
+	
+	/**
+	 * <p>
+	 * Calcula o Dígito da posição <tt>31</tt> deste campo livre (<code>CLBancoReal</code>).
+	 * </p>
+	 * 
+	 * <p>
+	 * No cálculo do dígito da posição 31 são considerados, para a obtenção do
+	 * dígito, os dados <em><tt>{[NOSSO NÚMERO],[AGÊNCIA],[CONTA]}</tt></em> calculado pelos
+	 * critérios do Módulo 10.
+	 * </p>
+	 * <h5>Exemplo:</h5>
+	 * 
+	 * <div align="center"> <table border="1" cellpadding="3" cellspacing="0">
+	 * <tr>
+	 * <td>Nosso Número</td>
+	 * <td>1234567890123</td>
+	 * </tr>
+	 * <tr>
+	 * <td>Agência</td>
+	 * <td>4444</td>
+	 * </tr>
+	 * <tr>
+	 * <td>Conta Corrente</td>
+	 * <td>7777777</td>
+	 * </tr>
+	 * </table></div>
+	 * 
+	 * @param nossoNumero
+	 * @param agencia
+	 * @param contaCorrente
+	 * @return Dígito verficador calculador
+	 * 
+	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+	 * 
+	 * @see br.com.nordestefomento.jrimum.vallia.digitoverificador.AModulo
+	 * 
+	 * @since 0.2
+	 * 
+	 */	
+	private static String calcularDigitoDaPosicao31(String nossoNumero, Integer agencia, Integer contaCorrente){
+			
+			StringBuilder formula = new StringBuilder("");
+			
+			 String dV = null;
+			
+			AModulo aModulo = AModulo.getInstance(EnumModulo.MODULO_10);
+			aModulo.setLimiteMinimo(1);
+			aModulo.setLimiteMaximo(2);
+			
+			formula.append(Filler.ZERO_LEFT.fill(nossoNumero,13));
+			formula.append(Filler.ZERO_LEFT.fill(agencia, 4));
+			formula.append(Filler.ZERO_LEFT.fill(contaCorrente, 7));
+			
+			int restoDivisao = aModulo.calcular(formula.toString());
+			
+			int restoSubtracao = (10 - restoDivisao);
+			
+			if(restoSubtracao == 10)
+				dV = "0";
+			else
+				dV = ""+restoSubtracao;
+			
+			return dV;
+			
+		}
+	//TODO fazer testes
+	public static void main(String[] args) {
+		System.out.println(calcularDigitoDaPosicao31("5020", 1018, 16324));//==9
+	}
+
 }
