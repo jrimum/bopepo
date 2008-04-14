@@ -165,11 +165,10 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre{
 	 * 
 	 * @since 0.2
 	 */
-
 	private static boolean isContaBacariaOK(ContaBancaria conta) {
 
-		return (!isNull(conta, "contaBancaria")
-				&& !isNull(conta.getBanco(), "Banco") && isCodigoDeCompensacaoOK(conta
+		return (isNotNull(conta, "contaBancaria")
+				&& isNotNull(conta.getBanco(), "Banco") && isCodigoDeCompensacaoOK(conta
 				.getBanco().getCodigoDeCompensacao()));
 
 	}
