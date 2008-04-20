@@ -40,6 +40,7 @@ import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
+import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
@@ -74,7 +75,7 @@ public class TestBoleto extends TestCase {
 		agencia.setCodigoDaAgencia(1234);
 		contaBancaria.setAgencia(agencia);
 		
-		contaBancaria.setCodigoDaCarteira(5);
+		contaBancaria.setCarteira(new Carteira(5));
 		
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
 		numeroDaConta.setCodigoDaConta(6789);

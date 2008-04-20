@@ -128,7 +128,7 @@ class CLBradesco extends ACLBradesco {
 		//TODO Código em teste
 		clBradesco.add(new Field<Integer>(conta.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
 		
-		clBradesco.add(new Field<Integer>(conta.getCodigoDaCarteira(), 2, Filler.ZERO_LEFT));
+		clBradesco.add(new Field<Integer>(conta.getCarteira().getCodigo(), 2, Filler.ZERO_LEFT));
 		clBradesco.add(new Field<String>(nossoNumero, 11, Filler.ZERO_LEFT));
 		
 		//TODO Código em teste

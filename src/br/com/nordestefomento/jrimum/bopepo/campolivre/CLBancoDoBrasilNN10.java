@@ -125,7 +125,7 @@ public class CLBancoDoBrasilNN10 extends ACLBancoDoBrasil {
 		
 		clBancoDoBrasilN10.add(new Field<String>(nossoNumero, 10, Filler.ZERO_LEFT));	
 		
-		clBancoDoBrasilN10.add(new Field<Integer>(conta.getCodigoDaCarteira(), 2, Filler.ZERO_LEFT));
+		clBancoDoBrasilN10.add(new Field<Integer>(conta.getCarteira().getCodigo(), 2, Filler.ZERO_LEFT));
 
 		return clBancoDoBrasilN10;
 	}

@@ -111,7 +111,8 @@ public enum EnumBancos {
 
 	/**
 	 * Tipo enumerado que representa o <strong>Banco do Brasil</strong>, código
-	 * de compensação <strong><tt>001</tt></strong>.
+	 * de compensação <strong><tt>001</tt></strong> <a
+	 * href="http://www.bb.com.br">site</a>.
 	 * 
 	 * @since 0.2
 	 */
@@ -120,7 +121,8 @@ public enum EnumBancos {
 
 	/**
 	 * Tipo enumerado que representa o Banco <strong>Caixa Econômica Federal</strong>,
-	 * código de compensação <strong><tt>104</tt></strong>.
+	 * código de compensação <strong><tt>104</tt></strong> <a
+	 * href="http://www.caixa.gov.br">site</a>.
 	 * 
 	 * @since 0.2
 	 */
@@ -129,7 +131,8 @@ public enum EnumBancos {
 
 	/**
 	 * Tipo enumerado que representa o Banco <strong>Bradesco</strong>, código
-	 * de compensação <strong><tt>237</tt></strong>.
+	 * de compensação <strong><tt>237</tt></strong> <a
+	 * href="http://www.bradesco.com.br">site</a>.
 	 * 
 	 * @since 0.2
 	 */
@@ -138,12 +141,23 @@ public enum EnumBancos {
 
 	/**
 	 * Tipo enumerado que representa o <strong>Banco Real</strong>, código de
-	 * compensação <strong><tt>356</tt></strong>.
+	 * compensação <strong><tt>356</tt></strong> <a
+	 * href="http://www.bancoreal.com.br">site</a>.
 	 * 
 	 * @since 0.2
 	 */
 	BANCO_ABN_AMRO_REAL("356", "33066408000115", "BANCO ABN AMRO REAL S.A.",
-			"Banco Múltiplo");
+			"Banco Múltiplo"),
+
+	/**
+	 * Tipo enumerado que representa o <strong>Unibanco</strong>, código de
+	 * compensação <strong><tt>409</tt></strong> <a
+	 * href="http://www.unibanco.com.br">site</a>.
+	 * 
+	 * @since 0.2
+	 */
+	UNIBANCO("409", "33700394000140",
+			"UNIBANCO-UNIAO DE BANCOS BRASILEIROS S.A.", "Banco Múltiplo");
 
 	/**
 	 * Singleton <code>Map</code> para pesquisa por bancos suportados no
@@ -165,6 +179,8 @@ public enum EnumBancos {
 
 		suportados.put(BANCO_ABN_AMRO_REAL.codigoDeCompensacao,
 				BANCO_ABN_AMRO_REAL);
+		
+		suportados.put(UNIBANCO.codigoDeCompensacao, UNIBANCO);
 
 	}
 

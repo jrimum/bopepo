@@ -157,7 +157,7 @@ class CLBancoReal extends ACLBancoReal {
 	 * @param nossoNumero
 	 * @param agencia
 	 * @param contaCorrente
-	 * @return Dígito verficador calculador
+	 * @return Dígito verficador calculado
 	 * 
 	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
 	 * 
@@ -192,9 +192,5 @@ class CLBancoReal extends ACLBancoReal {
 			return dV;
 			
 		}
-	//TODO fazer testes
-	public static void main(String[] args) {
-		System.out.println(calcularDigitoDaPosicao31("5020", 1018, 16324));//==9
-	}
-
+	
 }

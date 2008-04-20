@@ -53,6 +53,7 @@ import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoExceptio
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.bopepo.pdf.BoletoPDF;
 import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
+import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
@@ -185,7 +186,7 @@ public final class Boleto extends ACurbitaObject{
 		ContaBancaria contaBancaria = new ContaBancaria(BANCO_DO_BRASIL.newInstance());
 		
 		contaBancaria.setAgencia(new Agencia(1234, "67"));
-		contaBancaria.setCodigoDaCarteira(5);
+		contaBancaria.setCarteira(new Carteira(5));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(6789, "12"));
 
 		cedente.addContaBancaria(contaBancaria);

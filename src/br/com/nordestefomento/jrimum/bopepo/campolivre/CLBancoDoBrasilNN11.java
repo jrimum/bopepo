@@ -125,7 +125,7 @@ class CLBancoDoBrasilNN11 extends ACLBancoDoBrasil {
 		clBancoDoBrasilN11.add(new Field<Integer>(conta.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
 		clBancoDoBrasilN11.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 8, Filler.ZERO_LEFT));
 		
-		clBancoDoBrasilN11.add(new Field<Integer>(conta.getCodigoDaCarteira(), 2, Filler.ZERO_LEFT));
+		clBancoDoBrasilN11.add(new Field<Integer>(conta.getCarteira().getCodigo(), 2, Filler.ZERO_LEFT));
 
 		return clBancoDoBrasilN11;
 	}
