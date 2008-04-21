@@ -117,6 +117,10 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre{
 								.getInstance(titulo);
 						break;
 
+					case HSBC:
+						campoLivre = ACLHsbc.getInstance(titulo);
+						break;
+
 					}
 				} else {
 					/*

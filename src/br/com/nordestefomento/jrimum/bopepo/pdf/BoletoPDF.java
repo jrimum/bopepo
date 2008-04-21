@@ -633,14 +633,14 @@ public class BoletoPDF extends ACurbitaObject {
 		
 		sacado.addEndereco(endereco);
 		
-		Pessoa cedente = new Pessoa("Empresa Lucrativa para Todo Sempre Ilimitada", "00.000.208/0001-00");
+		Pessoa cedente = new Pessoa("Empresa Lucrativa S.A para Todo Sempre Ilimitada", "00.000.208/0001-00");
 		
 		//ContaBancaria contaBancaria = new ContaBancaria(new Banco("035", 
 		//	"Misael Bank", new CNPJ("00.000.208/0001-00"), "Seg"));
 		//contaBancaria.getBanco().setImgLogo(ImageIO.read(new File("C:/Java/SP_A0021.jpg")));
 		
-		IBanco banco = EnumBancos.BANCO_DO_BRASIL.newInstance();
-		banco.setImgLogo(ImageIO.read(new File("C:/Java/SP_A0021.jpg")));
+		IBanco banco = EnumBancos.HSBC.newInstance();
+		//banco.setImgLogo(ImageIO.read(new File("C:/Java/SP_A0021.jpg")));
 		ContaBancaria contaBancaria = new ContaBancaria(banco);
 		
 		contaBancaria.setAgencia(new Agencia(1234, "67"));

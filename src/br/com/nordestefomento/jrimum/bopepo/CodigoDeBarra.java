@@ -135,7 +135,7 @@ public final class CodigoDeBarra extends LineOfFields{
 	 * 
 	 * @see #calculateFatorDeVencimento(Date)
 	 */
-	private static final Date DATA_BASE_DO_FATOR_DE_VENCIMENTO = new GregorianCalendar(
+	public static final Date DATA_BASE_DO_FATOR_DE_VENCIMENTO = new GregorianCalendar(
 			1997, Calendar.OCTOBER, 7).getTime();
 
 	

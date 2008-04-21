@@ -1,0 +1,147 @@
+/*
+ * Copyright 2008 JRimum Project
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by
+ * applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+ * OF ANY KIND, either express or implied. See the License for the specific
+ * language governing permissions and limitations under the License.
+ * 
+ * Created at: 30/03/2008 - 18:09:27
+ * 
+ * ================================================================================
+ * 
+ * Direitos autorais 2008 JRimum Project
+ * 
+ * Licenciado sob a Licença Apache, Versão 2.0 ("LICENÇA"); você não pode usar
+ * esse arquivo exceto em conformidade com a esta LICENÇA. Você pode obter uma
+ * cópia desta LICENÇA em http://www.apache.org/licenses/LICENSE-2.0 A menos que
+ * haja exigência legal ou acordo por escrito, a distribuição de software sob
+ * esta LICENÇA se dará “COMO ESTÁ”, SEM GARANTIAS OU CONDIÇÕES DE QUALQUER
+ * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
+ * reger permissões e limitações sob esta LICENÇA.
+ * 
+ * Criado em: 30/03/2008 - 18:09:27
+ * 
+ */
+
+
+package br.com.nordestefomento.jrimum.bopepo.campolivre;
+
+import br.com.nordestefomento.jrimum.bopepo.CodigoDeBarra;
+import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
+import br.com.nordestefomento.jrimum.utilix.Field;
+import br.com.nordestefomento.jrimum.utilix.Filler;
+import br.com.nordestefomento.jrimum.utilix.Util4Date;
+
+/**
+ * 
+ * 	O campo livre do bradesco deve seguir esta forma:
+ * 
+ * 	<table border="1" cellpadding="0" cellspacing="0" style="border-collapse:
+ * 	collapse" bordercolor="#111111" width="60%" id="campolivre">
+ * 		<tr>
+ * 			<thead>
+ *				<th>Posição </th>
+ * 				<th>Tamanho</th>
+ * 				<th>Picture</th>
+ * 				<th>Conteúdo</th>
+ * 			</thead>
+ * 		</tr>
+ * 
+ * 		<tr>
+ * 			<td>20-26</td>
+ * 			<td>7</td>
+ * 			<td>9(7) </td>
+ * 			<td>Conta do cedente (sem dígito)</td>
+ * 		</tr>
+ * 
+ * 		<tr>
+ * 			<td>27-39</td>
+ * 			<td>13</td>
+ * 			<td>9(13) </td>
+ * 			<td>Nosso número (sem dígito)</td>
+ * 		</tr>
+ * 
+ * 		<tr>
+ * 			<td>40-43</td>
+ * 			<td>4</td>
+ * 			<td>9(4) </td>
+ * 			<td>Data de vencimento (formato juliano)</td>
+ * 		</tr>
+ * 
+ * 		<tr>
+ * 			<td>44-44</td>
+ * 			<td>1</td>
+ * 			<td>9(1) </td>
+ * 			<td>2 FIXO (Código do Aplicativo CNR - Cob. Não Registrada)</td>
+ * 		</tr>
+ * </table>
+ * 
+ * 
+ * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ACampoLivre
+ * 
+ * @author Gabriel Guimarães
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto 
+ * @author Rômulo Augusto
+ * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
+ * 
+ * @since JMatryx 1.0
+ * 
+ * @version 1.0
+ */
+class CLHsbc extends ACLBradesco {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1253549781074159862L;
+
+	/**
+	 * 
+	 */
+	private static final Integer FIELDS_LENGTH = 4;
+	
+	/**
+	 * @param fieldsLength
+	 * @param stringLength
+	 */
+	protected CLHsbc(Integer fieldsLength, Integer stringLength) {
+		super(fieldsLength, stringLength);
+		
+	}
+
+	/**
+	 * @param titulo
+	 * @return
+	 */
+	static ICampoLivre getInstance(Titulo titulo) {
+		
+		ACampoLivre clHsbc = new CLHsbc(FIELDS_LENGTH,STRING_LENGTH);
+		
+		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
+		String nossoNumero = titulo.getNossoNumero();
+		
+		
+		//Conta do cedente (sem dígito)
+		clHsbc.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
+		
+		//Nosso número (sem dígito)
+		clHsbc.add(new Field<String>(nossoNumero, 13, Filler.ZERO_LEFT));
+		
+		// Data de vencimento (formato juliano)
+		int dataVencimentoFormatoJuliano = (int)Util4Date.calcularDiferencaEmDias(CodigoDeBarra.DATA_BASE_DO_FATOR_DE_VENCIMENTO, titulo.getDataDoVencimento());
+		clHsbc.add(new Field<Integer>(dataVencimentoFormatoJuliano, 4, Filler.ZERO_LEFT));
+		
+		//2 FIXO (Código do Aplicativo CNR - Cob. Não Registrada)
+		clHsbc.add(new Field<Integer>(2, 1));
+
+		
+		
+		return clHsbc;
+	}
+}
