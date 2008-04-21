@@ -39,7 +39,7 @@ import br.com.nordestefomento.jrimum.utilix.Util4Date;
 
 /**
  * 
- * 	O campo livre do bradesco deve seguir esta forma:
+ * 	O campo livre do HSBC deve seguir esta forma:
  * 
  * 	<table border="1" cellpadding="0" cellspacing="0" style="border-collapse:
  * 	collapse" bordercolor="#111111" width="60%" id="campolivre">
