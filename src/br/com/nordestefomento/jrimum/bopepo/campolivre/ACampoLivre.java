@@ -87,7 +87,7 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre{
 
 			if (log.isDebugEnabled())
 				log.debug("Campo Livre do Banco: "
-						+ contaBancaria.getBanco().getInstituicao());
+						+ contaBancaria.getBanco().getNome());
 
 			/*
 			 * A conta bancária passada não é sincronizada.

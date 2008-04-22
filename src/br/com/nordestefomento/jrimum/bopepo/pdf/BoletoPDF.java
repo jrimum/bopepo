@@ -496,8 +496,8 @@ public class BoletoPDF extends ACurbitaObject {
 				// Sem imagem, um alerta é exibido.
 				log.warn("Banco sem imagem definida. O nome da instiuição será usado como logo.");
 				
-				form.setField("txtRsLogoBanco", conta.getBanco().getInstituicao());
-				form.setField("txtFcLogoBanco", conta.getBanco().getInstituicao());			
+				form.setField("txtRsLogoBanco", conta.getBanco().getNome());
+				form.setField("txtFcLogoBanco", conta.getBanco().getNome());			
 
 			}				
 		}
