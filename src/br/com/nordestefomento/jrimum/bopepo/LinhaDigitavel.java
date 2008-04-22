@@ -182,17 +182,17 @@ public final class LinhaDigitavel extends LineOfFields {
 	/**
 	 * 
 	 */
-	private Field<Campo1> campo1;
+	private Field<InnerCampo1> innerCampo1;
 	
 	/**
 	 * 
 	 */
-	private Field<Campo2> campo2;
+	private Field<InnerCampo2> innerCampo2;
 	
 	/**
 	 * 
 	 */
-	private Field<Campo3> campo3;
+	private Field<InnerCampo3> innerCampo3;
 	
 	/**
 	 * Digito verificador geral.
@@ -202,7 +202,7 @@ public final class LinhaDigitavel extends LineOfFields {
 	/**
 	 * 
 	 */
-	private Field<Campo5> campo5;
+	private Field<InnerCampo5> innerCampo5;
 
 
 	/**
@@ -215,17 +215,17 @@ public final class LinhaDigitavel extends LineOfFields {
 	private LinhaDigitavel(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 		
-		campo1 = new Field<Campo1>(new Campo1(4,11),11);
-		campo2 = new Field<Campo2>(new Campo2(2,12),12);
-		campo3 = new Field<Campo3>(new Campo3(2,12),12);
+		innerCampo1 = new Field<InnerCampo1>(new InnerCampo1(4,11),11);
+		innerCampo2 = new Field<InnerCampo2>(new InnerCampo2(2,12),12);
+		innerCampo3 = new Field<InnerCampo3>(new InnerCampo3(2,12),12);
 		campo4 = new Field<Integer>(new Integer(0),1);
-		campo5 = new Field<Campo5>(new Campo5(2,14),14);
+		innerCampo5 = new Field<InnerCampo5>(new InnerCampo5(2,14),14);
 		
-		add(campo1);
-		add(campo2);
-		add(campo3);
+		add(innerCampo1);
+		add(innerCampo2);
+		add(innerCampo3);
 		add(campo4);
-		add(campo5);
+		add(innerCampo5);
 	}
 
 	/**
@@ -247,16 +247,16 @@ public final class LinhaDigitavel extends LineOfFields {
 		
 		LinhaDigitavel linhaDigitavel = new LinhaDigitavel(FIELDS_LENGTH,STRING_LENGTH);
 
-		linhaDigitavel.campo1.getField().load(codigoDeBarra);
-		linhaDigitavel.campo2.getField().load(codigoDeBarra);
-		linhaDigitavel.campo3.getField().load(codigoDeBarra);
+		linhaDigitavel.innerCampo1.getField().load(codigoDeBarra);
+		linhaDigitavel.innerCampo2.getField().load(codigoDeBarra);
+		linhaDigitavel.innerCampo3.getField().load(codigoDeBarra);
 		
 		linhaDigitavel.campo4.setField(codigoDeBarra.getDigitoVerificadorGeral().getField());
 		
 		if(log.isDebugEnabled())
-			log.debug("Campo 4 da Linha Digitável : "+linhaDigitavel.campo4.getField());
+			log.debug("InnerCampo 4 da Linha Digitável : "+linhaDigitavel.campo4.getField());
 		
-		linhaDigitavel.campo5.getField().load(codigoDeBarra);
+		linhaDigitavel.innerCampo5.getField().load(codigoDeBarra);
 		
 		if(log.isDebugEnabled() || log.isTraceEnabled())
 			log.debug("linhaDigitavel instanciada : "+linhaDigitavel.write());
@@ -272,19 +272,19 @@ public final class LinhaDigitavel extends LineOfFields {
 	@Override
 	public String write(){
 		
-		return new StringBuilder(campo1.write()).
+		return new StringBuilder(innerCampo1.write()).
 		append(Util4String.WHITE_SPACE).
-		append(campo2.write()).
+		append(innerCampo2.write()).
 		append(Util4String.WHITE_SPACE).
-		append(campo3.write()).
+		append(innerCampo3.write()).
 		append(Util4String.WHITE_SPACE).
 		append(campo4.write()).
 		append(Util4String.WHITE_SPACE).
-		append(campo5.write()).toString();
+		append(innerCampo5.write()).toString();
 
 	}
 
-	private abstract class Campo extends LineOfFields{
+	private abstract class InnerCampo extends LineOfFields{
 		
 		/**
 		 * 
@@ -292,16 +292,16 @@ public final class LinhaDigitavel extends LineOfFields {
 		protected final DV4BoletoLinhaDigitavel calculadorDV = new DV4BoletoLinhaDigitavel();
 		
 		
-		protected Campo(Integer fieldsLength, Integer stringLength) {
+		protected InnerCampo(Integer fieldsLength, Integer stringLength) {
 			super(fieldsLength, stringLength);
 		}
 		
 	}
 	
-	private abstract class CampoFormatado extends Campo{
+	private abstract class InnerCampoFormatado extends InnerCampo{
 		
 		
-		protected CampoFormatado(final Integer fieldsLength, final Integer stringLength) {
+		protected InnerCampoFormatado(final Integer fieldsLength, final Integer stringLength) {
 			super(fieldsLength, stringLength);
 		}
 		
@@ -346,7 +346,7 @@ public final class LinhaDigitavel extends LineOfFields {
 	 * @param codigoDeBarra
 	 * @param calculadorDV
 	 */
-	private class Campo1 extends CampoFormatado{
+	private class InnerCampo1 extends InnerCampoFormatado{
 		
 		/**
 		 * 
@@ -357,7 +357,7 @@ public final class LinhaDigitavel extends LineOfFields {
 		 * @param fieldsLength
 		 * @param stringLength
 		 */
-		private Campo1(Integer fieldsLength, Integer stringLength) {
+		private InnerCampo1(Integer fieldsLength, Integer stringLength) {
 			super(fieldsLength, stringLength);
 		}
 		
@@ -395,7 +395,7 @@ public final class LinhaDigitavel extends LineOfFields {
 	 * @param codigoDeBarra
 	 * @param calculadorDV
 	 */
-	private class Campo2 extends CampoFormatado{
+	private class InnerCampo2 extends InnerCampoFormatado{
 
 		/**
 		 * 
@@ -406,7 +406,7 @@ public final class LinhaDigitavel extends LineOfFields {
 		 * @param fieldsLength
 		 * @param stringLength
 		 */
-		private Campo2(Integer fieldsLength, Integer stringLength) {
+		private InnerCampo2(Integer fieldsLength, Integer stringLength) {
 			super(fieldsLength, stringLength);
 		}
 		
@@ -426,7 +426,7 @@ public final class LinhaDigitavel extends LineOfFields {
 				log.debug("Digito verificador do campo 2 da Linha Digitável : "+get(1).getField());
 			
 			if(log.isDebugEnabled() || log.isTraceEnabled())
-				log.debug("Campo 2 da Linha Digitável composto : "+write());
+				log.debug("InnerCampo 2 da Linha Digitável composto : "+write());
 		}
 		
 	}
@@ -442,7 +442,7 @@ public final class LinhaDigitavel extends LineOfFields {
 	 * @param codigoDeBarra
 	 * @param calculadorDV
 	 */
-	private class Campo3 extends CampoFormatado{
+	private class InnerCampo3 extends InnerCampoFormatado{
 		
 		/**
 		 * 
@@ -453,7 +453,7 @@ public final class LinhaDigitavel extends LineOfFields {
 		 * @param fieldsLength
 		 * @param stringLength
 		 */
-		private Campo3(Integer fieldsLength, Integer stringLength) {
+		private InnerCampo3(Integer fieldsLength, Integer stringLength) {
 			super(fieldsLength, stringLength);
 		}
 		
@@ -472,7 +472,7 @@ public final class LinhaDigitavel extends LineOfFields {
 				log.debug("Digito verificador do campo 3 da Linha Digitável : "+get(1).getField());
 			
 			if(log.isDebugEnabled() || log.isTraceEnabled())
-				log.debug("Campo 3 da Linha Digitável composto : "+write());
+				log.debug("InnerCampo 3 da Linha Digitável composto : "+write());
 			
 		}
 		
@@ -489,7 +489,7 @@ public final class LinhaDigitavel extends LineOfFields {
 	 * 
 	 * @param codigoDeBarra
 	 */
-	private class Campo5 extends Campo{
+	private class InnerCampo5 extends InnerCampo{
 
 		/**
 		 * 
@@ -500,7 +500,7 @@ public final class LinhaDigitavel extends LineOfFields {
 		 * @param fieldsLength
 		 * @param stringLength
 		 */
-		private Campo5(Integer fieldsLength, Integer stringLength) {
+		private InnerCampo5(Integer fieldsLength, Integer stringLength) {
 			super(fieldsLength, stringLength);
 		}
 		
@@ -516,7 +516,7 @@ public final class LinhaDigitavel extends LineOfFields {
 			add(new Field<String>(codigoDeBarra.write().substring(9, 19),10));
 			
 			if(log.isDebugEnabled() || log.isTraceEnabled())
-				log.debug("Campo 5 da Linha Digitável composto : "+write());
+				log.debug("InnerCampo 5 da Linha Digitável composto : "+write());
 			
 		}
 		
