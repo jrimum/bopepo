@@ -140,6 +140,15 @@ public enum EnumBancos {
 			"Banco Múltiplo"),
 
 	/**
+	 * Tipo enumerado que representa o <strong>Banco Itaú</strong>, código de
+	 * compensação <strong><tt>341</tt></strong>
+	 * <a href="http://www.itau.com.br">site</a>.
+	 * 
+	 * @since 0.2
+	 */
+	BANCO_ITAU("341", "60701190000104", "BANCO ITAÚ S.A.", "Banco Múltiplo"),
+	
+	/**
 	 * Tipo enumerado que representa o <strong>Banco Real</strong>, código de
 	 * compensação <strong><tt>356</tt></strong> <a
 	 * href="http://www.bancoreal.com.br">site</a>.
@@ -195,6 +204,8 @@ public enum EnumBancos {
 		suportados.put(UNIBANCO.codigoDeCompensacao, UNIBANCO);
 
 		suportados.put(HSBC.codigoDeCompensacao, HSBC);
+		
+		suportados.put(BANCO_ITAU.codigoDeCompensacao, BANCO_ITAU);
 	}
 
 	/**
