@@ -516,7 +516,7 @@ public class CLItau extends ACLItau {
 		
 	private static Integer calculeDigitoVerificador(String campo) {
 				
-		int restoDivisao = Modulo.calcularMod10(campo, 1, 2);
+		int restoDivisao = Modulo.calculeMod10(campo, 1, 2);
 		int digito = 10 - restoDivisao;
 		
 		if(digito > 9) {

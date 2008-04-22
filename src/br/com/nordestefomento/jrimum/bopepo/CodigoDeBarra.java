@@ -257,7 +257,7 @@ public final class CodigoDeBarra extends LineOfFields{
 		.append(valorNominalDoTitulo.write())
 		.append(campoLivre.write());
 
-		digitoVerificadorGeral.setField(calculadorDV.calcular(toCalculateDV.toString()));
+		digitoVerificadorGeral.setField(calculadorDV.calcule(toCalculateDV.toString()));
 
 		if (log.isDebugEnabled())
 			log.debug("Digito Verificador Geral calculado : "

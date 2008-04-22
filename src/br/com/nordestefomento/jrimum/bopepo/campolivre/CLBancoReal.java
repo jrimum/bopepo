@@ -35,8 +35,8 @@ import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.Util4String;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.AModulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.EnumModulo;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
 /**
  * 
@@ -92,6 +92,8 @@ class CLBancoReal extends ACLBancoReal {
 	 */
 	private static final long serialVersionUID = -5294809022535972391L;
 	
+	private static final Modulo modulo10 = new Modulo(EnumModulo.MODULO10);
+	
 	/**
 	 * Tamanho deste campo.
 	 */
@@ -120,7 +122,7 @@ class CLBancoReal extends ACLBancoReal {
 		//TODO Código em teste
 		clBancoReal.add(new Field<Integer>(conta.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
 		clBancoReal.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
-		clBancoReal.add(new Field<String>(calcularDigitoDaPosicao31(titulo.getNumeroDoDocumento(), conta.getAgencia().getCodigoDaAgencia(), conta.getNumeroDaConta().getCodigoDaConta()), 1, Filler.ZERO_LEFT));
+		clBancoReal.add(new Field<String>(calculeDigitoDaPosicao31(titulo.getNumeroDoDocumento(), conta.getAgencia().getCodigoDaAgencia(), conta.getNumeroDaConta().getCodigoDaConta()), 1, Filler.ZERO_LEFT));
 		
 		clBancoReal.add(new Field<String>(Util4String.eliminateSymbols(titulo.getNumeroDoDocumento()), 13, Filler.ZERO_LEFT));
 		
@@ -161,26 +163,22 @@ class CLBancoReal extends ACLBancoReal {
 	 * 
 	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
 	 * 
-	 * @see br.com.nordestefomento.jrimum.vallia.digitoverificador.AModulo
+	 * @see br.com.nordestefomento.jrimum.utilix.AModulo
 	 * 
 	 * @since 0.2
 	 * 
 	 */	
-	private static String calcularDigitoDaPosicao31(String nossoNumero, Integer agencia, Integer contaCorrente){
+	private static String calculeDigitoDaPosicao31(String nossoNumero, Integer agencia, Integer contaCorrente){
 			
 			StringBuilder formula = new StringBuilder("");
 			
 			 String dV = null;
 			
-			AModulo aModulo = AModulo.getInstance(EnumModulo.MODULO_10);
-			aModulo.setLimiteMinimo(1);
-			aModulo.setLimiteMaximo(2);
-			
 			formula.append(Filler.ZERO_LEFT.fill(nossoNumero,13));
 			formula.append(Filler.ZERO_LEFT.fill(agencia, 4));
 			formula.append(Filler.ZERO_LEFT.fill(contaCorrente, 7));
 			
-			int restoDivisao = aModulo.calcular(formula.toString());
+			int restoDivisao = modulo10.calcule(formula.toString());
 			
 			int restoSubtracao = (10 - restoDivisao);
 			

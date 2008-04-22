@@ -372,7 +372,7 @@ public final class LinhaDigitavel extends LineOfFields {
 				add(new Field<String>(codigoDeBarra.write().substring(0, 3),3));
 				add(new Field<String>(codigoDeBarra.write().substring(3, 4),1));
 				add(new Field<String>(codigoDeBarra.write().substring(19, 24),5));				
-				add(new Field<Integer>(calculadorDV.calcular(get(0).write() + get(1).write() + get(2).write()),1));
+				add(new Field<Integer>(calculadorDV.calcule(get(0).write() + get(1).write() + get(2).write()),1));
 				
 				if(log.isDebugEnabled())
 					log.debug("Digito verificador do Field 1 da Linha Digitável : "+get(3).getField());
@@ -420,7 +420,7 @@ public final class LinhaDigitavel extends LineOfFields {
 				log.trace("Compondo campo 2 da Linha Digitável");
 			
 			add(new Field<String>(codigoDeBarra.write().substring(24, 34),10));				
-			add(new Field<Integer>(calculadorDV.calcular(get(0).write()),1));
+			add(new Field<Integer>(calculadorDV.calcule(get(0).write()),1));
 			
 			if(log.isDebugEnabled())
 				log.debug("Digito verificador do campo 2 da Linha Digitável : "+get(1).getField());
@@ -466,7 +466,7 @@ public final class LinhaDigitavel extends LineOfFields {
 				log.trace("Compondo campo 3 da Linha Digitável");
 			
 			add(new Field<String>(codigoDeBarra.write().substring(34, 44),10));				
-			add(new Field<Integer>(calculadorDV.calcular(get(0).write()),1));
+			add(new Field<Integer>(calculadorDV.calcule(get(0).write()),1));
 			
 			if(log.isDebugEnabled())
 				log.debug("Digito verificador do campo 3 da Linha Digitável : "+get(1).getField());

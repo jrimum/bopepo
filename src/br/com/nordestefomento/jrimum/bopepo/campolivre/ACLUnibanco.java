@@ -3,8 +3,7 @@ package br.com.nordestefomento.jrimum.bopepo.campolivre;
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.EnumCobranca;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.AModulo;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.EnumModulo;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
 public class ACLUnibanco extends ACampoLivre {
 
@@ -66,8 +65,7 @@ public class ACLUnibanco extends ACampoLivre {
 
 		String dv = "";
 
-		int soma = AModulo.calculeSomaSequencial(EnumModulo.MODULO_11, numero,
-				2, 9);
+		int soma = Modulo.calculeSomaSequencialMod11(numero, 2, 9);
 
 		soma *= 10;
 

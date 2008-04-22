@@ -117,7 +117,7 @@ public class CLUnibancoCobrancaRegistrada extends ACLUnibanco {
 		aCLUnibanco.add(new Field<String>(titulo.getNossoNumero(), 11,
 				Filler.ZERO_LEFT));
 
-		aCLUnibanco.add(new Field<String>(calcularSuperDigito(titulo
+		aCLUnibanco.add(new Field<String>(calculeSuperDigito(titulo
 				.getNossoNumero()), 1));
 
 		return aCLUnibanco;
@@ -144,18 +144,18 @@ public class CLUnibancoCobrancaRegistrada extends ACLUnibanco {
 	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
 	 * 
 	 * @see #calculeDigitoEmModulo11(String)
-	 * @see br.com.nordestefomento.jrimum.vallia.digitoverificador.AModulo
+	 * @see br.com.nordestefomento.jrimum.utilix.AModulo
 	 * 
 	 * @since 0.2
 	 */
-	private static String calcularSuperDigito(String nossoNumero) {
+	private static String calculeSuperDigito(String nossoNumero) {
 
 		return calculeDigitoEmModulo11("1" + nossoNumero);
 	}
 
 	// TODO TESTES
 	public static void main(String[] args) {
-		System.out.println(calcularSuperDigito("11223344554"));
+		System.out.println(calculeSuperDigito("11223344554"));
 	}
 
 }
