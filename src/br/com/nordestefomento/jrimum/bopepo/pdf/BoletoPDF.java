@@ -255,14 +255,14 @@ public class BoletoPDF extends ACurbitaObject {
 		if(isNotNull(sacado.getNome())){
 			sb.append(sacado.getNome());
 		}
-		if(isNotNull(sacado.getCadastroDePessoa())){
+		if(isNotNull(sacado.getACpfCnpj())){
 			sb.append(", ");			
-			if(sacado.getCadastroDePessoa().isFisica())
+			if(sacado.getACpfCnpj().isFisica())
 				sb.append("Cpf: ");
-			else if(sacado.getCadastroDePessoa().isJuridica())
+			else if(sacado.getACpfCnpj().isJuridica())
 				sb.append("Cnpj: ");
 			
-			sb.append(sacado.getCadastroDePessoa().getCodigoFormatado());
+			sb.append(sacado.getACpfCnpj().getCodigoFormatado());
 		}
 		form.setField("txtRsSacado", sb.toString());
 		form.setField("txtFcSacadoL1", sb.toString());
@@ -307,14 +307,14 @@ public class BoletoPDF extends ACurbitaObject {
 			if(isNotNull(sacadorAvalista.getNome())){
 				sb.append(sacadorAvalista.getNome());
 			}
-			if(isNotNull(sacadorAvalista.getCadastroDePessoa())){
+			if(isNotNull(sacadorAvalista.getACpfCnpj())){
 				sb.append(", ");			
-				if(sacadorAvalista.getCadastroDePessoa().isFisica())
+				if(sacadorAvalista.getACpfCnpj().isFisica())
 					sb.append("Cpf: ");
-				else if(sacadorAvalista.getCadastroDePessoa().isJuridica())
+				else if(sacadorAvalista.getACpfCnpj().isJuridica())
 					sb.append("Cnpj: ");
 				
-				sb.append(sacadorAvalista.getCadastroDePessoa().getCodigoFormatado());
+				sb.append(sacadorAvalista.getACpfCnpj().getCodigoFormatado());
 			}
 			form.setField("txtFcSacadorAvalistaL1", sb.toString());
 			
@@ -416,7 +416,7 @@ public class BoletoPDF extends ACurbitaObject {
 
 	private void setCpfCnpjCedente() throws IOException, DocumentException {
 		// TODO Auto-generated method stub
-		form.setField("txtRsCpfCnpj", boleto.getTitulo().getCedente().getCadastroDePessoa().getCodigoFormatado());				
+		form.setField("txtRsCpfCnpj", boleto.getTitulo().getCedente().getACpfCnpj().getCodigoFormatado());				
 	}
 
 
