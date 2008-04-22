@@ -36,7 +36,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import junit.framework.TestCase;
-import br.com.nordestefomento.jrimum.bopepo.CodigoDeBarra;
+import br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.FactoryCampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
 import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
@@ -51,7 +51,7 @@ import br.com.nordestefomento.jrimum.domkee.type.EnumMoeda;
 /**
  * 
  * Teste Unitário para: <br />
- * {@link br.com.nordestefomento.jrimum.bopepo.CodigoDeBarra#getFatorDeVencimento()}
+ * {@link br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras#getFatorDeVencimento()}
  * 
  * 
  * @author Gabriel Guimarães
@@ -69,7 +69,7 @@ public class TestCodigoDeBarra extends TestCase {
 
 	private Titulo titulo;
 	
-	private CodigoDeBarra codigoDeBarra;
+	private CodigoDeBarras codigoDeBarras;
 	
 	private Date VENCIMENTO = new GregorianCalendar(2000, Calendar.JULY, 3).getTime();
 
@@ -101,45 +101,45 @@ public class TestCodigoDeBarra extends TestCase {
 		
 		clBradesco = FactoryCampoLivre.getInstance(titulo);
 		
-		codigoDeBarra = CodigoDeBarra.getInstance(titulo, clBradesco);
+		codigoDeBarras = CodigoDeBarras.getInstance(titulo, clBradesco);
 
 	}
 
 	/**
 	 * Test method for
-	 * {@link br.com.nordestefomento.jrimum.bopepo.CodigoDeBarra#getInstance(br.com.nordestefomento.jrimum.domkee.entity.Titulo, ICampoLivre)}.
+	 * {@link br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras#getInstance(br.com.nordestefomento.jrimum.domkee.entity.Titulo, ICampoLivre)}.
 	 */
 	public void testGetInstance() {
 		
-		assertNotNull(codigoDeBarra);
+		assertNotNull(codigoDeBarras);
 		
 	}
 	
 	/**
 	 * Test method for
-	 * {@link br.com.nordestefomento.jrimum.bopepo.CodigoDeBarra#getDigitoVerificadorGeral()}.
+	 * {@link br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras#getDigitoVerificadorGeral()}.
 	 */
 	public void testGetDigitoVerificadorGeral() {
-		assertTrue(2 == codigoDeBarra.getDigitoVerificadorGeral().getField());
+		assertTrue(2 == codigoDeBarras.getDigitoVerificadorGeral().getField());
 	}
 
 	/**
 	 * Test method for
-	 * {@link br.com.nordestefomento.jrimum.bopepo.CodigoDeBarra#toString()}.
+	 * {@link br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras#toString()}.
 	 */
 	public void testWrite() {
 		
-		assertEquals("23792100000000100231234051234567890100067890", codigoDeBarra.write());
+		assertEquals("23792100000000100231234051234567890100067890", codigoDeBarras.write());
 		
 	}
 
 	/**
 	 * Test method for
-	 * {@link br.com.nordestefomento.jrimum.bopepo.CodigoDeBarra#getFatorDeVencimento()}.
+	 * {@link br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras#getFatorDeVencimento()}.
 	 */
 	public void testGetFatorDeVencimento() {
 		
-		assertTrue(1000 == codigoDeBarra.getFatorDeVencimento().getField());
+		assertTrue(1000 == codigoDeBarras.getFatorDeVencimento().getField());
 		
 	}
 

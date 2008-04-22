@@ -36,7 +36,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import junit.framework.TestCase;
-import br.com.nordestefomento.jrimum.bopepo.CodigoDeBarra;
+import br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras;
 import br.com.nordestefomento.jrimum.bopepo.LinhaDigitavel;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.FactoryCampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
@@ -59,7 +59,7 @@ public class TestLinhaDigitavel extends TestCase {
 
 	private Titulo titulo;
 	
-	private CodigoDeBarra codigoDeBarra;
+	private CodigoDeBarras codigoDeBarras;
 	
 	private LinhaDigitavel linhaDigitavel;
 	
@@ -94,14 +94,14 @@ public class TestLinhaDigitavel extends TestCase {
 		
 		clBradesco = FactoryCampoLivre.getInstance(titulo);
 		
-		codigoDeBarra = CodigoDeBarra.getInstance(titulo, clBradesco);
+		codigoDeBarras = CodigoDeBarras.getInstance(titulo, clBradesco);
 		
-		linhaDigitavel = LinhaDigitavel.getInstance(codigoDeBarra);
+		linhaDigitavel = LinhaDigitavel.getInstance(codigoDeBarras);
 
 	}
 	
 	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.LinhaDigitavel#getInstance(br.com.nordestefomento.jrimum.domkee.entity.Titulo, br.com.nordestefomento.jrimum.bopepo.CodigoDeBarra)}.
+	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.LinhaDigitavel#getInstance(br.com.nordestefomento.jrimum.domkee.entity.Titulo, br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras)}.
 	 */
 	public void testGetInstance() {
 

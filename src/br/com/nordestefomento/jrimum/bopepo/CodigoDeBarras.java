@@ -112,7 +112,7 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.DV4BoletoCodigoDeB
  * 
  * @version 1.0
  */
-public final class CodigoDeBarra extends LineOfFields{
+public final class CodigoDeBarras extends LineOfFields{
 
 	/**
 	 * 
@@ -181,7 +181,7 @@ public final class CodigoDeBarra extends LineOfFields{
 	 * @param fieldsLength
 	 * @param stringLength
 	 */
-	private CodigoDeBarra(Integer fieldsLength, Integer stringLength) {
+	private CodigoDeBarras(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);	
 
 		codigoDoBanco = new Field<String>("0", 3, Filler.ZERO_LEFT );
@@ -209,39 +209,39 @@ public final class CodigoDeBarra extends LineOfFields{
 	 * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre
 	 * @return códigoDeBarra
 	 */
-	static CodigoDeBarra getInstance(Titulo titulo, ICampoLivre campoLivre) {
+	static CodigoDeBarras getInstance(Titulo titulo, ICampoLivre campoLivre) {
 		
 		if(log.isTraceEnabled())
-			log.trace("Instanciando o CodigoDeBarra");
+			log.trace("Instanciando o CodigoDeBarras");
 			
 		if(log.isDebugEnabled()){
 			log.debug("titulo instance : "+titulo);
 			log.debug("campoLivre instance : "+campoLivre);
 		}
 		
-		CodigoDeBarra codigoDeBarra = new CodigoDeBarra(FIELDS_LENGTH ,STRING_LENGTH);
+		CodigoDeBarras codigoDeBarras = new CodigoDeBarras(FIELDS_LENGTH ,STRING_LENGTH);
 		
 		//TODO Código em teste.
 		//codigoDeBarra.codigoDoBanco.setField(titulo.getCedente().getContaBancaria().getE_Banco().getCodigo());
 		ContaBancaria contaBancaria = titulo.getCedente().getContasBancarias().iterator().next();
-		codigoDeBarra.codigoDoBanco.setField(contaBancaria.getBanco().getCodigoDeCompensacao());
+		codigoDeBarras.codigoDoBanco.setField(contaBancaria.getBanco().getCodigoDeCompensacao());
 		
-		codigoDeBarra.codigoDaMoeda.setField(titulo.getE_Moeda().getCodigo());
+		codigoDeBarras.codigoDaMoeda.setField(titulo.getE_Moeda().getCodigo());
 		
 		//Was here DigitoVerificador 
 		//But wait
-		codigoDeBarra.calculateAndSetFatorDeVencimento(titulo.getDataDoVencimento());
+		codigoDeBarras.calculateAndSetFatorDeVencimento(titulo.getDataDoVencimento());
 	
-		codigoDeBarra.valorNominalDoTitulo.setField(titulo.getValor().movePointRight(2));
-		codigoDeBarra.campoLivre.setField(campoLivre.write());
+		codigoDeBarras.valorNominalDoTitulo.setField(titulo.getValor().movePointRight(2));
+		codigoDeBarras.campoLivre.setField(campoLivre.write());
 		
 		//Now you can
-		codigoDeBarra.calculateAndSetDigitoVerificadorGeral();
+		codigoDeBarras.calculateAndSetDigitoVerificadorGeral();
 		
 		if(log.isDebugEnabled() || log.isTraceEnabled())
-			log.debug("codigoDeBarra instanciado : "+codigoDeBarra);
+			log.debug("codigoDeBarra instanciado : "+codigoDeBarras);
 
-		return codigoDeBarra;
+		return codigoDeBarras;
 	}
 	
 	private void calculateAndSetDigitoVerificadorGeral() {

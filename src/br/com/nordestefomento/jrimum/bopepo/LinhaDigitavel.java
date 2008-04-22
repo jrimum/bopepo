@@ -150,7 +150,7 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.DV4BoletoLinhaDigi
  * </ul>
  * 
  * 
- * @see br.com.nordestefomento.jrimum.bopepo.CodigoDeBarra
+ * @see br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras
  * 
  * @author Gabriel Guimarães
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
@@ -233,30 +233,30 @@ public final class LinhaDigitavel extends LineOfFields {
 	 * 
 	 * @param titulo
 	 * @see br.com.nordestefomento.jrimum.domkee.entity.Titulo
-	 * @param codigoDeBarra
-	 * @see br.com.nordestefomento.jrimum.bopepo.CodigoDeBarra
+	 * @param codigoDeBarras
+	 * @see br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras
 	 * @return códigoDeBarra
 	 */
-	static LinhaDigitavel getInstance(CodigoDeBarra codigoDeBarra) {
+	static LinhaDigitavel getInstance(CodigoDeBarras codigoDeBarras) {
 
 		if(log.isTraceEnabled())
 			log.trace("Instanciando Linha Digitável");
 		
 		if(log.isDebugEnabled())
-			log.debug("codigoDeBarra instance : "+codigoDeBarra);
+			log.debug("codigoDeBarra instance : "+codigoDeBarras);
 		
 		LinhaDigitavel linhaDigitavel = new LinhaDigitavel(FIELDS_LENGTH,STRING_LENGTH);
 
-		linhaDigitavel.innerCampo1.getField().load(codigoDeBarra);
-		linhaDigitavel.innerCampo2.getField().load(codigoDeBarra);
-		linhaDigitavel.innerCampo3.getField().load(codigoDeBarra);
+		linhaDigitavel.innerCampo1.getField().load(codigoDeBarras);
+		linhaDigitavel.innerCampo2.getField().load(codigoDeBarras);
+		linhaDigitavel.innerCampo3.getField().load(codigoDeBarras);
 		
-		linhaDigitavel.campo4.setField(codigoDeBarra.getDigitoVerificadorGeral().getField());
+		linhaDigitavel.campo4.setField(codigoDeBarras.getDigitoVerificadorGeral().getField());
 		
 		if(log.isDebugEnabled())
 			log.debug("InnerCampo 4 da Linha Digitável : "+linhaDigitavel.campo4.getField());
 		
-		linhaDigitavel.innerCampo5.getField().load(codigoDeBarra);
+		linhaDigitavel.innerCampo5.getField().load(codigoDeBarras);
 		
 		if(log.isDebugEnabled() || log.isTraceEnabled())
 			log.debug("linhaDigitavel instanciada : "+linhaDigitavel.write());
@@ -362,16 +362,16 @@ public final class LinhaDigitavel extends LineOfFields {
 		}
 		
 		/**
-		 * @param codigoDeBarra
+		 * @param codigoDeBarras
 		 */
-		private void load(CodigoDeBarra codigoDeBarra){
+		private void load(CodigoDeBarras codigoDeBarras){
 				
 				if(log.isTraceEnabled())
 					log.trace("Compondo campo 1 da Linha Digitável");
 
-				add(new Field<String>(codigoDeBarra.write().substring(0, 3),3));
-				add(new Field<String>(codigoDeBarra.write().substring(3, 4),1));
-				add(new Field<String>(codigoDeBarra.write().substring(19, 24),5));				
+				add(new Field<String>(codigoDeBarras.write().substring(0, 3),3));
+				add(new Field<String>(codigoDeBarras.write().substring(3, 4),1));
+				add(new Field<String>(codigoDeBarras.write().substring(19, 24),5));				
 				add(new Field<Integer>(calculadorDV.calcule(get(0).write() + get(1).write() + get(2).write()),1));
 				
 				if(log.isDebugEnabled())
@@ -412,14 +412,14 @@ public final class LinhaDigitavel extends LineOfFields {
 		
 		
 		/**
-		 * @param codigoDeBarra
+		 * @param codigoDeBarras
 		 */
-		private void load(CodigoDeBarra codigoDeBarra){
+		private void load(CodigoDeBarras codigoDeBarras){
 			
 			if(log.isTraceEnabled())
 				log.trace("Compondo campo 2 da Linha Digitável");
 			
-			add(new Field<String>(codigoDeBarra.write().substring(24, 34),10));				
+			add(new Field<String>(codigoDeBarras.write().substring(24, 34),10));				
 			add(new Field<Integer>(calculadorDV.calcule(get(0).write()),1));
 			
 			if(log.isDebugEnabled())
@@ -458,14 +458,14 @@ public final class LinhaDigitavel extends LineOfFields {
 		}
 		
 		/**
-		 * @param codigoDeBarra
+		 * @param codigoDeBarras
 		 */
-		private void load(CodigoDeBarra codigoDeBarra){
+		private void load(CodigoDeBarras codigoDeBarras){
 			
 			if(log.isTraceEnabled())
 				log.trace("Compondo campo 3 da Linha Digitável");
 			
-			add(new Field<String>(codigoDeBarra.write().substring(34, 44),10));				
+			add(new Field<String>(codigoDeBarras.write().substring(34, 44),10));				
 			add(new Field<Integer>(calculadorDV.calcule(get(0).write()),1));
 			
 			if(log.isDebugEnabled())
@@ -505,15 +505,15 @@ public final class LinhaDigitavel extends LineOfFields {
 		}
 		
 		/**
-		 * @param codigoDeBarra
+		 * @param codigoDeBarras
 		 */
-		private void load(CodigoDeBarra codigoDeBarra){
+		private void load(CodigoDeBarras codigoDeBarras){
 			
 			if(log.isTraceEnabled())
 				log.trace("Compondo campo 5 da Linha Digitável");
 			
-			add(new Field<String>(codigoDeBarra.write().substring(5, 9),4));
-			add(new Field<String>(codigoDeBarra.write().substring(9, 19),10));
+			add(new Field<String>(codigoDeBarras.write().substring(5, 9),4));
+			add(new Field<String>(codigoDeBarras.write().substring(9, 19),10));
 			
 			if(log.isDebugEnabled() || log.isTraceEnabled())
 				log.debug("InnerCampo 5 da Linha Digitável composto : "+write());

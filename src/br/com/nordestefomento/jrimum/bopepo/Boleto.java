@@ -106,7 +106,7 @@ public final class Boleto extends ACurbitaObject{
 	 */
 	private Date dataDeProcessamento;
 	
-	private CodigoDeBarra codigoDeBarra;
+	private CodigoDeBarras codigoDeBarras;
 	private LinhaDigitavel linhaDigitavel;
 	private ICampoLivre campoLivre;
 	
@@ -381,8 +381,8 @@ public final class Boleto extends ACurbitaObject{
 	
 	private void load(){
 		
-		codigoDeBarra = CodigoDeBarra.getInstance(titulo, campoLivre);
-		linhaDigitavel = LinhaDigitavel.getInstance(codigoDeBarra);
+		codigoDeBarras = CodigoDeBarras.getInstance(titulo, campoLivre);
+		linhaDigitavel = LinhaDigitavel.getInstance(codigoDeBarras);
 		dataDeProcessamento = new Date();
 		
 		log.info("Data de Processamento do Boleto : "+Util4Date.fmt_dd_MM_yyyy.format(dataDeProcessamento));
@@ -457,17 +457,17 @@ public final class Boleto extends ACurbitaObject{
 	}
 
 	/**
-	 * @return the codigoDeBarra
+	 * @return the codigoDeBarras
 	 */
-	public CodigoDeBarra getCodigoDeBarra() {
-		return codigoDeBarra;
+	public CodigoDeBarras getCodigoDeBarras() {
+		return codigoDeBarras;
 	}
 
 	/**
-	 * @param codigoDeBarra the codigoDeBarra to set
+	 * @param codigoDeBarras the codigoDeBarras to set
 	 */
-	public void setCodigoDeBarra(CodigoDeBarra codigoDeBarra) {
-		this.codigoDeBarra = codigoDeBarra;
+	public void setCodigoDeBarras(CodigoDeBarras codigoDeBarras) {
+		this.codigoDeBarras = codigoDeBarras;
 	}
 
 	/**

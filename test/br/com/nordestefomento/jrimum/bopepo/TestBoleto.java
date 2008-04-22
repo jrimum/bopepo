@@ -115,11 +115,11 @@ public class TestBoleto extends TestCase {
 	}
 
 	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.Boleto#getCodigoDeBarra()}.
+	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.Boleto#getCodigoDeBarras()}.
 	 */
 	public void testGetCodigoDeBarra() {
 		
-		assertNotNull(boleto.getCodigoDeBarra());
+		assertNotNull(boleto.getCodigoDeBarras());
 		
 	}
 

@@ -1,3 +1,4 @@
+
 /* 
  * Copyright 2008 JRimum Project
  * 
@@ -10,7 +11,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  * 
- * Created at: 21/04/2008 - 21:14:40
+ * Created at: 21/04/2008 - 23:38:24
  *
  * ================================================================================
  *
@@ -24,65 +25,64 @@
  * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
  * e limitações sob esta LICENÇA.
  * 
- * Criado em: 21/04/2008 - 21:14:40
+ * Criado em: 21/04/2008 - 23:38:24
  * 
  */
 	
-package br.com.nordestefomento.jrimum.bopepo.campolivre;
+package br.com.nordestefomento.jrimum.bopepo;
 
 import br.com.nordestefomento.jrimum.JRimumException;
+
 
 /**
  * 
  * <p>
- * Qualquer exceção gerada durante a geração de um campo livre gera uma <code>CampoLivreException</code>. Centraliza e localiza os problemas relativos a geração de um campo livre.
+ * Qualquer exceção gerada durante a geração do Código de Barras gera uma <code>CodigoDeBarrasException</code>. Centraliza e localiza os problemas relativos a geração de um código de barras.
  * </p>
  * 
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
- * @author Romulo
  * 
  * @see br.com.nordestefomento.jrimum.JRimumException
- * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre
+ * @see br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras
  * 
  * @since 0.2
  * 
  * @version 0.2
  */
-public class CampoLivreException extends JRimumException {
+
+public class CodigoDeBarrasException extends JRimumException {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 893327780214327141L;
-
-	/**
-	 * 
-	 */
-	public CampoLivreException() {
-		super();
+	public CodigoDeBarrasException() {
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @param message
 	 * @param cause
 	 */
-	public CampoLivreException(String message, Throwable cause) {
+	public CodigoDeBarrasException(String message, Throwable cause) {
 		super(message, cause);
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @param message
 	 */
-	public CampoLivreException(String message) {
+	public CodigoDeBarrasException(String message) {
 		super(message);
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @param cause
 	 */
-	public CampoLivreException(Throwable cause) {
+	public CodigoDeBarrasException(Throwable cause) {
 		super(cause);
+		// TODO Auto-generated constructor stub
 	}
 
 }

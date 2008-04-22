@@ -196,7 +196,7 @@ public class BoletoPDF extends ACurbitaObject {
 		
 		// Montando o código de barras.
 		BarcodeInter25 barCode = new BarcodeInter25();
-		barCode.setCode(boleto.getCodigoDeBarra().write());
+		barCode.setCode(boleto.getCodigoDeBarras().write());
 		
 		barCode.setExtended(true);
 		barCode.setBarHeight(40);
