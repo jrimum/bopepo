@@ -30,9 +30,8 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.JRimumException;
 
-public class NotSuporttedBancoException extends JRimumException {
+public class NotSuporttedBancoException extends CampoLivreException {
 
 	/**
 	 * 
