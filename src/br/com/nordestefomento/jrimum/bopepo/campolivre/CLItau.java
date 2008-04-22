@@ -1,4 +1,3 @@
-
 /* 
  * Copyright 2008 JRimum Project
  * 
@@ -38,7 +37,6 @@ import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
-
 
 /**
  * 
@@ -165,7 +163,6 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * 
  * @version 
  */
-
 public class CLItau extends ACLItau {
 	
 	/**
@@ -517,7 +514,7 @@ public class CLItau extends ACLItau {
 	private static Integer calculeDigitoVerificador(String campo) {
 				
 		int restoDivisao = Modulo.calculeMod10(campo, 1, 2);
-		int digito = 10 - restoDivisao;
+		int digito = Modulo.MOD10 - restoDivisao;
 		
 		if(digito > 9) {
 			digito = 0;

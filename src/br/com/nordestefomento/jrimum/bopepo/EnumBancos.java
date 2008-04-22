@@ -167,8 +167,15 @@ public enum EnumBancos {
 	 */
 	UNIBANCO("409", "33700394000140",
 			"UNIBANCO-UNIAO DE BANCOS BRASILEIROS S.A.", "Banco Múltiplo"),
-
-	
+			
+	/**
+	 * Tipo enumerado que representa o <strong>Unibanco</strong>, código de
+	 * compensação <strong><tt>422</tt></strong> <a
+	 * href="http://www.safra.com.br/">site</a>.
+	 * 
+	 * @since 0.2
+	 */
+	BANCO_SAFRA("422", "58160789000128", "BANCO SAFRA S.A.", "Banco Múltiplo"),	
 	
 	/**
 	 * Tipo enumerado que representa o <strong>HSBC</strong>, código de
@@ -206,6 +213,8 @@ public enum EnumBancos {
 		suportados.put(HSBC.codigoDeCompensacao, HSBC);
 		
 		suportados.put(BANCO_ITAU.codigoDeCompensacao, BANCO_ITAU);
+		
+		suportados.put(BANCO_SAFRA.codigoDeCompensacao, BANCO_SAFRA);
 	}
 
 	/**
