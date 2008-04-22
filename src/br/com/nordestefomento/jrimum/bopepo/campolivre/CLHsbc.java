@@ -30,12 +30,11 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.bopepo.CodigoDeBarra;
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.utilix.Util4Date;
+import br.com.nordestefomento.jrimum.utilix.Util4Banco;
 
 /**
  * 
@@ -134,7 +133,7 @@ class CLHsbc extends ACLBradesco {
 		clHsbc.add(new Field<String>(nossoNumero, 13, Filler.ZERO_LEFT));
 		
 		// Data de vencimento (formato juliano)
-		int dataVencimentoFormatoJuliano = (int)Util4Date.calcularDiferencaEmDias(CodigoDeBarra.DATA_BASE_DO_FATOR_DE_VENCIMENTO, titulo.getDataDoVencimento());
+		int dataVencimentoFormatoJuliano = Util4Banco.calculcarFatorVencimento(titulo.getDataDoVencimento());
 		clHsbc.add(new Field<Integer>(dataVencimentoFormatoJuliano, 4, Filler.ZERO_LEFT));
 		
 		//2 FIXO (Código do Aplicativo CNR - Cob. Não Registrada)

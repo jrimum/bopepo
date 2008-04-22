@@ -613,7 +613,7 @@ public class BoletoPDF extends ACurbitaObject {
 	public static void main (String[] args) throws DocumentException, IllegalArgumentException, IOException, NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		Titulo titulo;
 
-		final Date VENCIMENTO = new GregorianCalendar(2000, Calendar.JULY, 3)
+		final Date VENCIMENTO = new GregorianCalendar(1999, Calendar.JULY, 3)
 				.getTime();
 		
 		final Date DATA_DO_DOCUMENTO =  new GregorianCalendar(2000, Calendar.APRIL, 14)
