@@ -152,10 +152,4 @@ public class CLUnibancoCobrancaRegistrada extends ACLUnibanco {
 
 		return calculeDigitoEmModulo11("1" + nossoNumero);
 	}
-
-	// TODO TESTES
-	public static void main(String[] args) {
-		System.out.println(calculeSuperDigito("11223344554"));
-	}
-
 }

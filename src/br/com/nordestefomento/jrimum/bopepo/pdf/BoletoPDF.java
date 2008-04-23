@@ -27,19 +27,14 @@
  * 
  */
 
-
 package br.com.nordestefomento.jrimum.bopepo.pdf;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -52,22 +47,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import br.com.nordestefomento.jrimum.ACurbitaObject;
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
-import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
-import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo.E_Aceite;
-import br.com.nordestefomento.jrimum.domkee.ientity.IBanco;
-import br.com.nordestefomento.jrimum.domkee.type.CEP;
 import br.com.nordestefomento.jrimum.domkee.type.Endereco;
-import br.com.nordestefomento.jrimum.domkee.type.EnumTitulo;
-import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
-import br.com.nordestefomento.jrimum.domkee.type.Localidade;
-import br.com.nordestefomento.jrimum.domkee.type.Logradouro;
 import br.com.nordestefomento.jrimum.utilix.RectanglePDF;
 import br.com.nordestefomento.jrimum.utilix.Util4Date;
 import br.com.nordestefomento.jrimum.utilix.Util4File;
@@ -84,6 +66,8 @@ import com.lowagie.text.pdf.PdfStamper;
 
 public class BoletoPDF extends ACurbitaObject {
 
+	//TODO Testes no teste unitário: TestBoletoPDF
+	
 	/**
 	 * 
 	 */
@@ -607,93 +591,5 @@ public class BoletoPDF extends ACurbitaObject {
 		tsb.append(boleto);
 		
 		return tsb.toString(); 
-	}
-	
-	
-	public static void main (String[] args) throws DocumentException, IllegalArgumentException, IOException, NotSuporttedBancoException, NotSuporttedCampoLivreException {
-		Titulo titulo;
-
-		final Date VENCIMENTO = new GregorianCalendar(1999, Calendar.JULY, 3)
-				.getTime();
-		
-		final Date DATA_DO_DOCUMENTO =  new GregorianCalendar(2000, Calendar.APRIL, 14)
-		.getTime();
-
-		Boleto boleto;
-
-		Pessoa sacado = new Pessoa("Fulano da Silva Sauro Perdido e Desempregado", "222.222.222-22");
-		
-		Endereco endereco = new Endereco();
-		endereco.setUf(EnumUnidadeFederativa.RN);
-		endereco.setLocalidade(new Localidade("Natal"));
-		endereco.setCep(new CEP("59064-120"));
-		endereco.setBairro("Grande Centro");
-		endereco.setLogradouro(new Logradouro("Rua Poeta das Princesas"));
-		endereco.setNumero("1");
-		
-		sacado.addEndereco(endereco);
-		
-		Pessoa cedente = new Pessoa("Empresa Lucrativa S.A para Todo Sempre Ilimitada", "00.000.208/0001-00");
-		
-		//ContaBancaria contaBancaria = new ContaBancaria(new Banco("035", 
-		//	"Misael Bank", new CNPJ("00.000.208/0001-00"), "Seg"));
-		//contaBancaria.getBanco().setImgLogo(ImageIO.read(new File("C:/Java/SP_A0021.jpg")));
-		
-		IBanco banco = EnumBancos.HSBC.newInstance();
-		//banco.setImgLogo(ImageIO.read(new File("C:/Java/SP_A0021.jpg")));
-		ContaBancaria contaBancaria = new ContaBancaria(banco);
-		
-		contaBancaria.setAgencia(new Agencia(1234, "67"));
-		contaBancaria.setCarteira(new Carteira(5));
-		contaBancaria.setNumeroDaConta(new NumeroDaConta(6789, "12"));
-
-		cedente.addContaBancaria(contaBancaria);
-		
-		Pessoa sacadorAvalista = new Pessoa("Banco do Brasil", "00.000.000/0001-91");
-		
-		Endereco endereco2 = new Endereco();
-		endereco2.setUf(EnumUnidadeFederativa.DF);
-		endereco2.setLocalidade(new Localidade("Brasília"));
-		endereco2.setCep(new CEP("00000-000"));
-		endereco2.setBairro("Grande Centro");
-		endereco2.setLogradouro(new Logradouro("Rua Principal Para Sempre"));
-		endereco2.setNumero("001");
-
-		sacadorAvalista.addEndereco(endereco2);
-		
-		//Fim Código em teste
-
-		titulo = Titulo.getInstance(sacado, cedente, sacadorAvalista);
-		titulo.setNumeroDoDocumento("123456789");
-		titulo.setNossoNumero("1234567890");
-		titulo.setDigitoDoNossoNumero("5");
-		titulo.setValor(BigDecimal.valueOf(100.23));
-		titulo.setDataDoDocumento(DATA_DO_DOCUMENTO);
-		titulo.setDataDoVencimento(VENCIMENTO);
-		titulo.setTipoDeDocumento(EnumTitulo.DM_DUPLICATA_MERCANTIL);
-		titulo.setAceite(E_Aceite.A);
-
-		boleto = Boleto.getInstance(titulo);
-		
-		boleto.setLocalPagamento("Pagável preferencialmente na Rede X ou em qualquer Banco até o Vencimento.");
-		
-		boleto.setInsturcaoAoSacado("Senhor sacado, sabemos sim que o valor cobrado é injusto e esperamos seu pagamento assim mesmo.");
-		
-		boleto.setInstrucao1("PARA PAGAMENTO 1 até xx/xx/xxxx COBRAR O VALOR DE: R$ YY,YY");
-		boleto.setInstrucao2("PARA PAGAMENTO 2 até xx/xx/xxxx COBRAR O VALOR DE: R$ YY,YY");
-		boleto.setInstrucao3("PARA PAGAMENTO 3 até xx/xx/xxxx COBRAR O VALOR DE: R$ YY,YY");
-		boleto.setInstrucao4("PARA PAGAMENTO 4 até xx/xx/xxxx COBRAR O VALOR DE: R$ YY,YY");
-		boleto.setInstrucao5("PARA PAGAMENTO 5 até xx/xx/xxxx COBRAR O VALOR DE: R$ YY,YY");
-		boleto.setInstrucao6("PARA PAGAMENTO 6 até xx/xx/xxxx COBRAR O VALOR DE: R$ YY,YY");
-		boleto.setInstrucao7("PARA PAGAMENTO 7 até xx/xx/xxxx COBRAR O VALOR DE: R$ YY,YY");
-		boleto.setInstrucao8("APÓS o Vencimento, Pagável Somente na Rede X.");
-		
-		//boleto.setTemplate("TemplateMisael.pdf");
-		//boleto.getListaCamposExtra().put("txtNew", "Puta que pariu...");
-		
-		boleto.getAsPDF("testeBoletoPdfFromPdf.pdf");
-		//BoletoPDF b = BoletoPDF.getInstance(boleto);
-		//b.getFile("testeBoletoPdfFromPdf.pdf");
-	}
-	
+	}	
 }
