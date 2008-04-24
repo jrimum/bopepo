@@ -30,12 +30,14 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.FactoryCampoLivre;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
@@ -58,13 +60,14 @@ import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
  * 
  * @version 1.0
  */
-public class TestCLBancoDoBrasilNN17 extends TestCase {
+public class TestCLBancoDoBrasilNN17{
 
 	private ICampoLivre clBancoDoBrasil;
 	
 	private Titulo titulo;
 	
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		
 		Pessoa sacado = new Pessoa();
 		Pessoa cedente = new Pessoa();
@@ -83,6 +86,7 @@ public class TestCLBancoDoBrasilNN17 extends TestCase {
 		
 	}
 
+	@Test
 	public void testGetInstanceTitulo() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		
 		//básico
@@ -91,6 +95,7 @@ public class TestCLBancoDoBrasilNN17 extends TestCase {
 		assertNotNull(clBancoDoBrasil);
 	}
 	
+	@Test
 	public void testWrite() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		
 		//básico feliz

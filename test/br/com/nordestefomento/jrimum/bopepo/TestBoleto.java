@@ -30,13 +30,19 @@
 
 package br.com.nordestefomento.jrimum.bopepo;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import junit.framework.TestCase;
-import br.com.nordestefomento.jrimum.bopepo.Boleto;
+import org.junit.Before;
+import org.junit.Test;
+
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
@@ -50,10 +56,27 @@ import br.com.nordestefomento.jrimum.utilix.Util4Date;
 
 
 /**
- * @author Gilmar
- *
+ * 
+ * <p>
+ * DEFINIÇÃO DA CLASSE
+ * </p>
+ * 
+ * <p>
+ * OBJETIVO/PROPÓSITO
+ * </p>
+ * 
+ * <p>
+ * EXEMPLO: 
+ * </p>
+ * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+ * 
+ * @since 
+ * 
+ * @version 
  */
-public class TestBoleto extends TestCase {
+	
+public class TestBoleto{
 
 
 	private Titulo titulo;
@@ -62,8 +85,9 @@ public class TestBoleto extends TestCase {
 	
 	private Boleto boleto;
 
-	@Override
-	protected void setUp() throws Exception {
+
+	@Before
+	public void setUp() throws Exception {
 
 		Pessoa sacado = new Pessoa();
 		Pessoa cedente = new Pessoa();
@@ -98,6 +122,7 @@ public class TestBoleto extends TestCase {
 	 * @throws NotSuporttedBancoException 
 	 * @throws NotSuporttedCampoLivreException 
 	 */
+	@Test
 	public void testGetInstance() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		
 		assertNotNull(boleto);
@@ -117,6 +142,7 @@ public class TestBoleto extends TestCase {
 	/**
 	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.Boleto#getCodigoDeBarras()}.
 	 */
+	@Test
 	public void testGetCodigoDeBarra() {
 		
 		assertNotNull(boleto.getCodigoDeBarras());
@@ -126,6 +152,7 @@ public class TestBoleto extends TestCase {
 	/**
 	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.Boleto#getLinhaDigitavel()}.
 	 */
+	@Test
 	public void testGetLinhaDigitavel() {
 
 		assertNotNull(boleto.getLinhaDigitavel());
@@ -135,6 +162,7 @@ public class TestBoleto extends TestCase {
 	/**
 	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.Boleto#getDataDeProcessamento()}.
 	 */
+	@Test
 	public void testGetDataDeProcessamento() {
 		
 		Date agora = new Date();

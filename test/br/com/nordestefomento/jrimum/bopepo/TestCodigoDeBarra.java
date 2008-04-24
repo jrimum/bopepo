@@ -30,13 +30,18 @@
 
 package br.com.nordestefomento.jrimum.bopepo;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import junit.framework.TestCase;
-import br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras;
+import org.junit.Before;
+import org.junit.Test;
+
 import br.com.nordestefomento.jrimum.bopepo.campolivre.FactoryCampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
 import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
@@ -46,7 +51,6 @@ import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.domkee.type.EnumMoeda;
-
 
 /**
  * 
@@ -63,7 +67,7 @@ import br.com.nordestefomento.jrimum.domkee.type.EnumMoeda;
  * 
  * @version 1.0
  */
-public class TestCodigoDeBarra extends TestCase {
+public class TestCodigoDeBarra{
 
 	private ICampoLivre clBradesco;
 
@@ -73,7 +77,8 @@ public class TestCodigoDeBarra extends TestCase {
 	
 	private Date VENCIMENTO = new GregorianCalendar(2000, Calendar.JULY, 3).getTime();
 
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 
 		Pessoa sacado = new Pessoa();
 		Pessoa cedente = new Pessoa();
@@ -109,6 +114,7 @@ public class TestCodigoDeBarra extends TestCase {
 	 * Test method for
 	 * {@link br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras#getInstance(br.com.nordestefomento.jrimum.domkee.entity.Titulo, ICampoLivre)}.
 	 */
+	@Test
 	public void testGetInstance() {
 		
 		assertNotNull(codigoDeBarras);
@@ -119,6 +125,7 @@ public class TestCodigoDeBarra extends TestCase {
 	 * Test method for
 	 * {@link br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras#getDigitoVerificadorGeral()}.
 	 */
+	@Test
 	public void testGetDigitoVerificadorGeral() {
 		assertTrue(2 == codigoDeBarras.getDigitoVerificadorGeral().getField());
 	}
@@ -127,6 +134,7 @@ public class TestCodigoDeBarra extends TestCase {
 	 * Test method for
 	 * {@link br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras#toString()}.
 	 */
+	@Test
 	public void testWrite() {
 		
 		assertEquals("23792100000000100231234051234567890100067890", codigoDeBarras.write());
@@ -137,6 +145,7 @@ public class TestCodigoDeBarra extends TestCase {
 	 * Test method for
 	 * {@link br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras#getFatorDeVencimento()}.
 	 */
+	@Test
 	public void testGetFatorDeVencimento() {
 		
 		assertTrue(1000 == codigoDeBarras.getFatorDeVencimento().getField());

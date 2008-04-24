@@ -30,14 +30,17 @@
 
 package br.com.nordestefomento.jrimum.bopepo;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import junit.framework.TestCase;
-import br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras;
-import br.com.nordestefomento.jrimum.bopepo.LinhaDigitavel;
+import org.junit.Before;
+import org.junit.Test;
+
 import br.com.nordestefomento.jrimum.bopepo.campolivre.FactoryCampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
 import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
@@ -52,9 +55,8 @@ import br.com.nordestefomento.jrimum.domkee.type.EnumMoeda;
  * @author Gilmar
  *
  */
-public class TestLinhaDigitavel extends TestCase {
+public class TestLinhaDigitavel{
 
-	
 	private ICampoLivre clBradesco;
 
 	private Titulo titulo;
@@ -65,8 +67,8 @@ public class TestLinhaDigitavel extends TestCase {
 	
 	private Date VENCIMENTO = new GregorianCalendar(2000, Calendar.JULY, 3).getTime();
 
-	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 
 		Pessoa sacado = new Pessoa();
 		Pessoa cedente = new Pessoa();
@@ -103,6 +105,7 @@ public class TestLinhaDigitavel extends TestCase {
 	/**
 	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.LinhaDigitavel#getInstance(br.com.nordestefomento.jrimum.domkee.entity.Titulo, br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras)}.
 	 */
+	@Test
 	public void testGetInstance() {
 
 		assertNotNull(linhaDigitavel);
@@ -112,6 +115,7 @@ public class TestLinhaDigitavel extends TestCase {
 	/**
 	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.LinhaDigitavel#toString()}.
 	 */
+	@Test
 	public void testWrite() {
 		
 		assertEquals("23791.23405 51234.567892 01000.678902 2 10000000010023", linhaDigitavel.write());

@@ -30,7 +30,14 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
@@ -51,15 +58,14 @@ import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
  * 
  * @version 1.0
  */
-public class TestCLCaixaEconomicaFederalSINCO extends TestCase {
+public class TestCLCaixaEconomicaFederalSINCO{
 	
 	private ICampoLivre clCaixaSINCO;
 	
 	private Titulo titulo;
 
-	protected void setUp() throws Exception {
-		
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 		
 		Pessoa sacado = new Pessoa();
 		Pessoa cedente = new Pessoa();
@@ -77,6 +83,7 @@ public class TestCLCaixaEconomicaFederalSINCO extends TestCase {
 		titulo = Titulo.getInstance(sacado, cedente);
 	}
 
+	@Test
 	public void testGetInstanceTitulo() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 
 		//Básico:
@@ -106,6 +113,7 @@ public class TestCLCaixaEconomicaFederalSINCO extends TestCase {
 		
 	}
 
+	@Test
 	public void testWrite() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		
 		titulo.setNossoNumero("10000000020061732");

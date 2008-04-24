@@ -30,20 +30,21 @@
 
 package br.com.nordestefomento.jrimum.bopepo;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import static org.junit.Assert.assertEquals;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * @author Gilmar
  *
  */
-public class TestEnumBanco extends TestCase {
+public class TestEnumBanco{
 
 
 	/**
 	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.EnumBancos#getCodigo()}.
 	 */
+	@Test
 	public void testGetCodigo() {
 		
 		//bancos implementados

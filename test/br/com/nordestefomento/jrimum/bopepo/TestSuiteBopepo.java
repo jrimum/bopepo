@@ -30,28 +30,40 @@
 
 package br.com.nordestefomento.jrimum.bopepo;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+
+import br.com.nordestefomento.jrimum.bopepo.campolivre.TestACLBancoSafra;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN11;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN17;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBancoReal;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBradesco;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLCaixaEconomicaFederalSINCO;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLItau;
 
+
+@RunWith(Suite.class)
+@Suite.SuiteClasses
+( 
+		{ 
+			TestBoleto.class,
+			TestBoletoPDF.class,
+			TestCodigoDeBarra.class,
+			TestEnumBanco.class,
+			TestLinhaDigitavel.class,
+			TestACLBancoSafra.class,
+			TestCLBancoDoBrasilNN11.class,
+			TestCLBancoDoBrasilNN17.class,
+			TestCLBancoReal.class,
+			TestCLBradesco.class,
+			TestCLCaixaEconomicaFederalSINCO.class,
+			TestCLItau.class
+		}
+)
 public class TestSuiteBopepo {
 
-public static Test suite() {
-	    
-		TestSuite suite= new TestSuite();
-		
-		suite.addTestSuite(TestEnumBanco.class);
-		suite.addTestSuite(TestBoleto.class);
-		suite.addTestSuite(TestCodigoDeBarra.class);
-		suite.addTestSuite(TestLinhaDigitavel.class);
-		suite.addTestSuite(TestCLBancoDoBrasilNN11.class);
-		suite.addTestSuite(TestCLBancoDoBrasilNN17.class);
-		suite.addTestSuite(TestCLBradesco.class);
-		suite.addTestSuite(TestCLCaixaEconomicaFederalSINCO.class);
-	    
-	    return suite;
-	}
+	/*
+	 * The class remains completely empty, being used only as a holder for the
+	 * above annotations
+	 */
 }
