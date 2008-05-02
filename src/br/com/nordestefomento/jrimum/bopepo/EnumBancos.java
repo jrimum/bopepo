@@ -119,6 +119,8 @@ public enum EnumBancos {
 	BANCO_DO_BRASIL("001", "00000000000191", "BANCO DO BRASIL S.A.",
 			"Banco do Brasil - Banco Múltiplo"),
 
+	
+			
 	/**
 	 * Tipo enumerado que representa o Banco <strong>Caixa Econômica Federal</strong>,
 	 * código de compensação <strong><tt>104</tt></strong> <a
@@ -129,6 +131,8 @@ public enum EnumBancos {
 	CAIXA_ECONOMICA_FEDERAL("104", "00360305000104", "CAIXA ECONOMICA FEDERAL",
 			"Caixa Econômica Federal"),
 
+	
+			
 	/**
 	 * Tipo enumerado que representa o Banco <strong>Bradesco</strong>, código
 	 * de compensação <strong><tt>237</tt></strong> <a
@@ -139,6 +143,8 @@ public enum EnumBancos {
 	BANCO_BRADESCO("237", "60746948000112", "BANCO BRADESCO S.A.",
 			"Banco Múltiplo"),
 
+	
+			
 	/**
 	 * Tipo enumerado que representa o <strong>Banco Itaú</strong>, código de
 	 * compensação <strong><tt>341</tt></strong> <a
@@ -148,16 +154,24 @@ public enum EnumBancos {
 	 */
 	BANCO_ITAU("341", "60701190000104", "BANCO ITAÚ S.A.", "Banco Múltiplo"),
 
+	
+	
 	/**
-	 * Tipo enumerado que representa o <strong>Banco Real</strong>, código de
-	 * compensação <strong><tt>356</tt></strong> <a
-	 * href="http://www.bancoreal.com.br">site</a>.
-	 * 
+	 * Tipo enumerado que representa o <strong>Banco ABN AMRO Real</strong>
+	 * (<a href="http://www.bancoreal.com.br">http://www.bancoreal.com.br</a>),
+	 * código de compensação <strong><tt>356</tt></strong>. <br/>
+	 * <p>
+	 * Obs: Os bancos <strong>Sudameris</strong> e <strong>Bandepe</strong>
+	 * foram incorporados ao Banco Real, portanto para gerar boletos bancários
+	 * dos bancos citados utilize este tipo enumerado.
+	 * </p>
 	 * @since 0.2
 	 */
 	BANCO_ABN_AMRO_REAL("356", "33066408000115", "BANCO ABN AMRO REAL S.A.",
 			"Banco Múltiplo"),
 
+	
+			
 	/**
 	 * Tipo enumerado que representa o <strong>HSBC</strong>, código de
 	 * compensação <strong><tt>399</tt></strong> <a
@@ -167,6 +181,8 @@ public enum EnumBancos {
 	 */
 	HSBC("399", "01701201000189", "HSBC BANK BRASIL S.A.", "Banco Múltiplo"),
 
+	
+	
 	/**
 	 * Tipo enumerado que representa o <strong>Unibanco</strong>, código de
 	 * compensação <strong><tt>409</tt></strong> <a
@@ -177,6 +193,8 @@ public enum EnumBancos {
 	UNIBANCO("409", "33700394000140",
 			"UNIBANCO-UNIAO DE BANCOS BRASILEIROS S.A.", "Banco Múltiplo"),
 
+	
+			
 	/**
 	 * Tipo enumerado que representa o <strong>Unibanco</strong>, código de
 	 * compensação <strong><tt>422</tt></strong> <a
@@ -273,7 +291,8 @@ public enum EnumBancos {
 		this.instituicao = instituicao;
 		this.segmento = segmento;
 	}
-
+	
+	
 	/**
 	 * <p>
 	 * Verifica se exite suporte (implementação) de "Campos Livres" para o banco

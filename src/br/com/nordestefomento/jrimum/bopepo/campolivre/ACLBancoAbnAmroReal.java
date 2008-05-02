@@ -53,9 +53,9 @@ import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
  * @version 0.2
  */
 	
-abstract class ACLBancoReal extends ACampoLivre {
+abstract class ACLBancoAbnAmroReal extends ACampoLivre {
 
-	protected ACLBancoReal(Integer fieldsLength, Integer stringLength) {
+	protected ACLBancoAbnAmroReal(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 
