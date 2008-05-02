@@ -38,7 +38,7 @@ import br.com.nordestefomento.jrimum.utilix.Util4Banco;
 
 /**
  * 
- * 	O campo livre do HSBC deve seguir esta forma:
+ * 	O campo livre do HSBC, para cobrança não registrada(CNR), deve seguir esta forma:
  * 
  * 	<table border="1" cellpadding="0" cellspacing="0" style="border-collapse:
  * 	collapse" bordercolor="#111111" width="60%" id="campolivre">
@@ -47,7 +47,8 @@ import br.com.nordestefomento.jrimum.utilix.Util4Banco;
  *				<th>Posição </th>
  * 				<th>Tamanho</th>
  * 				<th>Picture</th>
- * 				<th>Conteúdo</th>
+ * 				<th>Conteúdo (terminologia padrão)</th>
+ * 				<th>Conteúdo (terminologia do banco)</th>
  * 			</thead>
  * 		</tr>
  * 
@@ -56,6 +57,7 @@ import br.com.nordestefomento.jrimum.utilix.Util4Banco;
  * 			<td>7</td>
  * 			<td>9(7) </td>
  * 			<td>Conta do cedente (sem dígito)</td>
+ * 			<td>Código do cedente</td>
  * 		</tr>
  * 
  * 		<tr>
@@ -63,27 +65,32 @@ import br.com.nordestefomento.jrimum.utilix.Util4Banco;
  * 			<td>13</td>
  * 			<td>9(13) </td>
  * 			<td>Nosso número (sem dígito)</td>
+ * 			<td>
+ * 				Número bancário - Código do documento, sem os dígitos
+ * 				verificadores e tipo identificador.
+ * 			</td>
  * 		</tr>
  * 
  * 		<tr>
  * 			<td>40-43</td>
  * 			<td>4</td>
  * 			<td>9(4) </td>
- * 			<td>Data de vencimento (formato juliano)</td>
+ * 			<td>Fator de vencimento</td>
+ * 			<td>Data do vencimento no formato juliano</td>
  * 		</tr>
  * 
  * 		<tr>
  * 			<td>44-44</td>
  * 			<td>1</td>
  * 			<td>9(1) </td>
- * 			<td>2 FIXO (Código do Aplicativo CNR - Cob. Não Registrada)</td>
+ * 			<td>2 FIXO</td>
+ * 			<td>Código do Aplicativo CNR = 2</td>
  * 		</tr>
  * </table>
  * 
  * 
  * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ACampoLivre
  * 
- * @author Gabriel Guimarães
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author Misael Barreto 
  * @author Rômulo Augusto
@@ -93,7 +100,7 @@ import br.com.nordestefomento.jrimum.utilix.Util4Banco;
  * 
  * @version 1.0
  */
-class CLHsbc extends ACLBradesco {
+class CLHsbcCNR extends ACLHsbc {
 	
 	/**
 	 * 
@@ -109,7 +116,7 @@ class CLHsbc extends ACLBradesco {
 	 * @param fieldsLength
 	 * @param stringLength
 	 */
-	protected CLHsbc(Integer fieldsLength, Integer stringLength) {
+	protected CLHsbcCNR(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 		
 	}
@@ -120,7 +127,7 @@ class CLHsbc extends ACLBradesco {
 	 */
 	static ICampoLivre getInstance(Titulo titulo) {
 		
-		ACampoLivre clHsbc = new CLHsbc(FIELDS_LENGTH,STRING_LENGTH);
+		ACampoLivre clHsbc = new CLHsbcCNR(FIELDS_LENGTH,STRING_LENGTH);
 		
 		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
 		String nossoNumero = titulo.getNossoNumero();

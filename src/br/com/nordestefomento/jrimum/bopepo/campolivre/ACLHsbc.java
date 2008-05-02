@@ -30,6 +30,9 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
+import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.entity.EnumCobranca;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 
 /**
@@ -56,6 +59,19 @@ abstract class ACLHsbc extends ACampoLivre {
 	}
 
 	static ICampoLivre getInstance(Titulo titulo){
-		return CLHsbc.getInstance(titulo);
+		ICampoLivre campoLivre = null;
+		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
+		
+		if (conta.getCarteira().getCobranca() == EnumCobranca.SEM_REGISTRO) {
+			campoLivre = CLHsbcCNR.getInstance(titulo); 
+		}
+		else {
+			throw new CampoLivreException("Atualmente para o banco" +
+					" " + EnumBancos.HSBC.getInstituicao() + 
+					" só é possível a montagem do campo livre para carteiras" +
+					"não registradas.");
+		}
+		
+		return campoLivre;
 	}
 }
