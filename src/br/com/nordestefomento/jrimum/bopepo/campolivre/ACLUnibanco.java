@@ -1,7 +1,7 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.EnumCobranca;
+import br.com.nordestefomento.jrimum.domkee.entity.EnumTipoCobranca;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
@@ -25,9 +25,9 @@ public class ACLUnibanco extends ACampoLivre {
 		ContaBancaria conta = titulo.getCedente().getContasBancarias()
 				.iterator().next();
 
-		if (exists(conta.getCarteira().getCobranca())) {
+		if (exists(conta.getCarteira().getTipoCobranca())) {
 
-			if (conta.getCarteira().getCobranca() == EnumCobranca.COM_REGISTRO) {
+			if (conta.getCarteira().getTipoCobranca() == EnumTipoCobranca.COM_REGISTRO) {
 
 				campoLivre = CLUnibancoCobrancaRegistrada.getInstance(titulo);
 

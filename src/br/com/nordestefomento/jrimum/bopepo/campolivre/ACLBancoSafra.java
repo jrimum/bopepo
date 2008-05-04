@@ -31,7 +31,7 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.EnumCobranca;
+import br.com.nordestefomento.jrimum.domkee.entity.EnumTipoCobranca;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 
 public abstract class ACLBancoSafra extends ACampoLivre {
@@ -57,11 +57,11 @@ public abstract class ACLBancoSafra extends ACampoLivre {
 		ContaBancaria conta = titulo.getCedente().getContasBancarias()
 				.iterator().next();
 
-		if (exists(conta.getCarteira().getCobranca())) {
+		if (exists(conta.getCarteira().getTipoCobranca())) {
 			
 			if(exists(conta.getNumeroDaConta().getDigitoDaConta())) {
 
-				if (conta.getCarteira().getCobranca() == EnumCobranca.COM_REGISTRO) {
+				if (conta.getCarteira().getTipoCobranca() == EnumTipoCobranca.COM_REGISTRO) {
 	
 					campoLivre = CLBancoSafraCobrancaRegistrada.getInstance(titulo);
 	

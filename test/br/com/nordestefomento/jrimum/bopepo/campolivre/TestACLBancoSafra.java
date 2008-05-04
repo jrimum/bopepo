@@ -37,11 +37,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.sun.xml.internal.ws.util.StringUtils;
+
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
 import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.EnumCobranca;
+import br.com.nordestefomento.jrimum.domkee.entity.EnumTipoCobranca;
 import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
@@ -63,7 +65,7 @@ public class TestACLBancoSafra {
 		
 		contaBancaria.setAgencia(new Agencia(57, "1"));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(12345, "7"));
-		contaBancaria.setCarteira(new Carteira(123, EnumCobranca.COM_REGISTRO));
+		contaBancaria.setCarteira(new Carteira(123, EnumTipoCobranca.COM_REGISTRO));
 
 		cedente.addContaBancaria(contaBancaria);
 		
@@ -79,7 +81,7 @@ public class TestACLBancoSafra {
 	public void testGetInstanceNotSuporttedCampoLivreException() {
 		
 		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
-		conta.getCarteira().setCobranca(null);
+		conta.getCarteira().setTipoCobranca(null);
 		
 		clBancoSafra = ACLBancoSafra.getInstance(titulo);
 	}
@@ -89,8 +91,8 @@ public class TestACLBancoSafra {
 		
 		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
 		
-		conta.getCarteira().setCobranca(EnumCobranca.COM_REGISTRO);
-		conta.getNumeroDaConta().setDigitoDaConta(null);
+		conta.getCarteira().setTipoCobranca(EnumTipoCobranca.COM_REGISTRO);
+		//conta.getNumeroDaConta().setDigitoDaConta(null);
 		
 		clBancoSafra = ACLBancoSafra.getInstance(titulo);
 	}
@@ -100,7 +102,7 @@ public class TestACLBancoSafra {
 		
 		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
 		
-		conta.getCarteira().setCobranca(EnumCobranca.COM_REGISTRO);
+		conta.getCarteira().setTipoCobranca(EnumTipoCobranca.COM_REGISTRO);
 		
 		titulo.getCedente().getContasBancarias().clear();
 		titulo.getCedente().addContaBancaria(conta);
@@ -115,7 +117,7 @@ public class TestACLBancoSafra {
 		
 		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
 		
-		conta.getCarteira().setCobranca(EnumCobranca.SEM_REGISTRO);
+		conta.getCarteira().setTipoCobranca(EnumTipoCobranca.SEM_REGISTRO);
 		
 		titulo.getCedente().getContasBancarias().clear();
 		titulo.getCedente().addContaBancaria(conta);
@@ -130,7 +132,7 @@ public class TestACLBancoSafra {
 		
 		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
 		
-		conta.getCarteira().setCobranca(EnumCobranca.COM_REGISTRO);
+		conta.getCarteira().setTipoCobranca(EnumTipoCobranca.COM_REGISTRO);
 		
 		titulo.getCedente().getContasBancarias().clear();
 		titulo.getCedente().addContaBancaria(conta);
@@ -147,7 +149,7 @@ public class TestACLBancoSafra {
 		
 		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
 		
-		conta.getCarteira().setCobranca(EnumCobranca.SEM_REGISTRO);
+		conta.getCarteira().setTipoCobranca(EnumTipoCobranca.SEM_REGISTRO);
 		
 		titulo.getCedente().getContasBancarias().clear();
 		titulo.getCedente().addContaBancaria(conta);
