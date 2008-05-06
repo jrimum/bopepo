@@ -30,27 +30,17 @@
 
 package br.com.nordestefomento.jrimum.bopepo;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import br.com.nordestefomento.jrimum.ACurbitaObject;
-import br.com.nordestefomento.jrimum.JRimumException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.FactoryCampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
-import br.com.nordestefomento.jrimum.bopepo.pdf.BoletoPDF;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Util4Date;
-
-import com.lowagie.text.DocumentException;
 
 
 /**
@@ -78,9 +68,7 @@ public final class Boleto extends ACurbitaObject{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4436063640418293021L;
-	 
-	protected static Logger log = Logger.getLogger(Boleto.class); 
+	private static final long serialVersionUID = 4436063640418293021L; 
 
 	private Titulo titulo;
 	
@@ -104,11 +92,7 @@ public final class Boleto extends ACurbitaObject{
 	private String instrucao6;
 	private String instrucao7;
 	private String instrucao8;
-	
-	private static File templatePadrao1 = new File(Boleto.class.getResource("/resource/pdf/BoletoTemplate1.pdf").getPath());
-	private static File templatePadrao2 = new File(Boleto.class.getResource("/resource/pdf/BoletoTemplate2.pdf").getPath());
-	
-	private File template;
+
 	private Map<String, String> listaCamposExtra; 
 	
 	/**
@@ -140,21 +124,6 @@ public final class Boleto extends ACurbitaObject{
 		getInstance(titulo, campoLivre);
 	}
 
-	public static File groupInOnePDF(String pathName, List<Boleto> boletos)throws JRimumException{
-		
-		File arq = null;
-		
-		try{
-			
-			arq = BoletoPDF.groupInOnePDF(pathName, boletos);
-			
-		}catch(Exception e){
-			throw new JRimumException("Arquivo nao gerado!",e);
-		}
-		
-		return arq;
-	}
-	
 	public static Boleto getInstance(Titulo titulo)throws IllegalArgumentException, NotSuporttedBancoException, NotSuporttedCampoLivreException{
 		
 		Boleto boleto = null;
@@ -225,37 +194,6 @@ public final class Boleto extends ACurbitaObject{
 		return boleto;
 	}
 	
-	public File getAsPDF(String pathName)throws IllegalArgumentException, IOException, DocumentException{
-
-		BoletoPDF boletoPDF = BoletoPDF.getInstance(this);
-		
-		if(log.isDebugEnabled())
-			log.debug("documento instance : " + boletoPDF);
-		
-		return boletoPDF.getFile(pathName);
-	}
-	
-	public ByteArrayOutputStream getAsStream() throws IOException, DocumentException{
-		
-		BoletoPDF boletoPDF = BoletoPDF.getInstance(this);
-		
-		if(log.isDebugEnabled())
-			log.debug("documento instance : "+boletoPDF);
-		
-		return boletoPDF.getStream();
-		
-	}
-	
-	public byte[] getAsByteArray() throws IOException, DocumentException{
-		
-		BoletoPDF boletoPDF = BoletoPDF.getInstance(this);
-		
-		if(log.isDebugEnabled())
-			log.debug("documento instance : "+boletoPDF);
-		
-		return boletoPDF.getBytes();
-	}
-	
 	private void load(){
 		
 		codigoDeBarras = CodigoDeBarras.getInstance(titulo, campoLivre);
@@ -289,20 +227,6 @@ public final class Boleto extends ACurbitaObject{
 				else
 					throw new IllegalArgumentException("String length [ " + length + " ] less than specified [ "+ICampoLivre.STRING_LENGTH+" ]!");
 		}
-	}
-
-	/**
-	 * @return the log
-	 */
-	public static Logger getLogger() {
-		return log;
-	}
-
-	/**
-	 * @param log the log to set
-	 */
-	public static void setLogger(Logger logger) {
-		Boleto.log = logger;
 	}
 
 	/**
@@ -499,34 +423,6 @@ public final class Boleto extends ACurbitaObject{
 	 */
 	public void setInstrucao8(String instrucao8) {
 		this.instrucao8 = instrucao8;
-	}
-
-	/**
-	 * @return the serialVersionUID
-	 */
-	public static long getSerialVersionUID() {
-		return serialVersionUID;
-	}
-
-	public File getTemplate() {
-		setTemplate(this.template);
-		return template;
-	}
-
-	public void setTemplate(File template) {
-		if (template == null) {
-			if (titulo.getSacadorAvalista() != null)
-				this.template = templatePadrao1;
-			else
-				this.template = templatePadrao2;
-		}
-		else {
-			this.template = template;
-		}		
-	}
-	
-	public void setTemplate(String pathname) {
-		setTemplate(new File(pathname));
 	}
 
 	public Map<String, String> getListaCamposExtra() {
