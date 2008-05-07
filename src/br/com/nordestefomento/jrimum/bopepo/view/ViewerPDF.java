@@ -71,8 +71,8 @@ class ViewerPDF extends ACurbitaObject {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static File templatePadrao1 = new File(Boleto.class.getResource("/resource/pdf/BoletoTemplate1.pdf").getPath());
-	private static File templatePadrao2 = new File(Boleto.class.getResource("/resource/pdf/BoletoTemplate2.pdf").getPath());
+	private static URL TEMPLATE_PADRAO_COM_SACADOR_AVALISTA = Object.class.getResource("/resource/pdf/BoletoTemplate1.pdf");
+	private static URL TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA = Object.class.getResource("/resource/pdf/BoletoTemplate2.pdf");
 	
 	private static final String SEPERADOR = "-";
 	private PdfReader reader;
@@ -90,24 +90,45 @@ class ViewerPDF extends ACurbitaObject {
 	}
 	
 	protected File getTemplate() {
-		setTemplate(this.template);
 		return template;
 	}
 
 	protected void setTemplate(File template) {
-		if (template == null) {
-			if (boleto.getTitulo().hasSacadorAvalista())
-				this.template = templatePadrao1;
-			else
-				this.template = templatePadrao2;
-		}
-		else {
-			this.template = template;
-		}		
+		this.template = template;
 	}
 	
 	protected void setTemplate(String pathname) {
 		setTemplate(new File(pathname));
+	}
+	
+	private URL getTemplateFromResource() {
+		
+		URL templateFromResource = null;
+		
+		if (boleto.getTitulo().hasSacadorAvalista()) {
+			templateFromResource = TEMPLATE_PADRAO_COM_SACADOR_AVALISTA;
+		}
+		else {
+			templateFromResource = TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA;
+		}
+		
+		return templateFromResource;
+	}
+	
+	/**
+	 * <p>
+	 * Verifica se o template que será utilizado virá do resource ou é externo, 
+	 * ou seja, se o usuário definiu ou não um template.
+	 * </p>
+	 * 
+	 * @return true caso o template que pode ser definido pelo usuário for null; 
+	 * false caso o usuário tenha definido um template.
+	 * 
+	 * @since 
+	 */
+	private boolean isTemplateFromResource() {
+		
+		return getTemplate() == null;
 	}
 	
 	protected static ViewerPDF getInstance(Boleto boleto) {
@@ -144,8 +165,14 @@ class ViewerPDF extends ACurbitaObject {
 	}
 	*/
 	private void inicializar() throws IOException, DocumentException {
-		//reader = new PdfReader(this.getClass().getResource("/resource/pdf/BoletoTemplate.pdf"));
-		reader = new PdfReader(getTemplate().getAbsolutePath());
+
+		if(isTemplateFromResource()) {
+			reader = new PdfReader(getTemplateFromResource());
+		}
+		else {
+			reader = new PdfReader(getTemplate().getAbsolutePath());
+		}
+
 		outputStream = new ByteArrayOutputStream();
 		stamper = new PdfStamper(reader, outputStream);
 		form = stamper.getAcroFields();

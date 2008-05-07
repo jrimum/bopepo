@@ -45,7 +45,7 @@ public class BoletoViewer extends ACurbitaObject{
 	 * @throws DocumentException 
 	 * @throws IOException 
 	 */
-	private BoletoViewer(Boleto boleto) throws JRimumException {
+	public BoletoViewer(Boleto boleto) throws JRimumException {
 		super();
 		
 		this.boleto = boleto;
