@@ -231,7 +231,8 @@ class ViewerPDF extends ACurbitaObject {
 
 	private void setAceite() throws IOException, DocumentException {
 		// TODO Auto-generated method stub
-		form.setField("txtFcAceite", boleto.getTitulo().getAceite().toString());
+		if (  isNotNull(boleto.getTitulo().getAceite())  )
+			form.setField("txtFcAceite", boleto.getTitulo().getAceite().toString());
 	}
 
 
