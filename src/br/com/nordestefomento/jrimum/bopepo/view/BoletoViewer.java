@@ -177,6 +177,7 @@ public class BoletoViewer extends ACurbitaObject{
 		boleto.setInstrucao8("APÓS o Vencimento, Pagável Somente na Rede X.");
 		
 		BoletoViewer bViewer = new BoletoViewer(boleto);
+		bViewer.setTemplate("tutoriais/personalizacao/BoletoPersonalizado.pdf");
 		bViewer.getAsPDF("BoletoTeste.pdf");
 		
 		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();

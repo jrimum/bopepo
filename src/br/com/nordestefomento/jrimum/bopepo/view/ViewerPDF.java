@@ -110,15 +110,15 @@ class ViewerPDF extends ACurbitaObject {
 		setTemplate(new File(pathname));
 	}
 	
-	protected static ViewerPDF getInstance(Boleto boleto) throws IOException, DocumentException {
-		
+	protected static ViewerPDF getInstance(Boleto boleto) {
 		ViewerPDF boletoPdf = new ViewerPDF(boleto);
-
-		boletoPdf.inicializar();
-		boletoPdf.preencher();
-		boletoPdf.finalizar();
-		
 		return boletoPdf;
+	}
+	
+	private void processarPdf() throws IOException, DocumentException {
+		inicializar();
+		preencher();
+		finalizar();
 	}
 	
 	/*
@@ -590,17 +590,18 @@ class ViewerPDF extends ACurbitaObject {
 	
 	
 	
-	protected File getFile(String pathName)throws IllegalArgumentException, IOException{
-		
+	protected File getFile(String pathName)throws IllegalArgumentException, IOException, DocumentException{
+		processarPdf();
 		return Util4File.bytes2File(pathName, outputStream.toByteArray());
 	}
 	
-	protected ByteArrayOutputStream getStream() throws IOException{
-		
+	protected ByteArrayOutputStream getStream() throws IOException, DocumentException{
+		processarPdf();		
 		return Util4File.bytes2Stream(outputStream.toByteArray());
 	}
 	
-	protected byte[] getBytes(){
+	protected byte[] getBytes() throws IOException, DocumentException{
+		processarPdf();
 		return outputStream.toByteArray();
 	}
 	
