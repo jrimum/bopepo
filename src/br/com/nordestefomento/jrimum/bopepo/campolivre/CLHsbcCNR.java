@@ -140,7 +140,7 @@ class CLHsbcCNR extends ACLHsbc {
 		clHsbc.add(new Field<String>(nossoNumero, 13, Filler.ZERO_LEFT));
 		
 		// Data de vencimento (formato juliano)
-		int dataVencimentoFormatoJuliano = Util4Banco.calculcarFatorVencimento(titulo.getDataDoVencimento());
+		int dataVencimentoFormatoJuliano = Util4Banco.calculceFatorDeVencimento(titulo.getDataDoVencimento());
 		clHsbc.add(new Field<Integer>(dataVencimentoFormatoJuliano, 4, Filler.ZERO_LEFT));
 		
 		//2 FIXO (Código do Aplicativo CNR - Cob. Não Registrada)

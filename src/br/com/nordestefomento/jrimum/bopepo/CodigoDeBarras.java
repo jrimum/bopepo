@@ -287,7 +287,7 @@ public final class CodigoDeBarras extends LineOfFields{
 	private void calculateAndSetFatorDeVencimento(Date vencimento) {
 
 		fatorDeVencimento.setField(
-				Util4Banco.calculcarFatorVencimento(vencimento));
+				Util4Banco.calculceFatorDeVencimento(vencimento));
 	}
 
 	/**
