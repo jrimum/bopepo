@@ -71,8 +71,8 @@ class ViewerPDF extends ACurbitaObject {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static URL TEMPLATE_PADRAO_COM_SACADOR_AVALISTA = Object.class.getResource("/resource/pdf/BoletoTemplate1.pdf");
-	private static URL TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA = Object.class.getResource("/resource/pdf/BoletoTemplate2.pdf");
+	private static URL TEMPLATE_PADRAO_COM_SACADOR_AVALISTA = Object.class.getResource("/resource/pdf/BoletoTemplateComSacadorAvalista.pdf");
+	private static URL TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA = Object.class.getResource("/resource/pdf/BoletoTemplateSemSacadorAvalista.pdf");
 	
 	private static final String SEPERADOR = "-";
 	private PdfReader reader;
