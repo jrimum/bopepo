@@ -64,8 +64,6 @@ public class MeuPrimeiroBoleto {
 		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(6789, "12"));
 		cedente.addContaBancaria(contaBancariaCed);		
 		
-		
-		
 		/* 
 		 * INFORMANDO DADOS SOBRE O SACADO.
 		 * */
@@ -80,10 +78,6 @@ public class MeuPrimeiroBoleto {
 		enderecoSac.setLogradouro(new Logradouro("Rua poeta dos programas"));
 		enderecoSac.setNumero("1");
 		sacado.addEndereco(enderecoSac);
-		
-		
-		
-		
 		
 		/* 
 		 * INFORMANDO DADOS SOBRE O SACADOR AVALISTA.
@@ -100,11 +94,10 @@ public class MeuPrimeiroBoleto {
 		enderecoSacAval.setNumero("001");
 		sacadorAvalista.addEndereco(enderecoSacAval);
 
-		
 		/* 
 		 * INFORMANDO OS DADOS SOBRE O TÍTULO.
 		 * */		
-		Titulo titulo = Titulo.getInstance(sacado, cedente, sacadorAvalista);
+		Titulo titulo = Titulo.getInstance(contaBancariaCed, sacado, cedente, sacadorAvalista);
 		titulo.setNumeroDoDocumento("123456789");
 		titulo.setNossoNumero("1234567890");
 		titulo.setDigitoDoNossoNumero("5");
@@ -114,14 +107,12 @@ public class MeuPrimeiroBoleto {
 		titulo.setTipoDeDocumento(EnumTitulo.DM_DUPLICATA_MERCANTIL);
 		titulo.setAceite(EnumAceite.A);
 
-		
-		
 		/* 
 		 * INFORMANDO OS DADOS SOBRE O BOLETO.
 		 * */
 		Boleto boleto = Boleto.getInstance(titulo);
 		boleto.setLocalPagamento("Pagável preferencialmente na Rede X ou em qualquer Banco até o Vencimento.");
-		boleto.setInsturcaoAoSacado("Senhor sacado, sabemos sim que o valor cobrado não é o esperado, aproveite o DESCONTÃO!");
+		boleto.setInstrucaoAoSacado("Senhor sacado, sabemos sim que o valor cobrado não é o esperado, aproveite o DESCONTÃO!");
 		boleto.setInstrucao1("PARA PAGAMENTO 1 até Hoje não cobrar nada!");
 		boleto.setInstrucao2("PARA PAGAMENTO 2 até Amanhã Não cobre!");
 		boleto.setInstrucao3("PARA PAGAMENTO 3 até Depois de amanhã, OK, não cobre.");
@@ -130,8 +121,6 @@ public class MeuPrimeiroBoleto {
 		boleto.setInstrucao6("PARA PAGAMENTO 6 até 06/xx/xxxx COBRAR O VALOR DE: R$ 03,00");
 		boleto.setInstrucao7("PARA PAGAMENTO 7 até xx/xx/xxxx COBRAR O VALOR QUE VOCÊ QUISER!");
 		boleto.setInstrucao8("APÓS o Vencimento, Pagável Somente na Rede X.");
-		
-		
 		
 		/* 
 		 * GERANDO O BOLETO BANCÁRIO.
