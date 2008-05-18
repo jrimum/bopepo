@@ -69,10 +69,8 @@ public class TestCLBradesco{
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
 		numeroDaConta.setCodigoDaConta(6789);
 		contaBancaria.setNumeroDaConta(numeroDaConta);
-
-		cedente.addContaBancaria(contaBancaria);
 		
-		titulo = Titulo.getInstance(sacado, cedente);
+		titulo = Titulo.getInstance(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("12345678901");
 		
 	}
@@ -96,7 +94,7 @@ public class TestCLBradesco{
 		assertEquals("1234051234567890100067890",clBradesco.write());
 		
 		//Infeliz básico
-		ContaBancaria contaBancaria = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		contaBancaria.setBanco(EnumBancos.BANCO_BRADESCO.newInstance());
 		
 		Agencia agencia = new Agencia();
@@ -108,8 +106,6 @@ public class TestCLBradesco{
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
 		numeroDaConta.setCodigoDaConta(0);
 		contaBancaria.setNumeroDaConta(numeroDaConta);
-		
-		titulo.getCedente().addContaBancaria(contaBancaria);
 		
 		titulo.setNossoNumero("0");
 		

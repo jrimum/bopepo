@@ -38,9 +38,7 @@ public class TestCLItau {
 		numeroDaConta.setDigitoDaConta("7");//Não importa para o CampoLivre
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 
-		cedente.addContaBancaria(contaBancaria);
-		
-		titulo = Titulo.getInstance(sacado, cedente);
+		titulo = Titulo.getInstance(contaBancaria, sacado, cedente);
 		titulo.setNumeroDoDocumento("1234567");
 		titulo.setNossoNumero("12345678");
 	}
@@ -64,7 +62,7 @@ public class TestCLItau {
 		assertEquals("1101234567880057123457000",clItau.write());
 		
 		//Infeliz básico
-		ContaBancaria contaBancaria = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		contaBancaria.setBanco(EnumBancos.BANCO_ITAU.newInstance());
 		
 		contaBancaria.setAgencia(new Agencia(0));
@@ -72,7 +70,6 @@ public class TestCLItau {
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(0, "0"));
 		
 		titulo.setNossoNumero("0");
-		titulo.getCedente().addContaBancaria(contaBancaria);
 		titulo.setNumeroDoDocumento("0");
 		
 		clItau = FactoryCampoLivre.getInstance(titulo);
@@ -85,11 +82,8 @@ public class TestCLItau {
 	@Test
 	public void testToStringPadraoCarteirasExcecao() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		
-		ContaBancaria contaBancaria = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		contaBancaria.setCarteira(new Carteira(126));
-		
-		titulo.getCedente().getContasBancarias().clear();
-		titulo.getCedente().addContaBancaria(contaBancaria);
 		
 		clItau = FactoryCampoLivre.getInstance(titulo);
 		
@@ -100,11 +94,8 @@ public class TestCLItau {
 	@Test
 	public void testToStringEspecial() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		
-		ContaBancaria contaBancaria = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		contaBancaria.setCarteira(new Carteira(198));
-		
-		titulo.getCedente().getContasBancarias().clear();
-		titulo.getCedente().addContaBancaria(contaBancaria);
 		
 		clItau = FactoryCampoLivre.getInstance(titulo);
 		

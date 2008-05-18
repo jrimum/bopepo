@@ -56,6 +56,11 @@ public class CodigoDeBarrasException extends JRimumException {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = -3577770829101964833L;
+
+	/**
+	 * 
+	 */
 	public CodigoDeBarrasException() {
 		// TODO Auto-generated constructor stub
 	}

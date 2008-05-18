@@ -64,7 +64,7 @@ import com.lowagie.text.pdf.PdfStamper;
 
 class ViewerPDF extends ACurbitaObject {
 
-	//TODO Testes no teste unitário: TestBoletoPDF
+	//TODO Testes no teste unitário: TestViewPDF
 	
 	/**
 	 * 
@@ -179,7 +179,8 @@ class ViewerPDF extends ACurbitaObject {
 	}
 	
 	private void finalizar() throws DocumentException, IOException {
-		stamper.close();		
+		stamper.close();	
+		
 	}
 	
 	private void preencher() throws MalformedURLException, IOException, DocumentException {
@@ -410,7 +411,7 @@ class ViewerPDF extends ACurbitaObject {
 
 	private void setInstrucaoAoSacado() throws IOException, DocumentException {
 		// TODO Auto-generated method stub
-		form.setField("txtRsInstrucaoAoSacado", boleto.getInsturcaoAoSacado());			
+		form.setField("txtRsInstrucaoAoSacado", boleto.getInstrucaoAoSacado());			
 	}
 
 
@@ -480,8 +481,8 @@ class ViewerPDF extends ACurbitaObject {
 
 	private void setEspecie() throws IOException, DocumentException {
 		// TODO Auto-generated method stub
-		form.setField("txtRsEspecie", boleto.getTitulo().getE_Moeda().toString());
-		form.setField("txtFcEspecie", boleto.getTitulo().getE_Moeda().toString());				
+		form.setField("txtRsEspecie", boleto.getTitulo().getEnumMoeda().toString());
+		form.setField("txtFcEspecie", boleto.getTitulo().getEnumMoeda().toString());				
 	}
 
 
@@ -495,7 +496,7 @@ class ViewerPDF extends ACurbitaObject {
 	private void setLogoBanco() throws MalformedURLException, IOException, DocumentException {
 		// Através da conta bancária será descoberto a imagem que representa o banco, com base
 		// no código do banco.
-		ContaBancaria conta = boleto.getTitulo().getCedente().getContasBancarias().iterator().next();	
+		ContaBancaria conta = boleto.getTitulo().getContaBancaria();	
 		Image imgLogoBanco = null;
 		
 		if (isNotNull(conta.getBanco().getImgLogo())) {
@@ -564,7 +565,7 @@ class ViewerPDF extends ACurbitaObject {
 	
 	private void setCodigoBanco() throws IOException, DocumentException {
 		
-		ContaBancaria conta = boleto.getTitulo().getCedente().getContasBancarias().iterator().next();
+		ContaBancaria conta = boleto.getTitulo().getContaBancaria();
 		form.setField("txtRsCodBanco", conta.getBanco().getCodigoDeCompensacao());
 		form.setField("txtFcCodBanco", conta.getBanco().getCodigoDeCompensacao());
 	}
@@ -572,7 +573,7 @@ class ViewerPDF extends ACurbitaObject {
 	private void setAgenciaCondigoCedente() throws IOException, DocumentException {
 		
 		StringBuilder sb = new StringBuilder(StringUtils.EMPTY);
-		ContaBancaria conta = boleto.getTitulo().getCedente().getContasBancarias().iterator().next();
+		ContaBancaria conta = boleto.getTitulo().getContaBancaria();
 		
 		if(isNotNull(conta.getAgencia().getCodigoDaAgencia()))
 			sb.append(conta.getAgencia().getCodigoDaAgencia());

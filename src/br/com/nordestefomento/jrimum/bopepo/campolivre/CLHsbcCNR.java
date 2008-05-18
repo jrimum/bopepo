@@ -129,7 +129,7 @@ class CLHsbcCNR extends ACLHsbc {
 		
 		ACampoLivre clHsbc = new CLHsbcCNR(FIELDS_LENGTH,STRING_LENGTH);
 		
-		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria conta = titulo.getContaBancaria();
 		String nossoNumero = titulo.getNossoNumero();
 		
 		

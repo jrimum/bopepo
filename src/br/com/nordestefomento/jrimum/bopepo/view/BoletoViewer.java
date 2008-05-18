@@ -137,8 +137,6 @@ public class BoletoViewer extends ACurbitaObject{
 		contaBancaria.setCarteira(new Carteira(5));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(6789, "12"));
 
-		cedente.addContaBancaria(contaBancaria);
-		
 		Pessoa sacadorAvalista = new Pessoa("Nordeste Fomento Mercantil", "00.000.000/0001-91");
 		
 		Endereco endereco2 = new Endereco();
@@ -151,7 +149,7 @@ public class BoletoViewer extends ACurbitaObject{
 
 		sacadorAvalista.addEndereco(endereco2);
 
-		Titulo titulo = Titulo.getInstance(sacado, cedente, sacadorAvalista);
+		Titulo titulo = Titulo.getInstance(contaBancaria, sacado, cedente, sacadorAvalista);
 		titulo.setNumeroDoDocumento("123456789");
 		titulo.setNossoNumero("1234567890");
 		titulo.setDigitoDoNossoNumero("5");
@@ -160,12 +158,13 @@ public class BoletoViewer extends ACurbitaObject{
 		titulo.setDataDoVencimento(new Date());
 		titulo.setTipoDeDocumento(EnumTitulo.DM_DUPLICATA_MERCANTIL);
 		titulo.setAceite(EnumAceite.A);
+		titulo.setContaBancaria(contaBancaria);
 
 		Boleto boleto = Boleto.getInstance(titulo);
 		
 		boleto.setLocalPagamento("Pagável preferencialmente na Rede X ou em qualquer Banco até o Vencimento.");
 		
-		boleto.setInsturcaoAoSacado("Senhor sacado, sabemos sim que o valor cobrado não é o esperado, aproveite o DESCONTÃO!");
+		boleto.setInstrucaoAoSacado("Senhor sacado, sabemos sim que o valor cobrado não é o esperado, aproveite o DESCONTÃO!");
 		
 		boleto.setInstrucao1("PARA PAGAMENTO 1 até Hoje não cobrar nada!");
 		boleto.setInstrucao2("PARA PAGAMENTO 2 até Amanhã Não cobre!");
@@ -181,7 +180,7 @@ public class BoletoViewer extends ACurbitaObject{
 		bViewer.getAsPDF("BoletoTeste.pdf");
 		
 		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
-		 
+
 		try {
 			desktop.open(new File("BoletoTeste.pdf"));
 		} catch (IOException e) {

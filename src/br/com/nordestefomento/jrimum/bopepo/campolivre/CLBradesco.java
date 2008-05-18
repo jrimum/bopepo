@@ -121,8 +121,7 @@ class CLBradesco extends ACLBradesco {
 		
 		ACampoLivre clBradesco = new CLBradesco(FIELDS_LENGTH,STRING_LENGTH);
 		
-		//TODO Código em teste
-		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria conta = titulo.getContaBancaria();
 		String nossoNumero = titulo.getNossoNumero();
 		
 		//TODO Código em teste

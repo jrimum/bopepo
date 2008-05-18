@@ -99,9 +99,7 @@ public class CLUnibancoCobrancaRegistrada extends ACLUnibanco {
 		ACampoLivre aCLUnibanco = new CLUnibancoCobrancaRegistrada(
 				FIELDS_LENGTH, STRING_LENGTH);
 
-		// TODO Código em teste
-		ContaBancaria conta = titulo.getCedente().getContasBancarias()
-				.iterator().next();
+		ContaBancaria conta = titulo.getContaBancaria();
 
 		aCLUnibanco.add(new Field<String>(CODIGO_TRANSACAO, 2));
 

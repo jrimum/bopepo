@@ -56,6 +56,11 @@ public class BoletoExceptiton extends JRimumException {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = -3874521668322644183L;
+
+	/**
+	 * 
+	 */
 	public BoletoExceptiton() {
 		// TODO Auto-generated constructor stub
 	}

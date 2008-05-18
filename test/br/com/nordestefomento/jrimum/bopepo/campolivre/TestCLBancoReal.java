@@ -71,10 +71,8 @@ public class TestCLBancoReal {
 		numeroDaConta.setCodigoDaConta(16324);
 		numeroDaConta.setDigitoDaConta("0");//Não importa para o CampoLivre
 		contaBancaria.setNumeroDaConta(numeroDaConta);
-
-		cedente.addContaBancaria(contaBancaria);
 		
-		titulo = Titulo.getInstance(sacado, cedente);
+		titulo = Titulo.getInstance(contaBancaria, sacado, cedente);
 		titulo.setNumeroDoDocumento("1234567890123");
 		titulo.setNossoNumero("5020");
 	}
@@ -98,7 +96,7 @@ public class TestCLBancoReal {
 		assertEquals("1018001632491234567890123",clReal.write());
 		
 		//Infeliz básico
-		ContaBancaria contaBancaria = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		contaBancaria.setBanco(EnumBancos.BANCO_ABN_AMRO_REAL.newInstance());
 		
 		Agencia agencia = new Agencia();
@@ -110,7 +108,7 @@ public class TestCLBancoReal {
 		numeroDaConta.setDigitoDaConta("0");
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		
-		titulo.getCedente().addContaBancaria(contaBancaria);
+		titulo.getContaBancaria();
 		titulo.setNumeroDoDocumento("0");
 		
 		clReal = FactoryCampoLivre.getInstance(titulo);

@@ -82,7 +82,7 @@ public final class Boleto extends ACurbitaObject{
 	private ICampoLivre campoLivre;
 	
 	private String localPagamento;
-	private String insturcaoAoSacado;
+	private String instrucaoAoSacado;
 	
 	private String instrucao1;
 	private String instrucao2;
@@ -300,17 +300,17 @@ public final class Boleto extends ACurbitaObject{
 	}
 
 	/**
-	 * @return the insturcaoAoSacado
+	 * @return the instrucaoAoSacado
 	 */
-	public String getInsturcaoAoSacado() {
-		return insturcaoAoSacado;
+	public String getInstrucaoAoSacado() {
+		return instrucaoAoSacado;
 	}
 
 	/**
-	 * @param insturcaoAoSacado the insturcaoAoSacado to set
+	 * @param instrucaoAoSacado the instrucaoAoSacado to set
 	 */
-	public void setInsturcaoAoSacado(String insturcaoAoSacado) {
-		this.insturcaoAoSacado = insturcaoAoSacado;
+	public void setInstrucaoAoSacado(String insturcaoAoSacado) {
+		this.instrucaoAoSacado = insturcaoAoSacado;
 	}
 
 	/**

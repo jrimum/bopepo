@@ -86,11 +86,9 @@ public class TestLinhaDigitavel{
 		numeroDaConta.setCodigoDaConta(6789);
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 
-		cedente.addContaBancaria(contaBancaria);
-
-		titulo = Titulo.getInstance(sacado, cedente);
+		titulo = Titulo.getInstance(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("12345678901");
-		titulo.setE_Moeda(EnumMoeda.REAL);
+		titulo.setEnumMoeda(EnumMoeda.REAL);
 		titulo.setValor(BigDecimal.valueOf(100.23));
 		titulo.setDataDoVencimento(VENCIMENTO);
 		

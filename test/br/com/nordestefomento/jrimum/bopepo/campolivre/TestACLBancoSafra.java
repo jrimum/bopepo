@@ -37,8 +37,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.xml.internal.ws.util.StringUtils;
-
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
 import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
@@ -66,10 +64,8 @@ public class TestACLBancoSafra {
 		contaBancaria.setAgencia(new Agencia(57, "1"));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(12345, "7"));
 		contaBancaria.setCarteira(new Carteira(123, EnumTipoCobranca.COM_REGISTRO));
-
-		cedente.addContaBancaria(contaBancaria);
 		
-		titulo = Titulo.getInstance(sacado, cedente);
+		titulo = Titulo.getInstance(contaBancaria, sacado, cedente);
 		titulo.setNumeroDoDocumento("1234567");
 		titulo.setNossoNumero("12345678");
 	}
@@ -80,7 +76,7 @@ public class TestACLBancoSafra {
 	@Test(expected=NotSuporttedCampoLivreException.class)
 	public void testGetInstanceNotSuporttedCampoLivreException() {
 		
-		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria conta = titulo.getContaBancaria();
 		conta.getCarteira().setTipoCobranca(null);
 		
 		clBancoSafra = ACLBancoSafra.getInstance(titulo);
@@ -89,10 +85,15 @@ public class TestACLBancoSafra {
 	@Test(expected=CampoLivreException.class)
 	public void testGetInstanceCampoLivreException() {
 		
-		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria conta = titulo.getContaBancaria();
+		
+		System.out.println(">>>>>>>>>"+conta);
 		
 		conta.getCarteira().setTipoCobranca(EnumTipoCobranca.COM_REGISTRO);
-		//conta.getNumeroDaConta().setDigitoDaConta(null);
+	
+		String digito = null;
+		
+		conta.getNumeroDaConta().setDigitoDaConta(digito);
 		
 		clBancoSafra = ACLBancoSafra.getInstance(titulo);
 	}
@@ -100,12 +101,9 @@ public class TestACLBancoSafra {
 	@Test
 	public void testGetInstanceCobrancaRegistrada() {
 		
-		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria conta = titulo.getContaBancaria();
 		
 		conta.getCarteira().setTipoCobranca(EnumTipoCobranca.COM_REGISTRO);
-		
-		titulo.getCedente().getContasBancarias().clear();
-		titulo.getCedente().addContaBancaria(conta);
 		
 		clBancoSafra = FactoryCampoLivre.getInstance(titulo);
 		
@@ -115,13 +113,10 @@ public class TestACLBancoSafra {
 	@Test
 	public void testGetInstanceCobrancaNaoRegistrada() {
 		
-		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria conta = titulo.getContaBancaria();
 		
 		conta.getCarteira().setTipoCobranca(EnumTipoCobranca.SEM_REGISTRO);
-		
-		titulo.getCedente().getContasBancarias().clear();
-		titulo.getCedente().addContaBancaria(conta);
-		
+				
 		clBancoSafra = FactoryCampoLivre.getInstance(titulo);
 		
 		assertTrue(clBancoSafra instanceof CLBancoSafraCobrancaNaoRegistrada);
@@ -130,12 +125,9 @@ public class TestACLBancoSafra {
 	@Test
 	public void testWriteCobrancaRegistrada() {
 		
-		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria conta = titulo.getContaBancaria();
 		
 		conta.getCarteira().setTipoCobranca(EnumTipoCobranca.COM_REGISTRO);
-		
-		titulo.getCedente().getContasBancarias().clear();
-		titulo.getCedente().addContaBancaria(conta);
 		
 		//básico feliz
 		clBancoSafra = FactoryCampoLivre.getInstance(titulo);
@@ -147,13 +139,10 @@ public class TestACLBancoSafra {
 	@Test
 	public void testWriteCobrancaNaoRegistrada() {
 		
-		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria conta = titulo.getContaBancaria();
 		
 		conta.getCarteira().setTipoCobranca(EnumTipoCobranca.SEM_REGISTRO);
-		
-		titulo.getCedente().getContasBancarias().clear();
-		titulo.getCedente().addContaBancaria(conta);
-		
+				
 		//básico feliz
 		clBancoSafra = FactoryCampoLivre.getInstance(titulo);
 		

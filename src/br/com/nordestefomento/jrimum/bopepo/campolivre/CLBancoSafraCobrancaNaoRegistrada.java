@@ -119,9 +119,7 @@ public class CLBancoSafraCobrancaNaoRegistrada extends ACLBancoSafra {
 
 	static ICampoLivre getInstance(Titulo titulo) {
 
-		// TODO Código em teste
-		ContaBancaria conta = titulo.getCedente().getContasBancarias()
-				.iterator().next();
+		ContaBancaria conta = titulo.getContaBancaria();
 		
 		ACampoLivre aCLBancoSafra = new CLBancoSafraCobrancaNaoRegistrada(
 				FIELDS_LENGTH, STRING_LENGTH);

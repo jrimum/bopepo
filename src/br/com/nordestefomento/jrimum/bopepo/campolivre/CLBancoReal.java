@@ -116,8 +116,7 @@ class CLBancoReal extends ACLBancoAbnAmroReal {
 		
 		ACampoLivre clBancoReal = new CLBancoReal(FIELDS_LENGTH,STRING_LENGTH);
 		
-		//TODO Código em teste
-		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria conta = titulo.getContaBancaria();
 		
 		//TODO Código em teste
 		clBancoReal.add(new Field<Integer>(conta.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));

@@ -63,7 +63,7 @@ import br.com.nordestefomento.jrimum.utilix.LineOfFields;
  * 
  * @version 1.0
  */
-abstract class ACampoLivre extends LineOfFields implements ICampoLivre{
+abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 
 	protected ACampoLivre(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
@@ -81,82 +81,79 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre{
 		ContaBancaria contaBancaria = null;
 		EnumBancos enumBanco = null;
 
-		if (titulo.getCedente().hasContaBancaria()) {
-			contaBancaria = titulo.getCedente().getContasBancarias().iterator()
-					.next();
+		contaBancaria = titulo.getContaBancaria();
 
-			if (log.isDebugEnabled())
-				log.debug("Campo Livre do Banco: "
-						+ contaBancaria.getBanco().getNome());
+		if (log.isDebugEnabled())
+			log.debug("Campo Livre do Banco: "
+					+ contaBancaria.getBanco().getNome());
+
+		/*
+		 * A conta bancária passada não é sincronizada.
+		 */
+		if (isContaBacariaOK(contaBancaria)) {
+
+			if (EnumBancos.isSuportado(contaBancaria.getBanco()
+					.getCodigoDeCompensacao())) {
+
+				enumBanco = EnumBancos.suportados.get(contaBancaria.getBanco()
+						.getCodigoDeCompensacao());
+
+				switch (enumBanco) {
+
+				case BANCO_BRADESCO:
+					campoLivre = ACLBradesco.getInstance(titulo);
+					break;
+
+				case BANCO_DO_BRASIL:
+					campoLivre = ACLBancoDoBrasil.getInstance(titulo);
+					break;
+
+				case BANCO_ABN_AMRO_REAL:
+					campoLivre = ACLBancoAbnAmroReal.getInstance(titulo);
+					break;
+
+				case CAIXA_ECONOMICA_FEDERAL:
+					campoLivre = ACLCaixaEconomicaFederal.getInstance(titulo);
+					break;
+
+				case HSBC:
+					campoLivre = ACLHsbc.getInstance(titulo);
+					break;
+
+				case BANCO_ITAU:
+					campoLivre = ACLItau.getInstance(titulo);
+					break;
+
+				case BANCO_SAFRA:
+					campoLivre = ACLBancoSafra.getInstance(titulo);
+					break;
+
+				}
+			} else {
+				/*
+				 * Se chegar até este ponto, é sinal de que para o banco em em
+				 * questão, apesar de estar definido no EnumBancos, não há
+				 * implementações de campo livre, logo considera-se o banco com
+				 * não suportado.
+				 */
+				throw new NotSuporttedBancoException();
+			}
 
 			/*
-			 * A conta bancária passada não é sincronizada.
+			 * Se chegar neste ponto e nenhum campo livre foi definido, então é
+			 * sinal de que existe implementações de campo livre para o banco em
+			 * questão, só que nenhuma destas implementações serviu e a classe
+			 * abstrata responsável por fornecer o campo livre não gerou a
+			 * exceção NotSuporttedCampoLivreException. Trata-se de uma mensagem
+			 * genérica que será utilizada somente em último caso.
 			 */
-			if (isContaBacariaOK(contaBancaria)) {
-
-				if (EnumBancos.isSuportado(contaBancaria.getBanco().getCodigoDeCompensacao())){
-					
-					enumBanco = EnumBancos.suportados.get(contaBancaria.getBanco().getCodigoDeCompensacao());
-
-					switch (enumBanco) {
-
-					case BANCO_BRADESCO:
-						campoLivre = ACLBradesco.getInstance(titulo);
-						break;
-
-					case BANCO_DO_BRASIL:
-						campoLivre = ACLBancoDoBrasil.getInstance(titulo);
-						break;
-
-					case BANCO_ABN_AMRO_REAL:
-						campoLivre = ACLBancoAbnAmroReal.getInstance(titulo);
-						break;
-
-					case CAIXA_ECONOMICA_FEDERAL:
-						campoLivre = ACLCaixaEconomicaFederal
-								.getInstance(titulo);
-						break;
-
-					case HSBC:
-						campoLivre = ACLHsbc.getInstance(titulo);
-						break;
-						
-					case BANCO_ITAU:
-						campoLivre = ACLItau.getInstance(titulo);
-						break;
-						
-					case BANCO_SAFRA:
-						campoLivre = ACLBancoSafra.getInstance(titulo);
-						break;
-
-					}
-				} else {
-					/*
-					 * Se chegar até este ponto, é sinal de que para o banco em
-					 * em questão, apesar de estar definido no EnumBancos, não há
-					 * implementações de campo livre, logo considera-se o banco
-					 * com não suportado.
-					 */
-					throw new NotSuporttedBancoException();
-				}
-
-				/*
-				 * Se chegar neste ponto e nenhum campo livre foi definido,
-				 * então é sinal de que existe implementações de campo livre
-				 * para o banco em questão, só que nenhuma destas implementações
-				 * serviu e a classe abstrata responsável por fornecer o campo
-				 * livre não gerou a exceção NotSuporttedCampoLivreException.
-				 * Trata-se de uma mensagem genérica que será utilizada somente
-				 * em último caso.
-				 */
-				if (campoLivre == null) {
-					throw new NotSuporttedCampoLivreException(
-							"Não há implementações de campo livre para o banco "
-									+ contaBancaria.getBanco()
-											.getCodigoDeCompensacao()
-									+ " compatíveis com as "
-									+ "caracteríticas do título informado.");
-				}
+			if (campoLivre == null) {
+				throw new NotSuporttedCampoLivreException(
+						"Não há implementações de campo livre para o banco "
+								+ contaBancaria.getBanco()
+										.getCodigoDeCompensacao()
+								+ " compatíveis com as "
+								+ "caracteríticas do título informado.");
 			}
 		}
 

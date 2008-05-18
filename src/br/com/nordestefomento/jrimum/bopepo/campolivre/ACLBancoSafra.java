@@ -53,9 +53,7 @@ public abstract class ACLBancoSafra extends ACampoLivre {
 
 		ICampoLivre campoLivre = null;
 
-		// TODO Código em teste
-		ContaBancaria conta = titulo.getCedente().getContasBancarias()
-				.iterator().next();
+		ContaBancaria conta = titulo.getContaBancaria(); 
 
 		if (exists(conta.getCarteira().getTipoCobranca())) {
 			

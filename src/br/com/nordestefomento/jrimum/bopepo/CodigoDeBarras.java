@@ -221,12 +221,10 @@ public final class CodigoDeBarras extends LineOfFields{
 		
 		CodigoDeBarras codigoDeBarras = new CodigoDeBarras(FIELDS_LENGTH ,STRING_LENGTH);
 		
-		//TODO Código em teste.
-		//codigoDeBarra.codigoDoBanco.setField(titulo.getCedente().getContaBancaria().getE_Banco().getCodigo());
-		ContaBancaria contaBancaria = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		codigoDeBarras.codigoDoBanco.setField(contaBancaria.getBanco().getCodigoDeCompensacao());
 		
-		codigoDeBarras.codigoDaMoeda.setField(titulo.getE_Moeda().getCodigo());
+		codigoDeBarras.codigoDaMoeda.setField(titulo.getEnumMoeda().getCodigo());
 		
 		//Was here DigitoVerificador 
 		//But wait

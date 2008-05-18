@@ -78,10 +78,8 @@ public class TestCLBancoDoBrasilNN17{
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
 		numeroDaConta.setCodigoDaConta(123456);
 		contaBancaria.setNumeroDaConta(numeroDaConta);
-
-		cedente.addContaBancaria(contaBancaria);
 		
-		titulo = Titulo.getInstance(sacado, cedente);
+		titulo = Titulo.getInstance(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("12345678901234567");
 		
 	}
@@ -105,14 +103,14 @@ public class TestCLBancoDoBrasilNN17{
 		assertEquals("1234561234567890123456721",clBancoDoBrasil.write());
 		
 		//Infeliz básico
-		ContaBancaria contaBancaria = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		contaBancaria.setBanco(EnumBancos.BANCO_DO_BRASIL.newInstance());
 
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
 		numeroDaConta.setCodigoDaConta(0);
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		
-		titulo.getCedente().addContaBancaria(contaBancaria);
+		titulo.getContaBancaria();
 		
 		titulo.setNossoNumero("00000000000000001");
 		

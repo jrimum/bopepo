@@ -110,8 +110,8 @@ class CLCaixaEconomicaFederalSINCO extends ACLCaixaEconomicaFederal {
 		
 		ACampoLivre clCaixaSINCO = new CLCaixaEconomicaFederalSINCO(FIELDS_LENGTH,STRING_LENGTH);
 		
-		//TODO Código em teste
-		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria conta = titulo.getContaBancaria();
+		
 		String nossoNumero = titulo.getNossoNumero();
 		
 		clCaixaSINCO.add(new Field<Integer>(1, 1));

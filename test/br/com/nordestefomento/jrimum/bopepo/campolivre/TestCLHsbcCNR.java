@@ -39,7 +39,7 @@ public class TestCLHsbcCNR {
 	
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
 		numeroDaConta.setCodigoDaConta(3003);
-		numeroDaConta.setDigitoDaConta(2);
+		numeroDaConta.setDigitoDaConta("2");
 
 		ContaBancaria contaBancaria = new ContaBancaria();
 		contaBancaria.setBanco(EnumBancos.HSBC.newInstance());
@@ -48,9 +48,8 @@ public class TestCLHsbcCNR {
 
 		Pessoa sacado = new Pessoa();
 		Pessoa cedente = new Pessoa();
-		cedente.addContaBancaria(contaBancaria);
 		
-		titulo = Titulo.getInstance(sacado, cedente);
+		titulo = Titulo.getInstance(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("41234567894");
 		titulo.setDataDoVencimento(new GregorianCalendar(2000, Calendar.JULY, 4).getTime());			
 	}
@@ -77,7 +76,7 @@ public class TestCLHsbcCNR {
 		
 		
 		// Alterando alguns dados do título
-		titulo.getCedente().getContasBancarias().iterator().next().getNumeroDaConta().setCodigoDaConta(3333);
+		titulo.getContaBancaria();
 		titulo.setNossoNumero("4412345678944");
 		clHsbcCNR = FactoryCampoLivre.getInstance(titulo);
 		

@@ -114,8 +114,7 @@ class CLBancoDoBrasilNN17 extends ACLBancoDoBrasil{
 		
 		CLBancoDoBrasilNN17 clBancoDoBrasilN17 = new CLBancoDoBrasilNN17(FIELDS_LENGTH,STRING_LENGTH);
 		
-		//TODO Código em teste
-		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria conta = titulo.getContaBancaria();
 		String nossoNumero = titulo.getNossoNumero();
 		
 		//TODO Código em teste

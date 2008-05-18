@@ -201,7 +201,7 @@ public class CLItau extends ACLItau {
 	static ICampoLivre getInstance(Titulo titulo) {
 		
 		ACampoLivre clBancoItau = null;
-		ContaBancaria conta = titulo.getCedente().getContasBancarias().iterator().next();
+		ContaBancaria conta = titulo.getContaBancaria();
 		
 		/*
 		 * Se a carteira for especial, a forma de construir o campo livre será diferente.

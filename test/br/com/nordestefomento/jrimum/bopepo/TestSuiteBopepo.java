@@ -47,7 +47,7 @@ import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLItau;
 ( 
 		{ 
 			TestBoleto.class,
-			TestBoletoPDF.class,
+			TestViewPDF.class,
 			TestCodigoDeBarra.class,
 			TestEnumBanco.class,
 			TestLinhaDigitavel.class,
