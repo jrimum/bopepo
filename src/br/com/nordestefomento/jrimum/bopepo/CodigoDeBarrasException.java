@@ -62,7 +62,7 @@ public class CodigoDeBarrasException extends JRimumException {
 	 * 
 	 */
 	public CodigoDeBarrasException() {
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class CodigoDeBarrasException extends JRimumException {
 	 */
 	public CodigoDeBarrasException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class CodigoDeBarrasException extends JRimumException {
 	 */
 	public CodigoDeBarrasException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class CodigoDeBarrasException extends JRimumException {
 	 */
 	public CodigoDeBarrasException(Throwable cause) {
 		super(cause);
-		// TODO Auto-generated constructor stub
+	
 	}
 
 }

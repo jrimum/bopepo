@@ -91,7 +91,7 @@ public final class FactoryCampoLivre extends ACurbitaObject{
 		
 		ICampoLivre campoLivre = null;
 		
-		if (!isNull(strCampoLivre, "strCampoLivre")) {
+		if (isNotNull(strCampoLivre, "strCampoLivre")) {
 
 			if (StringUtils.isNotBlank(strCampoLivre)) {
 

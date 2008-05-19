@@ -27,22 +27,25 @@ import br.com.nordestefomento.jrimum.domkee.type.Logradouro;
 
 import com.lowagie.text.DocumentException;
 
+
+
 /**
  * 
+ * <p>
  * Classe exemplo que mostra a geração de boletos de vários bancos.<br/>
  * Para cada banco o código se repete propositalmente, afim de facilitar
  * o entendimento por parte do usuário.
+ * </p>
  * 
- * @author Gabriel Guimarães
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author Misael Barreto 
- * @author Rômulo Augusto
- * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
  * 
- * @since JMatryx 1.0
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+ * @author Misael Barreto
  * 
- * @version 1.0
+ * @since 0.2 
+ * 
+ * @version 0.2
  */
+	
 public class MeuPrimeiroBoleto {
 
 	public static void main (String[] args) throws DocumentException, IllegalArgumentException, IOException, NotSuporttedBancoException, NotSuporttedCampoLivreException {
@@ -133,7 +136,7 @@ public class MeuPrimeiroBoleto {
 		// pasta do projeto. Outros exemplos:
 		// WINDOWS: boletoViewer.getAsPDF("C:/Temp/MeuBoleto.pdf");
 		// LINUX: boletoViewer.getAsPDF("/home/temp/MeuBoleto.pdf");
-		File arquivoPdf = boletoViewer.getAsPDF("MeuPrimeiroBoleto_BoletoBancoDoBrasil.pdf");
+		File arquivoPdf = boletoViewer.getAsPDF("MeuPrimeiroBoleto_BoletoBancoDoBrasil");
 		
 		// Mostrando o boleto gerado na tela.
 		mostreBoletoNaTela(arquivoPdf);
@@ -146,7 +149,6 @@ public class MeuPrimeiroBoleto {
 		try {
 			desktop.open(arquivoBoleto);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 		

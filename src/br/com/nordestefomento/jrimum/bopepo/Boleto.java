@@ -215,7 +215,7 @@ public final class Boleto extends ACurbitaObject{
 	 */
 	public void setCampoLivre(ICampoLivre campoLivre) {
 		
-		if(!isNull(campoLivre, "campoLivre")){
+		if(isNotNull(campoLivre, "campoLivre")){
 			
 			int length = campoLivre.write().length();
 			
