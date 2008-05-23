@@ -70,7 +70,7 @@ abstract class ACLCaixaEconomicaFederal extends ACampoLivre {
 			}
 		}
 		
-		if (campoLivre == null) {
+		if (isNull(campoLivre)) {
 			throw new NotSuporttedCampoLivreException (
 					"Campo livre disponível somente para títulos com " +
 					" comprimento de " + NOSSO_NUMERO_SINCO + " " + 

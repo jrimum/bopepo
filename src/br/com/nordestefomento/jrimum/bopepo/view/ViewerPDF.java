@@ -272,7 +272,7 @@ class ViewerPDF extends ACurbitaObject {
 	 */
 	private boolean isTemplateFromResource() {
 
-		return getTemplate() == null;
+		return isNull(getTemplate());
 	}
 
 	/**
@@ -398,7 +398,7 @@ class ViewerPDF extends ACurbitaObject {
 		Map<String, String> listaCamposExtra = this.boleto
 				.getListaCamposExtra();
 
-		if (listaCamposExtra != null) {
+		if (isNotNull(listaCamposExtra)) {
 			Set<String> listaCampo = listaCamposExtra.keySet();
 			for (String campo : listaCampo) {
 				form.setField(campo, listaCamposExtra.get(campo));
@@ -508,9 +508,11 @@ class ViewerPDF extends ACurbitaObject {
 	}
 
 	private void setSacadorAvalista() throws IOException, DocumentException {
-		Pessoa sacadorAvalista = boleto.getTitulo().getSacadorAvalista();
-
-		if (sacadorAvalista != null) {
+		
+		if (boleto.getTitulo().hasSacadorAvalista()) {
+			
+			Pessoa sacadorAvalista = boleto.getTitulo().getSacadorAvalista(); 
+			
 			StringBuilder sb = new StringBuilder("");
 
 			if (isNotNull(sacadorAvalista.getNome())) {
@@ -689,10 +691,10 @@ class ViewerPDF extends ACurbitaObject {
 								+ conta.getBanco().getCodigoDeCompensacao()
 								+ ".png");
 
-				if (url != null)
+				if (isNotNull(url))
 					imgLogoBanco = Image.getInstance(url);
 
-				if (imgLogoBanco != null) {
+				if (isNotNull(imgLogoBanco)) {
 
 					// Esta imagem gerada aqui é do tipo java.awt.Image
 					conta.getBanco().setImgLogo(ImageIO.read(url));

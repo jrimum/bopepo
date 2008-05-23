@@ -147,7 +147,7 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 			 * exceção NotSuporttedCampoLivreException. Trata-se de uma mensagem
 			 * genérica que será utilizada somente em último caso.
 			 */
-			if (campoLivre == null) {
+			if (isNull(campoLivre)) {
 				throw new NotSuporttedCampoLivreException(
 						"Não há implementações de campo livre para o banco "
 								+ contaBancaria.getBanco()

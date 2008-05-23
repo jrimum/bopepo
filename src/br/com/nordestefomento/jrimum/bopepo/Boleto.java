@@ -135,7 +135,7 @@ public final class Boleto extends ACurbitaObject{
 		if(log.isDebugEnabled())
 			log.debug("titulo instance : "+titulo);
 		
-		if(titulo != null){
+		if(isNotNull(titulo)){
 			
 			boleto = new Boleto();			
 			boleto.setTitulo(titulo);
@@ -172,7 +172,7 @@ public final class Boleto extends ACurbitaObject{
 		if(log.isDebugEnabled())
 			log.debug("campoLivre instance : "+campoLivre);
 		
-		if(titulo != null){
+		if(isNotNull(titulo)){
 			
 			boleto = new Boleto();			
 			boleto.setTitulo(titulo);
@@ -431,7 +431,7 @@ public final class Boleto extends ACurbitaObject{
 	}
 
 	public void setListaCamposExtra(Map<String,String> camposTemplate) {
-		if (camposTemplate == null)
+		if (isNull(camposTemplate))
 			this.listaCamposExtra = new HashMap<String, String>();
 		else
 			this.listaCamposExtra = camposTemplate;

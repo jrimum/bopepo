@@ -31,6 +31,8 @@ package br.com.nordestefomento.jrimum.bopepo;
 
 import java.util.HashMap;
 
+import br.com.nordestefomento.jrimum.ACurbitaObject;
+import br.com.nordestefomento.jrimum.ICurbitaObject;
 import br.com.nordestefomento.jrimum.domkee.entity.Banco;
 import br.com.nordestefomento.jrimum.domkee.ientity.IBanco;
 import br.com.nordestefomento.jrimum.domkee.type.CNPJ;
@@ -96,7 +98,7 @@ import br.com.nordestefomento.jrimum.domkee.type.CNPJ;
  * @version 0.2
  */
 
-public enum EnumBancos {
+public enum EnumBancos implements ICurbitaObject{
 
 	// TODO FAZER um link para a lista de componentes suportados no javadoc
 	// dessa classe.
@@ -372,4 +374,11 @@ public enum EnumBancos {
 		return segmento;
 	}
 
+	/**
+	 * @see br.com.nordestefomento.jrimum.ACurbitaObject#toString()
+	 * @see java.lang.Enum#toString()
+	 */
+	public String toString(){
+		return ACurbitaObject.toString(this);
+	}
 }
