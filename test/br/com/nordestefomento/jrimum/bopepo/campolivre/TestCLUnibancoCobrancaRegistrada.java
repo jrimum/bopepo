@@ -62,12 +62,42 @@ public class TestCLUnibancoCobrancaRegistrada {
 
 	/**
 	 * <p>
-	 * SOBRE O MÉTODO
+	 * Cobrança com registro<br />
+	 * <br />
+	 * Situação: precisamos emitir um título para um sacado com essas
+	 * características:
+	 * </p>
+	 * <p>
+	 * Banco: UNIBANCO – identificação 409<br />
+	 * Agência: 0001-9<br />
+	 * Moeda: Real – R$ - identificação 9<br />
+	 * Vencimento: 31 de dezembro de 2001<br />
+	 * Valor: R$1000,00<br />
+	 * Código para transação CVT: 04 (cobrança com registro – 5539-5)<br />
+	 * “Nosso Número”: 11223344554<br />
 	 * </p>
 	 * 
-	 * @throws java.lang.Exception
+	 * <p>
+	 * NÚMERO DE ORIGEM DO CÓDIGO DE BARRAS:<br />
+	 * <br />
 	 * 
-	 * @since 
+	 * <pre>
+	 * 409 9  1  1546  0000100000  04  011231  0001  9  11223344554  0
+	 * </pre>
+	 * 
+	 * <br />
+	 * LINHA DIGITÁVEL: <br />
+	 * 
+	 * <pre>
+	 * 40990.40117  20100.019110  22334.455403  1  15460000100000
+	 * </pre>
+	 * 
+	 * </p>
+	 * 
+	 * 
+	 * @throws Exception
+	 * 
+	 * @since
 	 */
 	@Before
 	public void setUp() throws Exception {

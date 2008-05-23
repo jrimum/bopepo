@@ -25,15 +25,14 @@ public class ACLUnibanco extends ACampoLivre {
 
 		if (exists(conta.getCarteira().getTipoCobranca())) {
 
-			if (conta.getCarteira().getTipoCobranca() == EnumTipoCobranca.COM_REGISTRO) {
-
+			if (conta.getCarteira().getTipoCobranca() == EnumTipoCobranca.COM_REGISTRO) 
 				campoLivre = CLUnibancoCobrancaRegistrada.getInstance(titulo);
-
-			} else {// Sem_Registro
-
-				campoLivre = CLUnibancoCobrancaNaoRegistrada
-						.getInstance(titulo);
-			}
+			else 
+				if(conta.getCarteira().getTipoCobranca() == EnumTipoCobranca.SEM_REGISTRO)
+					campoLivre = CLUnibancoCobrancaNaoRegistrada.getInstance(titulo);
+				else
+					throw new NotSuporttedCampoLivreException(
+					"Nao existe suporte para um campo livre do unibanco com a cobranca: "+conta.getCarteira().getTipoCobranca());
 
 		} else {
 			throw new NotSuporttedCampoLivreException(

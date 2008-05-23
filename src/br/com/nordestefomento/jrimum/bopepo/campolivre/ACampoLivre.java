@@ -70,7 +70,7 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 	}
 
 	static ICampoLivre getInstance(Titulo titulo)
-			throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
+			throws NotSuporttedBancoException, NotSuporttedCampoLivreException, CampoLivreException {
 
 		if (log.isTraceEnabled())
 			log.trace("Instanciando Campo livre");
@@ -80,7 +80,9 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 		ICampoLivre campoLivre = null;
 		ContaBancaria contaBancaria = null;
 		EnumBancos enumBanco = null;
-
+		
+		try{
+		
 		contaBancaria = titulo.getContaBancaria();
 
 		if (log.isDebugEnabled())
@@ -119,6 +121,10 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 				case HSBC:
 					campoLivre = ACLHsbc.getInstance(titulo);
 					break;
+					
+				case UNIBANCO:
+					campoLivre = ACLUnibanco.getInstance(titulo);
+					break;
 
 				case BANCO_ITAU:
 					campoLivre = ACLItau.getInstance(titulo);
@@ -155,6 +161,13 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 								+ " compatíveis com as "
 								+ "caracteríticas do título informado.");
 			}
+		}
+		
+		}catch(Exception e){
+			if(e instanceof CampoLivreException)
+				throw (CampoLivreException)e;
+			else
+				throw new CampoLivreException(e);		
 		}
 
 		if (log.isDebugEnabled() || log.isTraceEnabled())

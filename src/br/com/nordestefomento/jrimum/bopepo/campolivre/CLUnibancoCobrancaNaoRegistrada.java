@@ -1,9 +1,12 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
+import org.apache.commons.lang.StringUtils;
+
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
+import br.com.nordestefomento.jrimum.utilix.Util4String;
 
 /**
  * 
@@ -96,28 +99,43 @@ public class CLUnibancoCobrancaNaoRegistrada extends ACLUnibanco {
 		ACampoLivre aCLUnibanco = new CLUnibancoCobrancaNaoRegistrada(
 				FIELDS_LENGTH, STRING_LENGTH);
 
-		// TODO Código em teste
 		ContaBancaria conta = titulo.getContaBancaria();
 
 		aCLUnibanco.add(new Field<Integer>(CODIGO_TRANSACAO, 1));
 
-		aCLUnibanco.add(new Field<Integer>(conta.getNumeroDaConta()
-				.getCodigoDaConta(), 6, Filler.ZERO_LEFT));
+		if(isNotNull(conta.getNumeroDaConta().getCodigoDaConta(), "Numero da Conta Bancária"))
+			if(conta.getNumeroDaConta().getCodigoDaConta() > 0)
+				aCLUnibanco.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
+			else
+				throw new CampoLivreException(new IllegalArgumentException("Conta bancária com valor inválido: "+conta.getNumeroDaConta().getCodigoDaConta()));
 
-		aCLUnibanco.add(new Field<Integer>(Integer.valueOf(conta
-				.getNumeroDaConta().getDigitoDaConta()), 1));
+		if(isNotNull(conta.getNumeroDaConta().getDigitoDaConta(),"Digito da Conta Bancária"))
+			if(StringUtils.isNumeric(conta.getNumeroDaConta().getDigitoDaConta())){
+				
+				Integer digitoDaConta = Integer.valueOf(conta.getNumeroDaConta().getDigitoDaConta());  
+				
+				if(digitoDaConta>0)
+					aCLUnibanco.add(new Field<Integer>(Integer.valueOf(digitoDaConta), 1));
+				else
+					throw new CampoLivreException(new IllegalArgumentException("O digito da conta deve ser um número natural positivo, e não: ["+conta.getNumeroDaConta().getCodigoDaConta()+"]"));
+			}else
+				throw new CampoLivreException(new IllegalArgumentException("O digito da conta deve ser numérico, e não: ["+conta.getNumeroDaConta().getCodigoDaConta()+"]"));
 
 		aCLUnibanco.add(new Field<Integer>(RESERVADO, 2, Filler.ZERO_LEFT));
 
-		aCLUnibanco.add(new Field<String>(titulo.getNossoNumero(), 14,
-				Filler.ZERO_LEFT));
-
+		if(isNotNull(titulo.getNossoNumero(),"Nosso Número"))
+			if(StringUtils.isNumeric(titulo.getNossoNumero())){
+				if(Long.valueOf(Util4String.removeStartWithZeros(titulo.getNossoNumero()))>0)
+					aCLUnibanco.add(new Field<String>(titulo.getNossoNumero(), 14,Filler.ZERO_LEFT));
+				else
+					throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser um número natural positivo, e não: ["+conta.getNumeroDaConta().getCodigoDaConta()+"]"));
+			}else
+				throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser numérico, e não: ["+conta.getNumeroDaConta().getCodigoDaConta()+"]"));
+		
 		aCLUnibanco.add(new Field<String>(calculeDigitoEmModulo11(titulo
 				.getNossoNumero()), 1));
 
 		return aCLUnibanco;
 	}
 	
-	//TODO TESTES
-
 }
