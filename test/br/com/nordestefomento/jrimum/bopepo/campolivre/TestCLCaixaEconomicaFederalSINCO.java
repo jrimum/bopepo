@@ -49,14 +49,14 @@ import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
  * Teste da classe <code>CL_CaixaEconômicaFederal_SINCO</code>.
  * 
  * 
- * @author Gabriel Guimarães
+ * 
  * @author Gilmar P.S.L
  * @author Misael Barreto
  * @author Rômulo Augusto
  * 
- * @since JMatryx 1.0
+ * @since 0.2
  * 
- * @version 1.0
+ * @version 0.2
  */
 public class TestCLCaixaEconomicaFederalSINCO{
 	

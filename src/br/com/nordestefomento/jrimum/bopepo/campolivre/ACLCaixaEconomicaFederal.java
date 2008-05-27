@@ -35,15 +35,15 @@ package br.com.nordestefomento.jrimum.bopepo.campolivre;
  * Representa a família de classes do campo livre para o banco Caixa Econômica Federal.
  * 
  * 
- * @author Gabriel Guimarães
+ * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author Misael Barreto 
  * @author Rômulo Augusto
  * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
  * 
- * @since JMatryx 1.0
+ * @since 0.2
  * 
- * @version 1.0
+ * @version 0.2
  */
 import org.apache.commons.lang.StringUtils;
 

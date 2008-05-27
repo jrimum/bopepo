@@ -373,7 +373,7 @@ class ViewerPDF extends ACurbitaObject {
 		setQuantidade();
 		setNossoNumero();
 		setNumeroDocumento();
-		setCpfCnpjCedente();
+		setAbstractCPRFCedente();
 		setDataVencimeto();
 		setValorDocumento();
 		setDescontoAbatimento();
@@ -438,7 +438,7 @@ class ViewerPDF extends ACurbitaObject {
 
 		if (isNotNull(boleto.getTitulo().getAceite()))
 			form.setField("txtFcAceite", boleto.getTitulo().getAceite()
-					.toString());
+					.name());
 	}
 
 	private void setEspecieDoc() throws IOException, DocumentException {
@@ -467,14 +467,14 @@ class ViewerPDF extends ACurbitaObject {
 		if (isNotNull(sacado.getNome())) {
 			sb.append(sacado.getNome());
 		}
-		if (isNotNull(sacado.getACpfCnpj())) {
+		if (isNotNull(sacado.getAbstractCPRF())) {
 			sb.append(", ");
-			if (sacado.getACpfCnpj().isFisica())
+			if (sacado.getAbstractCPRF().isFisica())
 				sb.append("Cpf: ");
-			else if (sacado.getACpfCnpj().isJuridica())
+			else if (sacado.getAbstractCPRF().isJuridica())
 				sb.append("Cnpj: ");
 
-			sb.append(sacado.getACpfCnpj().getCodigoFormatado());
+			sb.append(sacado.getAbstractCPRF().getCodigoFormatado());
 		}
 		form.setField("txtRsSacado", sb.toString());
 		form.setField("txtFcSacadoL1", sb.toString());
@@ -489,7 +489,7 @@ class ViewerPDF extends ACurbitaObject {
 			if (isNotNull(endereco.getLocalidade().getNome()))
 				sb.append(SEPERADOR + endereco.getLocalidade().getNome());
 			if (isNotNull(endereco.getUf()))
-				sb.append(" / " + endereco.getUf().toString());
+				sb.append(" / " + endereco.getUf().name());
 
 			form.setField("txtFcSacadoL2", sb.toString());
 
@@ -518,14 +518,14 @@ class ViewerPDF extends ACurbitaObject {
 			if (isNotNull(sacadorAvalista.getNome())) {
 				sb.append(sacadorAvalista.getNome());
 			}
-			if (isNotNull(sacadorAvalista.getACpfCnpj())) {
+			if (isNotNull(sacadorAvalista.getAbstractCPRF())) {
 				sb.append(", ");
-				if (sacadorAvalista.getACpfCnpj().isFisica())
+				if (sacadorAvalista.getAbstractCPRF().isFisica())
 					sb.append("Cpf: ");
-				else if (sacadorAvalista.getACpfCnpj().isJuridica())
+				else if (sacadorAvalista.getAbstractCPRF().isJuridica())
 					sb.append("Cnpj: ");
 
-				sb.append(sacadorAvalista.getACpfCnpj().getCodigoFormatado());
+				sb.append(sacadorAvalista.getAbstractCPRF().getCodigoFormatado());
 			}
 			form.setField("txtFcSacadorAvalistaL1", sb.toString());
 
@@ -540,7 +540,7 @@ class ViewerPDF extends ACurbitaObject {
 				if (isNotNull(endereco.getLocalidade().getNome()))
 					sb.append(SEPERADOR + endereco.getLocalidade().getNome());
 				if (isNotNull(endereco.getUf()))
-					sb.append(" / " + endereco.getUf().toString());
+					sb.append(" / " + endereco.getUf().name());
 
 				form.setField("txtFcSacadorAvalistaL2", sb.toString());
 
@@ -618,10 +618,10 @@ class ViewerPDF extends ACurbitaObject {
 				.format(boleto.getTitulo().getDataDoVencimento()));
 	}
 
-	private void setCpfCnpjCedente() throws IOException, DocumentException {
+	private void setAbstractCPRFCedente() throws IOException, DocumentException {
 
 		form.setField("txtRsCpfCnpj", boleto.getTitulo().getCedente()
-				.getACpfCnpj().getCodigoFormatado());
+				.getAbstractCPRF().getCodigoFormatado());
 	}
 
 	private void setNumeroDocumento() throws IOException, DocumentException {
@@ -651,9 +651,9 @@ class ViewerPDF extends ACurbitaObject {
 	private void setEspecie() throws IOException, DocumentException {
 
 		form.setField("txtRsEspecie", boleto.getTitulo().getEnumMoeda()
-				.toString());
+				.name());
 		form.setField("txtFcEspecie", boleto.getTitulo().getEnumMoeda()
-				.toString());
+				.name());
 	}
 
 	private void setLinhaDigitavel() throws DocumentException, IOException {
