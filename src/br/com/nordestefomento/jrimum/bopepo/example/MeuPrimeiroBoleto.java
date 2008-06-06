@@ -100,7 +100,7 @@ public class MeuPrimeiroBoleto {
 		/* 
 		 * INFORMANDO OS DADOS SOBRE O TÍTULO.
 		 * */		
-		Titulo titulo = Titulo.getInstance(contaBancariaCed, sacado, cedente, sacadorAvalista);
+		Titulo titulo = new Titulo(contaBancariaCed, sacado, cedente, sacadorAvalista);
 		titulo.setNumeroDoDocumento("123456789");
 		titulo.setNossoNumero("1234567890");
 		titulo.setDigitoDoNossoNumero("5");
@@ -113,7 +113,7 @@ public class MeuPrimeiroBoleto {
 		/* 
 		 * INFORMANDO OS DADOS SOBRE O BOLETO.
 		 * */
-		Boleto boleto = Boleto.getInstance(titulo);
+		Boleto boleto = new Boleto(titulo);
 		boleto.setLocalPagamento("Pagável preferencialmente na Rede X ou em qualquer Banco até o Vencimento.");
 		boleto.setInstrucaoAoSacado("Senhor sacado, sabemos sim que o valor cobrado não é o esperado, aproveite o DESCONTÃO!");
 		boleto.setInstrucao1("PARA PAGAMENTO 1 até Hoje não cobrar nada!");

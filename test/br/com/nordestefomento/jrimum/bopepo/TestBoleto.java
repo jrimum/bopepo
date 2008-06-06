@@ -105,18 +105,18 @@ public class TestBoleto{
 		numeroDaConta.setCodigoDaConta(6789);
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 
-		titulo = Titulo.getInstance(contaBancaria, sacado, cedente);
+		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("12345678901");
 		titulo.setEnumMoeda(EnumMoeda.REAL);
 		titulo.setValor(BigDecimal.valueOf(100.23));
 		titulo.setDataDoVencimento(VENCIMENTO);
 		
-		boleto = Boleto.getInstance(titulo);
+		boleto = new Boleto(titulo);
 		
 	}
 
 	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.Boleto#getInstance(br.com.nordestefomento.jrimum.domkee.entity.Titulo)}.
+	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.Boleto#create(br.com.nordestefomento.jrimum.domkee.entity.Titulo)}.
 	 * @throws NotSuporttedBancoException 
 	 * @throws NotSuporttedCampoLivreException 
 	 */
@@ -127,7 +127,7 @@ public class TestBoleto{
 		assertNotNull(boleto.getTitulo());
 		
 		try{
-			Boleto.getInstance(null);
+			new Boleto(null);
 			assertTrue(false);
 			fail("Teste Falho!");
 			

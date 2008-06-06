@@ -49,17 +49,17 @@ public class TestCLHsbcCNR {
 		Pessoa sacado = new Pessoa();
 		Pessoa cedente = new Pessoa();
 		
-		titulo = Titulo.getInstance(contaBancaria, sacado, cedente);
+		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("41234567894");
 		titulo.setDataDoVencimento(new GregorianCalendar(2000, Calendar.JULY, 4).getTime());			
 	}
 
 	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.campolivre.CLHsbcCNR#getInstance(br.com.nordestefomento.jrimum.domkee.entity.Titulo)}.
+	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.campolivre.CLHsbcCNR#create(br.com.nordestefomento.jrimum.domkee.entity.Titulo)}.
 	 */
 	@Test
 	public final void testGetInstance() {
-		clHsbcCNR = FactoryCampoLivre.getInstance(titulo);
+		clHsbcCNR = Factory4CampoLivre.create(titulo);
 		assertNotNull(clHsbcCNR);
 	}
 
@@ -69,7 +69,7 @@ public class TestCLHsbcCNR {
 	@Test
 	public final void testWrite() {
 		//Teste básico
-		clHsbcCNR = FactoryCampoLivre.getInstance(titulo);
+		clHsbcCNR = Factory4CampoLivre.create(titulo);
 		
 		assertTrue(clHsbcCNR.write().length() == 25);
 		assertEquals("0003003004123456789410012", clHsbcCNR.write());
@@ -78,7 +78,7 @@ public class TestCLHsbcCNR {
 		// Alterando alguns dados do título
 		titulo.getContaBancaria();
 		titulo.setNossoNumero("4412345678944");
-		clHsbcCNR = FactoryCampoLivre.getInstance(titulo);
+		clHsbcCNR = Factory4CampoLivre.create(titulo);
 		
 		assertTrue(clHsbcCNR.write().length() == 25);
 		assertEquals("0003333441234567894410012", clHsbcCNR.write());		

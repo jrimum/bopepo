@@ -136,7 +136,7 @@ public class Util4Exemplos {
 		
 		// Fim Código em teste
 
-		titulo = Titulo.getInstance(contaBancaria,sacado, cedente, sacadorAvalista);
+		titulo = new Titulo(contaBancaria,sacado, cedente, sacadorAvalista);
 		titulo.setNumeroDoDocumento("123456789");
 		titulo.setNossoNumero("1234567890");
 		titulo.setDigitoDoNossoNumero("5");
@@ -147,35 +147,35 @@ public class Util4Exemplos {
 		titulo.setAceite(EnumAceite.A);
 	
 		Boleto b1,b2,b3,b4,b5;
-		b1 = Boleto.getInstance(titulo);
+		b1 = new Boleto(titulo);
 		
 		b1.setLocalPagamento("Pagável preferencialmente na Rede X ou em qualquer Banco até o Vencimento.");
 		b1.setInstrucaoAoSacado("Senhor sacado, sabemos sim que o valor cobrado é injusto e esperamos seu pagamento assim mesmo.");
 		b1.setInstrucao1("PARA PAGAMENTO 1 ");
 		b1.getTitulo().getSacado().setNome("Misael Martins Motriz");
 	
-		b2 = Boleto.getInstance(titulo);
+		b2 = new Boleto(titulo);
 		
 		b2.setLocalPagamento(b1.getLocalPagamento());
 		b2.setInstrucaoAoSacado(b1.getInstrucaoAoSacado());
 		b2.setInstrucao1("PARA PAGAMENTO 2 ");
 		b2.getTitulo().getSacado().setNome("Samuca Meu Carro");
 		
-		b3 = Boleto.getInstance(titulo);
+		b3 = new Boleto(titulo);
 		
 		b3.setLocalPagamento(b1.getLocalPagamento());
 		b3.setInstrucaoAoSacado(b1.getInstrucaoAoSacado());
 		b3.setInstrucao1("PARA PAGAMENTO 3 ");
 		b3.getTitulo().getSacado().setNome("Romulo O Namorador");
 		
-		b4 = Boleto.getInstance(titulo);
+		b4 = new Boleto(titulo);
 		
 		b4.setLocalPagamento(b1.getLocalPagamento());
 		b4.setInstrucaoAoSacado(b1.getInstrucaoAoSacado());
 		b4.setInstrucao1("PARA PAGAMENTO 4 ");
 		b1.getTitulo().getSacado().setNome("Michelx E Seus Irmãos");
 		
-		b5 = Boleto.getInstance(titulo);
+		b5 = new Boleto(titulo);
 		
 		b5.setLocalPagamento(b1.getLocalPagamento());
 		b5.setInstrucaoAoSacado(b1.getInstrucaoAoSacado());

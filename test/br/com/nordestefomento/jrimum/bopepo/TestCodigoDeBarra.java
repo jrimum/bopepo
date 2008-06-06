@@ -42,7 +42,7 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.campolivre.FactoryCampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.Factory4CampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
 import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
 import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
@@ -96,29 +96,18 @@ public class TestCodigoDeBarra{
 		numeroDaConta.setCodigoDaConta(6789);
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 
-		titulo = Titulo.getInstance(contaBancaria, sacado, cedente);
+		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("12345678901");
 		titulo.setEnumMoeda(EnumMoeda.REAL);
 		titulo.setValor(BigDecimal.valueOf(100.23));
 		titulo.setDataDoVencimento(VENCIMENTO);
 		
-		clBradesco = FactoryCampoLivre.getInstance(titulo);
+		clBradesco = Factory4CampoLivre.create(titulo);
 		
-		codigoDeBarras = CodigoDeBarras.getInstance(titulo, clBradesco);
+		codigoDeBarras = new CodigoDeBarras(titulo, clBradesco);
 
 	}
 
-	/**
-	 * Test method for
-	 * {@link br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras#getInstance(br.com.nordestefomento.jrimum.domkee.entity.Titulo, ICampoLivre)}.
-	 */
-	@Test
-	public void testGetInstance() {
-		
-		assertNotNull(codigoDeBarras);
-		
-	}
-	
 	/**
 	 * Test method for
 	 * {@link br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras#getDigitoVerificadorGeral()}.

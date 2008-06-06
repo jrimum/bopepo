@@ -70,7 +70,7 @@ public class TestCLBradesco{
 		numeroDaConta.setCodigoDaConta(6789);
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		
-		titulo = Titulo.getInstance(contaBancaria, sacado, cedente);
+		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("12345678901");
 		
 	}
@@ -79,7 +79,7 @@ public class TestCLBradesco{
 	public void testGetInstanceTitulo() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		
 		//básico
-		clBradesco = FactoryCampoLivre.getInstance(titulo);
+		clBradesco = Factory4CampoLivre.create(titulo);
 		
 		assertNotNull(clBradesco);
 	}
@@ -88,7 +88,7 @@ public class TestCLBradesco{
 	public void testWrite() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		
 		//básico feliz
-		clBradesco = FactoryCampoLivre.getInstance(titulo);
+		clBradesco = Factory4CampoLivre.create(titulo);
 		
 		assertTrue(clBradesco.write().length() == 25);
 		assertEquals("1234051234567890100067890",clBradesco.write());
@@ -109,7 +109,7 @@ public class TestCLBradesco{
 		
 		titulo.setNossoNumero("0");
 		
-		clBradesco = FactoryCampoLivre.getInstance(titulo);
+		clBradesco = Factory4CampoLivre.create(titulo);
 		
 		assertTrue(clBradesco.write().length() == 25);
 		assertEquals("0000000000000000000000000",clBradesco.write());

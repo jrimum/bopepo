@@ -59,8 +59,8 @@ abstract class ACLBancoAbnAmroReal extends ACampoLivre {
 		super(fieldsLength, stringLength);
 	}
 
-	static ICampoLivre getInstance(Titulo titulo){
+	static ICampoLivre create(Titulo titulo){
 		
-		return CLBancoReal.getInstance(titulo);
+		return new CLBancoReal(titulo);
 	}
 }

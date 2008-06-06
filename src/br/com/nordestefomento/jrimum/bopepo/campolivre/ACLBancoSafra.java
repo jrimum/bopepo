@@ -48,7 +48,7 @@ public abstract class ACLBancoSafra extends ACampoLivre {
 		super(fieldsLength, stringLength);
 	}
 
-	static ICampoLivre getInstance(Titulo titulo)
+	static ICampoLivre create(Titulo titulo)
 			throws NotSuporttedCampoLivreException {
 
 		ICampoLivre campoLivre = null;
@@ -61,11 +61,11 @@ public abstract class ACLBancoSafra extends ACampoLivre {
 
 				if (conta.getCarteira().getTipoCobranca() == EnumTipoCobranca.COM_REGISTRO) {
 	
-					campoLivre = CLBancoSafraCobrancaRegistrada.getInstance(titulo);
+					campoLivre = new CLBancoSafraCobrancaRegistrada(titulo);
 	
 				} else {// Sem_Registro
 	
-					campoLivre = CLBancoSafraCobrancaNaoRegistrada.getInstance(titulo);
+					campoLivre = new CLBancoSafraCobrancaNaoRegistrada(titulo);
 				}
 			}
 			else {

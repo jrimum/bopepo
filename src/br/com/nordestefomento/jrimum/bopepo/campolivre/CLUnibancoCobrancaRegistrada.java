@@ -80,45 +80,36 @@ public class CLUnibancoCobrancaRegistrada extends ACLUnibanco {
 	private static final Integer FIELDS_LENGTH = 6;
 
 	private static final String CODIGO_TRANSACAO = "04";
-
+	
 	/**
-	 * @param fieldsLength
-	 * @param stringLength
+	 * <p>
+	 *   Dado um título, cria um campo livre para o padrão do Banco Unibanco
+	 *   que tenha o tipo de cobrança registrada.
+	 * </p>
+	 * @param titulo título com as informações para geração do campo livre
 	 */
-	protected CLUnibancoCobrancaRegistrada(Integer fieldsLength,
-			Integer stringLength) {
-		super(fieldsLength, stringLength);
-	}
-
-	/**
-	 * @param titulo
-	 * @return
-	 */
-	static ICampoLivre getInstance(Titulo titulo) {
-
-		ACampoLivre aCLUnibanco = new CLUnibancoCobrancaRegistrada(
-				FIELDS_LENGTH, STRING_LENGTH);
-
+	CLUnibancoCobrancaRegistrada(Titulo titulo) {
+		super(FIELDS_LENGTH, STRING_LENGTH);
+		
 		ContaBancaria conta = titulo.getContaBancaria();
-
-		aCLUnibanco.add(new Field<String>(CODIGO_TRANSACAO, 2));
-
-		aCLUnibanco.add(new Field<Date>(titulo.getDataDoVencimento(), 6,
+		
+		this.add(new Field<String>(CODIGO_TRANSACAO, 2));
+		
+		this.add(new Field<Date>(titulo.getDataDoVencimento(), 6,
 				Util4Date.fmt_yyMMdd));
-
-		aCLUnibanco.add(new Field<Integer>(conta.getAgencia()
+		
+		this.add(new Field<Integer>(conta.getAgencia()
 				.getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
-
-		aCLUnibanco.add(new Field<Integer>(Integer.valueOf(conta.getAgencia()
+		
+		this.add(new Field<Integer>(Integer.valueOf(conta.getAgencia()
 				.getDigitoDaAgencia()), 1));
-
-		aCLUnibanco.add(new Field<String>(titulo.getNossoNumero(), 11,
+		
+		this.add(new Field<String>(titulo.getNossoNumero(), 11,
 				Filler.ZERO_LEFT));
-
-		aCLUnibanco.add(new Field<String>(calculeSuperDigito(titulo
+		
+		this.add(new Field<String>(calculeSuperDigito(titulo
 				.getNossoNumero()), 1));
-
-		return aCLUnibanco;
+		
 	}
 
 	/**
@@ -146,7 +137,7 @@ public class CLUnibancoCobrancaRegistrada extends ACLUnibanco {
 	 * 
 	 * @since 0.2
 	 */
-	private static String calculeSuperDigito(String nossoNumero) {
+	private String calculeSuperDigito(String nossoNumero) {
 
 		return calculeDigitoEmModulo11("1" + nossoNumero);
 	}

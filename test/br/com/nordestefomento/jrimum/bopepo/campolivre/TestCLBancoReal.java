@@ -38,7 +38,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.FactoryCampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.Factory4CampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
@@ -72,7 +72,7 @@ public class TestCLBancoReal {
 		numeroDaConta.setDigitoDaConta("0");//Não importa para o CampoLivre
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		
-		titulo = Titulo.getInstance(contaBancaria, sacado, cedente);
+		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNumeroDoDocumento("1234567890123");
 		titulo.setNossoNumero("5020");
 	}
@@ -81,7 +81,7 @@ public class TestCLBancoReal {
 	public void testGetInstanceTitulo() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		
 		//básico
-		clReal = FactoryCampoLivre.getInstance(titulo);
+		clReal = Factory4CampoLivre.create(titulo);
 		
 		assertNotNull(clReal);
 	}
@@ -90,7 +90,7 @@ public class TestCLBancoReal {
 	public void testToString() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		
 		//básico feliz
-		clReal = FactoryCampoLivre.getInstance(titulo);
+		clReal = Factory4CampoLivre.create(titulo);
 		
 		assertTrue(clReal.write().length() == 25);
 		assertEquals("1018001632491234567890123",clReal.write());
@@ -111,7 +111,7 @@ public class TestCLBancoReal {
 		titulo.getContaBancaria();
 		titulo.setNumeroDoDocumento("0");
 		
-		clReal = FactoryCampoLivre.getInstance(titulo);
+		clReal = Factory4CampoLivre.create(titulo);
 		
 		assertTrue(clReal.write().length() == 25);
 		assertEquals("0000000000000000000000000",clReal.write());

@@ -198,7 +198,7 @@ public class CLItau extends ACLItau {
 		super(fieldsLength, stringLength);
 	}
 	
-	static ICampoLivre getInstance(Titulo titulo) {
+	static ICampoLivre create(Titulo titulo) {
 		
 		ACampoLivre clBancoItau = null;
 		ContaBancaria conta = titulo.getContaBancaria();

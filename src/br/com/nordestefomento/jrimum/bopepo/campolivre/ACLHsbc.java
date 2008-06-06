@@ -58,12 +58,12 @@ abstract class ACLHsbc extends ACampoLivre {
 		
 	}
 
-	static ICampoLivre getInstance(Titulo titulo){
+	static ICampoLivre create(Titulo titulo){
 		ICampoLivre campoLivre = null;
 		ContaBancaria conta = titulo.getContaBancaria();
 		
 		if (conta.getCarteira().getTipoCobranca() == EnumTipoCobranca.SEM_REGISTRO) {
-			campoLivre = CLHsbcCNR.getInstance(titulo); 
+			campoLivre = new CLHsbcCNR(titulo); 
 		}
 		else {
 			throw new CampoLivreException("Atualmente para o banco" +

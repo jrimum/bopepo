@@ -80,62 +80,54 @@ public class CLUnibancoCobrancaNaoRegistrada extends ACLUnibanco {
 	private static final Integer CODIGO_TRANSACAO = 5;
 
 	private static final Integer RESERVADO = 0;
-
+	
 	/**
-	 * @param fieldsLength
-	 * @param stringLength
+	 * <p>
+	 *   Dado um título, cria um campo livre para o padrão do Banco Unibanco
+	 *   que tenha o tipo de cobrança não registrada.
+	 * </p>
+	 * @param titulo título com as informações para geração do campo livre
 	 */
-	protected CLUnibancoCobrancaNaoRegistrada(Integer fieldsLength,
-			Integer stringLength) {
-		super(fieldsLength, stringLength);
-	}
-
-	/**
-	 * @param titulo
-	 * @return
-	 */
-	static ICampoLivre getInstance(Titulo titulo) {
-
-		ACampoLivre aCLUnibanco = new CLUnibancoCobrancaNaoRegistrada(
-				FIELDS_LENGTH, STRING_LENGTH);
+	CLUnibancoCobrancaNaoRegistrada(Titulo titulo) {
+		super(FIELDS_LENGTH, STRING_LENGTH);
 
 		ContaBancaria conta = titulo.getContaBancaria();
-
-		aCLUnibanco.add(new Field<Integer>(CODIGO_TRANSACAO, 1));
-
+		
+		this.add(new Field<Integer>(CODIGO_TRANSACAO, 1));
+		
 		if(isNotNull(conta.getNumeroDaConta().getCodigoDaConta(), "Numero da Conta Bancária"))
 			if(conta.getNumeroDaConta().getCodigoDaConta() > 0)
-				aCLUnibanco.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
+				this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
 			else
 				throw new CampoLivreException(new IllegalArgumentException("Conta bancária com valor inválido: "+conta.getNumeroDaConta().getCodigoDaConta()));
-
+		
 		if(isNotNull(conta.getNumeroDaConta().getDigitoDaConta(),"Digito da Conta Bancária"))
 			if(StringUtils.isNumeric(conta.getNumeroDaConta().getDigitoDaConta())){
 				
 				Integer digitoDaConta = Integer.valueOf(conta.getNumeroDaConta().getDigitoDaConta());  
 				
 				if(digitoDaConta>0)
-					aCLUnibanco.add(new Field<Integer>(Integer.valueOf(digitoDaConta), 1));
+					this.add(new Field<Integer>(Integer.valueOf(digitoDaConta), 1));
 				else
 					throw new CampoLivreException(new IllegalArgumentException("O digito da conta deve ser um número natural positivo, e não: ["+conta.getNumeroDaConta().getCodigoDaConta()+"]"));
 			}else
 				throw new CampoLivreException(new IllegalArgumentException("O digito da conta deve ser numérico, e não: ["+conta.getNumeroDaConta().getCodigoDaConta()+"]"));
-
-		aCLUnibanco.add(new Field<Integer>(RESERVADO, 2, Filler.ZERO_LEFT));
-
+		
+		this.add(new Field<Integer>(RESERVADO, 2, Filler.ZERO_LEFT));
+		
 		if(isNotNull(titulo.getNossoNumero(),"Nosso Número"))
 			if(StringUtils.isNumeric(titulo.getNossoNumero())){
 				if(Long.valueOf(Util4String.removeStartWithZeros(titulo.getNossoNumero()))>0)
-					aCLUnibanco.add(new Field<String>(titulo.getNossoNumero(), 14,Filler.ZERO_LEFT));
+					this.add(new Field<String>(titulo.getNossoNumero(), 14,Filler.ZERO_LEFT));
 				else
 					throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser um número natural positivo, e não: ["+conta.getNumeroDaConta().getCodigoDaConta()+"]"));
 			}else
 				throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser numérico, e não: ["+conta.getNumeroDaConta().getCodigoDaConta()+"]"));
 		
-		aCLUnibanco.add(new Field<String>(calculeDigitoEmModulo11(titulo
+		this.add(new Field<String>(calculeDigitoEmModulo11(titulo
 				.getNossoNumero()), 1));
-
-		return aCLUnibanco;
+		
+		
 	}
 	
 }

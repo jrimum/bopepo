@@ -173,33 +173,7 @@ public final class CodigoDeBarras extends LineOfFields{
 	 * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre
 	 */
 	private Field<String> campoLivre;
-
-	/**
-	 * Acesso private para forçar o usuário desta classe a
-	 * buscar o método <code>getInstance</code> com forma criação.
-	 * 
-	 * @param fieldsLength
-	 * @param stringLength
-	 */
-	private CodigoDeBarras(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);	
-
-		codigoDoBanco = new Field<String>("0", 3, Filler.ZERO_LEFT );
-		codigoDaMoeda = new Field<Integer>(0, 1, Filler.ZERO_LEFT);
-		digitoVerificadorGeral = new Field<Integer>(0, 1, Filler.ZERO_LEFT);
-		fatorDeVencimento = new Field<Integer>(0, 4, Filler.ZERO_LEFT);
-		valorNominalDoTitulo = new Field<BigDecimal>(new BigDecimal(0), 10, Filler.ZERO_LEFT);
-		campoLivre = new Field<String>(StringUtils.EMPTY, 25);
-		
-		add(codigoDoBanco);
-		add(codigoDaMoeda);
-		add(digitoVerificadorGeral);
-		add(fatorDeVencimento);
-		add(valorNominalDoTitulo);
-		add(campoLivre);
 	
-	}
-
 	/**
 	 * Retorna uma instância da classe.
 	 * 
@@ -209,7 +183,8 @@ public final class CodigoDeBarras extends LineOfFields{
 	 * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre
 	 * @return códigoDeBarra
 	 */
-	static CodigoDeBarras getInstance(Titulo titulo, ICampoLivre campoLivre) {
+	CodigoDeBarras(Titulo titulo, ICampoLivre campoLivre) {
+		super(FIELDS_LENGTH ,STRING_LENGTH);
 		
 		if(log.isTraceEnabled())
 			log.trace("Instanciando o CodigoDeBarras");
@@ -218,30 +193,40 @@ public final class CodigoDeBarras extends LineOfFields{
 			log.debug("titulo instance : "+titulo);
 			log.debug("campoLivre instance : "+campoLivre);
 		}
+
+		codigoDoBanco = new Field<String>("0", 3, Filler.ZERO_LEFT );
+		codigoDaMoeda = new Field<Integer>(0, 1, Filler.ZERO_LEFT);
+		digitoVerificadorGeral = new Field<Integer>(0, 1, Filler.ZERO_LEFT);
+		fatorDeVencimento = new Field<Integer>(0, 4, Filler.ZERO_LEFT);
+		valorNominalDoTitulo = new Field<BigDecimal>(new BigDecimal(0), 10, Filler.ZERO_LEFT);
+		this.campoLivre = new Field<String>(StringUtils.EMPTY, 25);
 		
-		CodigoDeBarras codigoDeBarras = new CodigoDeBarras(FIELDS_LENGTH ,STRING_LENGTH);
-		
+		add(codigoDoBanco);
+		add(codigoDaMoeda);
+		add(digitoVerificadorGeral);
+		add(fatorDeVencimento);
+		add(valorNominalDoTitulo);
+		add(this.campoLivre);
+	
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		codigoDeBarras.codigoDoBanco.setField(contaBancaria.getBanco().getCodigoDeCompensacao());
+		this.codigoDoBanco.setField(contaBancaria.getBanco().getCodigoDeCompensacao());
 		
-		codigoDeBarras.codigoDaMoeda.setField(titulo.getEnumMoeda().getCodigo());
+		this.codigoDaMoeda.setField(titulo.getEnumMoeda().getCodigo());
 		
 		//Was here DigitoVerificador 
 		//But wait
-		codigoDeBarras.calculateAndSetFatorDeVencimento(titulo.getDataDoVencimento());
-	
-		codigoDeBarras.valorNominalDoTitulo.setField(titulo.getValor().movePointRight(2));
-		codigoDeBarras.campoLivre.setField(campoLivre.write());
+		this.calculateAndSetFatorDeVencimento(titulo.getDataDoVencimento());
+		
+		this.valorNominalDoTitulo.setField(titulo.getValor().movePointRight(2));
+		this.campoLivre.setField(campoLivre.write());
 		
 		//Now you can
-		codigoDeBarras.calculateAndSetDigitoVerificadorGeral();
+		this.calculateAndSetDigitoVerificadorGeral();
 		
 		if(log.isDebugEnabled() || log.isTraceEnabled())
-			log.debug("codigoDeBarra instanciado : "+codigoDeBarras);
-
-		return codigoDeBarras;
+			log.debug("codigoDeBarra instanciado : "+this);
 	}
-	
+
 	private void calculateAndSetDigitoVerificadorGeral() {
 
 		if (log.isTraceEnabled())

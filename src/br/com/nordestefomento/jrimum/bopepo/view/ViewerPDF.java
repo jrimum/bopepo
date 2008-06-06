@@ -109,25 +109,8 @@ class ViewerPDF extends ACurbitaObject {
 
 	private File template;
 
-	private ViewerPDF(Boleto boleto) {
-		super();
+	ViewerPDF(Boleto boleto) {
 		this.boleto = boleto;
-	}
-
-	/**
-	 * <p>
-	 * SOBRE O MÉTODO
-	 * </p>
-	 * 
-	 * @param boleto
-	 * @return
-	 * 
-	 * @since 0.2
-	 */
-
-	protected static ViewerPDF getInstance(Boleto boleto) {
-		ViewerPDF boletoPdf = new ViewerPDF(boleto);
-		return boletoPdf;
 	}
 
 	/**

@@ -55,8 +55,8 @@ abstract class ACLBradesco extends ACampoLivre {
 		
 	}
 
-	static ICampoLivre getInstance(Titulo titulo){
+	static ICampoLivre create(Titulo titulo){
 		
-		return CLBradesco.getInstance(titulo);
+		return new CLBradesco(titulo);
 	}
 }

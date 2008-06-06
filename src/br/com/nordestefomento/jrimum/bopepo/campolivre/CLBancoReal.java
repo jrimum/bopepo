@@ -100,32 +100,22 @@ class CLBancoReal extends ACLBancoAbnAmroReal {
 	private static final Integer FIELDS_LENGTH = 4;
 	
 	/**
-	 * @param fieldsLength
-	 * @param stringLength
+	 * <p>
+	 *   Dado um título, cria um campo livre para o padrão do Banco Real.
+	 * </p>
+	 * @param titulo título com as informações para geração do campo livre
 	 */
-	protected CLBancoReal(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
-		
-	}
-
-	/**
-	 * @param titulo
-	 * @return
-	 */
-	static ICampoLivre getInstance(Titulo titulo) {
-		
-		ACampoLivre clBancoReal = new CLBancoReal(FIELDS_LENGTH,STRING_LENGTH);
+	CLBancoReal(Titulo titulo) {
+		super(FIELDS_LENGTH, STRING_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		
-		//TODO Código em teste
-		clBancoReal.add(new Field<Integer>(conta.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
-		clBancoReal.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
-		clBancoReal.add(new Field<String>(calculeDigitoDaPosicao31(titulo.getNumeroDoDocumento(), conta.getAgencia().getCodigoDaAgencia(), conta.getNumeroDaConta().getCodigoDaConta()), 1, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(conta.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
+		this.add(new Field<String>(calculeDigitoDaPosicao31(titulo.getNumeroDoDocumento(), conta.getAgencia().getCodigoDaAgencia(), conta.getNumeroDaConta().getCodigoDaConta()), 1, Filler.ZERO_LEFT));
 		
-		clBancoReal.add(new Field<String>(Util4String.eliminateSymbols(titulo.getNumeroDoDocumento()), 13, Filler.ZERO_LEFT));
+		this.add(new Field<String>(Util4String.eliminateSymbols(titulo.getNumeroDoDocumento()), 13, Filler.ZERO_LEFT));
 		
-		return clBancoReal;
 	}
 	
 	/**
@@ -167,11 +157,10 @@ class CLBancoReal extends ACLBancoAbnAmroReal {
 	 * @since 0.2
 	 * 
 	 */	
-	private static String calculeDigitoDaPosicao31(String nossoNumero, Integer agencia, Integer contaCorrente){
+	private String calculeDigitoDaPosicao31(String nossoNumero, Integer agencia, Integer contaCorrente){
 			
-			StringBuilder formula = new StringBuilder("");
-			
-			 String dV = null;
+			StringBuilder formula = new StringBuilder();
+			String dV = null;
 			
 			formula.append(Filler.ZERO_LEFT.fill(nossoNumero,13));
 			formula.append(Filler.ZERO_LEFT.fill(agencia, 4));

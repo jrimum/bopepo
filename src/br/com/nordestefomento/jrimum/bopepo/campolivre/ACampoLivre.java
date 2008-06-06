@@ -69,7 +69,7 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 		super(fieldsLength, stringLength);
 	}
 
-	static ICampoLivre getInstance(Titulo titulo)
+	static ICampoLivre create(Titulo titulo)
 			throws NotSuporttedBancoException, NotSuporttedCampoLivreException, CampoLivreException {
 
 		if (log.isTraceEnabled())
@@ -103,35 +103,35 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 				switch (enumBanco) {
 
 				case BANCO_BRADESCO:
-					campoLivre = ACLBradesco.getInstance(titulo);
+					campoLivre = ACLBradesco.create(titulo);
 					break;
 
 				case BANCO_DO_BRASIL:
-					campoLivre = ACLBancoDoBrasil.getInstance(titulo);
+					campoLivre = ACLBancoDoBrasil.create(titulo);
 					break;
 
 				case BANCO_ABN_AMRO_REAL:
-					campoLivre = ACLBancoAbnAmroReal.getInstance(titulo);
+					campoLivre = ACLBancoAbnAmroReal.create(titulo);
 					break;
 
 				case CAIXA_ECONOMICA_FEDERAL:
-					campoLivre = ACLCaixaEconomicaFederal.getInstance(titulo);
+					campoLivre = ACLCaixaEconomicaFederal.create(titulo);
 					break;
 
 				case HSBC:
-					campoLivre = ACLHsbc.getInstance(titulo);
+					campoLivre = ACLHsbc.create(titulo);
 					break;
 					
 				case UNIBANCO:
-					campoLivre = ACLUnibanco.getInstance(titulo);
+					campoLivre = ACLUnibanco.create(titulo);
 					break;
 
 				case BANCO_ITAU:
-					campoLivre = ACLItau.getInstance(titulo);
+					campoLivre = ACLItau.create(titulo);
 					break;
 
 				case BANCO_SAFRA:
-					campoLivre = ACLBancoSafra.getInstance(titulo);
+					campoLivre = ACLBancoSafra.create(titulo);
 					break;
 
 				}
@@ -194,5 +194,5 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 				.getBanco().getCodigoDeCompensacao()));
 
 	}
-
+	
 }

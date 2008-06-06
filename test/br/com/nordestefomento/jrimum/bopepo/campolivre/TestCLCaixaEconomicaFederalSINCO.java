@@ -78,7 +78,7 @@ public class TestCLCaixaEconomicaFederalSINCO{
 		
 		contaBancaria.setBanco(EnumBancos.CAIXA_ECONOMICA_FEDERAL.newInstance());
 		
-		titulo = Titulo.getInstance(contaBancaria, sacado, cedente);
+		titulo = new Titulo(contaBancaria, sacado, cedente);
 	}
 
 	@Test
@@ -86,7 +86,7 @@ public class TestCLCaixaEconomicaFederalSINCO{
 
 		//Básico:
 		titulo.setNossoNumero("10000000020061732");
-		clCaixaSINCO = FactoryCampoLivre.getInstance(titulo);
+		clCaixaSINCO = Factory4CampoLivre.create(titulo);
 	
 		assertNotNull(clCaixaSINCO);
 		//
@@ -98,7 +98,7 @@ public class TestCLCaixaEconomicaFederalSINCO{
 		
 		try{
 			
-			clCaixaSINCO = FactoryCampoLivre.getInstance(titulo);
+			clCaixaSINCO = Factory4CampoLivre.create(titulo);
 			
 			assertTrue(false);
 			
@@ -116,7 +116,7 @@ public class TestCLCaixaEconomicaFederalSINCO{
 		
 		titulo.setNossoNumero("10000000020061732");
 		
-		clCaixaSINCO = FactoryCampoLivre.getInstance(titulo);
+		clCaixaSINCO = Factory4CampoLivre.create(titulo);
 		
 		assertEquals("1000002910000000020061732", clCaixaSINCO.write());
 	}

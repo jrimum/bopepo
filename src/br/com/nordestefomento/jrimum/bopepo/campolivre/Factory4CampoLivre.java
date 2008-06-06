@@ -56,7 +56,7 @@ import br.com.nordestefomento.jrimum.utilix.Filler;
  * 
  * @version 0.2
  */
-public final class FactoryCampoLivre extends ACurbitaObject{
+public final class Factory4CampoLivre extends ACurbitaObject{
 
 	/**
 	 * 
@@ -74,9 +74,9 @@ public final class FactoryCampoLivre extends ACurbitaObject{
 	 * @throws NotSuporttedBancoException 
 	 * @throws NotSuporttedCampoLivreException 
 	 */
-	public static ICampoLivre getInstance(Titulo titulo) throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
+	public static ICampoLivre create(Titulo titulo) throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 
-		return ACampoLivre.getInstance(titulo);
+		return ACampoLivre.create(titulo);
 	}
 	
 	/**
@@ -87,7 +87,7 @@ public final class FactoryCampoLivre extends ACurbitaObject{
 	 * @return Uma referência para um ICampoLivre.
 	 * @throws IllegalArgumentException
 	 */
-	public static ICampoLivre getInstace(String strCampoLivre) throws IllegalArgumentException{
+	public static ICampoLivre create(String strCampoLivre) throws IllegalArgumentException{
 		
 		ICampoLivre campoLivre = null;
 		

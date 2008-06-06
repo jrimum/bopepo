@@ -79,7 +79,7 @@ public class TestCLBancoDoBrasilNN17{
 		numeroDaConta.setCodigoDaConta(123456);
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		
-		titulo = Titulo.getInstance(contaBancaria, sacado, cedente);
+		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("12345678901234567");
 		
 	}
@@ -88,7 +88,7 @@ public class TestCLBancoDoBrasilNN17{
 	public void testGetInstanceTitulo() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		
 		//básico
-		clBancoDoBrasil = FactoryCampoLivre.getInstance(titulo);
+		clBancoDoBrasil = Factory4CampoLivre.create(titulo);
 		
 		assertNotNull(clBancoDoBrasil);
 	}
@@ -97,7 +97,7 @@ public class TestCLBancoDoBrasilNN17{
 	public void testWrite() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		
 		//básico feliz
-		clBancoDoBrasil = FactoryCampoLivre.getInstance(titulo);
+		clBancoDoBrasil = Factory4CampoLivre.create(titulo);
 		
 		assertTrue(clBancoDoBrasil.write().length() == 25);
 		assertEquals("1234561234567890123456721",clBancoDoBrasil.write());
@@ -114,7 +114,7 @@ public class TestCLBancoDoBrasilNN17{
 		
 		titulo.setNossoNumero("00000000000000001");
 		
-		clBancoDoBrasil = FactoryCampoLivre.getInstance(titulo);
+		clBancoDoBrasil = Factory4CampoLivre.create(titulo);
 		
 		assertTrue(clBancoDoBrasil.write().length() == 25);
 		assertEquals("0000000000000000000000121",clBancoDoBrasil.write());

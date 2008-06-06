@@ -205,14 +205,22 @@ public final class LinhaDigitavel extends LineOfFields {
 
 
 	/**
-	 * Acesso private para forçar o usuário desta classe a
-	 * buscar o método <code>getInstance</code> com forma criação.
+	 * Retorna uma instância da classe.
 	 * 
-	 * @param fieldsLength
-	 * @param stringLength
+	 * @param titulo
+	 * @see br.com.nordestefomento.jrimum.domkee.entity.Titulo
+	 * @param codigoDeBarras
+	 * @see br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras
+	 * @return códigoDeBarra
 	 */
-	private LinhaDigitavel(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
+	LinhaDigitavel(CodigoDeBarras codigoDeBarras) {
+		super(FIELDS_LENGTH,STRING_LENGTH);
+		
+		if(log.isTraceEnabled())
+			log.trace("Instanciando Linha Digitável");
+		
+		if(log.isDebugEnabled())
+			log.debug("codigoDeBarra instance : "+codigoDeBarras);
 		
 		innerCampo1 = new Field<InnerCampo1>(new InnerCampo1(4,11),11);
 		innerCampo2 = new Field<InnerCampo2>(new InnerCampo2(2,12),12);
@@ -225,42 +233,20 @@ public final class LinhaDigitavel extends LineOfFields {
 		add(innerCampo3);
 		add(campo4);
 		add(innerCampo5);
-	}
-
-	/**
-	 * Retorna uma instância da classe.
-	 * 
-	 * @param titulo
-	 * @see br.com.nordestefomento.jrimum.domkee.entity.Titulo
-	 * @param codigoDeBarras
-	 * @see br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras
-	 * @return códigoDeBarra
-	 */
-	static LinhaDigitavel getInstance(CodigoDeBarras codigoDeBarras) {
-
-		if(log.isTraceEnabled())
-			log.trace("Instanciando Linha Digitável");
+		
+		this.innerCampo1.getField().load(codigoDeBarras);
+		this.innerCampo2.getField().load(codigoDeBarras);
+		this.innerCampo3.getField().load(codigoDeBarras);
+		
+		this.campo4.setField(codigoDeBarras.getDigitoVerificadorGeral().getField());
 		
 		if(log.isDebugEnabled())
-			log.debug("codigoDeBarra instance : "+codigoDeBarras);
+			log.debug("InnerCampo 4 da Linha Digitável : "+this.campo4.getField());
 		
-		LinhaDigitavel linhaDigitavel = new LinhaDigitavel(FIELDS_LENGTH,STRING_LENGTH);
-
-		linhaDigitavel.innerCampo1.getField().load(codigoDeBarras);
-		linhaDigitavel.innerCampo2.getField().load(codigoDeBarras);
-		linhaDigitavel.innerCampo3.getField().load(codigoDeBarras);
-		
-		linhaDigitavel.campo4.setField(codigoDeBarras.getDigitoVerificadorGeral().getField());
-		
-		if(log.isDebugEnabled())
-			log.debug("InnerCampo 4 da Linha Digitável : "+linhaDigitavel.campo4.getField());
-		
-		linhaDigitavel.innerCampo5.getField().load(codigoDeBarras);
+		this.innerCampo5.getField().load(codigoDeBarras);
 		
 		if(log.isDebugEnabled() || log.isTraceEnabled())
-			log.debug("linhaDigitavel instanciada : "+linhaDigitavel.write());
-
-		return linhaDigitavel;
+			log.debug("linhaDigitavel instanciada : "+this.write());
 	}
 
 	/**

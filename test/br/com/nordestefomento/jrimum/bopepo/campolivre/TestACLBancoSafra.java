@@ -65,13 +65,13 @@ public class TestACLBancoSafra {
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(12345, "7"));
 		contaBancaria.setCarteira(new Carteira(123, EnumTipoCobranca.COM_REGISTRO));
 		
-		titulo = Titulo.getInstance(contaBancaria, sacado, cedente);
+		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNumeroDoDocumento("1234567");
 		titulo.setNossoNumero("12345678");
 	}
 
 	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.campolivre.ACLBancoSafra#getInstance(br.com.nordestefomento.jrimum.domkee.entity.Titulo)}.
+	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.campolivre.ACLBancoSafra#create(br.com.nordestefomento.jrimum.domkee.entity.Titulo)}.
 	 */
 	@Test(expected=NotSuporttedCampoLivreException.class)
 	public void testGetInstanceNotSuporttedCampoLivreException() {
@@ -79,7 +79,7 @@ public class TestACLBancoSafra {
 		ContaBancaria conta = titulo.getContaBancaria();
 		conta.getCarteira().setTipoCobranca(null);
 		
-		clBancoSafra = ACLBancoSafra.getInstance(titulo);
+		clBancoSafra = ACLBancoSafra.create(titulo);
 	}
 
 	@Test(expected=CampoLivreException.class)
@@ -95,7 +95,7 @@ public class TestACLBancoSafra {
 		
 		conta.getNumeroDaConta().setDigitoDaConta(digito);
 		
-		clBancoSafra = ACLBancoSafra.getInstance(titulo);
+		clBancoSafra = ACLBancoSafra.create(titulo);
 	}
 	
 	@Test
@@ -105,7 +105,7 @@ public class TestACLBancoSafra {
 		
 		conta.getCarteira().setTipoCobranca(EnumTipoCobranca.COM_REGISTRO);
 		
-		clBancoSafra = FactoryCampoLivre.getInstance(titulo);
+		clBancoSafra = Factory4CampoLivre.create(titulo);
 		
 		Assert.assertTrue(clBancoSafra instanceof CLBancoSafraCobrancaRegistrada);
 	}
@@ -117,7 +117,7 @@ public class TestACLBancoSafra {
 		
 		conta.getCarteira().setTipoCobranca(EnumTipoCobranca.SEM_REGISTRO);
 				
-		clBancoSafra = FactoryCampoLivre.getInstance(titulo);
+		clBancoSafra = Factory4CampoLivre.create(titulo);
 		
 		assertTrue(clBancoSafra instanceof CLBancoSafraCobrancaNaoRegistrada);
 	}
@@ -130,7 +130,7 @@ public class TestACLBancoSafra {
 		conta.getCarteira().setTipoCobranca(EnumTipoCobranca.COM_REGISTRO);
 		
 		//básico feliz
-		clBancoSafra = FactoryCampoLivre.getInstance(titulo);
+		clBancoSafra = Factory4CampoLivre.create(titulo);
 		
 		assertTrue(clBancoSafra.write().length() == 25);
 		assertEquals("7005710001234570123456782", clBancoSafra.write());
@@ -144,7 +144,7 @@ public class TestACLBancoSafra {
 		conta.getCarteira().setTipoCobranca(EnumTipoCobranca.SEM_REGISTRO);
 				
 		//básico feliz
-		clBancoSafra = FactoryCampoLivre.getInstance(titulo);
+		clBancoSafra = Factory4CampoLivre.create(titulo);
 		
 		assertTrue(clBancoSafra.write().length() == 25);
 		assertEquals("7123457000000000123456784", clBancoSafra.write());

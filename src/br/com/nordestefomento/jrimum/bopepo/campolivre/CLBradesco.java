@@ -105,36 +105,26 @@ class CLBradesco extends ACLBradesco {
 	private static final Integer FIELDS_LENGTH = 5;
 	
 	/**
-	 * @param fieldsLength
-	 * @param stringLength
+	 * <p>
+	 *   Dado um título, cria um campo livre para o padrão do Banco Bradesco.
+	 * </p>
+	 * @param titulo título com as informações para geração do campo livre
 	 */
-	protected CLBradesco(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
-		
-	}
-
-	/**
-	 * @param titulo
-	 * @return
-	 */
-	static ICampoLivre getInstance(Titulo titulo) {
-		
-		ACampoLivre clBradesco = new CLBradesco(FIELDS_LENGTH,STRING_LENGTH);
+	CLBradesco(Titulo titulo){
+		super(FIELDS_LENGTH, STRING_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		String nossoNumero = titulo.getNossoNumero();
 		
-		//TODO Código em teste
-		clBradesco.add(new Field<Integer>(conta.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(conta.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
 		
-		clBradesco.add(new Field<Integer>(conta.getCarteira().getCodigo(), 2, Filler.ZERO_LEFT));
-		clBradesco.add(new Field<String>(nossoNumero, 11, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(conta.getCarteira().getCodigo(), 2, Filler.ZERO_LEFT));
+		this.add(new Field<String>(nossoNumero, 11, Filler.ZERO_LEFT));
 		
-		//TODO Código em teste
-		clBradesco.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
 		
-		clBradesco.add(new Field<Integer>(0, 1));
-
-		return clBradesco;
+		this.add(new Field<Integer>(0, 1));
+		
 	}
+	
 }

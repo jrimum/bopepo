@@ -16,7 +16,7 @@ public class ACLUnibanco extends ACampoLivre {
 		super(fieldsLength, stringLength);
 	}
 
-	static ICampoLivre getInstance(Titulo titulo)
+	static ICampoLivre create(Titulo titulo)
 			throws NotSuporttedCampoLivreException {
 
 		ICampoLivre campoLivre = null;
@@ -26,10 +26,10 @@ public class ACLUnibanco extends ACampoLivre {
 		if (exists(conta.getCarteira().getTipoCobranca())) {
 
 			if (conta.getCarteira().getTipoCobranca() == EnumTipoCobranca.COM_REGISTRO) 
-				campoLivre = CLUnibancoCobrancaRegistrada.getInstance(titulo);
+				campoLivre = new CLUnibancoCobrancaRegistrada(titulo);
 			else 
 				if(conta.getCarteira().getTipoCobranca() == EnumTipoCobranca.SEM_REGISTRO)
-					campoLivre = CLUnibancoCobrancaNaoRegistrada.getInstance(titulo);
+					campoLivre = new CLUnibancoCobrancaNaoRegistrada(titulo);
 				else
 					throw new NotSuporttedCampoLivreException(
 					"Nao existe suporte para um campo livre do unibanco com a cobranca: "+conta.getCarteira().getTipoCobranca());
@@ -58,7 +58,7 @@ public class ACLUnibanco extends ACampoLivre {
 	 * 
 	 * @since 0.2
 	 */
-	static String calculeDigitoEmModulo11(String numero) {
+	String calculeDigitoEmModulo11(String numero) {
 
 		String dv = "";
 

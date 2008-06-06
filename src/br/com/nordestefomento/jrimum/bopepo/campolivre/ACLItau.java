@@ -61,9 +61,9 @@ public abstract class ACLItau extends ACampoLivre {
 		super(fieldsLength, stringLength);
 	}
 	
-	static ICampoLivre getInstance(Titulo titulo){
+	static ICampoLivre create(Titulo titulo){
 		
-		return CLItau.getInstance(titulo);
+		return CLItau.create(titulo);
 	}
 
 }

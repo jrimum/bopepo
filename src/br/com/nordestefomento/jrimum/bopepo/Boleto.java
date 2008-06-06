@@ -35,7 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.com.nordestefomento.jrimum.ACurbitaObject;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.FactoryCampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.Factory4CampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
@@ -110,8 +110,32 @@ public final class Boleto extends ACurbitaObject{
 	 * @throws NotSuporttedCampoLivreException 
 	 */
 	public Boleto(Titulo titulo)throws IllegalArgumentException, NotSuporttedBancoException, NotSuporttedCampoLivreException{
-		super();
-		getInstance(titulo);
+
+		if(log.isTraceEnabled())
+			log.trace("Instanciando boleto");
+		
+		
+		if(log.isDebugEnabled())
+			log.debug("titulo instance : "+titulo);
+		
+		if(isNotNull(titulo)){
+			
+			this.setTitulo(titulo);
+			this.setCampoLivre(Factory4CampoLivre.create(titulo));
+			this.load();
+			
+			if(log.isDebugEnabled())
+				log.debug("boleto instance : "+this);
+			
+		}else {
+			IllegalArgumentException e = new IllegalArgumentException("Título nulo!");
+			log.error("Valor Não Permitido!",e);
+			throw e;
+		}
+		
+		if(log.isDebugEnabled() || log.isTraceEnabled())
+			log.trace("Boleto Instanciado : "+this);
+
 	}
 
 	/**
@@ -120,67 +144,25 @@ public final class Boleto extends ACurbitaObject{
 	 */
 	public Boleto(Titulo titulo, ICampoLivre campoLivre) {
 		super();
-		
-		getInstance(titulo, campoLivre);
-	}
 
-	public static Boleto getInstance(Titulo titulo)throws IllegalArgumentException, NotSuporttedBancoException, NotSuporttedCampoLivreException{
-		
-		Boleto boleto = null;
-		
 		if(log.isTraceEnabled())
 			log.trace("Instanciando boleto");
-		
 		
 		if(log.isDebugEnabled())
 			log.debug("titulo instance : "+titulo);
 		
-		if(isNotNull(titulo)){
-			
-			boleto = new Boleto();			
-			boleto.setTitulo(titulo);
-			boleto.setCampoLivre(FactoryCampoLivre.getInstance(titulo));
-			boleto.load();
-			
-			if(log.isDebugEnabled())
-				log.debug("boleto instance : "+boleto);
-			
-		}else {
-			IllegalArgumentException e = new IllegalArgumentException("Título nulo!");
-			log.error("Valor Não Permitido!",e);
-			throw e;
-		}
 		
-		if(log.isDebugEnabled() || log.isTraceEnabled())
-			log.trace("Boleto Instanciado : "+boleto);
-		
-		return boleto;
-	}
-	
-	public static Boleto getInstance(Titulo titulo, ICampoLivre campoLivre)throws IllegalArgumentException{
-		
-		Boleto boleto = null;
-		
-		if(log.isTraceEnabled())
-			log.trace("Instanciando boleto");
-		
-		
-		if(log.isDebugEnabled())
-			log.debug("titulo instance : "+titulo);
-		
-
 		if(log.isDebugEnabled())
 			log.debug("campoLivre instance : "+campoLivre);
 		
 		if(isNotNull(titulo)){
 			
-			boleto = new Boleto();			
-			boleto.setTitulo(titulo);
-			boleto.setCampoLivre(campoLivre);
-			boleto.load();
+			this.setTitulo(titulo);
+			this.setCampoLivre(campoLivre);
+			this.load();
 			
 			if(log.isDebugEnabled())
-				log.debug("boleto instance : "+boleto);
+				log.debug("boleto instance : "+this);
 			
 		}else {
 			IllegalArgumentException e = new IllegalArgumentException("Título nulo!");
@@ -189,15 +171,14 @@ public final class Boleto extends ACurbitaObject{
 		}
 		
 		if(log.isDebugEnabled() || log.isTraceEnabled())
-			log.trace("Boleto Instanciado : "+boleto);
+			log.trace("Boleto Instanciado : "+this);
 		
-		return boleto;
 	}
-	
+
 	private void load(){
 		
-		codigoDeBarras = CodigoDeBarras.getInstance(titulo, campoLivre);
-		linhaDigitavel = LinhaDigitavel.getInstance(codigoDeBarras);
+		codigoDeBarras = new CodigoDeBarras(titulo, campoLivre);
+		linhaDigitavel = new LinhaDigitavel(codigoDeBarras);
 		dataDeProcessamento = new Date();
 		
 		log.info("Data de Processamento do Boleto : "+Util4Date.fmt_dd_MM_yyyy.format(dataDeProcessamento));

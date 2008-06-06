@@ -97,36 +97,28 @@ class CLBancoDoBrasilNN11 extends ACLBancoDoBrasil {
 	 * 
 	 */
 	private static final Integer FIELDS_LENGTH = 4;
-
-	/**
-	 * @param fieldsLength
-	 * @param stringLength
-	 */
-	protected CLBancoDoBrasilNN11(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
 	
-	}
-
 	/**
-	 * @param titulo
-	 * @return
+	 * <p>
+	 *   Dado um título, cria um campo livre para o padrão do Banco do Brasil
+	 *   que tenha o nosso número de tamanho 11.  
+	 * </p>
+	 * @param titulo título com as informações para geração do campo livre
 	 */
-	static ICampoLivre getInstance(Titulo titulo) {
-		
-		ACampoLivre clBancoDoBrasilN11 = new CLBancoDoBrasilNN11(FIELDS_LENGTH,STRING_LENGTH);
+	CLBancoDoBrasilNN11(Titulo titulo) {
+		super(FIELDS_LENGTH, STRING_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		String nossoNumero = titulo.getNossoNumero();
 		
-		clBancoDoBrasilN11.add(new Field<String>(nossoNumero, 11, Filler.ZERO_LEFT));
+		this.add(new Field<String>(nossoNumero, 11, Filler.ZERO_LEFT));
 		
 		//TODO Código em teste
-		clBancoDoBrasilN11.add(new Field<Integer>(conta.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
-		clBancoDoBrasilN11.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 8, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(conta.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 8, Filler.ZERO_LEFT));
 		
-		clBancoDoBrasilN11.add(new Field<Integer>(conta.getCarteira().getCodigo(), 2, Filler.ZERO_LEFT));
-
-		return clBancoDoBrasilN11;
+		this.add(new Field<Integer>(conta.getCarteira().getCodigo(), 2, Filler.ZERO_LEFT));
+		
 	}
 
 }

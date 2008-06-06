@@ -95,7 +95,7 @@ public class BoletoViewer extends ACurbitaObject {
 
 		try {
 
-			this.viewerPDF = ViewerPDF.getInstance(this.boleto);
+			this.viewerPDF = new ViewerPDF(this.boleto);
 
 		} catch (Exception e) {
 			throw new JRimumException(e);

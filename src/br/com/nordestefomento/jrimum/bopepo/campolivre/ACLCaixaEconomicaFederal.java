@@ -58,14 +58,14 @@ abstract class ACLCaixaEconomicaFederal extends ACampoLivre {
 		super(fieldsLength, stringLength);
 	}
 
-	static ICampoLivre getInstance(Titulo titulo) throws NotSuporttedCampoLivreException{
+	static ICampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException{
 		ICampoLivre campoLivre = null;
 		String nossoNumero = titulo.getNossoNumero();
 		
 		if(StringUtils.isNotBlank(nossoNumero)) {
 			switch(nossoNumero.length()) {
 				case NOSSO_NUMERO_SINCO:
-					campoLivre = CLCaixaEconomicaFederalSINCO.getInstance(titulo);
+					campoLivre = new CLCaixaEconomicaFederalSINCO(titulo);
 					break;
 			}
 		}

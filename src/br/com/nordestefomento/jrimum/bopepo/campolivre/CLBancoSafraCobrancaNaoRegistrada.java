@@ -109,31 +109,27 @@ public class CLBancoSafraCobrancaNaoRegistrada extends ACLBancoSafra {
 	private static final int TIPO_COBRANCA = 4;
 
 	/**
-	 * @param fieldsLength
-	 * @param stringLength
+	 * <p>
+	 *   Dado um título, cria um campo livre para o padrão do Banco Safra
+	 *   que tenha o tipo de cobrança não registrada.  
+	 * </p>
+	 * @param titulo título com as informações para geração do campo livre
 	 */
-	public CLBancoSafraCobrancaNaoRegistrada(Integer fieldsLength,
-			Integer stringLength) {
-		super(fieldsLength, stringLength);
-	}
-
-	static ICampoLivre getInstance(Titulo titulo) {
-
+	CLBancoSafraCobrancaNaoRegistrada(Titulo titulo) {
+		super(FIELDS_LENGTH, STRING_LENGTH);
+		
 		ContaBancaria conta = titulo.getContaBancaria();
 		
-		ACampoLivre aCLBancoSafra = new CLBancoSafraCobrancaNaoRegistrada(
-				FIELDS_LENGTH, STRING_LENGTH);
-		
-		aCLBancoSafra.add(new Field<Integer>(SISTEMA, 1));
+		this.add(new Field<Integer>(SISTEMA, 1));
 		
 		//Referente a identificação do cliente.
-		aCLBancoSafra.add(new Field<String>(
+		this.add(new Field<String>(
 				Filler.ZERO_LEFT.fill(conta.getNumeroDaConta().getCodigoDaConta(), 5) +
 				conta.getNumeroDaConta().getDigitoDaConta(), 6));
 		
-		aCLBancoSafra.add(new Field<String>(titulo.getNossoNumero(), 17, Filler.ZERO_LEFT));
-		aCLBancoSafra.add(new Field<Integer>(TIPO_COBRANCA, 1));
+		this.add(new Field<String>(titulo.getNossoNumero(), 17, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(TIPO_COBRANCA, 1));
 		
-		return aCLBancoSafra;
 	}
+	
 }

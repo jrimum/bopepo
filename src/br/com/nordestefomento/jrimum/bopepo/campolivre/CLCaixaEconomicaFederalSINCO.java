@@ -97,31 +97,26 @@ class CLCaixaEconomicaFederalSINCO extends ACLCaixaEconomicaFederal {
 	private static final Integer FIELDS_LENGTH = 4;
 
 	/**
-	 * @param fieldsLength
-	 * @param stringLength
+	 * <p>
+	 *   Dado um título, cria um campo livre para o padrão do Banco Caixa Econômica
+	 *   Federal que tenha o serviço SINCO.
+	 * </p>
+	 * @param titulo título com as informações para geração do campo livre
 	 */
-	protected CLCaixaEconomicaFederalSINCO(Integer fieldsLength,
-			Integer stringLength) {
-		super(fieldsLength, stringLength);
-
-	}
-
-	static ICampoLivre getInstance(Titulo titulo) throws IllegalArgumentException {
-		
-		ACampoLivre clCaixaSINCO = new CLCaixaEconomicaFederalSINCO(FIELDS_LENGTH,STRING_LENGTH);
+	CLCaixaEconomicaFederalSINCO(Titulo titulo) {
+		super(FIELDS_LENGTH, STRING_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		
 		String nossoNumero = titulo.getNossoNumero();
 		
-		clCaixaSINCO.add(new Field<Integer>(1, 1));
+		this.add(new Field<Integer>(1, 1));
 		
-		//TODO Código em teste
-		clCaixaSINCO.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
 		
-		clCaixaSINCO.add(new Field<Integer>(9, 1));
-		clCaixaSINCO.add(new Field<String>(nossoNumero, 17));
+		this.add(new Field<Integer>(9, 1));
+		this.add(new Field<String>(nossoNumero, 17));
 		
-		return clCaixaSINCO;
 	}
+	
 }

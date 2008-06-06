@@ -38,7 +38,7 @@ public class TestCLItau {
 		numeroDaConta.setDigitoDaConta("7");//Não importa para o CampoLivre
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 
-		titulo = Titulo.getInstance(contaBancaria, sacado, cedente);
+		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNumeroDoDocumento("1234567");
 		titulo.setNossoNumero("12345678");
 	}
@@ -47,7 +47,7 @@ public class TestCLItau {
 	public void testGetInstanceTitulo() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		
 		//básico
-		clItau = FactoryCampoLivre.getInstance(titulo);
+		clItau = Factory4CampoLivre.create(titulo);
 		
 		assertNotNull(clItau);
 	}
@@ -56,7 +56,7 @@ public class TestCLItau {
 	public void testToStringPadrao() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		
 		//básico feliz
-		clItau = FactoryCampoLivre.getInstance(titulo);
+		clItau = Factory4CampoLivre.create(titulo);
 		
 		assertTrue(clItau.write().length() == 25);
 		assertEquals("1101234567880057123457000",clItau.write());
@@ -72,7 +72,7 @@ public class TestCLItau {
 		titulo.setNossoNumero("0");
 		titulo.setNumeroDoDocumento("0");
 		
-		clItau = FactoryCampoLivre.getInstance(titulo);
+		clItau = Factory4CampoLivre.create(titulo);
 		
 		assertTrue(clItau.write().length() == 25);
 		assertEquals("0000000000000000000000000",clItau.write());
@@ -85,7 +85,7 @@ public class TestCLItau {
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		contaBancaria.setCarteira(new Carteira(126));
 		
-		clItau = FactoryCampoLivre.getInstance(titulo);
+		clItau = Factory4CampoLivre.create(titulo);
 		
 		assertTrue(clItau.write().length() == 25);
 		assertEquals("1261234567850057123457000",clItau.write());
@@ -97,7 +97,7 @@ public class TestCLItau {
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		contaBancaria.setCarteira(new Carteira(198));
 		
-		clItau = FactoryCampoLivre.getInstance(titulo);
+		clItau = Factory4CampoLivre.create(titulo);
 		
 		assertTrue(clItau.write().length() == 25);
 		assertEquals("1981234567812345671234580",clItau.write());

@@ -113,41 +113,31 @@ class CLHsbcCNR extends ACLHsbc {
 	private static final Integer FIELDS_LENGTH = 4;
 	
 	/**
-	 * @param fieldsLength
-	 * @param stringLength
+	 * <p>
+	 *   Dado um título, cria um campo livre para o padrão do Banco HSBC
+	 *   que tenha o tipo de cobrança não registrada.
+	 * </p>
+	 * @param titulo título com as informações para geração do campo livre
 	 */
-	protected CLHsbcCNR(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
-		
-	}
-
-	/**
-	 * @param titulo
-	 * @return
-	 */
-	static ICampoLivre getInstance(Titulo titulo) {
-		
-		ACampoLivre clHsbc = new CLHsbcCNR(FIELDS_LENGTH,STRING_LENGTH);
+	CLHsbcCNR(Titulo titulo) {
+		super(FIELDS_LENGTH, STRING_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		String nossoNumero = titulo.getNossoNumero();
 		
-		
 		//Conta do cedente (sem dígito)
-		clHsbc.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
 		
 		//Nosso número (sem dígito)
-		clHsbc.add(new Field<String>(nossoNumero, 13, Filler.ZERO_LEFT));
+		this.add(new Field<String>(nossoNumero, 13, Filler.ZERO_LEFT));
 		
 		// Data de vencimento (formato juliano)
 		int dataVencimentoFormatoJuliano = Util4Banco.calculceFatorDeVencimento(titulo.getDataDoVencimento());
-		clHsbc.add(new Field<Integer>(dataVencimentoFormatoJuliano, 4, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(dataVencimentoFormatoJuliano, 4, Filler.ZERO_LEFT));
 		
 		//2 FIXO (Código do Aplicativo CNR - Cob. Não Registrada)
-		clHsbc.add(new Field<Integer>(2, 1));
-
+		this.add(new Field<Integer>(2, 1));
 		
-		
-		return clHsbc;
 	}
+	
 }

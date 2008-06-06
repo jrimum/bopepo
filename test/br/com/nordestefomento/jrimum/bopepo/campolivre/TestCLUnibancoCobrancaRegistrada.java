@@ -104,7 +104,7 @@ public class TestCLUnibancoCobrancaRegistrada {
 	}
 
 	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.campolivre.CLUnibancoCobrancaRegistrada#getInstance(br.com.nordestefomento.jrimum.domkee.entity.Titulo)}.
+	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.campolivre.CLUnibancoCobrancaRegistrada#create(br.com.nordestefomento.jrimum.domkee.entity.Titulo)}.
 	 */
 	@Test
 	public final void testGetInstance() {

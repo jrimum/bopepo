@@ -59,18 +59,18 @@ abstract class ACLBancoDoBrasil extends ACampoLivre {
 	}
 
 	
-	static ICampoLivre getInstance(Titulo titulo) throws NotSuporttedCampoLivreException{
+	static ICampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException{
 				
 		ICampoLivre campoLivre = null;
 		
 		if (titulo.getNossoNumero().length() == 10) {
-			campoLivre = CLBancoDoBrasilNN10.getInstance(titulo);
+			campoLivre = new CLBancoDoBrasilNN10(titulo);
 		}
 		else if (titulo.getNossoNumero().length() == 11) {
-			campoLivre = CLBancoDoBrasilNN11.getInstance(titulo);
+			campoLivre = new CLBancoDoBrasilNN11(titulo);
 		}
 		else if (titulo.getNossoNumero().length() == 17) {
-			campoLivre = CLBancoDoBrasilNN17.getInstance(titulo);	
+			campoLivre = new CLBancoDoBrasilNN17(titulo);	
 		}
 		else {
 			throw new NotSuporttedCampoLivreException(

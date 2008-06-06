@@ -98,34 +98,27 @@ public class CLBancoDoBrasilNN10 extends ACLBancoDoBrasil {
 	private static final Integer FIELDS_LENGTH = 4;
 
 	/**
-	 * @param fieldsLength
-	 * @param stringLength
+	 * <p>
+	 *   Dado um título, cria um campo livre para o padrão do Banco do Brasil
+	 *   que tenha o nosso número de tamanho 10.  
+	 * </p>
+	 * @param titulo título com as informações para geração do campo livre
 	 */
-	protected CLBancoDoBrasilNN10(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
-	
-	}
-
-	/**
-	 * @param titulo
-	 * @return
-	 */
-	static ICampoLivre getInstance(Titulo titulo) {
-		
-		ACampoLivre clBancoDoBrasilN10 = new CLBancoDoBrasilNN10(FIELDS_LENGTH,STRING_LENGTH);
+	CLBancoDoBrasilNN10(Titulo titulo) {
+		super(FIELDS_LENGTH,STRING_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		
 		String nossoNumero = titulo.getNossoNumero();
 		
-		clBancoDoBrasilN10.add(new Field<String>("", 6, Filler.ZERO_LEFT));
-
-		clBancoDoBrasilN10.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
+		this.add(new Field<String>("", 6, Filler.ZERO_LEFT));
 		
-		clBancoDoBrasilN10.add(new Field<String>(nossoNumero, 10, Filler.ZERO_LEFT));	
+		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
 		
-		clBancoDoBrasilN10.add(new Field<Integer>(conta.getCarteira().getCodigo(), 2, Filler.ZERO_LEFT));
-
-		return clBancoDoBrasilN10;
+		this.add(new Field<String>(nossoNumero, 10, Filler.ZERO_LEFT));	
+		
+		this.add(new Field<Integer>(conta.getCarteira().getCodigo(), 2, Filler.ZERO_LEFT));
+		
 	}
+
 }
