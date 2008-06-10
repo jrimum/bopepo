@@ -109,9 +109,9 @@ public class CLUnibancoCobrancaNaoRegistrada extends ACLUnibanco {
 				if(digitoDaConta>0)
 					this.add(new Field<Integer>(Integer.valueOf(digitoDaConta), 1));
 				else
-					throw new CampoLivreException(new IllegalArgumentException("O digito da conta deve ser um número natural positivo, e não: ["+conta.getNumeroDaConta().getCodigoDaConta()+"]"));
+					throw new CampoLivreException(new IllegalArgumentException("O digito da conta deve ser um número natural positivo, e não: ["+conta.getNumeroDaConta().getDigitoDaConta()+"]"));
 			}else
-				throw new CampoLivreException(new IllegalArgumentException("O digito da conta deve ser numérico, e não: ["+conta.getNumeroDaConta().getCodigoDaConta()+"]"));
+				throw new CampoLivreException(new IllegalArgumentException("O digito da conta deve ser numérico, e não: ["+conta.getNumeroDaConta().getDigitoDaConta()+"]"));
 		
 		this.add(new Field<Integer>(RESERVADO, 2, Filler.ZERO_LEFT));
 		
@@ -120,14 +120,13 @@ public class CLUnibancoCobrancaNaoRegistrada extends ACLUnibanco {
 				if(Long.valueOf(Util4String.removeStartWithZeros(titulo.getNossoNumero()))>0)
 					this.add(new Field<String>(titulo.getNossoNumero(), 14,Filler.ZERO_LEFT));
 				else
-					throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser um número natural positivo, e não: ["+conta.getNumeroDaConta().getCodigoDaConta()+"]"));
+					throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser um número natural positivo, e não: ["+titulo.getNossoNumero()+"]"));
 			}else
-				throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser numérico, e não: ["+conta.getNumeroDaConta().getCodigoDaConta()+"]"));
+				throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser numérico, e não: ["+titulo.getNossoNumero()+"]"));
 		
 		this.add(new Field<String>(calculeDigitoEmModulo11(titulo
 				.getNossoNumero()), 1));
-		
-		
+			
 	}
 	
 }

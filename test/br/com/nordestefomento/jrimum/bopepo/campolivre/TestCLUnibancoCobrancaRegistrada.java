@@ -31,10 +31,22 @@
 	
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Calendar;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
+import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
+import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.entity.EnumTipoCobranca;
+import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 
 
 /**
@@ -60,6 +72,15 @@ import org.junit.Test;
 
 public class TestCLUnibancoCobrancaRegistrada {
 
+	/**
+	 * String Campo Livre.
+	 */
+	private static String TEST_CASE = "0401123100019112233445540";
+
+	private ICampoLivre campoLivre;
+
+	private Titulo titulo;
+	
 	/**
 	 * <p>
 	 * Cobrança com registro<br />
@@ -101,38 +122,99 @@ public class TestCLUnibancoCobrancaRegistrada {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		
+		Calendar cal = Calendar.getInstance();
+		
+		cal.set(2001,Calendar.DECEMBER,31);
+		
+		Pessoa sacado = new Pessoa();
+		Pessoa cedente = new Pessoa();
+
+		ContaBancaria contaBancaria = new ContaBancaria();
+		contaBancaria.setBanco(EnumBancos.UNIBANCO.newInstance());
+		contaBancaria.setAgencia(new Agencia(1, "9"));
+		contaBancaria.setCarteira(new Carteira(123,EnumTipoCobranca.COM_REGISTRO));
+
+		titulo = new Titulo(contaBancaria, sacado, cedente);
+		titulo.setNumeroDoDocumento("1234567");
+		titulo.setNossoNumero("11223344554");
+
+		titulo.setDataDoVencimento(cal.getTime());
+
+		campoLivre = Factory4CampoLivre.create(titulo);
 	}
 
-	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.campolivre.CLUnibancoCobrancaRegistrada#create(br.com.nordestefomento.jrimum.domkee.entity.Titulo)}.
-	 */
 	@Test
 	public final void testGetInstance() {
-		fail("Not yet implemented"); // TODO
+
+		assertNotNull(campoLivre);
+		assertTrue(campoLivre instanceof CLUnibancoCobrancaRegistrada);
 	}
 
-	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.campolivre.ACLUnibanco#calculeDigitoEmModulo11(java.lang.String)}.
-	 */
-	@Test
-	public final void testCalculeDigitoEmModulo11() {
-		fail("Not yet implemented"); // TODO
+	@Test(expected = CampoLivreException.class)
+	public final void testGetInstanceComAgenciaNula() {
+
+		titulo.getContaBancaria().setAgencia(null);
+		campoLivre = Factory4CampoLivre.create(titulo);
 	}
 
-	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.utilix.LineOfFields#read(java.lang.String)}.
-	 */
-	@Test
-	public final void testRead() {
-		fail("Not yet implemented"); // TODO
+	@Test(expected = CampoLivreException.class)
+	public final void testGetInstanceComAgenciaNegativa() {
+
+		titulo.getContaBancaria().setAgencia(new Agencia(-23));
+		campoLivre = Factory4CampoLivre.create(titulo);
 	}
 
-	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.utilix.LineOfFields#write()}.
-	 */
+	@Test(expected = CampoLivreException.class)
+	public final void testGetInstanceComDigitoDaAgenciaNulo() {
+
+		titulo.getContaBancaria().setAgencia((new Agencia(23, null)));
+		campoLivre = Factory4CampoLivre.create(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public final void testGetInstanceComDigitoDaAgenciaNegativo() {
+
+		titulo.getContaBancaria().setAgencia(new Agencia(2, "-3"));
+		campoLivre = Factory4CampoLivre.create(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public final void testGetInstanceComDigitoDaAgenciaNaoNumerico() {
+
+		titulo.getContaBancaria().setAgencia(new Agencia(-23, "X"));
+		campoLivre = Factory4CampoLivre.create(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public final void testGetInstanceComNossoNumeroNulo() {
+
+		titulo.setNossoNumero(null);
+		campoLivre = Factory4CampoLivre.create(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public final void testGetInstanceComNossoNumeroNegativo() {
+
+		titulo.setNossoNumero("-012345679012345");
+		campoLivre = Factory4CampoLivre.create(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public final void testGetInstanceComNossoNumeroNaoNumerico() {
+
+		titulo.setNossoNumero("123456790123y45");
+		campoLivre = Factory4CampoLivre.create(titulo);
+	}
+
 	@Test
-	public final void testWrite() {
-		fail("Not yet implemented"); // TODO
+	public final void testITextStream() {
+
+		assertEquals(TEST_CASE, campoLivre.write());
+
+		campoLivre.read(TEST_CASE);
+
+		assertEquals(TEST_CASE, campoLivre.write());
 	}
 
 }
