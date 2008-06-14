@@ -43,28 +43,32 @@ import br.com.nordestefomento.jrimum.utilix.Filler;
  * <table border="1" cellpadding="0" cellspacing="0" style="border-collapse:
  * collapse" bordercolor="#111111" width="60%" id="campolivre">
  * <tr> <thead>
- * <th >Posição </th>
- * <th >Tamanho</th>
- * <th >Picture</th>
- * <th >Conteúdo</th>
+ * <th>Posição </th>
+ * <th>Tamanho</th>
+ * <th>Picture</th>
+ * <th>Conteúdo (terminologia padrão)</th>
+ * <th>Conteúdo (terminologia do banco)</th>
  * </thead> </tr>
  * <tr>
- * <td >20-25</td>
- * <td >6</td>
- * <td >9(6) </td>
- * <td >Número do Convênio (sem dígito)</td>
+ * <td>20-25</td>
+ * <td>6</td>
+ * <td>9(6) </td>
+ * <td>Conta do cedente (sem dígito)</td>
+ * <td>Convênio (sem dígito)</td>
  * </tr>
  * <tr>
- * <td >26-42</td>
- * <td >17</td>
- * <td >9(17) </td>
- * <td >Nosso Número (sem dígito)</td>
+ * <td>26-42</td>
+ * <td>17</td>
+ * <td>9(17) </td>
+ * <td>Nosso Número (sem dígito)</td>
+ * <td>Nosso Número (sem dígito)</td>
  * </tr>
  * <tr>
- * <td >43-44</td>
- * <td >2</td>
- * <td >9(2) </td>
- * <td >Fixo 21 (serviço)</td>
+ * <td>43-44</td>
+ * <td>2</td>
+ * <td>9(2) </td>
+ * <td>Fixo 21 (serviço)</td>
+ * <td>Fixo 21 (serviço)</td>
  * </tr>
  * </table>
  * 

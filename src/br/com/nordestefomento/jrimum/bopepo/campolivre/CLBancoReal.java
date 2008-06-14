@@ -39,7 +39,7 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.EnumModulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
 /**
- * 
+ * <p><strong>*** COBRANÇA SEM REGISTRO ***</strong></p>
  * O campo livre do Banco Real deve seguir esta forma:
  * 
  * <table border="1" cellpadding="0" cellspacing="0" style="border-collapse:
@@ -48,31 +48,36 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * <th >Posição </th>
  * <th >Tamanho</th>
  * <th >Picture</th>
- * <th >Conteúdo</th>
+ * <th>Conteúdo (terminologia padrão)</th>
+ * <th>Conteúdo (terminologia do banco)</th>
  * </thead> </tr>
  * <tr>
- * <td >20-23</td>
- * <td >4</td>
- * <td >9(4) </td>
- * <td >CODIGO DA AGENCIA CEDENTE</td>
+ * <td>20-23</td>
+ * <td>4</td>
+ * <td>9(4)</td>
+ * <td>Código da agência (sem dígito)</td>
+ * <td>Agência - Código da agência do cedente</td>
  * </tr>
  * <tr>
- * <td >24-30</td>
- * <td >7</td>
- * <td >9(7) </td>
- * <td >CODIGO DA CONTA CORRENTE</td>
+ * <td>24-30</td>
+ * <td>7</td>
+ * <td>9(7) </td>
+ * <td>Código da conta (sem dígito)</td>
+ * <td>Conta - Número da conta do cedente</td>
  * </tr>
  * <tr>
- * <td >31-31</td>
- * <td >1</td>
- * <td >9(1) </td>
- * <td >DIGITO VERIFICADOR</td>
+ * <td>31-31</td>
+ * <td>1</td>
+ * <td>9(1) </td>
+ * <td>Dígito verificador</td>
+ * <td>Digitão - Dígito de cobrança</td>
  * </tr>
  * <tr>
- * <td >32-44</td>
- * <td >13</td>
- * <td >9(13) </td>
- * <td >NUMERO DO TITULO (MAXIMO DE 13 POSICOES NUMERICAS)</td>
+ * <td>32-44</td>
+ * <td>13</td>
+ * <td>9(13) </td>
+ * <td>Número do título(máximo de 13 posições numéricas)</td>
+ * <td>Número do banco - Número do título no banco</td>
  * </tr>
  * </table>
  * 

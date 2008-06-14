@@ -43,33 +43,38 @@ import br.com.nordestefomento.jrimum.utilix.Filler;
  * <table border="1" cellpadding="0" cellspacing="0" style="border-collapse:
  * collapse" bordercolor="#111111" width="60%" id="campolivre">
  * <tr> <thead>
- * <th >Posição </th>
- * <th >Tamanho</th>
- * <th >Picture</th>
- * <th >Conteúdo</th>
+ * <th>Posição </th>
+ * <th>Tamanho</th>
+ * <th>Picture</th>
+ * <th>Conteúdo (terminologia padrão)</th>
+ * <th>Conteúdo (terminologia do banco)</th>
  * </thead> </tr>
  * <tr>
- * <td >20-30</td>
- * <td >11</td>
- * <td >9(11) </td>
- * <td >Nosso número (sem dígito)</td>
+ * <td>20-30</td>
+ * <td>11</td>
+ * <td>9(11) </td>
+ * <td>Nosso número (sem dígito)</td>
+ * <td>Nosso número (sem dígito)</td>
  * </tr>
  * <tr>
- * <td >31-34</td>
- * <td >4</td>
- * <td >9(4) </td>
- * <td >Código da Agência (sem dígito)</td>
+ * <td>31-34</td>
+ * <td>4</td>
+ * <td>9(4) </td>
+ * <td>Código da agência (sem dígito)</td>
+ * <td>Código da Agência (sem dígito)</td>
  * </tr>
  * <tr>
- * <td >35-42</td>
- * <td >8</td>
- * <td >9(8) </td>
- * <td >Conta do cedente (sem dígito)</td>
+ * <td>35-42</td>
+ * <td>8</td>
+ * <td>9(8) </td>
+ * <td>Código da conta (sem dígito)</td>
+ * <td>Convênio (sem dígito)</td>
  * </tr>
  * <tr>
  * <td >43-44</td>
  * <td >2</td>
  * <td >9(2) </td>
+ * <td >Carteira</td>
  * <td >Carteira</td>
  * </tr>
  * </table>

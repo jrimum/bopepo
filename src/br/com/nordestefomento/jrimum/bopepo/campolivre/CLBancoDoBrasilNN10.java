@@ -47,30 +47,35 @@ import br.com.nordestefomento.jrimum.utilix.Filler;
  * <th >Posição </th>
  * <th >Tamanho</th>
  * <th >Picture</th>
- * <th >Conteúdo</th>
+ * <th>Conteúdo (terminologia padrão)</th>
+ * <th>Conteúdo (terminologia do banco)</th>
  * </thead> </tr>
  * <tr>
  * <td >20-25</td>
  * <td >6</td>
  * <td >9(6) </td>
  * <td >ZEROS</td>
+ * <td >ZEROS</td>
  * </tr>
  * <tr>
  * <td >26-32</td>
  * <td >7</td>
  * <td >9(7) </td>
- * <td >Conta do cedente/Convênio (sem dígito)</td>
+ * <td >Conta do cedente (sem dígito)</td>
+ * <td >Convênio (sem dígito)</td>
  * </tr>
  * <tr>
  * <td >33-42</td>
  * <td >10</td>
  * <td >9(10) </td>
  * <td >Nosso Número</td>
+ * <td >Nosso Número</td>
  * </tr>
  * <tr>
  * <td >43-44</td>
  * <td >2</td>
  * <td >9(2) </td>
+ * <td >Carteira</td>
  * <td >Carteira</td>
  * </tr>
  * </table>
