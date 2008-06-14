@@ -61,7 +61,7 @@ public class TestCLBancoReal {
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_ABN_AMRO_REAL.newInstance());
+		contaBancaria.setBanco(EnumBancos.BANCO_ABN_AMRO_REAL.create());
 		
 		Agencia agencia = new Agencia();
 		agencia.setCodigoDaAgencia(1018);
@@ -97,7 +97,7 @@ public class TestCLBancoReal {
 		
 		//Infeliz básico
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_ABN_AMRO_REAL.newInstance());
+		contaBancaria.setBanco(EnumBancos.BANCO_ABN_AMRO_REAL.create());
 		
 		Agencia agencia = new Agencia();
 		agencia.setCodigoDaAgencia(0);

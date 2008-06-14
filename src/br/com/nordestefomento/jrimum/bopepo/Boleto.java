@@ -45,7 +45,8 @@ import br.com.nordestefomento.jrimum.utilix.Util4Date;
 
 /**
  * 
- * É a representação do documento Boleto que por sua vez, representa títulos em cobrança.
+ * É a representação do documento Boleto que por sua vez, representa títulos 
+ * em cobrança.
  * 
  * A classe encapsula os atributos integrantes e as funcionalidades inerentes 
  * à construção de tal documento.
@@ -56,6 +57,7 @@ import br.com.nordestefomento.jrimum.utilix.Util4Date;
  * @author Misael Barreto 
  * @author Rômulo Augusto
  * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
+ * @author Samuel
  * 
  * @since 0.2
  * 
@@ -70,6 +72,9 @@ public final class Boleto extends ACurbitaObject{
 	 */
 	private static final long serialVersionUID = 4436063640418293021L; 
 
+	/**
+	 * @see Titulo
+	 */
 	private Titulo titulo;
 	
 	/**
@@ -77,11 +82,33 @@ public final class Boleto extends ACurbitaObject{
 	 */
 	private Date dataDeProcessamento;
 	
+	/**
+	 * @see CodigoDeBarras
+	 */
 	private CodigoDeBarras codigoDeBarras;
+	
+	/**
+	 * @see LinhaDigitavel
+	 */
 	private LinhaDigitavel linhaDigitavel;
+	
+	/**
+	 * @see ICampoLivre
+	 */
 	private ICampoLivre campoLivre;
 	
+	/**
+	 * Possíveis locais para pagamento.
+	 * Exemplo: Pagável preferencialmente na Rede X ou em qualquer Banco até 
+	 * o Vencimento
+	 */
 	private String localPagamento;
+	
+	/**
+	 * Instrução adicional ao sacado.
+	 * Para visualizar o conceito de negócio de sacado consultar o 
+	 * {@link http://jrimum.nordestefomento.com.br/wprojeto/wiki/Glossario glossário}.
+	 */
 	private String instrucaoAoSacado;
 	
 	private String instrucao1;
@@ -93,6 +120,10 @@ public final class Boleto extends ACurbitaObject{
 	private String instrucao7;
 	private String instrucao8;
 
+	/**
+	 * Caso queira adicionar novos campos no boleto, os novos campos serão
+	 * adicionados nesta lista.
+	 */
 	private Map<String, String> listaCamposExtra; 
 	
 	/**

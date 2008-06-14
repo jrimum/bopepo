@@ -41,7 +41,7 @@ public class MeuPrimeiroBoleto {
 		Pessoa cedente = new Pessoa("PROJETO JRimum", "00.000.208/0001-00");
 		
 		// Informando dados sobre a conta bancária do cendente.		
-		IBanco banco = EnumBancos.BANCO_DO_BRASIL.newInstance();
+		IBanco banco = EnumBancos.BANCO_DO_BRASIL.create();
 		ContaBancaria contaBancariaCed = new ContaBancaria(banco);
 		contaBancariaCed.setAgencia(new Agencia(1234, "67"));
 		contaBancariaCed.setCarteira(new Carteira(5));

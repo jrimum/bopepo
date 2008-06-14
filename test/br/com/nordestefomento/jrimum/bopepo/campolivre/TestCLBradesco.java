@@ -58,7 +58,7 @@ public class TestCLBradesco{
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_BRADESCO.newInstance());
+		contaBancaria.setBanco(EnumBancos.BANCO_BRADESCO.create());
 		
 		Agencia agencia = new Agencia();
 		agencia.setCodigoDaAgencia(1234);
@@ -95,7 +95,7 @@ public class TestCLBradesco{
 		
 		//Infeliz básico
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_BRADESCO.newInstance());
+		contaBancaria.setBanco(EnumBancos.BANCO_BRADESCO.create());
 		
 		Agencia agencia = new Agencia();
 		agencia.setCodigoDaAgencia(0);

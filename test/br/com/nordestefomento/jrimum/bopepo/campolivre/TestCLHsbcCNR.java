@@ -42,7 +42,7 @@ public class TestCLHsbcCNR {
 		numeroDaConta.setDigitoDaConta("2");
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.HSBC.newInstance());
+		contaBancaria.setBanco(EnumBancos.HSBC.create());
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		contaBancaria.setCarteira(new Carteira(1, EnumTipoCobranca.SEM_REGISTRO));
 

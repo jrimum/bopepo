@@ -131,7 +131,7 @@ public class TestCLUnibancoCobrancaRegistrada {
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.UNIBANCO.newInstance());
+		contaBancaria.setBanco(EnumBancos.UNIBANCO.create());
 		contaBancaria.setAgencia(new Agencia(1, "9"));
 		contaBancaria.setCarteira(new Carteira(123,EnumTipoCobranca.COM_REGISTRO));
 

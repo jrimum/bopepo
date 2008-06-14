@@ -75,7 +75,7 @@ public class TestCLBancoDoBrasilNN11{
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_DO_BRASIL.newInstance());
+		contaBancaria.setBanco(EnumBancos.BANCO_DO_BRASIL.create());
 		
 		Agencia agencia = new Agencia();
 		agencia.setCodigoDaAgencia(1234);
@@ -112,7 +112,7 @@ public class TestCLBancoDoBrasilNN11{
 		
 		//Infeliz básico
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_DO_BRASIL.newInstance());
+		contaBancaria.setBanco(EnumBancos.BANCO_DO_BRASIL.create());
 		
 		Agencia agencia = new Agencia();
 		agencia.setCodigoDaAgencia(0);

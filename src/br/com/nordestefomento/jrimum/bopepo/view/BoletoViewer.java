@@ -46,18 +46,22 @@ import com.lowagie.text.DocumentException;
 /**
  * 
  * <p>
- * DEFINIÇÃO DA CLASSE
+ * Agrupa as formas de visualização de um boleto.
  * </p>
  * 
  * <p>
- * OBJETIVO/PROPÓSITO
- * </p>
- * 
- * <p>
- * EXEMPLO:
+ * EXEMPLO de formas de visualização:
+ * <ul>
+ * <li>PDF</li>
+ * <li>Stream</li>
+ * <li>Array de Bytes</li>
+ * </ul>
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+ * @author Misael
+ * @author Romulo
+ * @author Samuel
  * 
  * @since 0.2
  * 
@@ -104,12 +108,12 @@ public class BoletoViewer extends ACurbitaObject {
 
 	/**
 	 * <p>
-	 * SOBRE O MÉTODO
+	 * Agrupo vários boletos em um único pdf.
 	 * </p>
 	 * 
-	 * @param pathName
-	 * @param boletos
-	 * @return
+	 * @param pathName Caminho no qual será gerado o pdf
+	 * @param boletos Boletos a serem agrupados
+	 * @return Arquivo pdf
 	 * @throws JRimumException
 	 * 
 	 * @since 0.2
@@ -155,12 +159,12 @@ public class BoletoViewer extends ACurbitaObject {
 
 	/**
 	 * <p>
-	 * SOBRE O MÉTODO
+	 * Gera vários arquivos pdf, cada qual com o seu boleto.
 	 * </p>
 	 * 
-	 * @param path
-	 * @param boletos
-	 * @return
+	 * @param path Caminho no qual será gerados os arquivos
+	 * @param boletos Boletos a partir dos quais serão gerados os arquivos
+	 * @return Vários arquivos pdf
 	 * @throws JRimumException
 	 * 
 	 * @since 0.2
@@ -204,16 +208,6 @@ public class BoletoViewer extends ACurbitaObject {
 	}
 
 	
-	/**
-	 * <p>
-	 * SOBRE O MÉTODO
-	 * </p>
-	 * 
-	 * @return
-	 * 
-	 * @since 0.2 
-	 */
-	
 	public File getTemplate() {
 
 		return viewerPDF.getTemplate();
@@ -222,7 +216,7 @@ public class BoletoViewer extends ACurbitaObject {
 	
 	/**
 	 * <p>
-	 * SOBRE O MÉTODO
+	 * Define o template que será utilizado para construir o boleto.
 	 * </p>
 	 * 
 	 * @param template
@@ -238,7 +232,7 @@ public class BoletoViewer extends ACurbitaObject {
 	
 	/**
 	 * <p>
-	 * SOBRE O MÉTODO
+	 * @see BoletoViewer#setTemplate(File)
 	 * </p>
 	 * 
 	 * @param pathname
@@ -253,16 +247,16 @@ public class BoletoViewer extends ACurbitaObject {
 
 	/**
 	 * <p>
-	 * SOBRE O MÉTODO
+	 * Retorna o boleto em um arquivo pdf.
 	 * </p>
 	 * 
-	 * @param pathName
+	 * @param pathName Caminho onde será criado o arquivo pdf
 	 * @return
 	 * @throws IllegalArgumentException
 	 * @throws IOException
 	 * @throws DocumentException
 	 * 
-	 * @since 0.1
+	 * @since 0.2
 	 */
 
 	public File getAsPDF(String pathName) throws IllegalArgumentException,
@@ -276,7 +270,7 @@ public class BoletoViewer extends ACurbitaObject {
 
 	/**
 	 * <p>
-	 * SOBRE O MÉTODO
+	 * Retorna o boleto em uma stream.
 	 * </p>
 	 * 
 	 * @return
@@ -298,7 +292,7 @@ public class BoletoViewer extends ACurbitaObject {
 
 	/**
 	 * <p>
-	 * SOBRE O MÉTODO
+	 * Retorna o boleto em um array de bytes.
 	 * </p>
 	 * 
 	 * @return

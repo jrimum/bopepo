@@ -74,7 +74,7 @@ public class TestCLUnibancoCobrancaNaoRegistrada {
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.UNIBANCO.newInstance());
+		contaBancaria.setBanco(EnumBancos.UNIBANCO.create());
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(123456, "1"));
 		contaBancaria.setCarteira(new Carteira(123,
 				EnumTipoCobranca.SEM_REGISTRO));

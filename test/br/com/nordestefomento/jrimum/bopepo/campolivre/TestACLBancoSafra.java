@@ -59,7 +59,7 @@ public class TestACLBancoSafra {
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_SAFRA.newInstance());
+		contaBancaria.setBanco(EnumBancos.BANCO_SAFRA.create());
 		
 		contaBancaria.setAgencia(new Agencia(57, "1"));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(12345, "7"));

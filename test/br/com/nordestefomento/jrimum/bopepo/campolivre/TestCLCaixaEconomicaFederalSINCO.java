@@ -76,7 +76,7 @@ public class TestCLCaixaEconomicaFederalSINCO{
 		numeroDaConta.setCodigoDaConta(2);
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		
-		contaBancaria.setBanco(EnumBancos.CAIXA_ECONOMICA_FEDERAL.newInstance());
+		contaBancaria.setBanco(EnumBancos.CAIXA_ECONOMICA_FEDERAL.create());
 		
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 	}

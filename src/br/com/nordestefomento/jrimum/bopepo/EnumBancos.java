@@ -89,6 +89,7 @@ import br.com.nordestefomento.jrimum.domkee.type.CNPJ;
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * @author Misael Barreto
  * @author Rômulo Augusto
+ * @author Samuel Valério
  * 
  * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre
  * @see br.com.nordestefomento.jrimum.domkee.ientity.IBanco
@@ -333,7 +334,7 @@ public enum EnumBancos implements ICurbitaObject{
 	 * 
 	 * @since 0.2
 	 */
-	public IBanco newInstance() {
+	public IBanco create() {
 		return new Banco(this.codigoDeCompensacao, this.instituicao, new CNPJ(
 				this.cNPJ), this.segmento);
 	}

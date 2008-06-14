@@ -49,9 +49,9 @@ public class TestEnumBanco{
 		
 		//bancos implementados
 		
-		assertEquals(EnumBancos.BANCO_DO_BRASIL.newInstance().getCodigoDeCompensacao(), "001");
-		assertEquals(EnumBancos.BANCO_BRADESCO.newInstance().getCodigoDeCompensacao(), "237");
-		assertEquals(EnumBancos.CAIXA_ECONOMICA_FEDERAL.newInstance().getCodigoDeCompensacao(), "104");
+		assertEquals(EnumBancos.BANCO_DO_BRASIL.create().getCodigoDeCompensacao(), "001");
+		assertEquals(EnumBancos.BANCO_BRADESCO.create().getCodigoDeCompensacao(), "237");
+		assertEquals(EnumBancos.CAIXA_ECONOMICA_FEDERAL.create().getCodigoDeCompensacao(), "104");
 		
 	}
 

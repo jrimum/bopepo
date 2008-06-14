@@ -73,7 +73,7 @@ public class TestCLBancoDoBrasilNN17{
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_DO_BRASIL.newInstance());
+		contaBancaria.setBanco(EnumBancos.BANCO_DO_BRASIL.create());
 		
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
 		numeroDaConta.setCodigoDaConta(123456);
@@ -104,7 +104,7 @@ public class TestCLBancoDoBrasilNN17{
 		
 		//Infeliz básico
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_DO_BRASIL.newInstance());
+		contaBancaria.setBanco(EnumBancos.BANCO_DO_BRASIL.create());
 
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
 		numeroDaConta.setCodigoDaConta(0);

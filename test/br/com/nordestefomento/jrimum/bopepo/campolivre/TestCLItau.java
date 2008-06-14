@@ -28,7 +28,7 @@ public class TestCLItau {
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_ITAU.newInstance());
+		contaBancaria.setBanco(EnumBancos.BANCO_ITAU.create());
 		
 		contaBancaria.setAgencia(new Agencia(57));
 		contaBancaria.setCarteira(new Carteira(110));
@@ -63,7 +63,7 @@ public class TestCLItau {
 		
 		//Infeliz básico
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_ITAU.newInstance());
+		contaBancaria.setBanco(EnumBancos.BANCO_ITAU.create());
 		
 		contaBancaria.setAgencia(new Agencia(0));
 		contaBancaria.setCarteira(new Carteira(0));

@@ -114,7 +114,7 @@ public class Util4Exemplos {
 		
 		Pessoa cedente = new Pessoa("Empresa Lucrativa para Todo Sempre Ilimitada", "00.000.208/0001-00");
 	
-		ContaBancaria contaBancaria = new ContaBancaria(EnumBancos.BANCO_DO_BRASIL.newInstance());
+		ContaBancaria contaBancaria = new ContaBancaria(EnumBancos.BANCO_DO_BRASIL.create());
 		
 		contaBancaria.setAgencia(new Agencia(1234, "67"));
 		contaBancaria.setCarteira(new Carteira(5));
