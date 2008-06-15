@@ -55,6 +55,7 @@ import br.com.nordestefomento.jrimum.utilix.Util4Date;
 import br.com.nordestefomento.jrimum.utilix.Util4File;
 import br.com.nordestefomento.jrimum.utilix.Util4Monetary;
 import br.com.nordestefomento.jrimum.utilix.Util4PDF;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.DV4BoletoCodigoCompensacaoBanco;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;
@@ -731,10 +732,14 @@ class ViewerPDF extends ACurbitaObject {
 	private void setCodigoBanco() throws IOException, DocumentException {
 
 		ContaBancaria conta = boleto.getTitulo().getContaBancaria();
-		form.setField("txtRsCodBanco", conta.getBanco()
-				.getCodigoDeCompensacao());
-		form.setField("txtFcCodBanco", conta.getBanco()
-				.getCodigoDeCompensacao());
+		DV4BoletoCodigoCompensacaoBanco dv4boletoCodigoCompensacaoBanco = 
+			new DV4BoletoCodigoCompensacaoBanco(); 
+		
+		String codigoCompensacao = conta.getBanco().getCodigoDeCompensacao();
+		String digitoCompensacao = String.valueOf(dv4boletoCodigoCompensacaoBanco.calcule(codigoCompensacao));
+		
+		form.setField("txtRsCodBanco", codigoCompensacao + "-" + digitoCompensacao);
+		form.setField("txtFcCodBanco", codigoCompensacao + "-" + digitoCompensacao);
 	}
 
 	private void setAgenciaCondigoCedente() throws IOException,
