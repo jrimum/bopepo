@@ -155,12 +155,9 @@ class CLBancoReal extends ACLBancoAbnAmroReal {
 	 * @param contaCorrente
 	 * @return Dígito verficador calculado
 	 * 
-	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
-	 * 
-	 * @see br.com.nordestefomento.jrimum.utilix.AModulo
+	 * @see br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo
 	 * 
 	 * @since 0.2
-	 * 
 	 */	
 	private String calculeDigitoDaPosicao31(String nossoNumero, Integer agencia, Integer contaCorrente){
 			

@@ -70,10 +70,12 @@ import br.com.nordestefomento.jrimum.utilix.Util4Date;
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+ * @author Misael
+ * @author Rômulo
  * 
- * @since 
+ * @since 0.2
  * 
- * @version 
+ * @version 0.2
  */
 	
 public class TestBoleto{
@@ -116,7 +118,7 @@ public class TestBoleto{
 	}
 
 	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.Boleto#create(br.com.nordestefomento.jrimum.domkee.entity.Titulo)}.
+	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.Boleto#Boleto(Titulo)}.
 	 * @throws NotSuporttedBancoException 
 	 * @throws NotSuporttedCampoLivreException 
 	 */

@@ -54,7 +54,7 @@ public class ACLUnibanco extends ACampoLivre {
 	 * </p>
 	 * 
 	 * @param numero
-	 * @return
+	 * @return String dígito
 	 * 
 	 * @since 0.2
 	 */

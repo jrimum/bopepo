@@ -157,11 +157,13 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * <pre>
  * </p>
  * 
- * @author Romulo
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto 
+ * @author Rômulo Augusto
  * 
- * @since 
+ * @since 0.2
  * 
- * @version 
+ * @version 0.2
  */
 public class CLItau extends ACLItau {
 	
@@ -282,9 +284,9 @@ public class CLItau extends ACLItau {
 	 * 
 	 * @param titulo
 	 * @param conta
-	 * @return
+	 * @return ACampoLivre
 	 * 
-	 * @since 
+	 * @since 0.2
 	 */
 		
 	private static ACampoLivre construaCampoLivreEspecial(Titulo titulo,
@@ -316,9 +318,9 @@ public class CLItau extends ACLItau {
 	 * 
 	 * @param titulo
 	 * @param conta
-	 * @return
+	 * @return ACampoLivre
 	 * 
-	 * @since 
+	 * @since 0.2
 	 */
 		
 	private static ACampoLivre construaCampoLivrePadrao(Titulo titulo, ContaBancaria conta) {
@@ -375,9 +377,9 @@ public class CLItau extends ACLItau {
 	 * 
 	 * @param codigoDaAgencia
 	 * @param codigoDaConta
-	 * @return
+	 * @return Integer digito
 	 * 
-	 * @since 
+	 * @since 0.2
 	 */
 	private static Integer calculeDigitoDaPosicao41(Integer codigoDaAgencia,
 			Integer codigoDaConta) {
@@ -441,9 +443,9 @@ public class CLItau extends ACLItau {
 	 * @param codigoDaConta
 	 * @param codigoDaCarteira
 	 * @param nossoNumero
-	 * @return
+	 * @return Integer dígito
 	 * 
-	 * @since 
+	 * @since 0.2
 	 */
 	private static Integer calculeDigitoDaPosicao31(Integer codigoDaAgencia,
 			Integer codigoDaConta, Integer codigoDaCarteira, String nossoNumero) {
@@ -476,11 +478,11 @@ public class CLItau extends ACLItau {
 	 * @param nossoNumero
 	 * @param numeroDoDocumento
 	 * @param codigoDaConta
-	 * @return
+	 * @return Integer digito
 	 * 
-	 * @see #calculeDigitoDaPosicao41(Integer, Integer, Integer, String)
+	 * @see #calculeDigitoDaPosicao41(Integer, Integer)
 	 * 
-	 * @since 
+	 * @since 0.2
 	 */
 	private static Integer calculeDigitoDoCampoLivreEspecial(Integer codigoDaCarteira,
 			String nossoNumero, String numeroDoDocumento, Integer codigoDaConta) {

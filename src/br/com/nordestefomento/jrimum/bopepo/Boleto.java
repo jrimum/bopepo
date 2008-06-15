@@ -44,13 +44,15 @@ import br.com.nordestefomento.jrimum.utilix.Util4Date;
 
 
 /**
- * 
+ * <p>
  * É a representação do documento Boleto que por sua vez, representa títulos 
  * em cobrança.
+ * </p>
  * 
+ * <p>
  * A classe encapsula os atributos integrantes e as funcionalidades inerentes 
  * à construção de tal documento.
- * 
+ * </p>
  * 
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
@@ -67,9 +69,7 @@ public final class Boleto extends ACurbitaObject{
 	
 	//TODO Testes no teste unitário: TestBoleto
 	
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 4436063640418293021L; 
 
 	/**
@@ -78,7 +78,7 @@ public final class Boleto extends ACurbitaObject{
 	private Titulo titulo;
 	
 	/**
-	 * Data de emissão do boleto de cobrança.
+	 * @see #setDataDeProcessamento(Date)
 	 */
 	private Date dataDeProcessamento;
 	
@@ -98,16 +98,12 @@ public final class Boleto extends ACurbitaObject{
 	private ICampoLivre campoLivre;
 	
 	/**
-	 * Possíveis locais para pagamento.
-	 * Exemplo: Pagável preferencialmente na Rede X ou em qualquer Banco até 
-	 * o Vencimento
+	 * @see #setLocalPagamento(String)
 	 */
 	private String localPagamento;
 	
 	/**
-	 * Instrução adicional ao sacado.
-	 * Para visualizar o conceito de negócio de sacado consultar o 
-	 * {@link http://jrimum.nordestefomento.com.br/wprojeto/wiki/Glossario glossário}.
+	 * @see #setInstrucaoAoSacado(String)
 	 */
 	private String instrucaoAoSacado;
 	
@@ -121,8 +117,7 @@ public final class Boleto extends ACurbitaObject{
 	private String instrucao8;
 
 	/**
-	 * Caso queira adicionar novos campos no boleto, os novos campos serão
-	 * adicionados nesta lista.
+	 * @see #setListaCamposExtra(Map)
 	 */
 	private Map<String, String> listaCamposExtra; 
 	
@@ -256,6 +251,8 @@ public final class Boleto extends ACurbitaObject{
 	}
 
 	/**
+	 * @see #getDataDeProcessamento()
+	 * 
 	 * @return the dataDeProcessamento
 	 */
 	public Date getDataDeProcessamento() {
@@ -263,6 +260,10 @@ public final class Boleto extends ACurbitaObject{
 	}
 
 	/**
+	 * <p>
+	 * Data de emissão do boleto de cobrança.
+	 * </p>
+	 * 
 	 * @param dataDeProcessamento the dataDeProcessamento to set
 	 */
 	public void setDataDeProcessamento(Date dataDeProcessamento) {
@@ -298,13 +299,23 @@ public final class Boleto extends ACurbitaObject{
 	}
 
 	/**
-	 * @return the localPagamento1
+	 * @see #setLocalPagamento(String)
+	 * 
+	 * @return String local de pagamento
 	 */
 	public String getLocalPagamento() {
 		return localPagamento;
 	}
 
 	/**
+	 * <p>
+	 * Possíveis locais para pagamento.
+	 * </p>
+	 * <p>
+	 * Exemplo: <em>Pagável preferencialmente na Rede X ou em qualquer Banco até 
+	 * o Vencimento.</em>
+	 * </p>
+	 * 
 	 * @param localPagamento1 the localPagamento1 to set
 	 */
 	public void setLocalPagamento(String localPagamento1) {
@@ -312,6 +323,8 @@ public final class Boleto extends ACurbitaObject{
 	}
 
 	/**
+	 * @see #setInstrucaoAoSacado(String)
+	 * 
 	 * @return the instrucaoAoSacado
 	 */
 	public String getInstrucaoAoSacado() {
@@ -319,7 +332,12 @@ public final class Boleto extends ACurbitaObject{
 	}
 
 	/**
-	 * @param instrucaoAoSacado the instrucaoAoSacado to set
+	 * <p>
+	 *  Instrução adicional ao sacado, para visualizar o conceito de negócio de sacado consultar o 
+	 * <a href="http://jrimum.nordestefomento.com.br/wprojeto/wiki/Glossario">glossário</a>.
+	 * </p>
+	 * 
+	 * @param insturcaoAoSacado the insturcaoAoSacado to set
 	 */
 	public void setInstrucaoAoSacado(String insturcaoAoSacado) {
 		this.instrucaoAoSacado = insturcaoAoSacado;

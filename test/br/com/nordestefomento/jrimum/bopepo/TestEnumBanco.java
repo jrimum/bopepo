@@ -42,7 +42,7 @@ public class TestEnumBanco{
 
 
 	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.EnumBancos#getCodigo()}.
+	 * Test method for {@link br.com.nordestefomento.jrimum.domkee.ientity.IBanco#getCodigoDeCompensacao()}.
 	 */
 	@Test
 	public void testGetCodigo() {

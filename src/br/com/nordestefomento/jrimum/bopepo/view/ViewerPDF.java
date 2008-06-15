@@ -81,9 +81,9 @@ import com.lowagie.text.pdf.PdfStamper;
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * 
- * @since
+ * @since 0.2
  * 
- * @version
+ * @version 0.2
  */
 
 class ViewerPDF extends ACurbitaObject {
@@ -121,7 +121,7 @@ class ViewerPDF extends ACurbitaObject {
 	 * 
 	 * @param pathName
 	 * @param boletos
-	 * @return
+	 * @return File contendo boletos gerados
 	 * @throws IOException
 	 * @throws DocumentException
 	 * 
@@ -152,7 +152,7 @@ class ViewerPDF extends ACurbitaObject {
 	 * 
 	 * @param path
 	 * @param boletos
-	 * @return
+	 * @return List<File> com os boletos gerados.
 	 * @throws IOException
 	 * @throws DocumentException
 	 * 
@@ -225,7 +225,7 @@ class ViewerPDF extends ACurbitaObject {
 	 * SOBRE O MÉTODO
 	 * </p>
 	 * 
-	 * @return
+	 * @return URL template
 	 * 
 	 * @since
 	 */

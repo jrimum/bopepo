@@ -133,7 +133,7 @@ public final class CodigoDeBarras extends LineOfFields{
 	 * Data Base de 07.10.1997, data usada pela FEBRABAN para realizar o cálculo
 	 * do fator de vencimento.
 	 * 
-	 * @see #calculateFatorDeVencimento(Date)
+	 * @see Util4Banco#calculceFatorDeVencimento(Date)
 	 */
 	public static final Date DATA_BASE_DO_FATOR_DE_VENCIMENTO = new GregorianCalendar(
 			1997, Calendar.OCTOBER, 7).getTime();
@@ -160,7 +160,7 @@ public final class CodigoDeBarras extends LineOfFields{
 	 * Representa a quantidade de dias decorridos da data base à data de
 	 * vencimento do título.
 	 * 
-	 * @see #calculateFatorDeVencimento(Date)
+	 * @see Util4Banco#calculceFatorDeVencimento(Date)
 	 */
 	private Field<Integer> fatorDeVencimento;
 	
@@ -175,13 +175,14 @@ public final class CodigoDeBarras extends LineOfFields{
 	private Field<String> campoLivre;
 	
 	/**
-	 * Retorna uma instância da classe.
+	 * <p>
+	 * Cria um Código de Barras a partir do título e campo livre passados.
+	 * </p>
 	 * 
 	 * @param titulo
-	 * @see br.com.nordestefomento.jrimum.domkee.entity.Titulo
 	 * @param campoLivre
-	 * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre
-	 * @return códigoDeBarra
+	 * 
+	 * @see ICampoLivre
 	 */
 	CodigoDeBarras(Titulo titulo, ICampoLivre campoLivre) {
 		super(FIELDS_LENGTH ,STRING_LENGTH);

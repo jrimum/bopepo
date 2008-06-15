@@ -251,7 +251,7 @@ public class BoletoViewer extends ACurbitaObject {
 	 * </p>
 	 * 
 	 * @param pathName Caminho onde será criado o arquivo pdf
-	 * @return
+	 * @return File
 	 * @throws IllegalArgumentException
 	 * @throws IOException
 	 * @throws DocumentException
@@ -273,7 +273,7 @@ public class BoletoViewer extends ACurbitaObject {
 	 * Retorna o boleto em uma stream.
 	 * </p>
 	 * 
-	 * @return
+	 * @return ByteArrayOutputStream
 	 * @throws IOException
 	 * @throws DocumentException
 	 * 
@@ -295,7 +295,8 @@ public class BoletoViewer extends ACurbitaObject {
 	 * Retorna o boleto em um array de bytes.
 	 * </p>
 	 * 
-	 * @return
+	 * @return byte[]
+	 * 
 	 * @throws IOException
 	 * @throws DocumentException
 	 * 

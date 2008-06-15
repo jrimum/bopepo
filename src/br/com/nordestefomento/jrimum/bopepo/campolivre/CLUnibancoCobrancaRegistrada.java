@@ -157,10 +157,8 @@ public class CLUnibancoCobrancaRegistrada extends ACLUnibanco {
 	 * 
 	 * @return Dígito verficador calculado
 	 * 
-	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
-	 * 
 	 * @see #calculeDigitoEmModulo11(String)
-	 * @see br.com.nordestefomento.jrimum.utilix.AModulo
+	 * @see br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo
 	 * 
 	 * @since 0.2
 	 */

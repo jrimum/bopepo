@@ -174,7 +174,9 @@ public final class LinhaDigitavel extends LineOfFields {
 	private static final Integer FIELDS_LENGTH = 5;
 	
 	/**
+	 * <p>
 	 * Tamanho dos campos mais os espaços entre eles.
+	 * </p>
 	 */
 	private static final Integer STRING_LENGTH = 54;
 
@@ -194,7 +196,9 @@ public final class LinhaDigitavel extends LineOfFields {
 	private Field<InnerCampo3> innerCampo3;
 	
 	/**
+	 * <p>
 	 * Digito verificador geral.
+	 * </p>
 	 */
 	private Field<Integer> campo4;
 	
@@ -205,13 +209,15 @@ public final class LinhaDigitavel extends LineOfFields {
 
 
 	/**
-	 * Retorna uma instância da classe.
+	 * <p>
+	 * Cria uma linha digitável com a partir do código de barras passado.
+	 * </p>
 	 * 
-	 * @param titulo
-	 * @see br.com.nordestefomento.jrimum.domkee.entity.Titulo
 	 * @param codigoDeBarras
-	 * @see br.com.nordestefomento.jrimum.bopepo.CodigoDeBarras
-	 * @return códigoDeBarra
+	 * 
+	 * @see CodigoDeBarras
+	 * 
+	 * @since 0.2
 	 */
 	LinhaDigitavel(CodigoDeBarras codigoDeBarras) {
 		super(FIELDS_LENGTH,STRING_LENGTH);
@@ -291,12 +297,15 @@ public final class LinhaDigitavel extends LineOfFields {
 		}
 		
 		/**
+		 * <p>
+		 * 
 		 * Aplicação do seguinte requisito da FEBRABAN: <br />
 		 * Em cada um dos três primeiros campos, após a quinta (5) posição, deve ser
 		 * inserido um ponto “.”, a fim de facilitar a visualização, para a
-		 * digitação, quando necessário;
+		 * digitação, quando necessário.
 		 * 
-		 * @param campo
+		 * </p>
+		 * 
 		 * 
 		 * @see br.com.nordestefomento.jrimum.utilix.LineOfFields#write()
 		 */

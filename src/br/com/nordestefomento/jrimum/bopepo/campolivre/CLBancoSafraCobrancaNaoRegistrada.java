@@ -93,11 +93,13 @@ import br.com.nordestefomento.jrimum.utilix.Filler;
  * </div>
  * </p>
  * 
- * @author Romulo
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto 
+ * @author Rômulo Augusto
  * 
- * @since 
+ * @since 0.2
  * 
- * @version 
+ * @version 0.2
  */
 public class CLBancoSafraCobrancaNaoRegistrada extends ACLBancoSafra {
 

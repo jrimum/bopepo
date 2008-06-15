@@ -71,23 +71,25 @@ import br.com.nordestefomento.jrimum.domkee.type.Logradouro;
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * 
- * @since 
+ * @since 0.2
  * 
- * @version 
+ * @version 0.2
  */
 
 public class Util4Exemplos {
 
+
+	
 	/**
 	 * <p>
-	 * SOBRE O MÉTODO
+	 * Devolve uma lista com mais de um boleto.
 	 * </p>
 	 * 
-	 * @param args
+	 * @return List<Boleto>
 	 * 
-	 * @since 
+	 * @since 0.2
 	 */
-
+		
 	public static List<Boleto> getVariosBoletos() {
 		
 		List<Boleto> boletos = new ArrayList<Boleto>(5);
