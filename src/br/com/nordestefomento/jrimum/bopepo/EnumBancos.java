@@ -34,6 +34,7 @@ import java.util.HashMap;
 import br.com.nordestefomento.jrimum.ACurbitaObject;
 import br.com.nordestefomento.jrimum.ICurbitaObject;
 import br.com.nordestefomento.jrimum.domkee.entity.Banco;
+import br.com.nordestefomento.jrimum.domkee.entity.CodigoDeCompensacaoBACEN;
 import br.com.nordestefomento.jrimum.domkee.ientity.IBanco;
 import br.com.nordestefomento.jrimum.domkee.type.CNPJ;
 
@@ -218,23 +219,23 @@ public enum EnumBancos implements ICurbitaObject{
 
 	static {
 
-		suportados.put(BANCO_DO_BRASIL.codigoDeCompensacao, BANCO_DO_BRASIL);
+		suportados.put(BANCO_DO_BRASIL.codigoDeCompensacaoBACEN, BANCO_DO_BRASIL);
 
-		suportados.put(CAIXA_ECONOMICA_FEDERAL.codigoDeCompensacao,
+		suportados.put(CAIXA_ECONOMICA_FEDERAL.codigoDeCompensacaoBACEN,
 				CAIXA_ECONOMICA_FEDERAL);
 
-		suportados.put(BANCO_BRADESCO.codigoDeCompensacao, BANCO_BRADESCO);
+		suportados.put(BANCO_BRADESCO.codigoDeCompensacaoBACEN, BANCO_BRADESCO);
 
-		suportados.put(BANCO_ABN_AMRO_REAL.codigoDeCompensacao,
+		suportados.put(BANCO_ABN_AMRO_REAL.codigoDeCompensacaoBACEN,
 				BANCO_ABN_AMRO_REAL);
 
-		suportados.put(UNIBANCO.codigoDeCompensacao, UNIBANCO);
+		suportados.put(UNIBANCO.codigoDeCompensacaoBACEN, UNIBANCO);
 
-		suportados.put(HSBC.codigoDeCompensacao, HSBC);
+		suportados.put(HSBC.codigoDeCompensacaoBACEN, HSBC);
 
-		suportados.put(BANCO_ITAU.codigoDeCompensacao, BANCO_ITAU);
+		suportados.put(BANCO_ITAU.codigoDeCompensacaoBACEN, BANCO_ITAU);
 
-		suportados.put(BANCO_SAFRA.codigoDeCompensacao, BANCO_SAFRA);
+		suportados.put(BANCO_SAFRA.codigoDeCompensacaoBACEN, BANCO_SAFRA);
 	}
 
 	/**
@@ -243,7 +244,7 @@ public enum EnumBancos implements ICurbitaObject{
 	 * 
 	 * @since 0.2
 	 */
-	private String codigoDeCompensacao;
+	private String codigoDeCompensacaoBACEN;
 
 	/**
 	 * CNPJ registrado na <a href="http://www.bcb.gov.br/?CHEQUESCOMPE">BACEN</a>.
@@ -274,7 +275,7 @@ public enum EnumBancos implements ICurbitaObject{
 	 * única instância para cada banco.
 	 * </p>
 	 * 
-	 * @param codigoDeCompensacao
+	 * @param codigoDeCompensacaoBACEN
 	 * @param cNPJ
 	 * @param instituicao
 	 * @param segmento
@@ -287,9 +288,9 @@ public enum EnumBancos implements ICurbitaObject{
 	 * @since 0.2
 	 * 
 	 */
-	private EnumBancos(String codigoDeCompensacao, String cnpj,
+	private EnumBancos(String codigoDeCompensacaoBACEN, String cnpj,
 			String instituicao, String segmento) {
-		this.codigoDeCompensacao = codigoDeCompensacao;
+		this.codigoDeCompensacaoBACEN = codigoDeCompensacaoBACEN;
 		this.cNPJ = cnpj;
 		this.instituicao = instituicao;
 		this.segmento = segmento;
@@ -327,25 +328,24 @@ public enum EnumBancos implements ICurbitaObject{
 	 * 
 	 * @return Uma instância do respectivo banco.
 	 * 
-	 * @see br.com.nordestefomento.jrimum.domkee.entity.Banco#Banco(String,
-	 *      String, CNPJ, String)
+	 * @see br.com.nordestefomento.jrimum.domkee.entity.Banco#Banco(CodigoDeCompensacaoBACEN, String, CNPJ, String)
 	 * @see <a href="http://www.bcb.gov.br/?CHEQUESCOMPE">Bancos supervisionados
 	 *      pela BACEN</a>
 	 * 
 	 * @since 0.2
 	 */
 	public IBanco create() {
-		return new Banco(this.codigoDeCompensacao, this.instituicao, new CNPJ(
+		return new Banco(new CodigoDeCompensacaoBACEN(this.codigoDeCompensacaoBACEN), this.instituicao, new CNPJ(
 				this.cNPJ), this.segmento);
 	}
 
 	/**
-	 * @return the codigoDeCompensacao
+	 * @return the codigoDeCompensacaoBACEN
 	 * 
 	 * @since 0.2
 	 */
 	public String getCodigoDeCompensacao() {
-		return codigoDeCompensacao;
+		return codigoDeCompensacaoBACEN;
 	}
 
 	/**

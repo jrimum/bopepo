@@ -95,10 +95,10 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 		if (isContaBacariaOK(contaBancaria)) {
 
 			if (EnumBancos.isSuportado(contaBancaria.getBanco()
-					.getCodigoDeCompensacao())) {
+					.getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
 
 				enumBanco = EnumBancos.suportados.get(contaBancaria.getBanco()
-						.getCodigoDeCompensacao());
+						.getCodigoDeCompensacaoBACEN().getCodigoFormatado());
 
 				switch (enumBanco) {
 
@@ -157,7 +157,7 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 				throw new NotSuporttedCampoLivreException(
 						"Não há implementações de campo livre para o banco "
 								+ contaBancaria.getBanco()
-										.getCodigoDeCompensacao()
+										.getCodigoDeCompensacaoBACEN().getCodigoFormatado()
 								+ " compatíveis com as "
 								+ "caracteríticas do título informado.");
 			}
@@ -191,7 +191,7 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 
 		return (isNotNull(conta, "contaBancaria")
 				&& isNotNull(conta.getBanco(), "Banco") && isCodigoDeCompensacaoOK(conta
-				.getBanco().getCodigoDeCompensacao()));
+				.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado()));
 
 	}
 	

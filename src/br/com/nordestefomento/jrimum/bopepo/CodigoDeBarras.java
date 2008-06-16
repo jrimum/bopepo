@@ -210,7 +210,7 @@ public final class CodigoDeBarras extends LineOfFields{
 		add(this.campoLivre);
 	
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		this.codigoDoBanco.setField(contaBancaria.getBanco().getCodigoDeCompensacao());
+		this.codigoDoBanco.setField(contaBancaria.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado());
 		
 		this.codigoDaMoeda.setField(titulo.getEnumMoeda().getCodigo());
 		
