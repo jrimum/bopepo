@@ -33,10 +33,19 @@ package br.com.nordestefomento.jrimum.bopepo.campolivre;
 import br.com.nordestefomento.jrimum.utilix.ITextStream;
 
 /**
+ * <p>
  * Essa é uma Interace com um propósito de marcar e agrupar tipos campo livre.
+ * </p>
  * 
- * @author Gilmar
- *
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto
+ * @author Rômulo Augusto
+ * 
+ * @see ACampoLivre
+ * 
+ * @since 0.2
+ * 
+ * @version 0.2
  */
 public interface ICampoLivre extends ITextStream{
 	

@@ -41,18 +41,12 @@ import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
 /**
  * 
  * <p>
- * DEFINIÇÃO DA CLASSE
+ * Exemplo de código para geração de vários boletos em um único arquivo PDF.
  * </p>
  * 
- * <p>
- * OBJETIVO/PROPÓSITO
- * </p>
- * 
- * <p>
- * EXEMPLO: 
- * </p>
- * 
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto
+ * @author Rômulo Augusto
  * 
  * @since 0.2
  * 
@@ -61,15 +55,6 @@ import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
 
 public class VariosBoletosEmVariosArquivos {
 
-	/**
-	 * <p>
-	 * SOBRE O MÉTODO
-	 * </p>
-	 * 
-	 * @param args
-	 * 
-	 * @since 
-	 */
 
 	public static void main(String[] args) {
 		

@@ -29,6 +29,23 @@ import br.com.nordestefomento.jrimum.domkee.type.Logradouro;
 
 
 
+
+/**
+ * 
+ * <p>
+ * Exemplo de código para geração de um boleto simples.
+ * </p>
+ * 
+ * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto
+ * @author Rômulo Augusto
+ * 
+ * @since 0.2
+ * 
+ * @version 0.2
+ */
+	
 public class MeuPrimeiroBoleto {
 
 	public static void main (String[] args) throws DocumentException,

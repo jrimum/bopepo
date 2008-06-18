@@ -31,6 +31,23 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 
+
+/**
+ * 
+ * <p>
+ * Exceção indicadora de não existência de um referido banco ou problemas com dados de um banco.
+ * </p>
+ * 
+ * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto 
+ * @author Rômulo Augusto
+ * 
+ * @since 0.2
+ * 
+ * @version 0.2
+ */
+	
 public class NotSuporttedBancoException extends CampoLivreException {
 
 	/**

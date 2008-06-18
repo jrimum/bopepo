@@ -39,8 +39,9 @@ import br.com.nordestefomento.jrimum.JRimumException;
  * </p>
  * 
  * 
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
- * @author Romulo
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto
+ * @author Rômulo Augusto
  * 
  * @see br.com.nordestefomento.jrimum.JRimumException
  * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre

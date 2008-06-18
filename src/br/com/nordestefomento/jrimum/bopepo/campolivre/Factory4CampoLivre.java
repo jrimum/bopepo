@@ -39,12 +39,12 @@ import br.com.nordestefomento.jrimum.utilix.Filler;
 
 
 /**
- * 
+ * <p>
  * Esta classe tem como finalidade encapsular toda a lógica de criação de um
  * campo livre e de fornecer para o pacote
  * <code>br.com.nordestefomento.jrimum.bopepo.campolivre</code> 
  * um único ponto de acesso ao mesmo.
- * 
+ * </p>
  * 
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>

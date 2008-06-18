@@ -36,21 +36,25 @@ import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.utilix.LineOfFields;
 
 /**
- * 
+ * <p>
  * Esta classe é responsável por determinar a interface campo livre e também
  * determinar qual implementação de campo livre se aplica a um determinado
  * título.
+ * </p>
  * 
+ * <p>
  * Uma outra forma de analisar esta classe é sob o prisma de uma Abstract
  * Factory.
+ * </p>
  * 
+ * <p>
  * <dl>
  * <dt><strong>Field Livre:</strong>
  * <dd>É um espaço reservado no código de barras e a sua implementação varia de
  * banco para banco.</dd>
  * </dt>
  * </dl>
- * 
+ * </p>
  * 
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
