@@ -157,7 +157,7 @@ public class MeuPrimeiroBoletoSicredi {
 		// Instanciando um objeto "BoletoViewer", classe respons�vel pela geraçãoo
 		// do boleto bancário.
 		BoletoViewer boletoViewer = new BoletoViewer(boleto);
-		boletoViewer.setTemplate("desenvolvimento/SICREDI/Template/TemplateBoletoSicrediOtimizado.pdf");
+		boletoViewer.setTemplate("desenvolvimento/SICREDI/Template/TemplateBoletoSicrediOtimizado");
 		
 		// Setando o meu template...
 		//boletoViewer.setTemplate("C:/Documents and Settings/misael/Desktop/tutorial02/MeuBoletoTemplate.pdf");
