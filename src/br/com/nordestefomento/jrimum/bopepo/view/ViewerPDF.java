@@ -399,15 +399,18 @@ class ViewerPDF extends ACurbitaObject {
 		barCode.setFont(null);
 		barCode.setN(3);
 
+	
+		// FICHA DE COMPENSAÇÃO
 		PdfContentByte cb = null;
 
-		// FICHA DE COMPENSAÇÃO
-		RectanglePDF field = new RectanglePDF(form
-				.getFieldPositions("txtFcCodigoBarra"));
-		cb = stamper.getOverContent(field.getPage());
-		Image imgBarCode = barCode.createImageWithBarcode(cb, null, null);
-
-		Util4PDF.changeField2Image(stamper, field, imgBarCode);
+		// Verifcando se existe o field(campo) da imagem no template do boleto.
+		float posCampoImgLogo[] = form.getFieldPositions("txtFcCodigoBarra");		
+		if (isNotNull(posCampoImgLogo)) {
+			RectanglePDF field = new RectanglePDF(posCampoImgLogo);
+			cb = stamper.getOverContent(field.getPage());
+			Image imgBarCode = barCode.createImageWithBarcode(cb, null, null);
+			Util4PDF.changeField2Image(stamper, field, imgBarCode);
+		}
 	}
 
 	private void setDataProcessamento() throws IOException, DocumentException {
@@ -716,15 +719,20 @@ class ViewerPDF extends ACurbitaObject {
 	 */
 	private void setImageLogo(Image imgLogoBanco) throws DocumentException {
 
+		float posCampoImgLogo[];
+		
 		// RECIBO DO SACADO
-		Util4PDF.changeField2Image(stamper, form
-				.getFieldPositions("txtRsLogoBanco"), imgLogoBanco);
+		posCampoImgLogo = form.getFieldPositions("txtRsLogoBanco");
+		if (isNotNull(posCampoImgLogo))
+			Util4PDF.changeField2Image(stamper, posCampoImgLogo, imgLogoBanco);
 
 		// FICHA DE COMPENSAÇÃO
-		Util4PDF.changeField2Image(stamper, form
-				.getFieldPositions("txtFcLogoBanco"), imgLogoBanco);
+		posCampoImgLogo = form.getFieldPositions("txtFcLogoBanco");
+		if (isNotNull(posCampoImgLogo))
+			Util4PDF.changeField2Image(stamper, posCampoImgLogo, imgLogoBanco);
 	}
 
+	
 	private void setCodigoBanco() throws IOException, DocumentException {
 
 		ContaBancaria conta = boleto.getTitulo().getContaBancaria();
