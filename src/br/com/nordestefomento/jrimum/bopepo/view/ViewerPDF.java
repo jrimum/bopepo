@@ -378,8 +378,7 @@ class ViewerPDF extends ACurbitaObject {
 
 	private void setCamposExtra() throws IOException, DocumentException {
 
-		Map<String, String> listaCamposExtra = this.boleto
-				.getListaCamposExtra();
+		Map<String, String> listaCamposExtra = this.boleto.getListaCamposExtra();
 
 		if (isNotNull(listaCamposExtra)) {
 			Set<String> listaCampo = listaCamposExtra.keySet();
@@ -595,10 +594,16 @@ class ViewerPDF extends ACurbitaObject {
 
 	private void setDataVencimeto() throws IOException, DocumentException {
 
-		form.setField("txtRsDataVencimento", Util4Date.fmt_dd_MM_yyyy
-				.format(boleto.getTitulo().getDataDoVencimento()));
-		form.setField("txtFcDataVencimento", Util4Date.fmt_dd_MM_yyyy
-				.format(boleto.getTitulo().getDataDoVencimento()));
+		// Obtendo uma string com a data de vencimento formatada 
+		// no padrão "dd/mm/yyyy".
+		// Ex: 03/07/2008.
+		String dataFormatada = Util4Date.fmt_dd_MM_yyyy.format(
+				boleto.getTitulo().getDataDoVencimento());
+		
+		// Realizando a impressão da data de vencimeto no boleto.
+		form.setField("txtRsDataVencimento", dataFormatada);
+		form.setField("txtFcDataVencimento", dataFormatada);
+		
 	}
 
 	private void setAbstractCPRFCedente() throws IOException, DocumentException {
@@ -615,14 +620,10 @@ class ViewerPDF extends ACurbitaObject {
 				.getNumeroDoDocumento());
 	}
 
+	
 	private void setCedente() throws IOException, DocumentException {
-
-		form
-				.setField("txtRsCedente", boleto.getTitulo().getCedente()
-						.getNome());
-		form
-				.setField("txtFcCedente", boleto.getTitulo().getCedente()
-						.getNome());
+		form.setField("txtRsCedente", boleto.getTitulo().getCedente().getNome());
+		form.setField("txtFcCedente", boleto.getTitulo().getCedente().getNome());
 	}
 
 	private void setQuantidade() throws IOException, DocumentException {
@@ -640,15 +641,11 @@ class ViewerPDF extends ACurbitaObject {
 	}
 
 	private void setLinhaDigitavel() throws DocumentException, IOException {
-
-		form
-				.setField("txtRsLinhaDigitavel", boleto.getLinhaDigitavel()
-						.write());
-		form
-				.setField("txtFcLinhaDigitavel", boleto.getLinhaDigitavel()
-						.write());
+		form.setField("txtRsLinhaDigitavel", boleto.getLinhaDigitavel().write());
+		form.setField("txtFcLinhaDigitavel", boleto.getLinhaDigitavel().write());
 	}
 
+	
 	private void setLogoBanco() throws MalformedURLException, IOException,
 			DocumentException {
 		// Através da conta bancária será descoberto a imagem que representa o
