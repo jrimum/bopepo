@@ -228,20 +228,29 @@ public final class CodigoDeBarras extends LineOfFields{
 			log.debug("codigoDeBarra instanciado : "+this);
 	}
 
+	
+	
 	private void calculateAndSetDigitoVerificadorGeral() {
-
+		
 		if (log.isTraceEnabled())
 			log.trace("Calculando Digito Verificador Geral");
 
+		// Instanciando o objeto irá calcular o dígito verificador do boleto.
 		DV4BoletoCodigoDeBarra calculadorDV = new DV4BoletoCodigoDeBarra();
 
+		// Preparando o conjunto de informações que será a base para o cálculo
+		// do dígito verificador, conforme normas da FEBRABAN.
 		StringBuilder toCalculateDV = new StringBuilder(codigoDoBanco.write())
 		.append(codigoDaMoeda.write())
 		.append(fatorDeVencimento.write())
 		.append(valorNominalDoTitulo.write())
 		.append(campoLivre.write());
 
-		digitoVerificadorGeral.setField(calculadorDV.calcule(toCalculateDV.toString()));
+		// Realizando o cálculo dígito verificador e em seguida armazenando 
+		// a informação no campo "digitoVerificadorGeral".
+		digitoVerificadorGeral.setField(
+				calculadorDV.calcule(toCalculateDV.toString())
+				);
 
 		if (log.isDebugEnabled())
 			log.debug("Digito Verificador Geral calculado : "
