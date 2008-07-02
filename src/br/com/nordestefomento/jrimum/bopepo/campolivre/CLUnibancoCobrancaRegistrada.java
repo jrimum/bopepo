@@ -108,7 +108,7 @@ public class CLUnibancoCobrancaRegistrada extends ACLUnibanco {
 			if(conta.getAgencia().getCodigoDaAgencia() > 0)
 				this.add(new Field<Integer>(conta.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
 			else
-				throw new CampoLivreException(new IllegalArgumentException("Agência bancária com valor inválido: "+conta.getNumeroDaConta().getCodigoDaConta()));
+				throw new CampoLivreException(new IllegalArgumentException("Agência bancária com valor inválido, a agência deve ser um número inteiro positivo, e não: "+conta.getNumeroDaConta().getCodigoDaConta()));
 		
 		
 		if(isNotNull(conta.getAgencia().getDigitoDaAgencia(),"Digito da Agência Bancária"))
@@ -116,10 +116,10 @@ public class CLUnibancoCobrancaRegistrada extends ACLUnibanco {
 				
 				Integer digitoDaAgencia = Integer.valueOf(conta.getAgencia().getDigitoDaAgencia());  
 				
-				if(digitoDaAgencia>0)
+				if(digitoDaAgencia>=0)
 					this.add(new Field<Integer>(Integer.valueOf(digitoDaAgencia), 1));
 				else
-					throw new CampoLivreException(new IllegalArgumentException("O dígito da agência deve ser um número natural positivo, e não: ["+conta.getAgencia().getDigitoDaAgencia()+"]"));
+					throw new CampoLivreException(new IllegalArgumentException("O dígito da agência deve ser um número interio não-negativo, e não: ["+conta.getAgencia().getDigitoDaAgencia()+"]"));
 			}else
 				throw new CampoLivreException(new IllegalArgumentException("O dígito da agência deve ser numérico, e não: ["+conta.getAgencia().getDigitoDaAgencia()+"]"));
 		

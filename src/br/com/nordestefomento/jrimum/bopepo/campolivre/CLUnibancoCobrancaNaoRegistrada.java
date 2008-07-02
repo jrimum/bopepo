@@ -99,17 +99,17 @@ public class CLUnibancoCobrancaNaoRegistrada extends ACLUnibanco {
 			if(conta.getNumeroDaConta().getCodigoDaConta() > 0)
 				this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
 			else
-				throw new CampoLivreException(new IllegalArgumentException("Conta bancária com valor inválido: "+conta.getNumeroDaConta().getCodigoDaConta()));
+				throw new CampoLivreException(new IllegalArgumentException("Conta bancária com valor inválido, a conta deve ser um número inteiro positivo, e não: "+conta.getNumeroDaConta().getCodigoDaConta()));
 		
 		if(isNotNull(conta.getNumeroDaConta().getDigitoDaConta(),"Digito da Conta Bancária"))
 			if(StringUtils.isNumeric(conta.getNumeroDaConta().getDigitoDaConta())){
 				
 				Integer digitoDaConta = Integer.valueOf(conta.getNumeroDaConta().getDigitoDaConta());  
 				
-				if(digitoDaConta>0)
+				if(digitoDaConta>=0)
 					this.add(new Field<Integer>(Integer.valueOf(digitoDaConta), 1));
 				else
-					throw new CampoLivreException(new IllegalArgumentException("O digito da conta deve ser um número natural positivo, e não: ["+conta.getNumeroDaConta().getDigitoDaConta()+"]"));
+					throw new CampoLivreException(new IllegalArgumentException("O digito da conta deve ser um número inteiro não-negativo, e não: ["+conta.getNumeroDaConta().getDigitoDaConta()+"]"));
 			}else
 				throw new CampoLivreException(new IllegalArgumentException("O digito da conta deve ser numérico, e não: ["+conta.getNumeroDaConta().getDigitoDaConta()+"]"));
 		
@@ -120,7 +120,7 @@ public class CLUnibancoCobrancaNaoRegistrada extends ACLUnibanco {
 				if(Long.valueOf(Util4String.removeStartWithZeros(titulo.getNossoNumero()))>0)
 					this.add(new Field<String>(titulo.getNossoNumero(), 14,Filler.ZERO_LEFT));
 				else
-					throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser um número natural positivo, e não: ["+titulo.getNossoNumero()+"]"));
+					throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser um número inteiro positivo, e não: ["+titulo.getNossoNumero()+"]"));
 			}else
 				throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser numérico, e não: ["+titulo.getNossoNumero()+"]"));
 		

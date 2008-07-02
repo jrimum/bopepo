@@ -15,6 +15,7 @@ import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
 import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
 import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.entity.EnumTipoCobranca;
 import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
@@ -58,15 +59,14 @@ public class MeuPrimeiroBoleto {
 		Pessoa cedente = new Pessoa("PROJETO JRimum", "00.000.208/0001-00");
 		
 		// Informando dados sobre a conta bancária do cendente.		
-		IBanco banco = EnumBancos.BANCO_DO_BRASIL.create();
+		IBanco banco = EnumBancos.UNIBANCO.create();
 		ContaBancaria contaBancariaCed = new ContaBancaria(banco);
-		contaBancariaCed.setAgencia(new Agencia(1234, "67"));
-		contaBancariaCed.setCarteira(new Carteira(5));
-		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(6789, "12"));
+		contaBancariaCed.setBanco(EnumBancos.UNIBANCO.create());
+		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(123456, "0"));
+		contaBancariaCed.setCarteira(new Carteira(123,
+				EnumTipoCobranca.SEM_REGISTRO));
+		contaBancariaCed.setAgencia(new Agencia(01234, "1"));
 		cedente.addContaBancaria(contaBancariaCed);		
-		
-		
-		
 		
 		/* 
 		 * INFORMANDO DADOS SOBRE O SACADO.
