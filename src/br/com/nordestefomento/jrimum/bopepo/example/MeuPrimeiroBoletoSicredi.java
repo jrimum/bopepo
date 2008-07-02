@@ -157,7 +157,7 @@ public class MeuPrimeiroBoletoSicredi {
 		// Instanciando um objeto "BoletoViewer", classe respons�vel pela geraçãoo
 		// do boleto bancário.
 		BoletoViewer boletoViewer = new BoletoViewer(boleto);
-		boletoViewer.setTemplate("desenvolvimento/SICREDI/Template/TemplateBoletoSicrediOtimizado");
+		boletoViewer.setTemplate("desenvolvimento/SICREDI/Template/TemplateBoletoSicrediOtimizado.pdf");
 		
 		// Setando o meu template...
 		//boletoViewer.setTemplate("C:/Documents and Settings/misael/Desktop/tutorial02/MeuBoletoTemplate.pdf");
@@ -168,7 +168,7 @@ public class MeuPrimeiroBoletoSicredi {
 		// pasta do projeto. Outros exemplos:
 		// WINDOWS: boletoViewer.getAsPDF("C:/Temp/MeuBoleto.pdf");
 		// LINUX: boletoViewer.getAsPDF("/home/temp/MeuBoleto.pdf");
-		File arquivoPdf = boletoViewer.getAsPDF("MeuPrimeiroBoletoSicrediOtimizado.pdf");
+		File arquivoPdf = boletoViewer.getAsPDF("MeuPrimeiroBoletoSicrediOtimizado");
 		
 		// Mostrando o boleto gerado na tela.
 		mostreBoletoNaTela(arquivoPdf);
