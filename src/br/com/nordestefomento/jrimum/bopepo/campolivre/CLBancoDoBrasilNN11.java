@@ -118,7 +118,6 @@ class CLBancoDoBrasilNN11 extends ACLBancoDoBrasil {
 		
 		this.add(new Field<String>(nossoNumero, 11, Filler.ZERO_LEFT));
 		
-		//TODO Código em teste
 		this.add(new Field<Integer>(conta.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 8, Filler.ZERO_LEFT));
 		

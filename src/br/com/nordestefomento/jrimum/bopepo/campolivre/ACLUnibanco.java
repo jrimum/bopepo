@@ -32,11 +32,11 @@ public class ACLUnibanco extends ACampoLivre {
 					campoLivre = new CLUnibancoCobrancaNaoRegistrada(titulo);
 				else
 					throw new NotSuporttedCampoLivreException(
-					"Nao existe suporte para um campo livre do unibanco com a cobranca: "+conta.getCarteira().getTipoCobranca());
+					"Não existe suporte para um campo livre do unibanco com a cobrança: "+conta.getCarteira().getTipoCobranca());
 
 		} else {
 			throw new NotSuporttedCampoLivreException(
-					"Campo livre indeterminado, defina o tipo de cobranca para a carteira usada.");
+					"Campo livre indeterminado, defina o tipo de cobrança para a carteira usada.");
 		}
 
 		return campoLivre;

@@ -689,15 +689,14 @@ class ViewerPDF extends ACurbitaObject {
 				if (log.isDebugEnabled())
 					log.debug("Banco sem imagem da logo informada. "
 							+ "Com base no código do banco, uma imagem foi "
-							+ "encontrada no resource e esta sendo utilizada.");
+							+ "encontrada no resource e está sendo utilizada.");
 
 				setImageLogo(imgLogoBanco);
 
 			} else {
 
 				// Sem imagem, um alerta é exibido.
-				log
-						.warn("Banco sem imagem definida. O nome da instiuição será usado como logo.");
+				log.warn("Banco sem imagem definida. O nome da instituição será usado como logo.");
 
 				form.setField("txtRsLogoBanco", conta.getBanco().getNome());
 				form.setField("txtFcLogoBanco", conta.getBanco().getNome());

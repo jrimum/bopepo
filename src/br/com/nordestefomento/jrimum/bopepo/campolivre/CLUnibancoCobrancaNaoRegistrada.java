@@ -95,13 +95,13 @@ public class CLUnibancoCobrancaNaoRegistrada extends ACLUnibanco {
 		
 		this.add(new Field<Integer>(CODIGO_TRANSACAO, 1));
 		
-		if(isNotNull(conta.getNumeroDaConta().getCodigoDaConta(), "Numero da Conta Bancária"))
+		if(isNotNull(conta.getNumeroDaConta().getCodigoDaConta(), "Número da Conta Bancária"))
 			if(conta.getNumeroDaConta().getCodigoDaConta() > 0)
 				this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
 			else
 				throw new CampoLivreException(new IllegalArgumentException("Conta bancária com valor inválido, a conta deve ser um número inteiro positivo, e não: "+conta.getNumeroDaConta().getCodigoDaConta()));
 		
-		if(isNotNull(conta.getNumeroDaConta().getDigitoDaConta(),"Digito da Conta Bancária"))
+		if(isNotNull(conta.getNumeroDaConta().getDigitoDaConta(),"Dígito da Conta Bancária"))
 			if(StringUtils.isNumeric(conta.getNumeroDaConta().getDigitoDaConta())){
 				
 				Integer digitoDaConta = Integer.valueOf(conta.getNumeroDaConta().getDigitoDaConta());  
@@ -109,9 +109,9 @@ public class CLUnibancoCobrancaNaoRegistrada extends ACLUnibanco {
 				if(digitoDaConta>=0)
 					this.add(new Field<Integer>(Integer.valueOf(digitoDaConta), 1));
 				else
-					throw new CampoLivreException(new IllegalArgumentException("O digito da conta deve ser um número inteiro não-negativo, e não: ["+conta.getNumeroDaConta().getDigitoDaConta()+"]"));
+					throw new CampoLivreException(new IllegalArgumentException("O dígito da conta deve ser um número inteiro não-negativo, e não: ["+conta.getNumeroDaConta().getDigitoDaConta()+"]"));
 			}else
-				throw new CampoLivreException(new IllegalArgumentException("O digito da conta deve ser numérico, e não: ["+conta.getNumeroDaConta().getDigitoDaConta()+"]"));
+				throw new CampoLivreException(new IllegalArgumentException("O dígito da conta deve ser numérico, e não: ["+conta.getNumeroDaConta().getDigitoDaConta()+"]"));
 		
 		this.add(new Field<Integer>(RESERVADO, 2, Filler.ZERO_LEFT));
 		

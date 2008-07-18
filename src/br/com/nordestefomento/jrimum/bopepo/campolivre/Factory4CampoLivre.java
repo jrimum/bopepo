@@ -125,7 +125,7 @@ public final class Factory4CampoLivre extends ACurbitaObject{
 							
 						}else{
 							
-							IllegalArgumentException e = new IllegalArgumentException("The strCampoLivre [ " + strCampoLivre + " ] must be a numeric string!");
+							IllegalArgumentException e = new IllegalArgumentException("O Campo Livre [ " + strCampoLivre + " ] deve ser uma String numérica!");
 							
 							log.error(StringUtils.EMPTY, e);
 							
@@ -133,7 +133,7 @@ public final class Factory4CampoLivre extends ACurbitaObject{
 						}
 					}else{
 						
-						IllegalArgumentException e = new IllegalArgumentException("The strCampoLivre [ " + strCampoLivre + " ] must not contain whitespaces!");
+						IllegalArgumentException e = new IllegalArgumentException("O Campo Livre [ " + strCampoLivre + " ] não deve conter espaços em branco!");
 						
 						log.error(StringUtils.EMPTY, e);
 						
@@ -141,7 +141,7 @@ public final class Factory4CampoLivre extends ACurbitaObject{
 					}
 				}else{
 					
-					IllegalArgumentException e = new IllegalArgumentException("The length strCampoLivre [ " + strCampoLivre + " ] must be equals to 25 not ["+strCampoLivre.length()+"]!");
+					IllegalArgumentException e = new IllegalArgumentException("O tamanho do Campo Livre [ " + strCampoLivre + " ] deve ser igual a 25 e não ["+strCampoLivre.length()+"]!");
 					
 					log.error(StringUtils.EMPTY, e);
 					
@@ -149,7 +149,7 @@ public final class Factory4CampoLivre extends ACurbitaObject{
 				}
 			}else{
 				
-				IllegalArgumentException e = new IllegalArgumentException("The strCampoLivre [ " + strCampoLivre + " ] must not be blank!");
+				IllegalArgumentException e = new IllegalArgumentException("O Campo Livre [ " + strCampoLivre + " ] não deve ser vazio!");
 				
 				log.error(StringUtils.EMPTY, e);
 				

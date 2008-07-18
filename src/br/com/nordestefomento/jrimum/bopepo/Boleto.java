@@ -230,9 +230,9 @@ public final class Boleto extends ACurbitaObject{
 				this.campoLivre = campoLivre;
 			else
 				if(length > ICampoLivre.STRING_LENGTH)
-					throw new IllegalArgumentException("String length [ " + length + " ] greater than specified [ "+ICampoLivre.STRING_LENGTH+" ]!");
+					throw new IllegalArgumentException("O tamanho da String [ " + length + " ] é maior que o especificado [ "+ICampoLivre.STRING_LENGTH+" ]!");
 				else
-					throw new IllegalArgumentException("String length [ " + length + " ] less than specified [ "+ICampoLivre.STRING_LENGTH+" ]!");
+					throw new IllegalArgumentException("O tamanho da String [ " + length + " ] é menor que o especificado [ "+ICampoLivre.STRING_LENGTH+" ]!");
 		}
 	}
 

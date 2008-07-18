@@ -98,20 +98,20 @@ public class CLUnibancoCobrancaRegistrada extends ACLUnibanco {
 		
 		this.add(new Field<String>(CODIGO_TRANSACAO, 2));
 		
-		if(isNotNull(titulo.getDataDoVencimento(), "data de vencimento do titulo"))
+		if(isNotNull(titulo.getDataDoVencimento(), "Data de vencimento do título"))
 			this.add(new Field<Date>(titulo.getDataDoVencimento(), 6,
 					Util4Date.fmt_yyMMdd));
 			else
 				throw new CampoLivreException(new IllegalArgumentException("Data de vencimento do título inválida: "+titulo.getDataDoVencimento()));
 		
-		if(isNotNull(conta.getAgencia().getCodigoDaAgencia(), "Numero da Agência Bancária"))
+		if(isNotNull(conta.getAgencia().getCodigoDaAgencia(), "Número da Agência Bancária"))
 			if(conta.getAgencia().getCodigoDaAgencia() > 0)
 				this.add(new Field<Integer>(conta.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
 			else
 				throw new CampoLivreException(new IllegalArgumentException("Agência bancária com valor inválido, a agência deve ser um número inteiro positivo, e não: "+conta.getNumeroDaConta().getCodigoDaConta()));
 		
 		
-		if(isNotNull(conta.getAgencia().getDigitoDaAgencia(),"Digito da Agência Bancária"))
+		if(isNotNull(conta.getAgencia().getDigitoDaAgencia(),"Dígito da Agência Bancária"))
 			if(StringUtils.isNumeric(conta.getAgencia().getDigitoDaAgencia())){
 				
 				Integer digitoDaAgencia = Integer.valueOf(conta.getAgencia().getDigitoDaAgencia());  

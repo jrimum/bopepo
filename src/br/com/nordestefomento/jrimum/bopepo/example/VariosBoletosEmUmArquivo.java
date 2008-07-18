@@ -82,7 +82,7 @@ public class VariosBoletosEmUmArquivo {
 			desktop.open(new File("TesteVariosEmUm.pdf"));
 	
 		}catch(Exception e){
-			throw new JRimumException("Arquivo nao gerado!",e);
+			throw new JRimumException("Arquivo não gerado!",e);
 		}
 		
 		/*

@@ -75,7 +75,7 @@ public abstract class ACLBancoSafra extends ACampoLivre {
 
 		} else {
 			throw new NotSuporttedCampoLivreException(
-					"Campo livre indeterminado, defina o tipo de cobranca para a carteira usada.");
+					"Campo livre indeterminado, defina o tipo de cobrança para a carteira usada.");
 		}
 
 		return campoLivre;
