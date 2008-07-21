@@ -1,4 +1,3 @@
-
 /* 
  * Copyright 2008 JRimum Project
  * 
@@ -28,10 +27,13 @@
  * Criado em: 28/06/2008 - 18:48:48
  * 
  */
-	
+
 package br.com.nordestefomento.jrimum.bopepo.example;
 
-import org.apache.commons.lang.StringUtils;
+import static org.apache.commons.lang.StringUtils.isNotBlank;
+import static org.apache.commons.lang.StringUtils.isNumeric;
+
+import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
@@ -43,7 +45,6 @@ import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.LineOfFields;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.EnumModulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
-
 
 /**
  * <p>
@@ -65,7 +66,8 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * <tr>
  * <td >21-21</td>
  * <td >1</td>
- * <td >Código númerico correspondente ao tipo de carteira: "1" - carteira simples</td>
+ * <td >Código númerico correspondente ao tipo de carteira: "1" - carteira
+ * simples</td>
  * </tr>
  * <tr>
  * <td >22-30</td>
@@ -90,7 +92,8 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * <tr>
  * <td >42-42</td>
  * <td >1</td>
- * <td >Filler: 1 (um) quando o campo "valor do documento" diferente de 0 (zero), caso contrário zero.</td>
+ * <td >Filler: 1 (um) quando o campo "valor do documento" diferente de 0
+ * (zero), caso contrário zero.</td>
  * </tr>
  * <tr>
  * <td >43-43</td>
@@ -100,7 +103,9 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * <tr>
  * <td >44-44</td>
  * <td >1</td>
- * <td >Dígito verificador do campo livre calculado por módulo 11 com aproveitamento total (resto igual a (0) zero ou (1) um o Dígito será (0) zero)</td>
+ * <td >Dígito verificador do campo livre calculado por módulo 11 com
+ * aproveitamento total (resto igual a (0) zero ou (1) um o Dígito será (0)
+ * zero)</td>
  * </tr>
  * </table>
  * 
@@ -112,90 +117,103 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  */
 
 @SuppressWarnings("serial")
-public class CampoLivreSicredi extends LineOfFields implements ICampoLivre{
+public class CampoLivreSicredi extends LineOfFields implements ICampoLivre {
+
+	static Logger log = Logger.getLogger(CampoLivreSicredi.class);
 
 	private static final Integer FIELDS_LENGTH = 9;
-	
+
 	private static final Integer STRING_LENGTH = 25;
-	
+
 	private static final Modulo modulo11 = new Modulo(EnumModulo.MODULO11);
-	
+
 	/**
 	 * <p>
 	 * Código númerico correspondente ao tipo de cobrança: "3" - SICREDI.
 	 * </p>
 	 */
 	private static final String COBRANCA = "3";
-	
+
 	/**
 	 * <p>
-	 * Código númerico correspondente ao tipo de carteira: "1" - carteira simples.
+	 * Código númerico correspondente ao tipo de carteira: "1" - carteira
+	 * simples.
 	 * </p>
 	 */
 	private static final String CARTEIRA = "1";
-	
+
 	/**
-	 *<p>
-	 *Primeira posição do campo livre.
-	 *</p> 
+	 * <p>
+	 * Primeira posição do campo livre.
+	 * </p>
 	 */
-	private static final Field<String> FIELD_COBRANCA = new Field<String>(COBRANCA,1);
-	
+	private static final Field<String> FIELD_COBRANCA = new Field<String>(
+			COBRANCA, 1);
+
 	/**
-	 *<p>
-	 *Segunda posição do campo livre.
-	 *</p> 
+	 * <p>
+	 * Segunda posição do campo livre.
+	 * </p>
 	 */
-	private static final Field<String> FIELD_CARTEIRA = new Field<String>(CARTEIRA,1);
-	
-	
-	public CampoLivreSicredi(Titulo titulo) throws CampoLivreException{
-		
+	private static final Field<String> FIELD_CARTEIRA = new Field<String>(
+			CARTEIRA, 1);
+
+	public CampoLivreSicredi(Titulo titulo) throws CampoLivreException {
+
 		super(FIELDS_LENGTH, STRING_LENGTH);
-		
-		try{
-	
-		this.add(FIELD_COBRANCA);
-		this.add(FIELD_CARTEIRA);
-		
-		this.add(new Field<String>(loadNossoNumero(titulo), 9, Filler.ZERO_LEFT));
-		
-		InnerCooperativaDeCredito cooperativa = loadCooperativaDeCredito(titulo.getContaBancaria().getAgencia());
-		
-		this.add(new Field<String>(cooperativa.codigo, 4, Filler.ZERO_LEFT));
-		this.add(new Field<String>(cooperativa.posto, 2, Filler.ZERO_LEFT));
-		
-		this.add(new Field<String>(componhaCodigoDoCedente(titulo.getContaBancaria().getNumeroDaConta()), 5, Filler.ZERO_LEFT));
-		
-		if(titulo.getValor() != null && titulo.getValor().doubleValue() > 0)
-			this.add(new Field<String>("1", 1));
-		else
+
+		try {
+
+			this.add(FIELD_COBRANCA);
+			this.add(FIELD_CARTEIRA);
+
+			this.add(new Field<String>(loadNossoNumero(titulo), 9,
+					Filler.ZERO_LEFT));
+
+			InnerCooperativaDeCredito cooperativa = loadCooperativaDeCredito(titulo
+					.getContaBancaria().getAgencia());
+
+			this
+					.add(new Field<String>(cooperativa.codigo, 4,
+							Filler.ZERO_LEFT));
+			this.add(new Field<String>(cooperativa.posto, 2, Filler.ZERO_LEFT));
+
+			this.add(new Field<String>(componhaCodigoDoCedente(titulo
+					.getContaBancaria().getNumeroDaConta()), 5,
+					Filler.ZERO_LEFT));
+
+			if (titulo.getValor() != null
+					&& titulo.getValor().doubleValue() > 0)
+				this.add(new Field<String>("1", 1));
+			else
+				this.add(new Field<String>("0", 1));
+
 			this.add(new Field<String>("0", 1));
-		
-		this.add(new Field<String>("0", 1));
-		this.add(new Field<String>(calculeDigitoVerificador(), 1));
-		
-		}catch(Exception e){
-			throw new CampoLivreException("Ocorreu um problema ao tentar gerar o campo livre Sicredi.",e);
+			this.add(new Field<String>(calculeDigitoVerificador(), 1));
+
+		} catch (Exception e) {
+			throw new CampoLivreException(
+					"Ocorreu um problema ao tentar gerar o campo livre Sicredi.",
+					e);
 		}
 	}
-	
+
 	@SuppressWarnings("unused")
 	private CampoLivreSicredi(Integer fieldsLength, Integer stringLength) {
 		super(FIELDS_LENGTH, STRING_LENGTH);
-		
+
 	}
-	
+
 	private String loadNossoNumero(Titulo titulo) {
 
 		String nossoNumeroComposto = null;
 
 		String nossoNumero = titulo.getNossoNumero();
 		String dvNossoNumero = titulo.getDigitoDoNossoNumero();
-		
+
 		if (isNotNull(nossoNumero, "Nosso Número")) {
-			if (StringUtils.isNumeric(nossoNumero)) {
-				
+			if (isNotBlank(nossoNumero) && isNumeric(nossoNumero)) {
+
 				if (nossoNumero.length() == 8)
 					nossoNumeroComposto = nossoNumero;
 				else
@@ -209,7 +227,7 @@ public class CampoLivreSicredi extends LineOfFields implements ICampoLivre{
 		}
 
 		if (isNotNull(dvNossoNumero, "Dígito Verificador do Nosso Número")) {
-			if (StringUtils.isNumeric(dvNossoNumero)) {
+			if (isNotBlank(dvNossoNumero) && isNumeric(dvNossoNumero)) {
 
 				Integer dvNN = Integer.valueOf(dvNossoNumero);
 
@@ -234,118 +252,141 @@ public class CampoLivreSicredi extends LineOfFields implements ICampoLivre{
 		return nossoNumeroComposto.toString();
 	}
 
-	InnerCooperativaDeCredito loadCooperativaDeCredito(Agencia agencia){
-		
+	InnerCooperativaDeCredito loadCooperativaDeCredito(Agencia agencia) {
+
 		InnerCooperativaDeCredito cooperativa = null;
-		
-		if(isNotNull(agencia.getCodigoDaAgencia(), "Número da Agência Sicredi")){
-			if(agencia.getCodigoDaAgencia() > 0){
-				if(agencia.getCodigoDaAgencia().toString().length() <= 6){
-					
+
+		if (isNotNull(agencia.getCodigoDaAgencia(), "Número da Agência Sicredi")) {
+			if (agencia.getCodigoDaAgencia() > 0) {
+				if (agencia.getCodigoDaAgencia().toString().length() <= 4) {
+
 					cooperativa = new InnerCooperativaDeCredito();
-					
-					String codigoDaAgencia = agencia.getCodigoDaAgencia().toString();
-					
-					if(agencia.getCodigoDaAgencia().toString().length() == 6){
-						
-						cooperativa.codigo = codigoDaAgencia.substring(0,4);
-						cooperativa.posto = codigoDaAgencia.substring(4);
-						
-					}else{
-						
-						cooperativa.codigo = codigoDaAgencia.substring(0, codigoDaAgencia.length() - 1);
-						cooperativa.posto = agencia.getCodigoDaAgencia().toString().substring(codigoDaAgencia.length() - 1);
-					}
-				}else
-					new IllegalArgumentException("Número da Agência Sicredi deve conter no máximo 6 dígitos (SEM O DIGITO VERIFICADOR) e não: "+agencia.getCodigoDaAgencia());
-			}else
-				new IllegalArgumentException("Número da Agência Sicredi com valor inválido: "+agencia.getCodigoDaAgencia());
+
+					cooperativa.codigo = agencia.getCodigoDaAgencia()
+							.toString();
+
+				} else
+					new IllegalArgumentException(
+							"Número da Agência Sicredi deve conter no máximo 4 dígitos (SEM O DIGITO VERIFICADOR) e não: "
+									+ agencia.getCodigoDaAgencia());
+			} else
+				new IllegalArgumentException(
+						"Número da Agência Sicredi com valor inválido: "
+								+ agencia.getCodigoDaAgencia());
 		}
-		
-		if(agencia.getCodigoDaAgencia().toString().length() < 6){
-			
-			if(isNotNull(agencia.getDigitoDaAgencia(),"Dígito da Agência Sicredi"))
-				if(StringUtils.isNumeric(agencia.getDigitoDaAgencia())){
-					
-					Integer digitoDaAgencia = Integer.valueOf(agencia.getDigitoDaAgencia());  
-					
-					if(digitoDaAgencia >= 0)
-						cooperativa.posto += digitoDaAgencia;
+
+		if (isNotNull(agencia.getDigitoDaAgencia(), "Dígito da Agência Sicredi")) {
+			if (isNotBlank(agencia.getDigitoDaAgencia())
+					&& isNumeric(agencia.getDigitoDaAgencia())) {
+
+				if (agencia.getDigitoDaAgencia().toString().length() <= 2) {
+
+					Integer digitoDaAgencia = Integer.valueOf(agencia
+							.getDigitoDaAgencia());
+
+					if (digitoDaAgencia >= 0)
+						cooperativa.posto = digitoDaAgencia.toString();
 					else
-						new IllegalArgumentException("O dígito da Agência Sicredi deve ser um número natural não-negativo, e não: ["+agencia.getDigitoDaAgencia()+"]");
-					
-				}else
-					new IllegalArgumentException("O dígito da Agência Sicredi deve ser numérico, e não: ["+agencia.getDigitoDaAgencia()+"]");
-		
-		}else
-			new IllegalArgumentException("O dígito da Agência Sicredi deve ser fornecido somente quando o número da agência for composto de 1 a 5 dígitos, e não: ["+agencia.getDigitoDaAgencia()+"]");;
-		
+						new IllegalArgumentException(
+								"O dígito da Agência Sicredi deve ser um número natural não-negativo, e não: ["
+										+ agencia.getDigitoDaAgencia() + "]");
+
+				} else
+					new IllegalArgumentException(
+							"Dígito da Agência Sicredi deve conter no máximo 2 dígitos e não: "
+									+ agencia.getCodigoDaAgencia());
+			} else
+				new IllegalArgumentException(
+						"O dígito da Agência Sicredi deve ser numérico, e não: ["
+								+ agencia.getDigitoDaAgencia() + "]");
+		}
+
 		return cooperativa;
 	}
-	
-	String componhaCodigoDoCedente(NumeroDaConta conta){//5digitos sem dv
-		
+
+	String componhaCodigoDoCedente(NumeroDaConta conta) {// 5digitos sem dv
+
+		final String msg = "<<<ATENÇÃO>>> O dígito da Conta/Código do Cedente Sicredi deve ser fornecido somente quando o número da (Conta/Código do Cedente) for composto de 1 a 4 dígitos, e não: ["
+				+ conta.getDigitoDaConta() + "]";
+
 		StringBuilder codigoDoCedente = new StringBuilder();
-		
-		if(isNotNull(conta.getCodigoDaConta(), "Número da Conta/Código do Cedente Sicredi")){
-			if(conta.getCodigoDaConta() > 0){
-				if(conta.getCodigoDaConta().toString().length() <= 5){
-			
+
+		if (isNotNull(conta.getCodigoDaConta(),
+				"Número da Conta/Código do Cedente Sicredi")) {
+
+			if (conta.getCodigoDaConta() > 0) {
+				if (conta.getCodigoDaConta().toString().length() <= 5) {
+
 					codigoDoCedente.append(conta.getCodigoDaConta().toString());
-					
-				}else
-					new IllegalArgumentException("Número da Conta/Código do Cedente Sicredi deve conter no máximo 6 dígitos (SEM O DIGITO VERIFICADOR) e não: "+conta.getCodigoDaConta());
-			}else
-				new IllegalArgumentException("Número da Conta/Código do Cedente Sicredi com valor inválido: "+conta.getCodigoDaConta());
+
+					if (conta.getCodigoDaConta().toString().length() < 5) {// ComDigito
+						if (isNotBlank(conta.getDigitoDaConta())) {
+							if (isNumeric(conta.getDigitoDaConta())) {
+
+								Integer digitoDaConta = Integer.valueOf(conta
+										.getDigitoDaConta());
+
+								if (digitoDaConta >= 0)
+									codigoDoCedente.append(digitoDaConta);
+								else
+									new IllegalArgumentException(
+											"O dígito da Conta/Código do Cedente Sicredi deve ser um número natural não-negativo, e não: ["
+													+ conta.getDigitoDaConta()
+													+ "]");
+
+							} else
+								throw new CampoLivreException(
+										new IllegalArgumentException(
+												"O dígito da Conta/Código do Cedente Sicredi deve ser numérico, e não: ["
+														+ conta
+																.getDigitoDaConta()
+														+ "]"));
+						} else {
+							System.out.println(msg);
+							log.warn(msg);
+						}
+					}
+
+				} else
+					new IllegalArgumentException(
+							"Número da Conta/Código do Cedente Sicredi deve conter no máximo 6 dígitos (SEM O DIGITO VERIFICADOR) e não: "
+									+ conta.getCodigoDaConta());
+			} else
+				new IllegalArgumentException(
+						"Número da Conta/Código do Cedente Sicredi com valor inválido: "
+								+ conta.getCodigoDaConta());
 		}
-		
-		if(conta.getCodigoDaConta().toString().length() < 5){
-			
-			if(isNotNull(conta.getDigitoDaConta(),"Dígito da Conta/Código do Cedente Sicredi"))
-				if(StringUtils.isNumeric(conta.getDigitoDaConta())){
-					
-					Integer digitoDaConta = Integer.valueOf(conta.getDigitoDaConta());  
-					
-					if(digitoDaConta >= 0)
-						codigoDoCedente.append(digitoDaConta);
-					else
-						new IllegalArgumentException("O dígito da Conta/Código do Cedente Sicredi deve ser um número natural não-negativo, e não: ["+conta.getDigitoDaConta()+"]");
-					
-				}else
-					throw new CampoLivreException(new IllegalArgumentException("O dígito da Conta/Código do Cedente Sicredi deve ser numérico, e não: ["+conta.getDigitoDaConta()+"]"));
-		
-		}else
-			throw new IllegalArgumentException("O dígito da Conta/Código do Cedente Sicredi deve ser fornecido somente quando o número da (Conta/Código do Cedente) for composto de 1 a 4 dígitos, e não: ["+conta.getDigitoDaConta()+"]");;
-		
+
 		return codigoDoCedente.toString();
 	}
-	
-	private String calculeDigitoVerificador(){
-		
+
+	private String calculeDigitoVerificador() {
+
 		Integer dv = 0;
-		
+
 		this.setStringLength(STRING_LENGTH - 1);
 		this.setFieldsLength(FIELDS_LENGTH - 1);
-		
+
 		String campoLivreSemDv = this.write();
-		
+
 		this.setFieldsLength(FIELDS_LENGTH);
 		this.setStringLength(STRING_LENGTH);
-	
+
 		int resto = modulo11.calcule(campoLivreSemDv);
-		
-		if(resto != 0 || resto != 1){
-			
+
+		if (resto != 0 && resto != 1) {
+
 			dv = modulo11.valor() - resto;
-		}
-			
-		return ""+dv;
+		} else
+			dv = resto;
+
+		return "" + dv;
 	}
-	
-	class InnerCooperativaDeCredito{
-		
+
+	class InnerCooperativaDeCredito {
+
 		String codigo;
-		
+
 		String posto;
 
 	}
