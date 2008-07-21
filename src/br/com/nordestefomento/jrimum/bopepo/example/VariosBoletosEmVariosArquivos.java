@@ -68,7 +68,7 @@ public class VariosBoletosEmVariosArquivos {
 		 * Depois diga o nome do diretorio para onde os boletos serão gerados. 
 		 */
 		
-		BoletoViewer.onePerPDF("./", boletos);
+		BoletoViewer.onePerPDF("./", ".pdf", boletos);
 	
 		
 		/*

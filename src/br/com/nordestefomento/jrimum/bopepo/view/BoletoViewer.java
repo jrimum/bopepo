@@ -163,6 +163,7 @@ public class BoletoViewer extends ACurbitaObject {
 	 * </p>
 	 * 
 	 * @param path Caminho no qual será gerados os arquivos
+	 * @param extensao TODO
 	 * @param boletos Boletos a partir dos quais serão gerados os arquivos
 	 * @return Vários arquivos pdf
 	 * @throws JRimumException
@@ -170,7 +171,7 @@ public class BoletoViewer extends ACurbitaObject {
 	 * @since 0.2
 	 */
 
-	public static List<File> onePerPDF(String path, List<Boleto> boletos)
+	public static List<File> onePerPDF(String path, String extensao, List<Boleto> boletos)
 			throws JRimumException {
 
 		if (isNotNull(path, "path") && isNotNull(boletos, "boletos")) {
@@ -180,7 +181,7 @@ public class BoletoViewer extends ACurbitaObject {
 					
 						try {
 							
-							ViewerPDF.onePerPDF(path, boletos);
+							ViewerPDF.onePerPDF(path, extensao, boletos);
 							
 						} catch (IOException e) {
 							
@@ -259,13 +260,13 @@ public class BoletoViewer extends ACurbitaObject {
 	 * @since 0.2
 	 */
 
-	public File getAsPDF(String pathName) throws IllegalArgumentException,
+	public File getPdfAsFile(String pathName) throws IllegalArgumentException,
 			IOException, DocumentException {
 
 		if (log.isDebugEnabled())
 			log.debug("documento instance : " + viewerPDF);
 
-		return viewerPDF.getFile(pathName + ".pdf");
+		return viewerPDF.getFile(pathName);
 	}
 
 	/**
@@ -280,7 +281,7 @@ public class BoletoViewer extends ACurbitaObject {
 	 * @since 0.1
 	 */
 
-	public ByteArrayOutputStream getAsStream() throws IOException,
+	public ByteArrayOutputStream getPdfAsStream() throws IOException,
 			DocumentException {
 
 		if (log.isDebugEnabled())
@@ -303,7 +304,7 @@ public class BoletoViewer extends ACurbitaObject {
 	 * @since 0.1
 	 */
 
-	public byte[] getAsByteArray() throws IOException, DocumentException {
+	public byte[] getPdfAsByteArray() throws IOException, DocumentException {
 
 		if (log.isDebugEnabled())
 			log.debug("documento instance : " + viewerPDF);

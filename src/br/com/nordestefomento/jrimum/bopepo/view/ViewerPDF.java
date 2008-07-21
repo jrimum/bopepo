@@ -135,9 +135,9 @@ class ViewerPDF extends ACurbitaObject {
 		List<byte[]> boletosEmBytes = new ArrayList<byte[]>(boletos.size());
 
 		for (Boleto bop : boletos)
-			boletosEmBytes.add(new BoletoViewer(bop).getAsByteArray());
+			boletosEmBytes.add(new BoletoViewer(bop).getPdfAsByteArray());
 
-		arq = Util4File.bytes2File(pathName + ".pdf", Util4PDF
+		arq = Util4File.bytes2File(pathName, Util4PDF
 				.mergeFiles(boletosEmBytes));
 
 		return arq;
@@ -150,6 +150,7 @@ class ViewerPDF extends ACurbitaObject {
 	 * </p>
 	 * 
 	 * @param path
+	 * @param extensao TODO
 	 * @param boletos
 	 * @return List<File> com os boletos gerados.
 	 * @throws IOException
@@ -158,7 +159,7 @@ class ViewerPDF extends ACurbitaObject {
 	 * @since 0.2
 	 */
 
-	protected static List<File> onePerPDF(String path, List<Boleto> boletos)
+	protected static List<File> onePerPDF(String path, String extensao, List<Boleto> boletos)
 			throws IOException, DocumentException {
 
 		List<File> arquivos = null;
@@ -167,8 +168,8 @@ class ViewerPDF extends ACurbitaObject {
 		arquivos = new ArrayList<File>(boletos.size());
 
 		for (Boleto bop : boletos)
-			arquivos.add(new BoletoViewer(bop).getAsPDF(path + "Boleto"
-					+ cont++));
+			arquivos.add(new BoletoViewer(bop).getPdfAsFile(path + "Boleto"
+					+ cont++ + extensao));
 
 		return arquivos;
 	}
