@@ -37,6 +37,8 @@ import br.com.nordestefomento.jrimum.bopepo.campolivre.TestACLBancoSafra;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN11;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN17;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBancoReal;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBanrisulCobrancaNaoRegistrada;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBanrisulCobrancaRegistrada;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBradesco;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLCaixaEconomicaFederalSINCO;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLItauComCarteirasEspeciais;
@@ -59,7 +61,9 @@ import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLItauPadrao;
 			TestCLBradesco.class,
 			TestCLCaixaEconomicaFederalSINCO.class,
 			TestCLItauPadrao.class,
-			TestCLItauComCarteirasEspeciais.class
+			TestCLItauComCarteirasEspeciais.class,
+			TestCLBanrisulCobrancaRegistrada.class,
+			TestCLBanrisulCobrancaNaoRegistrada.class
 		}
 )
 public class TestSuiteBopepo {

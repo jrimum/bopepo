@@ -123,7 +123,15 @@ public enum EnumBancos implements ICurbitaObject{
 	BANCO_DO_BRASIL("001", "00000000000191", "BANCO DO BRASIL S.A.",
 			"Banco do Brasil - Banco Múltiplo"),
 
-	
+	/**
+	 * Tipo enumerado que representa o Banrisul, Banco <strong>do Estado do Rio Grande do Sul</strong>,
+	 * código de compensação <strong><tt>041</tt></strong> <a href="http://www.banrisul.com.br/">
+	 * site</a>.
+	 * 
+	 * @since 0.2
+	 */
+	BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL("041", "92702067000196", 
+			"BANCO DO ESTADO DO RIO GRANDE DO SUL S.A.", "Banco Múltiplo"),
 			
 	/**
 	 * Tipo enumerado que representa o Banco <strong>Caixa Econômica Federal</strong>,
@@ -236,6 +244,8 @@ public enum EnumBancos implements ICurbitaObject{
 		suportados.put(BANCO_ITAU.codigoDeCompensacaoBACEN, BANCO_ITAU);
 
 		suportados.put(BANCO_SAFRA.codigoDeCompensacaoBACEN, BANCO_SAFRA);
+		
+		suportados.put(BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.codigoDeCompensacaoBACEN, BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL);
 	}
 
 	/**

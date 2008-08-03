@@ -138,6 +138,9 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 					campoLivre = ACLBancoSafra.create(titulo);
 					break;
 
+				case BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL:
+					campoLivre = ACLBanrisul.create(titulo);
+					break;
 				}
 			} else {
 				/*
