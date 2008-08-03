@@ -39,7 +39,8 @@ import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN17;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBancoReal;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBradesco;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLCaixaEconomicaFederalSINCO;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLItau;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLItauComCarteirasEspeciais;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLItauPadrao;
 
 
 @RunWith(Suite.class)
@@ -57,7 +58,8 @@ import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLItau;
 			TestCLBancoReal.class,
 			TestCLBradesco.class,
 			TestCLCaixaEconomicaFederalSINCO.class,
-			TestCLItau.class
+			TestCLItauPadrao.class,
+			TestCLItauComCarteirasEspeciais.class
 		}
 )
 public class TestSuiteBopepo {

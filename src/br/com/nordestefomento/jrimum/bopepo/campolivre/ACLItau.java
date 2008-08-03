@@ -31,7 +31,11 @@
 	
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
+import java.util.Arrays;
+
+import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
 
 /**
@@ -58,6 +62,14 @@ import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
  */
 
 public abstract class ACLItau extends ACampoLivre {
+	
+	/**
+	 * <p>
+	 * Carteiras especiais sem registro na qual são utilizadas 15 posições numéricas 
+	 * para identificação do título liquidado (8 do Nosso Número e 7 do Seu Número).
+	 * </p>
+	 */
+	private static final Integer[] CARTEIRAS_ESPECIAIS = {106, 107, 122, 142, 143, 195, 196, 198};
 
 	protected ACLItau(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
@@ -65,7 +77,49 @@ public abstract class ACLItau extends ACampoLivre {
 	
 	static ICampoLivre create(Titulo titulo){
 		
-		return CLItau.create(titulo);
+		ICampoLivre campoLivre = null;
+		ContaBancaria conta = titulo.getContaBancaria();
+		
+		/*
+		 * Se a carteira for especial, a forma de construir o campo livre será diferente.
+		 */
+		if(Arrays.binarySearch(CARTEIRAS_ESPECIAIS, conta.getCarteira().getCodigo()) >= 0) {
+			
+			campoLivre = new CLItauComCarteirasEspeciais(titulo);
+		}
+		else {
+			
+			campoLivre = new CLItauPadrao(titulo);
+		}
+		
+		return campoLivre;
+	}
+	
+	/**
+	 * <p>
+	 * Método auxiliar para calcular o dígito verificador dos campos 31 e 41.
+	 * O dígito é calculado com base em um campo fornecido pelos métodos que o chamam
+	 * (<code>calculeDigitoDaPosicao31</code> e <code>calculeDigitoDaPosicao41</code>)
+	 * </p>
+	 * <p>
+	 * O cálculo é feito através do módulo 10.
+	 * </p>
+	 * 
+	 * @param campo
+	 * @return Dígito verificador do campo fornecido.
+	 * 
+	 * @since 
+	 */
+	protected Integer calculeDigitoVerificador(String campo) {
+				
+		int restoDivisao = Modulo.calculeMod10(campo, 1, 2);
+		int digito = Modulo.MOD10 - restoDivisao;
+		
+		if(digito > 9) {
+			digito = 0;
+		}
+		
+		return new Integer(digito);
 	}
 
 }
