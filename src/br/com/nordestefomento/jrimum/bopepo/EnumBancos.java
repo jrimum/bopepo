@@ -182,7 +182,14 @@ public enum EnumBancos implements ICurbitaObject{
 	BANCO_ABN_AMRO_REAL("356", "33066408000115", "BANCO ABN AMRO REAL S.A.",
 			"Banco Múltiplo"),
 
-	
+
+	/**
+	 * Tipo enumerado que representa o <strong>Banco Mercantil do Brasil</strong>
+	 * (<a href="http://www.mercantildobrasil.com.br">http://www.mercantildobrasil.com.br</a>),
+	 * código de compensação <strong><tt>389</tt></strong>.
+	 * @since 0.2
+	 */
+	MERCANTIL_DO_BRASIL("389", "17184037000110", "BANCO MERCANTIL DO BRASIL S.A.", "Banco Múltiplo"),
 			
 	/**
 	 * Tipo enumerado que representa o <strong>HSBC</strong>, código de
@@ -246,6 +253,8 @@ public enum EnumBancos implements ICurbitaObject{
 		suportados.put(BANCO_SAFRA.codigoDeCompensacaoBACEN, BANCO_SAFRA);
 		
 		suportados.put(BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.codigoDeCompensacaoBACEN, BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL);
+		
+		suportados.put(MERCANTIL_DO_BRASIL.codigoDeCompensacaoBACEN, MERCANTIL_DO_BRASIL);
 	}
 
 	/**
