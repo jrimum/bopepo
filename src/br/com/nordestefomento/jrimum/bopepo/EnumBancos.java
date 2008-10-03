@@ -143,7 +143,11 @@ public enum EnumBancos implements ICurbitaObject{
 	CAIXA_ECONOMICA_FEDERAL("104", "00360305000104", "CAIXA ECONOMICA FEDERAL",
 			"Caixa Econômica Federal"),
 
-	
+	/**
+	 * Tipo enumerado que representa o Banco <strong>Nossa Caixa</strong>, código
+	 * de compensação <strong><tt>151</tt></strong> <a href="http://www.nossacaixa.com.br/">site</a>.
+	 */
+	NOSSA_CAIXA("151", "43073394000110", "BANCO NOSSA CAIXA S.A.", "Banco Múltiplo"),	
 			
 	/**
 	 * Tipo enumerado que representa o Banco <strong>Bradesco</strong>, código
@@ -255,6 +259,8 @@ public enum EnumBancos implements ICurbitaObject{
 		suportados.put(BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.codigoDeCompensacaoBACEN, BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL);
 		
 		suportados.put(MERCANTIL_DO_BRASIL.codigoDeCompensacaoBACEN, MERCANTIL_DO_BRASIL);
+		
+		suportados.put(NOSSA_CAIXA.codigoDeCompensacaoBACEN, NOSSA_CAIXA);
 	}
 
 	/**

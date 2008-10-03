@@ -10,7 +10,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  * 
- * Created at: 25/09/2008 - 20:55:13
+ * Created at: 03/10/2008 - 11:39:10
  *
  * ================================================================================
  *
@@ -24,12 +24,10 @@
  * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
  * e limitações sob esta LICENÇA.
  * 
- * Criado em: 25/09/2008 - 20:55:13
+ * Criado em: 03/10/2008 - 11:39:10
  * 
  */
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
-
-import java.math.BigDecimal;
 
 import junit.framework.Assert;
 
@@ -63,9 +61,9 @@ import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
  * 
  * @version 
  */
-public class TestCLMercantilDoBrasil {
+public class TestCLNossaCaixa {
 
-	private ICampoLivre clMercantil;
+	private ICampoLivre clNossaCaixa;
 	
 	private Titulo titulo;
 	
@@ -75,15 +73,13 @@ public class TestCLMercantilDoBrasil {
 		Pessoa sacado = new Pessoa();
 		Pessoa cedente = new Pessoa();
 		
-		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.MERCANTIL_DO_BRASIL.create());
-		
-		contaBancaria.setAgencia(new Agencia(1234));
-		contaBancaria.setNumeroDaConta(new NumeroDaConta(123456789));
+		ContaBancaria contaBancaria = new ContaBancaria(EnumBancos.NOSSA_CAIXA.create());
+		contaBancaria.setAgencia(new Agencia(1));
+		contaBancaria.setNumeroDaConta(new NumeroDaConta(2818));
 		
 		titulo = new Titulo(contaBancaria, sacado, cedente);
-		titulo.setNossoNumero("1234567890");
-		titulo.setDigitoDoNossoNumero("5");
+		titulo.setNossoNumero("990000001");
+		titulo.setDigitoDoNossoNumero("1");
 	}
 	
 	@Test
@@ -91,14 +87,19 @@ public class TestCLMercantilDoBrasil {
 		
 		try {
 			
-			clMercantil = Factory4CampoLivre.create(titulo);
-			Assert.assertNotNull(clMercantil);
+			clNossaCaixa = Factory4CampoLivre.create(titulo);
+			Assert.assertNotNull(clNossaCaixa);
 			
 		} catch(NotSuporttedCampoLivreException e) {
 			e.printStackTrace();
-			Assert.fail("O campo livre do banco Mercantil do Brasil deve estar sendo suportado.");
+			Assert.fail("O campo livre do banco Nossa Caixa deve estar sendo suportado.");
 		}
-		
+	}
+	
+	private String getCampoLivreComoString() {
+		clNossaCaixa = Factory4CampoLivre.create(titulo);
+		String campoLivre = clNossaCaixa.write();
+		return campoLivre;
 	}
 	
 	@Test
@@ -108,19 +109,13 @@ public class TestCLMercantilDoBrasil {
 		
 		Assert.assertNotNull(campoLivre);
 	}
-
-	private String getCampoLivreComoString() {
-		clMercantil = Factory4CampoLivre.create(titulo);
-		String campoLivre = clMercantil.write();
-		return campoLivre;
-	}
 	
 	@Test
 	public void testWriteCampo1Correto() {
 		
 		String campoLivre = getCampoLivreComoString();
 		
-		Assert.assertEquals("1234", campoLivre.substring(0, 4));
+		Assert.assertEquals("9", campoLivre.substring(0, 1));
 	}
 	
 	@Test
@@ -128,7 +123,7 @@ public class TestCLMercantilDoBrasil {
 		
 		String campoLivre = getCampoLivreComoString();
 		
-		Assert.assertEquals("12345678905", campoLivre.substring(4, 15));
+		Assert.assertEquals("90000001", campoLivre.substring(1, 9));
 	}
 	
 	@Test
@@ -136,51 +131,46 @@ public class TestCLMercantilDoBrasil {
 		
 		String campoLivre = getCampoLivreComoString();
 		
-		Assert.assertEquals("123456789", campoLivre.substring(15, 24));
+		Assert.assertEquals("0001", campoLivre.substring(9, 13));
 	}
 	
 	@Test
-	public void testWriteCampo4ComDesconto() {
+	public void testWriteCampo4Correto() {
 		
-		titulo.setDesconto(BigDecimal.TEN);
+		String campoLivre = getCampoLivreComoString();
+		
+		Assert.assertEquals("4", campoLivre.substring(13, 14));
+	}
+	
+	@Test
+	public void testWriteCampo5Correto() {
+		
+		String campoLivre = getCampoLivreComoString();
+		
+		Assert.assertEquals("002818", campoLivre.substring(14, 20));
+	}
+	
+	@Test
+	public void testWriteCampo6Correto() {
+		
+		String campoLivre = getCampoLivreComoString();
+		
+		Assert.assertEquals("151", campoLivre.substring(20, 23));
+	}
+	
+	@Test
+	public void testWriteCampo7Correto() {
+		
+		String campoLivre = getCampoLivreComoString();
+		
+		Assert.assertEquals("3", campoLivre.substring(23, 24));
+	}
+	
+	@Test
+	public void testWriteCampo8Correto() {
+		
 		String campoLivre = getCampoLivreComoString();
 		
 		Assert.assertEquals("0", campoLivre.substring(24, 25));
-	}
-	
-	@Test
-	public void testWriteCampo4SemDescontoNull() {
-
-		titulo.setDesconto(null);
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("2", campoLivre.substring(24, 25));
-	}
-	
-	@Test
-	public void testWriteCampo4SemDescontoZero() {
-
-		titulo.setDesconto(BigDecimal.ZERO);
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("2", campoLivre.substring(24, 25));
-	}
-	
-	@Test
-	public void testWriteCopmletoComDesconto() {
-		
-		titulo.setDesconto(BigDecimal.TEN);
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("1234123456789051234567890", campoLivre);
-	}
-	
-	@Test
-	public void testWriteCopmletoSemDesconto() {
-		
-		titulo.setDesconto(null);
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("1234123456789051234567892", campoLivre);
 	}
 }

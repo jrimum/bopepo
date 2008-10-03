@@ -69,6 +69,11 @@ import br.com.nordestefomento.jrimum.utilix.LineOfFields;
  */
 abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4605730904122445595L;
+
 	protected ACampoLivre(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
@@ -145,6 +150,11 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 				case MERCANTIL_DO_BRASIL:
 					campoLivre = ACLMercantilDoBrasil.create(titulo);
 					break;
+					
+				case NOSSA_CAIXA:
+					campoLivre = ACLNossaCaixa.create(titulo);
+					break;
+					
 				}
 			} else {
 				/*
