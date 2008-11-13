@@ -47,6 +47,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import br.com.nordestefomento.jrimum.ACurbitaObject;
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.type.Endereco;
@@ -375,6 +376,7 @@ class ViewerPDF extends ACurbitaObject {
 		setSacadorAvalista();
 		setCodigoBarra();
 		setCamposExtra();
+		setCarteira();
 	}
 
 	private void setCamposExtra() throws IOException, DocumentException {
@@ -629,6 +631,15 @@ class ViewerPDF extends ACurbitaObject {
 		form.setField("txtRsCedente", boleto.getTitulo().getCedente().getNome());
 		form.setField("txtFcCedente", boleto.getTitulo().getCedente().getNome());
 	}
+	
+	
+	private void setCarteira() throws IOException, DocumentException {
+
+		Carteira carteira = boleto.getTitulo().getContaBancaria().getCarteira();
+		
+		if (isNotNull(carteira)) 
+		  form.setField("txtFcCarteira", carteira.getCodigo().toString());
+	}	
 
 	private void setQuantidade() throws IOException, DocumentException {
 
