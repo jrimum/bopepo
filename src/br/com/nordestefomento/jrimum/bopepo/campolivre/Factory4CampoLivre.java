@@ -110,12 +110,12 @@ public final class Factory4CampoLivre extends ACurbitaObject{
 								Field<String> campo = new Field<String>(StringUtils.EMPTY,
 										STRING_LENGTH, Filler.ZERO_LEFT);
 
-								@Override
+								
 								public void read(String str) {
 									campo.read(str);
 								}
 
-								@Override
+								
 								public String write() {
 									return campo.write();
 								}
