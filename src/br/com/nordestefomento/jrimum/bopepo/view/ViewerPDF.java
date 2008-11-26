@@ -585,9 +585,10 @@ class ViewerPDF extends ACurbitaObject {
 
 	private void setDescontoAbatimento() throws IOException, DocumentException {
 
-		form.setField("txtRsDescontoAbatimento", "");
-		form.setField("txtFcDescontoAbatimento", "");
-
+		form.setField("txtRsDescontoAbatimento", Util4Monetary.fmt_Real
+				.format(boleto.getTitulo().getDesconto()));
+		form.setField("txtFcDescontoAbatimento", Util4Monetary.fmt_Real
+				.format(boleto.getTitulo().getDesconto()));
 	}
 
 	private void setValorDocumento() throws IOException, DocumentException {

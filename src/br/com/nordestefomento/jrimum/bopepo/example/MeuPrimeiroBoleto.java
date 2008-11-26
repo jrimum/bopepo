@@ -118,6 +118,7 @@ public class MeuPrimeiroBoleto {
 		titulo.setDataDoVencimento(new Date());
 		titulo.setTipoDeDocumento(EnumTitulo.DM_DUPLICATA_MERCANTIL);
 		titulo.setAceite(EnumAceite.A);
+		titulo.setDesconto(new BigDecimal(0.05));
 
 		
 		
@@ -141,7 +142,6 @@ public class MeuPrimeiroBoleto {
 		boleto.setInstrucao7("PARA PAGAMENTO 7 até xx/xx/xxxx COBRAR O VALOR " +
 				"QUE VOCÊ QUISER!");
 		boleto.setInstrucao8("APÓS o Vencimento, Pagável Somente na Rede X.");
-		
 		
 		
 		
