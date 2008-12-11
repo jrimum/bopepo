@@ -36,8 +36,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.imageio.ImageIO;
 
@@ -375,18 +373,16 @@ class ViewerPDF extends ACurbitaObject {
 		setDataProcessamento();
 		setSacadorAvalista();
 		setCodigoBarra();
-		setCamposExtra();
 		setCarteira();
+		setCamposExtra();
+		setImagensNosCampos();
 	}
 
 	private void setCamposExtra() throws IOException, DocumentException {
 
-		Map<String, String> listaCamposExtra = this.boleto.getListaCamposExtra();
-
-		if (isNotNull(listaCamposExtra)) {
-			Set<String> listaCampo = listaCamposExtra.keySet();
-			for (String campo : listaCampo) {
-				form.setField(campo, listaCamposExtra.get(campo));
+		if (isNotNull(boleto.getListaCamposExtra())) {
+			for (String campo : boleto.getListaCamposExtra().keySet()) {
+				form.setField(campo, boleto.getListaCamposExtra().get(campo));
 			}
 		}
 	}
@@ -720,6 +716,51 @@ class ViewerPDF extends ACurbitaObject {
 
 	/**
 	 * <p>
+	 * Coloca as imagens dos campos no pdf de acordo com o nome dos campos do boleto atribuídos no map e templante.
+	 * </p>
+	 * 
+	 * @throws DocumentException
+	 * @throws IOException 
+	 * 
+	 * @since 0.2
+	 */
+	private void setImagensNosCampos() throws DocumentException, IOException {
+
+		if (isNotNull(boleto.getImagensEmCampos())) {
+			for (String campo : boleto.getImagensEmCampos().keySet()) {
+				setImagemNoCampo(campo, Image.getInstance(boleto.getImagensEmCampos().get(campo),null));
+			}
+		}
+	}
+
+	
+	/**
+	 * <p>
+	 * Coloca uma imagem no pdf de acordo com o nome do field no templante.
+	 * </p>
+	 * 
+	 * @param nomeDoCampo
+	 * @param imagem
+	 * @throws DocumentException
+	 * 
+	 * @since 0.2
+	 */
+	private void setImagemNoCampo(String nomeDoCampo, Image imagem) throws DocumentException {
+	
+		float posCampoImgLogo[];
+		
+		if(StringUtils.isNotBlank(nomeDoCampo)){
+			
+			posCampoImgLogo = form.getFieldPositions(nomeDoCampo);
+			
+			if (isNotNull(posCampoImgLogo))
+				Util4PDF.changeField2Image(stamper, posCampoImgLogo, imagem);
+		}
+	}
+	
+	
+	/**
+	 * <p>
 	 * Coloca a logo do passada na ficha de compensação do boleto e no recibo do
 	 * sacado.
 	 * </p>
@@ -731,17 +772,11 @@ class ViewerPDF extends ACurbitaObject {
 	 */
 	private void setImageLogo(Image imgLogoBanco) throws DocumentException {
 
-		float posCampoImgLogo[];
-		
 		// RECIBO DO SACADO
-		posCampoImgLogo = form.getFieldPositions("txtRsLogoBanco");
-		if (isNotNull(posCampoImgLogo))
-			Util4PDF.changeField2Image(stamper, posCampoImgLogo, imgLogoBanco);
+		setImagemNoCampo("txtRsLogoBanco",imgLogoBanco);
 
 		// FICHA DE COMPENSAÇÃO
-		posCampoImgLogo = form.getFieldPositions("txtFcLogoBanco");
-		if (isNotNull(posCampoImgLogo))
-			Util4PDF.changeField2Image(stamper, posCampoImgLogo, imgLogoBanco);
+		setImagemNoCampo("txtFcLogoBanco",imgLogoBanco);	
 	}
 
 	

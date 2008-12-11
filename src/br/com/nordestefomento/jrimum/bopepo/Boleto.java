@@ -30,6 +30,7 @@
 
 package br.com.nordestefomento.jrimum.bopepo;
 
+import java.awt.Image;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -120,6 +121,13 @@ public final class Boleto extends ACurbitaObject{
 	 * @see #setListaCamposExtra(Map)
 	 */
 	private Map<String, String> listaCamposExtra; 
+	
+	/**
+	 *<p>
+	 * Map com nome do campo e imagem para este campo.
+	 *</p>
+	 */
+	private Map<String, Image> ImagensEmCampos; 
 	
 	/**
 	 * Apenas cria um instâcia do boleto com os dados nulos. 
@@ -456,7 +464,7 @@ public final class Boleto extends ACurbitaObject{
 	}
 
 	public Map<String, String> getListaCamposExtra() {
-		setListaCamposExtra(this.listaCamposExtra);
+		
 		return this.listaCamposExtra;
 	}
 
@@ -470,6 +478,23 @@ public final class Boleto extends ACurbitaObject{
 	public void addCampoExtra(String nome, String valor) {
 		
 		getListaCamposExtra().put(nome, valor);
+	}
+	
+	public Map<String, Image> getImagensEmCampos() {
+		
+		return this.ImagensEmCampos;
+	}
+
+	public void setImagensEmCampos(Map<String,Image> imagensParaCampos) {
+		if (isNull(imagensParaCampos))
+			this.ImagensEmCampos = new HashMap<String, Image>();
+		else
+			this.ImagensEmCampos = imagensParaCampos;
+	}
+	
+	public void addImagensEmCampos(String fieldName, Image image) {
+		
+		getImagensEmCampos().put(fieldName, image);
 	}
 
 }
