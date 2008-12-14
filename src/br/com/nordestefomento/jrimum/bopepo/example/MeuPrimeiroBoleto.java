@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.lowagie.text.DocumentException;
-
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
@@ -26,8 +24,11 @@ import br.com.nordestefomento.jrimum.domkee.type.CEP;
 import br.com.nordestefomento.jrimum.domkee.type.Endereco;
 import br.com.nordestefomento.jrimum.domkee.type.EnumTitulo;
 import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
+import br.com.nordestefomento.jrimum.domkee.type.IDadoBancario;
 import br.com.nordestefomento.jrimum.domkee.type.Localidade;
 import br.com.nordestefomento.jrimum.domkee.type.Logradouro;
+
+import com.lowagie.text.DocumentException;
 
 
 
@@ -124,6 +125,28 @@ public class MeuPrimeiroBoleto {
 
 		
 		
+		
+		/*
+		 * INFORMANDO MAIS DADOS BANCÁRIOS, QUANDO NECESSÁRIO.
+		 * Dependendo do banco, talvez seja necessário informar mais dados além de: 
+		 * 
+		 * > Valor do título; 
+		 * > Vencimento; 
+		 * > Nosso número; 
+		 * > Código do banco 
+		 * > Data de vencimento; 
+		 * > Agência/Código do cedente; 
+		 * > Código da carteira; 
+		 * > Código da moeda;
+		 * 
+		 * Definidos como padrão pela FEBRABAN.
+		 * Verifique na documentação.
+		 */
+		titulo.setDadosBancarios(new IDadoBancario(){});
+		
+		
+		
+		
 		/* 
 		 * INFORMANDO OS DADOS SOBRE O BOLETO.
 		 * */
@@ -144,7 +167,6 @@ public class MeuPrimeiroBoleto {
 		boleto.setInstrucao7("PARA PAGAMENTO 7 até xx/xx/xxxx COBRAR O VALOR " +
 				"QUE VOCÊ QUISER!");
 		boleto.setInstrucao8("APÓS o Vencimento, Pagável Somente na Rede X.");
-		
 		
 		
 		/* 
