@@ -29,6 +29,7 @@
  */
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
+import br.com.nordestefomento.jrimum.domkee.entity.Modalidade;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 
 /**
@@ -63,7 +64,7 @@ public class ACLNossaCaixa extends ACampoLivre {
 	}
 	
 	static ICampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException {
-
+					
 		return new CLNossaCaixa(titulo);
 	}
 }

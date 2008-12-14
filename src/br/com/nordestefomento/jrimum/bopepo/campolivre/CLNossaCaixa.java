@@ -29,6 +29,8 @@
  */
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
+import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
+
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
@@ -159,8 +161,7 @@ public class CLNossaCaixa extends ACLNossaCaixa {
 		super(FIELDS_LENGTH, STRING_LENGTH);
 		
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		//TODO Verificar como passar a modalidade da conta.
-		Integer modalidadeDaConta = 4;
+		Integer modalidadeContaConvertida = convertaModalidadeDaConta(contaBancaria.getModalidade().getCodigoAsInteger());
 		
 		this.add(new Field<Integer>(getIdentificacaoDoSistemaPeloNossoNumero(titulo.getNossoNumero()), 1));
 		
@@ -168,14 +169,14 @@ public class CLNossaCaixa extends ACLNossaCaixa {
 		
 		this.add(new Field<Integer>(contaBancaria.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
 		
-		this.add(new Field<Integer>(convertaModalidadeDaConta(modalidadeDaConta), 1));
+		this.add(new Field<Integer>(modalidadeContaConvertida, 1));
 		
 		this.add(new Field<Integer>(contaBancaria.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
 		
 		this.add(new Field<Integer>(contaBancaria.getBanco().getCodigoDeCompensacaoBACEN().getCodigo(), 3));
 		
-		digito1ASBACE = calculeDigito1ASBACE(titulo, convertaModalidadeDaConta(modalidadeDaConta));
-		int digito2ASBACE = calculeDigito2ASBACE(titulo, convertaModalidadeDaConta(modalidadeDaConta), digito1ASBACE);
+		digito1ASBACE = calculeDigito1ASBACE(titulo, modalidadeContaConvertida);
+		int digito2ASBACE = calculeDigito2ASBACE(titulo, modalidadeContaConvertida, digito1ASBACE);
 		
 		this.add(new Field<Integer>(digito1ASBACE, 1));
 		
@@ -283,42 +284,6 @@ public class CLNossaCaixa extends ACLNossaCaixa {
 	/**
 	 * 
 	 * <p>
-	 * Realiza a conversão da modalidade da conta de acordo com a tabela de conversões.
-	 * </p>
-	 * 
-	 * @param modalidadeDaConta
-	 * @return
-	 * 
-	 * @since
-	 */
-	private Integer convertaModalidadeDaConta(Integer modalidadeDaConta) {
-		
-		switch(modalidadeDaConta) {
-		
-		case 13:
-			modalidadeDaConta = 3;
-			break;
-			
-		case 16:
-			modalidadeDaConta = 6;
-			break;
-			
-		case 17:
-			modalidadeDaConta = 7;
-			break;
-			
-		case 18:
-			modalidadeDaConta = 8;
-			break;
-		
-		}
-		
-		return modalidadeDaConta;
-	}
-
-	/**
-	 * 
-	 * <p>
 	 * A identificação do sistema é o primeiro dígito do Nosso Número, que por obrigatoriedade 
 	 * deve ser '9'.
 	 * </p>
@@ -347,7 +312,66 @@ public class CLNossaCaixa extends ACLNossaCaixa {
 	 */
 	private String getNossoNumeroCom8Posicoes(String nossoNumero) {
 		
+		if (  (nossoNumero.length() != 9) || (!nossoNumero.substring(0, 2).equals("99"))  ) 
+			throw new CampoLivreException("O nosso número deve conter exatamente 9 posições, sendo as 2 posições iniciais obrigatoriamente igual a 99.");
+		
 		return nossoNumero.substring(1);
+	}
+
+	/**
+	 * 
+	 * <p>
+	 * Realiza a conversão da modalidade da conta de acordo com a tabela de conversões.
+	 * </p>
+	 * 
+	 * @param modalidadeDaConta
+	 * @return
+	 * 
+	 * @since
+	 */
+	private Integer convertaModalidadeDaConta(Integer modalidadeDaConta) {
+	
+		Integer modalidadeConvertida = null;
+	
+		switch (modalidadeDaConta) {
+		case 1:
+			modalidadeConvertida = 1;
+			break;
+	
+		case 4:
+			modalidadeConvertida = 4;
+			break;
+	
+		case 9:
+			modalidadeConvertida = 9;
+			break;
+	
+		case 13:
+			modalidadeConvertida = 3;
+			break;
+	
+		case 16:
+			modalidadeConvertida = 6;
+			break;
+	
+		case 17:
+			modalidadeConvertida = 7;
+			break;
+	
+		case 18:
+			modalidadeConvertida = 8;
+			break;
+	
+		}
+		
+		if (modalidadeConvertida == null)  {
+			throw new CampoLivreException(
+					"Campo livre diponível somente para títulos de contas correntes " +
+					"com modalidades 01, 04, 09, 13, 16, 17 e 18."
+				);
+		}		
+		
+		return modalidadeDaConta;
 	}
 
 }

@@ -37,6 +37,7 @@ import org.junit.Test;
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.entity.Modalidade;
 import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
@@ -76,9 +77,10 @@ public class TestCLNossaCaixa {
 		ContaBancaria contaBancaria = new ContaBancaria(EnumBancos.NOSSA_CAIXA.create());
 		contaBancaria.setAgencia(new Agencia(1));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(2818));
+		contaBancaria.setModalidade(new Modalidade(13));
 		
 		titulo = new Titulo(contaBancaria, sacado, cedente);
-		titulo.setNossoNumero("990000001");
+		titulo.setNossoNumero("997654321");
 		titulo.setDigitoDoNossoNumero("1");
 	}
 	
@@ -139,7 +141,7 @@ public class TestCLNossaCaixa {
 		
 		String campoLivre = getCampoLivreComoString();
 		
-		Assert.assertEquals("4", campoLivre.substring(13, 14));
+		Assert.assertEquals("3", campoLivre.substring(13, 14));
 	}
 	
 	@Test

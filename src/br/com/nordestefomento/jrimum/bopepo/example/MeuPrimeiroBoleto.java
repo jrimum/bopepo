@@ -16,6 +16,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
 import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
 import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.EnumTipoCobranca;
+import br.com.nordestefomento.jrimum.domkee.entity.Modalidade;
 import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
@@ -59,12 +60,13 @@ public class MeuPrimeiroBoleto {
 		Pessoa cedente = new Pessoa("PROJETO JRimum", "00.000.208/0001-00");
 		
 		// Informando dados sobre a conta bancária do cendente.		
-		IBanco banco = EnumBancos.UNIBANCO.create();
+		IBanco banco = EnumBancos.NOSSA_CAIXA.create();
 		ContaBancaria contaBancariaCed = new ContaBancaria(banco);
-		contaBancariaCed.setBanco(EnumBancos.UNIBANCO.create());
+		contaBancariaCed.setBanco(banco);
 		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(123456, "0"));
 		contaBancariaCed.setCarteira(new Carteira(123,
 				EnumTipoCobranca.SEM_REGISTRO));
+		contaBancariaCed.setModalidade(new Modalidade(4));
 		contaBancariaCed.setAgencia(new Agencia(01234, "1"));
 		cedente.addContaBancaria(contaBancariaCed);		
 		
@@ -110,8 +112,8 @@ public class MeuPrimeiroBoleto {
 		 * INFORMANDO OS DADOS SOBRE O TÍTULO.
 		 * */		
 		Titulo titulo = new Titulo(contaBancariaCed, sacado, cedente,sacadorAvalista);
-		titulo.setNumeroDoDocumento("123456789");
-		titulo.setNossoNumero("1234567890");
+		titulo.setNumeroDoDocumento("123456");
+		titulo.setNossoNumero("993456789");
 		titulo.setDigitoDoNossoNumero("5");
 		titulo.setValor(BigDecimal.valueOf(0.23));
 		titulo.setDataDoDocumento(new Date());
