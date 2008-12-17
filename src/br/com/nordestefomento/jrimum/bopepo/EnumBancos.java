@@ -122,6 +122,18 @@ public enum EnumBancos implements ICurbitaObject{
 	 */
 	BANCO_DO_BRASIL("001", "00000000000191", "BANCO DO BRASIL S.A.",
 			"Banco do Brasil - Banco Múltiplo"),
+			
+	/**
+	 * Tipo enumerado que representa o Banestes, Banco <strong>do Estado do Espírito Santo</strong>,
+	 * código de compensação <strong><tt>021</tt></strong>
+	 *  <a href="http://www.banestes.com.br">
+	 * site</a>.
+	 * 
+	 * @since 0.2
+	 */
+	BANCO_DO_ESTADO_DO_ESPIRITO_SANTO("021", "28127603000178", 
+			"BANCO DO ESTADO DO ESPIRITO SANTO S.A.", "Banco Múltiplo"),
+	
 
 	/**
 	 * Tipo enumerado que representa o Banrisul, Banco <strong>do Estado do Rio Grande do Sul</strong>,
@@ -261,6 +273,8 @@ public enum EnumBancos implements ICurbitaObject{
 		suportados.put(MERCANTIL_DO_BRASIL.codigoDeCompensacaoBACEN, MERCANTIL_DO_BRASIL);
 		
 		suportados.put(NOSSA_CAIXA.codigoDeCompensacaoBACEN, NOSSA_CAIXA);
+		
+		suportados.put(BANCO_DO_ESTADO_DO_ESPIRITO_SANTO.codigoDeCompensacaoBACEN, BANCO_DO_ESTADO_DO_ESPIRITO_SANTO);
 	}
 
 	/**
