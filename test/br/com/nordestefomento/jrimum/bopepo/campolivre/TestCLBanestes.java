@@ -117,8 +117,7 @@ public class TestCLBanestes {
 	
 	@Test
 	public void seOWriteRetornaOValorEsperadoParaUmaCarteiraCaucionada() {
-		final Carteira carteiraCaucionada = new Carteira();
-		carteiraCaucionada.setTipoCobranca(EnumTipoCobranca.CAUCIONADA);
+		final Carteira carteiraCaucionada = new Carteira(3, EnumTipoCobranca.COM_REGISTRO);
 		titulo.getContaBancaria().setCarteira(carteiraCaucionada);
 		clBanestes = Factory4CampoLivre.create(titulo);
 		assertEquals(

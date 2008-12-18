@@ -40,14 +40,16 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * 
  * <p>
  * Representação do campo livre usado para boletos com carteiras (<em>cobrança</em>)
- * sem registro, caucionadas e com registro.
+ * sem registro, caucionadas e com registro. O tipo de cobrança de carteira caucionada
+ * se enquadra no conceito de cobrança registrada, sendo diferenciada pelo código
+ * da carteira.
  * </p>
  * 
  * <p>
  * Layout:<br />
  * <div align="center">
  * <p align="center">
- * <font face="Arial">Cobrança Normal (com registro) - CAMPO LIVRE - Chave ASBACE</font>
+ * <font face="Arial">Cobrança Normal - CAMPO LIVRE - Chave ASBACE</font>
  * </p>
  * 
  * <table border="1" cellpadding="0" cellspacing="0" style="border-collapse:
@@ -122,16 +124,13 @@ public class CLBanestes extends ACLBanestes {
 					this.add(new Field<Integer>(2, 1));
 					break;
 				case COM_REGISTRO:
-					if (codigoDaCarteiraDeCobranca >= 4 && codigoDaCarteiraDeCobranca <= 7) {
+					if (codigoDaCarteiraDeCobranca >= 3 && codigoDaCarteiraDeCobranca <= 7) {
 						this.add(new Field<Integer>(codigoDaCarteiraDeCobranca, 1));
 						break;
 					} else
 						throw new CampoLivreException("Código da carteira de cobrança com registro deve ser" +
-							" especificado com 4,5,6 ou 7. Valor atual = [" + 
+							" especificado com 3,4,5,6 ou 7. Valor atual = [" + 
 							codigoDaCarteiraDeCobranca + "]");
-				case CAUCIONADA:
-					this.add(new Field<Integer>(3, 1));
-					break;
 				default:
 					if (tipoDeCobranca == null)
 						throw new CampoLivreException("Tipo de cobrança da carteira não foi especificado!");
