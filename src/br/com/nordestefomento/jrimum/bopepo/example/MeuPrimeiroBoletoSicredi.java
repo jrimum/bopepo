@@ -139,13 +139,13 @@ public class MeuPrimeiroBoletoSicredi {
 
 		
 		// Adicionando novos campos ao boleto...
-		boleto.addCampoExtra("txtEnvSacado1", "CLIENTE TESTE (Algum Sacado)");
-		boleto.addCampoExtra("txtEnvSacado2", "RUA TESTE, 999");
-		boleto.addCampoExtra("txtEnvSacado3", "17506-970  MARÍLIA-SP");
+		boleto.addTextosExtras("txtEnvSacado1", "CLIENTE TESTE (Algum Sacado)");
+		boleto.addTextosExtras("txtEnvSacado2", "RUA TESTE, 999");
+		boleto.addTextosExtras("txtEnvSacado3", "17506-970  MARÍLIA-SP");
 		
 				
-		boleto.addCampoExtra("txtRsNumeroFatura", "111");
-		boleto.addCampoExtra("txtRsSacado2", "MAIS DADOS SOBRE O SACADO...");
+		boleto.addTextosExtras("txtRsNumeroFatura", "111");
+		boleto.addTextosExtras("txtRsSacado2", "MAIS DADOS SOBRE O SACADO...");
 		
 		/*
 		 * Detalhando a Fatura:
@@ -182,24 +182,24 @@ public class MeuPrimeiroBoletoSicredi {
 			
 		}
 		
-		boleto.addCampoExtra("txtRsListagemNome", sbProduto.toString());
-		boleto.addCampoExtra("txtRsListagemData", sbData.toString());
-		boleto.addCampoExtra("txtRsListagemServico", sbServico.toString());
-		boleto.addCampoExtra("txtRsListagemQtde", sbQuantidade.toString());
-		boleto.addCampoExtra("txtRsListagemValor", sbValor.toString());
+		boleto.addTextosExtras("txtRsListagemNome", sbProduto.toString());
+		boleto.addTextosExtras("txtRsListagemData", sbData.toString());
+		boleto.addTextosExtras("txtRsListagemServico", sbServico.toString());
+		boleto.addTextosExtras("txtRsListagemQtde", sbQuantidade.toString());
+		boleto.addTextosExtras("txtRsListagemValor", sbValor.toString());
 		
 		/*
 		 * Campos específicos do SICREDI para ficha de compensação
 		 */
 		
-		boleto.addCampoExtra("txtFcNomeCarteira", "SIMPLES");
+		boleto.addTextosExtras("txtFcNomeCarteira", "SIMPLES");
 		
 		//Formatação própria para Agencia/CodigoDoCedente
 		CampoLivreSicredi.InnerCooperativaDeCredito cooperativa = clSICREDI.loadCooperativaDeCredito(titulo.getContaBancaria().getAgencia());
 		
 		String codigoDoCedente = clSICREDI.componhaCodigoDoCedente(titulo.getContaBancaria().getNumeroDaConta());
 		//FORMATAÇÃO: AAAA.PP.CCCCC
-		boleto.addCampoExtra("txtFcAgenciaCodigoCedentePosto", cooperativa.codigo+"."+cooperativa.posto+"."+codigoDoCedente);
+		boleto.addTextosExtras("txtFcAgenciaCodigoCedentePosto", cooperativa.codigo+"."+cooperativa.posto+"."+codigoDoCedente);
 		
 		
 		/* 

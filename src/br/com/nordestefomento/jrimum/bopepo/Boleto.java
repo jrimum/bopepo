@@ -27,7 +27,6 @@
  * 
  */
 
-
 package br.com.nordestefomento.jrimum.bopepo;
 
 import java.awt.Image;
@@ -42,7 +41,6 @@ import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoExceptio
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Util4Date;
-
 
 /**
  * <p>
@@ -118,16 +116,16 @@ public final class Boleto extends ACurbitaObject{
 	private String instrucao8;
 
 	/**
-	 * @see #setListaCamposExtra(Map)
+	 * @see #setTextosExtras(Map)
 	 */
-	private Map<String, String> listaCamposExtra; 
+	private Map<String, String> textosExtras; 
 	
 	/**
 	 *<p>
 	 * Map com nome do campo e imagem para este campo.
 	 *</p>
 	 */
-	private Map<String, Image> ImagensEmCampos; 
+	private Map<String, Image> imagensExtras; 
 	
 	/**
 	 * Apenas cria um instâcia do boleto com os dados nulos. 
@@ -147,7 +145,6 @@ public final class Boleto extends ACurbitaObject{
 
 		if(log.isTraceEnabled())
 			log.trace("Instanciando boleto");
-		
 		
 		if(log.isDebugEnabled())
 			log.debug("titulo instance : "+titulo);
@@ -184,7 +181,6 @@ public final class Boleto extends ACurbitaObject{
 		
 		if(log.isDebugEnabled())
 			log.debug("titulo instance : "+titulo);
-		
 		
 		if(log.isDebugEnabled())
 			log.debug("campoLivre instance : "+campoLivre);
@@ -463,38 +459,41 @@ public final class Boleto extends ACurbitaObject{
 		this.instrucao8 = instrucao8;
 	}
 
-	public Map<String, String> getListaCamposExtra() {
+	public Map<String, String> getTextosExtras() {
 		
-		return this.listaCamposExtra;
+		return this.textosExtras;
 	}
 
-	public void setListaCamposExtra(Map<String,String> camposTemplate) {
-		if (isNull(camposTemplate))
-			this.listaCamposExtra = new HashMap<String, String>();
-		else
-			this.listaCamposExtra = camposTemplate;
+	public void setTextosExtras(Map<String,String> textosExtras) {
+
+		this.textosExtras = textosExtras;
 	}
 	
-	public void addCampoExtra(String nome, String valor) {
+	public void addTextosExtras(String nome, String valor) {
 		
-		getListaCamposExtra().put(nome, valor);
+		if(isNotNull(getTextosExtras())) {
+			setTextosExtras(new HashMap<String, String>());
+		}
+		
+		getTextosExtras().put(nome, valor);
 	}
 	
-	public Map<String, Image> getImagensEmCampos() {
+	public Map<String, Image> getImagensExtras() {
 		
-		return this.ImagensEmCampos;
+		return this.imagensExtras;
 	}
 
-	public void setImagensEmCampos(Map<String,Image> imagensParaCampos) {
-		if (isNull(imagensParaCampos))
-			this.ImagensEmCampos = new HashMap<String, Image>();
-		else
-			this.ImagensEmCampos = imagensParaCampos;
+	public void setImagensExtras(Map<String,Image> imagensExtras) {
+		this.imagensExtras = imagensExtras;
 	}
 	
-	public void addImagensEmCampos(String fieldName, Image image) {
+	public void addImagensExtras(String fieldName, Image image) {
 		
-		getImagensEmCampos().put(fieldName, image);
+		if(isNull(getImagensExtras())) {
+			setImagensExtras(new HashMap<String, Image>());
+		}
+		
+		getImagensExtras().put(fieldName, image);
 	}
 
 }

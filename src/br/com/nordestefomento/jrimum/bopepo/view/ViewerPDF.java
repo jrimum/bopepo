@@ -380,9 +380,9 @@ class ViewerPDF extends ACurbitaObject {
 
 	private void setCamposExtra() throws IOException, DocumentException {
 
-		if (isNotNull(boleto.getListaCamposExtra())) {
-			for (String campo : boleto.getListaCamposExtra().keySet()) {
-				form.setField(campo, boleto.getListaCamposExtra().get(campo));
+		if (isNotNull(boleto.getTextosExtras())) {
+			for (String campo : boleto.getTextosExtras().keySet()) {
+				form.setField(campo, boleto.getTextosExtras().get(campo));
 			}
 		}
 	}
@@ -726,9 +726,9 @@ class ViewerPDF extends ACurbitaObject {
 	 */
 	private void setImagensNosCampos() throws DocumentException, IOException {
 
-		if (isNotNull(boleto.getImagensEmCampos())) {
-			for (String campo : boleto.getImagensEmCampos().keySet()) {
-				setImagemNoCampo(campo, Image.getInstance(boleto.getImagensEmCampos().get(campo),null));
+		if (isNotNull(boleto.getImagensExtras())) {
+			for (String campo : boleto.getImagensExtras().keySet()) {
+				setImagemNoCampo(campo, Image.getInstance(boleto.getImagensExtras().get(campo),null));
 			}
 		}
 	}
