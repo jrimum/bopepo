@@ -65,11 +65,16 @@ public class VariosBoletosEmUmArquivo {
 		List<Boleto> boletos = Util4Exemplos.getVariosBoletos();
 		
 		/*
-		 * Depois diga o nome do diretorio/arquivo para onde os boletos serão gerados. 
+		 * Depois diga o nome do diretorio/arquivo para onde os boletos serão gerados com template padrão. 
 		 */
 		
-		BoletoViewer.groupInOnePDF("TesteVariosEmUm.pdf", boletos);
+		//BoletoViewer.groupInOnePDF("TesteVariosEmUm.pdf", boletos);
 	
+		/*
+		 * OU então diga o nome do diretorio/arquivo para onde os boletos serão gerados com um template personalizado. 
+		 */
+		
+		BoletoViewer.groupInOnePDF("TesteVariosEmUmPersonalizado.pdf", boletos,new File("TemplatePersonalizado.pdf"));
 		
 		/*
 		 * Pronto, agora vamos conferir: 
@@ -79,7 +84,7 @@ public class VariosBoletosEmUmArquivo {
 			
 		try{
 	
-			desktop.open(new File("TesteVariosEmUm.pdf"));
+			desktop.open(new File("TesteVariosEmUmPersonalizado.pdf"));
 	
 		}catch(Exception e){
 			throw new JRimumException("Arquivo não gerado!",e);

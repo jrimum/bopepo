@@ -108,8 +108,22 @@ class ViewerPDF extends ACurbitaObject {
 
 	private File template;
 
+	/**
+	 *<p> Para uso interno do componente </p> 
+	 */
+	ViewerPDF() {
+	}
+	
 	ViewerPDF(Boleto boleto) {
+		
 		this.boleto = boleto;
+	}
+	
+	ViewerPDF(Boleto boleto, File template) {
+		
+		this.boleto = boleto;
+		
+		setTemplate(template);
 	}
 
 	/**
@@ -117,8 +131,9 @@ class ViewerPDF extends ACurbitaObject {
 	 * SOBRE O MÉTODO
 	 * </p>
 	 * 
-	 * @param pathName
-	 * @param boletos
+	 * @param pathName arquivo de destino
+	 * @param boletos a serem agrupados
+	 * @param boletoViewer visualizador
 	 * @return File contendo boletos gerados
 	 * @throws IOException
 	 * @throws DocumentException
@@ -126,7 +141,7 @@ class ViewerPDF extends ACurbitaObject {
 	 * @since 0.2
 	 */
 
-	protected static File groupInOnePDF(String pathName, List<Boleto> boletos)
+	protected static File groupInOnePDF(String pathName, List<Boleto> boletos, BoletoViewer boletoViewer)
 			throws IOException, DocumentException {
 
 		File arq = null;
@@ -134,13 +149,12 @@ class ViewerPDF extends ACurbitaObject {
 		List<byte[]> boletosEmBytes = new ArrayList<byte[]>(boletos.size());
 
 		for (Boleto bop : boletos)
-			boletosEmBytes.add(new BoletoViewer(bop).getPdfAsByteArray());
+			boletosEmBytes.add(boletoViewer.setBoleto(bop).getPdfAsByteArray());
 
 		arq = Util4File.bytes2File(pathName, Util4PDF
 				.mergeFiles(boletosEmBytes));
 
 		return arq;
-
 	}
 
 	/**
@@ -202,6 +216,16 @@ class ViewerPDF extends ACurbitaObject {
 		setTemplate(new File(pathname));
 	}
 
+	/**
+	 * @return the boleto
+	 * 
+	 * @since 0.2
+	 */
+	protected Boleto getBoleto() {
+		
+		return this.boleto;
+	}
+	
 	/**
 	 * <p>
 	 * SOBRE O MÉTODO
@@ -581,10 +605,14 @@ class ViewerPDF extends ACurbitaObject {
 
 	private void setDescontoAbatimento() throws IOException, DocumentException {
 
-		form.setField("txtRsDescontoAbatimento", Util4Monetary.fmt_Real
-				.format(boleto.getTitulo().getDesconto()));
-		form.setField("txtFcDescontoAbatimento", Util4Monetary.fmt_Real
-				.format(boleto.getTitulo().getDesconto()));
+		if(isNotNull(boleto.getTitulo().getDesconto())){
+			
+			form.setField("txtRsDescontoAbatimento", Util4Monetary.fmt_Real
+					.format(boleto.getTitulo().getDesconto()));
+			form.setField("txtFcDescontoAbatimento", Util4Monetary.fmt_Real
+					.format(boleto.getTitulo().getDesconto()));
+		}
+		
 	}
 
 	private void setValorDocumento() throws IOException, DocumentException {
