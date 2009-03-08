@@ -30,6 +30,7 @@ import br.com.nordestefomento.jrimum.domkee.type.EnumTitulo;
 import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.type.Localidade;
 import br.com.nordestefomento.jrimum.domkee.type.Logradouro;
+import br.com.nordestefomento.jrimum.domkee.type.UnidadeFederativa;
 
 import com.lowagie.text.DocumentException;
 
@@ -69,7 +70,7 @@ public class MeuPrimeiroBoletoSicredi {
 
 		// Informando o endereço do sacado.
 		Endereco enderecoSac = new Endereco();
-		enderecoSac.setUf(EnumUnidadeFederativa.RN);
+		enderecoSac.setUF(new UnidadeFederativa(EnumUnidadeFederativa.RN));
 		enderecoSac.setLocalidade(new Localidade("Natal"));
 		enderecoSac.setCep(new CEP("59064-120"));
 		enderecoSac.setBairro("Grande Centro");
@@ -86,7 +87,7 @@ public class MeuPrimeiroBoletoSicredi {
 		
 		// Informando o endereço do sacador avalista. 
 		Endereco enderecoSacAval = new Endereco();
-		enderecoSacAval.setUf(EnumUnidadeFederativa.DF);
+		enderecoSacAval.setUF(new UnidadeFederativa(EnumUnidadeFederativa.DF));
 		enderecoSacAval.setLocalidade(new Localidade("Brasília"));
 		enderecoSacAval.setCep(new CEP("00000-000"));
 		enderecoSacAval.setBairro("Grande Centro");

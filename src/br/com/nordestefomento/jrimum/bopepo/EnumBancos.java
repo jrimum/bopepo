@@ -29,10 +29,10 @@
 
 package br.com.nordestefomento.jrimum.bopepo;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import br.com.nordestefomento.jrimum.ACurbitaObject;
-import br.com.nordestefomento.jrimum.ICurbitaObject;
 import br.com.nordestefomento.jrimum.domkee.entity.Banco;
 import br.com.nordestefomento.jrimum.domkee.entity.CodigoDeCompensacaoBACEN;
 import br.com.nordestefomento.jrimum.domkee.ientity.IBanco;
@@ -100,7 +100,7 @@ import br.com.nordestefomento.jrimum.domkee.type.CNPJ;
  * @version 0.2
  */
 
-public enum EnumBancos implements ICurbitaObject{
+public enum EnumBancos implements Serializable{
 
 	// TODO FAZER um link para a lista de componentes suportados no javadoc
 	// dessa classe.

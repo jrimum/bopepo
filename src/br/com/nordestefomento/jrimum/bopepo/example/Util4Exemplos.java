@@ -53,6 +53,7 @@ import br.com.nordestefomento.jrimum.domkee.type.EnumTitulo;
 import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.type.Localidade;
 import br.com.nordestefomento.jrimum.domkee.type.Logradouro;
+import br.com.nordestefomento.jrimum.domkee.type.UnidadeFederativa;
 
 
 /**
@@ -105,7 +106,7 @@ public class Util4Exemplos {
 		Pessoa sacado = new Pessoa("Fulano da Silva Sauro Perdido e Desempregado", "222.222.222-22");
 		
 		Endereco endereco = new Endereco();
-		endereco.setUf(EnumUnidadeFederativa.RN);
+		endereco.setUF(new UnidadeFederativa(EnumUnidadeFederativa.RN));
 		endereco.setLocalidade(new Localidade("Natal"));
 		endereco.setCep(new CEP("59064-120"));
 		endereco.setBairro("Grande Centro");
@@ -127,7 +128,7 @@ public class Util4Exemplos {
 		Pessoa sacadorAvalista = new Pessoa("Banco do Brasil", "00.000.000/0001-91");
 		
 		Endereco endereco2 = new Endereco();
-		endereco2.setUf(EnumUnidadeFederativa.DF);
+		endereco2.setUF(new UnidadeFederativa(EnumUnidadeFederativa.DF));
 		endereco2.setLocalidade(new Localidade("Brasília"));
 		endereco2.setCep(new CEP("00000-000"));
 		endereco2.setBairro("Grande Centro");
