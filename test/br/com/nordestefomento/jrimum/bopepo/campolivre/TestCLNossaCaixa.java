@@ -35,12 +35,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
-import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.Modalidade;
-import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Modalidade;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 
 /**
  * 
@@ -75,7 +75,7 @@ public class TestCLNossaCaixa {
 		Pessoa cedente = new Pessoa();
 		
 		ContaBancaria contaBancaria = new ContaBancaria(EnumBancos.NOSSA_CAIXA.create());
-		contaBancaria.setAgencia(new Agencia(1));
+		contaBancaria.setAgencia(new Agencia(1,'1'));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(2818));
 		contaBancaria.setModalidade(new Modalidade(13));
 		

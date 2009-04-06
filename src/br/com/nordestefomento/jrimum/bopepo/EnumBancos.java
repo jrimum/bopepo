@@ -33,8 +33,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 import br.com.nordestefomento.jrimum.ACurbitaObject;
-import br.com.nordestefomento.jrimum.domkee.entity.Banco;
-import br.com.nordestefomento.jrimum.domkee.entity.CodigoDeCompensacaoBACEN;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Banco;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.CodigoDeCompensacaoBACEN;
 import br.com.nordestefomento.jrimum.domkee.ientity.IBanco;
 import br.com.nordestefomento.jrimum.domkee.type.CNPJ;
 
@@ -367,7 +367,7 @@ public enum EnumBancos implements Serializable{
 	 * 
 	 * @return Uma instância do respectivo banco.
 	 * 
-	 * @see br.com.nordestefomento.jrimum.domkee.entity.Banco#Banco(CodigoDeCompensacaoBACEN, String, CNPJ, String)
+	 * @see br.com.nordestefomento.jrimum.domkee.bank.febraban.Banco#Banco(CodigoDeCompensacaoBACEN, String, CNPJ, String)
 	 * @see <a href="http://www.bcb.gov.br/?CHEQUESCOMPE">Bancos supervisionados
 	 *      pela BACEN</a>
 	 * 

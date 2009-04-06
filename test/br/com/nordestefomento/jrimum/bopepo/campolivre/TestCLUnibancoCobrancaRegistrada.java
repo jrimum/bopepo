@@ -41,12 +41,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
-import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
-import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.EnumTipoCobranca;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTipoCobranca;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 
 
 /**
@@ -134,7 +134,7 @@ public class TestCLUnibancoCobrancaRegistrada {
 
 		ContaBancaria contaBancaria = new ContaBancaria();
 		contaBancaria.setBanco(EnumBancos.UNIBANCO.create());
-		contaBancaria.setAgencia(new Agencia(1, "9"));
+		contaBancaria.setAgencia(new Agencia(1, '9'));
 		contaBancaria.setCarteira(new Carteira(123,EnumTipoCobranca.COM_REGISTRO));
 
 		titulo = new Titulo(contaBancaria, sacado, cedente);
@@ -163,7 +163,7 @@ public class TestCLUnibancoCobrancaRegistrada {
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComAgenciaNegativa() {
 
-		titulo.getContaBancaria().setAgencia(new Agencia(-23));
+		titulo.getContaBancaria().setAgencia(new Agencia(-23,'1'));
 		campoLivre = Factory4CampoLivre.create(titulo);
 	}
 
@@ -177,14 +177,14 @@ public class TestCLUnibancoCobrancaRegistrada {
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComDigitoDaAgenciaNegativo() {
 
-		titulo.getContaBancaria().setAgencia(new Agencia(2, "-3"));
+		titulo.getContaBancaria().setAgencia(new Agencia(2, '3'));
 		campoLivre = Factory4CampoLivre.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComDigitoDaAgenciaNaoNumerico() {
 
-		titulo.getContaBancaria().setAgencia(new Agencia(-23, "X"));
+		titulo.getContaBancaria().setAgencia(new Agencia(-23, 'X'));
 		campoLivre = Factory4CampoLivre.create(titulo);
 	}
 

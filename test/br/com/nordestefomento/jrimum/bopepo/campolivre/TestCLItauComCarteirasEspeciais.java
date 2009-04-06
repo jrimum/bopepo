@@ -38,12 +38,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
-import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
-import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 
 public class TestCLItauComCarteirasEspeciais {
 	
@@ -60,7 +60,7 @@ public class TestCLItauComCarteirasEspeciais {
 		ContaBancaria contaBancaria = new ContaBancaria();
 		contaBancaria.setBanco(EnumBancos.BANCO_ITAU.create());
 		
-		contaBancaria.setAgencia(new Agencia(57));
+		contaBancaria.setAgencia(new Agencia(57,'1'));
 		contaBancaria.setCarteira(new Carteira(198));
 		
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
@@ -102,7 +102,7 @@ public class TestCLItauComCarteirasEspeciais {
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		contaBancaria.setBanco(EnumBancos.BANCO_ITAU.create());
 		
-		contaBancaria.setAgencia(new Agencia(0));
+		contaBancaria.setAgencia(new Agencia(0,'1'));
 		contaBancaria.setCarteira(new Carteira(0));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(0, "0"));
 		

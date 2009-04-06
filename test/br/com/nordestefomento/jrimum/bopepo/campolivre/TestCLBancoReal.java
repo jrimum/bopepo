@@ -42,11 +42,11 @@ import br.com.nordestefomento.jrimum.bopepo.campolivre.Factory4CampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
-import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
-import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 
 public class TestCLBancoReal {
 	
@@ -63,8 +63,7 @@ public class TestCLBancoReal {
 		ContaBancaria contaBancaria = new ContaBancaria();
 		contaBancaria.setBanco(EnumBancos.BANCO_ABN_AMRO_REAL.create());
 		
-		Agencia agencia = new Agencia();
-		agencia.setCodigoDaAgencia(1018);
+		Agencia agencia = new Agencia(1018, '1');
 		contaBancaria.setAgencia(agencia);
 		
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
@@ -99,8 +98,7 @@ public class TestCLBancoReal {
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		contaBancaria.setBanco(EnumBancos.BANCO_ABN_AMRO_REAL.create());
 		
-		Agencia agencia = new Agencia();
-		agencia.setCodigoDaAgencia(0);
+		Agencia agencia = new Agencia(0,'1');
 		contaBancaria.setAgencia(agencia);
 		
 		NumeroDaConta numeroDaConta = new NumeroDaConta();

@@ -45,8 +45,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import br.com.nordestefomento.jrimum.ACurbitaObject;
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
-import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.type.Endereco;
 import br.com.nordestefomento.jrimum.utilix.RectanglePDF;
@@ -494,8 +494,8 @@ class ViewerPDF extends ACurbitaObject {
 		if (isNotNull(endereco)) {
 			if (isNotNull(endereco.getBairro()))
 				sb.append(endereco.getBairro());
-			if (isNotNull(endereco.getLocalidade().getNome()))
-				sb.append(SEPERADOR + endereco.getLocalidade().getNome());
+			if (isNotNull(endereco.getLocalidade()))
+				sb.append(SEPERADOR + endereco.getLocalidade());
 			if (isNotNull(endereco.getUF()))
 				sb.append(" / " + endereco.getUF().getNome());
 
@@ -503,7 +503,7 @@ class ViewerPDF extends ACurbitaObject {
 
 			sb.delete(0, sb.length());
 			if (isNotNull(endereco.getLogradouro()))
-				sb.append(endereco.getLogradouro().getNome());
+				sb.append(endereco.getLogradouro());
 
 			if (isNotNull(endereco.getNumero()))
 				sb.append(", n°: " + endereco.getNumero());
@@ -545,8 +545,8 @@ class ViewerPDF extends ACurbitaObject {
 			if (isNotNull(endereco)) {
 				if (isNotNull(endereco.getBairro()))
 					sb.append(endereco.getBairro());
-				if (isNotNull(endereco.getLocalidade().getNome()))
-					sb.append(SEPERADOR + endereco.getLocalidade().getNome());
+				if (isNotNull(endereco.getLocalidade()))
+					sb.append(SEPERADOR + endereco.getLocalidade());
 				if (isNotNull(endereco.getUF()))
 					sb.append(" / " + endereco.getUF().getNome());
 
@@ -554,7 +554,7 @@ class ViewerPDF extends ACurbitaObject {
 
 				sb.delete(0, sb.length());
 				if (isNotNull(endereco.getLogradouro()))
-					sb.append(endereco.getLogradouro().getNome());
+					sb.append(endereco.getLogradouro());
 
 				if (isNotNull(endereco.getNumero()))
 					sb.append(", n°: " + endereco.getNumero());
@@ -825,15 +825,14 @@ class ViewerPDF extends ACurbitaObject {
 		StringBuilder sb = new StringBuilder(StringUtils.EMPTY);
 		ContaBancaria conta = boleto.getTitulo().getContaBancaria();
 
-		if (isNotNull(conta.getAgencia().getCodigoDaAgencia()))
-			sb.append(conta.getAgencia().getCodigoDaAgencia());
+		if (isNotNull(conta.getAgencia().getCodigo()))
+			sb.append(conta.getAgencia().getCodigo());
 
-		if (isNotNull(conta.getAgencia().getDigitoDaAgencia())
-				&& StringUtils.isNotBlank(conta.getAgencia()
-						.getDigitoDaAgencia())) {
+		if (isNotNull(conta.getAgencia().getDigitoVerificador())
+				&& StringUtils.isNotBlank(conta.getAgencia().getDigitoVerificador().toString())) {
 
 			sb.append(ViewerPDF.SEPERADOR);
-			sb.append(conta.getAgencia().getDigitoDaAgencia());
+			sb.append(conta.getAgencia().getDigitoVerificador());
 		}
 
 		if (isNotNull(conta.getNumeroDaConta().getCodigoDaConta())) {

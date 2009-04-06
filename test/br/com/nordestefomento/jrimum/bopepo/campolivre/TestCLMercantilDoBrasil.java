@@ -37,11 +37,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
-import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 
 /**
  * 
@@ -78,7 +78,7 @@ public class TestCLMercantilDoBrasil {
 		ContaBancaria contaBancaria = new ContaBancaria();
 		contaBancaria.setBanco(EnumBancos.MERCANTIL_DO_BRASIL.create());
 		
-		contaBancaria.setAgencia(new Agencia(1234));
+		contaBancaria.setAgencia(new Agencia(1234,'1'));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(123456789));
 		
 		titulo = new Titulo(contaBancaria, sacado, cedente);

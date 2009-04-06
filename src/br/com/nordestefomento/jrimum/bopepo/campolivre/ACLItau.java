@@ -33,8 +33,8 @@ package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import java.util.Arrays;
 
-import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
 

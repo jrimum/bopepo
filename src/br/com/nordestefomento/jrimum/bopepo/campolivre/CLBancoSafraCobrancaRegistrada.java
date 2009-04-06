@@ -30,8 +30,8 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 
@@ -119,13 +119,13 @@ public class CLBancoSafraCobrancaRegistrada extends ACLBancoSafra {
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		
-		if(exists(conta.getAgencia().getDigitoDaAgencia())) {
+		if(exists(conta.getAgencia().getDigitoVerificador())) {
 			
 			this.add(new Field<Integer>(SISTEMA, 1));
 			
 			this.add(new Field<String>(
-					Filler.ZERO_LEFT.fill(conta.getAgencia().getCodigoDaAgencia(), 4) + 
-					conta.getAgencia().getDigitoDaAgencia() +
+					Filler.ZERO_LEFT.fill(conta.getAgencia().getCodigo(), 4) + 
+					conta.getAgencia().getDigitoVerificador() +
 					Filler.ZERO_LEFT.fill(conta.getNumeroDaConta().getCodigoDaConta(), 8) +
 					conta.getNumeroDaConta().getDigitoDaConta(), 14));
 			

@@ -37,9 +37,9 @@ import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
-import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
-import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.LineOfFields;
@@ -256,49 +256,47 @@ public class CampoLivreSicredi extends LineOfFields implements ICampoLivre {
 
 		InnerCooperativaDeCredito cooperativa = null;
 
-		if (isNotNull(agencia.getCodigoDaAgencia(), "Número da Agência Sicredi")) {
-			if (agencia.getCodigoDaAgencia() > 0) {
-				if (agencia.getCodigoDaAgencia().toString().length() <= 4) {
+		if (isNotNull(agencia.getCodigo(), "Número da Agência Sicredi")) {
+			if (agencia.getCodigo() > 0) {
+				if (String.valueOf(agencia.getCodigo()).length() <= 4) {
 
 					cooperativa = new InnerCooperativaDeCredito();
 
-					cooperativa.codigo = agencia.getCodigoDaAgencia()
-							.toString();
+					cooperativa.codigo = "" + agencia.getCodigo();
 
 				} else
 					new IllegalArgumentException(
 							"Número da Agência Sicredi deve conter no máximo 4 dígitos (SEM O DIGITO VERIFICADOR) e não: "
-									+ agencia.getCodigoDaAgencia());
+									+ agencia.getCodigo());
 			} else
 				new IllegalArgumentException(
 						"Número da Agência Sicredi com valor inválido: "
-								+ agencia.getCodigoDaAgencia());
+								+ agencia.getCodigo());
 		}
 
-		if (isNotNull(agencia.getDigitoDaAgencia(), "Dígito da Agência Sicredi")) {
-			if (isNotBlank(agencia.getDigitoDaAgencia())
-					&& isNumeric(agencia.getDigitoDaAgencia())) {
+		if (isNotNull(agencia.getDigitoVerificador(), "Dígito da Agência Sicredi")) {
+			if (Character.isDigit(agencia.getDigitoVerificador())) {
 
-				if (agencia.getDigitoDaAgencia().toString().length() <= 2) {
+				if (String.valueOf(agencia.getDigitoVerificador()).length() <= 2) {
 
 					Integer digitoDaAgencia = Integer.valueOf(agencia
-							.getDigitoDaAgencia());
+							.getDigitoVerificador());
 
 					if (digitoDaAgencia >= 0)
 						cooperativa.posto = digitoDaAgencia.toString();
 					else
 						new IllegalArgumentException(
 								"O dígito da Agência Sicredi deve ser um número natural não-negativo, e não: ["
-										+ agencia.getDigitoDaAgencia() + "]");
+										+ agencia.getDigitoVerificador() + "]");
 
 				} else
 					new IllegalArgumentException(
 							"Dígito da Agência Sicredi deve conter no máximo 2 dígitos e não: "
-									+ agencia.getCodigoDaAgencia());
+									+ agencia.getCodigo());
 			} else
 				new IllegalArgumentException(
 						"O dígito da Agência Sicredi deve ser numérico, e não: ["
-								+ agencia.getDigitoDaAgencia() + "]");
+								+ agencia.getDigitoVerificador() + "]");
 		}
 
 		return cooperativa;

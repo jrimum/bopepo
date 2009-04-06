@@ -43,13 +43,13 @@ import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.campolivre.Factory4CampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
-import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
-import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
-import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumMoeda;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
-import br.com.nordestefomento.jrimum.domkee.type.EnumMoeda;
 
 /**
  * @author Gilmar
@@ -76,8 +76,7 @@ public class TestLinhaDigitavel{
 		ContaBancaria contaBancaria = new ContaBancaria();
 		contaBancaria.setBanco(EnumBancos.BANCO_BRADESCO.create());
 		
-		Agencia agencia = new Agencia();
-		agencia.setCodigoDaAgencia(1234);
+		Agencia agencia = new Agencia(1234, '1');
 		contaBancaria.setAgencia(agencia);
 		
 		contaBancaria.setCarteira(new Carteira(5));

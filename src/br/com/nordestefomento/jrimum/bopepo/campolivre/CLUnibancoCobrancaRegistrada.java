@@ -4,8 +4,8 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 
-import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.Util4Date;
@@ -104,24 +104,24 @@ public class CLUnibancoCobrancaRegistrada extends ACLUnibanco {
 			else
 				throw new CampoLivreException(new IllegalArgumentException("Data de vencimento do título inválida: "+titulo.getDataDoVencimento()));
 		
-		if(isNotNull(conta.getAgencia().getCodigoDaAgencia(), "Número da Agência Bancária"))
-			if(conta.getAgencia().getCodigoDaAgencia() > 0)
-				this.add(new Field<Integer>(conta.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
+		if(isNotNull(conta.getAgencia().getCodigo(), "Número da Agência Bancária"))
+			if(conta.getAgencia().getCodigo() > 0)
+				this.add(new Field<Integer>(conta.getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
 			else
 				throw new CampoLivreException(new IllegalArgumentException("Agência bancária com valor inválido, a agência deve ser um número inteiro positivo, e não: "+conta.getNumeroDaConta().getCodigoDaConta()));
 		
 		
-		if(isNotNull(conta.getAgencia().getDigitoDaAgencia(),"Dígito da Agência Bancária"))
-			if(StringUtils.isNumeric(conta.getAgencia().getDigitoDaAgencia())){
+		if(isNotNull(conta.getAgencia().getDigitoVerificador(),"Dígito da Agência Bancária"))
+			if(Character.isDigit((conta.getAgencia().getDigitoVerificador()))){
 				
-				Integer digitoDaAgencia = Integer.valueOf(conta.getAgencia().getDigitoDaAgencia());  
+				Integer digitoDaAgencia = Integer.valueOf(conta.getAgencia().getDigitoVerificador());  
 				
 				if(digitoDaAgencia>=0)
 					this.add(new Field<Integer>(Integer.valueOf(digitoDaAgencia), 1));
 				else
-					throw new CampoLivreException(new IllegalArgumentException("O dígito da agência deve ser um número interio não-negativo, e não: ["+conta.getAgencia().getDigitoDaAgencia()+"]"));
+					throw new CampoLivreException(new IllegalArgumentException("O dígito da agência deve ser um número interio não-negativo, e não: ["+conta.getAgencia().getDigitoVerificador()+"]"));
 			}else
-				throw new CampoLivreException(new IllegalArgumentException("O dígito da agência deve ser numérico, e não: ["+conta.getAgencia().getDigitoDaAgencia()+"]"));
+				throw new CampoLivreException(new IllegalArgumentException("O dígito da agência deve ser numérico, e não: ["+conta.getAgencia().getDigitoVerificador()+"]"));
 		
 		
 		if(isNotNull(titulo.getNossoNumero(),"Nosso Número"))

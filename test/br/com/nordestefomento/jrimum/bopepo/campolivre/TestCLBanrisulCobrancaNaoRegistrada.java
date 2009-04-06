@@ -36,13 +36,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
-import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
-import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.EnumTipoCobranca;
-import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTipoCobranca;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
 
 /**
  * 
@@ -72,7 +72,7 @@ public class TestCLBanrisulCobrancaNaoRegistrada {
 				EnumBancos.BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.create());
 		contaBancaria
 		.setCarteira(new Carteira(1, EnumTipoCobranca.SEM_REGISTRO));
-		contaBancaria.setAgencia(new Agencia(100));
+		contaBancaria.setAgencia(new Agencia(100,'1'));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(1));
 
 		titulo = new Titulo(contaBancaria, new Pessoa("Nordeste Fomento"),
@@ -134,7 +134,7 @@ public class TestCLBanrisulCobrancaNaoRegistrada {
 
 	@Test(expected = CampoLivreException.class)
 	public void criacaoAgenciaComCodigoMaiorQue3Digitos() {
-		titulo.getContaBancaria().setAgencia(new Agencia(1000));
+		titulo.getContaBancaria().setAgencia(new Agencia(1000,'1'));
 		Factory4CampoLivre.create(titulo);
 	}
 

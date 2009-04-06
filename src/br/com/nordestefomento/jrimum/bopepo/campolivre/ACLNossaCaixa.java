@@ -29,8 +29,8 @@
  */
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.domkee.entity.Modalidade;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Modalidade;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 
 /**
  * 

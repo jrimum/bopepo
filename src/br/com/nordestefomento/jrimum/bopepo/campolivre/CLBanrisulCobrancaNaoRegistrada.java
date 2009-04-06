@@ -29,7 +29,7 @@
  */
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 
@@ -114,7 +114,7 @@ class CLBanrisulCobrancaNaoRegistrada extends ACLBanrisul {
 		this.add(new Field<Integer>(2, 1));
 		this.add(new Field<String>("1", 1));
 		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia()
-				.getCodigoDaAgencia(), 3, Filler.ZERO_LEFT));
+				.getCodigo(), 3, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(titulo.getContaBancaria()
 				.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(Integer.valueOf(titulo.getNossoNumero()),

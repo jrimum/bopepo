@@ -30,9 +30,9 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.EnumTipoCobranca;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTipoCobranca;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 
 public abstract class ACLBancoSafra extends ACampoLivre {
 	

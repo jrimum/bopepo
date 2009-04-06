@@ -31,8 +31,8 @@ package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
 
-import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.EnumModulo;
@@ -167,7 +167,7 @@ public class CLNossaCaixa extends ACLNossaCaixa {
 		
 		this.add(new Field<String>(getNossoNumeroCom8Posicoes(titulo.getNossoNumero()), 8));
 		
-		this.add(new Field<Integer>(contaBancaria.getAgencia().getCodigoDaAgencia(), 4, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(contaBancaria.getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
 		
 		this.add(new Field<Integer>(modalidadeContaConvertida, 1));
 		
@@ -273,7 +273,7 @@ public class CLNossaCaixa extends ACLNossaCaixa {
 		StringBuilder numeroParaCalculo = new StringBuilder();
 		numeroParaCalculo.append(getIdentificacaoDoSistemaPeloNossoNumero(titulo.getNossoNumero()));
 		numeroParaCalculo.append(getNossoNumeroCom8Posicoes(titulo.getNossoNumero()));
-		numeroParaCalculo.append(Filler.ZERO_LEFT.fill(titulo.getContaBancaria().getAgencia().getCodigoDaAgencia(), 4));
+		numeroParaCalculo.append(Filler.ZERO_LEFT.fill(titulo.getContaBancaria().getAgencia().getCodigo(), 4));
 		numeroParaCalculo.append(modalidadeDaConta);
 		numeroParaCalculo.append(Filler.ZERO_LEFT.fill(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 6));
 		numeroParaCalculo.append(titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigo());

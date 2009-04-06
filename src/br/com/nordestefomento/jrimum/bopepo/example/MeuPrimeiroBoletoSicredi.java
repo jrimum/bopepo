@@ -13,24 +13,21 @@ import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
-import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
-import br.com.nordestefomento.jrimum.domkee.entity.Banco;
-import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
-import br.com.nordestefomento.jrimum.domkee.entity.CodigoDeCompensacaoBACEN;
-import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Banco;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.CodigoDeCompensacaoBACEN;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTitulo;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo.EnumAceite;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo.EnumAceite;
 import br.com.nordestefomento.jrimum.domkee.ientity.IBanco;
 import br.com.nordestefomento.jrimum.domkee.type.CEP;
 import br.com.nordestefomento.jrimum.domkee.type.CNPJ;
 import br.com.nordestefomento.jrimum.domkee.type.Endereco;
-import br.com.nordestefomento.jrimum.domkee.type.EnumTitulo;
 import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
-import br.com.nordestefomento.jrimum.domkee.type.Localidade;
-import br.com.nordestefomento.jrimum.domkee.type.Logradouro;
-import br.com.nordestefomento.jrimum.domkee.type.UnidadeFederativa;
 
 import com.lowagie.text.DocumentException;
 
@@ -56,7 +53,7 @@ public class MeuPrimeiroBoletoSicredi {
 		banco.setImgLogo(new ImageIcon("desenvolvimento/SICREDI/Template/Imagens/LogoSicredi.PNG").getImage());
 		
 		ContaBancaria contaBancariaCed = new ContaBancaria(banco);
-		contaBancariaCed.setAgencia(new Agencia(123, "6"));
+		contaBancariaCed.setAgencia(new Agencia(123, '6'));
 		contaBancariaCed.setCarteira(new Carteira(5));
 		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(7891, "0"));
 		cedente.addContaBancaria(contaBancariaCed);
@@ -70,11 +67,11 @@ public class MeuPrimeiroBoletoSicredi {
 
 		// Informando o endereço do sacado.
 		Endereco enderecoSac = new Endereco();
-		enderecoSac.setUF(new UnidadeFederativa(EnumUnidadeFederativa.RN));
-		enderecoSac.setLocalidade(new Localidade("Natal"));
+		enderecoSac.setUF(EnumUnidadeFederativa.RN);
+		enderecoSac.setLocalidade("Natal");
 		enderecoSac.setCep(new CEP("59064-120"));
 		enderecoSac.setBairro("Grande Centro");
-		enderecoSac.setLogradouro(new Logradouro("Rua poeta dos programas"));
+		enderecoSac.setLogradouro("Rua poeta dos programas");
 		enderecoSac.setNumero("1");
 		sacado.addEndereco(enderecoSac);
 	
@@ -87,11 +84,11 @@ public class MeuPrimeiroBoletoSicredi {
 		
 		// Informando o endereço do sacador avalista. 
 		Endereco enderecoSacAval = new Endereco();
-		enderecoSacAval.setUF(new UnidadeFederativa(EnumUnidadeFederativa.DF));
-		enderecoSacAval.setLocalidade(new Localidade("Brasília"));
+		enderecoSacAval.setUF(EnumUnidadeFederativa.DF);
+		enderecoSacAval.setLocalidade("Brasília");
 		enderecoSacAval.setCep(new CEP("00000-000"));
 		enderecoSacAval.setBairro("Grande Centro");
-		enderecoSacAval.setLogradouro(new Logradouro("Rua Eternamente Principal"));
+		enderecoSacAval.setLogradouro("Rua Eternamente Principal");
 		enderecoSacAval.setNumero("001");
 		sacadorAvalista.addEndereco(enderecoSacAval);
 

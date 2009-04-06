@@ -40,20 +40,17 @@ import java.util.List;
 
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.entity.Agencia;
-import br.com.nordestefomento.jrimum.domkee.entity.Carteira;
-import br.com.nordestefomento.jrimum.domkee.entity.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTitulo;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo.EnumAceite;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo;
-import br.com.nordestefomento.jrimum.domkee.entity.Titulo.EnumAceite;
 import br.com.nordestefomento.jrimum.domkee.type.CEP;
 import br.com.nordestefomento.jrimum.domkee.type.Endereco;
-import br.com.nordestefomento.jrimum.domkee.type.EnumTitulo;
 import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
-import br.com.nordestefomento.jrimum.domkee.type.Localidade;
-import br.com.nordestefomento.jrimum.domkee.type.Logradouro;
-import br.com.nordestefomento.jrimum.domkee.type.UnidadeFederativa;
 
 
 /**
@@ -106,11 +103,11 @@ public class Util4Exemplos {
 		Pessoa sacado = new Pessoa("Fulano da Silva Sauro Perdido e Desempregado", "222.222.222-22");
 		
 		Endereco endereco = new Endereco();
-		endereco.setUF(new UnidadeFederativa(EnumUnidadeFederativa.RN));
-		endereco.setLocalidade(new Localidade("Natal"));
+		endereco.setUF(EnumUnidadeFederativa.RN);
+		endereco.setLocalidade("Natal");
 		endereco.setCep(new CEP("59064-120"));
 		endereco.setBairro("Grande Centro");
-		endereco.setLogradouro(new Logradouro("Rua Poeta das Princesas"));
+		endereco.setLogradouro("Rua Poeta das Princesas");
 		endereco.setNumero("1");
 		
 		sacado.addEndereco(endereco);
@@ -119,7 +116,7 @@ public class Util4Exemplos {
 	
 		ContaBancaria contaBancaria = new ContaBancaria(EnumBancos.BANCO_DO_BRASIL.create());
 		
-		contaBancaria.setAgencia(new Agencia(1234, "67"));
+		contaBancaria.setAgencia(new Agencia(1234, '7'));
 		contaBancaria.setCarteira(new Carteira(5));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(6789, "12"));
 
@@ -128,11 +125,11 @@ public class Util4Exemplos {
 		Pessoa sacadorAvalista = new Pessoa("Banco do Brasil", "00.000.000/0001-91");
 		
 		Endereco endereco2 = new Endereco();
-		endereco2.setUF(new UnidadeFederativa(EnumUnidadeFederativa.DF));
-		endereco2.setLocalidade(new Localidade("Brasília"));
+		endereco2.setUF(EnumUnidadeFederativa.DF);
+		endereco2.setLocalidade("Brasília");
 		endereco2.setCep(new CEP("00000-000"));
 		endereco2.setBairro("Grande Centro");
-		endereco2.setLogradouro(new Logradouro("Rua Principal Para Sempre"));
+		endereco2.setLogradouro("Rua Principal Para Sempre");
 		endereco2.setNumero("001");
 
 		sacadorAvalista.addEndereco(endereco2);
