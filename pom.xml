@@ -9,8 +9,14 @@
   	<groupId>jrimum</groupId>
   	<version>0.3.0-SNAPSHOT</version>
   </parent>
+  <ciManagement>
+  	<system>hudson</system>
+  	<url>http://localhost:8080</url>
+  </ciManagement>
   <scm>
   	<connection>scm:svn:http://jrimum.nordestefomento.com.br/svn/bopepo</connection>
+  	<developerConnection>scm:svn:http://jrimum.nordestefomento.com.br/svn/bopepo</developerConnection>
+  	<tag>HEAD</tag>
   	<url>http://jrimum.nordestefomento.com.br/svn/bopepo</url>
   </scm>
   <dependencies>
