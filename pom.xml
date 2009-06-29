@@ -19,6 +19,14 @@
   	<tag>HEAD</tag>
   	<url>http://jrimum.nordestefomento.com.br/svn/bopepo</url>
   </scm>
+  <build>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-compiler-plugin</artifactId>
+  		</plugin>
+  	</plugins>
+  </build>
   <dependencies>
   	<dependency>
   		<groupId>jrimum</groupId>
