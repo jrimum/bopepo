@@ -9,6 +9,10 @@
   	<groupId>jrimum</groupId>
   	<version>0.3.0-SNAPSHOT</version>
   </parent>
+  <scm>
+  	<connection>scm:svn:http://jrimum.nordestefomento.com.br/svn/bopepo</connection>
+  	<url>http://jrimum.nordestefomento.com.br/svn/bopepo</url>
+  </scm>
   <dependencies>
   	<dependency>
   		<groupId>jrimum</groupId>
