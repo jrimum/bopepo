@@ -171,13 +171,10 @@ class ViewerPDF extends ACurbitaObject {
 	 * @since 0.2
 	 */
 
-	protected static List<File> onePerPDF(String path, String extensao, List<Boleto> boletos)
-			throws IOException, DocumentException {
+	protected static List<File> onePerPDF(String path, String extensao, List<Boleto> boletos) throws IOException, DocumentException {
 
-		List<File> arquivos = null;
+		List<File> arquivos = new ArrayList<File>(boletos.size());
 		int cont = 1;
-
-		arquivos = new ArrayList<File>(boletos.size());
 
 		for (Boleto bop : boletos) {
 			arquivos.add(new BoletoViewer(bop).getPdfAsFile(path + "Boleto" + cont++ + extensao));
