@@ -31,6 +31,7 @@ package br.com.nordestefomento.jrimum.bopepo.view;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -43,6 +44,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import br.com.nordestefomento.jrimum.ACurbitaObject;
+import br.com.nordestefomento.jrimum.JRimumException;
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
@@ -134,14 +136,13 @@ class ViewerPDF extends ACurbitaObject {
 	 * @param boletos a serem agrupados
 	 * @param boletoViewer visualizador
 	 * @return File contendo boletos gerados
-	 * @throws IOException
-	 * @throws DocumentException
+	 * 
+	 * @throws JRimumException Quando ocorrer um problema na geração do PDF que está fora do controle
+	 * da biblioteca.
 	 * 
 	 * @since 0.2
 	 */
-
-	protected static File groupInOnePDF(String pathName, List<Boleto> boletos, BoletoViewer boletoViewer)
-			throws IOException, DocumentException {
+	protected static File groupInOnePDF(String pathName, List<Boleto> boletos, BoletoViewer boletoViewer) {
 
 		File arq = null;
 
@@ -151,7 +152,20 @@ class ViewerPDF extends ACurbitaObject {
 			boletosEmBytes.add(boletoViewer.setBoleto(bop).getPdfAsByteArray());
 		}
 
-		arq = Util4File.bytes2File(pathName, Util4PDF.mergeFiles(boletosEmBytes));
+		try {
+			
+			arq = Util4File.bytes2File(pathName, Util4PDF.mergeFiles(boletosEmBytes));
+			
+		} catch (FileNotFoundException e) {
+			
+			log.error("Erro durante geração do PDF." + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro durante geração do PDF. Causado por " + e.getLocalizedMessage(), e);
+			
+		} catch (IOException e) {
+
+			log.error("Erro durante geração do PDF." + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro durante geração do PDF. Causado por " + e.getLocalizedMessage(), e);
+		}
 
 		return arq;
 	}
@@ -165,13 +179,10 @@ class ViewerPDF extends ACurbitaObject {
 	 * @param extensao TODO
 	 * @param boletos
 	 * @return List<File> com os boletos gerados.
-	 * @throws IOException
-	 * @throws DocumentException
 	 * 
 	 * @since 0.2
 	 */
-
-	protected static List<File> onePerPDF(String path, String extensao, List<Boleto> boletos) throws IOException, DocumentException {
+	protected static List<File> onePerPDF(String path, String extensao, List<Boleto> boletos) {
 
 		List<File> arquivos = new ArrayList<File>(boletos.size());
 		int cont = 1;
@@ -183,25 +194,104 @@ class ViewerPDF extends ACurbitaObject {
 		return arquivos;
 	}
 
-	protected File getFile(String pathName) throws IllegalArgumentException, IOException, DocumentException {
+	/**
+	 * 
+	 * @param pathName
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	protected File getFile(String pathName) {
 		
-		processarPdf();
+		File file = null;
+
+		try {
+
+			processarPdf();
+			
+			file = Util4File.bytes2File(pathName, outputStream.toByteArray());
+			
+		} catch (FileNotFoundException e) {
+			
+			log.error("Erro ao tentar acessar arquivo inexistente. " + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro ao tentar acessar arquivo inexistente: [" + pathName + "]. " +
+					"Causado por " + e.getLocalizedMessage(), e);
+			
+		} catch (IOException e) {
+			
+			log.error("Erro durante a criação do arquivo. " + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro durante a criação do arquivo: [" + pathName + "]. " +
+					"Causado por " + e.getLocalizedMessage(), e);
+			
+		} catch (DocumentException e) {
+			
+			log.error("Erro durante a criação do arquivo. " + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro durante a criação do arquivo: [" + pathName + "]. " +
+					"Causado por " + e.getLocalizedMessage(), e);
+		}
 		
-		return Util4File.bytes2File(pathName, outputStream.toByteArray());
+		return file;
 	}
 
-	protected ByteArrayOutputStream getStream() throws IOException, DocumentException {
+	/**
+	 * @throws JRimumException
+	 * 
+	 * @return
+	 */
+	protected ByteArrayOutputStream getStream() {
 		
-		processarPdf();
+		ByteArrayOutputStream baos = null;
 		
-		return Util4File.bytes2Stream(outputStream.toByteArray());
+		try {
+
+			processarPdf();
+			
+			baos = Util4File.bytes2Stream(outputStream.toByteArray());
+			
+		} catch (IOException e) {
+			
+			log.error("Erro durante a criação do stream. " + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro durante a criação do stream. " +
+					"Causado por " + e.getLocalizedMessage(), e);
+			
+		} catch (DocumentException e) {
+			
+			log.error("Erro durante a criação do stream. " + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro durante a criação do stream. " +
+					"Causado por " + e.getLocalizedMessage(), e);
+		}
+		
+		return baos;
 	}
 
-	protected byte[] getBytes() throws IOException, DocumentException {
+	/**
+	 * @throws JRimumException
+	 * 
+	 * @return
+	 */
+	protected byte[] getBytes() {
 		
-		processarPdf();
+		byte[] bytes = null;
 		
-		return outputStream.toByteArray();
+		try {
+
+			processarPdf();
+			
+			bytes = outputStream.toByteArray();
+			
+		} catch (IOException e) {
+			
+			log.error("Erro durante a criação do stream. " + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro durante a criação do stream. " +
+					"Causado por " + e.getLocalizedMessage(), e);
+			
+		} catch (DocumentException e) {
+			
+			log.error("Erro durante a criação do stream. " + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro durante a criação do stream. " +
+					"Causado por " + e.getLocalizedMessage(), e);
+		}
+		
+		return bytes;
 	}
 
 	protected File getTemplate() {

@@ -91,8 +91,6 @@ public class BoletoViewer extends ACurbitaObject {
 	 * @throws IOException
 	 */
 	public BoletoViewer(Boleto boleto) throws JRimumException {
-		super();
-
 		initViewerPDF(null, null, boleto);			
 	}
 	
@@ -102,8 +100,6 @@ public class BoletoViewer extends ACurbitaObject {
 	 * @throws JRimumException
 	 */
 	public BoletoViewer(Boleto boleto, String templatePathName) throws JRimumException {
-		super();
-
 		initViewerPDF(templatePathName, null, boleto);
 	}
 	
@@ -113,8 +109,6 @@ public class BoletoViewer extends ACurbitaObject {
 	 * @throws JRimumException
 	 */
 	public BoletoViewer(Boleto boleto, File template) throws JRimumException {
-		super();
-
 		initViewerPDF(null, template, boleto);
 	}
 
@@ -204,33 +198,14 @@ public class BoletoViewer extends ACurbitaObject {
 				
 				if(!boletos.isEmpty()) {
 					
-						try {
-							
-							files.addAll(ViewerPDF.onePerPDF(path, extensao, boletos));
-							
-						} catch (IOException e) {
-							
-							JRimumException jrie =  new JRimumException("Erro durante a geração dos arquivos",e); 
-							
-							log.error("Erro durante a geração de PDFs para boletos", e);
-							
-							throw jrie;
-							
-						} catch (DocumentException e) {
-							
-							JRimumException jrie =  new JRimumException("Erro durante a geração dos arquivos",e); 
-							
-							log.error("Erro durante a geração de PDFs para boletos", e);
-							
-							throw jrie;
-						}
+					files.addAll(ViewerPDF.onePerPDF(path, extensao, boletos));
 					
 				} else {
-					throw new JRimumException(new IllegalArgumentException("A Lista de boletos está vazia!"));
+					throw new IllegalArgumentException("A Lista de boletos está vazia!");
 				}
 				
 			} else {
-				throw new JRimumException(new IllegalArgumentException("Path(Diretório) destinado a geração dos arquivos não contém informação!"));
+				throw new IllegalArgumentException("Path(Diretório) destinado a geração dos arquivos não contém informação!");
 			}
 		}
 		
@@ -258,7 +233,7 @@ public class BoletoViewer extends ACurbitaObject {
 			this.viewerPDF.setTemplate(template);
 			
 		} else {
-			throw new JRimumException(new IllegalArgumentException("Arquivo de template inválido!"));
+			throw new NullPointerException("Arquivo de template inválido: valor [null]");
 		}
 		
 		return this;
@@ -281,7 +256,7 @@ public class BoletoViewer extends ACurbitaObject {
 			viewerPDF.setTemplate(pathName);
 			
 		} else {
-			throw new JRimumException(new IllegalArgumentException("Caminho do template inválido!"));
+			throw new IllegalArgumentException("Caminho do template inválido: valor [" + pathName + "]");
 		}
 		
 		return this;
@@ -314,12 +289,10 @@ public class BoletoViewer extends ACurbitaObject {
 	 * @param pathName Caminho onde será criado o arquivo pdf
 	 * @return File
 	 * @throws IllegalArgumentException
-	 * @throws IOException
-	 * @throws DocumentException
 	 * 
 	 * @since 0.2
 	 */
-	public File getPdfAsFile(String pathName) throws IllegalArgumentException, IOException, DocumentException {
+	public File getPdfAsFile(String pathName) {
 
 		if (log.isDebugEnabled()) {
 			log.debug("documento instance : " + viewerPDF);
@@ -334,12 +307,10 @@ public class BoletoViewer extends ACurbitaObject {
 	 * </p>
 	 * 
 	 * @return ByteArrayOutputStream
-	 * @throws IOException
-	 * @throws DocumentException
 	 * 
 	 * @since 0.1
 	 */
-	public ByteArrayOutputStream getPdfAsStream() throws IOException, DocumentException {
+	public ByteArrayOutputStream getPdfAsStream() {
 
 		if (log.isDebugEnabled()) {
 			log.debug("documento instance : " + viewerPDF);
@@ -356,12 +327,9 @@ public class BoletoViewer extends ACurbitaObject {
 	 * 
 	 * @return byte[]
 	 * 
-	 * @throws IOException
-	 * @throws DocumentException
-	 * 
 	 * @since 0.1
 	 */
-	public byte[] getPdfAsByteArray() throws IOException, DocumentException {
+	public byte[] getPdfAsByteArray() {
 
 		if (log.isDebugEnabled()) {
 			log.debug("documento instance : " + viewerPDF);
@@ -403,7 +371,7 @@ public class BoletoViewer extends ACurbitaObject {
 			if(StringUtils.isNotBlank(pathName)) {
 				ok = true;
 			} else {
-				throw new JRimumException(new IllegalArgumentException("Path(Diretório) destinado a geração do(s) arquivo(s) não contém informação!"));
+				throw new IllegalArgumentException("Path(Diretório) destinado a geração do(s) arquivo(s) não contém informação!");
 			}
 		}
 		
@@ -417,7 +385,7 @@ public class BoletoViewer extends ACurbitaObject {
 		if (isNotNull(file)) {
 				ok = true;
 		} else {
-			throw new JRimumException(new IllegalArgumentException("File(Arquivo) destinado a geração do(s) documento(s) [" + name + "] nulo!"));
+			throw new NullPointerException("File(Arquivo) destinado a geração do(s) documento(s) [" + name + "] nulo!");
 		}
 		
 		return ok;
@@ -433,7 +401,7 @@ public class BoletoViewer extends ACurbitaObject {
 				ok = true;
 				
 			} else {
-				throw new JRimumException(new IllegalArgumentException("A Lista de boletos está vazia!"));
+				throw new IllegalArgumentException("A Lista de boletos está vazia!");
 			}
 		}
 		
@@ -442,56 +410,30 @@ public class BoletoViewer extends ACurbitaObject {
 	
 	private static File groupInOnePDF(String pathName, List<Boleto> boletos, BoletoViewer boletoViewer){
 		
-		try {
-			
-			return ViewerPDF.groupInOnePDF(pathName, boletos, boletoViewer);
-
-		} catch (IOException e) {
-
-			JRimumException jrie = new JRimumException("Erro durante a geração do arquivo", e);
-
-			log.error("Erro no agrupamento de boletos", e);
-
-			throw jrie;
-
-		} catch (DocumentException e) {
-
-			JRimumException jrie = new JRimumException("Erro durante a geração do arquivo", e);
-
-			log.error("Erro no agrupamento de boletos", e);
-
-			throw jrie;
-		}
-		
+		return ViewerPDF.groupInOnePDF(pathName, boletos, boletoViewer);		
 	}
 
 	private void initViewerPDF(String templatePathName, File template, Boleto boleto) {
 		
-		try {
-
-			if(isNotNull(boleto, "boleto")) {
-				this.viewerPDF = new ViewerPDF(boleto);
+		if (isNotNull(boleto, "boleto")) {
+			this.viewerPDF = new ViewerPDF(boleto);
+		}
+		
+		/*
+		 * O arquivo tem prioridade 
+		 */
+		if (isNotBlank(templatePathName) && isNotNull(template)) {
+			setTemplate(template);
+			
+		} else {
+			
+			if (isNotBlank(templatePathName)) {
+				setTemplate(templatePathName);
 			}
 			
-			/*
-			 *O arquivo tem prioridade 
-			 */
-			if(isNotBlank(templatePathName) && isNotNull(template)) {
+			if (isNotNull(template)) {
 				setTemplate(template);
-				
-			} else {
-				
-				if(isNotBlank(templatePathName)) {
-					setTemplate(templatePathName);
-				}
-				
-				if(isNotNull(template)) {
-					setTemplate(template);
-				}
 			}
-				
-		} catch (Exception e) {
-			throw new JRimumException(e);
 		}
 	}
 	
@@ -509,7 +451,7 @@ public class BoletoViewer extends ACurbitaObject {
 	private void updateViewerPDF(Boleto boleto) {
 
 		if(isNotNull(this.viewerPDF)) {
-			this.viewerPDF = new ViewerPDF(boleto,this.viewerPDF.getTemplate());
+			this.viewerPDF = new ViewerPDF(boleto, this.viewerPDF.getTemplate());
 			
 		} else {
 			this.viewerPDF = new ViewerPDF(boleto);
