@@ -529,7 +529,7 @@ class ViewerPDF extends ACurbitaObject {
 	}
 
 	private void setDataProcessamento() throws IOException, DocumentException {
-		form.setField("txtFcDataProcessamento", Util4Date.fmt_dd_MM_yyyy.format(boleto.getDataDeProcessamento()));
+		form.setField("txtFcDataProcessamento", Util4Date.FORMAT_DD_MM_YYYY.format(boleto.getDataDeProcessamento()));
 	}
 
 	private void setAceite() throws IOException, DocumentException {
@@ -544,7 +544,7 @@ class ViewerPDF extends ACurbitaObject {
 	}
 
 	private void setDataDocumento() throws IOException, DocumentException {
-		form.setField("txtFcDataDocumento", Util4Date.fmt_dd_MM_yyyy.format(boleto.getTitulo().getDataDoDocumento()));
+		form.setField("txtFcDataDocumento", Util4Date.FORMAT_DD_MM_YYYY.format(boleto.getTitulo().getDataDoDocumento()));
 	}
 
 	private void setLocalPagamento() throws IOException, DocumentException {
@@ -719,7 +719,7 @@ class ViewerPDF extends ACurbitaObject {
 		// Obtendo uma string com a data de vencimento formatada 
 		// no padrão "dd/mm/yyyy".
 		// Ex: 03/07/2008.
-		String dataFormatada = Util4Date.fmt_dd_MM_yyyy.format(boleto.getTitulo().getDataDoVencimento());
+		String dataFormatada = Util4Date.FORMAT_DD_MM_YYYY.format(boleto.getTitulo().getDataDoVencimento());
 		
 		// Realizando a impressão da data de vencimeto no boleto.
 		form.setField("txtRsDataVencimento", dataFormatada);

@@ -7,8 +7,6 @@ import java.util.Date;
 
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
@@ -26,11 +24,6 @@ import br.com.nordestefomento.jrimum.domkee.type.Endereco;
 import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.type.IDadoBancario;
 
-import com.lowagie.text.DocumentException;
-
-
-
-
 /**
  * 
  * <p>
@@ -46,12 +39,9 @@ import com.lowagie.text.DocumentException;
  * 
  * @version 0.2
  */
-	
 public class MeuPrimeiroBoleto {
 
-	public static void main (String[] args) throws DocumentException,
-	IllegalArgumentException, IOException, NotSuporttedBancoException,
-	NotSuporttedCampoLivreException {
+	public static void main (String[] args) {
 		
  		/* 
 		 * INFORMANDO DADOS SOBRE O CEDENTE.
@@ -63,8 +53,7 @@ public class MeuPrimeiroBoleto {
 		ContaBancaria contaBancariaCed = new ContaBancaria(banco);
 		contaBancariaCed.setBanco(banco);
 		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(123456, "0"));
-		contaBancariaCed.setCarteira(new Carteira(123,
-				EnumTipoCobranca.SEM_REGISTRO));
+		contaBancariaCed.setCarteira(new Carteira(123, EnumTipoCobranca.SEM_REGISTRO));
 		contaBancariaCed.setModalidade(new Modalidade(4));
 		contaBancariaCed.setAgencia(new Agencia(1234, '1'));
 		cedente.addContaBancaria(contaBancariaCed);		
@@ -72,8 +61,7 @@ public class MeuPrimeiroBoleto {
 		/* 
 		 * INFORMANDO DADOS SOBRE O SACADO.
 		 * */
-		Pessoa sacado = new Pessoa("JavaDeveloper Pronto Para Férias",
-				"222.222.222-22");
+		Pessoa sacado = new Pessoa("JavaDeveloper Pronto Para Férias", "222.222.222-22");
 
 		// Informando o endereço do sacado.
 		Endereco enderecoSac = new Endereco();
@@ -85,14 +73,10 @@ public class MeuPrimeiroBoleto {
 		enderecoSac.setNumero("1");
 		sacado.addEndereco(enderecoSac);
 		
-		
-		
-		
 		/* 
 		 * INFORMANDO DADOS SOBRE O SACADOR AVALISTA.
 		 * */
-		Pessoa sacadorAvalista = new Pessoa("Nordeste Fomento Mercantil",
-				"00.000.000/0001-91");
+		Pessoa sacadorAvalista = new Pessoa("Nordeste Fomento Mercantil", "00.000.000/0001-91");
 		
 		// Informando o endereço do sacador avalista. 
 		Endereco enderecoSacAval = new Endereco();
@@ -103,9 +87,6 @@ public class MeuPrimeiroBoleto {
 		enderecoSacAval.setLogradouro("Rua Eternamente Principal");
 		enderecoSacAval.setNumero("001");
 		sacadorAvalista.addEndereco(enderecoSacAval);
-
-		
-		
 		
 		/* 
 		 * INFORMANDO OS DADOS SOBRE O TÍTULO.
@@ -121,9 +102,6 @@ public class MeuPrimeiroBoleto {
 		titulo.setAceite(EnumAceite.A);
 		titulo.setDesconto(new BigDecimal(0.05));
 
-		
-		
-		
 		/*
 		 * INFORMANDO MAIS DADOS BANCÁRIOS, QUANDO NECESSÁRIO.
 		 * Dependendo do banco, talvez seja necessário informar mais dados além de: 
@@ -141,9 +119,6 @@ public class MeuPrimeiroBoleto {
 		 * Verifique na documentação.
 		 */
 		titulo.setDadosBancarios(new IDadoBancario(){});
-		
-		
-		
 		
 		/* 
 		 * INFORMANDO OS DADOS SOBRE O BOLETO.
@@ -165,7 +140,6 @@ public class MeuPrimeiroBoleto {
 		boleto.setInstrucao7("PARA PAGAMENTO 7 até xx/xx/xxxx COBRAR O VALOR " +
 				"QUE VOCÊ QUISER!");
 		boleto.setInstrucao8("APÓS o Vencimento, Pagável Somente na Rede X.");
-		
 		
 		/* 
 		 * GERANDO O BOLETO BANCÁRIO.

@@ -166,7 +166,7 @@ public class TestBoleto{
 		
 		Date agora = new Date();
 		
-		assertEquals(Util4Date.fmt_dd_MM_yyyy.format(agora), Util4Date.fmt_dd_MM_yyyy.format(boleto.getDataDeProcessamento()));
+		assertEquals(Util4Date.FORMAT_DD_MM_YYYY.format(agora), Util4Date.FORMAT_DD_MM_YYYY.format(boleto.getDataDeProcessamento()));
 		
 	}
 

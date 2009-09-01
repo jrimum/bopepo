@@ -100,7 +100,7 @@ public class CLUnibancoCobrancaRegistrada extends ACLUnibanco {
 		
 		if(isNotNull(titulo.getDataDoVencimento(), "Data de vencimento do título"))
 			this.add(new Field<Date>(titulo.getDataDoVencimento(), 6,
-					Util4Date.fmt_yyMMdd));
+					Util4Date.FORMAT_YYMMDD));
 			else
 				throw new CampoLivreException(new IllegalArgumentException("Data de vencimento do título inválida: "+titulo.getDataDoVencimento()));
 		

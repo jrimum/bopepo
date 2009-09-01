@@ -211,7 +211,7 @@ public final class Boleto extends ACurbitaObject{
 		linhaDigitavel = new LinhaDigitavel(codigoDeBarras);
 		dataDeProcessamento = new Date();
 		
-		log.info("Data de Processamento do Boleto : "+Util4Date.fmt_dd_MM_yyyy.format(dataDeProcessamento));
+		log.info("Data de Processamento do Boleto : "+Util4Date.FORMAT_DD_MM_YYYY.format(dataDeProcessamento));
 	}
 	
 	/**
