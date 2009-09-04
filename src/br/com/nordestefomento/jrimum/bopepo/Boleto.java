@@ -40,7 +40,7 @@ import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.utilix.Util4Date;
+import br.com.nordestefomento.jrimum.utilix.DateUtil;
 
 /**
  * <p>
@@ -211,7 +211,7 @@ public final class Boleto extends ACurbitaObject{
 		linhaDigitavel = new LinhaDigitavel(codigoDeBarras);
 		dataDeProcessamento = new Date();
 		
-		log.info("Data de Processamento do Boleto : "+Util4Date.FORMAT_DD_MM_YYYY.format(dataDeProcessamento));
+		log.info("Data de Processamento do Boleto : "+DateUtil.FORMAT_DD_MM_YYYY.format(dataDeProcessamento));
 	}
 	
 	/**

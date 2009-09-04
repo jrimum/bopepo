@@ -52,7 +52,7 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumMoeda;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.utilix.Util4Date;
+import br.com.nordestefomento.jrimum.utilix.DateUtil;
 
 
 /**
@@ -166,7 +166,7 @@ public class TestBoleto{
 		
 		Date agora = new Date();
 		
-		assertEquals(Util4Date.FORMAT_DD_MM_YYYY.format(agora), Util4Date.FORMAT_DD_MM_YYYY.format(boleto.getDataDeProcessamento()));
+		assertEquals(DateUtil.FORMAT_DD_MM_YYYY.format(agora), DateUtil.FORMAT_DD_MM_YYYY.format(boleto.getDataDeProcessamento()));
 		
 	}
 

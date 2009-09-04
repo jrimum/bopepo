@@ -8,8 +8,8 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.utilix.Util4Date;
-import br.com.nordestefomento.jrimum.utilix.Util4String;
+import br.com.nordestefomento.jrimum.utilix.DateUtil;
+import br.com.nordestefomento.jrimum.utilix.StringUtil;
 
 /**
  * 
@@ -100,7 +100,7 @@ public class CLUnibancoCobrancaRegistrada extends ACLUnibanco {
 		
 		if(isNotNull(titulo.getDataDoVencimento(), "Data de vencimento do título"))
 			this.add(new Field<Date>(titulo.getDataDoVencimento(), 6,
-					Util4Date.FORMAT_YYMMDD));
+					DateUtil.FORMAT_YYMMDD));
 			else
 				throw new CampoLivreException(new IllegalArgumentException("Data de vencimento do título inválida: "+titulo.getDataDoVencimento()));
 		
@@ -126,7 +126,7 @@ public class CLUnibancoCobrancaRegistrada extends ACLUnibanco {
 		
 		if(isNotNull(titulo.getNossoNumero(),"Nosso Número"))
 			if(StringUtils.isNumeric(titulo.getNossoNumero())){
-				if(Long.valueOf(Util4String.removeStartWithZeros(titulo.getNossoNumero()))>0)
+				if(Long.valueOf(StringUtil.removeStartWithZeros(titulo.getNossoNumero()))>0)
 					this.add(new Field<String>(titulo.getNossoNumero(), 11,Filler.ZERO_LEFT));
 				else
 					throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser um número natural positivo, e não: ["+titulo.getNossoNumero()+"]"));

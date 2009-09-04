@@ -34,7 +34,7 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.utilix.Util4Banco;
+import br.com.nordestefomento.jrimum.utilix.BancoUtil;
 
 /**
  * 
@@ -132,7 +132,7 @@ class CLHsbcCNR extends ACLHsbc {
 		this.add(new Field<String>(nossoNumero, 13, Filler.ZERO_LEFT));
 		
 		// Data de vencimento (formato juliano)
-		int dataVencimentoFormatoJuliano = Util4Banco.calculceFatorDeVencimento(titulo.getDataDoVencimento());
+		int dataVencimentoFormatoJuliano = BancoUtil.calculceFatorDeVencimento(titulo.getDataDoVencimento());
 		this.add(new Field<Integer>(dataVencimentoFormatoJuliano, 4, Filler.ZERO_LEFT));
 		
 		//2 FIXO (Código do Aplicativo CNR - Cob. Não Registrada)

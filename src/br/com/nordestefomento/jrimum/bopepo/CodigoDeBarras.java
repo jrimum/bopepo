@@ -43,7 +43,7 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.LineOfFields;
-import br.com.nordestefomento.jrimum.utilix.Util4Banco;
+import br.com.nordestefomento.jrimum.utilix.BancoUtil;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.DV4BoletoCodigoDeBarra;
 
 
@@ -133,7 +133,7 @@ public final class CodigoDeBarras extends LineOfFields{
 	 * Data Base de 07.10.1997, data usada pela FEBRABAN para realizar o cálculo
 	 * do fator de vencimento.
 	 * 
-	 * @see Util4Banco#calculceFatorDeVencimento(Date)
+	 * @see BancoUtil#calculceFatorDeVencimento(Date)
 	 */
 	public static final Date DATA_BASE_DO_FATOR_DE_VENCIMENTO = new GregorianCalendar(
 			1997, Calendar.OCTOBER, 7).getTime();
@@ -160,7 +160,7 @@ public final class CodigoDeBarras extends LineOfFields{
 	 * Representa a quantidade de dias decorridos da data base à data de
 	 * vencimento do título.
 	 * 
-	 * @see Util4Banco#calculceFatorDeVencimento(Date)
+	 * @see BancoUtil#calculceFatorDeVencimento(Date)
 	 */
 	private Field<Integer> fatorDeVencimento;
 	
@@ -280,7 +280,7 @@ public final class CodigoDeBarras extends LineOfFields{
 	private void calculateAndSetFatorDeVencimento(Date vencimento) {
 
 		fatorDeVencimento.setField(
-				Util4Banco.calculceFatorDeVencimento(vencimento));
+				BancoUtil.calculceFatorDeVencimento(vencimento));
 	}
 
 	/**

@@ -52,10 +52,10 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.type.Endereco;
 import br.com.nordestefomento.jrimum.utilix.RectanglePDF;
-import br.com.nordestefomento.jrimum.utilix.Util4Date;
-import br.com.nordestefomento.jrimum.utilix.Util4File;
-import br.com.nordestefomento.jrimum.utilix.Util4Monetary;
-import br.com.nordestefomento.jrimum.utilix.Util4PDF;
+import br.com.nordestefomento.jrimum.utilix.DateUtil;
+import br.com.nordestefomento.jrimum.utilix.FileUtil;
+import br.com.nordestefomento.jrimum.utilix.MonetaryUtil;
+import br.com.nordestefomento.jrimum.utilix.PDFUtil;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;
@@ -154,7 +154,7 @@ class ViewerPDF extends ACurbitaObject {
 
 		try {
 			
-			arq = Util4File.bytes2File(pathName, Util4PDF.mergeFiles(boletosEmBytes));
+			arq = FileUtil.bytes2File(pathName, PDFUtil.mergeFiles(boletosEmBytes));
 			
 		} catch (FileNotFoundException e) {
 			
@@ -208,7 +208,7 @@ class ViewerPDF extends ACurbitaObject {
 
 			processarPdf();
 			
-			file = Util4File.bytes2File(pathName, outputStream.toByteArray());
+			file = FileUtil.bytes2File(pathName, outputStream.toByteArray());
 			
 		} catch (FileNotFoundException e) {
 			
@@ -245,7 +245,7 @@ class ViewerPDF extends ACurbitaObject {
 
 			processarPdf();
 			
-			baos = Util4File.bytes2Stream(outputStream.toByteArray());
+			baos = FileUtil.bytes2Stream(outputStream.toByteArray());
 			
 		} catch (IOException e) {
 			
@@ -524,12 +524,12 @@ class ViewerPDF extends ACurbitaObject {
 			cb = stamper.getOverContent(field.getPage());
 			Image imgBarCode = barCode.createImageWithBarcode(cb, null, null);
 			
-			Util4PDF.changeField2Image(stamper, field, imgBarCode);
+			PDFUtil.changeField2Image(stamper, field, imgBarCode);
 		}
 	}
 
 	private void setDataProcessamento() throws IOException, DocumentException {
-		form.setField("txtFcDataProcessamento", Util4Date.FORMAT_DD_MM_YYYY.format(boleto.getDataDeProcessamento()));
+		form.setField("txtFcDataProcessamento", DateUtil.FORMAT_DD_MM_YYYY.format(boleto.getDataDeProcessamento()));
 	}
 
 	private void setAceite() throws IOException, DocumentException {
@@ -544,7 +544,7 @@ class ViewerPDF extends ACurbitaObject {
 	}
 
 	private void setDataDocumento() throws IOException, DocumentException {
-		form.setField("txtFcDataDocumento", Util4Date.FORMAT_DD_MM_YYYY.format(boleto.getTitulo().getDataDoDocumento()));
+		form.setField("txtFcDataDocumento", DateUtil.FORMAT_DD_MM_YYYY.format(boleto.getTitulo().getDataDoDocumento()));
 	}
 
 	private void setLocalPagamento() throws IOException, DocumentException {
@@ -702,16 +702,16 @@ class ViewerPDF extends ACurbitaObject {
 
 		if(isNotNull(boleto.getTitulo().getDesconto())){
 			
-			form.setField("txtRsDescontoAbatimento", Util4Monetary.fmt_Real.format(boleto.getTitulo().getDesconto()));
-			form.setField("txtFcDescontoAbatimento", Util4Monetary.fmt_Real.format(boleto.getTitulo().getDesconto()));
+			form.setField("txtRsDescontoAbatimento", MonetaryUtil.FORMAT_REAL.format(boleto.getTitulo().getDesconto()));
+			form.setField("txtFcDescontoAbatimento", MonetaryUtil.FORMAT_REAL.format(boleto.getTitulo().getDesconto()));
 		}
 		
 	}
 
 	private void setValorDocumento() throws IOException, DocumentException {
 
-		form.setField("txtRsValorDocumento", Util4Monetary.fmt_Real.format(boleto.getTitulo().getValor()));
-		form.setField("txtFcValorDocumento", Util4Monetary.fmt_Real.format(boleto.getTitulo().getValor()));
+		form.setField("txtRsValorDocumento", MonetaryUtil.FORMAT_REAL.format(boleto.getTitulo().getValor()));
+		form.setField("txtFcValorDocumento", MonetaryUtil.FORMAT_REAL.format(boleto.getTitulo().getValor()));
 	}
 
 	private void setDataVencimeto() throws IOException, DocumentException {
@@ -719,7 +719,7 @@ class ViewerPDF extends ACurbitaObject {
 		// Obtendo uma string com a data de vencimento formatada 
 		// no padrão "dd/mm/yyyy".
 		// Ex: 03/07/2008.
-		String dataFormatada = Util4Date.FORMAT_DD_MM_YYYY.format(boleto.getTitulo().getDataDoVencimento());
+		String dataFormatada = DateUtil.FORMAT_DD_MM_YYYY.format(boleto.getTitulo().getDataDoVencimento());
 		
 		// Realizando a impressão da data de vencimeto no boleto.
 		form.setField("txtRsDataVencimento", dataFormatada);
@@ -870,7 +870,7 @@ class ViewerPDF extends ACurbitaObject {
 			posCampoImgLogo = form.getFieldPositions(nomeDoCampo);
 			
 			if (isNotNull(posCampoImgLogo)) {
-				Util4PDF.changeField2Image(stamper, posCampoImgLogo, imagem);
+				PDFUtil.changeField2Image(stamper, posCampoImgLogo, imagem);
 			}
 		}
 	}

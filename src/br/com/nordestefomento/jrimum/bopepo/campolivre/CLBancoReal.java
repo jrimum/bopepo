@@ -34,7 +34,7 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.utilix.Util4String;
+import br.com.nordestefomento.jrimum.utilix.StringUtil;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.EnumModulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
@@ -119,7 +119,7 @@ class CLBancoReal extends ACLBancoAbnAmroReal {
 		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
 		this.add(new Field<String>(calculeDigitoDaPosicao31(titulo.getNumeroDoDocumento(), conta.getAgencia().getCodigo(), conta.getNumeroDaConta().getCodigoDaConta()), 1, Filler.ZERO_LEFT));
 		
-		this.add(new Field<String>(Util4String.eliminateSymbols(titulo.getNumeroDoDocumento()), 13, Filler.ZERO_LEFT));
+		this.add(new Field<String>(StringUtil.eliminateSymbols(titulo.getNumeroDoDocumento()), 13, Filler.ZERO_LEFT));
 		
 	}
 	

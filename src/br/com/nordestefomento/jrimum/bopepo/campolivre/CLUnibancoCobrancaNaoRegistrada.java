@@ -6,7 +6,7 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.utilix.Util4String;
+import br.com.nordestefomento.jrimum.utilix.StringUtil;
 
 /**
  * 
@@ -117,7 +117,7 @@ public class CLUnibancoCobrancaNaoRegistrada extends ACLUnibanco {
 		
 		if(isNotNull(titulo.getNossoNumero(),"Nosso Número"))
 			if(StringUtils.isNumeric(titulo.getNossoNumero())){
-				if(Long.valueOf(Util4String.removeStartWithZeros(titulo.getNossoNumero()))>0)
+				if(Long.valueOf(StringUtil.removeStartWithZeros(titulo.getNossoNumero()))>0)
 					this.add(new Field<String>(titulo.getNossoNumero(), 14,Filler.ZERO_LEFT));
 				else
 					throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser um número inteiro positivo, e não: ["+titulo.getNossoNumero()+"]"));
