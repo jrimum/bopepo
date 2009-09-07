@@ -73,7 +73,7 @@ import br.com.nordestefomento.jrimum.utilix.LineOfFields;
  * 
  * @version 0.2
  */
-abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
+abstract class AbstractCampoLivre extends LineOfFields implements ICampoLivre {
 
 	/**
 	 * 
@@ -82,7 +82,7 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 	
 	private static Logger log = Logger.getLogger(ObjectUtil.class);
 
-	protected ACampoLivre(Integer fieldsLength, Integer stringLength) {
+	protected AbstractCampoLivre(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 
@@ -120,51 +120,51 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 				switch (enumBanco) {
 
 				case BANCO_BRADESCO:
-					campoLivre = ACLBradesco.create(titulo);
+					campoLivre = AbstractCLBradesco.create(titulo);
 					break;
 
 				case BANCO_DO_BRASIL:
-					campoLivre = ACLBancoDoBrasil.create(titulo);
+					campoLivre = AbstractCLBancoDoBrasil.create(titulo);
 					break;
 
 				case BANCO_ABN_AMRO_REAL:
-					campoLivre = ACLBancoAbnAmroReal.create(titulo);
+					campoLivre = AbstractCLBancoABNAmroReal.create(titulo);
 					break;
 
 				case CAIXA_ECONOMICA_FEDERAL:
-					campoLivre = ACLCaixaEconomicaFederal.create(titulo);
+					campoLivre = AbstractCLCaixaEconomicaFederal.create(titulo);
 					break;
 
 				case HSBC:
-					campoLivre = ACLHsbc.create(titulo);
+					campoLivre = AbstractCLHSBC.create(titulo);
 					break;
 					
 				case UNIBANCO:
-					campoLivre = ACLUnibanco.create(titulo);
+					campoLivre = AbstractCLUnibanco.create(titulo);
 					break;
 
 				case BANCO_ITAU:
-					campoLivre = ACLItau.create(titulo);
+					campoLivre = AbstractCLItau.create(titulo);
 					break;
 
 				case BANCO_SAFRA:
-					campoLivre = ACLBancoSafra.create(titulo);
+					campoLivre = AbstractCLBancoSafra.create(titulo);
 					break;
 
 				case BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL:
-					campoLivre = ACLBanrisul.create(titulo);
+					campoLivre = AbstractCLBanrisul.create(titulo);
 					break;
 					
 				case MERCANTIL_DO_BRASIL:
-					campoLivre = ACLMercantilDoBrasil.create(titulo);
+					campoLivre = AbstractCLMercantilDoBrasil.create(titulo);
 					break;
 					
 				case NOSSA_CAIXA:
-					campoLivre = ACLNossaCaixa.create(titulo);
+					campoLivre = AbstractCLNossaCaixa.create(titulo);
 					break;
 				
 				case BANCO_DO_ESTADO_DO_ESPIRITO_SANTO:
-					campoLivre = ACLBanestes.create(titulo);
+					campoLivre = AbstractCLBanestes.create(titulo);
 					break;
 					
 				}

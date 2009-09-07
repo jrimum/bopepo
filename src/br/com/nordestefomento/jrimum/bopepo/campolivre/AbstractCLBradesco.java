@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  * 
- * Created at: 30/03/2008 - 18:08:25
+ * Created at: 30/03/2008 - 18:08:12
  * 
  * ================================================================================
  * 
@@ -23,54 +23,40 @@
  * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
  * reger permissões e limitações sob esta LICENÇA.
  * 
- * Criado em: 30/03/2008 - 18:08:25
+ * Criado em: 30/03/2008 - 18:08:12
  * 
  */
 
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNull;
-
-import org.apache.commons.lang.StringUtils;
-
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 
+/**
+ * 
+ * Descrição:
+ * 
+ * 
+ * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto
+ * @author Rômulo Augusto
+ * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento
+ *         Mercantil</a>
+ * 
+ * @since 0.2
+ * 
+ * @version 0.2
+ */
+abstract class AbstractCLBradesco extends AbstractCampoLivre {
 
-abstract class ACLCaixaEconomicaFederal extends ACampoLivre {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4104858478390595830L;
-	
-	private static final int NOSSO_NUMERO_SINCO = 17;
-
-	protected ACLCaixaEconomicaFederal(Integer fieldsLength, Integer stringLength) {
+	protected AbstractCLBradesco(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
+		
 	}
 
-	static ICampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException{
-		ICampoLivre campoLivre = null;
-		String nossoNumero = titulo.getNossoNumero();
+	static ICampoLivre create(Titulo titulo){
 		
-		if(StringUtils.isNotBlank(nossoNumero)) {
-			switch(nossoNumero.length()) {
-				case NOSSO_NUMERO_SINCO:
-					campoLivre = new CLCaixaEconomicaFederalSINCO(titulo);
-					break;
-			}
-		}
-		
-		if (isNull(campoLivre)) {
-			throw new NotSuporttedCampoLivreException (
-					"Campo livre disponível somente para títulos com " +
-					" comprimento de " + NOSSO_NUMERO_SINCO + " " + 
-					"(SINCO) caracteres"
-			);
-		}
-		else {
-			return campoLivre;
-		}
+		return new CLBradesco(titulo);
 	}
 }

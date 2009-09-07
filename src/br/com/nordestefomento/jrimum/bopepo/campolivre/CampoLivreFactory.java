@@ -81,7 +81,7 @@ public final class CampoLivreFactory {
 	 */
 	public static ICampoLivre create(Titulo titulo) throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 
-		return ACampoLivre.create(titulo);
+		return AbstractCampoLivre.create(titulo);
 	}
 	
 	/**

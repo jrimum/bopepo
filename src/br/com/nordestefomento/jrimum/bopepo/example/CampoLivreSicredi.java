@@ -111,7 +111,7 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * </table>
  * 
  * 
- * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ACampoLivre
+ * @see br.com.nordestefomento.jrimum.bopepo.campolivre.AbstractCampoLivre
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author <a href="http://jrimum.nordestefomento.com.br/wprojeto">JRimum</a>

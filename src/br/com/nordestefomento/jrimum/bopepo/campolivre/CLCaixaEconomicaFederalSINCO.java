@@ -83,7 +83,7 @@ import br.com.nordestefomento.jrimum.utilix.Filler;
  * 
  * @version 0.2
  */
-class CLCaixaEconomicaFederalSINCO extends ACLCaixaEconomicaFederal {
+class CLCaixaEconomicaFederalSINCO extends AbstractCLCaixaEconomicaFederal {
 
 	
 	/**

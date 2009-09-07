@@ -6,14 +6,14 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTipoCobranca;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
-public class ACLUnibanco extends ACampoLivre {
+public class AbstractCLUnibanco extends AbstractCampoLivre {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6169577742706045367L;
 
-	protected ACLUnibanco(Integer fieldsLength, Integer stringLength) {
+	protected AbstractCLUnibanco(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 

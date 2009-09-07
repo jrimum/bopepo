@@ -52,14 +52,14 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
  * 
  * @version 
  */
-public class ACLNossaCaixa extends ACampoLivre {
+public class AbstractCLNossaCaixa extends AbstractCampoLivre {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3806982587407010815L;
 
-	protected ACLNossaCaixa(Integer fieldsLength, Integer stringLength) {
+	protected AbstractCLNossaCaixa(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 	

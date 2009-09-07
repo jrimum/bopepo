@@ -41,7 +41,7 @@ import br.com.nordestefomento.jrimum.utilix.ITextStream;
  * @author Misael Barreto
  * @author Rômulo Augusto
  * 
- * @see ACampoLivre
+ * @see AbstractCampoLivre
  * 
  * @since 0.2
  * 

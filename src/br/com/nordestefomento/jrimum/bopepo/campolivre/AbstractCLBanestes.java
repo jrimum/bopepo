@@ -53,9 +53,9 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
  * 
  * @version 0.2
  */
-public class ACLBanestes extends ACampoLivre {
+public class AbstractCLBanestes extends AbstractCampoLivre {
 
-	protected ACLBanestes(Integer fieldsLength, Integer stringLength) {
+	protected AbstractCLBanestes(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 	

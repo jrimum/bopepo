@@ -109,7 +109,7 @@ import br.com.nordestefomento.jrimum.utilix.Filler;
  * 
  * @version 0.2
  */
-class CLItauComCarteirasEspeciais extends ACLItau {
+class CLItauComCarteirasEspeciais extends AbstractCLItau {
 
 	/**
 	 * 

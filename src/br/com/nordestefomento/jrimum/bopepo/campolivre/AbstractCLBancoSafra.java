@@ -35,7 +35,7 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTipoCobranca;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 
-public abstract class ACLBancoSafra extends ACampoLivre {
+public abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
 	
 	/**
 	 * 
@@ -50,7 +50,7 @@ public abstract class ACLBancoSafra extends ACampoLivre {
 	
 	protected static final int SISTEMA = 7;
 
-	protected ACLBancoSafra(Integer fieldsLength, Integer stringLength) {
+	protected AbstractCLBancoSafra(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 

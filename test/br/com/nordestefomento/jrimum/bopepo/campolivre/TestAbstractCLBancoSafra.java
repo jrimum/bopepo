@@ -46,7 +46,7 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 
-public class TestACLBancoSafra {
+public class TestAbstractCLBancoSafra {
 	
 	private ICampoLivre clBancoSafra;
 	
@@ -71,7 +71,7 @@ public class TestACLBancoSafra {
 	}
 
 	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.campolivre.ACLBancoSafra#create(br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo)}.
+	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.campolivre.AbstractCLBancoSafra#create(br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo)}.
 	 */
 	@Test(expected=NotSuporttedCampoLivreException.class)
 	public void testGetInstanceNotSuporttedCampoLivreException() {
@@ -79,7 +79,7 @@ public class TestACLBancoSafra {
 		ContaBancaria conta = titulo.getContaBancaria();
 		conta.getCarteira().setTipoCobranca(null);
 		
-		clBancoSafra = ACLBancoSafra.create(titulo);
+		clBancoSafra = AbstractCLBancoSafra.create(titulo);
 	}
 
 	@Test(expected=CampoLivreException.class)
@@ -95,7 +95,7 @@ public class TestACLBancoSafra {
 		
 		conta.getNumeroDaConta().setDigitoDaConta(digito);
 		
-		clBancoSafra = ACLBancoSafra.create(titulo);
+		clBancoSafra = AbstractCLBancoSafra.create(titulo);
 	}
 	
 	@Test

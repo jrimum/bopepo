@@ -33,7 +33,7 @@ package br.com.nordestefomento.jrimum.bopepo;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import br.com.nordestefomento.jrimum.bopepo.campolivre.TestACLBancoSafra;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.TestAbstractCLBancoSafra;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN11;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN17;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLBancoReal;
@@ -55,7 +55,7 @@ import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLItauPadrao;
 			TestCodigoDeBarra.class,
 			TestEnumBanco.class,
 			TestLinhaDigitavel.class,
-			TestACLBancoSafra.class,
+			TestAbstractCLBancoSafra.class,
 			TestCLBancoDoBrasilNN11.class,
 			TestCLBancoDoBrasilNN17.class,
 			TestCLBancoReal.class,

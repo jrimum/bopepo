@@ -139,7 +139,7 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * 
  * @version 0.2
  */
-public class CLNossaCaixa extends ACLNossaCaixa {
+public class CLNossaCaixa extends AbstractCLNossaCaixa {
 
 	/**
 	 * 

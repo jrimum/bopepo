@@ -61,7 +61,7 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * @version 0.2
  */
 
-public abstract class ACLItau extends ACampoLivre {
+public abstract class AbstractCLItau extends AbstractCampoLivre {
 	
 	/**
 	 * <p>
@@ -71,7 +71,7 @@ public abstract class ACLItau extends ACampoLivre {
 	 */
 	private static final Integer[] CARTEIRAS_ESPECIAIS = {106, 107, 122, 142, 143, 195, 196, 198};
 
-	protected ACLItau(Integer fieldsLength, Integer stringLength) {
+	protected AbstractCLItau(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 	

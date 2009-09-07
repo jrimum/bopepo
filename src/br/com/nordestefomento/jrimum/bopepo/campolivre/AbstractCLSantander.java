@@ -5,14 +5,14 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTipoCobranca;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 
 
-public class ACLSantander extends ACampoLivre {
+public class AbstractCLSantander extends AbstractCampoLivre {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6824641098515768442L;
 
-	protected ACLSantander(Integer fieldsLength, Integer stringLength) {
+	protected AbstractCLSantander(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 		
 	}

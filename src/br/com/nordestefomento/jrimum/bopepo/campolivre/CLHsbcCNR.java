@@ -89,7 +89,7 @@ import br.com.nordestefomento.jrimum.utilix.BancoUtil;
  * </table>
  * 
  * 
- * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ACampoLivre
+ * @see br.com.nordestefomento.jrimum.bopepo.campolivre.AbstractCampoLivre
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author Misael Barreto 
@@ -100,7 +100,7 @@ import br.com.nordestefomento.jrimum.utilix.BancoUtil;
  * 
  * @version 0.2
  */
-class CLHsbcCNR extends ACLHsbc {
+class CLHsbcCNR extends AbstractCLHSBC {
 	
 	/**
 	 * 

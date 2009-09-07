@@ -99,7 +99,7 @@ import br.com.nordestefomento.jrimum.utilix.Filler;
  * 
  * @version 0.2
  */
-class CLBanrisulCobrancaNaoRegistrada extends ACLBanrisul {
+class CLBanrisulCobrancaNaoRegistrada extends AbstractCLBanrisul {
 
 	/**
 	 * 

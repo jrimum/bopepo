@@ -72,7 +72,7 @@ import br.com.nordestefomento.jrimum.utilix.StringUtil;
  * @version 0.2
  */
 
-public class CLUnibancoCobrancaRegistrada extends ACLUnibanco {
+public class CLUnibancoCobrancaRegistrada extends AbstractCLUnibanco {
 
 	/**
 	 * 

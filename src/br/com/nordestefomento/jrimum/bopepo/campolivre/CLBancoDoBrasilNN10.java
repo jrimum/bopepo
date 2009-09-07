@@ -91,7 +91,7 @@ import br.com.nordestefomento.jrimum.utilix.Filler;
  * 
  * @version 0.2
  */
-public class CLBancoDoBrasilNN10 extends ACLBancoDoBrasil { 
+public class CLBancoDoBrasilNN10 extends AbstractCLBancoDoBrasil { 
 	/**
 	 * 
 	 */

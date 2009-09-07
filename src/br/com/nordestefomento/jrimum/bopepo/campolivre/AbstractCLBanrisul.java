@@ -58,9 +58,9 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * 
  * @version 0.2
  */
-abstract class ACLBanrisul extends ACampoLivre {
+abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 	
-	protected ACLBanrisul(Integer fieldsLength, Integer stringLength) {
+	protected AbstractCLBanrisul(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 

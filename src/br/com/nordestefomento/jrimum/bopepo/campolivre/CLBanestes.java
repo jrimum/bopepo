@@ -96,7 +96,7 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * 
  * @version 0.2
  */
-public class CLBanestes extends ACLBanestes {
+public class CLBanestes extends AbstractCLBanestes {
 	
 	/**
 	 * 
