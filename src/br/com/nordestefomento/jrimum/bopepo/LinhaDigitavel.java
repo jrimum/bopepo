@@ -37,7 +37,7 @@ import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.LineOfFields;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
 import br.com.nordestefomento.jrimum.utilix.StringUtil;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.DV4BoletoLinhaDigitavel;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.BoletoLinhaDigitavelDV;
 
 
 /**
@@ -244,16 +244,16 @@ public final class LinhaDigitavel extends LineOfFields {
 		add(campo4);
 		add(innerCampo5);
 		
-		this.innerCampo1.getField().load(codigoDeBarras);
-		this.innerCampo2.getField().load(codigoDeBarras);
-		this.innerCampo3.getField().load(codigoDeBarras);
+		this.innerCampo1.getValue().load(codigoDeBarras);
+		this.innerCampo2.getValue().load(codigoDeBarras);
+		this.innerCampo3.getValue().load(codigoDeBarras);
 		
-		this.campo4.setField(codigoDeBarras.getDigitoVerificadorGeral().getField());
+		this.campo4.setValue(codigoDeBarras.getDigitoVerificadorGeral().getValue());
 		
 		if(log.isDebugEnabled())
-			log.debug("InnerCampo 4 da Linha Digitável : "+this.campo4.getField());
+			log.debug("InnerCampo 4 da Linha Digitável : "+this.campo4.getValue());
 		
-		this.innerCampo5.getField().load(codigoDeBarras);
+		this.innerCampo5.getValue().load(codigoDeBarras);
 		
 		if(log.isDebugEnabled() || log.isTraceEnabled())
 			log.debug("linhaDigitavel instanciada : "+this.write());
@@ -288,7 +288,7 @@ public final class LinhaDigitavel extends LineOfFields {
 		/**
 		 * 
 		 */
-		protected final DV4BoletoLinhaDigitavel calculadorDV = new DV4BoletoLinhaDigitavel();
+		protected final BoletoLinhaDigitavelDV calculadorDV = new BoletoLinhaDigitavelDV();
 		
 		
 		protected InnerCampo(Integer fieldsLength, Integer stringLength) {
@@ -382,7 +382,7 @@ public final class LinhaDigitavel extends LineOfFields {
 				add(new Field<Integer>(calculadorDV.calcule(get(0).write() + get(1).write() + get(2).write()),1));
 				
 				if(log.isDebugEnabled())
-					log.debug("Digito verificador do Field 1 da Linha Digitável : "+get(3).getField());
+					log.debug("Digito verificador do Field 1 da Linha Digitável : "+get(3).getValue());
 
 				
 				if(log.isDebugEnabled() || log.isTraceEnabled())
@@ -430,7 +430,7 @@ public final class LinhaDigitavel extends LineOfFields {
 			add(new Field<Integer>(calculadorDV.calcule(get(0).write()),1));
 			
 			if(log.isDebugEnabled())
-				log.debug("Digito verificador do campo 2 da Linha Digitável : "+get(1).getField());
+				log.debug("Digito verificador do campo 2 da Linha Digitável : "+get(1).getValue());
 			
 			if(log.isDebugEnabled() || log.isTraceEnabled())
 				log.debug("InnerCampo 2 da Linha Digitável composto : "+write());
@@ -476,7 +476,7 @@ public final class LinhaDigitavel extends LineOfFields {
 			add(new Field<Integer>(calculadorDV.calcule(get(0).write()),1));
 			
 			if(log.isDebugEnabled())
-				log.debug("Digito verificador do campo 3 da Linha Digitável : "+get(1).getField());
+				log.debug("Digito verificador do campo 3 da Linha Digitável : "+get(1).getValue());
 			
 			if(log.isDebugEnabled() || log.isTraceEnabled())
 				log.debug("InnerCampo 3 da Linha Digitável composto : "+write());

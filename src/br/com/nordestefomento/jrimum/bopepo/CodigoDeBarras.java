@@ -46,7 +46,7 @@ import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.LineOfFields;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.DV4BoletoCodigoDeBarra;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.BoletoCodigoDeBarraDV;
 
 
 /**
@@ -156,7 +156,7 @@ public final class CodigoDeBarras extends LineOfFields{
 	/**
 	 * Mecanismo de autenticação usado no composição de barras.
 	 * 
-	 * @see br.com.nordestefomento.jrimum.vallia.digitoverificador.DV4BoletoCodigoDeBarra
+	 * @see br.com.nordestefomento.jrimum.vallia.digitoverificador.BoletoCodigoDeBarraDV
 	 */
 	private Field<Integer> digitoVerificadorGeral;
 	
@@ -214,16 +214,16 @@ public final class CodigoDeBarras extends LineOfFields{
 		add(this.campoLivre);
 	
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		this.codigoDoBanco.setField(contaBancaria.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado());
+		this.codigoDoBanco.setValue(contaBancaria.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado());
 		
-		this.codigoDaMoeda.setField(titulo.getEnumMoeda().getCodigo());
+		this.codigoDaMoeda.setValue(titulo.getEnumMoeda().getCodigo());
 		
 		//Was here DigitoVerificador 
 		//But wait
 		this.calculateAndSetFatorDeVencimento(titulo.getDataDoVencimento());
 		
-		this.valorNominalDoTitulo.setField(titulo.getValor().movePointRight(2));
-		this.campoLivre.setField(campoLivre.write());
+		this.valorNominalDoTitulo.setValue(titulo.getValor().movePointRight(2));
+		this.campoLivre.setValue(campoLivre.write());
 		
 		//Now you can
 		this.calculateAndSetDigitoVerificadorGeral();
@@ -240,7 +240,7 @@ public final class CodigoDeBarras extends LineOfFields{
 			log.trace("Calculando Digito Verificador Geral");
 
 		// Instanciando o objeto irá calcular o dígito verificador do boleto.
-		DV4BoletoCodigoDeBarra calculadorDV = new DV4BoletoCodigoDeBarra();
+		BoletoCodigoDeBarraDV calculadorDV = new BoletoCodigoDeBarraDV();
 
 		// Preparando o conjunto de informações que será a base para o cálculo
 		// do dígito verificador, conforme normas da FEBRABAN.
@@ -252,13 +252,13 @@ public final class CodigoDeBarras extends LineOfFields{
 
 		// Realizando o cálculo dígito verificador e em seguida armazenando 
 		// a informação no campo "digitoVerificadorGeral".
-		digitoVerificadorGeral.setField(
+		digitoVerificadorGeral.setValue(
 				calculadorDV.calcule(toCalculateDV.toString())
 				);
 
 		if (log.isDebugEnabled())
 			log.debug("Digito Verificador Geral calculado : "
-					+ digitoVerificadorGeral.getField());
+					+ digitoVerificadorGeral.getValue());
 	}
 
 	/**
@@ -283,7 +283,7 @@ public final class CodigoDeBarras extends LineOfFields{
 	 */
 	private void calculateAndSetFatorDeVencimento(Date vencimento) {
 
-		fatorDeVencimento.setField(
+		fatorDeVencimento.setValue(
 				BancoUtil.calculceFatorDeVencimento(vencimento));
 	}
 

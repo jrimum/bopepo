@@ -113,7 +113,7 @@ public class TestCodigoDeBarra{
 	 */
 	@Test
 	public void testGetDigitoVerificadorGeral() {
-		assertTrue(2 == codigoDeBarras.getDigitoVerificadorGeral().getField());
+		assertTrue(2 == codigoDeBarras.getDigitoVerificadorGeral().getValue());
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class TestCodigoDeBarra{
 	@Test
 	public void testGetFatorDeVencimento() {
 		
-		assertTrue(1000 == codigoDeBarras.getFatorDeVencimento().getField());
+		assertTrue(1000 == codigoDeBarras.getFatorDeVencimento().getValue());
 		
 	}
 
