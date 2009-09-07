@@ -30,7 +30,7 @@
 
 package br.com.nordestefomento.jrimum.bopepo.view;
 
-import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.isNotNull;
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 
 import java.io.ByteArrayOutputStream;

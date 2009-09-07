@@ -30,15 +30,15 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import static br.com.nordestefomento.jrimum.domkee.bank.febraban.Banco.isCodigoDeCompensacaoOK;
-import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.isNotNull;
-import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.isNull;
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNull;
 
 import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.utilix.ACurbitaObject;
+import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
 import br.com.nordestefomento.jrimum.utilix.LineOfFields;
 
 /**
@@ -80,7 +80,7 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 	 */
 	private static final long serialVersionUID = 4605730904122445595L;
 	
-	private static Logger log = Logger.getLogger(ACurbitaObject.class);
+	private static Logger log = Logger.getLogger(ObjectUtil.class);
 
 	protected ACampoLivre(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
@@ -228,4 +228,8 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 
 	}
 	
+	@Override
+	public String toString() {
+		return ObjectUtil.toString(this);
+	}
 }

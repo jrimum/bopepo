@@ -86,7 +86,7 @@ public class TestCLCaixaEconomicaFederalSINCO{
 
 		//Básico:
 		titulo.setNossoNumero("10000000020061732");
-		clCaixaSINCO = Factory4CampoLivre.create(titulo);
+		clCaixaSINCO = CampoLivreFactory.create(titulo);
 	
 		assertNotNull(clCaixaSINCO);
 		//
@@ -98,7 +98,7 @@ public class TestCLCaixaEconomicaFederalSINCO{
 		
 		try{
 			
-			clCaixaSINCO = Factory4CampoLivre.create(titulo);
+			clCaixaSINCO = CampoLivreFactory.create(titulo);
 			
 			assertTrue(false);
 			
@@ -116,7 +116,7 @@ public class TestCLCaixaEconomicaFederalSINCO{
 		
 		titulo.setNossoNumero("10000000020061732");
 		
-		clCaixaSINCO = Factory4CampoLivre.create(titulo);
+		clCaixaSINCO = CampoLivreFactory.create(titulo);
 		
 		assertEquals("1000002910000000020061732", clCaixaSINCO.write());
 	}

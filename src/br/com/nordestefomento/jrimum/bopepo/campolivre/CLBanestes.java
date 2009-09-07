@@ -29,7 +29,7 @@
  */
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.exists;
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.exists;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTipoCobranca;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;

@@ -1,6 +1,6 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.isNotNull;
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
 
 import org.apache.commons.lang.StringUtils;
 

@@ -89,7 +89,7 @@ public class TestCLNossaCaixa {
 		
 		try {
 			
-			clNossaCaixa = Factory4CampoLivre.create(titulo);
+			clNossaCaixa = CampoLivreFactory.create(titulo);
 			Assert.assertNotNull(clNossaCaixa);
 			
 		} catch(NotSuporttedCampoLivreException e) {
@@ -99,7 +99,7 @@ public class TestCLNossaCaixa {
 	}
 	
 	private String getCampoLivreComoString() {
-		clNossaCaixa = Factory4CampoLivre.create(titulo);
+		clNossaCaixa = CampoLivreFactory.create(titulo);
 		String campoLivre = clNossaCaixa.write();
 		return campoLivre;
 	}

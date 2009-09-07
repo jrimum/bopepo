@@ -45,6 +45,7 @@ import br.com.nordestefomento.jrimum.utilix.BancoUtil;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.LineOfFields;
+import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.DV4BoletoCodigoDeBarra;
 
 
@@ -369,5 +370,9 @@ public final class CodigoDeBarras extends LineOfFields{
 	void setCampoLivre(Field<String> campoLivre) {
 		this.campoLivre = campoLivre;
 	}
-	
+
+	@Override
+	public String toString() {
+		return ObjectUtil.toString(this);
+	}
 }

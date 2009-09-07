@@ -36,7 +36,7 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.Banco;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.CodigoDeCompensacaoBACEN;
 import br.com.nordestefomento.jrimum.domkee.ientity.IBanco;
 import br.com.nordestefomento.jrimum.domkee.type.CNPJ;
-import br.com.nordestefomento.jrimum.utilix.ACurbitaObject;
+import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
 
 /**
  * 
@@ -415,10 +415,10 @@ public enum EnumBancos implements Serializable{
 	}
 
 	/**
-	 * @see br.com.nordestefomento.jrimum.utilix.ACurbitaObject#toString()
+	 * @see br.com.nordestefomento.jrimum.utilix.ObjectUtil#toString()
 	 * @see java.lang.Enum#toString()
 	 */
 	public String toString(){
-		return ACurbitaObject.toString(this);
+		return ObjectUtil.toString(this);
 	}
 }

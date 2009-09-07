@@ -91,7 +91,7 @@ public class TestCLMercantilDoBrasil {
 		
 		try {
 			
-			clMercantil = Factory4CampoLivre.create(titulo);
+			clMercantil = CampoLivreFactory.create(titulo);
 			Assert.assertNotNull(clMercantil);
 			
 		} catch(NotSuporttedCampoLivreException e) {
@@ -110,7 +110,7 @@ public class TestCLMercantilDoBrasil {
 	}
 
 	private String getCampoLivreComoString() {
-		clMercantil = Factory4CampoLivre.create(titulo);
+		clMercantil = CampoLivreFactory.create(titulo);
 		String campoLivre = clMercantil.write();
 		return campoLivre;
 	}

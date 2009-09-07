@@ -29,8 +29,8 @@
 
 package br.com.nordestefomento.jrimum.bopepo.view;
 
-import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.isNotNull;
-import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.isNull;
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -964,7 +964,7 @@ class ViewerPDF {
 	/**
 	 * Exibe os valores de instância.
 	 * 
-	 * @see br.com.nordestefomento.jrimum.utilix.ACurbitaObject#toString()
+	 * @see br.com.nordestefomento.jrimum.utilix.ObjectUtil#toString()
 	 */
 	@Override
 	public String toString() {

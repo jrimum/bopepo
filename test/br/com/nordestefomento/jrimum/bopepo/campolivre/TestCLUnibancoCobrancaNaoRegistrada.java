@@ -85,7 +85,7 @@ public class TestCLUnibancoCobrancaNaoRegistrada {
 		titulo.setNossoNumero("11223344556677");
 		titulo.setDigitoDoNossoNumero("7");
 
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test
@@ -99,56 +99,56 @@ public class TestCLUnibancoCobrancaNaoRegistrada {
 	public final void testGetInstanceComContaNula() {
 
 		titulo.getContaBancaria().setNumeroDaConta(null);
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComContaNegativa() {
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(-23));
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComDigitoDaContaNula() {
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(23, null));
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComDigitoDaContaNegativa() {
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(2, "-3"));
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComDigitoDaContaNaoNumerico() {
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(-23, "X"));
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNula() {
 
 		titulo.setNossoNumero(null);
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNegativo() {
 
 		titulo.setNossoNumero("-012345679012345");
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNaoNumerico() {
 
 		titulo.setNossoNumero("123456790123y45");
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test

@@ -41,7 +41,7 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.campolivre.Factory4CampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreFactory;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
@@ -91,7 +91,7 @@ public class TestLinhaDigitavel{
 		titulo.setValor(BigDecimal.valueOf(100.23));
 		titulo.setDataDoVencimento(VENCIMENTO);
 		
-		clBradesco = Factory4CampoLivre.create(titulo);
+		clBradesco = CampoLivreFactory.create(titulo);
 		
 		codigoDeBarras = new CodigoDeBarras(titulo, clBradesco);
 		

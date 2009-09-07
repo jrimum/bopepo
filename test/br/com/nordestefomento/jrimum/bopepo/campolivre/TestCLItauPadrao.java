@@ -76,13 +76,13 @@ public class TestCLItauPadrao {
 	@Test
 	public void testCreate() {
 		
-		Assert.assertNotNull(Factory4CampoLivre.create(titulo));
+		Assert.assertNotNull(CampoLivreFactory.create(titulo));
 	}
 	
 	@Test
 	public void testWriteNaoNulo() {
 		
-		clItauPadrao = Factory4CampoLivre.create(titulo);
+		clItauPadrao = CampoLivreFactory.create(titulo);
 		
 		Assert.assertNotNull(clItauPadrao.write());
 	}
@@ -90,7 +90,7 @@ public class TestCLItauPadrao {
 	@Test
 	public void testWriteValido() {
 		
-		clItauPadrao = Factory4CampoLivre.create(titulo);
+		clItauPadrao = CampoLivreFactory.create(titulo);
 		
 		Assert.assertEquals(25, clItauPadrao.write().length());
 		Assert.assertEquals("1101234567880057123457000", clItauPadrao.write());
@@ -109,7 +109,7 @@ public class TestCLItauPadrao {
 		titulo.setNossoNumero("0");
 		titulo.setNumeroDoDocumento("0");
 		
-		clItauPadrao = Factory4CampoLivre.create(titulo);
+		clItauPadrao = CampoLivreFactory.create(titulo);
 		
 		assertTrue(clItauPadrao.write().length() == 25);
 		assertEquals("0000000000000000000000000",clItauPadrao.write());
@@ -121,7 +121,7 @@ public class TestCLItauPadrao {
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		contaBancaria.setCarteira(new Carteira(198));
 		
-		clItauPadrao = Factory4CampoLivre.create(titulo);
+		clItauPadrao = CampoLivreFactory.create(titulo);
 		
 		assertTrue(clItauPadrao.write().length() == 25);
 		assertEquals("1981234567812345671234580", clItauPadrao.write());

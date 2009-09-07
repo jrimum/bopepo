@@ -74,7 +74,7 @@ public class TestCLBanestes {
 		titulo = new Titulo(contaBancaria,
 				new Pessoa("Nordeste Fomento"), new Pessoa("João Pereira"));
 		titulo.setNossoNumero("10297");
-		clBanestes = Factory4CampoLivre.create(titulo);
+		clBanestes = CampoLivreFactory.create(titulo);
 		
 	}
 	
@@ -109,7 +109,7 @@ public class TestCLBanestes {
 		final Carteira carteiraSemRegistro = new Carteira();
 		carteiraSemRegistro.setTipoCobranca(EnumTipoCobranca.SEM_REGISTRO);
 		titulo.getContaBancaria().setCarteira(carteiraSemRegistro);
-		clBanestes = Factory4CampoLivre.create(titulo);
+		clBanestes = CampoLivreFactory.create(titulo);
 		assertEquals(
 				"Testando um campo livre válido da carteira sem registro.",
 				"0001029700007730070202108", clBanestes.write());
@@ -119,7 +119,7 @@ public class TestCLBanestes {
 	public void seOWriteRetornaOValorEsperadoParaUmaCarteiraCaucionada() {
 		final Carteira carteiraCaucionada = new Carteira(3, EnumTipoCobranca.COM_REGISTRO);
 		titulo.getContaBancaria().setCarteira(carteiraCaucionada);
-		clBanestes = Factory4CampoLivre.create(titulo);
+		clBanestes = CampoLivreFactory.create(titulo);
 		assertEquals(
 				"Testando um campo livre válido da carteira caucionada.",
 				"0001029700007730070302196", clBanestes.write());
@@ -128,25 +128,25 @@ public class TestCLBanestes {
 	@Test(expected=CampoLivreException.class)
 	public void criacaoSemTipoDeCobranca() {
 		titulo.getContaBancaria().setCarteira(new Carteira());
-		Factory4CampoLivre.create(titulo);
+		CampoLivreFactory.create(titulo);
 	}
 	
 	@Test(expected=CampoLivreException.class)
 	public void criacaoSemNumeroDaConta() {
 		titulo.getContaBancaria().setNumeroDaConta(null);
-		Factory4CampoLivre.create(titulo);
+		CampoLivreFactory.create(titulo);
 	}
 	
 	@Test(expected=CampoLivreException.class)
 	public void criacaoSemNossoNumero() {
 		titulo.setNossoNumero(null);
-		Factory4CampoLivre.create(titulo);
+		CampoLivreFactory.create(titulo);
 	}
 	
 	@Test(expected=CampoLivreException.class)
 	public void criacaoNossoNumeroMaiorQue8Digitos(){
 		titulo.setNossoNumero("123456789");
-		Factory4CampoLivre.create(titulo);
+		CampoLivreFactory.create(titulo);
 	}
 	
 }

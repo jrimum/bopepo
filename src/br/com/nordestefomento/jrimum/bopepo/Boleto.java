@@ -29,8 +29,8 @@
 
 package br.com.nordestefomento.jrimum.bopepo;
 
-import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.isNotNull;
-import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.isNull;
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNull;
 
 import java.awt.Image;
 import java.util.Date;
@@ -39,12 +39,13 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import br.com.nordestefomento.jrimum.bopepo.campolivre.Factory4CampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreFactory;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.DateUtil;
+import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
 
 /**
  * <p>
@@ -157,7 +158,7 @@ public final class Boleto {
 		if(isNotNull(titulo)){
 			
 			this.setTitulo(titulo);
-			this.setCampoLivre(Factory4CampoLivre.create(titulo));
+			this.setCampoLivre(CampoLivreFactory.create(titulo));
 			this.load();
 			
 			if(log.isDebugEnabled())
@@ -501,4 +502,8 @@ public final class Boleto {
 		getImagensExtras().put(fieldName, image);
 	}
 
+	@Override
+	public String toString() {
+		return ObjectUtil.toString(this);
+	}
 }

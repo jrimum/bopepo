@@ -76,13 +76,13 @@ public class TestCLItauComCarteirasEspeciais {
 	@Test
 	public void testCreate() {
 		
-		Assert.assertNotNull(Factory4CampoLivre.create(titulo));
+		Assert.assertNotNull(CampoLivreFactory.create(titulo));
 	}
 	
 	@Test
 	public void testWriteNaoNulo() {
 		
-		clItauEspecial = Factory4CampoLivre.create(titulo);
+		clItauEspecial = CampoLivreFactory.create(titulo);
 		
 		Assert.assertNotNull(clItauEspecial.write());
 	}
@@ -90,7 +90,7 @@ public class TestCLItauComCarteirasEspeciais {
 	@Test
 	public void testWriteValido() {
 		
-		clItauEspecial = Factory4CampoLivre.create(titulo);
+		clItauEspecial = CampoLivreFactory.create(titulo);
 		
 		Assert.assertEquals(25, clItauEspecial.write().length());
 		Assert.assertEquals("1981234567812345671234580", clItauEspecial.write());
@@ -109,7 +109,7 @@ public class TestCLItauComCarteirasEspeciais {
 		titulo.setNossoNumero("0");
 		titulo.setNumeroDoDocumento("0");
 		
-		clItauEspecial = Factory4CampoLivre.create(titulo);
+		clItauEspecial = CampoLivreFactory.create(titulo);
 		
 		assertTrue(clItauEspecial.write().length() == 25);
 		assertEquals("0000000000000000000000000",clItauEspecial.write());

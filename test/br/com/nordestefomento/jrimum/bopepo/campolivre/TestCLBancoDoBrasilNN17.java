@@ -88,7 +88,7 @@ public class TestCLBancoDoBrasilNN17{
 	public void testGetInstanceTitulo() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		
 		//básico
-		clBancoDoBrasil = Factory4CampoLivre.create(titulo);
+		clBancoDoBrasil = CampoLivreFactory.create(titulo);
 		
 		assertNotNull(clBancoDoBrasil);
 	}
@@ -97,7 +97,7 @@ public class TestCLBancoDoBrasilNN17{
 	public void testWrite() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 		
 		//básico feliz
-		clBancoDoBrasil = Factory4CampoLivre.create(titulo);
+		clBancoDoBrasil = CampoLivreFactory.create(titulo);
 		
 		assertTrue(clBancoDoBrasil.write().length() == 25);
 		assertEquals("1234561234567890123456721",clBancoDoBrasil.write());
@@ -114,7 +114,7 @@ public class TestCLBancoDoBrasilNN17{
 		
 		titulo.setNossoNumero("00000000000000001");
 		
-		clBancoDoBrasil = Factory4CampoLivre.create(titulo);
+		clBancoDoBrasil = CampoLivreFactory.create(titulo);
 		
 		assertTrue(clBancoDoBrasil.write().length() == 25);
 		assertEquals("0000000000000000000000121",clBancoDoBrasil.write());
