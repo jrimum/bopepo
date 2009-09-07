@@ -4,12 +4,16 @@
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/_JRimum-Inc"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Domkee-Inc"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Utilix-Inc"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Vallia-Inc"/>
-	<classpathentry kind="lib" path="/_JRimum-Inc/lib/toDist/commons-lang-2.4.jar" sourcepath="/_JRimum-Inc/lib/toDist/commons-lang-2.4-sources.jar" />
-	<classpathentry kind="lib" path="/_JRimum-Inc/lib/toDist/iText-2.0.8.jar" sourcepath="/_JRimum-Inc/lib/toDist/iText-2.0.8-sources.jar"/>
-	<classpathentry kind="lib" path="/_JRimum-Inc/lib/toDist/log4j-1.2.15.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Domkee"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/JRimum"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Utilix"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Vallia"/>
+	<classpathentry kind="lib" path="/JRimum/lib/toDist/commons-lang-2.4.jar" sourcepath="/JRimum/lib/toDist/commons-lang-2.4-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/_JRimum/lib/toDist/commons-lang-2.4-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/JRimum/lib/toDist/iText-2.0.8.jar" sourcepath="/JRimum/lib/toDist/iText-2.0.8-sources.jar"/>
+	<classpathentry kind="lib" path="/JRimum/lib/toDist/log4j-1.2.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
