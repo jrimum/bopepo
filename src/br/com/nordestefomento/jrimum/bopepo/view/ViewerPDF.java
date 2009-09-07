@@ -545,7 +545,9 @@ class ViewerPDF {
 	}
 
 	private void setEspecieDoc() throws IOException, DocumentException {
-		form.setField("txtFcEspecieDocumento", boleto.getTitulo().getTipoDeDocumento().getSigla());
+		if (isNotNull(boleto.getTitulo().getTipoDeDocumento()) && isNotNull(boleto.getTitulo().getTipoDeDocumento().getSigla())) {
+			form.setField("txtFcEspecieDocumento", boleto.getTitulo().getTipoDeDocumento().getSigla());
+		}
 	}
 
 	private void setDataDocumento() throws IOException, DocumentException {
@@ -754,9 +756,10 @@ class ViewerPDF {
 	private void setCarteira() throws IOException, DocumentException {
 
 		Carteira carteira = boleto.getTitulo().getContaBancaria().getCarteira();
+		String descricaoCarteira = "";
 		
-		if (isNotNull(carteira)) {
-		  form.setField("txtFcCarteira", carteira.getCodigo().toString());
+		if (isNotNull(carteira) & isNotNull(carteira.getCodigo())) {
+			form.setField("txtFcCarteira", carteira.getCodigo().toString());
 		}
 	}	
 
@@ -918,16 +921,18 @@ class ViewerPDF {
 		StringBuilder sb = new StringBuilder(StringUtils.EMPTY);
 		ContaBancaria conta = boleto.getTitulo().getContaBancaria();
 
-		if (isNotNull(conta.getAgencia().getCodigo()))
-			sb.append(conta.getAgencia().getCodigo());
-
-		if (isNotNull(conta.getAgencia().getDigitoVerificador())
-				&& StringUtils.isNotBlank(conta.getAgencia().getDigitoVerificador().toString())) {
-
-			sb.append(HIFEN_SEPERADOR);
-			sb.append(conta.getAgencia().getDigitoVerificador());
+		if (isNotNull(conta.getAgencia())) {
+			if (isNotNull(conta.getAgencia().getCodigo()))
+				sb.append(conta.getAgencia().getCodigo());
+	
+			if (isNotNull(conta.getAgencia().getDigitoVerificador())
+					&& StringUtils.isNotBlank(conta.getAgencia().getDigitoVerificador().toString())) {
+	
+				sb.append(HIFEN_SEPERADOR);
+				sb.append(conta.getAgencia().getDigitoVerificador());
+			}
 		}
-
+		
 		if (isNotNull(conta.getNumeroDaConta().getCodigoDaConta())) {
 
 			sb.append(" / ");
