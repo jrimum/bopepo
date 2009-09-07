@@ -30,9 +30,15 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import static br.com.nordestefomento.jrimum.domkee.bank.febraban.Banco.isCodigoDeCompensacaoOK;
+import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.isNotNull;
+import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.isNull;
+
+import org.apache.log4j.Logger;
+
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.utilix.ACurbitaObject;
 import br.com.nordestefomento.jrimum.utilix.LineOfFields;
 
 /**
@@ -73,6 +79,8 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 	 * 
 	 */
 	private static final long serialVersionUID = 4605730904122445595L;
+	
+	private static Logger log = Logger.getLogger(ACurbitaObject.class);
 
 	protected ACampoLivre(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);

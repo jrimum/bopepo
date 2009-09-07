@@ -29,12 +29,16 @@
 
 package br.com.nordestefomento.jrimum.bopepo;
 
+import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.isNotNull;
+import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.isNull;
+
 import java.awt.Image;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.com.nordestefomento.jrimum.ACurbitaObject;
+import org.apache.log4j.Logger;
+
 import br.com.nordestefomento.jrimum.bopepo.campolivre.Factory4CampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
@@ -64,12 +68,13 @@ import br.com.nordestefomento.jrimum.utilix.DateUtil;
  * 
  * @version 0.2
  */
-public final class Boleto extends ACurbitaObject{
+public final class Boleto {
 	
 	//TODO Testes no teste unitário: TestBoleto
 	
+	private static final long serialVersionUID = 4436063640418293021L;
 	
-	private static final long serialVersionUID = 4436063640418293021L; 
+	private static Logger log = Logger.getLogger(Boleto.class);
 
 	/**
 	 * @see Titulo
@@ -156,7 +161,7 @@ public final class Boleto extends ACurbitaObject{
 			this.load();
 			
 			if(log.isDebugEnabled())
-				log.debug("boleto instance : "+this);
+				log.debug("boleto instance : " + this);
 			
 		}else {
 			IllegalArgumentException e = new IllegalArgumentException("Título nulo!");

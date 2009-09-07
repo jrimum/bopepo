@@ -1,5 +1,7 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
+import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.isNotNull;
+
 import org.apache.commons.lang.StringUtils;
 
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;

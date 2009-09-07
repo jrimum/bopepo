@@ -30,6 +30,7 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
+import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.exists;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;

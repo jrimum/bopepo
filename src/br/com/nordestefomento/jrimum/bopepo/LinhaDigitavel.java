@@ -31,6 +31,7 @@
 package br.com.nordestefomento.jrimum.bopepo;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.LineOfFields;
@@ -168,6 +169,8 @@ public final class LinhaDigitavel extends LineOfFields {
 	 */
 	private static final long serialVersionUID = -6089634012523938802L;
 	
+	private static Logger log = Logger.getLogger(LinhaDigitavel.class);
+	
 	/**
 	 * 
 	 */
@@ -275,8 +278,12 @@ public final class LinhaDigitavel extends LineOfFields {
 
 	}
 
-	private abstract class InnerCampo extends LineOfFields{
+	private abstract class InnerCampo extends LineOfFields {
 		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 6746400538765124943L;
 		/**
 		 * 
 		 */
@@ -289,9 +296,14 @@ public final class LinhaDigitavel extends LineOfFields {
 		
 	}
 	
-	private abstract class InnerCampoFormatado extends InnerCampo{
+	private abstract class InnerCampoFormatado extends InnerCampo {
 		
 		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 3650450185403697045L;
+
 		protected InnerCampoFormatado(final Integer fieldsLength, final Integer stringLength) {
 			super(fieldsLength, stringLength);
 		}

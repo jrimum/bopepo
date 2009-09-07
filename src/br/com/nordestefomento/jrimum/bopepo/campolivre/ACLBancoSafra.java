@@ -30,12 +30,18 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
+import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.exists;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTipoCobranca;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 
 public abstract class ACLBancoSafra extends ACampoLivre {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -555393808447532987L;
+
 	/**
 	 * Tamanho deste campo. Em outras palavras, é a quantidade de partes que
 	 * compõem este campo livre.

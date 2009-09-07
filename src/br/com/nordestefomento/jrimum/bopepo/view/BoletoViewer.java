@@ -30,6 +30,7 @@
 
 package br.com.nordestefomento.jrimum.bopepo.view;
 
+import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.isNotNull;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 
 import java.io.ByteArrayOutputStream;
@@ -39,8 +40,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
-import br.com.nordestefomento.jrimum.ACurbitaObject;
 import br.com.nordestefomento.jrimum.JRimumException;
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
 
@@ -71,7 +72,7 @@ import com.lowagie.text.DocumentException;
  * @version 0.2
  */
 
-public class BoletoViewer extends ACurbitaObject {
+public class BoletoViewer {
 
 	//TODO Teste no teste unitário.
 	
@@ -79,6 +80,8 @@ public class BoletoViewer extends ACurbitaObject {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private static Logger log = Logger.getLogger(BoletoViewer.class);
 
 	/**
 	 * <p> Engine responsável pela visualização em formato <em>PDF</em>.

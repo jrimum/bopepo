@@ -29,6 +29,9 @@
 
 package br.com.nordestefomento.jrimum.bopepo.view;
 
+import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.isNotNull;
+import static br.com.nordestefomento.jrimum.utilix.ACurbitaObject.isNull;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,8 +45,8 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.log4j.Logger;
 
-import br.com.nordestefomento.jrimum.ACurbitaObject;
 import br.com.nordestefomento.jrimum.JRimumException;
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
@@ -51,11 +54,11 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.type.Endereco;
-import br.com.nordestefomento.jrimum.utilix.RectanglePDF;
 import br.com.nordestefomento.jrimum.utilix.DateUtil;
 import br.com.nordestefomento.jrimum.utilix.FileUtil;
 import br.com.nordestefomento.jrimum.utilix.MonetaryUtil;
 import br.com.nordestefomento.jrimum.utilix.PDFUtil;
+import br.com.nordestefomento.jrimum.utilix.RectanglePDF;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;
@@ -85,7 +88,7 @@ import com.lowagie.text.pdf.PdfStamper;
  * 
  * @version 0.2
  */
-class ViewerPDF extends ACurbitaObject {
+class ViewerPDF {
 
 	// TODO Teste no teste unitário.
 
@@ -93,6 +96,8 @@ class ViewerPDF extends ACurbitaObject {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private static Logger log = Logger.getLogger(ViewerPDF.class);
 
 	private static URL TEMPLATE_PADRAO_COM_SACADOR_AVALISTA = ViewerPDF.class.getResource("/resource/pdf/BoletoTemplateComSacadorAvalista.pdf");
 	private static URL TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA = ViewerPDF.class.getResource("/resource/pdf/BoletoTemplateSemSacadorAvalista.pdf");
@@ -959,7 +964,7 @@ class ViewerPDF extends ACurbitaObject {
 	/**
 	 * Exibe os valores de instância.
 	 * 
-	 * @see br.com.nordestefomento.jrimum.ACurbitaObject#toString()
+	 * @see br.com.nordestefomento.jrimum.utilix.ACurbitaObject#toString()
 	 */
 	@Override
 	public String toString() {

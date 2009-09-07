@@ -31,9 +31,10 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
-import br.com.nordestefomento.jrimum.ACurbitaObject;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.utilix.ACurbitaObject;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 
@@ -62,6 +63,8 @@ public final class Factory4CampoLivre extends ACurbitaObject{
 	 * 
 	 */
 	private static final long serialVersionUID = 8572635342980404937L;
+	
+	private static Logger log = Logger.getLogger(Factory4CampoLivre.class);
 
 	/**
 	 * Devolve um ICampoLivre de acordo com o Banco contido na conta do Cedente. 
