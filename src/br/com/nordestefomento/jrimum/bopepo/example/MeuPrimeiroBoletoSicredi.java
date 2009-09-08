@@ -13,21 +13,20 @@ import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
-import br.com.nordestefomento.jrimum.domkee.banco.IBanco;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Agencia;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Banco;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Carteira;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.CodigoDeCompensacaoBACEN;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.EnumTitulo;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo.EnumAceite;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.receitafederal.CNPJ;
-import br.com.nordestefomento.jrimum.domkee.type.CEP;
-import br.com.nordestefomento.jrimum.domkee.type.Endereco;
-import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
+import br.com.nordestefomento.jrimum.domkee.comum.endereco.CEP;
+import br.com.nordestefomento.jrimum.domkee.comum.endereco.Endereco;
+import br.com.nordestefomento.jrimum.domkee.comum.endereco.EnumUnidadeFederativa;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.id.cprf.CNPJ;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Banco;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTitulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
 
 import com.lowagie.text.DocumentException;
 
@@ -46,7 +45,7 @@ public class MeuPrimeiroBoletoSicredi {
 		
 		// Informando dados sobre a conta bancária do cendente.
 		
-		final IBanco banco = new Banco(new CodigoDeCompensacaoBACEN(748),
+		final Banco banco = new Banco(new CodigoDeCompensacaoBACEN(748),
 				"BANCO COOPERATIVO SICREDI S.A.", new CNPJ("01181521000155"));
 		
 		//SOBREpondo a Logo do banco:

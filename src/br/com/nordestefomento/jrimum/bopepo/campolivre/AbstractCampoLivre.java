@@ -29,15 +29,15 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import static br.com.nordestefomento.jrimum.domkee.banco.febraban.Banco.isCodigoDeCompensacaoOK;
+import static br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Banco.isCodigoDeCompensacaoOK;
 import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
 import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNull;
 
 import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
 import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
 

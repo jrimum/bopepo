@@ -8,21 +8,21 @@ import java.util.Date;
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
-import br.com.nordestefomento.jrimum.domkee.banco.DadoBancario;
-import br.com.nordestefomento.jrimum.domkee.banco.IBanco;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Agencia;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Carteira;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.EnumTipoCobranca;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.EnumTitulo;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Modalidade;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo.EnumAceite;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.type.CEP;
-import br.com.nordestefomento.jrimum.domkee.type.Endereco;
-import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
+import br.com.nordestefomento.jrimum.domkee.comum.endereco.CEP;
+import br.com.nordestefomento.jrimum.domkee.comum.endereco.Endereco;
+import br.com.nordestefomento.jrimum.domkee.comum.endereco.EnumUnidadeFederativa;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Banco;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.DadoBancario;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTipoCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTitulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Modalidade;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
 
 /**
  * 
@@ -49,7 +49,7 @@ public class MeuPrimeiroBoleto {
 		Pessoa cedente = new Pessoa("PROJETO JRimum", "00.000.208/0001-00");
 		
 		// Informando dados sobre a conta bancária do cendente.		
-		IBanco banco = EnumBancos.NOSSA_CAIXA.create();
+		Banco banco = EnumBancos.NOSSA_CAIXA.create();
 		ContaBancaria contaBancariaCed = new ContaBancaria(banco);
 		contaBancariaCed.setBanco(banco);
 		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(123456, "0"));

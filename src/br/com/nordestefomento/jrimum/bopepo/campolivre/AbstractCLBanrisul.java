@@ -31,7 +31,7 @@ package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import org.apache.commons.lang.StringUtils;
 
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 

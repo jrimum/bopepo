@@ -32,10 +32,9 @@ package br.com.nordestefomento.jrimum.bopepo;
 import java.io.Serializable;
 import java.util.HashMap;
 
-import br.com.nordestefomento.jrimum.domkee.banco.IBanco;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Banco;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.CodigoDeCompensacaoBACEN;
-import br.com.nordestefomento.jrimum.domkee.receitafederal.CNPJ;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.id.cprf.CNPJ;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Banco;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
 
 /**
@@ -93,7 +92,7 @@ import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
  * @author Samuel Valério
  * 
  * @see br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre
- * @see br.com.nordestefomento.jrimum.domkee.banco.IBanco
+ * @see br.com.nordestefomento.jrimum.domkee.financeiro.banco.Banco
  * 
  * @since 0.2
  * 
@@ -367,13 +366,13 @@ public enum EnumBancos implements Serializable{
 	 * 
 	 * @return Uma instância do respectivo banco.
 	 * 
-	 * @see br.com.nordestefomento.jrimum.domkee.banco.febraban.Banco#Banco(CodigoDeCompensacaoBACEN, String, CNPJ, String)
+	 * @see br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Banco#Banco(CodigoDeCompensacaoBACEN, String, CNPJ, String)
 	 * @see <a href="http://www.bcb.gov.br/?CHEQUESCOMPE">Bancos supervisionados
 	 *      pela BACEN</a>
 	 * 
 	 * @since 0.2
 	 */
-	public IBanco create() {
+	public Banco create() {
 		return new Banco(new CodigoDeCompensacaoBACEN(this.codigoDeCompensacaoBACEN), this.instituicao, new CNPJ(
 				this.cNPJ), this.segmento);
 	}

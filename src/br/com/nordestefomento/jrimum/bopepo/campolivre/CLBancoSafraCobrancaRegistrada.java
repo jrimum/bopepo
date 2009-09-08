@@ -31,8 +31,8 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.exists;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 

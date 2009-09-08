@@ -40,17 +40,17 @@ import java.util.List;
 
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Agencia;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Carteira;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.EnumTitulo;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo.EnumAceite;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.type.CEP;
-import br.com.nordestefomento.jrimum.domkee.type.Endereco;
-import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
+import br.com.nordestefomento.jrimum.domkee.comum.endereco.CEP;
+import br.com.nordestefomento.jrimum.domkee.comum.endereco.Endereco;
+import br.com.nordestefomento.jrimum.domkee.comum.endereco.EnumUnidadeFederativa;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTitulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
 
 
 /**
