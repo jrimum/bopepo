@@ -39,9 +39,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 
 /**

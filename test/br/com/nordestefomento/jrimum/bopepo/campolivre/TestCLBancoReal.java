@@ -42,10 +42,10 @@ import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreFactory;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 
 public class TestCLBancoReal {

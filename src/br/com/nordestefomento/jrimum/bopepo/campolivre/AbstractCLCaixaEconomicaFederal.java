@@ -34,7 +34,7 @@ import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNull;
 
 import org.apache.commons.lang.StringUtils;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo;
 
 
 abstract class AbstractCLCaixaEconomicaFederal extends AbstractCampoLivre {

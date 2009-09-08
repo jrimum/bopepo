@@ -4,8 +4,8 @@ import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
 
 import org.apache.commons.lang.StringUtils;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.StringUtil;

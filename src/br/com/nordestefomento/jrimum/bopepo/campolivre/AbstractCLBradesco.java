@@ -30,7 +30,7 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo;
 
 /**
  * 

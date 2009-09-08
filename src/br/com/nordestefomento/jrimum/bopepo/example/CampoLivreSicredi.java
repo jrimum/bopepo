@@ -38,9 +38,9 @@ import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
