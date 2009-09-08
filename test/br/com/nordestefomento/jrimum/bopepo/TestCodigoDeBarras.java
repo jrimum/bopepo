@@ -47,7 +47,7 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumMoeda;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeMoeda;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
@@ -83,7 +83,7 @@ public class TestCodigoDeBarras{
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_BRADESCO.create());
+		contaBancaria.setBanco(BancoSuportado.BANCO_BRADESCO.create());
 		
 		Agencia agencia = new Agencia(1234, '1');
 		contaBancaria.setAgencia(agencia);
@@ -96,7 +96,7 @@ public class TestCodigoDeBarras{
 
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("12345678901");
-		titulo.setEnumMoeda(EnumMoeda.REAL);
+		titulo.setEnumMoeda(TipoDeMoeda.REAL);
 		titulo.setValor(BigDecimal.valueOf(100.23));
 		titulo.setDataDoVencimento(VENCIMENTO);
 		

@@ -30,11 +30,11 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.exists;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTipoCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.EnumModulo;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.TipoDeModulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
 /**
@@ -119,7 +119,7 @@ class CLBanestes extends AbstractCLBanestes {
 		if (exists(codigoDaCarteiraDeCobranca))
 			this.add(new Field<Integer>(codigoDaCarteiraDeCobranca, 1));
 		else {
-			final EnumTipoCobranca tipoDeCobranca = titulo.getContaBancaria().getCarteira().getTipoCobranca();
+			final TipoDeCobranca tipoDeCobranca = titulo.getContaBancaria().getCarteira().getTipoCobranca();
 			switch (tipoDeCobranca) {
 				case SEM_REGISTRO:
 					this.add(new Field<Integer>(2, 1));
@@ -166,7 +166,7 @@ class CLBanestes extends AbstractCLBanestes {
 		final byte segundoDV;
 		
 		// resto proveniente do módulo 11 com pesos de 2 a 7
-		int restoDoModulo11 = new Modulo(EnumModulo.MODULO11, 7, 2).calcule(numero + primeiroDV);
+		int restoDoModulo11 = new Modulo(TipoDeModulo.MODULO11, 7, 2).calcule(numero + primeiroDV);
 		
 		if (restoDoModulo11 == 0) {
 			segundoDV = 0;
@@ -176,7 +176,7 @@ class CLBanestes extends AbstractCLBanestes {
 			} else {
 				primeiroDV++;
 			}
-			segundoDV = (byte) new Modulo(EnumModulo.MODULO11, 7, 2).calcule(numero + primeiroDV);
+			segundoDV = (byte) new Modulo(TipoDeModulo.MODULO11, 7, 2).calcule(numero + primeiroDV);
 		} else {
 				segundoDV = (byte) (11 - restoDoModulo11);
 		}
@@ -198,7 +198,7 @@ class CLBanestes extends AbstractCLBanestes {
 		final byte primeiroDV;
 		
 		// resto proveniente do módulo 10
-		byte restoDoModulo10 = (byte) new Modulo(EnumModulo.MODULO10).calcule(this.write());
+		byte restoDoModulo10 = (byte) new Modulo(TipoDeModulo.MODULO10).calcule(this.write());
 		
 		// se não houver resto, primeiroDV = 0
 		// caso contrário, primeiroDV = 10 - resto

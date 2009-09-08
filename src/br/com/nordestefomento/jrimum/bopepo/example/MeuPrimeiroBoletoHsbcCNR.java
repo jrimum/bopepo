@@ -5,18 +5,18 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.CEP;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.Endereco;
-import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.EnumUnidadeFederativa;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.DadoBancario;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Banco;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumMoeda;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTipoCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeMoeda;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
@@ -47,12 +47,12 @@ public class MeuPrimeiroBoletoHsbcCNR {
 		Pessoa cedente = new Pessoa("Cedente de Teste", "00.000.208/0001-00");
 		
 		// Informando dados sobre a conta bancária do cendente.		
-		Banco banco = EnumBancos.HSBC.create();
+		Banco banco = BancoSuportado.HSBC.create();
 		ContaBancaria contaBancariaCed = new ContaBancaria(banco);
 		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(1234567));
 		
 		Carteira carteira = new Carteira();
-		carteira.setTipoCobranca(EnumTipoCobranca.SEM_REGISTRO);
+		carteira.setTipoCobranca(TipoDeCobranca.SEM_REGISTRO);
 		contaBancariaCed.setCarteira(carteira);
 		cedente.addContaBancaria(contaBancariaCed);		
 		
@@ -69,7 +69,7 @@ public class MeuPrimeiroBoletoHsbcCNR {
 		enderecoSac.setBairro("Centro");
 		enderecoSac.setCep(new CEP("59064-120"));
 		enderecoSac.setLocalidade("Belo Horizonte");
-		enderecoSac.setUF(EnumUnidadeFederativa.MG);
+		enderecoSac.setUF(UnidadeFederativa.MG);
 		sacado.addEndereco(enderecoSac);
 
 		
@@ -83,7 +83,7 @@ public class MeuPrimeiroBoletoHsbcCNR {
 		titulo.setDataDoDocumento(DateUtil.parse("05/09/2008"));
 		titulo.setDataDoVencimento(DateUtil.parse("25/09/2009"));
 		titulo.setAceite(EnumAceite.A);
-		titulo.setEnumMoeda(EnumMoeda.REAL);
+		titulo.setEnumMoeda(TipoDeMoeda.REAL);
 		/*
 		 * INFORMANDO MAIS DADOS BANCÁRIOS, QUANDO NECESSÁRIO.
 		 * Dependendo do banco, talvez seja necessário informar mais dados além de: 

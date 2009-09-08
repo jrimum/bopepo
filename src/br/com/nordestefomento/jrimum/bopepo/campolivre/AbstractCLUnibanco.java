@@ -2,7 +2,7 @@ package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.exists;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTipoCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
@@ -26,10 +26,10 @@ abstract class AbstractCLUnibanco extends AbstractCampoLivre {
 
 		if (exists(conta.getCarteira().getTipoCobranca())) {
 
-			if (conta.getCarteira().getTipoCobranca() == EnumTipoCobranca.COM_REGISTRO) 
+			if (conta.getCarteira().getTipoCobranca() == TipoDeCobranca.COM_REGISTRO) 
 				campoLivre = new CLUnibancoCobrancaRegistrada(titulo);
 			else 
-				if(conta.getCarteira().getTipoCobranca() == EnumTipoCobranca.SEM_REGISTRO)
+				if(conta.getCarteira().getTipoCobranca() == TipoDeCobranca.SEM_REGISTRO)
 					campoLivre = new CLUnibancoCobrancaNaoRegistrada(titulo);
 				else
 					throw new NotSuporttedCampoLivreException(

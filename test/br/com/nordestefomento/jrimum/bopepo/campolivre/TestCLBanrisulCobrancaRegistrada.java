@@ -35,12 +35,12 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTipoCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
@@ -69,9 +69,9 @@ public class TestCLBanrisulCobrancaRegistrada {
 	public void inicializa() {
 
 		ContaBancaria contaBancaria = new ContaBancaria(
-				EnumBancos.BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.create());
+				BancoSuportado.BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.create());
 		contaBancaria
-		.setCarteira(new Carteira(1, EnumTipoCobranca.COM_REGISTRO));
+		.setCarteira(new Carteira(1, TipoDeCobranca.COM_REGISTRO));
 		contaBancaria.setAgencia(new Agencia(100,'1'));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(1));
 

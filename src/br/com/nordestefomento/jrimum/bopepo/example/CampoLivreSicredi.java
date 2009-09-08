@@ -44,7 +44,7 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.EnumModulo;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.TipoDeModulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
 /**
@@ -126,7 +126,7 @@ public class CampoLivreSicredi extends AbstractLineOfFields implements CampoLivr
 
 	private static final Integer STRING_LENGTH = 25;
 
-	private static final Modulo modulo11 = new Modulo(EnumModulo.MODULO11);
+	private static final Modulo modulo11 = new Modulo(TipoDeModulo.MODULO11);
 
 	/**
 	 * <p>

@@ -13,11 +13,11 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTipoCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
@@ -42,9 +42,9 @@ public class TestCLHsbcCNR {
 		numeroDaConta.setDigitoDaConta("2");
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.HSBC.create());
+		contaBancaria.setBanco(BancoSuportado.HSBC.create());
 		contaBancaria.setNumeroDaConta(numeroDaConta);
-		contaBancaria.setCarteira(new Carteira(1, EnumTipoCobranca.SEM_REGISTRO));
+		contaBancaria.setCarteira(new Carteira(1, TipoDeCobranca.SEM_REGISTRO));
 
 		Pessoa sacado = new Pessoa();
 		Pessoa cedente = new Pessoa();

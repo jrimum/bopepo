@@ -99,7 +99,7 @@ import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
  * @version 0.2
  */
 
-public enum EnumBancos implements Serializable{
+public enum BancoSuportado implements Serializable{
 
 	// TODO FAZER um link para a lista de componentes suportados no javadoc
 	// dessa classe.
@@ -244,8 +244,8 @@ public enum EnumBancos implements Serializable{
 	 * 
 	 * @since 0.2
 	 */
-	public static final HashMap<String, EnumBancos> suportados = new HashMap<String, EnumBancos>(
-			EnumBancos.values().length);
+	public static final HashMap<String, BancoSuportado> suportados = new HashMap<String, BancoSuportado>(
+			BancoSuportado.values().length);
 
 	static {
 
@@ -326,7 +326,7 @@ public enum EnumBancos implements Serializable{
 	 * @since 0.2
 	 * 
 	 */
-	private EnumBancos(String codigoDeCompensacaoBACEN, String cnpj,
+	private BancoSuportado(String codigoDeCompensacaoBACEN, String cnpj,
 			String instituicao, String segmento) {
 		this.codigoDeCompensacaoBACEN = codigoDeCompensacaoBACEN;
 		this.cNPJ = cnpj;

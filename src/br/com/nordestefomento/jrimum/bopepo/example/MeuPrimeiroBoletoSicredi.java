@@ -15,7 +15,7 @@ import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreExc
 import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.CEP;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.Endereco;
-import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.EnumUnidadeFederativa;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.id.cprf.CNPJ;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
@@ -23,7 +23,7 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Banco;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTitulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
@@ -66,7 +66,7 @@ public class MeuPrimeiroBoletoSicredi {
 
 		// Informando o endereço do sacado.
 		Endereco enderecoSac = new Endereco();
-		enderecoSac.setUF(EnumUnidadeFederativa.RN);
+		enderecoSac.setUF(UnidadeFederativa.RN);
 		enderecoSac.setLocalidade("Natal");
 		enderecoSac.setCep(new CEP("59064-120"));
 		enderecoSac.setBairro("Grande Centro");
@@ -83,7 +83,7 @@ public class MeuPrimeiroBoletoSicredi {
 		
 		// Informando o endereço do sacador avalista. 
 		Endereco enderecoSacAval = new Endereco();
-		enderecoSacAval.setUF(EnumUnidadeFederativa.DF);
+		enderecoSacAval.setUF(UnidadeFederativa.DF);
 		enderecoSacAval.setLocalidade("Brasília");
 		enderecoSacAval.setCep(new CEP("00000-000"));
 		enderecoSacAval.setBairro("Grande Centro");
@@ -102,7 +102,7 @@ public class MeuPrimeiroBoletoSicredi {
 		titulo.setValor(BigDecimal.valueOf(0.23));
 		titulo.setDataDoDocumento(new Date());
 		titulo.setDataDoVencimento(new Date());
-		titulo.setTipoDeDocumento(EnumTitulo.DM_DUPLICATA_MERCANTIL);
+		titulo.setTipoDeDocumento(TipoDeTitulo.DM_DUPLICATA_MERCANTIL);
 		titulo.setAceite(EnumAceite.A);
 
 		

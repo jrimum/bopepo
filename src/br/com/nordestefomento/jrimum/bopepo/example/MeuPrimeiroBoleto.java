@@ -6,19 +6,19 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.CEP;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.Endereco;
-import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.EnumUnidadeFederativa;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Banco;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.DadoBancario;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTipoCobranca;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTitulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Modalidade;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
@@ -49,11 +49,11 @@ public class MeuPrimeiroBoleto {
 		Pessoa cedente = new Pessoa("PROJETO JRimum", "00.000.208/0001-00");
 		
 		// Informando dados sobre a conta bancária do cendente.		
-		Banco banco = EnumBancos.NOSSA_CAIXA.create();
+		Banco banco = BancoSuportado.NOSSA_CAIXA.create();
 		ContaBancaria contaBancariaCed = new ContaBancaria(banco);
 		contaBancariaCed.setBanco(banco);
 		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(123456, "0"));
-		contaBancariaCed.setCarteira(new Carteira(123, EnumTipoCobranca.SEM_REGISTRO));
+		contaBancariaCed.setCarteira(new Carteira(123, TipoDeCobranca.SEM_REGISTRO));
 		contaBancariaCed.setModalidade(new Modalidade(4));
 		contaBancariaCed.setAgencia(new Agencia(1234, '1'));
 		cedente.addContaBancaria(contaBancariaCed);		
@@ -65,7 +65,7 @@ public class MeuPrimeiroBoleto {
 
 		// Informando o endereço do sacado.
 		Endereco enderecoSac = new Endereco();
-		enderecoSac.setUF(EnumUnidadeFederativa.RN);
+		enderecoSac.setUF(UnidadeFederativa.RN);
 		enderecoSac.setLocalidade("Natal");
 		enderecoSac.setCep(new CEP("59064-120"));
 		enderecoSac.setBairro("Grande Centro");
@@ -80,7 +80,7 @@ public class MeuPrimeiroBoleto {
 		
 		// Informando o endereço do sacador avalista. 
 		Endereco enderecoSacAval = new Endereco();
-		enderecoSacAval.setUF(EnumUnidadeFederativa.DF);
+		enderecoSacAval.setUF(UnidadeFederativa.DF);
 		enderecoSacAval.setLocalidade("Brasília");
 		enderecoSacAval.setCep(new CEP("00000-000"));
 		enderecoSacAval.setBairro("Grande Centro");
@@ -98,7 +98,7 @@ public class MeuPrimeiroBoleto {
 		titulo.setValor(BigDecimal.valueOf(0.23));
 		titulo.setDataDoDocumento(new Date());
 		titulo.setDataDoVencimento(new Date());
-		titulo.setTipoDeDocumento(EnumTitulo.DM_DUPLICATA_MERCANTIL);
+		titulo.setTipoDeDocumento(TipoDeTitulo.DM_DUPLICATA_MERCANTIL);
 		titulo.setAceite(EnumAceite.A);
 		titulo.setDesconto(new BigDecimal(0.05));
 

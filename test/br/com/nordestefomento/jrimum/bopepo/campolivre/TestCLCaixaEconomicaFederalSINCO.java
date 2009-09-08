@@ -38,7 +38,7 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
@@ -76,7 +76,7 @@ public class TestCLCaixaEconomicaFederalSINCO{
 		numeroDaConta.setCodigoDaConta(2);
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		
-		contaBancaria.setBanco(EnumBancos.CAIXA_ECONOMICA_FEDERAL.create());
+		contaBancaria.setBanco(BancoSuportado.CAIXA_ECONOMICA_FEDERAL.create());
 		
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 	}

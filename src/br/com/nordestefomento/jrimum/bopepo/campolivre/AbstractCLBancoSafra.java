@@ -32,7 +32,7 @@ package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.exists;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTipoCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
@@ -65,7 +65,7 @@ abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
 			
 			if(exists(conta.getNumeroDaConta().getDigitoDaConta())) {
 
-				if (conta.getCarteira().getTipoCobranca() == EnumTipoCobranca.COM_REGISTRO) {
+				if (conta.getCarteira().getTipoCobranca() == TipoDeCobranca.COM_REGISTRO) {
 	
 					campoLivre = new CLBancoSafraCobrancaRegistrada(titulo);
 	

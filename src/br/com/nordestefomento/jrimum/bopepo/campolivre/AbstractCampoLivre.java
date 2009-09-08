@@ -35,7 +35,7 @@ import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNull;
 
 import org.apache.log4j.Logger;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
@@ -96,7 +96,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 
 		CampoLivre campoLivre = null;
 		ContaBancaria contaBancaria = null;
-		EnumBancos enumBanco = null;
+		BancoSuportado enumBanco = null;
 		
 		try{
 		
@@ -111,10 +111,10 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		 */
 		if (isContaBacariaOK(contaBancaria)) {
 
-			if (EnumBancos.isSuportado(contaBancaria.getBanco()
+			if (BancoSuportado.isSuportado(contaBancaria.getBanco()
 					.getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
 
-				enumBanco = EnumBancos.suportados.get(contaBancaria.getBanco()
+				enumBanco = BancoSuportado.suportados.get(contaBancaria.getBanco()
 						.getCodigoDeCompensacaoBACEN().getCodigoFormatado());
 
 				switch (enumBanco) {

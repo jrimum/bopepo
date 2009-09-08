@@ -39,15 +39,15 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.CEP;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.Endereco;
-import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.EnumUnidadeFederativa;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTitulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
@@ -103,7 +103,7 @@ public class Util4Exemplos {
 		Pessoa sacado = new Pessoa("Fulano da Silva Sauro Perdido e Desempregado", "222.222.222-22");
 		
 		Endereco endereco = new Endereco();
-		endereco.setUF(EnumUnidadeFederativa.RN);
+		endereco.setUF(UnidadeFederativa.RN);
 		endereco.setLocalidade("Natal");
 		endereco.setCep(new CEP("59064-120"));
 		endereco.setBairro("Grande Centro");
@@ -114,7 +114,7 @@ public class Util4Exemplos {
 		
 		Pessoa cedente = new Pessoa("Empresa Lucrativa para Todo Sempre Ilimitada", "00.000.208/0001-00");
 	
-		ContaBancaria contaBancaria = new ContaBancaria(EnumBancos.BANCO_DO_BRASIL.create());
+		ContaBancaria contaBancaria = new ContaBancaria(BancoSuportado.BANCO_DO_BRASIL.create());
 		
 		contaBancaria.setAgencia(new Agencia(1234, '7'));
 		contaBancaria.setCarteira(new Carteira(5));
@@ -125,7 +125,7 @@ public class Util4Exemplos {
 		Pessoa sacadorAvalista = new Pessoa("Banco do Brasil", "00.000.000/0001-91");
 		
 		Endereco endereco2 = new Endereco();
-		endereco2.setUF(EnumUnidadeFederativa.DF);
+		endereco2.setUF(UnidadeFederativa.DF);
 		endereco2.setLocalidade("Brasília");
 		endereco2.setCep(new CEP("00000-000"));
 		endereco2.setBairro("Grande Centro");
@@ -143,7 +143,7 @@ public class Util4Exemplos {
 		titulo.setValor(BigDecimal.valueOf(100.23));
 		titulo.setDataDoDocumento(DATA_DO_DOCUMENTO);
 		titulo.setDataDoVencimento(VENCIMENTO);
-		titulo.setTipoDeDocumento(EnumTitulo.DM_DUPLICATA_MERCANTIL);
+		titulo.setTipoDeDocumento(TipoDeTitulo.DM_DUPLICATA_MERCANTIL);
 		titulo.setAceite(EnumAceite.A);
 	
 		Boleto b1,b2,b3,b4,b5;

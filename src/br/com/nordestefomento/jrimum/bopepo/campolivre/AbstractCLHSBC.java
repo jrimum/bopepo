@@ -30,9 +30,9 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTipoCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
@@ -67,12 +67,12 @@ abstract class AbstractCLHSBC extends AbstractCampoLivre {
 		CampoLivre campoLivre = null;
 		ContaBancaria conta = titulo.getContaBancaria();
 		
-		if (conta.getCarteira().getTipoCobranca() == EnumTipoCobranca.SEM_REGISTRO) {
+		if (conta.getCarteira().getTipoCobranca() == TipoDeCobranca.SEM_REGISTRO) {
 			campoLivre = new CLHsbcCNR(titulo); 
 		}
 		else {
 			throw new CampoLivreException("Atualmente para o banco" +
-					" " + EnumBancos.HSBC.getInstituicao() + 
+					" " + BancoSuportado.HSBC.getInstituicao() + 
 					" só é possível a montagem do campo livre para carteiras" +
 					" não registradas.");
 		}

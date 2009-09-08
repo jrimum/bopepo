@@ -53,7 +53,7 @@ import br.com.nordestefomento.jrimum.bopepo.campolivre.TestCLItauPadrao;
 			TestBoleto.class,
 			TestViewPDF.class,
 			TestCodigoDeBarras.class,
-			TestEnumBanco.class,
+			TestBancoSuportado.class,
 			TestLinhaDigitavel.class,
 			TestAbstractCLBancoSafra.class,
 			TestCLBancoDoBrasilNN11.class,

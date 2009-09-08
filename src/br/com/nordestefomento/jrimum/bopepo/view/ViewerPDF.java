@@ -49,7 +49,7 @@ import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.JRimumException;
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.Endereco;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
@@ -797,7 +797,7 @@ class ViewerPDF {
 
 		} else {
 
-			if (EnumBancos.isSuportado(conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
+			if (BancoSuportado.isSuportado(conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
 
 				URL url = this.getClass().getResource("/resource/img/"
 											+ conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado()

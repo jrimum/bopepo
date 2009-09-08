@@ -37,7 +37,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
@@ -58,7 +58,7 @@ public class TestCLItauComCarteirasEspeciais {
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_ITAU.create());
+		contaBancaria.setBanco(BancoSuportado.BANCO_ITAU.create());
 		
 		contaBancaria.setAgencia(new Agencia(57,'1'));
 		contaBancaria.setCarteira(new Carteira(198));
@@ -100,7 +100,7 @@ public class TestCLItauComCarteirasEspeciais {
 	public void testWriteComValoresInvalidos() {
 		
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_ITAU.create());
+		contaBancaria.setBanco(BancoSuportado.BANCO_ITAU.create());
 		
 		contaBancaria.setAgencia(new Agencia(0,'1'));
 		contaBancaria.setCarteira(new Carteira(0));

@@ -7,12 +7,12 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTipoCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
@@ -74,10 +74,10 @@ public class TestCLUnibancoCobrancaNaoRegistrada {
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.UNIBANCO.create());
+		contaBancaria.setBanco(BancoSuportado.UNIBANCO.create());
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(123456, "1"));
 		contaBancaria.setCarteira(new Carteira(123,
-				EnumTipoCobranca.SEM_REGISTRO));
+				TipoDeCobranca.SEM_REGISTRO));
 		contaBancaria.setAgencia(new Agencia(01234, '1'));
 
 		titulo = new Titulo(contaBancaria, sacado, cedente);

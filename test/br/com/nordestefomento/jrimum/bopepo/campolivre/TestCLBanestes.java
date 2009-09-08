@@ -35,11 +35,11 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.EnumTipoCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
@@ -67,8 +67,8 @@ public class TestCLBanestes {
 	public void inicializa() {
 
 		ContaBancaria contaBancaria = new ContaBancaria(
-				EnumBancos.BANCO_DO_ESTADO_DO_ESPIRITO_SANTO.create());
-		contaBancaria.setCarteira(new Carteira(4, EnumTipoCobranca.COM_REGISTRO));
+				BancoSuportado.BANCO_DO_ESTADO_DO_ESPIRITO_SANTO.create());
+		contaBancaria.setCarteira(new Carteira(4, TipoDeCobranca.COM_REGISTRO));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(7730070));
 
 		titulo = new Titulo(contaBancaria,
@@ -107,7 +107,7 @@ public class TestCLBanestes {
 	@Test
 	public void seOWriteRetornaOValorEsperadoParaUmaCarteiraSemRegistro() {
 		final Carteira carteiraSemRegistro = new Carteira();
-		carteiraSemRegistro.setTipoCobranca(EnumTipoCobranca.SEM_REGISTRO);
+		carteiraSemRegistro.setTipoCobranca(TipoDeCobranca.SEM_REGISTRO);
 		titulo.getContaBancaria().setCarteira(carteiraSemRegistro);
 		clBanestes = CampoLivreFactory.create(titulo);
 		assertEquals(
@@ -117,7 +117,7 @@ public class TestCLBanestes {
 	
 	@Test
 	public void seOWriteRetornaOValorEsperadoParaUmaCarteiraCaucionada() {
-		final Carteira carteiraCaucionada = new Carteira(3, EnumTipoCobranca.COM_REGISTRO);
+		final Carteira carteiraCaucionada = new Carteira(3, TipoDeCobranca.COM_REGISTRO);
 		titulo.getContaBancaria().setCarteira(carteiraCaucionada);
 		clBanestes = CampoLivreFactory.create(titulo);
 		assertEquals(

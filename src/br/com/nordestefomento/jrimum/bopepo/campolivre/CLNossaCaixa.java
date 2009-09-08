@@ -33,7 +33,7 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBanca
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.EnumModulo;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.TipoDeModulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
 /**
@@ -198,7 +198,7 @@ class CLNossaCaixa extends AbstractCLNossaCaixa {
 		digito1ASBACE = digito1;
 		String numeroParaCalculo = gereNumeroParaCalculoDosDigitosASBACE(titulo, modalidadeDaConta) + digito1ASBACE;
 		
-		Modulo modulo11 = new Modulo(EnumModulo.MODULO11);
+		Modulo modulo11 = new Modulo(TipoDeModulo.MODULO11);
 		modulo11.setLimiteMinimo(2);
 		modulo11.setLimiteMaximo(7);
 		
@@ -233,7 +233,7 @@ class CLNossaCaixa extends AbstractCLNossaCaixa {
 	 */
 	private int calculeDigito1ASBACE(Titulo titulo, Integer modalidadeDaConta) {
 		
-		Modulo modulo10 = new Modulo(EnumModulo.MODULO10);
+		Modulo modulo10 = new Modulo(TipoDeModulo.MODULO10);
 		int resto = modulo10.calcule(gereNumeroParaCalculoDosDigitosASBACE(titulo, modalidadeDaConta));
 		
 		int digito = resto;

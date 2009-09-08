@@ -35,7 +35,7 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.StringUtil;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.EnumModulo;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.TipoDeModulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
 /**
@@ -97,7 +97,7 @@ class CLBancoReal extends AbstractCLBancoABNAmroReal {
 	 */
 	private static final long serialVersionUID = -5294809022535972391L;
 	
-	private static final Modulo modulo10 = new Modulo(EnumModulo.MODULO10);
+	private static final Modulo modulo10 = new Modulo(TipoDeModulo.MODULO10);
 	
 	/**
 	 * Tamanho deste campo.

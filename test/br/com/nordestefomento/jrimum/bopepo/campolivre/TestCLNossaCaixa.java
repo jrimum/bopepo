@@ -34,7 +34,7 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
@@ -74,7 +74,7 @@ public class TestCLNossaCaixa {
 		Pessoa sacado = new Pessoa();
 		Pessoa cedente = new Pessoa();
 		
-		ContaBancaria contaBancaria = new ContaBancaria(EnumBancos.NOSSA_CAIXA.create());
+		ContaBancaria contaBancaria = new ContaBancaria(BancoSuportado.NOSSA_CAIXA.create());
 		contaBancaria.setAgencia(new Agencia(1,'1'));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(2818));
 		contaBancaria.setModalidade(new Modalidade(13));

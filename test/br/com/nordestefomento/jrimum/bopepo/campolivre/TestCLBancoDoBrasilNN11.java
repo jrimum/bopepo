@@ -37,7 +37,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
@@ -75,7 +75,7 @@ public class TestCLBancoDoBrasilNN11{
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_DO_BRASIL.create());
+		contaBancaria.setBanco(BancoSuportado.BANCO_DO_BRASIL.create());
 		
 		Agencia agencia = new Agencia(1234,'1');
 		contaBancaria.setAgencia(agencia);
@@ -111,7 +111,7 @@ public class TestCLBancoDoBrasilNN11{
 		
 		//Infeliz básico
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_DO_BRASIL.create());
+		contaBancaria.setBanco(BancoSuportado.BANCO_DO_BRASIL.create());
 		
 		Agencia agencia = new Agencia(0,'1');
 		contaBancaria.setAgencia(agencia);

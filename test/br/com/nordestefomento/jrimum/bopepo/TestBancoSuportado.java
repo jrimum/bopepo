@@ -38,7 +38,7 @@ import org.junit.Test;
  * @author Gilmar
  *
  */
-public class TestEnumBanco{
+public class TestBancoSuportado{
 
 
 	/**
@@ -49,9 +49,9 @@ public class TestEnumBanco{
 		
 		//bancos implementados
 		
-		assertEquals(EnumBancos.BANCO_DO_BRASIL.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "001");
-		assertEquals(EnumBancos.BANCO_BRADESCO.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "237");
-		assertEquals(EnumBancos.CAIXA_ECONOMICA_FEDERAL.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "104");
+		assertEquals(BancoSuportado.BANCO_DO_BRASIL.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "001");
+		assertEquals(BancoSuportado.BANCO_BRADESCO.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "237");
+		assertEquals(BancoSuportado.CAIXA_ECONOMICA_FEDERAL.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "104");
 		
 	}
 }
