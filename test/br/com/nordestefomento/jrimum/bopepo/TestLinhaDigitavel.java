@@ -31,7 +31,6 @@
 package br.com.nordestefomento.jrimum.bopepo;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -41,8 +40,8 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreFactory;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreFactory;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;

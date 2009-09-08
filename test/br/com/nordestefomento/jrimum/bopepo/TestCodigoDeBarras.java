@@ -31,7 +31,6 @@
 package br.com.nordestefomento.jrimum.bopepo;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
@@ -42,8 +41,8 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreFactory;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreFactory;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
@@ -67,7 +66,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
  * 
  * @version 0.2
  */
-public class TestCodigoDeBarra{
+public class TestCodigoDeBarras{
 
 	private CampoLivre clBradesco;
 
