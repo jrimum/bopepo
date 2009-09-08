@@ -756,7 +756,6 @@ class ViewerPDF {
 	private void setCarteira() throws IOException, DocumentException {
 
 		Carteira carteira = boleto.getTitulo().getContaBancaria().getCarteira();
-		String descricaoCarteira = "";
 		
 		if (isNotNull(carteira) & isNotNull(carteira.getCodigo())) {
 			form.setField("txtFcCarteira", carteira.getCodigo().toString());
