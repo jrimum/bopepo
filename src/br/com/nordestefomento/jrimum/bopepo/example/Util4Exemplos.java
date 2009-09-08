@@ -40,10 +40,10 @@ import java.util.List;
 
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.comum.endereco.CEP;
-import br.com.nordestefomento.jrimum.domkee.comum.endereco.Endereco;
-import br.com.nordestefomento.jrimum.domkee.comum.endereco.EnumUnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.CEP;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.Endereco;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.EnumUnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
