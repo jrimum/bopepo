@@ -8,6 +8,7 @@ import java.util.Date;
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
+import br.com.nordestefomento.jrimum.domkee.bank.IDadoBancario;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
@@ -22,7 +23,6 @@ import br.com.nordestefomento.jrimum.domkee.ientity.IBanco;
 import br.com.nordestefomento.jrimum.domkee.type.CEP;
 import br.com.nordestefomento.jrimum.domkee.type.Endereco;
 import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
-import br.com.nordestefomento.jrimum.domkee.type.IDadoBancario;
 
 /**
  * 
