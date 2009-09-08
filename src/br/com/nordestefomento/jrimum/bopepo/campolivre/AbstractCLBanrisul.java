@@ -60,6 +60,11 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  */
 abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 	
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -259398499475894938L;
+
 	protected AbstractCLBanrisul(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}

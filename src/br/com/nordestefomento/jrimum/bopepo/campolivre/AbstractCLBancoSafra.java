@@ -35,7 +35,7 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTipoCobranca;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 
-public abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
+abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
 	
 	/**
 	 * 

@@ -99,7 +99,7 @@ import br.com.nordestefomento.jrimum.utilix.Filler;
  * 
  * @version 0.2
  */
-public class CLBancoSafraCobrancaRegistrada extends AbstractCLBancoSafra {
+class CLBancoSafraCobrancaRegistrada extends AbstractCLBancoSafra {
 
 	/**
 	 * 

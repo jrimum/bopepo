@@ -53,7 +53,7 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
  * 
  * @version 0.2
  */
-public class AbstractCLBanestes extends AbstractCampoLivre {
+abstract class AbstractCLBanestes extends AbstractCampoLivre {
 
 	protected AbstractCLBanestes(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);

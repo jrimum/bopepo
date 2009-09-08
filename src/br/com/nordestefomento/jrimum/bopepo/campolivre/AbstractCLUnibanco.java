@@ -6,7 +6,7 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTipoCobranca;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
-public class AbstractCLUnibanco extends AbstractCampoLivre {
+abstract class AbstractCLUnibanco extends AbstractCampoLivre {
 
 	/**
 	 * 

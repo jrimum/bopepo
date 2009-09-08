@@ -61,7 +61,12 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * @version 0.2
  */
 
-public abstract class AbstractCLItau extends AbstractCampoLivre {
+abstract class AbstractCLItau extends AbstractCampoLivre {
+	
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -3082903872777434482L;
 	
 	/**
 	 * <p>

@@ -51,7 +51,7 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
  * 
  * @version 
  */
-public class AbstractCLMercantilDoBrasil extends AbstractCampoLivre {
+abstract class AbstractCLMercantilDoBrasil extends AbstractCampoLivre {
 
 	/**
 	 * 

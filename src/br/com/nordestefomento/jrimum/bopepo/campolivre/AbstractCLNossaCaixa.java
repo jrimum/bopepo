@@ -29,7 +29,6 @@
  */
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Modalidade;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 
 /**
@@ -52,7 +51,7 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
  * 
  * @version 
  */
-public class AbstractCLNossaCaixa extends AbstractCampoLivre {
+abstract class AbstractCLNossaCaixa extends AbstractCampoLivre {
 
 	/**
 	 * 

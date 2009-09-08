@@ -55,6 +55,11 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 	
 abstract class AbstractCLBancoABNAmroReal extends AbstractCampoLivre {
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -2020155324741631945L;
+
 	protected AbstractCLBancoABNAmroReal(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}

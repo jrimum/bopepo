@@ -53,6 +53,11 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
  */
 abstract class AbstractCLHSBC extends AbstractCampoLivre {
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 3179450500491723317L;
+
 	protected AbstractCLHSBC(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 		

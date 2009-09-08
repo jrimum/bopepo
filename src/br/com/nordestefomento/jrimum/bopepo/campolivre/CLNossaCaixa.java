@@ -29,8 +29,6 @@
  */
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
-
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
@@ -139,7 +137,7 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * 
  * @version 0.2
  */
-public class CLNossaCaixa extends AbstractCLNossaCaixa {
+class CLNossaCaixa extends AbstractCLNossaCaixa {
 
 	/**
 	 * 

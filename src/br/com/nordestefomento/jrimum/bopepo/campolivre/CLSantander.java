@@ -1,7 +1,7 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 
-public class CLSantander extends AbstractCLSantander {
+class CLSantander extends AbstractCLSantander {
 
 	/**
 	 * 

@@ -36,8 +36,6 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.EnumModulo;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
 /**
  * 
@@ -143,14 +141,14 @@ class CLMercantilDoBrasil extends AbstractCLMercantilDoBrasil {
 	 * 
 	 * @since 0.2
 	 */
-	private int calculeDigitoVerificadorDoNossoNumero(Integer agencia, String nossoNumero) {
-		
-		Modulo modulo = new Modulo(EnumModulo.MODULO11);
-		int resto = modulo.calcule(Filler.ZERO_LEFT.fill(agencia, 4) + nossoNumero);
-		
-		int digito = modulo.valor() - resto;
-		
-		return digito;
-	}
+//	private int calculeDigitoVerificadorDoNossoNumero(Integer agencia, String nossoNumero) {
+//		
+//		Modulo modulo = new Modulo(EnumModulo.MODULO11);
+//		int resto = modulo.calcule(Filler.ZERO_LEFT.fill(agencia, 4) + nossoNumero);
+//		
+//		int digito = modulo.valor() - resto;
+//		
+//		return digito;
+//	}
 
 }

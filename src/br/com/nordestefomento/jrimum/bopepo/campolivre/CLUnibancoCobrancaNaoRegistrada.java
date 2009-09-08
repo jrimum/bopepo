@@ -67,7 +67,7 @@ import br.com.nordestefomento.jrimum.utilix.StringUtil;
  * @version 0.2
  */
 
-public class CLUnibancoCobrancaNaoRegistrada extends AbstractCLUnibanco {
+class CLUnibancoCobrancaNaoRegistrada extends AbstractCLUnibanco {
 
 	/**
 	 * 
