@@ -64,9 +64,9 @@ abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 		super(fieldsLength, stringLength);
 	}
 
-	static ICampoLivre create(Titulo titulo)
+	static CampoLivre create(Titulo titulo)
 			throws NotSuporttedCampoLivreException {
-		final ICampoLivre campoLivre;
+		final CampoLivre campoLivre;
 
 		switch (titulo.getContaBancaria().getCarteira().getTipoCobranca()) {
 		case COM_REGISTRO:

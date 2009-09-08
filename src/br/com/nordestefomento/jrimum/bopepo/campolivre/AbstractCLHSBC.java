@@ -58,8 +58,8 @@ abstract class AbstractCLHSBC extends AbstractCampoLivre {
 		
 	}
 
-	static ICampoLivre create(Titulo titulo){
-		ICampoLivre campoLivre = null;
+	static CampoLivre create(Titulo titulo){
+		CampoLivre campoLivre = null;
 		ContaBancaria conta = titulo.getContaBancaria();
 		
 		if (conta.getCarteira().getTipoCobranca() == EnumTipoCobranca.SEM_REGISTRO) {

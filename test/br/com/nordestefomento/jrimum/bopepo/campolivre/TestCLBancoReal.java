@@ -39,7 +39,7 @@ import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreFactory;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
@@ -50,7 +50,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 
 public class TestCLBancoReal {
 	
-	private ICampoLivre clReal;
+	private CampoLivre clReal;
 	
 	private Titulo titulo;
 

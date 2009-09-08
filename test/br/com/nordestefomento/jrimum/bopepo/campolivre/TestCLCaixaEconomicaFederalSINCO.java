@@ -60,7 +60,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
  */
 public class TestCLCaixaEconomicaFederalSINCO{
 	
-	private ICampoLivre clCaixaSINCO;
+	private CampoLivre clCaixaSINCO;
 	
 	private Titulo titulo;
 

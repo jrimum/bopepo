@@ -23,7 +23,7 @@ public class TestCLUnibancoCobrancaNaoRegistrada {
 	 */
 	private static String TEST_CASE = "5123456100112233445566777";
 
-	private ICampoLivre campoLivre;
+	private CampoLivre campoLivre;
 
 	private Titulo titulo;
 

@@ -59,9 +59,9 @@ abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
 	}
 
 	
-	static ICampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException{
+	static CampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException{
 				
-		ICampoLivre campoLivre = null;
+		CampoLivre campoLivre = null;
 		
 		if (titulo.getNossoNumero().length() == 10) {
 			campoLivre = new CLBancoDoBrasilNN10(titulo);

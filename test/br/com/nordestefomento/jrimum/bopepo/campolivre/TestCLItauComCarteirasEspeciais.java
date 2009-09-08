@@ -47,7 +47,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 
 public class TestCLItauComCarteirasEspeciais {
 	
-	private ICampoLivre clItauEspecial;
+	private CampoLivre clItauEspecial;
 	
 	private Titulo titulo;
 	

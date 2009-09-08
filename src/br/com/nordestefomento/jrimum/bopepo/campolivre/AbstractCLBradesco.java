@@ -55,7 +55,7 @@ abstract class AbstractCLBradesco extends AbstractCampoLivre {
 		
 	}
 
-	static ICampoLivre create(Titulo titulo){
+	static CampoLivre create(Titulo titulo){
 		
 		return new CLBradesco(titulo);
 	}

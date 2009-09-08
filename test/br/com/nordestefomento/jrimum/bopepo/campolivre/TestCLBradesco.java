@@ -47,7 +47,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 
 public class TestCLBradesco{
 
-	private ICampoLivre clBradesco;
+	private CampoLivre clBradesco;
 	
 	private Titulo titulo;
 

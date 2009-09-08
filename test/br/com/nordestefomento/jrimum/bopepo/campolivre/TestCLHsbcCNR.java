@@ -28,7 +28,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 public class TestCLHsbcCNR {
 
 	
-	private ICampoLivre clHsbcCNR;
+	private CampoLivre clHsbcCNR;
 	private Titulo titulo;
 	
 	/**
@@ -64,7 +64,7 @@ public class TestCLHsbcCNR {
 	}
 
 	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.utilix.LineOfFields#write()}.
+	 * Test method for {@link br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields#write()}.
 	 */
 	@Test
 	public final void testWrite() {

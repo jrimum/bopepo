@@ -54,10 +54,10 @@ public abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
 		super(fieldsLength, stringLength);
 	}
 
-	static ICampoLivre create(Titulo titulo)
+	static CampoLivre create(Titulo titulo)
 			throws NotSuporttedCampoLivreException {
 
-		ICampoLivre campoLivre = null;
+		CampoLivre campoLivre = null;
 
 		ContaBancaria conta = titulo.getContaBancaria(); 
 

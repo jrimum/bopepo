@@ -79,7 +79,7 @@ public final class CampoLivreFactory {
 	 * @throws NotSuporttedBancoException 
 	 * @throws NotSuporttedCampoLivreException 
 	 */
-	public static ICampoLivre create(Titulo titulo) throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
+	public static CampoLivre create(Titulo titulo) throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
 
 		return AbstractCampoLivre.create(titulo);
 	}
@@ -92,9 +92,9 @@ public final class CampoLivreFactory {
 	 * @return Uma referência para um ICampoLivre.
 	 * @throws IllegalArgumentException
 	 */
-	public static ICampoLivre create(String strCampoLivre) throws IllegalArgumentException{
+	public static CampoLivre create(String strCampoLivre) throws IllegalArgumentException{
 		
-		ICampoLivre campoLivre = null;
+		CampoLivre campoLivre = null;
 		
 		if (isNotNull(strCampoLivre, "strCampoLivre")) {
 
@@ -102,13 +102,13 @@ public final class CampoLivreFactory {
 
 				strCampoLivre = StringUtils.strip(strCampoLivre); 
 				
-				if (strCampoLivre.length() == ICampoLivre.STRING_LENGTH) {
+				if (strCampoLivre.length() == CampoLivre.STRING_LENGTH) {
 
-					if (StringUtils.remove(strCampoLivre, ' ').length() == ICampoLivre.STRING_LENGTH) {
+					if (StringUtils.remove(strCampoLivre, ' ').length() == CampoLivre.STRING_LENGTH) {
 
 						if (StringUtils.isNumeric(strCampoLivre)) {
 
-							campoLivre = new ICampoLivre() {
+							campoLivre = new CampoLivre() {
 
 								private static final long serialVersionUID = -7592488081807235080L;
 

@@ -59,8 +59,8 @@ public class AbstractCLBanestes extends AbstractCampoLivre {
 		super(fieldsLength, stringLength);
 	}
 	
-	static ICampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException {
-		final ICampoLivre campoLivre;
+	static CampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException {
+		final CampoLivre campoLivre;
 		
 		campoLivre = new CLBanestes(titulo);
 		

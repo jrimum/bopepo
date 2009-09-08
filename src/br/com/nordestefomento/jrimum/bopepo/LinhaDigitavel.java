@@ -34,7 +34,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.utilix.Field;
-import br.com.nordestefomento.jrimum.utilix.LineOfFields;
+import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
 import br.com.nordestefomento.jrimum.utilix.StringUtil;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.BoletoLinhaDigitavelDV;
@@ -163,7 +163,7 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.BoletoLinhaDigitav
  * 
  * @version 0.2
  */
-public final class LinhaDigitavel extends LineOfFields {
+public final class LinhaDigitavel extends AbstractLineOfFields {
 	
 	/**
 	 * 
@@ -262,7 +262,7 @@ public final class LinhaDigitavel extends LineOfFields {
 	/**
 	 * Escreve a linha digitável foramatada (com espaço entre os campos).
 	 * 
-	 * @see br.com.nordestefomento.jrimum.utilix.LineOfFields#write()
+	 * @see br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields#write()
 	 */
 	@Override
 	public String write(){
@@ -279,7 +279,7 @@ public final class LinhaDigitavel extends LineOfFields {
 
 	}
 
-	private abstract class InnerCampo extends LineOfFields {
+	private abstract class InnerCampo extends AbstractLineOfFields {
 		
 		/**
 		 * 
@@ -320,7 +320,7 @@ public final class LinhaDigitavel extends LineOfFields {
 		 * </p>
 		 * 
 		 * 
-		 * @see br.com.nordestefomento.jrimum.utilix.LineOfFields#write()
+		 * @see br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields#write()
 		 */
 		@Override
 		public String write(){

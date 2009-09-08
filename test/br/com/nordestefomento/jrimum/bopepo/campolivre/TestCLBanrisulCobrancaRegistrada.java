@@ -62,7 +62,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
  */
 public class TestCLBanrisulCobrancaRegistrada {
 
-	private ICampoLivre clBanrisulCobrancaRegistrada;
+	private CampoLivre clBanrisulCobrancaRegistrada;
 	private Titulo titulo;
 
 	@Before

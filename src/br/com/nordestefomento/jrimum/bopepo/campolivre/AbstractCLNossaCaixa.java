@@ -63,7 +63,7 @@ public class AbstractCLNossaCaixa extends AbstractCampoLivre {
 		super(fieldsLength, stringLength);
 	}
 	
-	static ICampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException {
+	static CampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException {
 					
 		return new CLNossaCaixa(titulo);
 	}

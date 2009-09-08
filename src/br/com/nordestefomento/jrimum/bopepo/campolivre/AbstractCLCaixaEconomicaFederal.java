@@ -50,8 +50,8 @@ abstract class AbstractCLCaixaEconomicaFederal extends AbstractCampoLivre {
 		super(fieldsLength, stringLength);
 	}
 
-	static ICampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException{
-		ICampoLivre campoLivre = null;
+	static CampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException{
+		CampoLivre campoLivre = null;
 		String nossoNumero = titulo.getNossoNumero();
 		
 		if(StringUtils.isNotBlank(nossoNumero)) {

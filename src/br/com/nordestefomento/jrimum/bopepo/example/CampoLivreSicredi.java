@@ -37,13 +37,13 @@ import static org.apache.commons.lang.StringUtils.isNumeric;
 import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreException;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.utilix.LineOfFields;
+import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.EnumModulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
@@ -118,7 +118,7 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  */
 
 @SuppressWarnings("serial")
-public class CampoLivreSicredi extends LineOfFields implements ICampoLivre {
+public class CampoLivreSicredi extends AbstractLineOfFields implements CampoLivre {
 
 	static Logger log = Logger.getLogger(CampoLivreSicredi.class);
 

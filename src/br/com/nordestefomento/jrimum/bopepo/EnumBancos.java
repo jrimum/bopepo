@@ -92,7 +92,7 @@ import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
  * @author Rômulo Augusto
  * @author Samuel Valério
  * 
- * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre
+ * @see br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre
  * @see br.com.nordestefomento.jrimum.domkee.ientity.IBanco
  * 
  * @since 0.2

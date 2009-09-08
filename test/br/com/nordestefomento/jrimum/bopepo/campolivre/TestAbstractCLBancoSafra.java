@@ -48,7 +48,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
 
 public class TestAbstractCLBancoSafra {
 	
-	private ICampoLivre clBancoSafra;
+	private CampoLivre clBancoSafra;
 	
 	private Titulo titulo;
 

@@ -64,7 +64,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
  */
 public class TestCLNossaCaixa {
 
-	private ICampoLivre clNossaCaixa;
+	private CampoLivre clNossaCaixa;
 	
 	private Titulo titulo;
 	

@@ -38,15 +38,15 @@ import java.util.GregorianCalendar;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.BancoUtil;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.utilix.LineOfFields;
+import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.BoletoCodigoDeBarraDV;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV;
 
 
 /**
@@ -114,7 +114,7 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.BoletoCodigoDeBarr
  * 
  * @version 0.2
  */
-public final class CodigoDeBarras extends LineOfFields{
+public final class CodigoDeBarras extends AbstractLineOfFields{
 
 	/**
 	 * 
@@ -156,7 +156,7 @@ public final class CodigoDeBarras extends LineOfFields{
 	/**
 	 * Mecanismo de autenticação usado no composição de barras.
 	 * 
-	 * @see br.com.nordestefomento.jrimum.vallia.digitoverificador.BoletoCodigoDeBarraDV
+	 * @see br.com.nordestefomento.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV
 	 */
 	private Field<Integer> digitoVerificadorGeral;
 	
@@ -174,7 +174,7 @@ public final class CodigoDeBarras extends LineOfFields{
 	private Field<BigDecimal> valorNominalDoTitulo;
 	
 	/**
-	 * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre
+	 * @see br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre
 	 */
 	private Field<String> campoLivre;
 	
@@ -186,9 +186,9 @@ public final class CodigoDeBarras extends LineOfFields{
 	 * @param titulo
 	 * @param campoLivre
 	 * 
-	 * @see ICampoLivre
+	 * @see CampoLivre
 	 */
-	CodigoDeBarras(Titulo titulo, ICampoLivre campoLivre) {
+	CodigoDeBarras(Titulo titulo, CampoLivre campoLivre) {
 		super(FIELDS_LENGTH ,STRING_LENGTH);
 		
 		if(log.isTraceEnabled())
@@ -240,7 +240,7 @@ public final class CodigoDeBarras extends LineOfFields{
 			log.trace("Calculando Digito Verificador Geral");
 
 		// Instanciando o objeto irá calcular o dígito verificador do boleto.
-		BoletoCodigoDeBarraDV calculadorDV = new BoletoCodigoDeBarraDV();
+		BoletoCodigoDeBarrasDV calculadorDV = new BoletoCodigoDeBarrasDV();
 
 		// Preparando o conjunto de informações que será a base para o cálculo
 		// do dígito verificador, conforme normas da FEBRABAN.

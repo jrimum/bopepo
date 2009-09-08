@@ -65,7 +65,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
  */
 public class TestCLMercantilDoBrasil {
 
-	private ICampoLivre clMercantil;
+	private CampoLivre clMercantil;
 	
 	private Titulo titulo;
 	

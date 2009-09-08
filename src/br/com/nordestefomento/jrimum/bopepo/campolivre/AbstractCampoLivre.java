@@ -39,7 +39,7 @@ import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
-import br.com.nordestefomento.jrimum.utilix.LineOfFields;
+import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
 
 /**
  * <p>
@@ -73,7 +73,7 @@ import br.com.nordestefomento.jrimum.utilix.LineOfFields;
  * 
  * @version 0.2
  */
-abstract class AbstractCampoLivre extends LineOfFields implements ICampoLivre {
+abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoLivre {
 
 	/**
 	 * 
@@ -86,7 +86,7 @@ abstract class AbstractCampoLivre extends LineOfFields implements ICampoLivre {
 		super(fieldsLength, stringLength);
 	}
 
-	static ICampoLivre create(Titulo titulo)
+	static CampoLivre create(Titulo titulo)
 			throws NotSuporttedBancoException, NotSuporttedCampoLivreException, CampoLivreException {
 
 		if (log.isTraceEnabled())
@@ -94,7 +94,7 @@ abstract class AbstractCampoLivre extends LineOfFields implements ICampoLivre {
 		if (log.isDebugEnabled())
 			log.debug("titulo instance : " + titulo);
 
-		ICampoLivre campoLivre = null;
+		CampoLivre campoLivre = null;
 		ContaBancaria contaBancaria = null;
 		EnumBancos enumBanco = null;
 		

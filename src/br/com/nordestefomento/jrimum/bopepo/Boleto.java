@@ -40,7 +40,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreFactory;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
@@ -98,9 +98,9 @@ public final class Boleto {
 	private LinhaDigitavel linhaDigitavel;
 	
 	/**
-	 * @see ICampoLivre
+	 * @see CampoLivre
 	 */
-	private ICampoLivre campoLivre;
+	private CampoLivre campoLivre;
 	
 	/**
 	 * @see #setLocalPagamento(String)
@@ -179,7 +179,7 @@ public final class Boleto {
 	 * @param titulo
 	 * @param campoLivre
 	 */
-	public Boleto(Titulo titulo, ICampoLivre campoLivre) {
+	public Boleto(Titulo titulo, CampoLivre campoLivre) {
 		super();
 
 		if(log.isTraceEnabled())
@@ -223,26 +223,26 @@ public final class Boleto {
 	/**
 	 * @return the campoLivre
 	 */
-	public ICampoLivre getCampoLivre() {
+	public CampoLivre getCampoLivre() {
 		return campoLivre;
 	}
 
 	/**
 	 * @param campoLivre the campoLivre to set
 	 */
-	public void setCampoLivre(ICampoLivre campoLivre) {
+	public void setCampoLivre(CampoLivre campoLivre) {
 		
 		if(isNotNull(campoLivre, "campoLivre")){
 			
 			int length = campoLivre.write().length();
 			
-			if(length == ICampoLivre.STRING_LENGTH)
+			if(length == CampoLivre.STRING_LENGTH)
 				this.campoLivre = campoLivre;
 			else
-				if(length > ICampoLivre.STRING_LENGTH)
-					throw new IllegalArgumentException("O tamanho da String [ " + length + " ] é maior que o especificado [ "+ICampoLivre.STRING_LENGTH+" ]!");
+				if(length > CampoLivre.STRING_LENGTH)
+					throw new IllegalArgumentException("O tamanho da String [ " + length + " ] é maior que o especificado [ "+CampoLivre.STRING_LENGTH+" ]!");
 				else
-					throw new IllegalArgumentException("O tamanho da String [ " + length + " ] é menor que o especificado [ "+ICampoLivre.STRING_LENGTH+" ]!");
+					throw new IllegalArgumentException("O tamanho da String [ " + length + " ] é menor que o especificado [ "+CampoLivre.STRING_LENGTH+" ]!");
 		}
 	}
 

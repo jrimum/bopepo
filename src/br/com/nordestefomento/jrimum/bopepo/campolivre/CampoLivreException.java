@@ -44,7 +44,7 @@ import br.com.nordestefomento.jrimum.JRimumException;
  * @author Rômulo Augusto
  * 
  * @see br.com.nordestefomento.jrimum.JRimumException
- * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre
+ * @see br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre
  * 
  * @since 0.2
  * 

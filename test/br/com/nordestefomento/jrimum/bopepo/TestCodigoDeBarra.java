@@ -43,7 +43,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreFactory;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
@@ -69,7 +69,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
  */
 public class TestCodigoDeBarra{
 
-	private ICampoLivre clBradesco;
+	private CampoLivre clBradesco;
 
 	private Titulo titulo;
 	

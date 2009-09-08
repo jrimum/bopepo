@@ -59,7 +59,7 @@ abstract class AbstractCLBancoABNAmroReal extends AbstractCampoLivre {
 		super(fieldsLength, stringLength);
 	}
 
-	static ICampoLivre create(Titulo titulo){
+	static CampoLivre create(Titulo titulo){
 		
 		return new CLBancoReal(titulo);
 	}

@@ -64,7 +64,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
  */
 public class TestCLBancoDoBrasilNN11{
 
-	private ICampoLivre clBancoDoBrasil;
+	private CampoLivre clBancoDoBrasil;
 	
 	private Titulo titulo;
 	
