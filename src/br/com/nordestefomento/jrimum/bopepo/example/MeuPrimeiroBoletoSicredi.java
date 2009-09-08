@@ -13,6 +13,7 @@ import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
 import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
+import br.com.nordestefomento.jrimum.domkee.banco.IBanco;
 import br.com.nordestefomento.jrimum.domkee.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.banco.febraban.Banco;
 import br.com.nordestefomento.jrimum.domkee.banco.febraban.Carteira;
@@ -23,9 +24,8 @@ import br.com.nordestefomento.jrimum.domkee.banco.febraban.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.banco.febraban.Titulo.EnumAceite;
 import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.ientity.IBanco;
+import br.com.nordestefomento.jrimum.domkee.receitafederal.CNPJ;
 import br.com.nordestefomento.jrimum.domkee.type.CEP;
-import br.com.nordestefomento.jrimum.domkee.type.CNPJ;
 import br.com.nordestefomento.jrimum.domkee.type.Endereco;
 import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
 

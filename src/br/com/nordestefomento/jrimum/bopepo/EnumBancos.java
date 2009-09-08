@@ -32,10 +32,10 @@ package br.com.nordestefomento.jrimum.bopepo;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import br.com.nordestefomento.jrimum.domkee.banco.IBanco;
 import br.com.nordestefomento.jrimum.domkee.banco.febraban.Banco;
 import br.com.nordestefomento.jrimum.domkee.banco.febraban.CodigoDeCompensacaoBACEN;
-import br.com.nordestefomento.jrimum.domkee.ientity.IBanco;
-import br.com.nordestefomento.jrimum.domkee.type.CNPJ;
+import br.com.nordestefomento.jrimum.domkee.receitafederal.CNPJ;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
 
 /**
@@ -93,7 +93,7 @@ import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
  * @author Samuel Valério
  * 
  * @see br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre
- * @see br.com.nordestefomento.jrimum.domkee.ientity.IBanco
+ * @see br.com.nordestefomento.jrimum.domkee.banco.IBanco
  * 
  * @since 0.2
  * 
