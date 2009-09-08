@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
 import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
-import br.com.nordestefomento.jrimum.domkee.bank.IDadoBancario;
+import br.com.nordestefomento.jrimum.domkee.bank.DadoBancario;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumMoeda;
@@ -100,7 +100,7 @@ public class MeuPrimeiroBoletoHsbcCNR {
 		 * Definidos como padrão pela FEBRABAN.
 		 * Verifique na documentação.
 		 */
-		titulo.setDadosBancarios(new IDadoBancario(){});
+		titulo.setDadosBancarios(new DadoBancario(){});
 		
 		/* 
 		 * INFORMANDO OS DADOS SOBRE O BOLETO.
