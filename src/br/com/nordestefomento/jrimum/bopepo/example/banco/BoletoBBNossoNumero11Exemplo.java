@@ -1,4 +1,3 @@
-
 /* 
  * Copyright 2008 JRimum Project
  * 
@@ -11,7 +10,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  * 
- * Created at: 21/04/2008 - 23:35:28
+ * Created at: 16/09/2009 - 00:44:51
  *
  * ================================================================================
  *
@@ -25,69 +24,43 @@
  * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
  * e limitações sob esta LICENÇA.
  * 
- * Criado em: 21/04/2008 - 23:35:28
+ * Criado em: 16/09/2009 - 00:44:51
  * 
  */
-	
-package br.com.nordestefomento.jrimum.bopepo;
+package br.com.nordestefomento.jrimum.bopepo.example.banco;
 
-import br.com.nordestefomento.jrimum.JRimumException;
-
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 
 /**
  * 
  * <p>
- * Qualquer exceção gerada durante a geração de um Boleto gera uma <code>BoletoExceptiton</code>. Centraliza e localiza os problemas relativos a geração de um boleto.
+ * Exemplo do boleto para o Banco do Brasil com Nosso Número 11
+ * </p>
+ * <p>
+ * Mostra um exemplo funcional que gere um boleto para a implementação de campo livre
+ * do Banco do Brasil com Nosso Número 11
  * </p>
  * 
- * 
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
- * 
- * @see br.com.nordestefomento.jrimum.JRimumException
- * @see br.com.nordestefomento.jrimum.bopepo.BoletoExceptiton
- * 
- * @since 0.2
+ * @author Rômulo Augusto
  * 
  * @version 0.2
  */
+public class BoletoBBNossoNumero11Exemplo extends AbstractBoletoExemplo {
 
-public class BoletoExceptiton extends JRimumException {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3874521668322644183L;
-
-	/**
-	 * 
-	 */
-	public BoletoExceptiton() {
-		
+	@Override
+	protected BancoSuportado getBancoSuportado() {
+		return BancoSuportado.BANCO_DO_BRASIL;
 	}
 
-	/**
-	 * @param message
-	 * @param cause
-	 */
-	public BoletoExceptiton(String message, Throwable cause) {
-		super(message, cause);
-		
+	@Override
+	protected Carteira getCarteira() {
+		return new Carteira(5);
 	}
 
-	/**
-	 * @param message
-	 */
-	public BoletoExceptiton(String message) {
-		super(message);
-		
-	}
-
-	/**
-	 * @param cause
-	 */
-	public BoletoExceptiton(Throwable cause) {
-		super(cause);
-		
+	@Override
+	protected String getNossoNumero() {
+		return "12345678901";
 	}
 
 }

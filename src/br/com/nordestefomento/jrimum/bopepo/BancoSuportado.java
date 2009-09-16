@@ -35,7 +35,6 @@ import java.util.HashMap;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.id.cprf.CNPJ;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Banco;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
-import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
 
 /**
  * 
@@ -411,13 +410,5 @@ public enum BancoSuportado implements Serializable{
 	 */
 	public String getSegmento() {
 		return segmento;
-	}
-
-	/**
-	 * @see br.com.nordestefomento.jrimum.utilix.ObjectUtil#toString()
-	 * @see java.lang.Enum#toString()
-	 */
-	public String toString(){
-		return ObjectUtil.toString(this);
 	}
 }
