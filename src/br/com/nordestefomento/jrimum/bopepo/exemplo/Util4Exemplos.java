@@ -29,7 +29,7 @@
  * 
  */
 	
-package br.com.nordestefomento.jrimum.bopepo.example;
+package br.com.nordestefomento.jrimum.bopepo.exemplo;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

@@ -1,9 +1,8 @@
-package br.com.nordestefomento.jrimum.bopepo.example;
+package br.com.nordestefomento.jrimum.bopepo.exemplo;
 
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Date;
 
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
@@ -11,18 +10,17 @@ import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.CEP;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.Endereco;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Banco;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.DadoBancario;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Banco;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeMoeda;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Modalidade;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
+import br.com.nordestefomento.jrimum.utilix.DateUtil;
 
 /**
  * 
@@ -39,69 +37,53 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo.Enu
  * 
  * @version 0.2
  */
-public class MeuPrimeiroBoleto {
+public class MeuPrimeiroBoletoHsbcCNR {
 
 	public static void main (String[] args) {
 		
  		/* 
 		 * INFORMANDO DADOS SOBRE O CEDENTE.
 		 * */
-		Pessoa cedente = new Pessoa("PROJETO JRimum", "00.000.208/0001-00");
+		Pessoa cedente = new Pessoa("Cedente de Teste", "00.000.208/0001-00");
 		
 		// Informando dados sobre a conta bancária do cendente.		
-		Banco banco = BancoSuportado.NOSSA_CAIXA.create();
+		Banco banco = BancoSuportado.HSBC.create();
 		ContaBancaria contaBancariaCed = new ContaBancaria(banco);
-		contaBancariaCed.setBanco(banco);
-		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(123456, "0"));
-		contaBancariaCed.setCarteira(new Carteira(123, TipoDeCobranca.SEM_REGISTRO));
-		contaBancariaCed.setModalidade(new Modalidade(4));
-		contaBancariaCed.setAgencia(new Agencia(1234, '1'));
+		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(1234567));
+		
+		Carteira carteira = new Carteira();
+		carteira.setTipoCobranca(TipoDeCobranca.SEM_REGISTRO);
+		contaBancariaCed.setCarteira(carteira);
 		cedente.addContaBancaria(contaBancariaCed);		
 		
 		/* 
 		 * INFORMANDO DADOS SOBRE O SACADO.
 		 * */
-		Pessoa sacado = new Pessoa("JavaDeveloper Pronto Para Férias", "222.222.222-22");
+		Pessoa sacado = new Pessoa("Martin A. G. Souza", "333.333.333-33");
 
 		// Informando o endereço do sacado.
 		Endereco enderecoSac = new Endereco();
-		enderecoSac.setUF(UnidadeFederativa.RN);
-		enderecoSac.setLocalidade("Natal");
+		enderecoSac.setLogradouro("Alameda dos Tocantins");
+		enderecoSac.setNumero("678");
+		enderecoSac.setComplemento("Bloco A Ap.32");
+		enderecoSac.setBairro("Centro");
 		enderecoSac.setCep(new CEP("59064-120"));
-		enderecoSac.setBairro("Grande Centro");
-		enderecoSac.setLogradouro("Rua poeta dos programas");
-		enderecoSac.setNumero("1");
+		enderecoSac.setLocalidade("Belo Horizonte");
+		enderecoSac.setUF(UnidadeFederativa.MG);
 		sacado.addEndereco(enderecoSac);
-		
-		/* 
-		 * INFORMANDO DADOS SOBRE O SACADOR AVALISTA.
-		 * */
-		Pessoa sacadorAvalista = new Pessoa("Nordeste Fomento Mercantil", "00.000.000/0001-91");
-		
-		// Informando o endereço do sacador avalista. 
-		Endereco enderecoSacAval = new Endereco();
-		enderecoSacAval.setUF(UnidadeFederativa.DF);
-		enderecoSacAval.setLocalidade("Brasília");
-		enderecoSacAval.setCep(new CEP("00000-000"));
-		enderecoSacAval.setBairro("Grande Centro");
-		enderecoSacAval.setLogradouro("Rua Eternamente Principal");
-		enderecoSacAval.setNumero("001");
-		sacadorAvalista.addEndereco(enderecoSacAval);
+
 		
 		/* 
 		 * INFORMANDO OS DADOS SOBRE O TÍTULO.
 		 * */		
-		Titulo titulo = new Titulo(contaBancariaCed, sacado, cedente,sacadorAvalista);
-		titulo.setNumeroDoDocumento("123456");
-		titulo.setNossoNumero("993456789");
-		titulo.setDigitoDoNossoNumero("5");
-		titulo.setValor(BigDecimal.valueOf(0.23));
-		titulo.setDataDoDocumento(new Date());
-		titulo.setDataDoVencimento(new Date());
-		titulo.setTipoDeDocumento(TipoDeTitulo.DM_DUPLICATA_MERCANTIL);
+		Titulo titulo = new Titulo(contaBancariaCed, sacado, cedente);
+		titulo.setNumeroDoDocumento("222");
+		titulo.setNossoNumero("222449");
+		titulo.setValor(BigDecimal.valueOf(9.65));
+		titulo.setDataDoDocumento(DateUtil.parse("05/09/2008"));
+		titulo.setDataDoVencimento(DateUtil.parse("25/09/2009"));
 		titulo.setAceite(EnumAceite.A);
-		titulo.setDesconto(new BigDecimal(0.05));
-
+		titulo.setEnumMoeda(TipoDeMoeda.REAL);
 		/*
 		 * INFORMANDO MAIS DADOS BANCÁRIOS, QUANDO NECESSÁRIO.
 		 * Dependendo do banco, talvez seja necessário informar mais dados além de: 
@@ -124,23 +106,10 @@ public class MeuPrimeiroBoleto {
 		 * INFORMANDO OS DADOS SOBRE O BOLETO.
 		 * */
 		Boleto boleto = new Boleto(titulo);
-		boleto.setLocalPagamento("Pagável preferencialmente na Rede X ou em " +
-				"qualquer Banco até o Vencimento.");
-		boleto.setInstrucaoAoSacado("Senhor sacado, sabemos sim que o valor " +
-				"cobrado não é o esperado, aproveite o DESCONTÃO!");
-		boleto.setInstrucao1("PARA PAGAMENTO 1 até Hoje não cobrar nada!");
-		boleto.setInstrucao2("PARA PAGAMENTO 2 até Amanhã Não cobre!");
-		boleto.setInstrucao3("PARA PAGAMENTO 3 até Depois de amanhã, OK, não cobre.");
-		boleto.setInstrucao4("PARA PAGAMENTO 4 até 04/xx/xxxx de 4 dias atrás " +
-				"COBRAR O VALOR DE: R$ 01,00");
-		boleto.setInstrucao5("PARA PAGAMENTO 5 até 05/xx/xxxx COBRAR O VALOR " +
-				"DE: R$ 02,00");
-		boleto.setInstrucao6("PARA PAGAMENTO 6 até 06/xx/xxxx COBRAR O VALOR " +
-				"DE: R$ 03,00");
-		boleto.setInstrucao7("PARA PAGAMENTO 7 até xx/xx/xxxx COBRAR O VALOR " +
-				"QUE VOCÊ QUISER!");
-		boleto.setInstrucao8("APÓS o Vencimento, Pagável Somente na Rede X.");
-		
+		boleto.setLocalPagamento("PAGAR PREFERENCIALMENTE EM AGÊNCIA DO HSBC");
+		boleto.setInstrucao1("Após o vencimento cobrar multa de 2,00% e juros de 0,02% por mês de atraso.");
+		boleto.setInstrucao3("Até o vencimento conceder desconto de 10%.");
+		boleto.setInstrucao5("Não receber após 25/09/2009.");		
 		/* 
 		 * GERANDO O BOLETO BANCÁRIO.
 		 * */

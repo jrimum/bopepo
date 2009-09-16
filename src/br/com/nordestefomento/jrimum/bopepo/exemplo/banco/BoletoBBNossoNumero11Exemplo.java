@@ -27,7 +27,7 @@
  * Criado em: 16/09/2009 - 00:44:51
  * 
  */
-package br.com.nordestefomento.jrimum.bopepo.example.banco;
+package br.com.nordestefomento.jrimum.bopepo.exemplo.banco;
 
 import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
@@ -35,36 +35,32 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 /**
  * 
  * <p>
- * Exemplo do boleto para o Banco Itaú com as carteiras especiais
+ * Exemplo do boleto para o Banco do Brasil com Nosso Número 11
  * </p>
  * <p>
  * Mostra um exemplo funcional que gere um boleto para a implementação de campo livre
- * do Banco Itaú com carteiras especiais
+ * do Banco do Brasil com Nosso Número 11
  * </p>
  * 
  * @author Rômulo Augusto
  * 
  * @version 0.2
  */
-public class BoletoItauCarteirasEspeciaisExemplo extends AbstractBoletoExemplo {
+public class BoletoBBNossoNumero11Exemplo extends AbstractBoletoExemplo {
 
 	@Override
 	protected BancoSuportado getBancoSuportado() {
-		return BancoSuportado.BANCO_ITAU;
+		return BancoSuportado.BANCO_DO_BRASIL;
 	}
 
 	@Override
 	protected Carteira getCarteira() {
-		return new Carteira(198);
+		return new Carteira(5);
 	}
 
 	@Override
 	protected String getNossoNumero() {
-		return "12345678";
+		return "12345678901";
 	}
-	
-	@Override
-	protected String getNumeroDoDocumento() {
-		return "1234567";
-	}
+
 }

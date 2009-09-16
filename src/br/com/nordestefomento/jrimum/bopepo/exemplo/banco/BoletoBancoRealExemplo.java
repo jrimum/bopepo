@@ -27,7 +27,7 @@
  * Criado em: 16/09/2009 - 00:44:51
  * 
  */
-package br.com.nordestefomento.jrimum.bopepo.example.banco;
+package br.com.nordestefomento.jrimum.bopepo.exemplo.banco;
 
 import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
@@ -35,22 +35,22 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 /**
  * 
  * <p>
- * Exemplo do boleto para o Banco do Brasil com Nosso Número 11
+ * Exemplo do boleto para o Banco Real
  * </p>
  * <p>
  * Mostra um exemplo funcional que gere um boleto para a implementação de campo livre
- * do Banco do Brasil com Nosso Número 11
+ * do Banco Real
  * </p>
  * 
  * @author Rômulo Augusto
  * 
  * @version 0.2
  */
-public class BoletoBBNossoNumero11Exemplo extends AbstractBoletoExemplo {
+public class BoletoBancoRealExemplo extends AbstractBoletoExemplo {
 
 	@Override
 	protected BancoSuportado getBancoSuportado() {
-		return BancoSuportado.BANCO_DO_BRASIL;
+		return BancoSuportado.BANCO_ABN_AMRO_REAL;
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class BoletoBBNossoNumero11Exemplo extends AbstractBoletoExemplo {
 
 	@Override
 	protected String getNossoNumero() {
-		return "12345678901";
+		return "5020";
 	}
 
 }

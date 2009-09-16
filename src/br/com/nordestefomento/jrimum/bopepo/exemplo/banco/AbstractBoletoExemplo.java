@@ -27,7 +27,7 @@
  * Criado em: 16/09/2009 - 00:05:18
  * 
  */
-package br.com.nordestefomento.jrimum.bopepo.example.banco;
+package br.com.nordestefomento.jrimum.bopepo.exemplo.banco;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package br.com.nordestefomento.jrimum.bopepo.example;
+package br.com.nordestefomento.jrimum.bopepo.exemplo;
 
 public class ItemFaturaBoletoSICREDI {
 

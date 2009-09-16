@@ -10,7 +10,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  * 
- * Created at: 16/09/2009 - 00:44:51
+ * Created at: 18/05/2008 - 21:13:29
  *
  * ================================================================================
  *
@@ -24,43 +24,72 @@
  * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
  * e limitações sob esta LICENÇA.
  * 
- * Criado em: 16/09/2009 - 00:44:51
+ * Criado em: 18/05/2008 - 21:13:29
  * 
  */
-package br.com.nordestefomento.jrimum.bopepo.example.banco;
 
-import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+package br.com.nordestefomento.jrimum.bopepo.exemplo;
+
+import java.io.File;
+import java.util.List;
+
+import br.com.nordestefomento.jrimum.JRimumException;
+import br.com.nordestefomento.jrimum.bopepo.Boleto;
+import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
+
 
 /**
  * 
  * <p>
- * Exemplo do boleto para o Banco do Brasil com Nosso Número 17
- * </p>
- * <p>
- * Mostra um exemplo funcional que gere um boleto para a implementação de campo livre
- * do Banco do Brasil com Nosso Número 17
+ * Exemplo de código para geração de vários boletos em um único arquivo PDF.
  * </p>
  * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto
  * @author Rômulo Augusto
+ * 
+ * @since 0.2
  * 
  * @version 0.2
  */
-public class BoletoBBNossoNumero17Exemplo extends AbstractBoletoExemplo {
 
-	@Override
-	protected BancoSuportado getBancoSuportado() {
-		return BancoSuportado.BANCO_DO_BRASIL;
-	}
+public class VariosBoletosEmVariosArquivos {
 
-	@Override
-	protected Carteira getCarteira() {
-		return new Carteira(5);
-	}
 
-	@Override
-	protected String getNossoNumero() {
-		return "12345678901234567";
+	public static void main(String[] args) {
+		
+		/*
+		 * É bem simples, consiga os boletos 
+		 */
+
+		List<Boleto> boletos = Util4Exemplos.getVariosBoletos();
+		
+		/*
+		 * Depois diga o nome do diretorio para onde os boletos serão gerados. 
+		 */
+		
+		BoletoViewer.onePerPDF("./", ".pdf", boletos);
+	
+		
+		/*
+		 * Pronto, agora vamos conferir um: 
+		 */
+		
+		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+			
+		try{
+	
+			desktop.open(new File("Boleto1.pdf"));
+	
+		}catch(Exception e){
+			throw new JRimumException("Arquivo não gerado!",e);
+		}
+		
+		/*
+		 * É sério, é só isso mesmo!
+		 * Se não acredita confira os vários arquivos que estão no diretório. 
+		 */
+		
 	}
 
 }

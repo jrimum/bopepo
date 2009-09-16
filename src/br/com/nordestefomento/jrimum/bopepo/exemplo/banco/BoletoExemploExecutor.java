@@ -10,7 +10,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  * 
- * Created at: 18/05/2008 - 21:13:29
+ * Created at: 15/09/2009 - 23:53:57
  *
  * ================================================================================
  *
@@ -24,72 +24,67 @@
  * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
  * e limitações sob esta LICENÇA.
  * 
- * Criado em: 18/05/2008 - 21:13:29
+ * Criado em: 15/09/2009 - 23:53:57
  * 
  */
-
-package br.com.nordestefomento.jrimum.bopepo.example;
+package br.com.nordestefomento.jrimum.bopepo.exemplo.banco;
 
 import java.io.File;
-import java.util.List;
+import java.io.IOException;
 
-import br.com.nordestefomento.jrimum.JRimumException;
-import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
-
 
 /**
  * 
  * <p>
- * Exemplo de código para geração de vários boletos em um único arquivo PDF.
+ * Executa todos os exemplos de geração de boletos
  * </p>
- * 
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author Misael Barreto
+ *  
  * @author Rômulo Augusto
- * 
- * @since 0.2
  * 
  * @version 0.2
  */
-
-public class VariosBoletosEmVariosArquivos {
-
-
-	public static void main(String[] args) {
-		
-		/*
-		 * É bem simples, consiga os boletos 
-		 */
-
-		List<Boleto> boletos = Util4Exemplos.getVariosBoletos();
-		
-		/*
-		 * Depois diga o nome do diretorio para onde os boletos serão gerados. 
-		 */
-		
-		BoletoViewer.onePerPDF("./", ".pdf", boletos);
+public class BoletoExemploExecutor {
 	
+	public BoletoExemploExecutor() {
+		init();
+	}
+	
+	private void init() {
 		
-		/*
-		 * Pronto, agora vamos conferir um: 
-		 */
+		AbstractBoletoExemplo.newInstance(BoletoBradescoExemplo.class);
+		AbstractBoletoExemplo.newInstance(BoletoBBNossoNumero11Exemplo.class);
+		AbstractBoletoExemplo.newInstance(BoletoBBNossoNumero17Exemplo.class);
+		AbstractBoletoExemplo.newInstance(BoletoBancoRealExemplo.class);
+		AbstractBoletoExemplo.newInstance(BoletoItauCarteirasPadroesExemplo.class);
+		AbstractBoletoExemplo.newInstance(BoletoItauCarteirasEspeciaisExemplo.class);
+	}
+	
+	private void executeAll() {
+		
+		for (AbstractBoletoExemplo boletoExemplo  : AbstractBoletoExemplo.getBoletosExemplo()) {
+			
+			BoletoViewer viewer = new BoletoViewer(boletoExemplo.execute());
+			File boletoPDF = viewer.getPdfAsFile("BOLETO_" + boletoExemplo.getClass().getSimpleName().toUpperCase() + ".PDF");
+			
+			mostreBoletoNaTela(boletoPDF);
+		}
+	}
+	
+	private void mostreBoletoNaTela(File arquivoBoleto) {
 		
 		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+		
+		try {
+			desktop.open(arquivoBoleto);
 			
-		try{
-	
-			desktop.open(new File("Boleto1.pdf"));
-	
-		}catch(Exception e){
-			throw new JRimumException("Arquivo não gerado!",e);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		
-		/*
-		 * É sério, é só isso mesmo!
-		 * Se não acredita confira os vários arquivos que estão no diretório. 
-		 */
-		
 	}
 
+	public static void main(String[] args) {
+
+		new BoletoExemploExecutor().executeAll();
+	}
 }

@@ -10,7 +10,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  * 
- * Created at: 16/09/2009 - 00:44:51
+ * Created at: 15/09/2009 - 23:20:51
  *
  * ================================================================================
  *
@@ -24,10 +24,10 @@
  * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
  * e limitações sob esta LICENÇA.
  * 
- * Criado em: 16/09/2009 - 00:44:51
+ * Criado em: 15/09/2009 - 23:20:51
  * 
  */
-package br.com.nordestefomento.jrimum.bopepo.example.banco;
+package br.com.nordestefomento.jrimum.bopepo.exemplo.banco;
 
 import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
@@ -35,31 +35,31 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 /**
  * 
  * <p>
- * Exemplo do boleto para o Banco Itaú com as carteiras padrões
+ * Exemplo do boleto para o banco Bradesco
  * </p>
  * <p>
  * Mostra um exemplo funcional que gere um boleto para a implementação de campo livre
- * do Banco Itaú com carteiras padrões
+ * do banco Bradesco
  * </p>
  * 
  * @author Rômulo Augusto
  * 
  * @version 0.2
  */
-public class BoletoItauCarteirasPadroesExemplo extends AbstractBoletoExemplo {
+public class BoletoBradescoExemplo extends AbstractBoletoExemplo {
 
 	@Override
-	protected BancoSuportado getBancoSuportado() {
-		return BancoSuportado.BANCO_ITAU;
+	public BancoSuportado getBancoSuportado() {
+		return BancoSuportado.BANCO_BRADESCO;
 	}
 
 	@Override
 	protected Carteira getCarteira() {
-		return new Carteira(110);
+		return new Carteira(5);
 	}
 
 	@Override
 	protected String getNossoNumero() {
-		return "12345678";
+		return "12345678901";
 	}
 }
