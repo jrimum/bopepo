@@ -75,7 +75,7 @@ public class TestLinhaDigitavel{
 		ContaBancaria contaBancaria = new ContaBancaria();
 		contaBancaria.setBanco(BancoSuportado.BANCO_BRADESCO.create());
 		
-		Agencia agencia = new Agencia(1234, '1');
+		Agencia agencia = new Agencia(1234, "1");
 		contaBancaria.setAgencia(agencia);
 		
 		contaBancaria.setCarteira(new Carteira(5));

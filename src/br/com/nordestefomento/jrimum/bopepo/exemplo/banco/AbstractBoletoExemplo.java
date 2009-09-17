@@ -181,7 +181,7 @@ public abstract class AbstractBoletoExemplo {
 	
 		ContaBancaria contaBancaria = new ContaBancaria(getBancoSuportado().create());
 		
-		Agencia agencia = new Agencia(1234, '1');
+		Agencia agencia = new Agencia(1234, "1");
 		contaBancaria.setAgencia(agencia);
 		
 		contaBancaria.setCarteira(getCarteira());

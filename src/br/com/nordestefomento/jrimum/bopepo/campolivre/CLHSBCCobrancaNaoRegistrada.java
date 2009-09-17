@@ -100,7 +100,7 @@ import br.com.nordestefomento.jrimum.utilix.BancoUtil;
  * 
  * @version 0.2
  */
-class CLHsbcCNR extends AbstractCLHSBC {
+class CLHSBCCobrancaNaoRegistrada extends AbstractCLHSBC {
 	
 	/**
 	 * 
@@ -119,7 +119,7 @@ class CLHsbcCNR extends AbstractCLHSBC {
 	 * </p>
 	 * @param titulo título com as informações para geração do campo livre
 	 */
-	CLHsbcCNR(Titulo titulo) {
+	CLHSBCCobrancaNaoRegistrada(Titulo titulo) {
 		super(FIELDS_LENGTH, STRING_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();

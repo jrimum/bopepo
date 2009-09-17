@@ -116,7 +116,7 @@ public class Util4Exemplos {
 	
 		ContaBancaria contaBancaria = new ContaBancaria(BancoSuportado.BANCO_DO_BRASIL.create());
 		
-		contaBancaria.setAgencia(new Agencia(1234, '7'));
+		contaBancaria.setAgencia(new Agencia(1234, "7"));
 		contaBancaria.setCarteira(new Carteira(5));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(6789, "12"));
 

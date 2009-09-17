@@ -75,7 +75,7 @@ public class TestCLNossaCaixa {
 		Pessoa cedente = new Pessoa();
 		
 		ContaBancaria contaBancaria = new ContaBancaria(BancoSuportado.NOSSA_CAIXA.create());
-		contaBancaria.setAgencia(new Agencia(1,'1'));
+		contaBancaria.setAgencia(new Agencia(1, "1"));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(2818));
 		contaBancaria.setModalidade(new Modalidade(13));
 		

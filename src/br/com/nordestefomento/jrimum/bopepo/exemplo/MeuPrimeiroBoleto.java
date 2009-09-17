@@ -55,7 +55,7 @@ public class MeuPrimeiroBoleto {
 		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(123456, "0"));
 		contaBancariaCed.setCarteira(new Carteira(123, TipoDeCobranca.SEM_REGISTRO));
 		contaBancariaCed.setModalidade(new Modalidade(4));
-		contaBancariaCed.setAgencia(new Agencia(1234, '1'));
+		contaBancariaCed.setAgencia(new Agencia(1234, "1"));
 		cedente.addContaBancaria(contaBancariaCed);		
 		
 		/* 

@@ -134,7 +134,7 @@ public class TestCLUnibancoCobrancaRegistrada {
 
 		ContaBancaria contaBancaria = new ContaBancaria();
 		contaBancaria.setBanco(BancoSuportado.UNIBANCO.create());
-		contaBancaria.setAgencia(new Agencia(1, '9'));
+		contaBancaria.setAgencia(new Agencia(1, "9"));
 		contaBancaria.setCarteira(new Carteira(123,TipoDeCobranca.COM_REGISTRO));
 
 		titulo = new Titulo(contaBancaria, sacado, cedente);
@@ -157,34 +157,6 @@ public class TestCLUnibancoCobrancaRegistrada {
 	public final void testGetInstanceComAgenciaNula() {
 
 		titulo.getContaBancaria().setAgencia(null);
-		campoLivre = CampoLivreFactory.create(titulo);
-	}
-
-	@Test(expected = CampoLivreException.class)
-	public final void testGetInstanceComAgenciaNegativa() {
-
-		titulo.getContaBancaria().setAgencia(new Agencia(-23,'1'));
-		campoLivre = CampoLivreFactory.create(titulo);
-	}
-
-	@Test(expected = CampoLivreException.class)
-	public final void testGetInstanceComDigitoDaAgenciaNulo() {
-
-		titulo.getContaBancaria().setAgencia((new Agencia(23, null)));
-		campoLivre = CampoLivreFactory.create(titulo);
-	}
-
-	@Test(expected = CampoLivreException.class)
-	public final void testGetInstanceComDigitoDaAgenciaNegativo() {
-
-		titulo.getContaBancaria().setAgencia(new Agencia(2, '3'));
-		campoLivre = CampoLivreFactory.create(titulo);
-	}
-
-	@Test(expected = CampoLivreException.class)
-	public final void testGetInstanceComDigitoDaAgenciaNaoNumerico() {
-
-		titulo.getContaBancaria().setAgencia(new Agencia(-23, 'X'));
 		campoLivre = CampoLivreFactory.create(titulo);
 	}
 

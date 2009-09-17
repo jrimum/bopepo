@@ -34,6 +34,7 @@ import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.apache.commons.lang.StringUtils.isNumeric;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreException;
@@ -276,7 +277,7 @@ public class CampoLivreSicredi extends AbstractLineOfFields implements CampoLivr
 		}
 
 		if (isNotNull(agencia.getDigitoVerificador(), "Dígito da Agência Sicredi")) {
-			if (Character.isDigit(agencia.getDigitoVerificador())) {
+			if (StringUtils.isNumeric(agencia.getDigitoVerificador())) {
 
 				if (String.valueOf(agencia.getDigitoVerificador()).length() <= 2) {
 

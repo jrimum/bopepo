@@ -60,7 +60,7 @@ public class TestCLItauPadrao {
 		ContaBancaria contaBancaria = new ContaBancaria();
 		contaBancaria.setBanco(BancoSuportado.BANCO_ITAU.create());
 		
-		contaBancaria.setAgencia(new Agencia(57,'1'));
+		contaBancaria.setAgencia(new Agencia(57, "1"));
 		contaBancaria.setCarteira(new Carteira(110));
 		
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
@@ -102,7 +102,7 @@ public class TestCLItauPadrao {
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		contaBancaria.setBanco(BancoSuportado.BANCO_ITAU.create());
 		
-		contaBancaria.setAgencia(new Agencia(0,'1'));
+		contaBancaria.setAgencia(new Agencia(0, "1"));
 		contaBancaria.setCarteira(new Carteira(0));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(0, "0"));
 		

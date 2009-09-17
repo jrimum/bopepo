@@ -25,7 +25,7 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * @author misael
  *
  */
-public class TestCLHsbcCNR {
+public class TestCLHSBCCobrancaNaoRegistrada {
 
 	
 	private CampoLivre clHsbcCNR;
@@ -55,7 +55,7 @@ public class TestCLHsbcCNR {
 	}
 
 	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.campolivre.CLHsbcCNR#create(br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo)}.
+	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.campolivre.CLHSBCCobrancaNaoRegistrada#create(br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo)}.
 	 */
 	@Test
 	public final void testGetInstance() {

@@ -60,7 +60,7 @@ public class TestCLBradesco{
 		ContaBancaria contaBancaria = new ContaBancaria();
 		contaBancaria.setBanco(BancoSuportado.BANCO_BRADESCO.create());
 		
-		Agencia agencia = new Agencia(1234,'1');
+		Agencia agencia = new Agencia(1234, "1");
 		contaBancaria.setAgencia(agencia);
 		
 		contaBancaria.setCarteira(new Carteira(5));
@@ -96,7 +96,7 @@ public class TestCLBradesco{
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		contaBancaria.setBanco(BancoSuportado.BANCO_BRADESCO.create());
 		
-		Agencia agencia = new Agencia(0,'1');
+		Agencia agencia = new Agencia(0, "1");
 		contaBancaria.setAgencia(agencia);
 		
 		contaBancaria.setCarteira(new Carteira(0));

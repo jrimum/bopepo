@@ -68,7 +68,7 @@ abstract class AbstractCLHSBC extends AbstractCampoLivre {
 		ContaBancaria conta = titulo.getContaBancaria();
 		
 		if (conta.getCarteira().getTipoCobranca() == TipoDeCobranca.SEM_REGISTRO) {
-			campoLivre = new CLHsbcCNR(titulo); 
+			campoLivre = new CLHSBCCobrancaNaoRegistrada(titulo); 
 		}
 		else {
 			throw new CampoLivreException("Atualmente para o banco" +

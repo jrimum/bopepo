@@ -114,7 +114,7 @@ class CLUnibancoCobrancaRegistrada extends AbstractCLUnibanco {
 		
 		
 		if(isNotNull(conta.getAgencia().getDigitoVerificador(),"Dígito da Agência Bancária"))
-			if(Character.isDigit((conta.getAgencia().getDigitoVerificador()))){
+			if (StringUtils.isNumeric(conta.getAgencia().getDigitoVerificador())) {
 				
 				Integer digitoDaAgencia = Integer.valueOf(conta.getAgencia().getDigitoVerificador());  
 				
@@ -136,8 +136,7 @@ class CLUnibancoCobrancaRegistrada extends AbstractCLUnibanco {
 				throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser numérico, e não: ["+titulo.getNossoNumero()+"]"));
 
 		
-		this.add(new Field<String>(calculeSuperDigito(titulo
-				.getNossoNumero()), 1));
+		this.add(new Field<String>(calculeSuperDigito(titulo.getNossoNumero()), 1));
 		
 	}
 

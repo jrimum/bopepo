@@ -78,7 +78,7 @@ public class TestCLUnibancoCobrancaNaoRegistrada {
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(123456, "1"));
 		contaBancaria.setCarteira(new Carteira(123,
 				TipoDeCobranca.SEM_REGISTRO));
-		contaBancaria.setAgencia(new Agencia(01234, '1'));
+		contaBancaria.setAgencia(new Agencia(01234, "1"));
 
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNumeroDoDocumento("1234567");

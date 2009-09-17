@@ -63,7 +63,7 @@ public class TestCLBancoReal {
 		ContaBancaria contaBancaria = new ContaBancaria();
 		contaBancaria.setBanco(BancoSuportado.BANCO_ABN_AMRO_REAL.create());
 		
-		Agencia agencia = new Agencia(1018, '1');
+		Agencia agencia = new Agencia(1018, "1");
 		contaBancaria.setAgencia(agencia);
 		
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
@@ -98,7 +98,7 @@ public class TestCLBancoReal {
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		contaBancaria.setBanco(BancoSuportado.BANCO_ABN_AMRO_REAL.create());
 		
-		Agencia agencia = new Agencia(0,'1');
+		Agencia agencia = new Agencia(0, "1");
 		contaBancaria.setAgencia(agencia);
 		
 		NumeroDaConta numeroDaConta = new NumeroDaConta();

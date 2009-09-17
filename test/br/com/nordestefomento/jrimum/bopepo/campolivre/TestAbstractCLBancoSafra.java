@@ -61,7 +61,7 @@ public class TestAbstractCLBancoSafra {
 		ContaBancaria contaBancaria = new ContaBancaria();
 		contaBancaria.setBanco(BancoSuportado.BANCO_SAFRA.create());
 		
-		contaBancaria.setAgencia(new Agencia(57, '1'));
+		contaBancaria.setAgencia(new Agencia(57, "1"));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(12345, "7"));
 		contaBancaria.setCarteira(new Carteira(123, TipoDeCobranca.COM_REGISTRO));
 		

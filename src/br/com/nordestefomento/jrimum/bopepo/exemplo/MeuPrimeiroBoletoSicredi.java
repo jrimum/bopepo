@@ -52,7 +52,7 @@ public class MeuPrimeiroBoletoSicredi {
 		banco.setImgLogo(new ImageIcon("desenvolvimento/SICREDI/Template/Imagens/LogoSicredi.PNG").getImage());
 		
 		ContaBancaria contaBancariaCed = new ContaBancaria(banco);
-		contaBancariaCed.setAgencia(new Agencia(123, '6'));
+		contaBancariaCed.setAgencia(new Agencia(123, "6"));
 		contaBancariaCed.setCarteira(new Carteira(5));
 		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(7891, "0"));
 		cedente.addContaBancaria(contaBancariaCed);

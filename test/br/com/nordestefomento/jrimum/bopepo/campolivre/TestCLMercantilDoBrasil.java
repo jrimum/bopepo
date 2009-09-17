@@ -78,7 +78,7 @@ public class TestCLMercantilDoBrasil {
 		ContaBancaria contaBancaria = new ContaBancaria();
 		contaBancaria.setBanco(BancoSuportado.MERCANTIL_DO_BRASIL.create());
 		
-		contaBancaria.setAgencia(new Agencia(1234,'1'));
+		contaBancaria.setAgencia(new Agencia(1234, "1"));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(123456789));
 		
 		titulo = new Titulo(contaBancaria, sacado, cedente);

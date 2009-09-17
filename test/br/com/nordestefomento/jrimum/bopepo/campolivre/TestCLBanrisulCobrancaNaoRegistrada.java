@@ -72,7 +72,7 @@ public class TestCLBanrisulCobrancaNaoRegistrada {
 				BancoSuportado.BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.create());
 		contaBancaria
 		.setCarteira(new Carteira(1, TipoDeCobranca.SEM_REGISTRO));
-		contaBancaria.setAgencia(new Agencia(100,'1'));
+		contaBancaria.setAgencia(new Agencia(100, "1"));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(1));
 
 		titulo = new Titulo(contaBancaria, new Pessoa("Nordeste Fomento"),
@@ -134,7 +134,7 @@ public class TestCLBanrisulCobrancaNaoRegistrada {
 
 	@Test(expected = CampoLivreException.class)
 	public void criacaoAgenciaComCodigoMaiorQue3Digitos() {
-		titulo.getContaBancaria().setAgencia(new Agencia(1000,'1'));
+		titulo.getContaBancaria().setAgencia(new Agencia(1000, "1"));
 		CampoLivreFactory.create(titulo);
 	}
 
