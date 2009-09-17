@@ -40,10 +40,6 @@ import org.junit.Test;
  */
 public class TestBancoSuportado{
 
-
-	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.domkee.financeiro.banco.Banco#getCodigoDeCompensacao()}.
-	 */
 	@Test
 	public void testGetCodigo() {
 		

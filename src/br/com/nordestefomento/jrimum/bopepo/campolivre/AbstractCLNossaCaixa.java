@@ -45,11 +45,9 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * EXEMPLO:
  * </p> 
  * 
- * @author Rômulo
+ * @author Rômulo Augusto
  * 
- * @since 
- * 
- * @version 
+ * @version 0.2 
  */
 abstract class AbstractCLNossaCaixa extends AbstractCampoLivre {
 

@@ -58,9 +58,7 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * 
  * @author Rômulo
  * 
- * @since 
- * 
- * @version 
+ * @version 0.2
  */
 public class TestCLNossaCaixa {
 
