@@ -71,8 +71,6 @@ import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
  */
 public final class Boleto {
 	
-	//TODO Testes no teste unitário: TestBoleto
-	
 	private static final long serialVersionUID = 4436063640418293021L;
 	
 	private static Logger log = Logger.getLogger(Boleto.class);
@@ -477,7 +475,7 @@ public final class Boleto {
 	
 	public void addTextosExtras(String nome, String valor) {
 		
-		if(isNotNull(getTextosExtras())) {
+		if(isNull(getTextosExtras())) {
 			setTextosExtras(new HashMap<String, String>());
 		}
 		
@@ -485,7 +483,6 @@ public final class Boleto {
 	}
 	
 	public Map<String, Image> getImagensExtras() {
-		
 		return this.imagensExtras;
 	}
 
