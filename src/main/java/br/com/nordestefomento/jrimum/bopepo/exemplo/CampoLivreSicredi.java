@@ -28,22 +28,24 @@
  * 
  */
 
-package br.com.nordestefomento.jrimum.bopepo.example;
+package br.com.nordestefomento.jrimum.bopepo.exemplo;
 
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.apache.commons.lang.StringUtils.isNumeric;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreException;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.utilix.LineOfFields;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.EnumModulo;
+import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.TipoDeModulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
 /**
@@ -110,14 +112,14 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * </table>
  * 
  * 
- * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ACampoLivre
+ * @see br.com.nordestefomento.jrimum.bopepo.campolivre.AbstractCampoLivre
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author <a href="http://jrimum.nordestefomento.com.br/wprojeto">JRimum</a>
  */
 
 @SuppressWarnings("serial")
-public class CampoLivreSicredi extends LineOfFields implements ICampoLivre {
+public class CampoLivreSicredi extends AbstractLineOfFields implements CampoLivre {
 
 	static Logger log = Logger.getLogger(CampoLivreSicredi.class);
 
@@ -125,7 +127,7 @@ public class CampoLivreSicredi extends LineOfFields implements ICampoLivre {
 
 	private static final Integer STRING_LENGTH = 25;
 
-	private static final Modulo modulo11 = new Modulo(EnumModulo.MODULO11);
+	private static final Modulo modulo11 = new Modulo(TipoDeModulo.MODULO11);
 
 	/**
 	 * <p>
@@ -275,7 +277,7 @@ public class CampoLivreSicredi extends LineOfFields implements ICampoLivre {
 		}
 
 		if (isNotNull(agencia.getDigitoVerificador(), "Dígito da Agência Sicredi")) {
-			if (Character.isDigit(agencia.getDigitoVerificador())) {
+			if (StringUtils.isNumeric(agencia.getDigitoVerificador())) {
 
 				if (String.valueOf(agencia.getDigitoVerificador()).length() <= 2) {
 

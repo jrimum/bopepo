@@ -1,4 +1,4 @@
-package br.com.nordestefomento.jrimum.bopepo.example;
+package br.com.nordestefomento.jrimum.bopepo.exemplo;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,24 +10,23 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSupportedBancoException;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
 import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Banco;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.CodigoDeCompensacaoBACEN;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTitulo;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo.EnumAceite;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.ientity.IBanco;
-import br.com.nordestefomento.jrimum.domkee.type.CEP;
-import br.com.nordestefomento.jrimum.domkee.type.CNPJ;
-import br.com.nordestefomento.jrimum.domkee.type.Endereco;
-import br.com.nordestefomento.jrimum.domkee.type.EnumUnidadeFederativa;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.CEP;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.Endereco;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.id.cprf.CNPJ;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Banco;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
 
 import com.lowagie.text.DocumentException;
 
@@ -35,9 +34,7 @@ import com.lowagie.text.DocumentException;
 
 public class MeuPrimeiroBoletoSicredi {
 
-	public static void main (String[] args) throws DocumentException,
-	IllegalArgumentException, IOException, NotSuporttedBancoException,
-	NotSuporttedCampoLivreException {
+	public static void main (String[] args) throws DocumentException, IllegalArgumentException, IOException, NotSupportedBancoException, NotSupportedCampoLivreException {
 		
  		/* 
 		 * INFORMANDO DADOS SOBRE O CEDENTE.
@@ -46,14 +43,14 @@ public class MeuPrimeiroBoletoSicredi {
 		
 		// Informando dados sobre a conta bancária do cendente.
 		
-		final IBanco banco = new Banco(new CodigoDeCompensacaoBACEN(748),
+		final Banco banco = new Banco(new CodigoDeCompensacaoBACEN(748),
 				"BANCO COOPERATIVO SICREDI S.A.", new CNPJ("01181521000155"));
 		
 		//SOBREpondo a Logo do banco:
 		banco.setImgLogo(new ImageIcon("desenvolvimento/SICREDI/Template/Imagens/LogoSicredi.PNG").getImage());
 		
 		ContaBancaria contaBancariaCed = new ContaBancaria(banco);
-		contaBancariaCed.setAgencia(new Agencia(123, '6'));
+		contaBancariaCed.setAgencia(new Agencia(123, "6"));
 		contaBancariaCed.setCarteira(new Carteira(5));
 		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(7891, "0"));
 		cedente.addContaBancaria(contaBancariaCed);
@@ -67,7 +64,7 @@ public class MeuPrimeiroBoletoSicredi {
 
 		// Informando o endereço do sacado.
 		Endereco enderecoSac = new Endereco();
-		enderecoSac.setUF(EnumUnidadeFederativa.RN);
+		enderecoSac.setUF(UnidadeFederativa.RN);
 		enderecoSac.setLocalidade("Natal");
 		enderecoSac.setCep(new CEP("59064-120"));
 		enderecoSac.setBairro("Grande Centro");
@@ -84,7 +81,7 @@ public class MeuPrimeiroBoletoSicredi {
 		
 		// Informando o endereço do sacador avalista. 
 		Endereco enderecoSacAval = new Endereco();
-		enderecoSacAval.setUF(EnumUnidadeFederativa.DF);
+		enderecoSacAval.setUF(UnidadeFederativa.DF);
 		enderecoSacAval.setLocalidade("Brasília");
 		enderecoSacAval.setCep(new CEP("00000-000"));
 		enderecoSacAval.setBairro("Grande Centro");
@@ -103,7 +100,7 @@ public class MeuPrimeiroBoletoSicredi {
 		titulo.setValor(BigDecimal.valueOf(0.23));
 		titulo.setDataDoDocumento(new Date());
 		titulo.setDataDoVencimento(new Date());
-		titulo.setTipoDeDocumento(EnumTitulo.DM_DUPLICATA_MERCANTIL);
+		titulo.setTipoDeDocumento(TipoDeTitulo.DM_DUPLICATA_MERCANTIL);
 		titulo.setAceite(EnumAceite.A);
 
 		

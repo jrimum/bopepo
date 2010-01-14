@@ -29,7 +29,7 @@
  * 
  */
 	
-package br.com.nordestefomento.jrimum.bopepo.example;
+package br.com.nordestefomento.jrimum.bopepo.exemplo;
 
 import java.io.File;
 import java.util.List;
@@ -62,7 +62,7 @@ public class VariosBoletosEmUmArquivo {
 		 * É bem simples, consiga os boletos 
 		 */
 
-		List<Boleto> boletos = Util4Exemplos.getVariosBoletos();
+		List<Boleto> boletos = ExemplosUtil.getVariosBoletos();
 		
 		/*
 		 * Depois diga o nome do diretorio/arquivo para onde os boletos serão gerados com template padrão. 
