@@ -30,8 +30,8 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 
@@ -80,7 +80,7 @@ import br.com.nordestefomento.jrimum.utilix.Filler;
  * </table>
  * 
  * 
- * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ACampoLivre
+ * @see br.com.nordestefomento.jrimum.bopepo.campolivre.AbstractCampoLivre
  * 
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
@@ -92,7 +92,7 @@ import br.com.nordestefomento.jrimum.utilix.Filler;
  * 
  * @version 0.2
  */
-class CLBradesco extends ACLBradesco {
+class CLBradesco extends AbstractCLBradesco {
 	
 	/**
 	 * 

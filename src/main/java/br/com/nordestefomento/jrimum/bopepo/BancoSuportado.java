@@ -32,11 +32,9 @@ package br.com.nordestefomento.jrimum.bopepo;
 import java.io.Serializable;
 import java.util.HashMap;
 
-import br.com.nordestefomento.jrimum.ACurbitaObject;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Banco;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.CodigoDeCompensacaoBACEN;
-import br.com.nordestefomento.jrimum.domkee.ientity.IBanco;
-import br.com.nordestefomento.jrimum.domkee.type.CNPJ;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.id.cprf.CNPJ;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Banco;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
 
 /**
  * 
@@ -92,15 +90,15 @@ import br.com.nordestefomento.jrimum.domkee.type.CNPJ;
  * @author Rômulo Augusto
  * @author Samuel Valério
  * 
- * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre
- * @see br.com.nordestefomento.jrimum.domkee.ientity.IBanco
+ * @see br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre
+ * @see br.com.nordestefomento.jrimum.domkee.financeiro.banco.Banco
  * 
  * @since 0.2
  * 
  * @version 0.2
  */
 
-public enum EnumBancos implements Serializable{
+public enum BancoSuportado implements Serializable{
 
 	// TODO FAZER um link para a lista de componentes suportados no javadoc
 	// dessa classe.
@@ -245,8 +243,8 @@ public enum EnumBancos implements Serializable{
 	 * 
 	 * @since 0.2
 	 */
-	public static final HashMap<String, EnumBancos> suportados = new HashMap<String, EnumBancos>(
-			EnumBancos.values().length);
+	public static final HashMap<String, BancoSuportado> suportados = new HashMap<String, BancoSuportado>(
+			BancoSuportado.values().length);
 
 	static {
 
@@ -327,7 +325,7 @@ public enum EnumBancos implements Serializable{
 	 * @since 0.2
 	 * 
 	 */
-	private EnumBancos(String codigoDeCompensacaoBACEN, String cnpj,
+	private BancoSuportado(String codigoDeCompensacaoBACEN, String cnpj,
 			String instituicao, String segmento) {
 		this.codigoDeCompensacaoBACEN = codigoDeCompensacaoBACEN;
 		this.cNPJ = cnpj;
@@ -367,13 +365,13 @@ public enum EnumBancos implements Serializable{
 	 * 
 	 * @return Uma instância do respectivo banco.
 	 * 
-	 * @see br.com.nordestefomento.jrimum.domkee.bank.febraban.Banco#Banco(CodigoDeCompensacaoBACEN, String, CNPJ, String)
+	 * @see br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Banco#Banco(CodigoDeCompensacaoBACEN, String, CNPJ, String)
 	 * @see <a href="http://www.bcb.gov.br/?CHEQUESCOMPE">Bancos supervisionados
 	 *      pela BACEN</a>
 	 * 
 	 * @since 0.2
 	 */
-	public IBanco create() {
+	public Banco create() {
 		return new Banco(new CodigoDeCompensacaoBACEN(this.codigoDeCompensacaoBACEN), this.instituicao, new CNPJ(
 				this.cNPJ), this.segmento);
 	}
@@ -412,13 +410,5 @@ public enum EnumBancos implements Serializable{
 	 */
 	public String getSegmento() {
 		return segmento;
-	}
-
-	/**
-	 * @see br.com.nordestefomento.jrimum.ACurbitaObject#toString()
-	 * @see java.lang.Enum#toString()
-	 */
-	public String toString(){
-		return ACurbitaObject.toString(this);
 	}
 }

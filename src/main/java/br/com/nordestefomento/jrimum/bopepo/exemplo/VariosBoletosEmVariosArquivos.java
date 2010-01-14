@@ -10,7 +10,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  * 
- * Created at: 03/10/2008 - 16:09:56
+ * Created at: 18/05/2008 - 21:13:29
  *
  * ================================================================================
  *
@@ -24,47 +24,72 @@
  * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
  * e limitações sob esta LICENÇA.
  * 
- * Criado em: 03/10/2008 - 16:09:56
+ * Criado em: 18/05/2008 - 21:13:29
  * 
  */
-package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Modalidade;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+package br.com.nordestefomento.jrimum.bopepo.example;
+
+import java.io.File;
+import java.util.List;
+
+import br.com.nordestefomento.jrimum.JRimumException;
+import br.com.nordestefomento.jrimum.bopepo.Boleto;
+import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
+
 
 /**
  * 
  * <p>
- * DEFINIÇÃO DA CLASSE
+ * Exemplo de código para geração de vários boletos em um único arquivo PDF.
  * </p>
  * 
- * <p>
- * OBJETIVO/PROPÓSITO
- * </p>
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto
+ * @author Rômulo Augusto
  * 
- * <p>
- * EXEMPLO:
- * </p> 
+ * @since 0.2
  * 
- * @author Rômulo
- * 
- * @since 
- * 
- * @version 
+ * @version 0.2
  */
-public class ACLNossaCaixa extends ACampoLivre {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3806982587407010815L;
+public class VariosBoletosEmVariosArquivos {
 
-	protected ACLNossaCaixa(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
-	}
+
+	public static void main(String[] args) {
+		
+		/*
+		 * É bem simples, consiga os boletos 
+		 */
+
+		List<Boleto> boletos = Util4Exemplos.getVariosBoletos();
+		
+		/*
+		 * Depois diga o nome do diretorio para onde os boletos serão gerados. 
+		 */
+		
+		BoletoViewer.onePerPDF("./", ".pdf", boletos);
 	
-	static ICampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException {
-					
-		return new CLNossaCaixa(titulo);
+		
+		/*
+		 * Pronto, agora vamos conferir um: 
+		 */
+		
+		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+			
+		try{
+	
+			desktop.open(new File("Boleto1.pdf"));
+	
+		}catch(Exception e){
+			throw new JRimumException("Arquivo não gerado!",e);
+		}
+		
+		/*
+		 * É sério, é só isso mesmo!
+		 * Se não acredita confira os vários arquivos que estão no diretório. 
+		 */
+		
 	}
+
 }

@@ -29,18 +29,23 @@
 
 package br.com.nordestefomento.jrimum.bopepo;
 
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNull;
+
 import java.awt.Image;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.com.nordestefomento.jrimum.ACurbitaObject;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.Factory4CampoLivre;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.utilix.Util4Date;
+import org.apache.log4j.Logger;
+
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreFactory;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSupportedBancoException;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import br.com.nordestefomento.jrimum.utilix.DateUtil;
+import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
 
 /**
  * <p>
@@ -64,12 +69,11 @@ import br.com.nordestefomento.jrimum.utilix.Util4Date;
  * 
  * @version 0.2
  */
-public final class Boleto extends ACurbitaObject{
+public final class Boleto {
 	
-	//TODO Testes no teste unitário: TestBoleto
+	private static final long serialVersionUID = 4436063640418293021L;
 	
-	
-	private static final long serialVersionUID = 4436063640418293021L; 
+	private static Logger log = Logger.getLogger(Boleto.class);
 
 	/**
 	 * @see Titulo
@@ -92,9 +96,9 @@ public final class Boleto extends ACurbitaObject{
 	private LinhaDigitavel linhaDigitavel;
 	
 	/**
-	 * @see ICampoLivre
+	 * @see CampoLivre
 	 */
-	private ICampoLivre campoLivre;
+	private CampoLivre campoLivre;
 	
 	/**
 	 * @see #setLocalPagamento(String)
@@ -138,10 +142,10 @@ public final class Boleto extends ACurbitaObject{
 	 * Cria um boleto pronto para ser gerado.
 	 * 
 	 * @param titulo
-	 * @throws NotSuporttedBancoException 
-	 * @throws NotSuporttedCampoLivreException 
+	 * @throws NotSupportedBancoException 
+	 * @throws NotSupportedCampoLivreException 
 	 */
-	public Boleto(Titulo titulo)throws IllegalArgumentException, NotSuporttedBancoException, NotSuporttedCampoLivreException{
+	public Boleto(Titulo titulo)throws IllegalArgumentException, NotSupportedBancoException, NotSupportedCampoLivreException{
 
 		if(log.isTraceEnabled())
 			log.trace("Instanciando boleto");
@@ -152,11 +156,11 @@ public final class Boleto extends ACurbitaObject{
 		if(isNotNull(titulo)){
 			
 			this.setTitulo(titulo);
-			this.setCampoLivre(Factory4CampoLivre.create(titulo));
+			this.setCampoLivre(CampoLivreFactory.create(titulo));
 			this.load();
 			
 			if(log.isDebugEnabled())
-				log.debug("boleto instance : "+this);
+				log.debug("boleto instance : " + this);
 			
 		}else {
 			IllegalArgumentException e = new IllegalArgumentException("Título nulo!");
@@ -173,7 +177,7 @@ public final class Boleto extends ACurbitaObject{
 	 * @param titulo
 	 * @param campoLivre
 	 */
-	public Boleto(Titulo titulo, ICampoLivre campoLivre) {
+	public Boleto(Titulo titulo, CampoLivre campoLivre) {
 		super();
 
 		if(log.isTraceEnabled())
@@ -211,32 +215,32 @@ public final class Boleto extends ACurbitaObject{
 		linhaDigitavel = new LinhaDigitavel(codigoDeBarras);
 		dataDeProcessamento = new Date();
 		
-		log.info("Data de Processamento do Boleto : "+Util4Date.fmt_dd_MM_yyyy.format(dataDeProcessamento));
+		log.info("Data de Processamento do Boleto : "+DateUtil.FORMAT_DD_MM_YYYY.format(dataDeProcessamento));
 	}
 	
 	/**
 	 * @return the campoLivre
 	 */
-	public ICampoLivre getCampoLivre() {
+	public CampoLivre getCampoLivre() {
 		return campoLivre;
 	}
 
 	/**
 	 * @param campoLivre the campoLivre to set
 	 */
-	public void setCampoLivre(ICampoLivre campoLivre) {
+	public void setCampoLivre(CampoLivre campoLivre) {
 		
 		if(isNotNull(campoLivre, "campoLivre")){
 			
 			int length = campoLivre.write().length();
 			
-			if(length == ICampoLivre.STRING_LENGTH)
+			if(length == CampoLivre.STRING_LENGTH)
 				this.campoLivre = campoLivre;
 			else
-				if(length > ICampoLivre.STRING_LENGTH)
-					throw new IllegalArgumentException("O tamanho da String [ " + length + " ] é maior que o especificado [ "+ICampoLivre.STRING_LENGTH+" ]!");
+				if(length > CampoLivre.STRING_LENGTH)
+					throw new IllegalArgumentException("O tamanho da String [ " + length + " ] é maior que o especificado [ "+CampoLivre.STRING_LENGTH+" ]!");
 				else
-					throw new IllegalArgumentException("O tamanho da String [ " + length + " ] é menor que o especificado [ "+ICampoLivre.STRING_LENGTH+" ]!");
+					throw new IllegalArgumentException("O tamanho da String [ " + length + " ] é menor que o especificado [ "+CampoLivre.STRING_LENGTH+" ]!");
 		}
 	}
 
@@ -471,7 +475,7 @@ public final class Boleto extends ACurbitaObject{
 	
 	public void addTextosExtras(String nome, String valor) {
 		
-		if(isNotNull(getTextosExtras())) {
+		if(isNull(getTextosExtras())) {
 			setTextosExtras(new HashMap<String, String>());
 		}
 		
@@ -479,7 +483,6 @@ public final class Boleto extends ACurbitaObject{
 	}
 	
 	public Map<String, Image> getImagensExtras() {
-		
 		return this.imagensExtras;
 	}
 
@@ -496,4 +499,8 @@ public final class Boleto extends ACurbitaObject{
 		getImagensExtras().put(fieldName, image);
 	}
 
+	@Override
+	public String toString() {
+		return ObjectUtil.toString(this);
+	}
 }

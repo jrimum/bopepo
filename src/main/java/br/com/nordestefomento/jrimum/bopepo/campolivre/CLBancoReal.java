@@ -30,12 +30,12 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.utilix.Util4String;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.EnumModulo;
+import br.com.nordestefomento.jrimum.utilix.StringUtil;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.TipoDeModulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
 /**
@@ -90,14 +90,14 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * @version 0.2
  */
 	
-class CLBancoReal extends ACLBancoAbnAmroReal {
+class CLBancoReal extends AbstractCLBancoABNAmroReal {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5294809022535972391L;
 	
-	private static final Modulo modulo10 = new Modulo(EnumModulo.MODULO10);
+	private static final Modulo modulo10 = new Modulo(TipoDeModulo.MODULO10);
 	
 	/**
 	 * Tamanho deste campo.
@@ -119,7 +119,7 @@ class CLBancoReal extends ACLBancoAbnAmroReal {
 		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
 		this.add(new Field<String>(calculeDigitoDaPosicao31(titulo.getNumeroDoDocumento(), conta.getAgencia().getCodigo(), conta.getNumeroDaConta().getCodigoDaConta()), 1, Filler.ZERO_LEFT));
 		
-		this.add(new Field<String>(Util4String.eliminateSymbols(titulo.getNumeroDoDocumento()), 13, Filler.ZERO_LEFT));
+		this.add(new Field<String>(StringUtil.eliminateSymbols(titulo.getNumeroDoDocumento()), 13, Filler.ZERO_LEFT));
 		
 	}
 	

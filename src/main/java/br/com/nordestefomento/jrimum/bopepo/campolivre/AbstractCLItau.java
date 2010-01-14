@@ -33,8 +33,8 @@ package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import java.util.Arrays;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
 
@@ -61,7 +61,12 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * @version 0.2
  */
 
-public abstract class ACLItau extends ACampoLivre {
+abstract class AbstractCLItau extends AbstractCampoLivre {
+	
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -3082903872777434482L;
 	
 	/**
 	 * <p>
@@ -71,13 +76,13 @@ public abstract class ACLItau extends ACampoLivre {
 	 */
 	private static final Integer[] CARTEIRAS_ESPECIAIS = {106, 107, 122, 142, 143, 195, 196, 198};
 
-	protected ACLItau(Integer fieldsLength, Integer stringLength) {
+	protected AbstractCLItau(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 	
-	static ICampoLivre create(Titulo titulo){
+	static CampoLivre create(Titulo titulo){
 		
-		ICampoLivre campoLivre = null;
+		CampoLivre campoLivre = null;
 		ContaBancaria conta = titulo.getContaBancaria();
 		
 		/*

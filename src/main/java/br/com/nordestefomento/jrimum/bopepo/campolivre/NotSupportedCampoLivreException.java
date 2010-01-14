@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  * 
- * Created at: 30/03/2008 - 18:08:12
+ * Created at: 30/03/2008 - 18:10:27
  * 
  * ================================================================================
  * 
@@ -23,40 +23,56 @@
  * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
  * reger permissões e limitações sob esta LICENÇA.
  * 
- * Criado em: 30/03/2008 - 18:08:12
+ * Criado em: 30/03/2008 - 18:10:27
  * 
  */
 
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+
 
 /**
  * 
- * Descrição:
- * 
- * 
+ * <p>
+ * Exceção indicadora de não existência de um campolivre para os dados correntes de um boleto.
+ * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author Misael Barreto
+ * @author Misael Barreto 
  * @author Rômulo Augusto
- * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento
- *         Mercantil</a>
  * 
  * @since 0.2
  * 
  * @version 0.2
  */
-abstract class ACLBradesco extends ACampoLivre {
+	
+public class NotSupportedCampoLivreException extends CampoLivreException {
 
-	protected ACLBradesco(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public NotSupportedCampoLivreException() {
+		super();
 		
 	}
 
-	static ICampoLivre create(Titulo titulo){
+	public NotSupportedCampoLivreException(String message, Throwable cause) {
+		super(message, cause);
 		
-		return new CLBradesco(titulo);
 	}
+
+	public NotSupportedCampoLivreException(String message) {
+		super(message);
+		
+	}
+
+	public NotSupportedCampoLivreException(Throwable cause) {
+		super(cause);
+		
+	}
+
+	
 }

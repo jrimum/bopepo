@@ -1,4 +1,3 @@
-
 /* 
  * Copyright 2008 JRimum Project
  * 
@@ -11,7 +10,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  * 
- * Created at: 21/04/2008 - 23:35:28
+ * Created at: 25/09/2008 - 21:20:19
  *
  * ================================================================================
  *
@@ -25,69 +24,44 @@
  * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
  * e limitações sob esta LICENÇA.
  * 
- * Criado em: 21/04/2008 - 23:35:28
+ * Criado em: 25/09/2008 - 21:20:19
  * 
  */
-	
-package br.com.nordestefomento.jrimum.bopepo;
+package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.JRimumException;
-
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * 
  * <p>
- * Qualquer exceção gerada durante a geração de um Boleto gera uma <code>BoletoExceptiton</code>. Centraliza e localiza os problemas relativos a geração de um boleto.
+ * DEFINIÇÃO DA CLASSE
  * </p>
  * 
+ * <p>
+ * OBJETIVO/PROPÓSITO
+ * </p>
  * 
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+ * <p>
+ * EXEMPLO:
+ * </p> 
  * 
- * @see br.com.nordestefomento.jrimum.JRimumException
- * @see br.com.nordestefomento.jrimum.bopepo.BoletoExceptiton
- * 
- * @since 0.2
+ * @author Rômulo Augusto
  * 
  * @version 0.2
  */
-
-public class BoletoExceptiton extends JRimumException {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3874521668322644183L;
+abstract class AbstractCLMercantilDoBrasil extends AbstractCampoLivre {
 
 	/**
 	 * 
 	 */
-	public BoletoExceptiton() {
-		
-	}
+	private static final long serialVersionUID = -6705784312499730452L;
 
-	/**
-	 * @param message
-	 * @param cause
-	 */
-	public BoletoExceptiton(String message, Throwable cause) {
-		super(message, cause);
-		
+	protected AbstractCLMercantilDoBrasil(Integer fieldsLength, Integer stringLength) {
+		super(fieldsLength, stringLength);
 	}
+	
+	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 
-	/**
-	 * @param message
-	 */
-	public BoletoExceptiton(String message) {
-		super(message);
-		
+		return new CLMercantilDoBrasil(titulo);
 	}
-
-	/**
-	 * @param cause
-	 */
-	public BoletoExceptiton(Throwable cause) {
-		super(cause);
-		
-	}
-
 }

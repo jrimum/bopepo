@@ -30,12 +30,18 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTipoCobranca;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.exists;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
-public abstract class ACLBancoSafra extends ACampoLivre {
+abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -555393808447532987L;
+
 	/**
 	 * Tamanho deste campo. Em outras palavras, é a quantidade de partes que
 	 * compõem este campo livre.
@@ -44,14 +50,14 @@ public abstract class ACLBancoSafra extends ACampoLivre {
 	
 	protected static final int SISTEMA = 7;
 
-	protected ACLBancoSafra(Integer fieldsLength, Integer stringLength) {
+	protected AbstractCLBancoSafra(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 
-	static ICampoLivre create(Titulo titulo)
-			throws NotSuporttedCampoLivreException {
+	static CampoLivre create(Titulo titulo)
+			throws NotSupportedCampoLivreException {
 
-		ICampoLivre campoLivre = null;
+		CampoLivre campoLivre = null;
 
 		ContaBancaria conta = titulo.getContaBancaria(); 
 
@@ -59,7 +65,7 @@ public abstract class ACLBancoSafra extends ACampoLivre {
 			
 			if(exists(conta.getNumeroDaConta().getDigitoDaConta())) {
 
-				if (conta.getCarteira().getTipoCobranca() == EnumTipoCobranca.COM_REGISTRO) {
+				if (conta.getCarteira().getTipoCobranca() == TipoDeCobranca.COM_REGISTRO) {
 	
 					campoLivre = new CLBancoSafraCobrancaRegistrada(titulo);
 	
@@ -74,7 +80,7 @@ public abstract class ACLBancoSafra extends ACampoLivre {
 			}
 
 		} else {
-			throw new NotSuporttedCampoLivreException(
+			throw new NotSupportedCampoLivreException(
 					"Campo livre indeterminado, defina o tipo de cobrança para a carteira usada.");
 		}
 

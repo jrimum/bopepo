@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  * 
- * Created at: 30/03/2008 - 18:10:19
+ * Created at: 30/03/2008 - 18:07:47
  * 
  * ================================================================================
  * 
@@ -23,59 +23,71 @@
  * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
  * reger permissões e limitações sob esta LICENÇA.
  * 
- * Criado em: 30/03/2008 - 18:10:19
+ * Criado em: 30/03/2008 - 18:07:47
  * 
  */
 
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * 
- * <p>
- * Exceção indicadora de não existência de um referido banco ou problemas com dados de um banco.
- * </p>
+ * Descrição:
+ * 
  * 
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author Misael Barreto 
+ * @author Misael Barreto
  * @author Rômulo Augusto
+ * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento
+ *         Mercantil</a>
  * 
  * @since 0.2
  * 
  * @version 0.2
  */
-	
-public class NotSuporttedBancoException extends CampoLivreException {
 
+abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
+	
+	
+	
+	
 	/**
-	 * 
+	 *
 	 */
-	private static final long serialVersionUID = 1L;
-	
-	private static String msg = "Banco não suportado por não haver " +
-								"implementações de Campo Livre para " +
-								"o mesmo.";
-	
-	
-	public NotSuporttedBancoException() {
-		super(msg);
+	private static final long serialVersionUID = -7324315662526104153L;
+
+
+	protected AbstractCLBancoDoBrasil(Integer fieldsLength, Integer stringLength) {
+		super(fieldsLength, stringLength);
 	}
+
 	
-	@SuppressWarnings("unused")
-	private NotSuporttedBancoException(String message, Throwable cause) {
-		super(message, cause);
-	}
-	@SuppressWarnings("unused")
-	private NotSuporttedBancoException(String message) {
-		super(message);
-	}
-	
-	@SuppressWarnings("unused")
-	private NotSuporttedBancoException(Throwable cause) {
-		super(msg, cause);
+	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException{
+				
+		CampoLivre campoLivre = null;
+		
+		if (titulo.getNossoNumero().length() == 10) {
+			campoLivre = new CLBancoDoBrasilNN10(titulo);
+		}
+		else if (titulo.getNossoNumero().length() == 11) {
+			campoLivre = new CLBancoDoBrasilNN11(titulo);
+		}
+		else if (titulo.getNossoNumero().length() == 17) {
+			campoLivre = new CLBancoDoBrasilNN17(titulo);	
+		}
+		else {
+			throw new NotSupportedCampoLivreException(
+				"Campo livre diponível somente para títulos com nosso número " +
+				"composto por 10 posições(convênio com 7), 11 posições ou " +
+				"17 posições(convênio com 6)."
+			);
+		}
+
+
+		return campoLivre;
 	}
 	
 }

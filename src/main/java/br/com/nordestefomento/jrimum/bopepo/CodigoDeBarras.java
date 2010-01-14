@@ -36,15 +36,17 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
-import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import br.com.nordestefomento.jrimum.utilix.BancoUtil;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.utilix.LineOfFields;
-import br.com.nordestefomento.jrimum.utilix.Util4Banco;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.DV4BoletoCodigoDeBarra;
+import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
+import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV;
 
 
 /**
@@ -112,12 +114,14 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.DV4BoletoCodigoDeB
  * 
  * @version 0.2
  */
-public final class CodigoDeBarras extends LineOfFields{
+public final class CodigoDeBarras extends AbstractLineOfFields{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 748913164143978133L;
+	
+	private static Logger log = Logger.getLogger(CodigoDeBarras.class);
 	
 	/**
 	 * 
@@ -133,7 +137,7 @@ public final class CodigoDeBarras extends LineOfFields{
 	 * Data Base de 07.10.1997, data usada pela FEBRABAN para realizar o cálculo
 	 * do fator de vencimento.
 	 * 
-	 * @see Util4Banco#calculceFatorDeVencimento(Date)
+	 * @see BancoUtil#calculceFatorDeVencimento(Date)
 	 */
 	public static final Date DATA_BASE_DO_FATOR_DE_VENCIMENTO = new GregorianCalendar(
 			1997, Calendar.OCTOBER, 7).getTime();
@@ -152,7 +156,7 @@ public final class CodigoDeBarras extends LineOfFields{
 	/**
 	 * Mecanismo de autenticação usado no composição de barras.
 	 * 
-	 * @see br.com.nordestefomento.jrimum.vallia.digitoverificador.DV4BoletoCodigoDeBarra
+	 * @see br.com.nordestefomento.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV
 	 */
 	private Field<Integer> digitoVerificadorGeral;
 	
@@ -160,7 +164,7 @@ public final class CodigoDeBarras extends LineOfFields{
 	 * Representa a quantidade de dias decorridos da data base à data de
 	 * vencimento do título.
 	 * 
-	 * @see Util4Banco#calculceFatorDeVencimento(Date)
+	 * @see BancoUtil#calculceFatorDeVencimento(Date)
 	 */
 	private Field<Integer> fatorDeVencimento;
 	
@@ -170,7 +174,7 @@ public final class CodigoDeBarras extends LineOfFields{
 	private Field<BigDecimal> valorNominalDoTitulo;
 	
 	/**
-	 * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre
+	 * @see br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre
 	 */
 	private Field<String> campoLivre;
 	
@@ -182,9 +186,9 @@ public final class CodigoDeBarras extends LineOfFields{
 	 * @param titulo
 	 * @param campoLivre
 	 * 
-	 * @see ICampoLivre
+	 * @see CampoLivre
 	 */
-	CodigoDeBarras(Titulo titulo, ICampoLivre campoLivre) {
+	CodigoDeBarras(Titulo titulo, CampoLivre campoLivre) {
 		super(FIELDS_LENGTH ,STRING_LENGTH);
 		
 		if(log.isTraceEnabled())
@@ -210,16 +214,16 @@ public final class CodigoDeBarras extends LineOfFields{
 		add(this.campoLivre);
 	
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		this.codigoDoBanco.setField(contaBancaria.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado());
+		this.codigoDoBanco.setValue(contaBancaria.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado());
 		
-		this.codigoDaMoeda.setField(titulo.getEnumMoeda().getCodigo());
+		this.codigoDaMoeda.setValue(titulo.getEnumMoeda().getCodigo());
 		
 		//Was here DigitoVerificador 
 		//But wait
 		this.calculateAndSetFatorDeVencimento(titulo.getDataDoVencimento());
 		
-		this.valorNominalDoTitulo.setField(titulo.getValor().movePointRight(2));
-		this.campoLivre.setField(campoLivre.write());
+		this.valorNominalDoTitulo.setValue(titulo.getValor().movePointRight(2));
+		this.campoLivre.setValue(campoLivre.write());
 		
 		//Now you can
 		this.calculateAndSetDigitoVerificadorGeral();
@@ -236,7 +240,7 @@ public final class CodigoDeBarras extends LineOfFields{
 			log.trace("Calculando Digito Verificador Geral");
 
 		// Instanciando o objeto irá calcular o dígito verificador do boleto.
-		DV4BoletoCodigoDeBarra calculadorDV = new DV4BoletoCodigoDeBarra();
+		BoletoCodigoDeBarrasDV calculadorDV = new BoletoCodigoDeBarrasDV();
 
 		// Preparando o conjunto de informações que será a base para o cálculo
 		// do dígito verificador, conforme normas da FEBRABAN.
@@ -248,13 +252,13 @@ public final class CodigoDeBarras extends LineOfFields{
 
 		// Realizando o cálculo dígito verificador e em seguida armazenando 
 		// a informação no campo "digitoVerificadorGeral".
-		digitoVerificadorGeral.setField(
+		digitoVerificadorGeral.setValue(
 				calculadorDV.calcule(toCalculateDV.toString())
 				);
 
 		if (log.isDebugEnabled())
 			log.debug("Digito Verificador Geral calculado : "
-					+ digitoVerificadorGeral.getField());
+					+ digitoVerificadorGeral.getValue());
 	}
 
 	/**
@@ -279,8 +283,8 @@ public final class CodigoDeBarras extends LineOfFields{
 	 */
 	private void calculateAndSetFatorDeVencimento(Date vencimento) {
 
-		fatorDeVencimento.setField(
-				Util4Banco.calculceFatorDeVencimento(vencimento));
+		fatorDeVencimento.setValue(
+				BancoUtil.calculceFatorDeVencimento(vencimento));
 	}
 
 	/**
@@ -366,5 +370,9 @@ public final class CodigoDeBarras extends LineOfFields{
 	void setCampoLivre(Field<String> campoLivre) {
 		this.campoLivre = campoLivre;
 	}
-	
+
+	@Override
+	public String toString() {
+		return ObjectUtil.toString(this);
+	}
 }

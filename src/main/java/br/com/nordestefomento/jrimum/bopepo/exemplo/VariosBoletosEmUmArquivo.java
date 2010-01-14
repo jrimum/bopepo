@@ -1,3 +1,4 @@
+
 /* 
  * Copyright 2008 JRimum Project
  * 
@@ -10,7 +11,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  * 
- * Created at: 21/04/2008 - 21:14:40
+ * Created at: 18/05/2008 - 21:13:29
  *
  * ================================================================================
  *
@@ -24,66 +25,77 @@
  * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
  * e limitações sob esta LICENÇA.
  * 
- * Criado em: 21/04/2008 - 21:14:40
+ * Criado em: 18/05/2008 - 21:13:29
  * 
  */
 	
-package br.com.nordestefomento.jrimum.bopepo.campolivre;
+package br.com.nordestefomento.jrimum.bopepo.example;
+
+import java.io.File;
+import java.util.List;
 
 import br.com.nordestefomento.jrimum.JRimumException;
+import br.com.nordestefomento.jrimum.bopepo.Boleto;
+import br.com.nordestefomento.jrimum.bopepo.view.BoletoViewer;
+
 
 /**
  * 
  * <p>
- * Qualquer exceção gerada durante a geração de um campo livre gera uma <code>CampoLivreException</code>. Centraliza e localiza os problemas relativos a geração de um campo livre.
+ * Exemplo de código para geração de vários boletos em um único arquivo PDF.
  * </p>
- * 
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author Misael Barreto
  * @author Rômulo Augusto
  * 
- * @see br.com.nordestefomento.jrimum.JRimumException
- * @see br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre
- * 
  * @since 0.2
  * 
  * @version 0.2
  */
-public class CampoLivreException extends JRimumException {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 893327780214327141L;
+public class VariosBoletosEmUmArquivo {
 
-	/**
-	 * 
-	 */
-	public CampoLivreException() {
-		super();
-	}
 
-	/**
-	 * @param message
-	 * @param cause
-	 */
-	public CampoLivreException(String message, Throwable cause) {
-		super(message, cause);
-	}
+	public static void main(String[] args) {
+		/*
+		 * É bem simples, consiga os boletos 
+		 */
 
-	/**
-	 * @param message
-	 */
-	public CampoLivreException(String message) {
-		super(message);
-	}
+		List<Boleto> boletos = Util4Exemplos.getVariosBoletos();
+		
+		/*
+		 * Depois diga o nome do diretorio/arquivo para onde os boletos serão gerados com template padrão. 
+		 */
+		
+		//BoletoViewer.groupInOnePDF("TesteVariosEmUm.pdf", boletos);
+	
+		/*
+		 * OU então diga o nome do diretorio/arquivo para onde os boletos serão gerados com um template personalizado. 
+		 */
+		
+		BoletoViewer.groupInOnePDF("TesteVariosEmUmPersonalizado.pdf", boletos,new File("TemplatePersonalizado.pdf"));
+		
+		/*
+		 * Pronto, agora vamos conferir: 
+		 */
+		
+		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+			
+		try{
+	
+			desktop.open(new File("TesteVariosEmUmPersonalizado.pdf"));
+	
+		}catch(Exception e){
+			throw new JRimumException("Arquivo não gerado!",e);
+		}
+		
+		/*
+		 * É sério, é só isso mesmo!
+		 * Acredita não?
+		 * Então faça novamente! 
+		 */
 
-	/**
-	 * @param cause
-	 */
-	public CampoLivreException(Throwable cause) {
-		super(cause);
 	}
 
 }

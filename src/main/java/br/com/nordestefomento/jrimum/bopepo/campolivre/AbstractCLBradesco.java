@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  * 
- * Created at: 30/03/2008 - 18:07:47
+ * Created at: 30/03/2008 - 18:08:12
  * 
  * ================================================================================
  * 
@@ -23,14 +23,14 @@
  * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
  * reger permissões e limitações sob esta LICENÇA.
  * 
- * Criado em: 30/03/2008 - 18:07:47
+ * Criado em: 30/03/2008 - 18:08:12
  * 
  */
 
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * 
@@ -48,40 +48,20 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
  * 
  * @version 0.2
  */
+abstract class AbstractCLBradesco extends AbstractCampoLivre {
 
-abstract class ACLBancoDoBrasil extends ACampoLivre {
-	
-	
-	
-	
-	protected ACLBancoDoBrasil(Integer fieldsLength, Integer stringLength) {
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -1733227746617862639L;
+
+	protected AbstractCLBradesco(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
-	}
-
-	
-	static ICampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException{
-				
-		ICampoLivre campoLivre = null;
 		
-		if (titulo.getNossoNumero().length() == 10) {
-			campoLivre = new CLBancoDoBrasilNN10(titulo);
-		}
-		else if (titulo.getNossoNumero().length() == 11) {
-			campoLivre = new CLBancoDoBrasilNN11(titulo);
-		}
-		else if (titulo.getNossoNumero().length() == 17) {
-			campoLivre = new CLBancoDoBrasilNN17(titulo);	
-		}
-		else {
-			throw new NotSuporttedCampoLivreException(
-				"Campo livre diponível somente para títulos com nosso número " +
-				"composto por 10 posições(convênio com 7), 11 posições ou " +
-				"17 posições(convênio com 6)."
-			);
-		}
-
-
-		return campoLivre;
 	}
-	
+
+	static CampoLivre create(Titulo titulo){
+		
+		return new CLBradesco(titulo);
+	}
 }

@@ -29,7 +29,7 @@
  */
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * 
@@ -53,14 +53,14 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
  * 
  * @version 0.2
  */
-public class ACLBanestes extends ACampoLivre {
+abstract class AbstractCLBanestes extends AbstractCampoLivre {
 
-	protected ACLBanestes(Integer fieldsLength, Integer stringLength) {
+	protected AbstractCLBanestes(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 	
-	static ICampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException {
-		final ICampoLivre campoLivre;
+	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
+		final CampoLivre campoLivre;
 		
 		campoLivre = new CLBanestes(titulo);
 		

@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  * 
- * Created at: 30/03/2008 - 18:10:11
+ * Created at: 30/03/2008 - 18:10:19
  * 
  * ================================================================================
  * 
@@ -23,34 +23,59 @@
  * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
  * reger permissões e limitações sob esta LICENÇA.
  * 
- * Criado em: 30/03/2008 - 18:10:11
+ * Criado em: 30/03/2008 - 18:10:19
  * 
  */
 
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.utilix.ITextStream;
+
 
 /**
+ * 
  * <p>
- * Essa é uma Interace com um propósito de marcar e agrupar tipos campo livre.
+ * Exceção indicadora de não existência de um referido banco ou problemas com dados de um banco.
  * </p>
  * 
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author Misael Barreto
- * @author Rômulo Augusto
  * 
- * @see ACampoLivre
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto 
+ * @author Rômulo Augusto
  * 
  * @since 0.2
  * 
  * @version 0.2
  */
-public interface ICampoLivre extends ITextStream{
 	
+public class NotSupportedBancoException extends CampoLivreException {
+
 	/**
-	 * Tamanho do Campo Livre, igual para qualquer que seja o banco.
+	 * 
 	 */
-	static final Integer STRING_LENGTH = 25;
+	private static final long serialVersionUID = 1L;
+	
+	private static String msg = "Banco não suportado por não haver " +
+								"implementações de Campo Livre para " +
+								"o mesmo.";
+	
+	
+	public NotSupportedBancoException() {
+		super(msg);
+	}
+	
+	@SuppressWarnings("unused")
+	private NotSupportedBancoException(String message, Throwable cause) {
+		super(message, cause);
+	}
+	@SuppressWarnings("unused")
+	private NotSupportedBancoException(String message) {
+		super(message);
+	}
+	
+	@SuppressWarnings("unused")
+	private NotSupportedBancoException(Throwable cause) {
+		super(msg, cause);
+	}
+	
 }

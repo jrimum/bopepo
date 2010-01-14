@@ -29,13 +29,11 @@
  */
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
-
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.EnumModulo;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.TipoDeModulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
 /**
@@ -139,7 +137,7 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * 
  * @version 0.2
  */
-public class CLNossaCaixa extends ACLNossaCaixa {
+class CLNossaCaixa extends AbstractCLNossaCaixa {
 
 	/**
 	 * 
@@ -200,7 +198,7 @@ public class CLNossaCaixa extends ACLNossaCaixa {
 		digito1ASBACE = digito1;
 		String numeroParaCalculo = gereNumeroParaCalculoDosDigitosASBACE(titulo, modalidadeDaConta) + digito1ASBACE;
 		
-		Modulo modulo11 = new Modulo(EnumModulo.MODULO11);
+		Modulo modulo11 = new Modulo(TipoDeModulo.MODULO11);
 		modulo11.setLimiteMinimo(2);
 		modulo11.setLimiteMaximo(7);
 		
@@ -235,7 +233,7 @@ public class CLNossaCaixa extends ACLNossaCaixa {
 	 */
 	private int calculeDigito1ASBACE(Titulo titulo, Integer modalidadeDaConta) {
 		
-		Modulo modulo10 = new Modulo(EnumModulo.MODULO10);
+		Modulo modulo10 = new Modulo(TipoDeModulo.MODULO10);
 		int resto = modulo10.calcule(gereNumeroParaCalculoDosDigitosASBACE(titulo, modalidadeDaConta));
 		
 		int digito = resto;

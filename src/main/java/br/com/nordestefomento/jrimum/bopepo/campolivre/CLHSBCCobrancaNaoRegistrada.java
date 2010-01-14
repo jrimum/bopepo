@@ -30,11 +30,11 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.utilix.Util4Banco;
+import br.com.nordestefomento.jrimum.utilix.BancoUtil;
 
 /**
  * 
@@ -89,7 +89,7 @@ import br.com.nordestefomento.jrimum.utilix.Util4Banco;
  * </table>
  * 
  * 
- * @see br.com.nordestefomento.jrimum.bopepo.campolivre.ACampoLivre
+ * @see br.com.nordestefomento.jrimum.bopepo.campolivre.AbstractCampoLivre
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author Misael Barreto 
@@ -100,7 +100,7 @@ import br.com.nordestefomento.jrimum.utilix.Util4Banco;
  * 
  * @version 0.2
  */
-class CLHsbcCNR extends ACLHsbc {
+class CLHSBCCobrancaNaoRegistrada extends AbstractCLHSBC {
 	
 	/**
 	 * 
@@ -119,7 +119,7 @@ class CLHsbcCNR extends ACLHsbc {
 	 * </p>
 	 * @param titulo título com as informações para geração do campo livre
 	 */
-	CLHsbcCNR(Titulo titulo) {
+	CLHSBCCobrancaNaoRegistrada(Titulo titulo) {
 		super(FIELDS_LENGTH, STRING_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
@@ -132,7 +132,7 @@ class CLHsbcCNR extends ACLHsbc {
 		this.add(new Field<String>(nossoNumero, 13, Filler.ZERO_LEFT));
 		
 		// Data de vencimento (formato juliano)
-		int dataVencimentoFormatoJuliano = Util4Banco.calculceFatorDeVencimento(titulo.getDataDoVencimento());
+		int dataVencimentoFormatoJuliano = BancoUtil.calculceFatorDeVencimento(titulo.getDataDoVencimento());
 		this.add(new Field<Integer>(dataVencimentoFormatoJuliano, 4, Filler.ZERO_LEFT));
 		
 		//2 FIXO (Código do Aplicativo CNR - Cob. Não Registrada)

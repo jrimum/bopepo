@@ -10,7 +10,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  * 
- * Created at: 25/09/2008 - 21:20:19
+ * Created at: 03/10/2008 - 16:09:56
  *
  * ================================================================================
  *
@@ -24,12 +24,12 @@
  * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
  * e limitações sob esta LICENÇA.
  * 
- * Criado em: 25/09/2008 - 21:20:19
+ * Criado em: 03/10/2008 - 16:09:56
  * 
  */
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * 
@@ -45,25 +45,23 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
  * EXEMPLO:
  * </p> 
  * 
- * @author Rômulo
+ * @author Rômulo Augusto
  * 
- * @since 
- * 
- * @version 
+ * @version 0.2 
  */
-public class ACLMercantilDoBrasil extends ACampoLivre {
+abstract class AbstractCLNossaCaixa extends AbstractCampoLivre {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6705784312499730452L;
+	private static final long serialVersionUID = 3806982587407010815L;
 
-	protected ACLMercantilDoBrasil(Integer fieldsLength, Integer stringLength) {
+	protected AbstractCLNossaCaixa(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 	
-	static ICampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException {
-
-		return new CLMercantilDoBrasil(titulo);
+	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
+					
+		return new CLNossaCaixa(titulo);
 	}
 }

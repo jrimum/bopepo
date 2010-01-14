@@ -30,36 +30,28 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-/**
- * 
- * Representa a família de classes do campo livre para o banco Caixa Econômica Federal.
- * 
- * 
- * 
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author Misael Barreto 
- * @author Rômulo Augusto
- * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
- * 
- * @since 0.2
- * 
- * @version 0.2
- */
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNull;
+
 import org.apache.commons.lang.StringUtils;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 
-abstract class ACLCaixaEconomicaFederal extends ACampoLivre {
+abstract class AbstractCLCaixaEconomicaFederal extends AbstractCampoLivre {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4104858478390595830L;
 	
 	private static final int NOSSO_NUMERO_SINCO = 17;
 
-	protected ACLCaixaEconomicaFederal(Integer fieldsLength, Integer stringLength) {
+	protected AbstractCLCaixaEconomicaFederal(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 
-	static ICampoLivre create(Titulo titulo) throws NotSuporttedCampoLivreException{
-		ICampoLivre campoLivre = null;
+	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException{
+		CampoLivre campoLivre = null;
 		String nossoNumero = titulo.getNossoNumero();
 		
 		if(StringUtils.isNotBlank(nossoNumero)) {
@@ -71,7 +63,7 @@ abstract class ACLCaixaEconomicaFederal extends ACampoLivre {
 		}
 		
 		if (isNull(campoLivre)) {
-			throw new NotSuporttedCampoLivreException (
+			throw new NotSupportedCampoLivreException (
 					"Campo livre disponível somente para títulos com " +
 					" comprimento de " + NOSSO_NUMERO_SINCO + " " + 
 					"(SINCO) caracteres"

@@ -29,8 +29,12 @@
 
 package br.com.nordestefomento.jrimum.bopepo.view;
 
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNull;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -41,19 +45,20 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.log4j.Logger;
 
-import br.com.nordestefomento.jrimum.ACurbitaObject;
+import br.com.nordestefomento.jrimum.JRimumException;
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.domkee.type.Endereco;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.Endereco;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.utilix.DateUtil;
+import br.com.nordestefomento.jrimum.utilix.FileUtil;
+import br.com.nordestefomento.jrimum.utilix.MonetaryUtil;
+import br.com.nordestefomento.jrimum.utilix.PDFUtil;
 import br.com.nordestefomento.jrimum.utilix.RectanglePDF;
-import br.com.nordestefomento.jrimum.utilix.Util4Date;
-import br.com.nordestefomento.jrimum.utilix.Util4File;
-import br.com.nordestefomento.jrimum.utilix.Util4Monetary;
-import br.com.nordestefomento.jrimum.utilix.Util4PDF;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;
@@ -83,8 +88,7 @@ import com.lowagie.text.pdf.PdfStamper;
  * 
  * @version 0.2
  */
-
-class ViewerPDF extends ACurbitaObject {
+class ViewerPDF {
 
 	// TODO Teste no teste unitário.
 
@@ -92,16 +96,18 @@ class ViewerPDF extends ACurbitaObject {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private static Logger log = Logger.getLogger(ViewerPDF.class);
 
-	private static URL TEMPLATE_PADRAO_COM_SACADOR_AVALISTA = Object.class
-			.getResource("/resource/pdf/BoletoTemplateComSacadorAvalista.pdf");
-	private static URL TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA = Object.class
-			.getResource("/resource/pdf/BoletoTemplateSemSacadorAvalista.pdf");
+	private static URL TEMPLATE_PADRAO_COM_SACADOR_AVALISTA = ViewerPDF.class.getResource("/resource/pdf/BoletoTemplateComSacadorAvalista.pdf");
+	private static URL TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA = ViewerPDF.class.getResource("/resource/pdf/BoletoTemplateSemSacadorAvalista.pdf");
 
-	private static final String SEPERADOR = "-";
+	private static final String HIFEN_SEPERADOR = "-";
+	
 	private PdfReader reader;
 	private PdfStamper stamper;
 	private AcroFields form;
+	
 	private ByteArrayOutputStream outputStream;
 
 	private Boleto boleto;
@@ -135,24 +141,36 @@ class ViewerPDF extends ACurbitaObject {
 	 * @param boletos a serem agrupados
 	 * @param boletoViewer visualizador
 	 * @return File contendo boletos gerados
-	 * @throws IOException
-	 * @throws DocumentException
+	 * 
+	 * @throws JRimumException Quando ocorrer um problema na geração do PDF que está fora do controle
+	 * da biblioteca.
 	 * 
 	 * @since 0.2
 	 */
-
-	protected static File groupInOnePDF(String pathName, List<Boleto> boletos, BoletoViewer boletoViewer)
-			throws IOException, DocumentException {
+	protected static File groupInOnePDF(String pathName, List<Boleto> boletos, BoletoViewer boletoViewer) {
 
 		File arq = null;
 
 		List<byte[]> boletosEmBytes = new ArrayList<byte[]>(boletos.size());
 
-		for (Boleto bop : boletos)
+		for (Boleto bop : boletos) {
 			boletosEmBytes.add(boletoViewer.setBoleto(bop).getPdfAsByteArray());
+		}
 
-		arq = Util4File.bytes2File(pathName, Util4PDF
-				.mergeFiles(boletosEmBytes));
+		try {
+			
+			arq = FileUtil.bytes2File(pathName, PDFUtil.mergeFiles(boletosEmBytes));
+			
+		} catch (FileNotFoundException e) {
+			
+			log.error("Erro durante geração do PDF." + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro durante geração do PDF. Causado por " + e.getLocalizedMessage(), e);
+			
+		} catch (IOException e) {
+
+			log.error("Erro durante geração do PDF." + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro durante geração do PDF. Causado por " + e.getLocalizedMessage(), e);
+		}
 
 		return arq;
 	}
@@ -166,42 +184,119 @@ class ViewerPDF extends ACurbitaObject {
 	 * @param extensao TODO
 	 * @param boletos
 	 * @return List<File> com os boletos gerados.
-	 * @throws IOException
-	 * @throws DocumentException
 	 * 
 	 * @since 0.2
 	 */
+	protected static List<File> onePerPDF(String path, String extensao, List<Boleto> boletos) {
 
-	protected static List<File> onePerPDF(String path, String extensao, List<Boleto> boletos)
-			throws IOException, DocumentException {
-
-		List<File> arquivos = null;
+		List<File> arquivos = new ArrayList<File>(boletos.size());
 		int cont = 1;
 
-		arquivos = new ArrayList<File>(boletos.size());
-
-		for (Boleto bop : boletos)
-			arquivos.add(new BoletoViewer(bop).getPdfAsFile(path + "Boleto"
-					+ cont++ + extensao));
+		for (Boleto bop : boletos) {
+			arquivos.add(new BoletoViewer(bop).getPdfAsFile(path + "Boleto" + cont++ + extensao));
+		}
 
 		return arquivos;
 	}
 
-	protected File getFile(String pathName) throws IllegalArgumentException,
-			IOException, DocumentException {
-		processarPdf();
-		return Util4File.bytes2File(pathName, outputStream.toByteArray());
+	/**
+	 * 
+	 * @param pathName
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	protected File getFile(String pathName) {
+		
+		File file = null;
+
+		try {
+
+			processarPdf();
+			
+			file = FileUtil.bytes2File(pathName, outputStream.toByteArray());
+			
+		} catch (FileNotFoundException e) {
+			
+			log.error("Erro ao tentar acessar arquivo inexistente. " + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro ao tentar acessar arquivo inexistente: [" + pathName + "]. " +
+					"Causado por " + e.getLocalizedMessage(), e);
+			
+		} catch (IOException e) {
+			
+			log.error("Erro durante a criação do arquivo. " + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro durante a criação do arquivo: [" + pathName + "]. " +
+					"Causado por " + e.getLocalizedMessage(), e);
+			
+		} catch (DocumentException e) {
+			
+			log.error("Erro durante a criação do arquivo. " + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro durante a criação do arquivo: [" + pathName + "]. " +
+					"Causado por " + e.getLocalizedMessage(), e);
+		}
+		
+		return file;
 	}
 
-	protected ByteArrayOutputStream getStream() throws IOException,
-			DocumentException {
-		processarPdf();
-		return Util4File.bytes2Stream(outputStream.toByteArray());
+	/**
+	 * @throws JRimumException
+	 * 
+	 * @return
+	 */
+	protected ByteArrayOutputStream getStream() {
+		
+		ByteArrayOutputStream baos = null;
+		
+		try {
+
+			processarPdf();
+			
+			baos = FileUtil.bytes2Stream(outputStream.toByteArray());
+			
+		} catch (IOException e) {
+			
+			log.error("Erro durante a criação do stream. " + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro durante a criação do stream. " +
+					"Causado por " + e.getLocalizedMessage(), e);
+			
+		} catch (DocumentException e) {
+			
+			log.error("Erro durante a criação do stream. " + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro durante a criação do stream. " +
+					"Causado por " + e.getLocalizedMessage(), e);
+		}
+		
+		return baos;
 	}
 
-	protected byte[] getBytes() throws IOException, DocumentException {
-		processarPdf();
-		return outputStream.toByteArray();
+	/**
+	 * @throws JRimumException
+	 * 
+	 * @return
+	 */
+	protected byte[] getBytes() {
+		
+		byte[] bytes = null;
+		
+		try {
+
+			processarPdf();
+			
+			bytes = outputStream.toByteArray();
+			
+		} catch (IOException e) {
+			
+			log.error("Erro durante a criação do stream. " + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro durante a criação do stream. " +
+					"Causado por " + e.getLocalizedMessage(), e);
+			
+		} catch (DocumentException e) {
+			
+			log.error("Erro durante a criação do stream. " + e.getLocalizedMessage(), e);
+			throw new JRimumException("Erro durante a criação do stream. " +
+					"Causado por " + e.getLocalizedMessage(), e);
+		}
+		
+		return bytes;
 	}
 
 	protected File getTemplate() {
@@ -222,7 +317,6 @@ class ViewerPDF extends ACurbitaObject {
 	 * @since 0.2
 	 */
 	protected Boleto getBoleto() {
-		
 		return this.boleto;
 	}
 	
@@ -236,8 +330,8 @@ class ViewerPDF extends ACurbitaObject {
 	 * 
 	 * @since
 	 */
-
 	private void processarPdf() throws IOException, DocumentException {
+		
 		inicializar();
 		preencher();
 		finalizar();
@@ -252,13 +346,13 @@ class ViewerPDF extends ACurbitaObject {
 	 * 
 	 * @since
 	 */
-
 	private URL getTemplateFromResource() {
 
 		URL templateFromResource = null;
 
 		if (boleto.getTitulo().hasSacadorAvalista()) {
 			templateFromResource = TEMPLATE_PADRAO_COM_SACADOR_AVALISTA;
+			
 		} else {
 			templateFromResource = TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA;
 		}
@@ -278,7 +372,6 @@ class ViewerPDF extends ACurbitaObject {
 	 * @since
 	 */
 	private boolean isTemplateFromResource() {
-
 		return isNull(getTemplate());
 	}
 
@@ -297,6 +390,7 @@ class ViewerPDF extends ACurbitaObject {
 
 		if (isTemplateFromResource()) {
 			reader = new PdfReader(getTemplateFromResource());
+			
 		} else {
 			reader = new PdfReader(getTemplate().getAbsolutePath());
 		}
@@ -316,7 +410,6 @@ class ViewerPDF extends ACurbitaObject {
 	 * 
 	 * @since
 	 */
-
 	private void finalizar() throws DocumentException, IOException {
 
 		reader.consolidateNamedDestinations();/*
@@ -368,9 +461,8 @@ class ViewerPDF extends ACurbitaObject {
 	 * 
 	 * @since
 	 */
-
-	private void preencher() throws MalformedURLException, IOException,
-			DocumentException {
+	private void preencher() throws MalformedURLException, IOException, DocumentException {
+		
 		setLogoBanco();
 		setCodigoBanco();
 		setLinhaDigitavel();
@@ -405,6 +497,7 @@ class ViewerPDF extends ACurbitaObject {
 	private void setCamposExtra() throws IOException, DocumentException {
 
 		if (isNotNull(boleto.getTextosExtras())) {
+			
 			for (String campo : boleto.getTextosExtras().keySet()) {
 				form.setField(campo, boleto.getTextosExtras().get(campo));
 			}
@@ -427,92 +520,74 @@ class ViewerPDF extends ACurbitaObject {
 		PdfContentByte cb = null;
 
 		// Verifcando se existe o field(campo) da imagem no template do boleto.
-		float posCampoImgLogo[] = form.getFieldPositions("txtFcCodigoBarra");		
+		float posCampoImgLogo[] = form.getFieldPositions("txtFcCodigoBarra");
+		
 		if (isNotNull(posCampoImgLogo)) {
+			
 			RectanglePDF field = new RectanglePDF(posCampoImgLogo);
+			
 			cb = stamper.getOverContent(field.getPage());
 			Image imgBarCode = barCode.createImageWithBarcode(cb, null, null);
-			Util4PDF.changeField2Image(stamper, field, imgBarCode);
+			
+			PDFUtil.changeField2Image(stamper, field, imgBarCode);
 		}
 	}
 
 	private void setDataProcessamento() throws IOException, DocumentException {
-
-		form.setField("txtFcDataProcessamento", Util4Date.fmt_dd_MM_yyyy
-				.format(boleto.getDataDeProcessamento()));
+		form.setField("txtFcDataProcessamento", DateUtil.FORMAT_DD_MM_YYYY.format(boleto.getDataDeProcessamento()));
 	}
 
 	private void setAceite() throws IOException, DocumentException {
 
-		if (isNotNull(boleto.getTitulo().getAceite()))
-			form.setField("txtFcAceite", boleto.getTitulo().getAceite()
-					.name());
+		if (isNotNull(boleto.getTitulo().getAceite())) {
+			form.setField("txtFcAceite", boleto.getTitulo().getAceite().name());
+		}
 	}
 
 	private void setEspecieDoc() throws IOException, DocumentException {
-
-		form.setField("txtFcEspecieDocumento", boleto.getTitulo()
-				.getTipoDeDocumento().getSigla());
+		if (isNotNull(boleto.getTitulo().getTipoDeDocumento()) && isNotNull(boleto.getTitulo().getTipoDeDocumento().getSigla())) {
+			form.setField("txtFcEspecieDocumento", boleto.getTitulo().getTipoDeDocumento().getSigla());
+		}
 	}
 
 	private void setDataDocumento() throws IOException, DocumentException {
-
-		form.setField("txtFcDataDocumento", Util4Date.fmt_dd_MM_yyyy
-				.format(boleto.getTitulo().getDataDoDocumento()));
-
+		form.setField("txtFcDataDocumento", DateUtil.FORMAT_DD_MM_YYYY.format(boleto.getTitulo().getDataDoDocumento()));
 	}
 
 	private void setLocalPagamento() throws IOException, DocumentException {
-
 		form.setField("txtFcLocalPagamento", (boleto.getLocalPagamento()));
 	}
 
 	private void setSacado() throws IOException, DocumentException {
 
-		StringBuilder sb = new StringBuilder(StringUtils.EMPTY);
+		StringBuilder sb = new StringBuilder();
 		Pessoa sacado = boleto.getTitulo().getSacado();
 
 		if (isNotNull(sacado.getNome())) {
 			sb.append(sacado.getNome());
 		}
+		
 		if (isNotNull(sacado.getCPRF())) {
 			sb.append(", ");
-			if (sacado.getCPRF().isFisica())
-				sb.append("Cpf: ");
-			else if (sacado.getCPRF().isJuridica())
-				sb.append("Cnpj: ");
+		
+			if (sacado.getCPRF().isFisica()) {
+				sb.append("CPF: ");
+				
+			} else if (sacado.getCPRF().isJuridica()) {
+				sb.append("CNPJ: ");
+			}
 
 			sb.append(sacado.getCPRF().getCodigoFormatado());
 		}
+		
 		form.setField("txtRsSacado", sb.toString());
 		form.setField("txtFcSacadoL1", sb.toString());
 
 		// TODO Código em teste
 		sb.delete(0, sb.length());
 		Endereco endereco = sacado.getEnderecos().iterator().next();
-
-		if (isNotNull(endereco)) {
-			if (isNotNull(endereco.getBairro()))
-				sb.append(endereco.getBairro());
-			if (isNotNull(endereco.getLocalidade()))
-				sb.append(SEPERADOR + endereco.getLocalidade());
-			if (isNotNull(endereco.getUF()))
-				sb.append(" / " + endereco.getUF().getNome());
-
-			form.setField("txtFcSacadoL2", sb.toString());
-
-			sb.delete(0, sb.length());
-			if (isNotNull(endereco.getLogradouro()))
-				sb.append(endereco.getLogradouro());
-
-			if (isNotNull(endereco.getNumero()))
-				sb.append(", n°: " + endereco.getNumero());
-
-			if (isNotNull(endereco.getCEP()))
-				sb.append(SEPERADOR + "Cep: " + endereco.getCEP().getCep());
-
-			form.setField("txtFcSacadoL3", sb.toString());
-		}
+		
+		setEndereco(endereco, "txtFcSacadoL2", "txtFcSacadoL3", sb);
 	}
 
 	private void setSacadorAvalista() throws IOException, DocumentException {
@@ -521,49 +596,76 @@ class ViewerPDF extends ACurbitaObject {
 			
 			Pessoa sacadorAvalista = boleto.getTitulo().getSacadorAvalista(); 
 			
-			StringBuilder sb = new StringBuilder("");
+			StringBuilder sb = new StringBuilder();
 
 			if (isNotNull(sacadorAvalista.getNome())) {
 				sb.append(sacadorAvalista.getNome());
 			}
+			
 			if (isNotNull(sacadorAvalista.getCPRF())) {
+			
 				sb.append(", ");
-				if (sacadorAvalista.getCPRF().isFisica())
-					sb.append("Cpf: ");
-				else if (sacadorAvalista.getCPRF().isJuridica())
-					sb.append("Cnpj: ");
+				
+				if (sacadorAvalista.getCPRF().isFisica()) {
+					sb.append("CPF: ");
+					
+				} else if (sacadorAvalista.getCPRF().isJuridica()) {
+					sb.append("CNPJ: ");
+				}
 
 				sb.append(sacadorAvalista.getCPRF().getCodigoFormatado());
 			}
+			
 			form.setField("txtFcSacadorAvalistaL1", sb.toString());
 
 			// TODO Código em teste
 			sb.delete(0, sb.length());
-			Endereco endereco = sacadorAvalista.getEnderecos().iterator()
-					.next();
+			Endereco endereco = sacadorAvalista.getEnderecos().iterator().next();
 
-			if (isNotNull(endereco)) {
-				if (isNotNull(endereco.getBairro()))
-					sb.append(endereco.getBairro());
-				if (isNotNull(endereco.getLocalidade()))
-					sb.append(SEPERADOR + endereco.getLocalidade());
-				if (isNotNull(endereco.getUF()))
-					sb.append(" / " + endereco.getUF().getNome());
-
-				form.setField("txtFcSacadorAvalistaL2", sb.toString());
-
-				sb.delete(0, sb.length());
-				if (isNotNull(endereco.getLogradouro()))
-					sb.append(endereco.getLogradouro());
-
-				if (isNotNull(endereco.getNumero()))
-					sb.append(", n°: " + endereco.getNumero());
-
-				if (isNotNull(endereco.getCEP()))
-					sb.append(SEPERADOR + "Cep: " + endereco.getCEP().getCep());
-
-				form.setField("txtFcSacadorAvalistaL3", sb.toString());
+			setEndereco(endereco, "txtFcSacadorAvalistaL2", "txtFcSacadorAvalistaL3", sb);
+		}
+	}
+	
+	private void setEndereco(Endereco endereco, String campoEndereco1, String campoEndereco2, StringBuilder sb) 
+		throws IOException, DocumentException {
+		
+		if (isNotNull(endereco)) {
+			
+			if (isNotNull(endereco.getBairro())) {
+				sb.append(endereco.getBairro());
 			}
+			
+			if (isNotNull(endereco.getLocalidade())) {
+				sb.append(HIFEN_SEPERADOR);
+				sb.append(endereco.getLocalidade());
+			}
+			
+			if (isNotNull(endereco.getUF())) {
+				sb.append(" / ");
+				sb.append(endereco.getUF().getNome());
+			}
+
+			form.setField(campoEndereco1, sb.toString());
+
+			sb.delete(0, sb.length());
+			
+			if (isNotNull(endereco.getLogradouro())) {
+				sb.append(endereco.getLogradouro());
+			}
+
+			if (isNotNull(endereco.getNumero())) {
+				sb.append(", n°: ");
+				sb.append(endereco.getNumero());
+			}
+
+			if (isNotNull(endereco.getCEP())) {
+				sb.append(" ");
+				sb.append(HIFEN_SEPERADOR);
+				sb.append(" CEP: ");
+				sb.append(endereco.getCEP().getCep());
+			}
+
+			form.setField(campoEndereco2, sb.toString());
 		}
 	}
 
@@ -581,8 +683,8 @@ class ViewerPDF extends ACurbitaObject {
 
 	private void setMoraMulta() throws IOException, DocumentException {
 
-		form.setField("txtRsMoraMulta", "");
-		form.setField("txtFcMoraMulta", "");
+		form.setField("txtRsMoraMulta", StringUtils.EMPTY);
+		form.setField("txtFcMoraMulta", StringUtils.EMPTY);
 	}
 
 	private void setInstrucaoAoSacado() throws IOException, DocumentException {
@@ -592,14 +694,14 @@ class ViewerPDF extends ACurbitaObject {
 
 	private void setOutroAcrescimo() throws IOException, DocumentException {
 
-		form.setField("txtRsOutroAcrescimo", "");
-		form.setField("txtFcOutroAcrescimo", "");
+		form.setField("txtRsOutroAcrescimo", StringUtils.EMPTY);
+		form.setField("txtFcOutroAcrescimo", StringUtils.EMPTY);
 	}
 
 	private void setOutraDeducao() throws IOException, DocumentException {
 
-		form.setField("txtRsOutraDeducao", "");
-		form.setField("txtFcOutraDeducao", "");
+		form.setField("txtRsOutraDeducao", StringUtils.EMPTY);
+		form.setField("txtFcOutraDeducao", StringUtils.EMPTY);
 
 	}
 
@@ -607,20 +709,16 @@ class ViewerPDF extends ACurbitaObject {
 
 		if(isNotNull(boleto.getTitulo().getDesconto())){
 			
-			form.setField("txtRsDescontoAbatimento", Util4Monetary.fmt_Real
-					.format(boleto.getTitulo().getDesconto()));
-			form.setField("txtFcDescontoAbatimento", Util4Monetary.fmt_Real
-					.format(boleto.getTitulo().getDesconto()));
+			form.setField("txtRsDescontoAbatimento", MonetaryUtil.FORMAT_REAL.format(boleto.getTitulo().getDesconto()));
+			form.setField("txtFcDescontoAbatimento", MonetaryUtil.FORMAT_REAL.format(boleto.getTitulo().getDesconto()));
 		}
 		
 	}
 
 	private void setValorDocumento() throws IOException, DocumentException {
 
-		form.setField("txtRsValorDocumento", Util4Monetary.fmt_Real
-				.format(boleto.getTitulo().getValor()));
-		form.setField("txtFcValorDocumento", Util4Monetary.fmt_Real
-				.format(boleto.getTitulo().getValor()));
+		form.setField("txtRsValorDocumento", MonetaryUtil.FORMAT_REAL.format(boleto.getTitulo().getValor()));
+		form.setField("txtFcValorDocumento", MonetaryUtil.FORMAT_REAL.format(boleto.getTitulo().getValor()));
 	}
 
 	private void setDataVencimeto() throws IOException, DocumentException {
@@ -628,8 +726,7 @@ class ViewerPDF extends ACurbitaObject {
 		// Obtendo uma string com a data de vencimento formatada 
 		// no padrão "dd/mm/yyyy".
 		// Ex: 03/07/2008.
-		String dataFormatada = Util4Date.fmt_dd_MM_yyyy.format(
-				boleto.getTitulo().getDataDoVencimento());
+		String dataFormatada = DateUtil.FORMAT_DD_MM_YYYY.format(boleto.getTitulo().getDataDoVencimento());
 		
 		// Realizando a impressão da data de vencimeto no boleto.
 		form.setField("txtRsDataVencimento", dataFormatada);
@@ -639,20 +736,18 @@ class ViewerPDF extends ACurbitaObject {
 
 	private void setAbstractCPRFCedente() throws IOException, DocumentException {
 
-		form.setField("txtRsCpfCnpj", boleto.getTitulo().getCedente()
-				.getCPRF().getCodigoFormatado());
+		form.setField("txtRsCpfCnpj", boleto.getTitulo().getCedente().getCPRF().getCodigoFormatado());
 	}
 
 	private void setNumeroDocumento() throws IOException, DocumentException {
 
-		form.setField("txtRsNumeroDocumento", boleto.getTitulo()
-				.getNumeroDoDocumento());
-		form.setField("txtFcNumeroDocumento", boleto.getTitulo()
-				.getNumeroDoDocumento());
+		form.setField("txtRsNumeroDocumento", boleto.getTitulo().getNumeroDoDocumento());
+		form.setField("txtFcNumeroDocumento", boleto.getTitulo().getNumeroDoDocumento());
 	}
 
 	
 	private void setCedente() throws IOException, DocumentException {
+		
 		form.setField("txtRsCedente", boleto.getTitulo().getCedente().getNome());
 		form.setField("txtFcCedente", boleto.getTitulo().getCedente().getNome());
 	}
@@ -662,32 +757,32 @@ class ViewerPDF extends ACurbitaObject {
 
 		Carteira carteira = boleto.getTitulo().getContaBancaria().getCarteira();
 		
-		if (isNotNull(carteira)) 
-		  form.setField("txtFcCarteira", carteira.getCodigo().toString());
+		if (isNotNull(carteira) & isNotNull(carteira.getCodigo())) {
+			form.setField("txtFcCarteira", carteira.getCodigo().toString());
+		}
 	}	
 
 	private void setQuantidade() throws IOException, DocumentException {
 
-		form.setField("txtRsQuantidade", "");
-		form.setField("txtFcQuantidade", "");
+		form.setField("txtRsQuantidade", StringUtils.EMPTY);
+		form.setField("txtFcQuantidade", StringUtils.EMPTY);
 	}
 
 	private void setEspecie() throws IOException, DocumentException {
 
-		form.setField("txtRsEspecie", boleto.getTitulo().getEnumMoeda()
-				.name());
-		form.setField("txtFcEspecie", boleto.getTitulo().getEnumMoeda()
-				.name());
+		form.setField("txtRsEspecie", boleto.getTitulo().getEnumMoeda().name());
+		form.setField("txtFcEspecie", boleto.getTitulo().getEnumMoeda().name());
 	}
 
 	private void setLinhaDigitavel() throws DocumentException, IOException {
+		
 		form.setField("txtRsLinhaDigitavel", boleto.getLinhaDigitavel().write());
 		form.setField("txtFcLinhaDigitavel", boleto.getLinhaDigitavel().write());
 	}
 
 	
-	private void setLogoBanco() throws MalformedURLException, IOException,
-			DocumentException {
+	private void setLogoBanco() throws MalformedURLException, IOException, DocumentException {
+		
 		// Através da conta bancária será descoberto a imagem que representa o
 		// banco, com base
 		// no código do banco.
@@ -696,23 +791,21 @@ class ViewerPDF extends ACurbitaObject {
 
 		if (isNotNull(conta.getBanco().getImgLogo())) {
 
-			imgLogoBanco = Image.getInstance(conta.getBanco().getImgLogo(),
-					null);
+			imgLogoBanco = Image.getInstance(conta.getBanco().getImgLogo(), null);
 
 			setImageLogo(imgLogoBanco);
 
 		} else {
 
-			if (EnumBancos.isSuportado(conta.getBanco()
-					.getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
+			if (BancoSuportado.isSuportado(conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
 
-				URL url = this.getClass().getResource(
-						"/resource/img/"
-								+ conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado()
-								+ ".png");
+				URL url = this.getClass().getResource("/resource/img/"
+											+ conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado()
+											+ ".png");
 
-				if (isNotNull(url))
+				if (isNotNull(url)) {
 					imgLogoBanco = Image.getInstance(url);
+				}
 
 				if (isNotNull(imgLogoBanco)) {
 
@@ -723,10 +816,11 @@ class ViewerPDF extends ACurbitaObject {
 				// Se o banco em questão é suportado nativamente pelo
 				// componente,
 				// então um alerta será exibido.
-				if (log.isDebugEnabled())
+				if (log.isDebugEnabled()) {
 					log.debug("Banco sem imagem da logo informada. "
 							+ "Com base no código do banco, uma imagem foi "
 							+ "encontrada no resource e está sendo utilizada.");
+				}
 
 				setImageLogo(imgLogoBanco);
 
@@ -755,6 +849,7 @@ class ViewerPDF extends ACurbitaObject {
 	private void setImagensNosCampos() throws DocumentException, IOException {
 
 		if (isNotNull(boleto.getImagensExtras())) {
+			
 			for (String campo : boleto.getImagensExtras().keySet()) {
 				setImagemNoCampo(campo, Image.getInstance(boleto.getImagensExtras().get(campo),null));
 			}
@@ -777,12 +872,13 @@ class ViewerPDF extends ACurbitaObject {
 	
 		float posCampoImgLogo[];
 		
-		if(StringUtils.isNotBlank(nomeDoCampo)){
+		if (StringUtils.isNotBlank(nomeDoCampo)) {
 			
 			posCampoImgLogo = form.getFieldPositions(nomeDoCampo);
 			
-			if (isNotNull(posCampoImgLogo))
-				Util4PDF.changeField2Image(stamper, posCampoImgLogo, imagem);
+			if (isNotNull(posCampoImgLogo)) {
+				PDFUtil.changeField2Image(stamper, posCampoImgLogo, imagem);
+			}
 		}
 	}
 	
@@ -815,26 +911,27 @@ class ViewerPDF extends ACurbitaObject {
 		String codigoCompensacao = conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado();
 		String digitoCompensacao = conta.getBanco().getCodigoDeCompensacaoBACEN().getDigito().toString();
 		
-		form.setField("txtRsCodBanco", codigoCompensacao + "-" + digitoCompensacao);
-		form.setField("txtFcCodBanco", codigoCompensacao + "-" + digitoCompensacao);
+		form.setField("txtRsCodBanco", codigoCompensacao + HIFEN_SEPERADOR + digitoCompensacao);
+		form.setField("txtFcCodBanco", codigoCompensacao + HIFEN_SEPERADOR + digitoCompensacao);
 	}
 
-	private void setAgenciaCondigoCedente() throws IOException,
-			DocumentException {
+	private void setAgenciaCondigoCedente() throws IOException, DocumentException {
 
 		StringBuilder sb = new StringBuilder(StringUtils.EMPTY);
 		ContaBancaria conta = boleto.getTitulo().getContaBancaria();
 
-		if (isNotNull(conta.getAgencia().getCodigo()))
-			sb.append(conta.getAgencia().getCodigo());
-
-		if (isNotNull(conta.getAgencia().getDigitoVerificador())
-				&& StringUtils.isNotBlank(conta.getAgencia().getDigitoVerificador().toString())) {
-
-			sb.append(ViewerPDF.SEPERADOR);
-			sb.append(conta.getAgencia().getDigitoVerificador());
+		if (isNotNull(conta.getAgencia())) {
+			if (isNotNull(conta.getAgencia().getCodigo()))
+				sb.append(conta.getAgencia().getCodigo());
+	
+			if (isNotNull(conta.getAgencia().getDigitoVerificador())
+					&& StringUtils.isNotBlank(conta.getAgencia().getDigitoVerificador().toString())) {
+	
+				sb.append(HIFEN_SEPERADOR);
+				sb.append(conta.getAgencia().getDigitoVerificador());
+			}
 		}
-
+		
 		if (isNotNull(conta.getNumeroDaConta().getCodigoDaConta())) {
 
 			sb.append(" / ");
@@ -843,7 +940,7 @@ class ViewerPDF extends ACurbitaObject {
 
 			if (isNotNull(conta.getNumeroDaConta().getDigitoDaConta())) {
 
-				sb.append(ViewerPDF.SEPERADOR);
+				sb.append(HIFEN_SEPERADOR);
 				sb.append(conta.getNumeroDaConta().getDigitoDaConta());
 			}
 		}
@@ -856,12 +953,13 @@ class ViewerPDF extends ACurbitaObject {
 
 		StringBuilder sb = new StringBuilder(StringUtils.EMPTY);
 
-		if (isNotNull(boleto.getTitulo().getNossoNumero()))
+		if (isNotNull(boleto.getTitulo().getNossoNumero())) {
 			sb.append(boleto.getTitulo().getNossoNumero());
+		}
 
-		if (isNotNull(boleto.getTitulo().getDigitoDoNossoNumero()))
-			sb.append(ViewerPDF.SEPERADOR
-					+ boleto.getTitulo().getDigitoDoNossoNumero());
+		if (isNotNull(boleto.getTitulo().getDigitoDoNossoNumero())) {
+			sb.append(HIFEN_SEPERADOR + boleto.getTitulo().getDigitoDoNossoNumero());
+		}
 
 		form.setField("txtRsNossoNumero", sb.toString());
 		form.setField("txtFcNossoNumero", sb.toString());
@@ -870,7 +968,7 @@ class ViewerPDF extends ACurbitaObject {
 	/**
 	 * Exibe os valores de instância.
 	 * 
-	 * @see br.com.nordestefomento.jrimum.ACurbitaObject#toString()
+	 * @see br.com.nordestefomento.jrimum.utilix.ObjectUtil#toString()
 	 */
 	@Override
 	public String toString() {

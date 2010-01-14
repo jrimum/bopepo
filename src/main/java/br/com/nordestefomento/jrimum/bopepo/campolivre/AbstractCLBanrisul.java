@@ -31,7 +31,7 @@ package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import org.apache.commons.lang.StringUtils;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
@@ -58,15 +58,20 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
  * 
  * @version 0.2
  */
-abstract class ACLBanrisul extends ACampoLivre {
+abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 	
-	protected ACLBanrisul(Integer fieldsLength, Integer stringLength) {
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -259398499475894938L;
+
+	protected AbstractCLBanrisul(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 
-	static ICampoLivre create(Titulo titulo)
-			throws NotSuporttedCampoLivreException {
-		final ICampoLivre campoLivre;
+	static CampoLivre create(Titulo titulo)
+			throws NotSupportedCampoLivreException {
+		final CampoLivre campoLivre;
 
 		switch (titulo.getContaBancaria().getCarteira().getTipoCobranca()) {
 		case COM_REGISTRO:
@@ -76,7 +81,7 @@ abstract class ACLBanrisul extends ACampoLivre {
 			campoLivre = new CLBanrisulCobrancaNaoRegistrada(titulo);
 			break;
 		default:
-			throw new NotSuporttedCampoLivreException(
+			throw new NotSupportedCampoLivreException(
 					"Campo livre diponível apenas para"
 							+ " carteiras com ou sem cobrança.");
 		}

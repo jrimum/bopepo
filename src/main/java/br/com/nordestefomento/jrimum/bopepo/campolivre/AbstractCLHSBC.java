@@ -30,10 +30,10 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTipoCobranca;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * 
@@ -51,23 +51,28 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
  * 
  * @version 0.2
  */
-abstract class ACLHsbc extends ACampoLivre {
+abstract class AbstractCLHSBC extends AbstractCampoLivre {
 
-	protected ACLHsbc(Integer fieldsLength, Integer stringLength) {
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 3179450500491723317L;
+
+	protected AbstractCLHSBC(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 		
 	}
 
-	static ICampoLivre create(Titulo titulo){
-		ICampoLivre campoLivre = null;
+	static CampoLivre create(Titulo titulo){
+		CampoLivre campoLivre = null;
 		ContaBancaria conta = titulo.getContaBancaria();
 		
-		if (conta.getCarteira().getTipoCobranca() == EnumTipoCobranca.SEM_REGISTRO) {
-			campoLivre = new CLHsbcCNR(titulo); 
+		if (conta.getCarteira().getTipoCobranca() == TipoDeCobranca.SEM_REGISTRO) {
+			campoLivre = new CLHSBCCobrancaNaoRegistrada(titulo); 
 		}
 		else {
 			throw new CampoLivreException("Atualmente para o banco" +
-					" " + EnumBancos.HSBC.getInstituicao() + 
+					" " + BancoSuportado.HSBC.getInstituicao() + 
 					" só é possível a montagem do campo livre para carteiras" +
 					" não registradas.");
 		}

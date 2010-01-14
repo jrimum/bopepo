@@ -30,12 +30,15 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import org.apache.commons.lang.StringUtils;
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
 
-import br.com.nordestefomento.jrimum.ACurbitaObject;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
+import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
 
 
 /**
@@ -56,12 +59,14 @@ import br.com.nordestefomento.jrimum.utilix.Filler;
  * 
  * @version 0.2
  */
-public final class Factory4CampoLivre extends ACurbitaObject{
+public final class CampoLivreFactory {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8572635342980404937L;
+	
+	private static Logger log = Logger.getLogger(CampoLivreFactory.class);
 
 	/**
 	 * Devolve um ICampoLivre de acordo com o Banco contido na conta do Cedente. 
@@ -71,12 +76,12 @@ public final class Factory4CampoLivre extends ACurbitaObject{
 	 * @param titulo
 	 * 
 	 * @return Uma referência para um ICampoLivre.
-	 * @throws NotSuporttedBancoException 
-	 * @throws NotSuporttedCampoLivreException 
+	 * @throws NotSupportedBancoException 
+	 * @throws NotSupportedCampoLivreException 
 	 */
-	public static ICampoLivre create(Titulo titulo) throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
+	public static CampoLivre create(Titulo titulo) throws NotSupportedBancoException, NotSupportedCampoLivreException {
 
-		return ACampoLivre.create(titulo);
+		return AbstractCampoLivre.create(titulo);
 	}
 	
 	/**
@@ -87,9 +92,9 @@ public final class Factory4CampoLivre extends ACurbitaObject{
 	 * @return Uma referência para um ICampoLivre.
 	 * @throws IllegalArgumentException
 	 */
-	public static ICampoLivre create(String strCampoLivre) throws IllegalArgumentException{
+	public static CampoLivre create(String strCampoLivre) throws IllegalArgumentException{
 		
-		ICampoLivre campoLivre = null;
+		CampoLivre campoLivre = null;
 		
 		if (isNotNull(strCampoLivre, "strCampoLivre")) {
 
@@ -97,13 +102,13 @@ public final class Factory4CampoLivre extends ACurbitaObject{
 
 				strCampoLivre = StringUtils.strip(strCampoLivre); 
 				
-				if (strCampoLivre.length() == ICampoLivre.STRING_LENGTH) {
+				if (strCampoLivre.length() == CampoLivre.STRING_LENGTH) {
 
-					if (StringUtils.remove(strCampoLivre, ' ').length() == ICampoLivre.STRING_LENGTH) {
+					if (StringUtils.remove(strCampoLivre, ' ').length() == CampoLivre.STRING_LENGTH) {
 
 						if (StringUtils.isNumeric(strCampoLivre)) {
 
-							campoLivre = new ICampoLivre() {
+							campoLivre = new CampoLivre() {
 
 								private static final long serialVersionUID = -7592488081807235080L;
 
@@ -159,4 +164,8 @@ public final class Factory4CampoLivre extends ACurbitaObject{
 		return campoLivre;
 	}
 
+	@Override
+	public String toString() {
+		return ObjectUtil.toString(this);
+	}
 }

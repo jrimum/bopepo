@@ -30,7 +30,7 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 
 
@@ -46,20 +46,25 @@ import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
  * @author Misael Barreto
  * @author Rômulo Augusto
  * 
- * @see ACampoLivre
+ * @see AbstractCampoLivre
  * 
  * @since 0.2 
  * 
  * @version 0.2
  */
 	
-abstract class ACLBancoAbnAmroReal extends ACampoLivre {
+abstract class AbstractCLBancoABNAmroReal extends AbstractCampoLivre {
 
-	protected ACLBancoAbnAmroReal(Integer fieldsLength, Integer stringLength) {
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -2020155324741631945L;
+
+	protected AbstractCLBancoABNAmroReal(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 
-	static ICampoLivre create(Titulo titulo){
+	static CampoLivre create(Titulo titulo){
 		
 		return new CLBancoReal(titulo);
 	}

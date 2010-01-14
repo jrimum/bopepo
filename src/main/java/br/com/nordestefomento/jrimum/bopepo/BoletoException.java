@@ -1,3 +1,4 @@
+
 /* 
  * Copyright 2008 JRimum Project
  * 
@@ -10,7 +11,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  * 
- * Created at: 21/04/2008 - 21:14:40
+ * Created at: 21/04/2008 - 23:35:28
  *
  * ================================================================================
  *
@@ -24,66 +25,69 @@
  * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
  * e limitações sob esta LICENÇA.
  * 
- * Criado em: 21/04/2008 - 21:14:40
+ * Criado em: 21/04/2008 - 23:35:28
  * 
  */
 	
-package br.com.nordestefomento.jrimum.bopepo.campolivre;
+package br.com.nordestefomento.jrimum.bopepo;
 
 import br.com.nordestefomento.jrimum.JRimumException;
+
 
 /**
  * 
  * <p>
- * Qualquer exceção gerada durante a geração de um campo livre gera uma <code>CampoLivreException</code>. Centraliza e localiza os problemas relativos a geração de um campo livre.
+ * Qualquer exceção gerada durante a geração de um Boleto gera uma <code>BoletoExceptiton</code>. Centraliza e localiza os problemas relativos a geração de um boleto.
  * </p>
  * 
  * 
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author Misael Barreto
- * @author Rômulo Augusto
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * 
  * @see br.com.nordestefomento.jrimum.JRimumException
- * @see br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre
+ * @see br.com.nordestefomento.jrimum.bopepo.BoletoException
  * 
  * @since 0.2
  * 
  * @version 0.2
  */
-public class CampoLivreException extends JRimumException {
+
+public class BoletoException extends JRimumException {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 893327780214327141L;
+	private static final long serialVersionUID = -3874521668322644183L;
 
 	/**
 	 * 
 	 */
-	public CampoLivreException() {
-		super();
+	public BoletoException() {
+		
 	}
 
 	/**
 	 * @param message
 	 * @param cause
 	 */
-	public CampoLivreException(String message, Throwable cause) {
+	public BoletoException(String message, Throwable cause) {
 		super(message, cause);
+		
 	}
 
 	/**
 	 * @param message
 	 */
-	public CampoLivreException(String message) {
+	public BoletoException(String message) {
 		super(message);
+		
 	}
 
 	/**
 	 * @param cause
 	 */
-	public CampoLivreException(Throwable cause) {
+	public BoletoException(Throwable cause) {
 		super(cause);
+		
 	}
 
 }

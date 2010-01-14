@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  * 
- * Created at: 30/03/2008 - 18:10:27
+ * Created at: 30/03/2008 - 18:10:11
  * 
  * ================================================================================
  * 
@@ -23,56 +23,34 @@
  * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
  * reger permissões e limitações sob esta LICENÇA.
  * 
- * Criado em: 30/03/2008 - 18:10:27
+ * Criado em: 30/03/2008 - 18:10:11
  * 
  */
 
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-
+import br.com.nordestefomento.jrimum.utilix.TextStream;
 
 /**
- * 
  * <p>
- * Exceção indicadora de não existência de um campolivre para os dados correntes de um boleto.
+ * Essa é uma Interace com um propósito de marcar e agrupar tipos campo livre.
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author Misael Barreto 
+ * @author Misael Barreto
  * @author Rômulo Augusto
+ * 
+ * @see AbstractCampoLivre
  * 
  * @since 0.2
  * 
  * @version 0.2
  */
+public interface CampoLivre extends TextStream{
 	
-public class NotSuporttedCampoLivreException extends CampoLivreException {
-
 	/**
-	 * 
+	 * Tamanho do Campo Livre, igual para qualquer que seja o banco.
 	 */
-	private static final long serialVersionUID = 1L;
-
-	public NotSuporttedCampoLivreException() {
-		super();
-		
-	}
-
-	public NotSuporttedCampoLivreException(String message, Throwable cause) {
-		super(message, cause);
-		
-	}
-
-	public NotSuporttedCampoLivreException(String message) {
-		super(message);
-		
-	}
-
-	public NotSuporttedCampoLivreException(Throwable cause) {
-		super(cause);
-		
-	}
-
-	
+	static final Integer STRING_LENGTH = 25;
 }

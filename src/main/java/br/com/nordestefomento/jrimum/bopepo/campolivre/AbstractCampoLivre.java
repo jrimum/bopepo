@@ -29,11 +29,17 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import static br.com.nordestefomento.jrimum.domkee.bank.febraban.Banco.isCodigoDeCompensacaoOK;
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.utilix.LineOfFields;
+import static br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Banco.isCodigoDeCompensacaoOK;
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
+import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNull;
+
+import org.apache.log4j.Logger;
+
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
+import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
 
 /**
  * <p>
@@ -67,28 +73,30 @@ import br.com.nordestefomento.jrimum.utilix.LineOfFields;
  * 
  * @version 0.2
  */
-abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
+abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoLivre {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4605730904122445595L;
+	
+	private static Logger log = Logger.getLogger(ObjectUtil.class);
 
-	protected ACampoLivre(Integer fieldsLength, Integer stringLength) {
+	protected AbstractCampoLivre(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 
-	static ICampoLivre create(Titulo titulo)
-			throws NotSuporttedBancoException, NotSuporttedCampoLivreException, CampoLivreException {
+	static CampoLivre create(Titulo titulo)
+			throws NotSupportedBancoException, NotSupportedCampoLivreException, CampoLivreException {
 
 		if (log.isTraceEnabled())
 			log.trace("Instanciando Campo livre");
 		if (log.isDebugEnabled())
 			log.debug("titulo instance : " + titulo);
 
-		ICampoLivre campoLivre = null;
+		CampoLivre campoLivre = null;
 		ContaBancaria contaBancaria = null;
-		EnumBancos enumBanco = null;
+		BancoSuportado enumBanco = null;
 		
 		try{
 		
@@ -103,60 +111,60 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 		 */
 		if (isContaBacariaOK(contaBancaria)) {
 
-			if (EnumBancos.isSuportado(contaBancaria.getBanco()
+			if (BancoSuportado.isSuportado(contaBancaria.getBanco()
 					.getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
 
-				enumBanco = EnumBancos.suportados.get(contaBancaria.getBanco()
+				enumBanco = BancoSuportado.suportados.get(contaBancaria.getBanco()
 						.getCodigoDeCompensacaoBACEN().getCodigoFormatado());
 
 				switch (enumBanco) {
 
 				case BANCO_BRADESCO:
-					campoLivre = ACLBradesco.create(titulo);
+					campoLivre = AbstractCLBradesco.create(titulo);
 					break;
 
 				case BANCO_DO_BRASIL:
-					campoLivre = ACLBancoDoBrasil.create(titulo);
+					campoLivre = AbstractCLBancoDoBrasil.create(titulo);
 					break;
 
 				case BANCO_ABN_AMRO_REAL:
-					campoLivre = ACLBancoAbnAmroReal.create(titulo);
+					campoLivre = AbstractCLBancoABNAmroReal.create(titulo);
 					break;
 
 				case CAIXA_ECONOMICA_FEDERAL:
-					campoLivre = ACLCaixaEconomicaFederal.create(titulo);
+					campoLivre = AbstractCLCaixaEconomicaFederal.create(titulo);
 					break;
 
 				case HSBC:
-					campoLivre = ACLHsbc.create(titulo);
+					campoLivre = AbstractCLHSBC.create(titulo);
 					break;
 					
 				case UNIBANCO:
-					campoLivre = ACLUnibanco.create(titulo);
+					campoLivre = AbstractCLUnibanco.create(titulo);
 					break;
 
 				case BANCO_ITAU:
-					campoLivre = ACLItau.create(titulo);
+					campoLivre = AbstractCLItau.create(titulo);
 					break;
 
 				case BANCO_SAFRA:
-					campoLivre = ACLBancoSafra.create(titulo);
+					campoLivre = AbstractCLBancoSafra.create(titulo);
 					break;
 
 				case BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL:
-					campoLivre = ACLBanrisul.create(titulo);
+					campoLivre = AbstractCLBanrisul.create(titulo);
 					break;
 					
 				case MERCANTIL_DO_BRASIL:
-					campoLivre = ACLMercantilDoBrasil.create(titulo);
+					campoLivre = AbstractCLMercantilDoBrasil.create(titulo);
 					break;
 					
 				case NOSSA_CAIXA:
-					campoLivre = ACLNossaCaixa.create(titulo);
+					campoLivre = AbstractCLNossaCaixa.create(titulo);
 					break;
 				
 				case BANCO_DO_ESTADO_DO_ESPIRITO_SANTO:
-					campoLivre = ACLBanestes.create(titulo);
+					campoLivre = AbstractCLBanestes.create(titulo);
 					break;
 					
 				}
@@ -167,7 +175,7 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 				 * implementações de campo livre, logo considera-se o banco com
 				 * não suportado.
 				 */
-				throw new NotSuporttedBancoException();
+				throw new NotSupportedBancoException();
 			}
 
 			/*
@@ -175,11 +183,11 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 			 * sinal de que existe implementações de campo livre para o banco em
 			 * questão, só que nenhuma destas implementações serviu e a classe
 			 * abstrata responsável por fornecer o campo livre não gerou a
-			 * exceção NotSuporttedCampoLivreException. Trata-se de uma mensagem
+			 * exceção NotSupportedCampoLivreException. Trata-se de uma mensagem
 			 * genérica que será utilizada somente em último caso.
 			 */
 			if (isNull(campoLivre)) {
-				throw new NotSuporttedCampoLivreException(
+				throw new NotSupportedCampoLivreException(
 						"Não há implementações de campo livre para o banco "
 								+ contaBancaria.getBanco()
 										.getCodigoDeCompensacaoBACEN().getCodigoFormatado()
@@ -220,4 +228,8 @@ abstract class ACampoLivre extends LineOfFields implements ICampoLivre {
 
 	}
 	
+	@Override
+	public String toString() {
+		return ObjectUtil.toString(this);
+	}
 }
