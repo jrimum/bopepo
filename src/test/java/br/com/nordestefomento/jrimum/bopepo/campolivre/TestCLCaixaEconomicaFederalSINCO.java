@@ -38,11 +38,11 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * 
@@ -60,7 +60,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
  */
 public class TestCLCaixaEconomicaFederalSINCO{
 	
-	private ICampoLivre clCaixaSINCO;
+	private CampoLivre clCaixaSINCO;
 	
 	private Titulo titulo;
 
@@ -76,17 +76,17 @@ public class TestCLCaixaEconomicaFederalSINCO{
 		numeroDaConta.setCodigoDaConta(2);
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		
-		contaBancaria.setBanco(EnumBancos.CAIXA_ECONOMICA_FEDERAL.create());
+		contaBancaria.setBanco(BancoSuportado.CAIXA_ECONOMICA_FEDERAL.create());
 		
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 	}
 
 	@Test
-	public void testGetInstanceTitulo() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
+	public void testGetInstanceTitulo() throws NotSupportedBancoException, NotSupportedCampoLivreException {
 
 		//Básico:
 		titulo.setNossoNumero("10000000020061732");
-		clCaixaSINCO = Factory4CampoLivre.create(titulo);
+		clCaixaSINCO = CampoLivreFactory.create(titulo);
 	
 		assertNotNull(clCaixaSINCO);
 		//
@@ -98,13 +98,13 @@ public class TestCLCaixaEconomicaFederalSINCO{
 		
 		try{
 			
-			clCaixaSINCO = Factory4CampoLivre.create(titulo);
+			clCaixaSINCO = CampoLivreFactory.create(titulo);
 			
 			assertTrue(false);
 			
 			fail("Teste Falho!");
 			
-		} catch(NotSuporttedCampoLivreException e){
+		} catch(NotSupportedCampoLivreException e){
 			assertTrue(true);
 		}
 		
@@ -112,11 +112,11 @@ public class TestCLCaixaEconomicaFederalSINCO{
 	}
 
 	@Test
-	public void testWrite() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
+	public void testWrite() throws NotSupportedBancoException, NotSupportedCampoLivreException {
 		
 		titulo.setNossoNumero("10000000020061732");
 		
-		clCaixaSINCO = Factory4CampoLivre.create(titulo);
+		clCaixaSINCO = CampoLivreFactory.create(titulo);
 		
 		assertEquals("1000002910000000020061732", clCaixaSINCO.write());
 	}

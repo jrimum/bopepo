@@ -37,20 +37,20 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.Factory4CampoLivre;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreFactory;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSupportedBancoException;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 public class TestCLBancoReal {
 	
-	private ICampoLivre clReal;
+	private CampoLivre clReal;
 	
 	private Titulo titulo;
 
@@ -61,9 +61,9 @@ public class TestCLBancoReal {
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_ABN_AMRO_REAL.create());
+		contaBancaria.setBanco(BancoSuportado.BANCO_ABN_AMRO_REAL.create());
 		
-		Agencia agencia = new Agencia(1018, '1');
+		Agencia agencia = new Agencia(1018, "1");
 		contaBancaria.setAgencia(agencia);
 		
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
@@ -77,28 +77,28 @@ public class TestCLBancoReal {
 	}
 
 	@Test
-	public void testGetInstanceTitulo() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
+	public void testGetInstanceTitulo() throws NotSupportedBancoException, NotSupportedCampoLivreException {
 		
 		//básico
-		clReal = Factory4CampoLivre.create(titulo);
+		clReal = CampoLivreFactory.create(titulo);
 		
 		assertNotNull(clReal);
 	}
 
 	@Test
-	public void testToString() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
+	public void testToString() throws NotSupportedBancoException, NotSupportedCampoLivreException {
 		
 		//básico feliz
-		clReal = Factory4CampoLivre.create(titulo);
+		clReal = CampoLivreFactory.create(titulo);
 		
 		assertTrue(clReal.write().length() == 25);
 		assertEquals("1018001632491234567890123",clReal.write());
 		
 		//Infeliz básico
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_ABN_AMRO_REAL.create());
+		contaBancaria.setBanco(BancoSuportado.BANCO_ABN_AMRO_REAL.create());
 		
-		Agencia agencia = new Agencia(0,'1');
+		Agencia agencia = new Agencia(0, "1");
 		contaBancaria.setAgencia(agencia);
 		
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
@@ -109,7 +109,7 @@ public class TestCLBancoReal {
 		titulo.getContaBancaria();
 		titulo.setNumeroDoDocumento("0");
 		
-		clReal = Factory4CampoLivre.create(titulo);
+		clReal = CampoLivreFactory.create(titulo);
 		
 		assertTrue(clReal.write().length() == 25);
 		assertEquals("0000000000000000000000000",clReal.write());

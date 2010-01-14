@@ -37,11 +37,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * 
@@ -62,7 +62,7 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
  */
 public class TestCLBancoDoBrasilNN17{
 
-	private ICampoLivre clBancoDoBrasil;
+	private CampoLivre clBancoDoBrasil;
 	
 	private Titulo titulo;
 	
@@ -73,7 +73,7 @@ public class TestCLBancoDoBrasilNN17{
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_DO_BRASIL.create());
+		contaBancaria.setBanco(BancoSuportado.BANCO_DO_BRASIL.create());
 		
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
 		numeroDaConta.setCodigoDaConta(123456);
@@ -85,26 +85,26 @@ public class TestCLBancoDoBrasilNN17{
 	}
 
 	@Test
-	public void testGetInstanceTitulo() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
+	public void testGetInstanceTitulo() throws NotSupportedBancoException, NotSupportedCampoLivreException {
 		
 		//básico
-		clBancoDoBrasil = Factory4CampoLivre.create(titulo);
+		clBancoDoBrasil = CampoLivreFactory.create(titulo);
 		
 		assertNotNull(clBancoDoBrasil);
 	}
 	
 	@Test
-	public void testWrite() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
+	public void testWrite() throws NotSupportedBancoException, NotSupportedCampoLivreException {
 		
 		//básico feliz
-		clBancoDoBrasil = Factory4CampoLivre.create(titulo);
+		clBancoDoBrasil = CampoLivreFactory.create(titulo);
 		
 		assertTrue(clBancoDoBrasil.write().length() == 25);
 		assertEquals("1234561234567890123456721",clBancoDoBrasil.write());
 		
 		//Infeliz básico
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_DO_BRASIL.create());
+		contaBancaria.setBanco(BancoSuportado.BANCO_DO_BRASIL.create());
 
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
 		numeroDaConta.setCodigoDaConta(0);
@@ -114,7 +114,7 @@ public class TestCLBancoDoBrasilNN17{
 		
 		titulo.setNossoNumero("00000000000000001");
 		
-		clBancoDoBrasil = Factory4CampoLivre.create(titulo);
+		clBancoDoBrasil = CampoLivreFactory.create(titulo);
 		
 		assertTrue(clBancoDoBrasil.write().length() == 25);
 		assertEquals("0000000000000000000000121",clBancoDoBrasil.write());

@@ -35,13 +35,13 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTipoCobranca;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * 
@@ -60,21 +60,21 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
  */
 public class TestCLBanestes {
 	
-	private ICampoLivre clBanestes;
+	private CampoLivre clBanestes;
 	private Titulo titulo;
 	
 	@Before
 	public void inicializa() {
 
 		ContaBancaria contaBancaria = new ContaBancaria(
-				EnumBancos.BANCO_DO_ESTADO_DO_ESPIRITO_SANTO.create());
-		contaBancaria.setCarteira(new Carteira(4, EnumTipoCobranca.COM_REGISTRO));
+				BancoSuportado.BANCO_DO_ESTADO_DO_ESPIRITO_SANTO.create());
+		contaBancaria.setCarteira(new Carteira(4, TipoDeCobranca.COM_REGISTRO));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(7730070));
 
 		titulo = new Titulo(contaBancaria,
 				new Pessoa("Nordeste Fomento"), new Pessoa("João Pereira"));
 		titulo.setNossoNumero("10297");
-		clBanestes = Factory4CampoLivre.create(titulo);
+		clBanestes = CampoLivreFactory.create(titulo);
 		
 	}
 	
@@ -107,9 +107,9 @@ public class TestCLBanestes {
 	@Test
 	public void seOWriteRetornaOValorEsperadoParaUmaCarteiraSemRegistro() {
 		final Carteira carteiraSemRegistro = new Carteira();
-		carteiraSemRegistro.setTipoCobranca(EnumTipoCobranca.SEM_REGISTRO);
+		carteiraSemRegistro.setTipoCobranca(TipoDeCobranca.SEM_REGISTRO);
 		titulo.getContaBancaria().setCarteira(carteiraSemRegistro);
-		clBanestes = Factory4CampoLivre.create(titulo);
+		clBanestes = CampoLivreFactory.create(titulo);
 		assertEquals(
 				"Testando um campo livre válido da carteira sem registro.",
 				"0001029700007730070202108", clBanestes.write());
@@ -117,9 +117,9 @@ public class TestCLBanestes {
 	
 	@Test
 	public void seOWriteRetornaOValorEsperadoParaUmaCarteiraCaucionada() {
-		final Carteira carteiraCaucionada = new Carteira(3, EnumTipoCobranca.COM_REGISTRO);
+		final Carteira carteiraCaucionada = new Carteira(3, TipoDeCobranca.COM_REGISTRO);
 		titulo.getContaBancaria().setCarteira(carteiraCaucionada);
-		clBanestes = Factory4CampoLivre.create(titulo);
+		clBanestes = CampoLivreFactory.create(titulo);
 		assertEquals(
 				"Testando um campo livre válido da carteira caucionada.",
 				"0001029700007730070302196", clBanestes.write());
@@ -128,25 +128,25 @@ public class TestCLBanestes {
 	@Test(expected=CampoLivreException.class)
 	public void criacaoSemTipoDeCobranca() {
 		titulo.getContaBancaria().setCarteira(new Carteira());
-		Factory4CampoLivre.create(titulo);
+		CampoLivreFactory.create(titulo);
 	}
 	
 	@Test(expected=CampoLivreException.class)
 	public void criacaoSemNumeroDaConta() {
 		titulo.getContaBancaria().setNumeroDaConta(null);
-		Factory4CampoLivre.create(titulo);
+		CampoLivreFactory.create(titulo);
 	}
 	
 	@Test(expected=CampoLivreException.class)
 	public void criacaoSemNossoNumero() {
 		titulo.setNossoNumero(null);
-		Factory4CampoLivre.create(titulo);
+		CampoLivreFactory.create(titulo);
 	}
 	
 	@Test(expected=CampoLivreException.class)
 	public void criacaoNossoNumeroMaiorQue8Digitos(){
 		titulo.setNossoNumero("123456789");
-		Factory4CampoLivre.create(titulo);
+		CampoLivreFactory.create(titulo);
 	}
 	
 }

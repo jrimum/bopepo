@@ -13,22 +13,22 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTipoCobranca;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * @author misael
  *
  */
-public class TestCLHsbcCNR {
+public class TestCLHSBCCobrancaNaoRegistrada {
 
 	
-	private ICampoLivre clHsbcCNR;
+	private CampoLivre clHsbcCNR;
 	private Titulo titulo;
 	
 	/**
@@ -42,9 +42,9 @@ public class TestCLHsbcCNR {
 		numeroDaConta.setDigitoDaConta("2");
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.HSBC.create());
+		contaBancaria.setBanco(BancoSuportado.HSBC.create());
 		contaBancaria.setNumeroDaConta(numeroDaConta);
-		contaBancaria.setCarteira(new Carteira(1, EnumTipoCobranca.SEM_REGISTRO));
+		contaBancaria.setCarteira(new Carteira(1, TipoDeCobranca.SEM_REGISTRO));
 
 		Pessoa sacado = new Pessoa();
 		Pessoa cedente = new Pessoa();
@@ -55,21 +55,21 @@ public class TestCLHsbcCNR {
 	}
 
 	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.campolivre.CLHsbcCNR#create(br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo)}.
+	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.campolivre.CLHSBCCobrancaNaoRegistrada#create(br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo)}.
 	 */
 	@Test
 	public final void testGetInstance() {
-		clHsbcCNR = Factory4CampoLivre.create(titulo);
+		clHsbcCNR = CampoLivreFactory.create(titulo);
 		assertNotNull(clHsbcCNR);
 	}
 
 	/**
-	 * Test method for {@link br.com.nordestefomento.jrimum.utilix.LineOfFields#write()}.
+	 * Test method for {@link br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields#write()}.
 	 */
 	@Test
 	public final void testWrite() {
 		//Teste básico
-		clHsbcCNR = Factory4CampoLivre.create(titulo);
+		clHsbcCNR = CampoLivreFactory.create(titulo);
 		
 		assertTrue(clHsbcCNR.write().length() == 25);
 		assertEquals("0003003004123456789410012", clHsbcCNR.write());
@@ -78,7 +78,7 @@ public class TestCLHsbcCNR {
 		// Alterando alguns dados do título
 		titulo.getContaBancaria();
 		titulo.setNossoNumero("4412345678944");
-		clHsbcCNR = Factory4CampoLivre.create(titulo);
+		clHsbcCNR = CampoLivreFactory.create(titulo);
 		
 		assertTrue(clHsbcCNR.write().length() == 25);
 		assertEquals("0003333441234567894410012", clHsbcCNR.write());		

@@ -34,13 +34,13 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Modalidade;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Modalidade;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * 
@@ -58,13 +58,11 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
  * 
  * @author Rômulo
  * 
- * @since 
- * 
- * @version 
+ * @version 0.2
  */
 public class TestCLNossaCaixa {
 
-	private ICampoLivre clNossaCaixa;
+	private CampoLivre clNossaCaixa;
 	
 	private Titulo titulo;
 	
@@ -74,8 +72,8 @@ public class TestCLNossaCaixa {
 		Pessoa sacado = new Pessoa();
 		Pessoa cedente = new Pessoa();
 		
-		ContaBancaria contaBancaria = new ContaBancaria(EnumBancos.NOSSA_CAIXA.create());
-		contaBancaria.setAgencia(new Agencia(1,'1'));
+		ContaBancaria contaBancaria = new ContaBancaria(BancoSuportado.NOSSA_CAIXA.create());
+		contaBancaria.setAgencia(new Agencia(1, "1"));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(2818));
 		contaBancaria.setModalidade(new Modalidade(13));
 		
@@ -89,17 +87,17 @@ public class TestCLNossaCaixa {
 		
 		try {
 			
-			clNossaCaixa = Factory4CampoLivre.create(titulo);
+			clNossaCaixa = CampoLivreFactory.create(titulo);
 			Assert.assertNotNull(clNossaCaixa);
 			
-		} catch(NotSuporttedCampoLivreException e) {
+		} catch(NotSupportedCampoLivreException e) {
 			e.printStackTrace();
 			Assert.fail("O campo livre do banco Nossa Caixa deve estar sendo suportado.");
 		}
 	}
 	
 	private String getCampoLivreComoString() {
-		clNossaCaixa = Factory4CampoLivre.create(titulo);
+		clNossaCaixa = CampoLivreFactory.create(titulo);
 		String campoLivre = clNossaCaixa.write();
 		return campoLivre;
 	}

@@ -7,14 +7,14 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTipoCobranca;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 public class TestCLUnibancoCobrancaNaoRegistrada {
 
@@ -23,7 +23,7 @@ public class TestCLUnibancoCobrancaNaoRegistrada {
 	 */
 	private static String TEST_CASE = "5123456100112233445566777";
 
-	private ICampoLivre campoLivre;
+	private CampoLivre campoLivre;
 
 	private Titulo titulo;
 
@@ -74,18 +74,18 @@ public class TestCLUnibancoCobrancaNaoRegistrada {
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.UNIBANCO.create());
+		contaBancaria.setBanco(BancoSuportado.UNIBANCO.create());
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(123456, "1"));
 		contaBancaria.setCarteira(new Carteira(123,
-				EnumTipoCobranca.SEM_REGISTRO));
-		contaBancaria.setAgencia(new Agencia(01234, '1'));
+				TipoDeCobranca.SEM_REGISTRO));
+		contaBancaria.setAgencia(new Agencia(01234, "1"));
 
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNumeroDoDocumento("1234567");
 		titulo.setNossoNumero("11223344556677");
 		titulo.setDigitoDoNossoNumero("7");
 
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test
@@ -99,56 +99,56 @@ public class TestCLUnibancoCobrancaNaoRegistrada {
 	public final void testGetInstanceComContaNula() {
 
 		titulo.getContaBancaria().setNumeroDaConta(null);
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComContaNegativa() {
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(-23));
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComDigitoDaContaNula() {
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(23, null));
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComDigitoDaContaNegativa() {
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(2, "-3"));
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComDigitoDaContaNaoNumerico() {
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(-23, "X"));
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNula() {
 
 		titulo.setNossoNumero(null);
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNegativo() {
 
 		titulo.setNossoNumero("-012345679012345");
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNaoNumerico() {
 
 		titulo.setNossoNumero("123456790123y45");
-		campoLivre = Factory4CampoLivre.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 
 	@Test

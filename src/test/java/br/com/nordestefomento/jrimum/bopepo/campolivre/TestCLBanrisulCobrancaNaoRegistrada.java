@@ -35,14 +35,14 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumTipoCobranca;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * 
@@ -62,23 +62,23 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
  */
 public class TestCLBanrisulCobrancaNaoRegistrada {
 
-	private ICampoLivre clBanrisulCobrancaNaoRegistrada;
+	private CampoLivre clBanrisulCobrancaNaoRegistrada;
 	private Titulo titulo;
 
 	@Before
 	public void inicializa() {
 
 		ContaBancaria contaBancaria = new ContaBancaria(
-				EnumBancos.BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.create());
+				BancoSuportado.BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.create());
 		contaBancaria
-		.setCarteira(new Carteira(1, EnumTipoCobranca.SEM_REGISTRO));
-		contaBancaria.setAgencia(new Agencia(100,'1'));
+		.setCarteira(new Carteira(1, TipoDeCobranca.SEM_REGISTRO));
+		contaBancaria.setAgencia(new Agencia(100, "1"));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(1));
 
 		titulo = new Titulo(contaBancaria, new Pessoa("Nordeste Fomento"),
 				new Pessoa("João Pereira"));
 		titulo.setNossoNumero("22832563");
-		clBanrisulCobrancaNaoRegistrada = Factory4CampoLivre.create(titulo);
+		clBanrisulCobrancaNaoRegistrada = CampoLivreFactory.create(titulo);
 	}
 
 	@Test
@@ -111,43 +111,43 @@ public class TestCLBanrisulCobrancaNaoRegistrada {
 	@Test(expected = CampoLivreException.class)
 	public void criacaoSemTipoDeCobranca() {
 		titulo.getContaBancaria().setCarteira(new Carteira(1, null));
-		Factory4CampoLivre.create(titulo);
+		CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void criacaoSemAgencia() {
 		titulo.getContaBancaria().setAgencia(null);
-		Factory4CampoLivre.create(titulo);
+		CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void criacaoSemNumeroDaConta() {
 		titulo.getContaBancaria().setNumeroDaConta(null);
-		Factory4CampoLivre.create(titulo);
+		CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void criacaoSemNossoNumero() {
 		titulo.setNossoNumero(null);
-		Factory4CampoLivre.create(titulo);
+		CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void criacaoAgenciaComCodigoMaiorQue3Digitos() {
-		titulo.getContaBancaria().setAgencia(new Agencia(1000,'1'));
-		Factory4CampoLivre.create(titulo);
+		titulo.getContaBancaria().setAgencia(new Agencia(1000, "1"));
+		CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void criacaoNumeroDaContaMaiorQue7Digitos() {
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(12345678));
-		Factory4CampoLivre.create(titulo);
+		CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void criacaoNossoNumeroMaiorQue8Digitos() {
 		titulo.setNossoNumero("123456789");
-		Factory4CampoLivre.create(titulo);
+		CampoLivreFactory.create(titulo);
 	}
 
 }

@@ -36,12 +36,12 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * 
@@ -57,15 +57,13 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
  * EXEMPLO:
  * </p> 
  * 
- * @author Rômulo
+ * @author Rômulo Augusto
  * 
- * @since 
- * 
- * @version 
+ * @version 0.2
  */
 public class TestCLMercantilDoBrasil {
 
-	private ICampoLivre clMercantil;
+	private CampoLivre clMercantil;
 	
 	private Titulo titulo;
 	
@@ -76,9 +74,9 @@ public class TestCLMercantilDoBrasil {
 		Pessoa cedente = new Pessoa();
 		
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.MERCANTIL_DO_BRASIL.create());
+		contaBancaria.setBanco(BancoSuportado.MERCANTIL_DO_BRASIL.create());
 		
-		contaBancaria.setAgencia(new Agencia(1234,'1'));
+		contaBancaria.setAgencia(new Agencia(1234, "1"));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(123456789));
 		
 		titulo = new Titulo(contaBancaria, sacado, cedente);
@@ -91,10 +89,10 @@ public class TestCLMercantilDoBrasil {
 		
 		try {
 			
-			clMercantil = Factory4CampoLivre.create(titulo);
+			clMercantil = CampoLivreFactory.create(titulo);
 			Assert.assertNotNull(clMercantil);
 			
-		} catch(NotSuporttedCampoLivreException e) {
+		} catch(NotSupportedCampoLivreException e) {
 			e.printStackTrace();
 			Assert.fail("O campo livre do banco Mercantil do Brasil deve estar sendo suportado.");
 		}
@@ -110,7 +108,7 @@ public class TestCLMercantilDoBrasil {
 	}
 
 	private String getCampoLivreComoString() {
-		clMercantil = Factory4CampoLivre.create(titulo);
+		clMercantil = CampoLivreFactory.create(titulo);
 		String campoLivre = clMercantil.write();
 		return campoLivre;
 	}

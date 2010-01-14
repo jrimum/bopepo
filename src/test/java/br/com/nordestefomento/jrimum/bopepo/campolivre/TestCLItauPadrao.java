@@ -37,17 +37,17 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 public class TestCLItauPadrao {
 	
-	private ICampoLivre clItauPadrao;
+	private CampoLivre clItauPadrao;
 	
 	private Titulo titulo;
 	
@@ -58,9 +58,9 @@ public class TestCLItauPadrao {
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_ITAU.create());
+		contaBancaria.setBanco(BancoSuportado.BANCO_ITAU.create());
 		
-		contaBancaria.setAgencia(new Agencia(57,'1'));
+		contaBancaria.setAgencia(new Agencia(57, "1"));
 		contaBancaria.setCarteira(new Carteira(110));
 		
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
@@ -76,13 +76,13 @@ public class TestCLItauPadrao {
 	@Test
 	public void testCreate() {
 		
-		Assert.assertNotNull(Factory4CampoLivre.create(titulo));
+		Assert.assertNotNull(CampoLivreFactory.create(titulo));
 	}
 	
 	@Test
 	public void testWriteNaoNulo() {
 		
-		clItauPadrao = Factory4CampoLivre.create(titulo);
+		clItauPadrao = CampoLivreFactory.create(titulo);
 		
 		Assert.assertNotNull(clItauPadrao.write());
 	}
@@ -90,7 +90,7 @@ public class TestCLItauPadrao {
 	@Test
 	public void testWriteValido() {
 		
-		clItauPadrao = Factory4CampoLivre.create(titulo);
+		clItauPadrao = CampoLivreFactory.create(titulo);
 		
 		Assert.assertEquals(25, clItauPadrao.write().length());
 		Assert.assertEquals("1101234567880057123457000", clItauPadrao.write());
@@ -100,16 +100,16 @@ public class TestCLItauPadrao {
 	public void testWriteComValoresInvalidos() {
 		
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_ITAU.create());
+		contaBancaria.setBanco(BancoSuportado.BANCO_ITAU.create());
 		
-		contaBancaria.setAgencia(new Agencia(0,'1'));
+		contaBancaria.setAgencia(new Agencia(0, "1"));
 		contaBancaria.setCarteira(new Carteira(0));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(0, "0"));
 		
 		titulo.setNossoNumero("0");
 		titulo.setNumeroDoDocumento("0");
 		
-		clItauPadrao = Factory4CampoLivre.create(titulo);
+		clItauPadrao = CampoLivreFactory.create(titulo);
 		
 		assertTrue(clItauPadrao.write().length() == 25);
 		assertEquals("0000000000000000000000000",clItauPadrao.write());
@@ -121,7 +121,7 @@ public class TestCLItauPadrao {
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		contaBancaria.setCarteira(new Carteira(198));
 		
-		clItauPadrao = Factory4CampoLivre.create(titulo);
+		clItauPadrao = CampoLivreFactory.create(titulo);
 		
 		assertTrue(clItauPadrao.write().length() == 25);
 		assertEquals("1981234567812345671234580", clItauPadrao.write());

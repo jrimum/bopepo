@@ -37,17 +37,17 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.EnumBancos;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
+import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 public class TestCLItauComCarteirasEspeciais {
 	
-	private ICampoLivre clItauEspecial;
+	private CampoLivre clItauEspecial;
 	
 	private Titulo titulo;
 	
@@ -58,9 +58,9 @@ public class TestCLItauComCarteirasEspeciais {
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_ITAU.create());
+		contaBancaria.setBanco(BancoSuportado.BANCO_ITAU.create());
 		
-		contaBancaria.setAgencia(new Agencia(57,'1'));
+		contaBancaria.setAgencia(new Agencia(57, "1"));
 		contaBancaria.setCarteira(new Carteira(198));
 		
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
@@ -76,13 +76,13 @@ public class TestCLItauComCarteirasEspeciais {
 	@Test
 	public void testCreate() {
 		
-		Assert.assertNotNull(Factory4CampoLivre.create(titulo));
+		Assert.assertNotNull(CampoLivreFactory.create(titulo));
 	}
 	
 	@Test
 	public void testWriteNaoNulo() {
 		
-		clItauEspecial = Factory4CampoLivre.create(titulo);
+		clItauEspecial = CampoLivreFactory.create(titulo);
 		
 		Assert.assertNotNull(clItauEspecial.write());
 	}
@@ -90,7 +90,7 @@ public class TestCLItauComCarteirasEspeciais {
 	@Test
 	public void testWriteValido() {
 		
-		clItauEspecial = Factory4CampoLivre.create(titulo);
+		clItauEspecial = CampoLivreFactory.create(titulo);
 		
 		Assert.assertEquals(25, clItauEspecial.write().length());
 		Assert.assertEquals("1981234567812345671234580", clItauEspecial.write());
@@ -100,16 +100,16 @@ public class TestCLItauComCarteirasEspeciais {
 	public void testWriteComValoresInvalidos() {
 		
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_ITAU.create());
+		contaBancaria.setBanco(BancoSuportado.BANCO_ITAU.create());
 		
-		contaBancaria.setAgencia(new Agencia(0,'1'));
+		contaBancaria.setAgencia(new Agencia(0, "1"));
 		contaBancaria.setCarteira(new Carteira(0));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(0, "0"));
 		
 		titulo.setNossoNumero("0");
 		titulo.setNumeroDoDocumento("0");
 		
-		clItauEspecial = Factory4CampoLivre.create(titulo);
+		clItauEspecial = CampoLivreFactory.create(titulo);
 		
 		assertTrue(clItauEspecial.write().length() == 25);
 		assertEquals("0000000000000000000000000",clItauEspecial.write());
