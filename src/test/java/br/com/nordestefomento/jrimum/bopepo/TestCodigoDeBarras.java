@@ -31,7 +31,6 @@
 package br.com.nordestefomento.jrimum.bopepo;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
@@ -42,15 +41,15 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.campolivre.Factory4CampoLivre;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.ICampoLivre;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumMoeda;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreFactory;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeMoeda;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * 
@@ -67,9 +66,9 @@ import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
  * 
  * @version 0.2
  */
-public class TestCodigoDeBarra{
+public class TestCodigoDeBarras{
 
-	private ICampoLivre clBradesco;
+	private CampoLivre clBradesco;
 
 	private Titulo titulo;
 	
@@ -84,9 +83,9 @@ public class TestCodigoDeBarra{
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_BRADESCO.create());
+		contaBancaria.setBanco(BancoSuportado.BANCO_BRADESCO.create());
 		
-		Agencia agencia = new Agencia(1234, '1');
+		Agencia agencia = new Agencia(1234, "1");
 		contaBancaria.setAgencia(agencia);
 		
 		contaBancaria.setCarteira(new Carteira(5));
@@ -97,11 +96,11 @@ public class TestCodigoDeBarra{
 
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("12345678901");
-		titulo.setEnumMoeda(EnumMoeda.REAL);
+		titulo.setEnumMoeda(TipoDeMoeda.REAL);
 		titulo.setValor(BigDecimal.valueOf(100.23));
 		titulo.setDataDoVencimento(VENCIMENTO);
 		
-		clBradesco = Factory4CampoLivre.create(titulo);
+		clBradesco = CampoLivreFactory.create(titulo);
 		
 		codigoDeBarras = new CodigoDeBarras(titulo, clBradesco);
 
@@ -113,7 +112,7 @@ public class TestCodigoDeBarra{
 	 */
 	@Test
 	public void testGetDigitoVerificadorGeral() {
-		assertTrue(2 == codigoDeBarras.getDigitoVerificadorGeral().getField());
+		assertTrue(2 == codigoDeBarras.getDigitoVerificadorGeral().getValue());
 	}
 
 	/**
@@ -134,7 +133,7 @@ public class TestCodigoDeBarra{
 	@Test
 	public void testGetFatorDeVencimento() {
 		
-		assertTrue(1000 == codigoDeBarras.getFatorDeVencimento().getField());
+		assertTrue(1000 == codigoDeBarras.getFatorDeVencimento().getValue());
 		
 	}
 

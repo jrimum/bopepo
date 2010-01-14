@@ -43,16 +43,16 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedBancoException;
-import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSuporttedCampoLivreException;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Agencia;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Carteira;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.EnumMoeda;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.NumeroDaConta;
-import br.com.nordestefomento.jrimum.domkee.bank.febraban.Titulo;
-import br.com.nordestefomento.jrimum.domkee.entity.Pessoa;
-import br.com.nordestefomento.jrimum.utilix.Util4Date;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSupportedBancoException;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeMoeda;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import br.com.nordestefomento.jrimum.utilix.DateUtil;
 
 
 /**
@@ -95,9 +95,9 @@ public class TestBoleto{
 		Pessoa cedente = new Pessoa();
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(EnumBancos.BANCO_BRADESCO.create());
+		contaBancaria.setBanco(BancoSuportado.BANCO_BRADESCO.create());
 		
-		Agencia agencia = new Agencia(1234, '1');
+		Agencia agencia = new Agencia(1234, "1");
 		contaBancaria.setAgencia(agencia);
 		
 		contaBancaria.setCarteira(new Carteira(5));
@@ -108,7 +108,7 @@ public class TestBoleto{
 
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("12345678901");
-		titulo.setEnumMoeda(EnumMoeda.REAL);
+		titulo.setEnumMoeda(TipoDeMoeda.REAL);
 		titulo.setValor(BigDecimal.valueOf(100.23));
 		titulo.setDataDoVencimento(VENCIMENTO);
 		
@@ -118,11 +118,11 @@ public class TestBoleto{
 
 	/**
 	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.Boleto#Boleto(Titulo)}.
-	 * @throws NotSuporttedBancoException 
-	 * @throws NotSuporttedCampoLivreException 
+	 * @throws NotSupportedBancoException 
+	 * @throws NotSupportedCampoLivreException 
 	 */
 	@Test
-	public void testGetInstance() throws NotSuporttedBancoException, NotSuporttedCampoLivreException {
+	public void testGetInstance() throws NotSupportedBancoException, NotSupportedCampoLivreException {
 		
 		assertNotNull(boleto);
 		assertNotNull(boleto.getTitulo());
@@ -166,7 +166,7 @@ public class TestBoleto{
 		
 		Date agora = new Date();
 		
-		assertEquals(Util4Date.fmt_dd_MM_yyyy.format(agora), Util4Date.fmt_dd_MM_yyyy.format(boleto.getDataDeProcessamento()));
+		assertEquals(DateUtil.FORMAT_DD_MM_YYYY.format(agora), DateUtil.FORMAT_DD_MM_YYYY.format(boleto.getDataDeProcessamento()));
 		
 	}
 

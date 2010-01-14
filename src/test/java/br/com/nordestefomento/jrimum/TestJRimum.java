@@ -1,7 +1,5 @@
 package br.com.nordestefomento.jrimum;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -11,6 +9,8 @@ import br.com.nordestefomento.jrimum.bopepo.TestSuiteBopepo;
 import br.com.nordestefomento.jrimum.domkee.TestSuiteDomkee;
 import br.com.nordestefomento.jrimum.utilix.TestSuiteUtilix;
 import br.com.nordestefomento.jrimum.vallia.TestSuiteVallia;
+
+import static org.junit.Assert.*;
 
 
 @RunWith(Suite.class)
