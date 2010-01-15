@@ -99,8 +99,8 @@ class ViewerPDF {
 	
 	private static Logger log = Logger.getLogger(ViewerPDF.class);
 
-	private static URL TEMPLATE_PADRAO_COM_SACADOR_AVALISTA = ViewerPDF.class.getResource("/resource/pdf/BoletoTemplateComSacadorAvalista.pdf");
-	private static URL TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA = ViewerPDF.class.getResource("/resource/pdf/BoletoTemplateSemSacadorAvalista.pdf");
+	private static URL TEMPLATE_PADRAO_COM_SACADOR_AVALISTA = ViewerPDF.class.getResource("/pdf/BoletoTemplateComSacadorAvalista.pdf");
+	private static URL TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA = ViewerPDF.class.getResource("/pdf/BoletoTemplateSemSacadorAvalista.pdf");
 
 	private static final String HIFEN_SEPERADOR = "-";
 	
@@ -799,7 +799,7 @@ class ViewerPDF {
 
 			if (BancoSuportado.isSuportado(conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
 
-				URL url = this.getClass().getResource("/resource/img/"
+				URL url = this.getClass().getResource("/img/"
 											+ conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado()
 											+ ".png");
 
