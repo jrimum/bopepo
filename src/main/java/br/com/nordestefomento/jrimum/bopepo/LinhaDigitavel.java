@@ -33,8 +33,8 @@ package br.com.nordestefomento.jrimum.bopepo;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
+import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
 import br.com.nordestefomento.jrimum.utilix.StringUtil;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.BoletoLinhaDigitavelDV;

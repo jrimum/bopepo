@@ -38,17 +38,19 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.CEP;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.Endereco;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Sacado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
 
@@ -94,13 +96,11 @@ public class ExemplosUtil {
 		
 		Titulo titulo;
 
-		final Date VENCIMENTO = new GregorianCalendar(2000, Calendar.JULY, 3)
-				.getTime();
+		final Date VENCIMENTO = new GregorianCalendar(2000, Calendar.JULY, 3).getTime();
 		
-		final Date DATA_DO_DOCUMENTO =  new GregorianCalendar(2000, Calendar.APRIL, 14)
-		.getTime();
+		final Date DATA_DO_DOCUMENTO =  new GregorianCalendar(2000, Calendar.APRIL, 14).getTime();
 
-		Pessoa sacado = new Pessoa("Fulano da Silva Sauro Perdido e Desempregado", "222.222.222-22");
+		Sacado sacado = new Sacado("Fulano da Silva Sauro Perdido e Desempregado", "222.222.222-22");
 		
 		Endereco endereco = new Endereco();
 		endereco.setUF(UnidadeFederativa.RN);
@@ -112,7 +112,7 @@ public class ExemplosUtil {
 		
 		sacado.addEndereco(endereco);
 		
-		Pessoa cedente = new Pessoa("Empresa Lucrativa para Todo Sempre Ilimitada", "00.000.208/0001-00");
+		Cedente cedente = new Cedente("Empresa Lucrativa para Todo Sempre Ilimitada", "00.000.208/0001-00");
 	
 		ContaBancaria contaBancaria = new ContaBancaria(BancoSuportado.BANCO_DO_BRASIL.create());
 		
@@ -122,7 +122,7 @@ public class ExemplosUtil {
 
 		cedente.addContaBancaria(contaBancaria);
 		
-		Pessoa sacadorAvalista = new Pessoa("Banco do Brasil", "00.000.000/0001-91");
+		SacadorAvalista sacadorAvalista = new SacadorAvalista("Banco do Brasil", "00.000.000/0001-91");
 		
 		Endereco endereco2 = new Endereco();
 		endereco2.setUF(UnidadeFederativa.DF);

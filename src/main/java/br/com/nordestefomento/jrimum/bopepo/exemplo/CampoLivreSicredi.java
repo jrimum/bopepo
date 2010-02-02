@@ -37,16 +37,16 @@ import static org.apache.commons.lang.StringUtils.isNumeric;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreException;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
-import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.TipoDeModulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.TipoDeModulo;
 
 /**
  * <p>

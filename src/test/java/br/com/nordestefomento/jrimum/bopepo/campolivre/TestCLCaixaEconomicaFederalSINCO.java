@@ -39,9 +39,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
@@ -67,8 +68,8 @@ public class TestCLCaixaEconomicaFederalSINCO{
 	@Before
 	public void setUp() throws Exception {
 		
-		Pessoa sacado = new Pessoa();
-		Pessoa cedente = new Pessoa();
+		Sacado sacado = new Sacado("Sacado");
+		Cedente cedente = new Cedente("Cedente");
 		
 		ContaBancaria contaBancaria = new ContaBancaria();
 		

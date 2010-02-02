@@ -17,13 +17,15 @@ import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.CEP;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.Endereco;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.id.cprf.CNPJ;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Banco;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Sacado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
@@ -39,7 +41,7 @@ public class MeuPrimeiroBoletoSicredi {
  		/* 
 		 * INFORMANDO DADOS SOBRE O CEDENTE.
 		 * */
-		Pessoa cedente = new Pessoa("PROJETO JRimum", "00.000.208/0001-00");
+		Cedente cedente = new Cedente("PROJETO JRimum", "00.000.208/0001-00");
 		
 		// Informando dados sobre a conta bancária do cendente.
 		
@@ -59,8 +61,7 @@ public class MeuPrimeiroBoletoSicredi {
 		/* 
 		 * INFORMANDO DADOS SOBRE O SACADO.
 		 * */
-		Pessoa sacado = new Pessoa("JavaDeveloper Pronto Para Férias",
-				"222.222.222-22");
+		Sacado sacado = new Sacado("JavaDeveloper Pronto Para Férias", "222.222.222-22");
 
 		// Informando o endereço do sacado.
 		Endereco enderecoSac = new Endereco();
@@ -76,8 +77,7 @@ public class MeuPrimeiroBoletoSicredi {
 		/* 
 		 * INFORMANDO DADOS SOBRE O SACADOR AVALISTA.
 		 * */
-		Pessoa sacadorAvalista = new Pessoa("Nordeste Fomento Mercantil",
-				"00.000.000/0001-91");
+		SacadorAvalista sacadorAvalista = new SacadorAvalista("Nordeste Fomento Mercantil", "00.000.000/0001-91");
 		
 		// Informando o endereço do sacador avalista. 
 		Endereco enderecoSacAval = new Endereco();

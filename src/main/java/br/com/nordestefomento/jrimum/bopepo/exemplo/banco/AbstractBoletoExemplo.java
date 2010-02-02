@@ -37,11 +37,13 @@ import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.Endereco;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Sacado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
@@ -115,9 +117,9 @@ public abstract class AbstractBoletoExemplo {
 
 	public Boleto execute(boolean comSacadorAvalista) {
 		
-		Pessoa cedente = crieCedente();
-		Pessoa sacado = crieSacado();
-		Pessoa sacadorAvalista = null;
+		Cedente cedente = crieCedente();
+		Sacado sacado = crieSacado();
+		SacadorAvalista sacadorAvalista = null;
 		
 		if (comSacadorAvalista) {
 			sacadorAvalista = crieSacadorAvalista();
@@ -150,7 +152,7 @@ public abstract class AbstractBoletoExemplo {
 		return boleto;
 	}
 
-	private Titulo crieTitulo(Pessoa cedente, Pessoa sacado, Pessoa sacadorAvalista) {
+	private Titulo crieTitulo(Cedente cedente, Sacado sacado, SacadorAvalista sacadorAvalista) {
 		
 		ContaBancaria contaBancariaDoCedente = cedente.getContasBancarias().iterator().next();
 		Titulo titulo = null;
@@ -175,9 +177,9 @@ public abstract class AbstractBoletoExemplo {
 		return titulo;
 	}
 
-	private Pessoa crieCedente() {
+	private Cedente crieCedente() {
 		
-		Pessoa cedente = new Pessoa("PROJETO JRimum", "00.000.208/0001-00");
+		Cedente cedente = new Cedente("PROJETO JRimum", "00.000.208/0001-00");
 	
 		ContaBancaria contaBancaria = new ContaBancaria(getBancoSuportado().create());
 		
@@ -194,9 +196,9 @@ public abstract class AbstractBoletoExemplo {
 		return cedente;
 	}
 
-	private Pessoa crieSacado() {
+	private Sacado crieSacado() {
 		
-		Pessoa sacado = new Pessoa("JRimum Developer", "111.111.111-11");
+		Sacado sacado = new Sacado("JRimum Developer", "111.111.111-11");
 		
 		Endereco endereco = new Endereco();
 		endereco.setUF(UnidadeFederativa.RN);
@@ -211,9 +213,9 @@ public abstract class AbstractBoletoExemplo {
 		return sacado;
 	}
 
-	private Pessoa crieSacadorAvalista() {
+	private SacadorAvalista crieSacadorAvalista() {
 	
-		Pessoa sacadorAvalista = new Pessoa("JavaRN", "00.000.000/0001-91");
+		SacadorAvalista sacadorAvalista = new SacadorAvalista("JavaRN", "00.000.000/0001-91");
 		
 		Endereco endereco = new Endereco();
 		endereco.setUF(UnidadeFederativa.PB);

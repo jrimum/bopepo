@@ -39,8 +39,8 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreFactory;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivreFactory;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSupportedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;

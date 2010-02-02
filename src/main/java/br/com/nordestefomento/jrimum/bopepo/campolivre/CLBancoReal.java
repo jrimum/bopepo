@@ -35,8 +35,8 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.StringUtil;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.TipoDeModulo;
 import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.TipoDeModulo;
 
 /**
  * <p><strong>*** COBRANÇA SEM REGISTRO ***</strong></p>

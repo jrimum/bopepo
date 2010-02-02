@@ -48,12 +48,13 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.JRimumException;
-import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.Endereco;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Sacado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
 import br.com.nordestefomento.jrimum.utilix.DateUtil;
 import br.com.nordestefomento.jrimum.utilix.FileUtil;
 import br.com.nordestefomento.jrimum.utilix.MonetaryUtil;
@@ -561,7 +562,7 @@ class ViewerPDF {
 	private void setSacado() throws IOException, DocumentException {
 
 		StringBuilder sb = new StringBuilder();
-		Pessoa sacado = boleto.getTitulo().getSacado();
+		Sacado sacado = boleto.getTitulo().getSacado();
 
 		if (isNotNull(sacado.getNome())) {
 			sb.append(sacado.getNome());
@@ -594,7 +595,7 @@ class ViewerPDF {
 		
 		if (boleto.getTitulo().hasSacadorAvalista()) {
 			
-			Pessoa sacadorAvalista = boleto.getTitulo().getSacadorAvalista(); 
+			SacadorAvalista sacadorAvalista = boleto.getTitulo().getSacadorAvalista(); 
 			
 			StringBuilder sb = new StringBuilder();
 

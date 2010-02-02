@@ -36,12 +36,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Pessoa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Sacado;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
@@ -68,15 +69,15 @@ public class TestCLBanrisulCobrancaRegistrada {
 	@Before
 	public void inicializa() {
 
-		ContaBancaria contaBancaria = new ContaBancaria(
-				BancoSuportado.BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.create());
-		contaBancaria
-		.setCarteira(new Carteira(1, TipoDeCobranca.COM_REGISTRO));
+		Sacado sacado = new Sacado("Sacado");
+		Cedente cedente = new Cedente("Cedente");
+		
+		ContaBancaria contaBancaria = new ContaBancaria(BancoSuportado.BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.create());
+		contaBancaria.setCarteira(new Carteira(1, TipoDeCobranca.COM_REGISTRO));
 		contaBancaria.setAgencia(new Agencia(100, "1"));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(1));
 
-		titulo = new Titulo(contaBancaria,
-				new Pessoa("Nordeste Fomento"), new Pessoa("João Pereira"));
+		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("22832563");
 		clBanrisulCobrancaRegistrada = CampoLivreFactory.create(titulo);
 		
