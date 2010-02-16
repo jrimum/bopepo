@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  * 
- * Created at: 30/03/2008 - 18:13:47
+ * Created at: 15/02/2010 - 18:40:47
  * 
  * ================================================================================
  * 
@@ -23,7 +23,7 @@
  * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
  * reger permissões e limitações sob esta LICENÇA.
  * 
- * Criado em: 30/03/2008 - 18:13:47
+ * Criado em: 15/02/2010 - 18:40:47
  * 
  */
 
@@ -32,7 +32,6 @@ package br.com.nordestefomento.jrimum.bopepo.campolivre;
 import org.junit.Before;
 
 import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
@@ -43,7 +42,7 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 /**
  * <p>
  * Teste unitário do campo livre do banco do brasil com o nosso número
- * de tamanho igual a 11.
+ * de tamanho igual a 10.
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
@@ -55,7 +54,7 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * 
  * @version 0.2
  */
-public class TestCLBancoDoBrasilNN11 extends CampoLivreTest {
+public class TestCLBancoDoBrasilNN10 extends CampoLivreTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -66,9 +65,6 @@ public class TestCLBancoDoBrasilNN11 extends CampoLivreTest {
 		ContaBancaria contaBancaria = new ContaBancaria();
 		contaBancaria.setBanco(BancoSuportado.BANCO_DO_BRASIL.create());
 		
-		Agencia agencia = new Agencia(1234, "1");
-		contaBancaria.setAgencia(agencia);
-		
 		contaBancaria.setCarteira(new Carteira(5));
 		
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
@@ -76,11 +72,11 @@ public class TestCLBancoDoBrasilNN11 extends CampoLivreTest {
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		
 		Titulo titulo = new Titulo(contaBancaria, sacado, cedente);
-		titulo.setNossoNumero("12345678901");		
+		titulo.setNossoNumero("1234567890");		
 		
 		campoLivre = CampoLivreFactory.create(titulo);
 		
-		setClasse(CLBancoDoBrasilNN11.class);
-		setStrCampoLivre("1234567890112340000678905");
+		setClasse(CLBancoDoBrasilNN10.class);
+		setStrCampoLivre("0000000006789123456789005");
 	}
 }
