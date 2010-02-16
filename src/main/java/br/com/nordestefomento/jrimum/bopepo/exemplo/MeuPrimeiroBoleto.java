@@ -120,7 +120,10 @@ public class MeuPrimeiroBoleto {
 		 * Definidos como padrão pela FEBRABAN.
 		 * Verifique na documentação.
 		 */
-		titulo.setDadosBancarios(new DadoBancario(){});
+		titulo.setDadoBancario(new DadoBancario<?>(){
+			public Object getDado() {
+				return null;
+			}});
 		
 		/* 
 		 * INFORMANDO OS DADOS SOBRE O BOLETO.
