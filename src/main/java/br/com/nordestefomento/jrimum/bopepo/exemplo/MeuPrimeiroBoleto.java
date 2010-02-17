@@ -12,7 +12,7 @@ import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.CEP;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.Endereco;
 import br.com.nordestefomento.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.Banco;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.ParametrosBancarios;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Cedente;
@@ -118,14 +118,14 @@ public class MeuPrimeiroBoleto {
 		 * 
 		 * Definidos como padrão pela FEBRABAN. Verifique na documentação.
 		 */
-		titulo.setDadoBancario(new ParametrosBancarios("dadoNecessario",
-				"Por exemplo, uma constante string").add("outroDadoNecessario:Constante1", new Integer(1)));
+		titulo.setParametrosBancarios(new ParametrosBancariosMap("dadoNecessario",
+				"Por exemplo, uma constante string").adicione("outroDadoNecessario:Constante1", new Integer(1)));
 		
 		/*
 		 * Para recuperar um dado
 		 */
-		String dado = titulo.getDadoBancario().getValor("dadoNecessario");
-		System.out.println("Um dado necessário. "+dado);
+		String dado = titulo.getParametrosBancarios().getValor("dadoNecessario");
+		System.out.println("Parâmetros Bancários: um dado necessário. "+dado);
 
 		/*
 		 * INFORMANDO OS DADOS SOBRE O BOLETO.

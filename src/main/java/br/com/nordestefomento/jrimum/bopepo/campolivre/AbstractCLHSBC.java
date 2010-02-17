@@ -27,7 +27,6 @@
  * 
  */
 
-
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
@@ -60,27 +59,25 @@ abstract class AbstractCLHSBC extends AbstractCampoLivre {
 
 	protected AbstractCLHSBC(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
-		
+
 	}
 
-	static CampoLivre create(Titulo titulo){
-		
+	static CampoLivre create(Titulo titulo) {
+
 		CampoLivre campoLivre = null;
 		ContaBancaria conta = titulo.getContaBancaria();
-		
+
 		if (conta.getCarteira().getTipoCobranca() == TipoDeCobranca.SEM_REGISTRO) {
-			
-			if(titulo.getDadoBancario() != null){				
-				campoLivre = new CLHSBCCobrancaNaoRegistrada(titulo); 
-			}
+
+			campoLivre = new CLHSBCCobrancaNaoRegistrada(titulo);
+
+		} else {
+			throw new CampoLivreException("Atualmente para o banco" + " "
+					+ BancoSuportado.HSBC.getInstituicao()
+					+ " só é possível a montagem do campo livre para carteiras"
+					+ " não registradas.");
 		}
-		else {
-			throw new CampoLivreException("Atualmente para o banco" +
-					" " + BancoSuportado.HSBC.getInstituicao() + 
-					" só é possível a montagem do campo livre para carteiras" +
-					" não registradas.");
-		}
-		
+
 		return campoLivre;
 	}
 }
