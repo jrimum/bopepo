@@ -30,8 +30,10 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.ParametrosBancarios;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.hsbc.TipoIdentificadorCNR;
 import br.com.nordestefomento.jrimum.utilix.BancoUtil;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
@@ -121,6 +123,10 @@ class CLHSBCCobrancaNaoRegistrada extends AbstractCLHSBC {
 	 */
 	CLHSBCCobrancaNaoRegistrada(Titulo titulo) {
 		super(FIELDS_LENGTH, STRING_LENGTH);
+		
+		TipoIdentificadorCNR tipoIdentificadorCNR = titulo.getDadoBancario().getValor("tipoIdentificadorCNR");
+		
+		tipoIdentificadorCNR.getConstante();
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		String nossoNumero = titulo.getNossoNumero();
