@@ -30,12 +30,7 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
-import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
@@ -45,12 +40,23 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaCo
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
-public class TestCLBancoReal {
+/**
+ * <p>
+ * Teste unitário do campo livre do banco real
+ * </p>
+ * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto
+ * @author Rômulo Augusto
+ * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
+ * 
+ * @since 0.2
+ * 
+ * @version 0.2
+ *
+ */
+public class TestCLBancoReal extends CampoLivreTest {
 	
-	private CampoLivre clReal;
-	
-	private Titulo titulo;
-
 	@Before
 	public void setUp() throws Exception {
 		
@@ -68,49 +74,14 @@ public class TestCLBancoReal {
 		numeroDaConta.setDigitoDaConta("0");//Não importa para o CampoLivre
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		
-		titulo = new Titulo(contaBancaria, sacado, cedente);
+		Titulo titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNumeroDoDocumento("1234567890123");
 		titulo.setNossoNumero("5020");
-	}
-
-	@Test
-	public void testGetInstanceTitulo() throws NotSupportedBancoException, NotSupportedCampoLivreException {
 		
-		//básico
-		clReal = CampoLivreFactory.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 		
-		assertNotNull(clReal);
-	}
-
-	@Test
-	public void testToString() throws NotSupportedBancoException, NotSupportedCampoLivreException {
-		
-		//básico feliz
-		clReal = CampoLivreFactory.create(titulo);
-		
-		assertTrue(clReal.write().length() == 25);
-		assertEquals("1018001632491234567890123",clReal.write());
-		
-		//Infeliz básico
-		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setBanco(BancoSuportado.BANCO_ABN_AMRO_REAL.create());
-		
-		Agencia agencia = new Agencia(0, "1");
-		contaBancaria.setAgencia(agencia);
-		
-		NumeroDaConta numeroDaConta = new NumeroDaConta();
-		numeroDaConta.setCodigoDaConta(0);
-		numeroDaConta.setDigitoDaConta("0");
-		contaBancaria.setNumeroDaConta(numeroDaConta);
-		
-		titulo.getContaBancaria();
-		titulo.setNumeroDoDocumento("0");
-		
-		clReal = CampoLivreFactory.create(titulo);
-		
-		assertTrue(clReal.write().length() == 25);
-		assertEquals("0000000000000000000000000",clReal.write());
-		
+		setClasse(CLBancoReal.class);
+		setStrCampoLivre("1018001632491234567890123");
 	}
 
 }

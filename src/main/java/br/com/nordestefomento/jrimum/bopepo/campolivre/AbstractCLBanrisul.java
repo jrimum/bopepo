@@ -69,21 +69,20 @@ abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 		super(fieldsLength, stringLength);
 	}
 
-	static CampoLivre create(Titulo titulo)
-			throws NotSupportedCampoLivreException {
+	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
+		
 		final CampoLivre campoLivre;
 
 		switch (titulo.getContaBancaria().getCarteira().getTipoCobranca()) {
-		case COM_REGISTRO:
-			campoLivre = new CLBanrisulCobrancaRegistrada(titulo);
-			break;
-		case SEM_REGISTRO:
-			campoLivre = new CLBanrisulCobrancaNaoRegistrada(titulo);
-			break;
-		default:
-			throw new NotSupportedCampoLivreException(
-					"Campo livre diponível apenas para"
-							+ " carteiras com ou sem cobrança.");
+
+			case COM_REGISTRO:
+				campoLivre = new CLBanrisulCobrancaRegistrada(titulo);
+				break;
+			case SEM_REGISTRO:
+				campoLivre = new CLBanrisulCobrancaNaoRegistrada(titulo);
+				break;
+			default:
+				throw new NotSupportedCampoLivreException("Campo livre diponível apenas para carteiras com ou sem cobrança.");
 		}
 
 		return campoLivre;
@@ -102,8 +101,7 @@ abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 	 */
 	protected String calculaDuploDigito(String seisPrimeirosCamposConcatenados) {
 		// calcula soma do módulo 10 a partir dos seis primeiros campos concatenados
-		final int somaMod10 = Modulo.calculeSomaSequencialMod10(
-				seisPrimeirosCamposConcatenados, 1, 2);
+		final int somaMod10 = Modulo.calculeSomaSequencialMod10(seisPrimeirosCamposConcatenados, 1, 2);
 		
 		// calcula resto do módulo 10 a partir do resultado da soma
 		final byte restoMod10 = calculeRestoMod10(somaMod10);
@@ -114,8 +112,7 @@ abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 		
 		// calcula soma do módulo 10 a partir dos seis primeiros campos concatenados
 		// incluindo o primeiro dígito
-		int somaMod11 = Modulo.calculeSomaSequencialMod11(
-				seisPrimeirosCamposConcatenados + primeiroDV, 2, 7);
+		int somaMod11 = Modulo.calculeSomaSequencialMod11(seisPrimeirosCamposConcatenados + primeiroDV, 2, 7);
 		
 		// calcula o resto do módulo 11 a partir do resultado da soma
 		byte restoMod11 = calculeRestoMod11(somaMod11);
@@ -129,8 +126,7 @@ abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 			
 			// calcula a soma do módulo 11 agora com um valor
 			// válido para o DV
-			somaMod11 = Modulo.calculeSomaSequencialMod11(
-					seisPrimeirosCamposConcatenados + primeiroDV, 2, 7);
+			somaMod11 = Modulo.calculeSomaSequencialMod11(seisPrimeirosCamposConcatenados + primeiroDV, 2, 7);
 			
 			// calcula o resto do módulo 11 a partir do resultado da soma
 			restoMod11 = calculeRestoMod11(somaMod11);
@@ -241,11 +237,13 @@ abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 
 	@SuppressWarnings("unchecked")
 	protected String concateneOsCamposExistentesAteOMomento() {
-		final StringBuilder camposExistentesAteOMomentoConcatenados = new StringBuilder(
-				StringUtils.EMPTY);
+		
+		final StringBuilder camposExistentesAteOMomentoConcatenados = new StringBuilder(StringUtils.EMPTY);
+		
 		for (Field field : this) {
 			camposExistentesAteOMomentoConcatenados.append(field.write());
 		}
+		
 		return camposExistentesAteOMomentoConcatenados.toString();
 	}
 

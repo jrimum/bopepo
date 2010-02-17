@@ -30,7 +30,6 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -59,13 +58,12 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * 
  * @version 0.2
  */
-public class TestCLBanestes {
+public class TestCLBanestes extends CampoLivreTest {
 	
-	private CampoLivre clBanestes;
 	private Titulo titulo;
 	
 	@Before
-	public void inicializa() {
+	public void setUp() {
 		
 		Sacado sacado = new Sacado("Sacado");
 		Cedente cedente = new Cedente("Cedente");
@@ -76,79 +74,69 @@ public class TestCLBanestes {
 
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("10297");
-		clBanestes = CampoLivreFactory.create(titulo);
 		
+		campoLivre = CampoLivreFactory.create(titulo);
+
+		setClasse(CLBanestes.class);
+		setStrCampoLivre("0001029700007730070402182");
 	}
 	
-	@Test
-	public void seOCampoLivreNaoEstaNulo() {
-		assertNotNull("Se o campo livre com registro criado não é nulo.",
-				clBanestes);
-	}
-	
-	@Test
-	public void seOWriteRetornaUmaStringNaoNula() {
-		assertNotNull("Todo campo livre retorna uma string não nula.",
-				clBanestes.write());
-	}
-	
-	@Test
-	public void seOTamanhoRetornadoPeloWriteEh25() {
-		assertEquals("Todo campo livre com registro deve ter tamanho 25."
-				+ clBanestes, 25, clBanestes
-				.write().length());
-	}
-	
-	@Test
-	public void seOWriteRetornaOValorEsperadoParaUmaCarteiraComRegistro() {
-		assertEquals(
-				"Testando um campo livre válido da carteira com registro.",
-				"0001029700007730070402182", clBanestes.write());
+	/**
+	 * Configura, no título, a carteira utilizada no teste.
+	 * 
+	 * @param carteira
+	 */
+	private void setCarteiraDoTitulo(Carteira carteira) {
+		titulo.getContaBancaria().setCarteira(carteira);
 	}
 	
 	@Test
 	public void seOWriteRetornaOValorEsperadoParaUmaCarteiraSemRegistro() {
-		final Carteira carteiraSemRegistro = new Carteira();
-		carteiraSemRegistro.setTipoCobranca(TipoDeCobranca.SEM_REGISTRO);
-		titulo.getContaBancaria().setCarteira(carteiraSemRegistro);
-		clBanestes = CampoLivreFactory.create(titulo);
-		assertEquals(
-				"Testando um campo livre válido da carteira sem registro.",
-				"0001029700007730070202108", clBanestes.write());
+		
+		final Carteira carteira = new Carteira();
+		carteira.setTipoCobranca(TipoDeCobranca.SEM_REGISTRO);
+		setCarteiraDoTitulo(carteira);
+		
+		campoLivre = CampoLivreFactory.create(titulo);
+		
+		assertEquals("Testando um campo livre válido da carteira sem registro.", "0001029700007730070202108", campoLivre.write());
 	}
 	
 	@Test
 	public void seOWriteRetornaOValorEsperadoParaUmaCarteiraCaucionada() {
-		final Carteira carteiraCaucionada = new Carteira(3, TipoDeCobranca.COM_REGISTRO);
-		titulo.getContaBancaria().setCarteira(carteiraCaucionada);
-		clBanestes = CampoLivreFactory.create(titulo);
-		assertEquals(
-				"Testando um campo livre válido da carteira caucionada.",
-				"0001029700007730070302196", clBanestes.write());
+		
+		setCarteiraDoTitulo(new Carteira(3, TipoDeCobranca.COM_REGISTRO));
+
+		campoLivre = CampoLivreFactory.create(titulo);
+		
+		assertEquals("Testando um campo livre válido da carteira caucionada.", "0001029700007730070302196", campoLivre.write());
 	}
 	
 	@Test(expected=CampoLivreException.class)
 	public void criacaoSemTipoDeCobranca() {
-		titulo.getContaBancaria().setCarteira(new Carteira());
+		
+		setCarteiraDoTitulo(new Carteira());
 		CampoLivreFactory.create(titulo);
 	}
 	
 	@Test(expected=CampoLivreException.class)
 	public void criacaoSemNumeroDaConta() {
+
 		titulo.getContaBancaria().setNumeroDaConta(null);
 		CampoLivreFactory.create(titulo);
 	}
 	
 	@Test(expected=CampoLivreException.class)
 	public void criacaoSemNossoNumero() {
+		
 		titulo.setNossoNumero(null);
 		CampoLivreFactory.create(titulo);
 	}
 	
 	@Test(expected=CampoLivreException.class)
-	public void criacaoNossoNumeroMaiorQue8Digitos(){
+	public void criacaoNossoNumeroMaiorQue8Digitos() {
+		
 		titulo.setNossoNumero("123456789");
 		CampoLivreFactory.create(titulo);
 	}
-	
 }

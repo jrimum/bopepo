@@ -30,12 +30,7 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
-import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Cedente;
@@ -47,26 +42,20 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 /**
  * 
  * Teste unitário do campo livre do banco do brasil com o nosso número
- * de tamanho igual a 11.
- * 
+ * de tamanho igual a 17.
  * 
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author Misael Barreto
  * @author Rômulo Augusto
- * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento
- *         Mercantil</a>
+ * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
  * 
  * @since 0.2
  * 
  * @version 0.2
  */
-public class TestCLBancoDoBrasilNN17{
+public class TestCLBancoDoBrasilNN17 extends CampoLivreTest {
 
-	private CampoLivre clBancoDoBrasil;
-	
-	private Titulo titulo;
-	
 	@Before
 	public void setUp() throws Exception {
 		
@@ -80,44 +69,13 @@ public class TestCLBancoDoBrasilNN17{
 		numeroDaConta.setCodigoDaConta(123456);
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		
-		titulo = new Titulo(contaBancaria, sacado, cedente);
+		Titulo titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("12345678901234567");
 		
+		campoLivre = CampoLivreFactory.create(titulo);
+		
+		setClasse(CLBancoDoBrasilNN17.class);
+		setStrCampoLivre("1234561234567890123456721");
 	}
 
-	@Test
-	public void testGetInstanceTitulo() throws NotSupportedBancoException, NotSupportedCampoLivreException {
-		
-		//básico
-		clBancoDoBrasil = CampoLivreFactory.create(titulo);
-		
-		assertNotNull(clBancoDoBrasil);
-	}
-	
-	@Test
-	public void testWrite() throws NotSupportedBancoException, NotSupportedCampoLivreException {
-		
-		//básico feliz
-		clBancoDoBrasil = CampoLivreFactory.create(titulo);
-		
-		assertTrue(clBancoDoBrasil.write().length() == 25);
-		assertEquals("1234561234567890123456721",clBancoDoBrasil.write());
-		
-		//Infeliz básico
-		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setBanco(BancoSuportado.BANCO_DO_BRASIL.create());
-
-		NumeroDaConta numeroDaConta = new NumeroDaConta();
-		numeroDaConta.setCodigoDaConta(0);
-		contaBancaria.setNumeroDaConta(numeroDaConta);
-		
-		titulo.getContaBancaria();
-		
-		titulo.setNossoNumero("00000000000000001");
-		
-		clBancoDoBrasil = CampoLivreFactory.create(titulo);
-		
-		assertTrue(clBancoDoBrasil.write().length() == 25);
-		assertEquals("0000000000000000000000121",clBancoDoBrasil.write());
-	}
 }

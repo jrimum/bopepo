@@ -45,27 +45,22 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
- * 
  * <p>
- * DEFINIÇÃO DA CLASSE
+ * Teste unitário do campo livre do banco mercantil do brasil
  * </p>
  * 
- * <p>
- * OBJETIVO/PROPÓSITO
- * </p>
- * 
- * <p>
- * EXEMPLO:
- * </p> 
- * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto
  * @author Rômulo Augusto
+ * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
+ * 
+ * @since 0.2
  * 
  * @version 0.2
+ * 
  */
-public class TestCLMercantilDoBrasil {
+public class TestCLMercantilDoBrasil extends CampoLivreTest {
 
-	private CampoLivre clMercantil;
-	
 	private Titulo titulo;
 	
 	@Before
@@ -83,103 +78,19 @@ public class TestCLMercantilDoBrasil {
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("1234567890");
 		titulo.setDigitoDoNossoNumero("5");
+		
+		campoLivre = CampoLivreFactory.create(titulo);
+		
+		setClasse(CLMercantilDoBrasil.class);
+		setStrCampoLivre("1234123456789051234567892"); //Sem desconto
 	}
 	
 	@Test
-	public void testCreate() {
-		
-		try {
-			
-			clMercantil = CampoLivreFactory.create(titulo);
-			Assert.assertNotNull(clMercantil);
-			
-		} catch(NotSupportedCampoLivreException e) {
-			e.printStackTrace();
-			Assert.fail("O campo livre do banco Mercantil do Brasil deve estar sendo suportado.");
-		}
-		
-	}
-	
-	@Test
-	public void testWriteNotNull() {
-		
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertNotNull(campoLivre);
-	}
-
-	private String getCampoLivreComoString() {
-		clMercantil = CampoLivreFactory.create(titulo);
-		String campoLivre = clMercantil.write();
-		return campoLivre;
-	}
-	
-	@Test
-	public void testWriteCampo1Correto() {
-		
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("1234", campoLivre.substring(0, 4));
-	}
-	
-	@Test
-	public void testWriteCampo2Correto() {
-		
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("12345678905", campoLivre.substring(4, 15));
-	}
-	
-	@Test
-	public void testWriteCampo3Correto() {
-		
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("123456789", campoLivre.substring(15, 24));
-	}
-	
-	@Test
-	public void testWriteCampo4ComDesconto() {
+	public void testWriteComDesconto() {
 		
 		titulo.setDesconto(BigDecimal.TEN);
-		String campoLivre = getCampoLivreComoString();
+		campoLivre = CampoLivreFactory.create(titulo);
 		
-		Assert.assertEquals("0", campoLivre.substring(24, 25));
-	}
-	
-	@Test
-	public void testWriteCampo4SemDescontoNull() {
-
-		titulo.setDesconto(null);
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("2", campoLivre.substring(24, 25));
-	}
-	
-	@Test
-	public void testWriteCampo4SemDescontoZero() {
-
-		titulo.setDesconto(BigDecimal.ZERO);
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("2", campoLivre.substring(24, 25));
-	}
-	
-	@Test
-	public void testWriteCopmletoComDesconto() {
-		
-		titulo.setDesconto(BigDecimal.TEN);
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("1234123456789051234567890", campoLivre);
-	}
-	
-	@Test
-	public void testWriteCopmletoSemDesconto() {
-		
-		titulo.setDesconto(null);
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("1234123456789051234567892", campoLivre);
+		Assert.assertEquals("1234123456789051234567890", campoLivre.write());
 	}
 }

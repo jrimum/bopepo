@@ -54,8 +54,7 @@ abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
 		super(fieldsLength, stringLength);
 	}
 
-	static CampoLivre create(Titulo titulo)
-			throws NotSupportedCampoLivreException {
+	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 
 		CampoLivre campoLivre = null;
 

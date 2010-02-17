@@ -30,12 +30,7 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
-import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
@@ -46,10 +41,23 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaCo
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
-public class TestCLBradesco{
+/**
+ * <p>
+ * Teste unitário do campo livre do banco bradesco
+ * </p>
+ * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto
+ * @author Rômulo Augusto
+ * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
+ * 
+ * @since 0.2
+ * 
+ * @version 0.2
+ *
+ */
+public class TestCLBradesco extends CampoLivreTest {
 
-	private CampoLivre clBradesco;
-	
 	private Titulo titulo;
 
 	@Before
@@ -73,45 +81,9 @@ public class TestCLBradesco{
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("12345678901");
 		
+		campoLivre = CampoLivreFactory.create(titulo);
+		
+		setClasse(CLBradesco.class);
+		setStrCampoLivre("1234051234567890100067890");
 	}
-
-	@Test
-	public void testGetInstanceTitulo() throws NotSupportedBancoException, NotSupportedCampoLivreException {
-		
-		//básico
-		clBradesco = CampoLivreFactory.create(titulo);
-		
-		assertNotNull(clBradesco);
-	}
-	
-	@Test
-	public void testWrite() throws NotSupportedBancoException, NotSupportedCampoLivreException {
-		
-		//básico feliz
-		clBradesco = CampoLivreFactory.create(titulo);
-		
-		assertTrue(clBradesco.write().length() == 25);
-		assertEquals("1234051234567890100067890",clBradesco.write());
-		
-		//Infeliz básico
-		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setBanco(BancoSuportado.BANCO_BRADESCO.create());
-		
-		Agencia agencia = new Agencia(0, "1");
-		contaBancaria.setAgencia(agencia);
-		
-		contaBancaria.setCarteira(new Carteira(0));
-		
-		NumeroDaConta numeroDaConta = new NumeroDaConta();
-		numeroDaConta.setCodigoDaConta(0);
-		contaBancaria.setNumeroDaConta(numeroDaConta);
-		
-		titulo.setNossoNumero("0");
-		
-		clBradesco = CampoLivreFactory.create(titulo);
-		
-		assertTrue(clBradesco.write().length() == 25);
-		assertEquals("0000000000000000000000000",clBradesco.write());
-	}
-
 }

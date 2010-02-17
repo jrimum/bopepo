@@ -29,9 +29,6 @@
  */
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -61,13 +58,12 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * 
  * @version 0.2
  */
-public class TestCLBanrisulCobrancaNaoRegistrada {
+public class TestCLBanrisulCobrancaNaoRegistrada extends CampoLivreTest {
 
-	private CampoLivre clBanrisulCobrancaNaoRegistrada;
 	private Titulo titulo;
-
+	
 	@Before
-	public void inicializa() {
+	public void setUp() {
 		
 		Sacado sacado = new Sacado("Sacado");
 		Cedente cedente = new Cedente("Cedente");
@@ -79,74 +75,58 @@ public class TestCLBanrisulCobrancaNaoRegistrada {
 
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("22832563");
-		clBanrisulCobrancaNaoRegistrada = CampoLivreFactory.create(titulo);
-	}
 
-	@Test
-	public void seOCampoLivreNaoEstaNulo() {
-		assertNotNull("Se o campo livre sem registro criado não é nulo.",
-				clBanrisulCobrancaNaoRegistrada);
-	}
-
-	@Test
-	public void seOWriteRetornaUmaStringNaoNula() {
-		assertNotNull("Todo campo livre retorna uma string não nula.",
-				clBanrisulCobrancaNaoRegistrada.write());
-	}
-
-	@Test
-	public void seOTamanhoRetornadoPeloWriteEh25() {
-		assertEquals("Todo campo livre sem registro deve ter tamanho 25"
-				+ clBanrisulCobrancaNaoRegistrada, 25,
-				clBanrisulCobrancaNaoRegistrada.write().length());
-	}
-
-	@Test
-	public void seOWriteRetornaOValorEsperado() {
-		assertEquals(
-				"Testando um campo livre válido da carteira sem registro.",
-				"2110000000012283256304168", clBanrisulCobrancaNaoRegistrada
-						.write());
+		campoLivre = CampoLivreFactory.create(titulo);
+		
+		setClasse(CLBanrisulCobrancaNaoRegistrada.class);
+		setStrCampoLivre("2110000000012283256304168");
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void criacaoSemTipoDeCobranca() {
+		
 		titulo.getContaBancaria().setCarteira(new Carteira(1, null));
 		CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void criacaoSemAgencia() {
+		
 		titulo.getContaBancaria().setAgencia(null);
 		CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void criacaoSemNumeroDaConta() {
+		
 		titulo.getContaBancaria().setNumeroDaConta(null);
 		CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void criacaoSemNossoNumero() {
+		
 		titulo.setNossoNumero(null);
 		CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void criacaoAgenciaComCodigoMaiorQue3Digitos() {
+		
 		titulo.getContaBancaria().setAgencia(new Agencia(1000, "1"));
 		CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void criacaoNumeroDaContaMaiorQue7Digitos() {
+		
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(12345678));
 		CampoLivreFactory.create(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void criacaoNossoNumeroMaiorQue8Digitos() {
+		
 		titulo.setNossoNumero("123456789");
 		CampoLivreFactory.create(titulo);
 	}

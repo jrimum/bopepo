@@ -10,7 +10,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  * 
- * Created at: 19/07/2008 - 10:58:09
+ * Created at: 21/04/2008 - 22:36:47
  *
  * ================================================================================
  *
@@ -24,13 +24,13 @@
  * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
  * e limitações sob esta LICENÇA.
  * 
- * Criado em: 19/07/2008 - 10:58:09
+ * Criado em: 21/04/2008 - 22:36:47
  * 
  */
+	
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import org.junit.Before;
-import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
@@ -43,92 +43,45 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobr
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
- * 
  * <p>
- * Valida a implementação do campo livre com cobrança registrada
- * para o Banco Banrisul.
+ * Teste unitário do campo livre do banco safra para cobrança registrada
  * </p>
  * 
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author Misael Barreto
  * @author Rômulo Augusto
- * @author Samuel Valerio
+ * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
  * 
  * @since 0.2
  * 
  * @version 0.2
+ *
  */
-public class TestCLBanrisulCobrancaRegistrada extends CampoLivreTest {
-
+public class TestCLBancoSafraCobrancaRegistrada extends CampoLivreTest {
+	
 	private Titulo titulo;
 
 	@Before
-	public void setUp() {
-
+	public void setUp() throws Exception {
+		
 		Sacado sacado = new Sacado("Sacado");
 		Cedente cedente = new Cedente("Cedente");
+
+		ContaBancaria contaBancaria = new ContaBancaria();
+		contaBancaria.setBanco(BancoSuportado.BANCO_SAFRA.create());
 		
-		ContaBancaria contaBancaria = new ContaBancaria(BancoSuportado.BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.create());
-		contaBancaria.setCarteira(new Carteira(1, TipoDeCobranca.COM_REGISTRO));
-		contaBancaria.setAgencia(new Agencia(100, "1"));
-		contaBancaria.setNumeroDaConta(new NumeroDaConta(1));
-
+		contaBancaria.setAgencia(new Agencia(57, "1"));
+		contaBancaria.setNumeroDaConta(new NumeroDaConta(12345, "7"));
+		contaBancaria.setCarteira(new Carteira(123, TipoDeCobranca.COM_REGISTRO));
+		
 		titulo = new Titulo(contaBancaria, sacado, cedente);
-		titulo.setNossoNumero("22832563");
-
+		titulo.setNumeroDoDocumento("1234567");
+		titulo.setNossoNumero("12345678");
+		
 		campoLivre = CampoLivreFactory.create(titulo);
 		
-		setClasse(CLBanrisulCobrancaRegistrada.class);
-		setStrCampoLivre("1110000000012283256304172");
-	}
-
-	@Test(expected=CampoLivreException.class)
-	public void criacaoSemTipoDeCobranca() {
-		
-		titulo.getContaBancaria().setCarteira(new Carteira(1, null));
-		CampoLivreFactory.create(titulo);
-	}
-	
-	@Test(expected=CampoLivreException.class)
-	public void criacaoSemAgencia() {
-		
-		titulo.getContaBancaria().setAgencia(null);
-		CampoLivreFactory.create(titulo);
-	}
-
-	@Test(expected=CampoLivreException.class)
-	public void criacaoSemNumeroDaConta() {
-		
-		titulo.getContaBancaria().setNumeroDaConta(null);
-		CampoLivreFactory.create(titulo);
-	}
-	
-	@Test(expected=CampoLivreException.class)
-	public void criacaoSemNossoNumero() {
-		
-		titulo.setNossoNumero(null);
-		CampoLivreFactory.create(titulo);
-	}
-
-	@Test(expected=CampoLivreException.class)
-	public void criacaoAgenciaComCodigoMaiorQue3Digitos() {
-		
-		titulo.getContaBancaria().setAgencia(new Agencia(1000, "1"));
-		CampoLivreFactory.create(titulo);
-	}
-	
-	@Test(expected=CampoLivreException.class)
-	public void criacaoNumeroDaContaMaiorQue7Digitos() {
-		
-		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(12345678));
-		CampoLivreFactory.create(titulo);
-	}
-	
-	@Test(expected=CampoLivreException.class)
-	public void criacaoNossoNumeroMaiorQue8Digitos(){
-		
-		titulo.setNossoNumero("123456789");
-		CampoLivreFactory.create(titulo);
+		setClasse(CLBancoSafraCobrancaRegistrada.class);
+		setStrCampoLivre("7005710001234570123456782");
 	}
 
 }

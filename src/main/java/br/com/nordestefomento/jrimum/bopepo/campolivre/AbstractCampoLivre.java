@@ -128,7 +128,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 					break;
 
 				case BANCO_ABN_AMRO_REAL:
-					campoLivre = AbstractCLBancoABNAmroReal.create(titulo);
+					campoLivre = AbstractCLBancoReal.create(titulo);
 					break;
 
 				case CAIXA_ECONOMICA_FEDERAL:

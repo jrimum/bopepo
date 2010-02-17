@@ -29,6 +29,8 @@
  */
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
+import java.util.Arrays;
+
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
@@ -323,53 +325,26 @@ class CLNossaCaixa extends AbstractCLNossaCaixa {
 	 * </p>
 	 * 
 	 * @param modalidadeDaConta
+	 * @throws CampoLivreException caso a modalidade fornecida não seja um valor válido.
 	 * @return
 	 * 
 	 * @since
 	 */
 	private Integer convertaModalidadeDaConta(Integer modalidadeDaConta) {
 	
-		Integer modalidadeConvertida = null;
-	
-		switch (modalidadeDaConta) {
-		case 1:
-			modalidadeConvertida = 1;
-			break;
-	
-		case 4:
-			modalidadeConvertida = 4;
-			break;
-	
-		case 9:
-			modalidadeConvertida = 9;
-			break;
-	
-		case 13:
-			modalidadeConvertida = 3;
-			break;
-	
-		case 16:
-			modalidadeConvertida = 6;
-			break;
-	
-		case 17:
-			modalidadeConvertida = 7;
-			break;
-	
-		case 18:
-			modalidadeConvertida = 8;
-			break;
-	
+		final int[] modalidadesValidas = {1, 4, 9, 13, 16, 17, 18};
+		
+		if (modalidadeDaConta == null || Arrays.binarySearch(modalidadesValidas, modalidadeDaConta.intValue()) < 0) {
+			throw new CampoLivreException("Campo livre diponível somente para títulos de contas correntes com modalidades 01, 04, 09, 13, 16, 17 e 18.");
 		}
 		
-		if (modalidadeConvertida == null)  {
-			throw new CampoLivreException(
-					"Campo livre diponível somente para títulos de contas correntes " +
-					"com modalidades 01, 04, 09, 13, 16, 17 e 18."
-				);
-		}		
+		int modalidadeConvertida = modalidadeDaConta.intValue();
 		
-		return modalidadeDaConta;
+		if (modalidadeDaConta.intValue() > 9) {
+			modalidadeConvertida = modalidadeDaConta.intValue() - 10;
+		}
+	
+		return modalidadeConvertida;
 	}
 
 }

@@ -30,10 +30,6 @@
 	
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -47,9 +43,22 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
+/**
+ * <p>
+ * Teste unitário dos métodos comuns dos campos livre do banco safra
+ * </p>
+ * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto
+ * @author Rômulo Augusto
+ * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
+ * 
+ * @since 0.2
+ * 
+ * @version 0.2
+ *
+ */
 public class TestAbstractCLBancoSafra {
-	
-	private CampoLivre clBancoSafra;
 	
 	private Titulo titulo;
 
@@ -69,85 +78,33 @@ public class TestAbstractCLBancoSafra {
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNumeroDoDocumento("1234567");
 		titulo.setNossoNumero("12345678");
+		
+		CampoLivreFactory.create(titulo);
 	}
 
 	/**
 	 * Test method for {@link br.com.nordestefomento.jrimum.bopepo.campolivre.AbstractCLBancoSafra#create(br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo)}.
 	 */
-	@Test(expected=NotSupportedCampoLivreException.class)
+	@Test(expected = NotSupportedCampoLivreException.class)
 	public void testGetInstanceNotSupportedCampoLivreException() {
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		conta.getCarteira().setTipoCobranca(null);
 		
-		clBancoSafra = AbstractCLBancoSafra.create(titulo);
+		CampoLivreFactory.create(titulo);
 	}
 
-	@Test(expected=CampoLivreException.class)
+	@Test(expected = CampoLivreException.class)
 	public void testGetInstanceCampoLivreException() {
 		
 		ContaBancaria conta = titulo.getContaBancaria();
-		
-		System.out.println(">>>>>>>>>"+conta);
-		
 		conta.getCarteira().setTipoCobranca(TipoDeCobranca.COM_REGISTRO);
 	
 		String digito = null;
 		
 		conta.getNumeroDaConta().setDigitoDaConta(digito);
 		
-		clBancoSafra = AbstractCLBancoSafra.create(titulo);
+		CampoLivreFactory.create(titulo);
 	}
 	
-	@Test
-	public void testGetInstanceCobrancaRegistrada() {
-		
-		ContaBancaria conta = titulo.getContaBancaria();
-		
-		conta.getCarteira().setTipoCobranca(TipoDeCobranca.COM_REGISTRO);
-		
-		clBancoSafra = CampoLivreFactory.create(titulo);
-		
-		Assert.assertTrue(clBancoSafra instanceof CLBancoSafraCobrancaRegistrada);
-	}
-	
-	@Test
-	public void testGetInstanceCobrancaNaoRegistrada() {
-		
-		ContaBancaria conta = titulo.getContaBancaria();
-		
-		conta.getCarteira().setTipoCobranca(TipoDeCobranca.SEM_REGISTRO);
-				
-		clBancoSafra = CampoLivreFactory.create(titulo);
-		
-		assertTrue(clBancoSafra instanceof CLBancoSafraCobrancaNaoRegistrada);
-	}
-	
-	@Test
-	public void testWriteCobrancaRegistrada() {
-		
-		ContaBancaria conta = titulo.getContaBancaria();
-		
-		conta.getCarteira().setTipoCobranca(TipoDeCobranca.COM_REGISTRO);
-		
-		//básico feliz
-		clBancoSafra = CampoLivreFactory.create(titulo);
-		
-		assertTrue(clBancoSafra.write().length() == 25);
-		assertEquals("7005710001234570123456782", clBancoSafra.write());
-	}
-	
-	@Test
-	public void testWriteCobrancaNaoRegistrada() {
-		
-		ContaBancaria conta = titulo.getContaBancaria();
-		
-		conta.getCarteira().setTipoCobranca(TipoDeCobranca.SEM_REGISTRO);
-				
-		//básico feliz
-		clBancoSafra = CampoLivreFactory.create(titulo);
-		
-		assertTrue(clBancoSafra.write().length() == 25);
-		assertEquals("7123457000000000123456784", clBancoSafra.write());
-	}
 }

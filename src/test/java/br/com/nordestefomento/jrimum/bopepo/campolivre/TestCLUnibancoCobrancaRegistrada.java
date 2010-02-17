@@ -1,4 +1,3 @@
-
 /* 
  * Copyright 2008 JRimum Project
  * 
@@ -49,38 +48,27 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
-
 /**
- * 
  * <p>
- * DEFINIÇÃO DA CLASSE
- * </p>
- * 
- * <p>
- * OBJETIVO/PROPÓSITO
- * </p>
- * 
- * <p>
- * EXEMPLO: 
+ * Teste unitário do campo livre do banco unibanco para cobrança não registrada
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author Misael Barreto 
+ * @author Misael Barreto
  * @author Rômulo Augusto
+ * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
  * 
  * @since 0.2
  * 
  * @version 0.2
+ * 
  */
-
-public class TestCLUnibancoCobrancaRegistrada {
+public class TestCLUnibancoCobrancaRegistrada extends CampoLivreTest {
 
 	/**
 	 * String Campo Livre.
 	 */
 	private static String TEST_CASE = "0401123100019112233445540";
-
-	private CampoLivre campoLivre;
 
 	private Titulo titulo;
 	
@@ -145,6 +133,9 @@ public class TestCLUnibancoCobrancaRegistrada {
 		titulo.setDataDoVencimento(cal.getTime());
 
 		campoLivre = CampoLivreFactory.create(titulo);
+		
+		setClasse(CLUnibancoCobrancaRegistrada.class);
+		setStrCampoLivre("0401123100019112233445540");
 	}
 
 	@Test

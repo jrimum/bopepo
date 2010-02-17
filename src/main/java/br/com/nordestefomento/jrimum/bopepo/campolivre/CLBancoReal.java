@@ -90,7 +90,7 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.TipoDeModulo;
  * @version 0.2
  */
 	
-class CLBancoReal extends AbstractCLBancoABNAmroReal {
+class CLBancoReal extends AbstractCLBancoReal {
 
 	/**
 	 * 

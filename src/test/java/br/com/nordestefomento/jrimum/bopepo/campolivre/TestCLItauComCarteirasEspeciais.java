@@ -30,12 +30,7 @@
 
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 
 import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
@@ -46,9 +41,22 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaCo
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
-public class TestCLItauComCarteirasEspeciais {
-	
-	private CampoLivre clItauEspecial;
+/**
+ * <p>
+ * Teste unitário do campo livre do banco itaú para carteiras especiais
+ * </p>
+ * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto
+ * @author Rômulo Augusto
+ * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
+ * 
+ * @since 0.2
+ * 
+ * @version 0.2
+ *
+ */
+public class TestCLItauComCarteirasEspeciais extends CampoLivreTest {
 	
 	private Titulo titulo;
 	
@@ -72,47 +80,11 @@ public class TestCLItauComCarteirasEspeciais {
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNumeroDoDocumento("1234567");
 		titulo.setNossoNumero("12345678");
+		
+		campoLivre = CampoLivreFactory.create(titulo);
+		
+		setClasse(CLItauComCarteirasEspeciais.class);
+		setStrCampoLivre("1981234567812345671234580");
 	}
 	
-	@Test
-	public void testCreate() {
-		
-		Assert.assertNotNull(CampoLivreFactory.create(titulo));
-	}
-	
-	@Test
-	public void testWriteNaoNulo() {
-		
-		clItauEspecial = CampoLivreFactory.create(titulo);
-		
-		Assert.assertNotNull(clItauEspecial.write());
-	}
-	
-	@Test
-	public void testWriteValido() {
-		
-		clItauEspecial = CampoLivreFactory.create(titulo);
-		
-		Assert.assertEquals(25, clItauEspecial.write().length());
-		Assert.assertEquals("1981234567812345671234580", clItauEspecial.write());
-	}
-	
-	@Test
-	public void testWriteComValoresInvalidos() {
-		
-		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setBanco(BancoSuportado.BANCO_ITAU.create());
-		
-		contaBancaria.setAgencia(new Agencia(0, "1"));
-		contaBancaria.setCarteira(new Carteira(0));
-		contaBancaria.setNumeroDaConta(new NumeroDaConta(0, "0"));
-		
-		titulo.setNossoNumero("0");
-		titulo.setNumeroDoDocumento("0");
-		
-		clItauEspecial = CampoLivreFactory.create(titulo);
-		
-		assertTrue(clItauEspecial.write().length() == 25);
-		assertEquals("0000000000000000000000000",clItauEspecial.write());
-	}
 }

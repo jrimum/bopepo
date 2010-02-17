@@ -1,8 +1,6 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,14 +15,27 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
-public class TestCLUnibancoCobrancaNaoRegistrada {
+/**
+ * <p>
+ * Teste unitário do campo livre do banco unibanco para cobrança não registrada
+ * </p>
+ * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto
+ * @author Rômulo Augusto
+ * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
+ * 
+ * @since 0.2
+ * 
+ * @version 0.2
+ *
+ */
+public class TestCLUnibancoCobrancaNaoRegistrada extends CampoLivreTest {
 
 	/**
 	 * String Campo Livre.
 	 */
 	private static String TEST_CASE = "5123456100112233445566777";
-
-	private CampoLivre campoLivre;
 
 	private Titulo titulo;
 
@@ -86,13 +97,9 @@ public class TestCLUnibancoCobrancaNaoRegistrada {
 		titulo.setDigitoDoNossoNumero("7");
 
 		campoLivre = CampoLivreFactory.create(titulo);
-	}
-
-	@Test
-	public final void testGetInstance() {
-
-		assertNotNull(campoLivre);
-		assertTrue(campoLivre instanceof CLUnibancoCobrancaNaoRegistrada);
+		
+		setClasse(CLUnibancoCobrancaNaoRegistrada.class);
+		setStrCampoLivre("5123456100112233445566777");
 	}
 
 	@Test(expected = CampoLivreException.class)

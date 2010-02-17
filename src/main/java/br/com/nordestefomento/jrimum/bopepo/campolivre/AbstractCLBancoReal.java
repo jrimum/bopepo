@@ -27,13 +27,9 @@
  * 
  */
 
-
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
-
-
-
 
 /**
  * 
@@ -52,15 +48,14 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * 
  * @version 0.2
  */
-	
-abstract class AbstractCLBancoABNAmroReal extends AbstractCampoLivre {
+abstract class AbstractCLBancoReal extends AbstractCampoLivre {
 
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = -2020155324741631945L;
 
-	protected AbstractCLBancoABNAmroReal(Integer fieldsLength, Integer stringLength) {
+	protected AbstractCLBancoReal(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 

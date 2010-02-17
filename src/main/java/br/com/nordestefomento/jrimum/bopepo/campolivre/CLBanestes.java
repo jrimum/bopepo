@@ -104,49 +104,59 @@ class CLBanestes extends AbstractCLBanestes {
 	private static final long serialVersionUID = 476678476727564241L;
 	
 	private static final Integer FIELDS_LENGTH = 5;
-	private static final Integer STRING_LENGTH = 25;
 
 	public CLBanestes(Titulo titulo) {
+		
 		super(FIELDS_LENGTH, STRING_LENGTH);
 		
-		this.add(new Field<Integer>(Integer.valueOf(titulo.getNossoNumero()),
-				8, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria()
-				.getNumeroDaConta().getCodigoDaConta(), 11, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(Integer.valueOf(titulo.getNossoNumero()), 8, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 11, Filler.ZERO_LEFT));
 		
 		final Integer codigoDaCarteiraDeCobranca = titulo.getContaBancaria().getCarteira().getCodigo();
 		
-		if (exists(codigoDaCarteiraDeCobranca))
+		if (exists(codigoDaCarteiraDeCobranca)) {
 			this.add(new Field<Integer>(codigoDaCarteiraDeCobranca, 1));
-		else {
+			
+		} else {
+			
 			final TipoDeCobranca tipoDeCobranca = titulo.getContaBancaria().getCarteira().getTipoCobranca();
+			
 			switch (tipoDeCobranca) {
+			
 				case SEM_REGISTRO:
 					this.add(new Field<Integer>(2, 1));
 					break;
+					
 				case COM_REGISTRO:
 					if (codigoDaCarteiraDeCobranca >= 3 && codigoDaCarteiraDeCobranca <= 7) {
+						
 						this.add(new Field<Integer>(codigoDaCarteiraDeCobranca, 1));
 						break;
-					} else
+						
+					} else {
 						throw new CampoLivreException("Código da carteira de cobrança com registro deve ser" +
-							" especificado com 3,4,5,6 ou 7. Valor atual = [" + 
-							codigoDaCarteiraDeCobranca + "]");
+							" especificado com 3,4,5,6 ou 7. Valor atual = [" + codigoDaCarteiraDeCobranca + "]");
+					}
+					
 				default:
-					if (tipoDeCobranca == null)
+					
+					if (tipoDeCobranca == null) {
 						throw new CampoLivreException("Tipo de cobrança da carteira não foi especificado!");
-					else
-						throw new CampoLivreException("Tipo de cobrança ["+ tipoDeCobranca  +"] não é suportado!");
+					} else {
+						throw new CampoLivreException("Tipo de cobrança [" + tipoDeCobranca  + "] não é suportado!");
+					}
 			}
 		}
 		
 		this.add(new Field<Byte>(titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigo().byteValue(), 3, Filler.ZERO_LEFT));
-		this.setFieldsLength(this.size());
-		this.setStringLength(23);
-		this.add(new Field<Byte>(calculaDuploDV(this.write()), 2, Filler.ZERO_LEFT));
-		this.setFieldsLength(this.size());
-		this.setStringLength(25);
 		
+		this.setFieldsLength(this.size());
+		this.setStringLength(STRING_LENGTH - 2);
+		
+		this.add(new Field<Byte>(calculaDuploDV(this.write()), 2, Filler.ZERO_LEFT));
+		
+		this.setFieldsLength(this.size());
+		this.setStringLength(STRING_LENGTH);
 	}
 	
 	/**
@@ -178,7 +188,7 @@ class CLBanestes extends AbstractCLBanestes {
 			}
 			segundoDV = (byte) new Modulo(TipoDeModulo.MODULO11, 7, 2).calcule(numero + primeiroDV);
 		} else {
-				segundoDV = (byte) (11 - restoDoModulo11);
+			segundoDV = (byte) (11 - restoDoModulo11);
 		}
 		
 		duploDV = Byte.parseByte(String.valueOf(primeiroDV) + String.valueOf(segundoDV)); 
@@ -206,8 +216,4 @@ class CLBanestes extends AbstractCLBanestes {
 		return primeiroDV;
 	}
 
-
 }
-
-
-

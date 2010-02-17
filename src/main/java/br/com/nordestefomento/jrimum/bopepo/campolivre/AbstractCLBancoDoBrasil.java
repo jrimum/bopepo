@@ -48,11 +48,7 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * 
  * @version 0.2
  */
-
 abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
-	
-	
-	
 	
 	/**
 	 *
@@ -64,7 +60,6 @@ abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
 		super(fieldsLength, stringLength);
 	}
 
-	
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException{
 				
 		CampoLivre campoLivre = null;
@@ -85,7 +80,6 @@ abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
 				"17 posições(convênio com 6)."
 			);
 		}
-
 
 		return campoLivre;
 	}

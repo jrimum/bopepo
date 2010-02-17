@@ -31,9 +31,7 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -46,9 +44,22 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.NumeroDaCo
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
-public class TestCLItauPadrao {
-	
-	private CampoLivre clItauPadrao;
+/**
+ * <p>
+ * Teste unitário do campo livre do banco itaú para carteiras padrão
+ * </p>
+ * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto
+ * @author Rômulo Augusto
+ * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
+ * 
+ * @since 0.2
+ * 
+ * @version 0.2
+ *
+ */
+public class TestCLItauPadrao extends CampoLivreTest {
 	
 	private Titulo titulo;
 	
@@ -72,59 +83,21 @@ public class TestCLItauPadrao {
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNumeroDoDocumento("1234567");
 		titulo.setNossoNumero("12345678");
+		
+		campoLivre = CampoLivreFactory.create(titulo);
+		
+		setClasse(CLItauPadrao.class);
+		setStrCampoLivre("1101234567880057123457000");
 	}
 
 	@Test
-	public void testCreate() {
-		
-		Assert.assertNotNull(CampoLivreFactory.create(titulo));
-	}
-	
-	@Test
-	public void testWriteNaoNulo() {
-		
-		clItauPadrao = CampoLivreFactory.create(titulo);
-		
-		Assert.assertNotNull(clItauPadrao.write());
-	}
-	
-	@Test
-	public void testWriteValido() {
-		
-		clItauPadrao = CampoLivreFactory.create(titulo);
-		
-		Assert.assertEquals(25, clItauPadrao.write().length());
-		Assert.assertEquals("1101234567880057123457000", clItauPadrao.write());
-	}
-	
-	@Test
-	public void testWriteComValoresInvalidos() {
-		
-		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setBanco(BancoSuportado.BANCO_ITAU.create());
-		
-		contaBancaria.setAgencia(new Agencia(0, "1"));
-		contaBancaria.setCarteira(new Carteira(0));
-		contaBancaria.setNumeroDaConta(new NumeroDaConta(0, "0"));
-		
-		titulo.setNossoNumero("0");
-		titulo.setNumeroDoDocumento("0");
-		
-		clItauPadrao = CampoLivreFactory.create(titulo);
-		
-		assertTrue(clItauPadrao.write().length() == 25);
-		assertEquals("0000000000000000000000000",clItauPadrao.write());
-	}
-	
-	@Test
 	public void testWriteParaCarteirasQueNaoPrecisamDeContaEAgencia() {
 		
-		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		contaBancaria.setCarteira(new Carteira(198));
+		titulo.getContaBancaria().setCarteira(new Carteira(198));
 		
-		clItauPadrao = CampoLivreFactory.create(titulo);
+		campoLivre = CampoLivreFactory.create(titulo);
 		
-		assertTrue(clItauPadrao.write().length() == 25);
-		assertEquals("1981234567812345671234580", clItauPadrao.write());
+		assertEquals(25, campoLivre.write().length());
+		assertEquals("1981234567812345671234580", campoLivre.write());
 	}
 }

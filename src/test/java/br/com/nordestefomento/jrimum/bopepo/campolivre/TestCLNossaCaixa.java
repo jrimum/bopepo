@@ -27,9 +27,8 @@
  * Criado em: 03/10/2008 - 11:39:10
  * 
  */
-package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
-import junit.framework.Assert;
+package br.com.nordestefomento.jrimum.bopepo.campolivre;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,27 +43,21 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
- * 
  * <p>
- * DEFINIÇÃO DA CLASSE
+ * Teste unitário do campo livre do banco nossa caixa
  * </p>
  * 
- * <p>
- * OBJETIVO/PROPÓSITO
- * </p>
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Misael Barreto
+ * @author Rômulo Augusto
+ * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
  * 
- * <p>
- * EXEMPLO:
- * </p> 
- * 
- * @author Rômulo
+ * @since 0.2
  * 
  * @version 0.2
  */
-public class TestCLNossaCaixa {
+public class TestCLNossaCaixa extends CampoLivreTest {
 
-	private CampoLivre clNossaCaixa;
-	
 	private Titulo titulo;
 	
 	@Before
@@ -81,97 +74,27 @@ public class TestCLNossaCaixa {
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("997654321");
 		titulo.setDigitoDoNossoNumero("1");
+		
+		campoLivre = CampoLivreFactory.create(titulo);
+		
+		setClasse(CLNossaCaixa.class);
+		setStrCampoLivre("9976543210001300281815107");
 	}
 	
-	@Test
-	public void testCreate() {
+	@Test(expected = CampoLivreException.class)
+	public void testCodigoDaModalidadeNull() {
+	
+		Integer codigo = null;
+		titulo.getContaBancaria().getModalidade().setCodigo(codigo);
 		
-		try {
-			
-			clNossaCaixa = CampoLivreFactory.create(titulo);
-			Assert.assertNotNull(clNossaCaixa);
-			
-		} catch(NotSupportedCampoLivreException e) {
-			e.printStackTrace();
-			Assert.fail("O campo livre do banco Nossa Caixa deve estar sendo suportado.");
-		}
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 	
-	private String getCampoLivreComoString() {
-		clNossaCaixa = CampoLivreFactory.create(titulo);
-		String campoLivre = clNossaCaixa.write();
-		return campoLivre;
-	}
+	@Test(expected = CampoLivreException.class)
+	public void testCodigoDaModalidadeInvalido() {
 	
-	@Test
-	public void testWriteNotNull() {
+		titulo.getContaBancaria().getModalidade().setCodigo(10);
 		
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertNotNull(campoLivre);
-	}
-	
-	@Test
-	public void testWriteCampo1Correto() {
-		
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("9", campoLivre.substring(0, 1));
-	}
-	
-	@Test
-	public void testWriteCampo2Correto() {
-		
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("90000001", campoLivre.substring(1, 9));
-	}
-	
-	@Test
-	public void testWriteCampo3Correto() {
-		
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("0001", campoLivre.substring(9, 13));
-	}
-	
-	@Test
-	public void testWriteCampo4Correto() {
-		
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("3", campoLivre.substring(13, 14));
-	}
-	
-	@Test
-	public void testWriteCampo5Correto() {
-		
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("002818", campoLivre.substring(14, 20));
-	}
-	
-	@Test
-	public void testWriteCampo6Correto() {
-		
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("151", campoLivre.substring(20, 23));
-	}
-	
-	@Test
-	public void testWriteCampo7Correto() {
-		
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("3", campoLivre.substring(23, 24));
-	}
-	
-	@Test
-	public void testWriteCampo8Correto() {
-		
-		String campoLivre = getCampoLivreComoString();
-		
-		Assert.assertEquals("0", campoLivre.substring(24, 25));
+		campoLivre = CampoLivreFactory.create(titulo);
 	}
 }
