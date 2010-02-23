@@ -85,9 +85,19 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	protected AbstractCampoLivre(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
-
-	static CampoLivre create(Titulo titulo)
-			throws NotSupportedBancoException, NotSupportedCampoLivreException, CampoLivreException {
+	
+	/**
+	 * 
+	 * @param titulo
+	 * @return
+	 * 
+	 * @throws NotSupportedBancoException Caso o banco informado na conta bancária não tenha nenhuma
+	 * implementação de campo livre.
+	 * @throws NotSupportedCampoLivreException Caso exista implementações de campo livre para o banco informa
+	 * na conta bancária, mas nenhuma dessas implementações foram adequadas para os dados do título.
+	 * @throws CampoLivreException Caso ocorra algum problema na geração do campo livre.
+	 */
+	static CampoLivre create(Titulo titulo) {
 
 		if (log.isTraceEnabled())
 			log.trace("Instanciando Campo livre");
@@ -100,103 +110,100 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		
 		try{
 		
-		contaBancaria = titulo.getContaBancaria();
-
-		if (log.isDebugEnabled())
-			log.debug("Campo Livre do Banco: "
-					+ contaBancaria.getBanco().getNome());
-
-		/*
-		 * A conta bancária passada não é sincronizada.
-		 */
-		if (isContaBacariaOK(contaBancaria)) {
-
-			if (BancoSuportado.isSuportado(contaBancaria.getBanco()
-					.getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
-
-				enumBanco = BancoSuportado.suportados.get(contaBancaria.getBanco()
-						.getCodigoDeCompensacaoBACEN().getCodigoFormatado());
-
-				switch (enumBanco) {
-
-				case BANCO_BRADESCO:
-					campoLivre = AbstractCLBradesco.create(titulo);
-					break;
-
-				case BANCO_DO_BRASIL:
-					campoLivre = AbstractCLBancoDoBrasil.create(titulo);
-					break;
-
-				case BANCO_ABN_AMRO_REAL:
-					campoLivre = AbstractCLBancoReal.create(titulo);
-					break;
-
-				case CAIXA_ECONOMICA_FEDERAL:
-					campoLivre = AbstractCLCaixaEconomicaFederal.create(titulo);
-					break;
-
-				case HSBC:
-					campoLivre = AbstractCLHSBC.create(titulo);
-					break;
-					
-				case UNIBANCO:
-					campoLivre = AbstractCLUnibanco.create(titulo);
-					break;
-
-				case BANCO_ITAU:
-					campoLivre = AbstractCLItau.create(titulo);
-					break;
-
-				case BANCO_SAFRA:
-					campoLivre = AbstractCLBancoSafra.create(titulo);
-					break;
-
-				case BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL:
-					campoLivre = AbstractCLBanrisul.create(titulo);
-					break;
-					
-				case MERCANTIL_DO_BRASIL:
-					campoLivre = AbstractCLMercantilDoBrasil.create(titulo);
-					break;
-					
-				case NOSSA_CAIXA:
-					campoLivre = AbstractCLNossaCaixa.create(titulo);
-					break;
-				
-				case BANCO_DO_ESTADO_DO_ESPIRITO_SANTO:
-					campoLivre = AbstractCLBanestes.create(titulo);
-					break;
-					
-				}
-			} else {
-				/*
-				 * Se chegar até este ponto, é sinal de que para o banco em em
-				 * questão, apesar de estar definido no EnumBancos, não há
-				 * implementações de campo livre, logo considera-se o banco com
-				 * não suportado.
-				 */
-				throw new NotSupportedBancoException();
-			}
-
+			contaBancaria = titulo.getContaBancaria();
+	
+			if (log.isDebugEnabled())
+				log.debug("Campo Livre do Banco: " + contaBancaria.getBanco().getNome());
+	
 			/*
-			 * Se chegar neste ponto e nenhum campo livre foi definido, então é
-			 * sinal de que existe implementações de campo livre para o banco em
-			 * questão, só que nenhuma destas implementações serviu e a classe
-			 * abstrata responsável por fornecer o campo livre não gerou a
-			 * exceção NotSupportedCampoLivreException. Trata-se de uma mensagem
-			 * genérica que será utilizada somente em último caso.
+			 * A conta bancária passada não é sincronizada.
 			 */
-			if (isNull(campoLivre)) {
-				throw new NotSupportedCampoLivreException(
-						"Não há implementações de campo livre para o banco "
-								+ contaBancaria.getBanco()
-										.getCodigoDeCompensacaoBACEN().getCodigoFormatado()
-								+ " compatíveis com as "
-								+ "caracteríticas do título informado.");
-			}
-		}
+			if (isContaBacariaOK(contaBancaria)) {
+	
+				if (BancoSuportado.isSuportado(contaBancaria.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
+	
+					enumBanco = BancoSuportado.suportados.get(contaBancaria.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado());
+	
+					switch (enumBanco) {
+	
+						case BANCO_BRADESCO:
+							campoLivre = AbstractCLBradesco.create(titulo);
+							break;
 		
-		}catch(Exception e){
+						case BANCO_DO_BRASIL:
+							campoLivre = AbstractCLBancoDoBrasil.create(titulo);
+							break;
+		
+						case BANCO_ABN_AMRO_REAL:
+							campoLivre = AbstractCLBancoReal.create(titulo);
+							break;
+		
+						case CAIXA_ECONOMICA_FEDERAL:
+							campoLivre = AbstractCLCaixaEconomicaFederal.create(titulo);
+							break;
+		
+						case HSBC:
+							campoLivre = AbstractCLHSBC.create(titulo);
+							break;
+							
+						case UNIBANCO:
+							campoLivre = AbstractCLUnibanco.create(titulo);
+							break;
+		
+						case BANCO_ITAU:
+							campoLivre = AbstractCLItau.create(titulo);
+							break;
+		
+						case BANCO_SAFRA:
+							campoLivre = AbstractCLBancoSafra.create(titulo);
+							break;
+		
+						case BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL:
+							campoLivre = AbstractCLBanrisul.create(titulo);
+							break;
+							
+						case MERCANTIL_DO_BRASIL:
+							campoLivre = AbstractCLMercantilDoBrasil.create(titulo);
+							break;
+							
+						case NOSSA_CAIXA:
+							campoLivre = AbstractCLNossaCaixa.create(titulo);
+							break;
+						
+						case BANCO_DO_ESTADO_DO_ESPIRITO_SANTO:
+							campoLivre = AbstractCLBanestes.create(titulo);
+							break;
+					}
+				} else {
+					/*
+					 * Se chegar até este ponto, é sinal de que para o banco em
+					 * questão, apesar de estar definido no EnumBancos, não há
+					 * implementações de campo livre, logo considera-se o banco com
+					 * não suportado.
+					 */
+					throw new NotSupportedBancoException();
+				}
+	
+				/*
+				 * Se chegar neste ponto e nenhum campo livre foi definido, então é
+				 * sinal de que existe implementações de campo livre para o banco em
+				 * questão, só que nenhuma destas implementações serviu e a classe
+				 * abstrata responsável por fornecer o campo livre não gerou a
+				 * exceção NotSupportedCampoLivreException. Trata-se de uma mensagem
+				 * genérica que será utilizada somente em último caso.
+				 */
+				if (isNull(campoLivre)) {
+					throw new NotSupportedCampoLivreException(
+							"Não há implementações de campo livre para o banco "
+									+ contaBancaria.getBanco()
+											.getCodigoDeCompensacaoBACEN().getCodigoFormatado()
+									+ " compatíveis com as "
+									+ "caracteríticas do título informado.");
+				}
+			}
+		
+		} catch(Exception e) {
+			
 			if(e instanceof CampoLivreException)
 				throw (CampoLivreException)e;
 			else
@@ -222,9 +229,8 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 */
 	private static boolean isContaBacariaOK(ContaBancaria conta) {
 
-		return (isNotNull(conta, "contaBancaria")
-				&& isNotNull(conta.getBanco(), "Banco") && isCodigoDeCompensacaoOK(conta
-				.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado()));
+		return (isNotNull(conta) && isNotNull(conta.getBanco()) 
+				&& isCodigoDeCompensacaoOK(conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado()));
 
 	}
 	
