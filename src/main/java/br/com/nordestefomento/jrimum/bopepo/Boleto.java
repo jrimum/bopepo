@@ -226,21 +226,29 @@ public final class Boleto {
 	}
 
 	/**
+	 * <p>
+	 * 
+	 * </p>
+	 * 
 	 * @param campoLivre the campoLivre to set
 	 */
 	public void setCampoLivre(CampoLivre campoLivre) {
 		
-		if(isNotNull(campoLivre, "campoLivre")){
+		ObjectUtil.checkNotNull(campoLivre);
+		
+		int length = campoLivre.write().length();
+		
+		if (length == CampoLivre.STRING_LENGTH) {
+			this.campoLivre = campoLivre;
 			
-			int length = campoLivre.write().length();
+		} else {
 			
-			if(length == CampoLivre.STRING_LENGTH)
-				this.campoLivre = campoLivre;
-			else
-				if(length > CampoLivre.STRING_LENGTH)
-					throw new IllegalArgumentException("O tamanho da String [ " + length + " ] é maior que o especificado [ "+CampoLivre.STRING_LENGTH+" ]!");
-				else
-					throw new IllegalArgumentException("O tamanho da String [ " + length + " ] é menor que o especificado [ "+CampoLivre.STRING_LENGTH+" ]!");
+			if (length > CampoLivre.STRING_LENGTH) {
+				throw new IllegalArgumentException("O tamanho da String [" + length + "] é maior que o especificado [" + CampoLivre.STRING_LENGTH + "]!");
+				
+			} else {
+				throw new IllegalArgumentException("O tamanho da String [" + length + "] é menor que o especificado [" + CampoLivre.STRING_LENGTH + "]!");
+			}
 		}
 	}
 

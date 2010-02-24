@@ -27,7 +27,6 @@
  * 
  */
 
-
 package br.com.nordestefomento.jrimum.bopepo;
 
 import static org.junit.Assert.assertEquals;
@@ -40,9 +39,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSupportedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Agencia;
@@ -55,19 +57,9 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.TipoDeMoed
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.DateUtil;
 
-
 /**
- * 
  * <p>
- * DEFINIÇÃO DA CLASSE
- * </p>
- * 
- * <p>
- * OBJETIVO/PROPÓSITO
- * </p>
- * 
- * <p>
- * EXEMPLO: 
+ * Teste da classe Boleto 
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
@@ -80,7 +72,6 @@ import br.com.nordestefomento.jrimum.utilix.DateUtil;
  */
 	
 public class TestBoleto{
-
 
 	private Titulo titulo;
 	
@@ -136,7 +127,6 @@ public class TestBoleto{
 		} catch(IllegalArgumentException illegalArgumentException){
 			assertTrue(true);
 		}
-		
 	}
 
 	/**
@@ -154,9 +144,7 @@ public class TestBoleto{
 	 */
 	@Test
 	public void testGetLinhaDigitavel() {
-
 		assertNotNull(boleto.getLinhaDigitavel());
-		
 	}
 	
 	/**
@@ -168,7 +156,66 @@ public class TestBoleto{
 		Date agora = new Date();
 		
 		assertEquals(DateUtil.FORMAT_DD_MM_YYYY.format(agora), DateUtil.FORMAT_DD_MM_YYYY.format(boleto.getDataDeProcessamento()));
-		
 	}
 
+	@Test(expected = NullPointerException.class)
+	public void testSetCampoLivreNull() {
+		boleto.setCampoLivre(null);
+	}
+	
+	@Test
+	public void testSetCampoLivreTamanhoCorreto() {
+		
+		boleto.setCampoLivre(new CampoLivre() {
+			
+			@Override
+			public String write() {
+				return "1234567890123456789012345";
+			}
+			
+			@Override
+			public void read(String g) {
+			}
+		});
+		
+		Assert.assertNotNull(boleto.getCampoLivre());
+		Assert.assertNotNull(boleto.getCampoLivre().write());
+		Assert.assertEquals(CampoLivre.STRING_LENGTH.intValue(), boleto.getCampoLivre().write().length());
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetCampoLivreTamanhoMaior() {
+		
+		boleto.setCampoLivre(new CampoLivre() {
+			
+			private static final long serialVersionUID = 1L;
+			
+			@Override
+			public String write() {
+				return "1234567890123456789012345000";
+			}
+			
+			@Override
+			public void read(String g) {
+			}
+		});
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetCampoLivreTamanhoMenor() {
+		
+		boleto.setCampoLivre(new CampoLivre() {
+	
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public String write() {
+				return "12345678901234567890";
+			}
+			
+			@Override
+			public void read(String g) {
+			}
+		});
+	}
 }

@@ -27,10 +27,7 @@
  * 
  */
 
-
 package br.com.nordestefomento.jrimum.bopepo.campolivre;
-
-import static br.com.nordestefomento.jrimum.utilix.ObjectUtil.isNotNull;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -39,6 +36,7 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
+import br.com.nordestefomento.jrimum.utilix.StringUtil;
 
 
 /**
@@ -69,13 +67,16 @@ public final class CampoLivreFactory {
 	private static Logger log = Logger.getLogger(CampoLivreFactory.class);
 
 	/**
-	 * Devolve um ICampoLivre de acordo com o Banco contido na conta do Cedente. 
-	 *  
+	 * <p>
+	 * Devolve um <code>CampoLivre</code> de acordo com o Banco contido na conta do Cedente.
+	 * </p> 
+	 * <p>
 	 * Caso exista implementação para o banco o retorno terá uma referência não nula.
+	 * </p>
 	 * 
 	 * @param titulo
 	 * 
-	 * @return Uma referência para um ICampoLivre.
+	 * @return Uma referência para um CampoLivre.
 	 * @throws NotSupportedBancoException 
 	 * @throws NotSupportedCampoLivreException 
 	 */
@@ -85,82 +86,76 @@ public final class CampoLivreFactory {
 	}
 	
 	/**
-	 * Devolve um ICampoLivre de acordo a partir de uma String.
+	 * Devolve um CampoLivre de acordo a partir de uma String.
 	 * 
 	 * @param strCampoLivre
 	 * 
 	 * @return Uma referência para um ICampoLivre.
+	 * 
+	 * @throws NullPointerException
 	 * @throws IllegalArgumentException
 	 */
-	public static CampoLivre create(String strCampoLivre) throws IllegalArgumentException{
+	public static CampoLivre create(String strCampoLivre) {
 		
 		CampoLivre campoLivre = null;
 		
-		if (isNotNull(strCampoLivre, "strCampoLivre")) {
+		ObjectUtil.checkNotNull(strCampoLivre);
+		
+		StringUtil.checkNotBlank(strCampoLivre, "O Campo Livre não deve ser vazio!");
+		
+		strCampoLivre = StringUtils.strip(strCampoLivre); 
+		
+		if (strCampoLivre.length() == CampoLivre.STRING_LENGTH) {
 
-			if (StringUtils.isNotBlank(strCampoLivre)) {
+			if (StringUtils.remove(strCampoLivre, ' ').length() == CampoLivre.STRING_LENGTH) {
 
-				strCampoLivre = StringUtils.strip(strCampoLivre); 
-				
-				if (strCampoLivre.length() == CampoLivre.STRING_LENGTH) {
+				if (StringUtils.isNumeric(strCampoLivre)) {
 
-					if (StringUtils.remove(strCampoLivre, ' ').length() == CampoLivre.STRING_LENGTH) {
+					campoLivre = new CampoLivre() {
 
-						if (StringUtils.isNumeric(strCampoLivre)) {
+						private static final long serialVersionUID = -7592488081807235080L;
 
-							campoLivre = new CampoLivre() {
+						Field<String> campo = new Field<String>(StringUtils.EMPTY,
+								STRING_LENGTH, Filler.ZERO_LEFT);
 
-								private static final long serialVersionUID = -7592488081807235080L;
-
-								Field<String> campo = new Field<String>(StringUtils.EMPTY,
-										STRING_LENGTH, Filler.ZERO_LEFT);
-
-								
-								public void read(String str) {
-									campo.read(str);
-								}
-
-								
-								public String write() {
-									return campo.write();
-								}
-							};
-							
-							campoLivre.read(strCampoLivre);
-							
-						}else{
-							
-							IllegalArgumentException e = new IllegalArgumentException("O Campo Livre [ " + strCampoLivre + " ] deve ser uma String numérica!");
-							
-							log.error(StringUtils.EMPTY, e);
-							
-							throw e;
+						
+						public void read(String str) {
+							campo.read(str);
 						}
-					}else{
+
 						
-						IllegalArgumentException e = new IllegalArgumentException("O Campo Livre [ " + strCampoLivre + " ] não deve conter espaços em branco!");
-						
-						log.error(StringUtils.EMPTY, e);
-						
-						throw e;
-					}
-				}else{
+						public String write() {
+							return campo.write();
+						}
+					};
 					
-					IllegalArgumentException e = new IllegalArgumentException("O tamanho do Campo Livre [ " + strCampoLivre + " ] deve ser igual a 25 e não ["+strCampoLivre.length()+"]!");
+					campoLivre.read(strCampoLivre);
+					
+				} else {
+					
+					IllegalArgumentException e = new IllegalArgumentException("O Campo Livre [ " + strCampoLivre + " ] deve ser uma String numérica!");
 					
 					log.error(StringUtils.EMPTY, e);
 					
 					throw e;
 				}
-			}else{
+			} else {
 				
-				IllegalArgumentException e = new IllegalArgumentException("O Campo Livre [ " + strCampoLivre + " ] não deve ser vazio!");
+				IllegalArgumentException e = new IllegalArgumentException("O Campo Livre [ " + strCampoLivre + " ] não deve conter espaços em branco!");
 				
 				log.error(StringUtils.EMPTY, e);
 				
 				throw e;
 			}
+		} else {
+			
+			IllegalArgumentException e = new IllegalArgumentException("O tamanho do Campo Livre [ " + strCampoLivre + " ] deve ser igual a 25 e não ["+strCampoLivre.length()+"]!");
+			
+			log.error(StringUtils.EMPTY, e);
+			
+			throw e;
 		}
+			
 		return campoLivre;
 	}
 
