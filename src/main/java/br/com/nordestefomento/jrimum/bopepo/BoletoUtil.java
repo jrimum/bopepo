@@ -1,8 +1,5 @@
 package br.com.nordestefomento.jrimum.bopepo;
 
-import java.util.IllegalFormatException;
-import java.util.IllegalFormatFlagsException;
-
 import org.apache.commons.lang.StringUtils;
 
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
@@ -26,9 +23,9 @@ public class BoletoUtil {
 	 * Mensagens.
 	 */
 	private static final String MSG_LINHA_INVALIDA = "Linha digitável inválida!";
-	private static final String MSG_STR_VAZIA = "String vazia [\"%s\"] tamanho:%d.";
-	private static final String MSG_NAO_FORMATADA = "String formatada [ %s ] fora do padrão [ \"ddddd.ddddd ddddd.dddddd ddddd.dddddd d dddddddddddddd\" ].";
-	private static final String MSG_STR_NUMERICA = "String numérica [ %s ] fora do padrão [ \"ddddddddddddddddddddddddddddddddddddddddddddddd\" ]";
+	private static final String MSG_STR_VAZIA = "String vazia [ \"%s\" ] tamanho [ %d ].";
+	private static final String MSG_NAO_FORMATADA = "String formatada [ \"%s\" ] de tamanho [ %d ] está fora do padrão [ \"ddddd.ddddd ddddd.dddddd ddddd.dddddd d dddddddddddddd\" ] tamanho = 54.";
+	private static final String MSG_STR_NUMERICA = "String numérica [ \"%s\" ] de tamanho [ %d ] está fora do padrão [ \"ddddddddddddddddddddddddddddddddddddddddddddddd\" ] tamanho = 47.";
 
 	public static void main(String[] args) {
 
@@ -42,7 +39,7 @@ public class BoletoUtil {
 		/*
 		 * Transformando em código de barras.
 		 */
-		String c = linhaDigitavelEmCodigoDeBarras(n);
+		String c = linhaDigitavelNumericaEmCodigoDeBarras(n);
 
 		/*
 		 * Recuperando dados a partir do código de barras
@@ -102,11 +99,6 @@ public class BoletoUtil {
 		return null;
 	}
 
-	public static String codigoDeBarrasEmLinhaDigitavel(String c) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public static String getCampoLivreDoCodigoDeBarras(String c) {
 		// TODO Auto-generated method stub
 		return null;
@@ -132,34 +124,56 @@ public class BoletoUtil {
 		return null;
 	}
 
-	public static String linhaDigitavelEmCodigoDeBarras(String n) {
+	public static String codigoDeBarrasEmLinhaDigitavel(String c) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static String linhaDigitavelFormatadaEmCodigoDeBarras(
+			String linhaDigitavel) {
+
+		return linhaDigitavelNumericaEmCodigoDeBarras(linhaDigitavelFormatadaEmNumerica(linhaDigitavel));
+	}
+
+	public static String linhaDigitavelNumericaEmCodigoDeBarras(
+			String linhaDigitavel) {
+
+		checkFormatoLinhaDigitavelNumerica(linhaDigitavel);
+
+		// TODO IMPL
+
 		return null;
 	}
 
 	/**
 	 * <p>
-	 * Remove formatação e espaços de uma linha digitável no formato:
+	 * Remove formatação e espaços de uma linha digitável no formato FEBRABAN:
 	 * </p>
 	 * <p>
 	 * "<strong>ddddd.ddddd ddddd.dddddd ddddd.dddddd d dddddddddddddd</strong>"
 	 * </p>
 	 * 
+	 * @see #checkExistsLinhaDigitavel(String)
+	 * @see #checkFormatoLinhaDigitavelFormatada(String)
+	 * 
 	 * @param linhaDigitavel
+	 *            string no formato FEBRABAN
 	 * @return linha digitável contendo somente números
 	 * @throws NullPointerException
-	 *             quando linhaDigitavel é nula
+	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando linhaDigitavel é vazio o tem tamanho diferente
-	 * @throws IllegalFormatException
+	 *             quando a string é vazia
+	 * @throws LinhaDigitavelException
+	 *             quando a string não está no formato válido
 	 */
 	public static String linhaDigitavelFormatadaEmNumerica(String linhaDigitavel)
 			throws NullPointerException, IllegalArgumentException,
-			IllegalFormatException {
+			LinhaDigitavelException {
 
 		checkFormatoLinhaDigitavelFormatada(linhaDigitavel);
 
-		return linhaDigitavel.replaceAll(" ", StringUtils.EMPTY).replaceAll("\\.", StringUtils.EMPTY);
+		return linhaDigitavel.replaceAll(" ", StringUtils.EMPTY).replaceAll(
+				"\\.", StringUtils.EMPTY);
 	}
 
 	public static boolean isLinhaDigitavelFormatadaValida(String linhaDigitavel) {
@@ -186,47 +200,148 @@ public class BoletoUtil {
 		}
 	}
 
-	private static void checkFormatoLinhaDigitavelFormatada(
-			String linhaDigitavel) {
+	/**
+	 * <p>
+	 * Verifica se a linha digitável <strong>não é nula</strong>, <strong>não é
+	 * vazia</strong> e <strong>é numérica</strong>, obedecendo o seguinte
+	 * FEBRABAN:
+	 * </p>
+	 * <p>
+	 * "<strong>ddddd.ddddd ddddd.dddddd ddddd.dddddd d dddddddddddddd</strong>"
+	 * </p>
+	 * <p>
+	 * Onde o número de dígitos é igual a 54 e o número de espaços é igual a 4.
+	 * </p>
+	 * <p>
+	 * <ul>
+	 * <li>Caso a string seja nula, lança uma <code>NullPointerException</code>;
+	 * </li>
+	 * <li>Caso seja vazia, lança uma <code>IllegalArgumentException</code>;</li>
+	 * <li>Caso não esteja no formato especificado, lança uma
+	 * <code>LinhaDigitavelException</code>.</li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @see #checkExistsLinhaDigitavel(String)
+	 * 
+	 * @param linhaDigitavel
+	 *            string no formato FEBRABAN
+	 * @return linha digitável contendo somente números
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws LinhaDigitavelException
+	 *             quando a string não está no formato válido
+	 * 
+	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+	 */
+	public static void checkFormatoLinhaDigitavelFormatada(String linhaDigitavel)
+			throws NullPointerException, IllegalArgumentException,
+			LinhaDigitavelException {
 
 		checkExistsLinhaDigitavel(linhaDigitavel);
 
 		if (!linhaDigitavel.contains(".")) {
-			throw new IllegalFormatFlagsException(MSG_LINHA_INVALIDA + " "
-					+ MSG_NAO_FORMATADA
+			throw new LinhaDigitavelException(MSG_LINHA_INVALIDA
+					+ " "
+					+ String.format(MSG_NAO_FORMATADA, linhaDigitavel,
+							linhaDigitavel.length())
 					+ " A linha digitável formatada deve conter pontos!");
 		}
 
 		if (!linhaDigitavel.trim().contains(" ")) {
-			throw new IllegalFormatFlagsException(MSG_LINHA_INVALIDA + " "
-					+ String.format(MSG_NAO_FORMATADA, linhaDigitavel)
+			throw new LinhaDigitavelException(MSG_LINHA_INVALIDA
+					+ " "
+					+ String.format(MSG_NAO_FORMATADA, linhaDigitavel,
+							linhaDigitavel.length())
 					+ " A linha digitável formatada deve conter espaços!");
 		}
 
 		if (!isLinhaDigitavelFormatadaValida(linhaDigitavel)) {
-			throw new IllegalFormatFlagsException(MSG_LINHA_INVALIDA + " "
-					+ String.format(MSG_NAO_FORMATADA, linhaDigitavel));
+			throw new LinhaDigitavelException(MSG_LINHA_INVALIDA
+					+ " "
+					+ String.format(MSG_NAO_FORMATADA, linhaDigitavel,
+							linhaDigitavel.length()));
 		}
 	}
 
-	private static void checkFormatoLinhaDigitavelNumerica(String linhaDigitavel) {
+	/**
+	 * <p>
+	 * Verifica se a linha digitável <strong>não é nula</strong>, <strong>não é
+	 * vazia</strong> e <strong>é numérica</strong>, obedecendo o seguinte
+	 * formato:
+	 *</p>
+	 * <p>
+	 * "<strong>ddddddddddddddddddddddddddddddddddddddddddddddd</strong>"
+	 * </p>
+	 * <p>
+	 * Onde o número de dígitos é igual a 47.
+	 * </p>
+	 * <p>
+	 * <ul>
+	 * <li>Caso a string seja nula, lança uma <code>NullPointerException</code>;
+	 * </li>
+	 * <li>Caso seja vazia, lança uma <code>IllegalArgumentException</code>;</li>
+	 * <li>Caso não esteja no formato especificado, lança uma
+	 * <code>LinhaDigitavelException</code>.</li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @see #checkExistsLinhaDigitavel(String)
+	 * 
+	 * @param linhaDigitavel
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws LinhaDigitavelException
+	 *             quando a string não está no formato válido
+	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+	 */
+	public static void checkFormatoLinhaDigitavelNumerica(String linhaDigitavel)
+			throws NullPointerException, IllegalArgumentException,
+			LinhaDigitavelException {
 
 		checkExistsLinhaDigitavel(linhaDigitavel);
 
 		if (!isLinhaDigitavelNumericaValida(linhaDigitavel)) {
-			throw new IllegalFormatFlagsException(MSG_LINHA_INVALIDA + " "
-					+ String.format(MSG_STR_NUMERICA, linhaDigitavel)
-					+ " A linha deve conter apenas dígitos de 0 a 9.");
+			throw new LinhaDigitavelException(MSG_LINHA_INVALIDA
+					+ " "
+					+ String.format(MSG_STR_NUMERICA, linhaDigitavel,
+							linhaDigitavel.length())
+					+ " A linha deve conter apenas 47 dígitos númericos [0-9]!");
 		}
+
 	}
 
-	private static void checkExistsLinhaDigitavel(String linhaDigitavel) {
+	/**
+	 * <p>
+	 * Verifica se a linha digitável <strong>não é nula</strong> e <strong>não é
+	 * vazia</strong>. Caso nula lança uma <code>NullPointerException</code>,
+	 * caso vazia lança uma <code>IllegalArgumentException</code>.
+	 * </p>
+	 * <p>
+	 * Considera-se vazia se <code>linhaDigitavel.trim().length()</code> == 0.
+	 * </p>
+	 * 
+	 * @param linhaDigitavel
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+	 */
+	public static void checkExistsLinhaDigitavel(String linhaDigitavel)
+			throws NullPointerException, IllegalArgumentException {
 
 		ObjectUtil.checkNotNull(linhaDigitavel, MSG_LINHA_INVALIDA);
 
 		if (StringUtils.isBlank(linhaDigitavel)) {
-			throw new IllegalArgumentException(MSG_LINHA_INVALIDA + " "
-					+ MSG_STR_VAZIA);
+			throw new IllegalArgumentException(MSG_LINHA_INVALIDA
+					+ " "
+					+ String.format(MSG_STR_VAZIA, linhaDigitavel,
+							linhaDigitavel.length()));
 		}
 	}
 }
