@@ -31,22 +31,19 @@
 package br.com.nordestefomento.jrimum.bopepo.guia;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.IdentificacaoSeguimento;
 import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
-import br.com.nordestefomento.jrimum.utilix.BancoUtil;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
-import br.com.nordestefomento.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.GuiaCodigoDeBarrasDV;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.Modulo;
 
 /**
  * 
@@ -199,15 +196,241 @@ import br.com.nordestefomento.jrimum.vallia.digitoverificador.BoletoCodigoDeBarr
  * @version 0.3
  */
 public final class CodigoDeBarras extends AbstractLineOfFields{
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2585072841078547723L;
+	private static final long serialVersionUID = -6280859254008661464L;
+
+	private static Logger log = Logger.getLogger(CodigoDeBarras.class);
+	
+	/**
+	 * 
+	 */
+	private static final Integer FIELDS_LENGTH = 7;
+	
+	/**
+	 * 
+	 */
+	private static final Integer STRING_LENGTH = 44;
 
 	
-	public CodigoDeBarras(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
-		// TODO Auto-generated constructor stub
+	/**
+	 *  Identificação do Produto. 
+	 */
+	private Field<Integer> produto;
+	
+	/**
+	 *  Identificação do Segmento.
+	 */
+	private Field<Integer> segmento;
+	
+	/**
+	 * Identificação do valor real ou referência.
+	 */
+	private Field<Integer> valorReferencia;
+	
+	/**
+	 * Dígito verificador geral (módulo 10 ou 11) 
+	 * Mecanismo de autenticação usado no composição de barras.
+	 * 
+	 * @see br.com.nordestefomento.jrimum.vallia.digitoverificador.GuiaCodigoDeBarrasDV
+	 */
+	private Field<Integer> digitoVerificadorGeral;
+	
+	/**
+	 *  Valor
+	 */
+	private Field<BigDecimal> valor;
+	
+
+	/**
+	 *  Identificação da Empresa/Órgão
+	 */
+	private Field<String> orgao;
+	
+	
+	/**
+	 * @see br.br.com.nordestefomento.jrimum.bopepo.campolivre.boleto.CampoLivre
+	 */
+	private Field<String> campoLivre;
+	
+	
+	private Modulo moduloParaCalculoDV;
+	
+	/**
+	 * <p>
+	 * Cria um Código de Barras a partir do título e campo livre passados.
+	 * </p>
+	 * 
+	 * @param arrecadacao
+	 * @param campoLivre
+	 * 
+	 * @see CampoLivre
+	 */
+	CodigoDeBarras(Arrecadacao arrecadacao, CampoLivre campoLivre) {
+		super(FIELDS_LENGTH ,STRING_LENGTH);
+		
+		if(log.isTraceEnabled())
+			log.trace("Instanciando o CodigoDeBarras");
+			
+		if(log.isDebugEnabled()){
+			log.debug("titulo instance : "+arrecadacao);
+			log.debug("campoLivre instance : "+campoLivre);
+		}
+
+		// Configurando os campos.
+		produto = new Field<Integer>(0, 1, Filler.ZERO_LEFT);
+		segmento = new Field<Integer>(0, 1, Filler.ZERO_LEFT);
+		valorReferencia = new Field<Integer>(0, 1, Filler.ZERO_LEFT);
+		digitoVerificadorGeral = new Field<Integer>(0, 1, Filler.ZERO_LEFT);
+		valor = new Field<BigDecimal>(new BigDecimal(0), 11, Filler.ZERO_LEFT);
+		
+		if (arrecadacao.getOrgaoRecebedor().getIdentificacaoSeguimento() == IdentificacaoSeguimento.USO_EXCLUSIVO_BANCO) {
+			this.orgao = new Field<String>("0", 4, Filler.ZERO_LEFT);
+			this.campoLivre = new Field<String>(StringUtils.EMPTY, 25);
+		}
+		else {
+			this.orgao = new Field<String>("0", 8, Filler.ZERO_LEFT);
+			this.campoLivre = new Field<String>(StringUtils.EMPTY, 21);
+		}
+			 
+		
+		// Adicionando os campos no código de barras, devidamente configurados.
+		add(this.produto);
+		add(this.segmento);
+		add(this.digitoVerificadorGeral);
+		add(this.valorReferencia);
+		add(this.valor);
+		add(this.orgao);
+		add(this.campoLivre);
+	
+		
+		// Informando o valor de cada campo.
+		this.produto.setValue(arrecadacao.getIdentificacaoProduto().getCodigo());
+		this.segmento.setValue(arrecadacao.getOrgaoRecebedor().getIdentificacaoSeguimento().getCodigo());
+		this.valorReferencia.setValue(arrecadacao.getIdentificacaoValorReferencia().getCodigo());
+		this.valor.setValue(arrecadacao.getValor().movePointRight(2));
+		
+		if (arrecadacao.getOrgaoRecebedor().getIdentificacaoSeguimento() == IdentificacaoSeguimento.USO_EXCLUSIVO_BANCO) {
+			this.orgao.setValue(arrecadacao.getConvenio().getBanco().getCodigoDeCompensacaoBACEN().getCodigo().toString());
+		}
+		else {
+			String cnpjFormatadoSemPontucao = arrecadacao.getOrgaoRecebedor().getCNPJ().getCodigoFormatadoSemPontuacao();
+			this.orgao.setValue(cnpjFormatadoSemPontucao.substring(0, 8));
+		}
+		
+		this.campoLivre.setValue(campoLivre.write());
+		
+		this.moduloParaCalculoDV = arrecadacao.getIdentificacaoValorReferencia().getModulo();
+		this.calculateAndSetDigitoVerificadorGeral(this.moduloParaCalculoDV);
+		
+		if(log.isDebugEnabled() || log.isTraceEnabled())
+			log.debug("codigoDeBarra instanciado : " + this);
 	}
+
+	
+	
+	private void calculateAndSetDigitoVerificadorGeral(Modulo modulo) {
+		
+		if (log.isTraceEnabled())
+			log.trace("Calculando Digito Verificador Geral");
+
+		// Instanciando o objeto irá calcular o dígito verificador da guia.
+		GuiaCodigoDeBarrasDV calculadorDV = new GuiaCodigoDeBarrasDV(modulo);
+
+		// Preparando o conjunto de informações que será a base para o cálculo
+		// do dígito verificador, conforme normas da FEBRABAN.
+		StringBuilder toCalculateDV = new StringBuilder(produto.write())
+		.append(segmento.write())
+		.append(valorReferencia.write())
+		.append(valor.write())
+		.append(orgao.write())
+		.append(campoLivre.write());
+
+		// Realizando o cálculo dígito verificador e em seguida armazenando 
+		// a informação no campo "digitoVerificadorGeral".
+		digitoVerificadorGeral.setValue(
+				calculadorDV.calcule(toCalculateDV.toString())
+				);
+
+		if (log.isDebugEnabled())
+			log.debug("Digito Verificador Geral calculado : "
+					+ digitoVerificadorGeral.getValue());
+	}
+
+	
+	/**
+	 * @return the produto
+	 */
+	public Field<Integer> getProduto() {
+		return produto;
+	}
+
+	/**
+	 * @return the segmento
+	 */
+	public Field<Integer> getSegmento() {
+		return segmento;
+	}
+
+
+
+	/**
+	 * @return the valorReferencia
+	 */
+	public Field<Integer> getValorReferencia() {
+		return valorReferencia;
+	}
+
+
+
+	/**
+	 * @return the digitoVerificadorGeral
+	 */
+	public Field<Integer> getDigitoVerificadorGeral() {
+		return digitoVerificadorGeral;
+	}
+
+
+
+	/**
+	 * @return the valor
+	 */
+	public Field<BigDecimal> getValor() {
+		return valor;
+	}
+
+
+
+	/**
+	 * @return the orgao
+	 */
+	public Field<String> getOrgao() {
+		return orgao;
+	}
+
+
+
+	/**
+	 * @return the campoLivre
+	 */
+	public Field<String> getCampoLivre() {
+		return campoLivre;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return ObjectUtil.toString(this);
+	}
+
+
+	/**
+	 * @return the moduloParaCalculoDV
+	 */
+	public Modulo getModuloParaCalculoDV() {
+		return moduloParaCalculoDV;
+	}
+	
 }
