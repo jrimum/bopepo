@@ -66,11 +66,11 @@ class CLBancoDoBrasilSegmento9 extends AbstractCLBancoDoBrasil {
 		
 
 		String digitos11Com12DoCNPJ = arrecadacao.getOrgaoRecebedor().getCNPJ().getCodigoFormatadoSemPontuacao().substring(10,12);
-		this.add(new Field<String>(digitos11Com12DoCNPJ, 2));
+		this.add(new Field<String>(digitos11Com12DoCNPJ, 2, Filler.ZERO_LEFT));
 		
 		this.add(new Field<Integer>(arrecadacao.getConvenio().getNumero(), 6, Filler.ZERO_LEFT));
 		
-		String dataFormatadaYYYYMMDD = DateUtil.parse(arrecadacao.getDataDoVencimento(), DateUtil.FORMAT_YYYYMMDD);
+		String dataFormatadaYYYYMMDD = DateUtil.FORMAT_YYYYMMDD.format(arrecadacao.getDataDoVencimento());
 		this.add(new Field<String>(dataFormatadaYYYYMMDD, 8));	
 
 		this.add(new Field<String>(arrecadacao.getNossoNumero(), 9, Filler.ZERO_LEFT));

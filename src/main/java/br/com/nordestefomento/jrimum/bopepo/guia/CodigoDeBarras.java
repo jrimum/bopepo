@@ -35,7 +35,7 @@ import java.math.BigDecimal;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre;
+import br.com.nordestefomento.jrimum.bopepo.campolivre.guia.CampoLivre;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.IdentificacaoSeguimento;
 import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
@@ -298,8 +298,8 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 		// Adicionando os campos no código de barras, devidamente configurados.
 		add(this.produto);
 		add(this.segmento);
-		add(this.digitoVerificadorGeral);
 		add(this.valorReferencia);
+		add(this.digitoVerificadorGeral);
 		add(this.valor);
 		add(this.orgao);
 		add(this.campoLivre);

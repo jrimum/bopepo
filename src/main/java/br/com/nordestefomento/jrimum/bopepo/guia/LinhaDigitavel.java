@@ -121,10 +121,10 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 			log.debug("codigoDeBarra instance : "+codigoDeBarras);
 		
 		
-		innerCampo1 = new Field<InnerCampo1>(new InnerCampo1(1,13),13);
-		innerCampo2 = new Field<InnerCampo2>(new InnerCampo2(1,13),13);
-		innerCampo3 = new Field<InnerCampo3>(new InnerCampo3(1,13),13);
-		innerCampo4 = new Field<InnerCampo4>(new InnerCampo4(1,13),13);
+		innerCampo1 = new Field<InnerCampo1>(new InnerCampo1(2,13),13);
+		innerCampo2 = new Field<InnerCampo2>(new InnerCampo2(2,13),13);
+		innerCampo3 = new Field<InnerCampo3>(new InnerCampo3(2,13),13);
+		innerCampo4 = new Field<InnerCampo4>(new InnerCampo4(2,13),13);
 		
 		add(innerCampo1);
 		add(innerCampo2);
@@ -213,10 +213,10 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 				add(  new Field<Integer>(calculadorDV.calcule(trechoCodigoDeBarras), 1)  );
 				
 				if(log.isDebugEnabled())
-					log.debug("Digito verificador do Field " + this.numeroCampo + " da Linha Digitável : "+get(3).getValue());
+					log.debug("Digito verificador do Field " + this.numeroCampo + " da Linha Digitável : "+ get(1).getValue());
 
 				if(log.isDebugEnabled() || log.isTraceEnabled())
-					log.debug("Field " + this.numeroCampo + " da Linha Digitável composto : "+write());
+					log.debug("Field " + this.numeroCampo + " da Linha Digitável composto : "+ this.write());
 		}
 		
 		protected abstract String getTrechoCodigoDeBarras(CodigoDeBarras codigoDeBarras); 
