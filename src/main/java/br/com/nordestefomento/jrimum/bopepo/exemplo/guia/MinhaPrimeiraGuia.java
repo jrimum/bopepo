@@ -27,7 +27,7 @@ public class MinhaPrimeiraGuia {
 	public static void main(String[] args) throws ParseException, BadElementException, MalformedURLException, IOException {
 		
 		
-		Contribuinte contribuinte = new Contribuinte("Misael Barreto de Queiroz", "01054377430");
+		Contribuinte contribuinte = new Contribuinte("Misael Barreto de Queiroz", "010.543.774-30");
 		
 		OrgaoRecebedor orgaoRecebedor = new OrgaoRecebedor("ESMARN", "08546459000105", TipoSeguimento.USO_EXCLUSIVO_BANCO);		
 		Image image = ImageIO.read(new File("D:/Misael/Desenvolvimento/Eclipse/eclipse-jee-galileo-SR1-workspace/TJRN/gerenciadorConcurso_TRUNK/doc/Logo_ESMARN_Guia.png"));
@@ -43,7 +43,7 @@ public class MinhaPrimeiraGuia {
 				"Estagiários 2010");
 		
 		arrecadacao.setNossoNumero("15744");
-		arrecadacao.setValor(new BigDecimal(20.00));
+		arrecadacao.setValorDocumento(new BigDecimal(20.00));
 		arrecadacao.setTipoValorReferencia(TipoValorReferencia.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_10);
 		arrecadacao.setDataDoDocumento(DateUtil.FORMAT_DD_MM_YYYY.parse("26/06/2010"));				
 		arrecadacao.setDataDoVencimento(DateUtil.FORMAT_DD_MM_YYYY.parse("26/06/2010"));

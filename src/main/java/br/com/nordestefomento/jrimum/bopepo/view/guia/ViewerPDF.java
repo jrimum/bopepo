@@ -541,7 +541,7 @@ class ViewerPDF {
 	}
 
 	private void setValorDocumento() throws IOException, DocumentException {
-		String valorStr = MonetaryUtil.FORMAT_REAL_COM_PREFIXO.format(guia.getArrecadacao().getValor());
+		String valorStr = MonetaryUtil.FORMAT_REAL_COM_PREFIXO.format(guia.getArrecadacao().getValorDocumento());
 		
 		form.setField("txtValorDocumento1", valorStr);
 		form.setField("txtValorDocumento2",valorStr);

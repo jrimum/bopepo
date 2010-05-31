@@ -309,7 +309,7 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 		this.produto.setValue(arrecadacao.getTipoProduto().getCodigo());
 		this.segmento.setValue(arrecadacao.getOrgaoRecebedor().getTipoSeguimento().getCodigo());
 		this.valorReferencia.setValue(arrecadacao.getTipoValorReferencia().getCodigo());
-		this.valor.setValue(arrecadacao.getValor().movePointRight(2));
+		this.valor.setValue(arrecadacao.getValorDocumento().movePointRight(2));
 		
 		if (arrecadacao.getOrgaoRecebedor().getTipoSeguimento() == TipoSeguimento.USO_EXCLUSIVO_BANCO) {
 			this.orgao.setValue(arrecadacao.getConvenio().getBanco().getCodigoDeCompensacaoBACEN().getCodigo().toString());
