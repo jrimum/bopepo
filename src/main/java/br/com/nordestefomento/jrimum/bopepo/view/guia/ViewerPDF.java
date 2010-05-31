@@ -49,11 +49,9 @@ import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.JRimumException;
 import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
-import br.com.nordestefomento.jrimum.bopepo.Boleto;
 import br.com.nordestefomento.jrimum.bopepo.guia.Guia;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.Carteira;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Convenio;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.OrgaoRecebedor;
 import br.com.nordestefomento.jrimum.utilix.DateUtil;
 import br.com.nordestefomento.jrimum.utilix.FileUtil;
 import br.com.nordestefomento.jrimum.utilix.MonetaryUtil;
@@ -478,13 +476,13 @@ class ViewerPDF {
 			DocumentException {
 
 		setLogoBanco();
-		// setLogoOrgaoRecebedor();
+		setLogoOrgaoRecebedor();
 		setContribuinteNome();
 		setContribuinteCPF();
 		setDescricao();
 		setTitulo();
 		setNossoNumero();
-		setValor();
+		setValorDocumento();
 		setDataDocumento();
 		setDataVencimeto();
 		setInstrucaoAoCaixa();
@@ -542,13 +540,12 @@ class ViewerPDF {
 		form.setField("txtInstrucaoAoCaixa3", guia.getInstrucao3());
 	}
 
-	private void setValor() throws IOException, DocumentException {
+	private void setValorDocumento() throws IOException, DocumentException {
 		String valorStr = MonetaryUtil.FORMAT_REAL_COM_PREFIXO.format(guia.getArrecadacao().getValor());
 		
-		form.setField("txtValor", valorStr);
-		form.setField("txtValor1", valorStr);
-		form.setField("txtValor2",valorStr);
-		form.setField("txtValor3",valorStr);
+		form.setField("txtValorDocumento1", valorStr);
+		form.setField("txtValorDocumento2",valorStr);
+		form.setField("txtValorDocumento3",valorStr);
 	}
 
 	private void setDataVencimeto() throws IOException, DocumentException {
@@ -648,6 +645,22 @@ class ViewerPDF {
 		}
 	}
 
+	
+	private void setLogoOrgaoRecebedor() throws MalformedURLException, IOException,
+			DocumentException {
+
+		// Através da conta bancária será descoberto a imagem que representa o
+		// banco, com base
+		// no código do banco.
+		OrgaoRecebedor orgaoRecebedor = guia.getArrecadacao().getOrgaoRecebedor();
+		Image imgLogoBanco = Image.getInstance(orgaoRecebedor.getImgLogo(),	null);
+
+		if (isNotNull(imgLogoBanco))
+			setImagemNoCampo("txtLogoOrgaoRecebedor", imgLogoBanco);
+		
+	}
+	
+	
 	/**
 	 * <p>
 	 * Coloca as imagens dos campos no pdf de acordo com o nome dos campos do
