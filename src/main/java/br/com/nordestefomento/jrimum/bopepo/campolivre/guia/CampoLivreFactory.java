@@ -33,7 +33,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.IdentificacaoSeguimento;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
@@ -93,10 +93,10 @@ public final class CampoLivreFactory {
 	 * @throws NullPointerException
 	 * @throws IllegalArgumentException
 	 */
-	public static CampoLivre create(String strCampoLivre, IdentificacaoSeguimento identificacaoSeguimento) {
+	public static CampoLivre create(String strCampoLivre, TipoSeguimento tipoSeguimento) {
 		
 		CampoLivre campoLivre = null;
-		final Integer tamanhoCorreto = CampoLivreUtil.getTamanhoCorreto(identificacaoSeguimento); 		
+		final Integer tamanhoCorreto = CampoLivreUtil.getTamanhoCorreto(tipoSeguimento); 		
 
 		ObjectUtil.checkNotNull(strCampoLivre);
 		
@@ -104,9 +104,9 @@ public final class CampoLivreFactory {
 		
 		strCampoLivre = StringUtils.strip(strCampoLivre); 
 		
-		if (CampoLivreUtil.tamanhoEstaCorreto(strCampoLivre, identificacaoSeguimento)) {
+		if (CampoLivreUtil.tamanhoEstaCorreto(strCampoLivre, tipoSeguimento)) {
 
-			if (CampoLivreUtil.naoExisteEspacoEmBranco(strCampoLivre, identificacaoSeguimento)) {
+			if (CampoLivreUtil.naoExisteEspacoEmBranco(strCampoLivre, tipoSeguimento)) {
 
 				if (StringUtils.isNumeric(strCampoLivre)) {
 

@@ -37,7 +37,7 @@ import org.apache.log4j.Logger;
 import br.com.nordestefomento.jrimum.bopepo.guia.BancoSuportado;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Convenio;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.IdentificacaoSeguimento;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
 import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
 
@@ -78,11 +78,11 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	private static Logger log = Logger.getLogger(ObjectUtil.class);
 
 		
-	protected AbstractCampoLivre(Integer fieldsLength, IdentificacaoSeguimento identificacaoSeguimento) {
+	protected AbstractCampoLivre(Integer fieldsLength, TipoSeguimento tipoSeguimento) {
 		super();
 		
 		Integer STRING_LENGTH;
-		STRING_LENGTH = CampoLivreUtil.getTamanhoCorreto(identificacaoSeguimento);	
+		STRING_LENGTH = CampoLivreUtil.getTamanhoCorreto(tipoSeguimento);	
 		
 		setStringLength(STRING_LENGTH);
 		setFieldsLength(fieldsLength);

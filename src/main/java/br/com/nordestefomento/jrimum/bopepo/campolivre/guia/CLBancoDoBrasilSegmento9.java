@@ -62,7 +62,7 @@ class CLBancoDoBrasilSegmento9 extends AbstractCLBancoDoBrasil {
 	 * @param arrecadacao título com as informações para geração do campo livre
 	 */
 	CLBancoDoBrasilSegmento9(Arrecadacao arrecadacao) {
-		super(FIELDS_LENGTH, arrecadacao.getOrgaoRecebedor().getIdentificacaoSeguimento());
+		super(FIELDS_LENGTH, arrecadacao.getOrgaoRecebedor().getTipoSeguimento());
 		
 
 		String digitos11Com12DoCNPJ = arrecadacao.getOrgaoRecebedor().getCNPJ().getCodigoFormatadoSemPontuacao().substring(10,12);

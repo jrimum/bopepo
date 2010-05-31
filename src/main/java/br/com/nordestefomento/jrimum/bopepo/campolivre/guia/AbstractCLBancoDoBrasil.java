@@ -31,8 +31,8 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre.guia;
 
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.IdentificacaoSeguimento;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.IdentificacaoValorReferencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoValorReferencia;
 
 /**
  * 
@@ -50,31 +50,31 @@ abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
 	private static final long serialVersionUID = -7324315662526104153L;
 
 
-	protected AbstractCLBancoDoBrasil(Integer fieldsLength, IdentificacaoSeguimento identificacaoSeguimento) {
-		super(fieldsLength, identificacaoSeguimento);
+	protected AbstractCLBancoDoBrasil(Integer fieldsLength, TipoSeguimento tipoSeguimento) {
+		super(fieldsLength, tipoSeguimento);
 	}
 
 	
 	static CampoLivre create(Arrecadacao arrecadacao) throws NotSupportedCampoLivreException{			
 		
 		CampoLivre campoLivre = null;
-		IdentificacaoValorReferencia identValRef = null;
-		IdentificacaoSeguimento identSeg = null;
+		TipoValorReferencia tipoValorReferencia = null;
+		TipoSeguimento tipoSeguimento = null;
 		
-		identValRef = arrecadacao.getIdentificacaoValorReferencia();
-		identSeg = arrecadacao.getOrgaoRecebedor().getIdentificacaoSeguimento();
-		if (identSeg == IdentificacaoSeguimento.USO_EXCLUSIVO_BANCO) {
+		tipoValorReferencia = arrecadacao.getTipoValorReferencia();
+		tipoSeguimento = arrecadacao.getOrgaoRecebedor().getTipoSeguimento();
+		if (tipoSeguimento == TipoSeguimento.USO_EXCLUSIVO_BANCO) {
 		
-			if ( (identValRef == IdentificacaoValorReferencia.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_10)
-				 || (identValRef == IdentificacaoValorReferencia.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_11) ) {
+			if ( (tipoValorReferencia == TipoValorReferencia.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_10)
+				 || (tipoValorReferencia == TipoValorReferencia.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_11) ) {
 
 				campoLivre = new CLBancoDoBrasilSegmento9(arrecadacao);	
 			}
 			else {
 				throw new NotSupportedCampoLivreException(
 					"Campo livre diponível somente para títulos com identificação " +
-					"de valor referência " + identValRef.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_10.getCodigo() + 
-					" ou " + identValRef.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_11.getCodigo() +
+					"de valor referência " + tipoValorReferencia.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_10.getCodigo() + 
+					" ou " + tipoValorReferencia.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_11.getCodigo() +
 					"."
 				);
 			}
@@ -82,8 +82,8 @@ abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
 		else {
 			throw new NotSupportedCampoLivreException(
 				"Campo livre diponível somente para guias nas quais o órgão " +
-				"ou empresa recebedora fizer parte do segmento " + identSeg.getNome() +
-				" (código " + identSeg.getCodigo() + ")."
+				"ou empresa recebedora fizer parte do segmento " + tipoSeguimento.getNome() +
+				" (código " + tipoSeguimento.getCodigo() + ")."
 			);
 		}
 

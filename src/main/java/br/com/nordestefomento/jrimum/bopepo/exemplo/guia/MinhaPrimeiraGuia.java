@@ -15,8 +15,8 @@ import br.com.nordestefomento.jrimum.bopepo.view.guia.GuiaViewer;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Contribuinte;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Convenio;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.IdentificacaoSeguimento;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.IdentificacaoValorReferencia;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoValorReferencia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.OrgaoRecebedor;
 import br.com.nordestefomento.jrimum.utilix.DateUtil;
 
@@ -29,7 +29,7 @@ public class MinhaPrimeiraGuia {
 		
 		Contribuinte contribuinte = new Contribuinte("Misael Barreto de Queiroz", "01054377430");
 		
-		OrgaoRecebedor orgaoRecebedor = new OrgaoRecebedor("ESMARN", "08546459000105", IdentificacaoSeguimento.USO_EXCLUSIVO_BANCO);		
+		OrgaoRecebedor orgaoRecebedor = new OrgaoRecebedor("ESMARN", "08546459000105", TipoSeguimento.USO_EXCLUSIVO_BANCO);		
 		Image image = ImageIO.read(new File("D:/Misael/Desenvolvimento/Eclipse/eclipse-jee-galileo-SR1-workspace/TJRN/gerenciadorConcurso_TRUNK/doc/Logo_ESMARN_Guia.png"));
 		orgaoRecebedor.setImgLogo(image);
 
@@ -44,7 +44,7 @@ public class MinhaPrimeiraGuia {
 		
 		arrecadacao.setNossoNumero("15744");
 		arrecadacao.setValor(new BigDecimal(20.00));
-		arrecadacao.setIdentificacaoValorReferencia(IdentificacaoValorReferencia.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_10);
+		arrecadacao.setTipoValorReferencia(TipoValorReferencia.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_10);
 		arrecadacao.setDataDoDocumento(DateUtil.FORMAT_DD_MM_YYYY.parse("26/06/2010"));				
 		arrecadacao.setDataDoVencimento(DateUtil.FORMAT_DD_MM_YYYY.parse("26/06/2010"));
 	

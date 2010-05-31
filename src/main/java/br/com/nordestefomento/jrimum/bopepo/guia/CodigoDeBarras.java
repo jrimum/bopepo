@@ -37,7 +37,7 @@ import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.bopepo.campolivre.guia.CampoLivre;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.IdentificacaoSeguimento;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
 import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
 import br.com.nordestefomento.jrimum.utilix.Field;
 import br.com.nordestefomento.jrimum.utilix.Filler;
@@ -285,7 +285,7 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 		digitoVerificadorGeral = new Field<Integer>(0, 1, Filler.ZERO_LEFT);
 		valor = new Field<BigDecimal>(new BigDecimal(0), 11, Filler.ZERO_LEFT);
 		
-		if (arrecadacao.getOrgaoRecebedor().getIdentificacaoSeguimento() == IdentificacaoSeguimento.USO_EXCLUSIVO_BANCO) {
+		if (arrecadacao.getOrgaoRecebedor().getTipoSeguimento() == TipoSeguimento.USO_EXCLUSIVO_BANCO) {
 			this.orgao = new Field<String>("0", 4, Filler.ZERO_LEFT);
 			this.campoLivre = new Field<String>(StringUtils.EMPTY, 25);
 		}
@@ -306,12 +306,12 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 	
 		
 		// Informando o valor de cada campo.
-		this.produto.setValue(arrecadacao.getIdentificacaoProduto().getCodigo());
-		this.segmento.setValue(arrecadacao.getOrgaoRecebedor().getIdentificacaoSeguimento().getCodigo());
-		this.valorReferencia.setValue(arrecadacao.getIdentificacaoValorReferencia().getCodigo());
+		this.produto.setValue(arrecadacao.getTipoProduto().getCodigo());
+		this.segmento.setValue(arrecadacao.getOrgaoRecebedor().getTipoSeguimento().getCodigo());
+		this.valorReferencia.setValue(arrecadacao.getTipoValorReferencia().getCodigo());
 		this.valor.setValue(arrecadacao.getValor().movePointRight(2));
 		
-		if (arrecadacao.getOrgaoRecebedor().getIdentificacaoSeguimento() == IdentificacaoSeguimento.USO_EXCLUSIVO_BANCO) {
+		if (arrecadacao.getOrgaoRecebedor().getTipoSeguimento() == TipoSeguimento.USO_EXCLUSIVO_BANCO) {
 			this.orgao.setValue(arrecadacao.getConvenio().getBanco().getCodigoDeCompensacaoBACEN().getCodigo().toString());
 		}
 		else {
@@ -321,7 +321,7 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 		
 		this.campoLivre.setValue(campoLivre.write());
 		
-		this.moduloParaCalculoDV = arrecadacao.getIdentificacaoValorReferencia().getModulo();
+		this.moduloParaCalculoDV = arrecadacao.getTipoValorReferencia().getModulo();
 		this.calculateAndSetDigitoVerificadorGeral(this.moduloParaCalculoDV);
 		
 		if(log.isDebugEnabled() || log.isTraceEnabled())

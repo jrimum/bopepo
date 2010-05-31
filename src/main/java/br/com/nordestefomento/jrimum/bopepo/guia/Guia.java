@@ -45,7 +45,7 @@ import br.com.nordestefomento.jrimum.bopepo.campolivre.guia.CampoLivreUtil;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.guia.NotSupportedBancoException;
 import br.com.nordestefomento.jrimum.bopepo.campolivre.guia.NotSupportedCampoLivreException;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.IdentificacaoSeguimento;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
 import br.com.nordestefomento.jrimum.utilix.DateUtil;
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
 
@@ -153,7 +153,7 @@ public final class Guia {
 		
 		if(isNotNull(arrecadacao)){
 			this.setArrecadacao(arrecadacao);
-			this.setCampoLivre(CampoLivreFactory.create(arrecadacao), arrecadacao.getOrgaoRecebedor().getIdentificacaoSeguimento());
+			this.setCampoLivre(CampoLivreFactory.create(arrecadacao), arrecadacao.getOrgaoRecebedor().getTipoSeguimento());
 			this.load();
 			
 			if(log.isDebugEnabled())
@@ -180,7 +180,7 @@ public final class Guia {
 		try {
 			ObjectUtil.checkNotNull(arrecadacao);
 			ObjectUtil.checkNotNull(arrecadacao.getOrgaoRecebedor());
-			ObjectUtil.checkNotNull(arrecadacao.getOrgaoRecebedor().getIdentificacaoSeguimento());
+			ObjectUtil.checkNotNull(arrecadacao.getOrgaoRecebedor().getTipoSeguimento());
 			ObjectUtil.checkNotNull(campoLivre);	
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e);
@@ -197,7 +197,7 @@ public final class Guia {
 		
 				
 		this.setArrecadacao(arrecadacao);
-		this.setCampoLivre(campoLivre, arrecadacao.getOrgaoRecebedor().getIdentificacaoSeguimento());
+		this.setCampoLivre(campoLivre, arrecadacao.getOrgaoRecebedor().getTipoSeguimento());
 		this.load();
 			
 		if(log.isDebugEnabled())
@@ -230,11 +230,11 @@ public final class Guia {
 	 * 
 	 * @param campoLivre the campoLivre to set
 	 */
-	public void setCampoLivre(CampoLivre campoLivre, IdentificacaoSeguimento identificacaoSeguimento ) {		
+	public void setCampoLivre(CampoLivre campoLivre, TipoSeguimento tipoSeguimento ) {		
 		ObjectUtil.checkNotNull(campoLivre);
-		ObjectUtil.checkNotNull(identificacaoSeguimento);		
+		ObjectUtil.checkNotNull(tipoSeguimento);		
 		
-		CampoLivreUtil.validar(campoLivre, identificacaoSeguimento);
+		CampoLivreUtil.validar(campoLivre, tipoSeguimento);
 		this.campoLivre = campoLivre;
 	}
 	

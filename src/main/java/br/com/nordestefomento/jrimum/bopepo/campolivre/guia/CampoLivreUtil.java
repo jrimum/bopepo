@@ -5,7 +5,7 @@ package br.com.nordestefomento.jrimum.bopepo.campolivre.guia;
 
 import org.apache.commons.lang.StringUtils;
 
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.IdentificacaoSeguimento;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
 
 /**
  * @author misael
@@ -17,10 +17,10 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Ident
  */
 public class CampoLivreUtil  {
 
-	public static Integer getTamanhoCorreto(IdentificacaoSeguimento identificacaoSeguimento) {
+	public static Integer getTamanhoCorreto(TipoSeguimento tipoSeguimento) {
 		Integer tamanhoCorreto = null;
 		
-		if (identificacaoSeguimento == IdentificacaoSeguimento.USO_EXCLUSIVO_BANCO)
+		if (tipoSeguimento == TipoSeguimento.USO_EXCLUSIVO_BANCO)
 			tamanhoCorreto = 25;
 		else
 			tamanhoCorreto = 21;
@@ -29,45 +29,45 @@ public class CampoLivreUtil  {
 	}
 	
 	
-	public static boolean tamanhoEstaCorreto(CampoLivre campoLivre, IdentificacaoSeguimento identificacaoSeguimento) {
-		return tamanhoEstaCorreto(campoLivre.write(), identificacaoSeguimento);
+	public static boolean tamanhoEstaCorreto(CampoLivre campoLivre, TipoSeguimento tipoSeguimento) {
+		return tamanhoEstaCorreto(campoLivre.write(), tipoSeguimento);
 	}
 
-	public static boolean tamanhoEstaCorreto(String campoLivreStr, IdentificacaoSeguimento identificacaoSeguimento) {
-		return (  campoLivreStr.length() == getTamanhoCorreto(identificacaoSeguimento)  );
+	public static boolean tamanhoEstaCorreto(String campoLivreStr, TipoSeguimento tipoSeguimento) {
+		return (  campoLivreStr.length() == getTamanhoCorreto(tipoSeguimento)  );
 	}
 	
-	public static boolean existeEspacoEmBranco(CampoLivre campoLivre, IdentificacaoSeguimento identificacaoSeguimento) {
-		return existeEspacoEmBranco(campoLivre.write(), identificacaoSeguimento);
+	public static boolean existeEspacoEmBranco(CampoLivre campoLivre, TipoSeguimento tipoSeguimento) {
+		return existeEspacoEmBranco(campoLivre.write(), tipoSeguimento);
 	}
 
-	public static boolean existeEspacoEmBranco(String campoLivreStr, IdentificacaoSeguimento identificacaoSeguimento) {
-		return !(StringUtils.remove(campoLivreStr, ' ').length() == getTamanhoCorreto(identificacaoSeguimento));
+	public static boolean existeEspacoEmBranco(String campoLivreStr, TipoSeguimento tipoSeguimento) {
+		return !(StringUtils.remove(campoLivreStr, ' ').length() == getTamanhoCorreto(tipoSeguimento));
 	}
 
-	public static boolean naoExisteEspacoEmBranco(CampoLivre campoLivre, IdentificacaoSeguimento identificacaoSeguimento) {
-		return naoExisteEspacoEmBranco(campoLivre.write(), identificacaoSeguimento);
+	public static boolean naoExisteEspacoEmBranco(CampoLivre campoLivre, TipoSeguimento tipoSeguimento) {
+		return naoExisteEspacoEmBranco(campoLivre.write(), tipoSeguimento);
 	}
 
-	public static boolean naoExisteEspacoEmBranco(String campoLivreStr, IdentificacaoSeguimento identificacaoSeguimento) {
-		return (StringUtils.remove(campoLivreStr, ' ').length() == getTamanhoCorreto(identificacaoSeguimento));
+	public static boolean naoExisteEspacoEmBranco(String campoLivreStr, TipoSeguimento tipoSeguimento) {
+		return (StringUtils.remove(campoLivreStr, ' ').length() == getTamanhoCorreto(tipoSeguimento));
 	}
 	
-	public static void validar(CampoLivre campoLivre, IdentificacaoSeguimento identificacaoSeguimento) throws CampoLivreException {	
+	public static void validar(CampoLivre campoLivre, TipoSeguimento tipoSeguimento) throws CampoLivreException {	
 		
 		int tamanhoAtual = campoLivre.write().length();
-		int tamanhoEsperado = getTamanhoCorreto(identificacaoSeguimento);
+		int tamanhoEsperado = getTamanhoCorreto(tipoSeguimento);
 
 		StringBuilder msgErro = new StringBuilder();
 		
-		if (  !tamanhoEstaCorreto(campoLivre, identificacaoSeguimento)  ) {
+		if (  !tamanhoEstaCorreto(campoLivre, tipoSeguimento)  ) {
 			if (tamanhoAtual > tamanhoAtual)
 				msgErro.append("O tamanho da String [" + tamanhoAtual + "] é maior que o esperado [" + tamanhoEsperado + "]!");
 			else
 				msgErro.append("O tamanho da String [" + tamanhoAtual + "] é menor que o especificado [" + tamanhoEsperado + "]!");			
 		}
 		
-		if (existeEspacoEmBranco(campoLivre, identificacaoSeguimento)) 
+		if (existeEspacoEmBranco(campoLivre, tipoSeguimento)) 
 			msgErro.append("Um campo livre possui espaços em branco");
 		
 		if (  msgErro.length() > 0  )
