@@ -57,9 +57,11 @@ public class MinhaPrimeiraGuia {
 
 		guia.addTextosExtras("txtCampoExtraOpcaoCargo", "Cargo: Estagiário  -  Lotação: Região 1/Comarca Natal  -  Cidade de prova: Natal-RN");
 		guia.addTextosExtras("txtCampoExtraNumeroInscricao", "13772");
-				
+		guia.addTextosExtras("txtCampoExtraVersaoSistema", "Sistema Gerenciador de Concursos (versão 1.0)");
+						
 	
 		GuiaViewer guiaViewer = new GuiaViewer(guia);
+		guiaViewer.setTemplate("D:/Misael/Desenvolvimento/Eclipse/eclipse-jee-galileo-SR1-workspace/TJRN/gerenciadorConcurso_TRUNK/gerenciadorConcurso/resource/pdf/GuiaTemplateGerenciadorConcurso.pdf");
 
 		// Gerando o arquivo. No caso o arquivo mencionado será salvo na mesma
 		// pasta do projeto. Outros exemplos:
