@@ -39,7 +39,7 @@ public class MinhaPrimeiraGuia {
 		Arrecadacao arrecadacao = new Arrecadacao(convenio, orgaoRecebedor, contribuinte);
 		arrecadacao.setTitulo("RECIBO DO CANDIDATO");
 		arrecadacao.setDescricao("Guia de Recebimento não Compensável para " +
-				"pagamento de Inscrição via Internet Para o Concurso ESMARN " +
+				"pagamento de Inscrição via Internet Para o Concurso ESMARN - " +
 				"Estagiários 2010");
 		
 		arrecadacao.setNossoNumero("15744");
@@ -51,7 +51,7 @@ public class MinhaPrimeiraGuia {
 		
 		
 		Guia guia = new Guia(arrecadacao);
-		guia.setInstrucao1("PAGAMENTO SOMENTE À VISTA E NO BANCO DO BRASIL.");
+		guia.setInstrucao1("PAGAMENTO SOMENTE À VISTA (EM ESPÉCIE) E NO BANCO DO BRASIL.");
 		guia.setInstrucao2("PREFERENCIAMENTE DEVE SER PAGA NOS TERMINAIS DE AUTO-ATENDIMENTO,");
 		guia.setInstrucao3("CORRESPONDENTES BANCÁRIOS E INTERNET");
 
