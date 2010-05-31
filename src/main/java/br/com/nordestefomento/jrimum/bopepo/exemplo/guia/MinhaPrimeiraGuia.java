@@ -29,7 +29,7 @@ public class MinhaPrimeiraGuia {
 		
 		Contribuinte contribuinte = new Contribuinte("Misael Barreto de Queiroz", "010.543.774-30");
 		
-		OrgaoRecebedor orgaoRecebedor = new OrgaoRecebedor("ESMARN", "08546459000105", TipoSeguimento.USO_EXCLUSIVO_BANCO);		
+		OrgaoRecebedor orgaoRecebedor = new OrgaoRecebedor("ESMARN", "08.546.459/0001-05", TipoSeguimento.USO_EXCLUSIVO_BANCO);		
 		Image image = ImageIO.read(new File("D:/Misael/Desenvolvimento/Eclipse/eclipse-jee-galileo-SR1-workspace/TJRN/gerenciadorConcurso_TRUNK/doc/Logo_ESMARN_Guia.png"));
 		orgaoRecebedor.setImgLogo(image);
 

@@ -63,6 +63,7 @@ abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
 		
 		tipoValorReferencia = arrecadacao.getTipoValorReferencia();
 		tipoSeguimento = arrecadacao.getOrgaoRecebedor().getTipoSeguimento();
+		
 		if (tipoSeguimento == TipoSeguimento.USO_EXCLUSIVO_BANCO) {
 		
 			if ( (tipoValorReferencia == TipoValorReferencia.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_10)

@@ -90,7 +90,7 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.CodigoDeCo
  * @author Rômulo Augusto
  * @author Samuel Valério
  * 
- * @see br.com.nordestefomento.jrimum.bopepo.campolivre.CampoLivre
+ * @see br.com.nordestefomento.jrimum.bopepo.campolivre.guia.CampoLivre
  * @see br.com.nordestefomento.jrimum.domkee.financeiro.banco.Banco
  * 
  * @since 0.3

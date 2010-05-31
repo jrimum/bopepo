@@ -48,10 +48,11 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.JRimumException;
-import br.com.nordestefomento.jrimum.bopepo.BancoSuportado;
+import br.com.nordestefomento.jrimum.bopepo.guia.BancoSuportado;
 import br.com.nordestefomento.jrimum.bopepo.guia.Guia;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Convenio;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.OrgaoRecebedor;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoValorReferencia;
 import br.com.nordestefomento.jrimum.utilix.DateUtil;
 import br.com.nordestefomento.jrimum.utilix.FileUtil;
 import br.com.nordestefomento.jrimum.utilix.MonetaryUtil;
@@ -541,8 +542,16 @@ class ViewerPDF {
 	}
 
 	private void setValorDocumento() throws IOException, DocumentException {
-		String valorStr = MonetaryUtil.FORMAT_REAL_COM_PREFIXO.format(guia.getArrecadacao().getValorDocumento());
+		String valorStr = null;
 		
+		if (  (guia.getArrecadacao().getTipoValorReferencia() == TipoValorReferencia.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_10)
+				|| (guia.getArrecadacao().getTipoValorReferencia() == TipoValorReferencia.VALOR_COBRADO_EM_REAL_COM_DV_MODULO_11)  ) {
+			valorStr = MonetaryUtil.FORMAT_REAL_COM_PREFIXO.format(guia.getArrecadacao().getValorDocumento());
+		}
+		else {
+			valorStr = MonetaryUtil.FORMAT_REAL.format(guia.getArrecadacao().getValorDocumento());
+		}
+				
 		form.setField("txtValorDocumento1", valorStr);
 		form.setField("txtValorDocumento2",valorStr);
 		form.setField("txtValorDocumento3",valorStr);
@@ -573,14 +582,11 @@ class ViewerPDF {
 	}
 
 	private void setDescricao() throws IOException, DocumentException {
-		form.setField("txtDescricao", guia.getArrecadacao()
-				.getDescricao());
+		form.setField("txtDescricao", guia.getArrecadacao().getDescricao());
 	}
 
 	private void setTitulo() throws IOException, DocumentException {
-		form
-				.setField("txtTitulo", guia.getArrecadacao()
-						.getTitulo());
+		form.setField("txtTitulo", guia.getArrecadacao().getTitulo());
 	}
 
 	private void setLinhaDigitavel() throws DocumentException, IOException {
@@ -635,12 +641,9 @@ class ViewerPDF {
 			} else {
 
 				// Sem imagem, um alerta é exibido.
-				log
-						.warn("Banco sem imagem definida. O nome da instituição será usado como logo.");
+				log.warn("Banco sem imagem definida. O nome da instituição será usado como logo.");
 
-				form.setField("txtRsLogoBanco", convenio.getBanco().getNome());
-				form.setField("txtFcLogoBanco", convenio.getBanco().getNome());
-
+				form.setField("txtLogoBanco", convenio.getBanco().getNome());
 			}
 		}
 	}
@@ -649,9 +652,6 @@ class ViewerPDF {
 	private void setLogoOrgaoRecebedor() throws MalformedURLException, IOException,
 			DocumentException {
 
-		// Através da conta bancária será descoberto a imagem que representa o
-		// banco, com base
-		// no código do banco.
 		OrgaoRecebedor orgaoRecebedor = guia.getArrecadacao().getOrgaoRecebedor();
 		Image imgLogoBanco = Image.getInstance(orgaoRecebedor.getImgLogo(),	null);
 
@@ -673,7 +673,6 @@ class ViewerPDF {
 	 * @since 0.2
 	 */
 	private void setImagensNosCampos() throws DocumentException, IOException {
-
 		if (isNotNull(guia.getImagensExtras())) {
 
 			for (String campo : guia.getImagensExtras().keySet()) {
@@ -735,11 +734,8 @@ class ViewerPDF {
 	 */
 	@Override
 	public String toString() {
-
 		ToStringBuilder tsb = new ToStringBuilder(this);
-
 		tsb.append(guia);
-
 		return tsb.toString();
 	}
 }

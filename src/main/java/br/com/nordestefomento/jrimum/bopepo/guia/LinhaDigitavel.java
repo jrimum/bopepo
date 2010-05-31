@@ -69,7 +69,8 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 	 * Tamanho dos campos mais os espaços entre eles. <br/>
 	 * 44 posições do código de barras <br/>
 	 * + <font color="red">4 dígitos verificadores</font><br/>
-	 * + 8 espaços em branco (um antes e um depois de cada DV): <br/>
+	 * + 4 espaços em branco (entre cada campo e seu dígito verificador): <br/>
+	 * + 3 espaços em branco (para separar os campos): <br/>
 	 * Ex: 89610000001 <font size="4" color="red">8</font>
 	 *     00000001011 <font size="4" color="red">6</font>
 	 *     05449201004 <font size="4" color="red">3</font>
@@ -77,7 +78,7 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 	 *     <br/>
  	 * </p>
 	 */
-	private static final Integer STRING_LENGTH = 56;
+	private static final Integer STRING_LENGTH = 55;
 
 	/**
 	 * 
@@ -121,6 +122,8 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 			log.debug("codigoDeBarra instance : "+codigoDeBarras);
 		
 		
+		// Cada InnerCampo possui 2 campos internos, com um total de 
+		// 13 caracteres ao final (11 dígitos do CB + " " + DV).
 		innerCampo1 = new Field<InnerCampo1>(new InnerCampo1(2,13),13);
 		innerCampo2 = new Field<InnerCampo2>(new InnerCampo2(2,13),13);
 		innerCampo3 = new Field<InnerCampo3>(new InnerCampo3(2,13),13);
@@ -137,7 +140,7 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 		this.innerCampo4.getValue().load(codigoDeBarras);
 		
 		if(log.isDebugEnabled() || log.isTraceEnabled())
-			log.debug("linhaDigitavel instanciada : "+this.write());
+			log.debug("Linha digitável instanciada : " + this.write());
 	}
 
 	/**
@@ -147,15 +150,16 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 	 */
 	@Override
 	public String write(){
+		StringBuilder lineOfFields = new StringBuilder(innerCampo1.write()).
+			append(StringUtil.WHITE_SPACE).
+			append(innerCampo2.write()).
+			append(StringUtil.WHITE_SPACE).
+			append(innerCampo3.write()).
+			append(StringUtil.WHITE_SPACE).
+			append(innerCampo4.write());
 		
-		return new StringBuilder(innerCampo1.write()).
-		append(StringUtil.WHITE_SPACE).
-		append(innerCampo2.write()).
-		append(StringUtil.WHITE_SPACE).
-		append(innerCampo3.write()).
-		append(StringUtil.WHITE_SPACE).
-		append(innerCampo4.write()).toString();
-
+		isConsistent(lineOfFields);
+		return lineOfFields.toString();
 	}
 
 	
@@ -202,18 +206,23 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 		/**
 		 * @param CodigoDeBarras codigoDeBarras
 		 */
-		public void load(CodigoDeBarras codigoDeBarras){		
+		public void load(CodigoDeBarras codigoDeBarras){
+			// Obtendo o mesmo módulo utilizado pelo código de barras para realizar
+			// o cálculo do dígito verificador.
 			GuiaLinhaDigitavelDV calculadorDV = new GuiaLinhaDigitavelDV(codigoDeBarras.getModuloParaCalculoDV());
 			
 			if(log.isTraceEnabled())
 				log.trace("Compondo campo " + this.numeroCampo + " da Linha Digitável");
 
+				// Obtendo o trecho do código de barras que servirá de base para
+				// a montagem da linha digitável. Casa classe filha definirá
+				// que trecho é esse.
 				String trechoCodigoDeBarras = getTrechoCodigoDeBarras(codigoDeBarras);
 				add(  new Field<String>(trechoCodigoDeBarras, 11)  );
 				add(  new Field<Integer>(calculadorDV.calcule(trechoCodigoDeBarras), 1)  );
 				
 				if(log.isDebugEnabled())
-					log.debug("Digito verificador do Field " + this.numeroCampo + " da Linha Digitável : "+ get(1).getValue());
+					log.debug("Digito verificador do Field " + this.numeroCampo + " da Linha Digitável: "+ get(1).getValue());
 
 				if(log.isDebugEnabled() || log.isTraceEnabled())
 					log.debug("Field " + this.numeroCampo + " da Linha Digitável composto : "+ this.write());
@@ -270,7 +279,7 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 		private static final long serialVersionUID = -5589288171927030864L;
 
 		private InnerCampo3(Integer fieldsLength, Integer stringLength) {
-			super(fieldsLength, stringLength, 2);
+			super(fieldsLength, stringLength, 3);
 		}
 
 		@Override
@@ -289,7 +298,7 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 		private static final long serialVersionUID = 7559169854185810900L;
 
 		private InnerCampo4(Integer fieldsLength, Integer stringLength) {
-			super(fieldsLength, stringLength, 2);
+			super(fieldsLength, stringLength, 4);
 		}
 
 		@Override

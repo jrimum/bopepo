@@ -244,13 +244,21 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 	
 
 	/**
-	 *  Identificação da Empresa/Órgão
+	 *  Identificação da Empresa/Órgão.
+	 *  Seu tamanho pode varias de acordo com a forma com a Empresa/Órgão Recebedor
+	 *  for identificado.
+	 *  
+	 *   @see br.com.nordestefomento.jrimum.bopepo.guia.CodigoDeBarras
 	 */
 	private Field<String> orgao;
 	
 	
 	/**
-	 * @see br.br.com.nordestefomento.jrimum.bopepo.campolivre.boleto.CampoLivre
+	 * @see br.br.com.nordestefomento.jrimum.bopepo.campolivre.boleto.guia.CampoLivre
+	 * Seu tamanho pode varias de acordo com a forma com a Empresa/Órgão Recebedor
+	 * for identificado.
+	 * 
+	 *  @see br.com.nordestefomento.jrimum.bopepo.guia.CodigoDeBarras
 	 */
 	private Field<String> campoLivre;
 	
@@ -259,7 +267,7 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 	
 	/**
 	 * <p>
-	 * Cria um Código de Barras a partir do título e campo livre passados.
+	 * Cria um Código de Barras a partir de uma arrecadação e campo livre passados.
 	 * </p>
 	 * 
 	 * @param arrecadacao
@@ -285,6 +293,7 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 		digitoVerificadorGeral = new Field<Integer>(0, 1, Filler.ZERO_LEFT);
 		valor = new Field<BigDecimal>(new BigDecimal(0), 11, Filler.ZERO_LEFT);
 		
+		// Configurando o tamanho dos campos campos orgão e campo livre. 
 		if (arrecadacao.getOrgaoRecebedor().getTipoSeguimento() == TipoSeguimento.USO_EXCLUSIVO_BANCO) {
 			this.orgao = new Field<String>("0", 4, Filler.ZERO_LEFT);
 			this.campoLivre = new Field<String>(StringUtils.EMPTY, 25);
@@ -306,21 +315,33 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 	
 		
 		// Informando o valor de cada campo.
-		this.produto.setValue(arrecadacao.getTipoProduto().getCodigo());
+		this.produto.setValue(arrecadacao.TIPO_PRODUTO.getCodigo());
 		this.segmento.setValue(arrecadacao.getOrgaoRecebedor().getTipoSeguimento().getCodigo());
 		this.valorReferencia.setValue(arrecadacao.getTipoValorReferencia().getCodigo());
 		this.valor.setValue(arrecadacao.getValorDocumento().movePointRight(2));
 		
 		if (arrecadacao.getOrgaoRecebedor().getTipoSeguimento() == TipoSeguimento.USO_EXCLUSIVO_BANCO) {
+			// Pegando o código do banco como inteiro. O filler deste campo vai se encarregar de deixar o código
+			// com quatro dígitos, com zeros à esquerda.
+			// Neste caso, a identificação do órgão recebedor será feita através
+			// do código do banco(presente no campo órgão) mais o código do 
+			// convênio (presente no campo livre) entre o banco e o órgão recebedor.
 			this.orgao.setValue(arrecadacao.getConvenio().getBanco().getCodigoDeCompensacaoBACEN().getCodigo().toString());
 		}
 		else {
-			String cnpjFormatadoSemPontucao = arrecadacao.getOrgaoRecebedor().getCNPJ().getCodigoFormatadoSemPontuacao();
-			this.orgao.setValue(cnpjFormatadoSemPontucao.substring(0, 8));
+			// Caso contrário, a identificação será feita através dos 8 primeiros
+			// dígitos do CNPJ do órgão recebedor, presente no campo órgão.
+			String cnpjDoOrgaoRecebedorFormatadoSemPontucao = arrecadacao.getOrgaoRecebedor().getCNPJ().getCodigoFormatadoSemPontuacao();
+			this.orgao.setValue(cnpjDoOrgaoRecebedorFormatadoSemPontucao.substring(0, 8));
 		}
 		
+		// Escrevendo os dados do campo livre informado como parâmetro deste
+		// método.
 		this.campoLivre.setValue(campoLivre.write());
 		
+		// Obtendo qual deverá ser o módulo utilizado para o cálculo do dígito
+		// verificador geral do código de barras da guia. Em seguida é realizado
+		// o cálculo do mesmo.
 		this.moduloParaCalculoDV = arrecadacao.getTipoValorReferencia().getModulo();
 		this.calculateAndSetDigitoVerificadorGeral(this.moduloParaCalculoDV);
 		
@@ -333,14 +354,14 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 	private void calculateAndSetDigitoVerificadorGeral(Modulo modulo) {
 		
 		if (log.isTraceEnabled())
-			log.trace("Calculando Digito Verificador Geral");
+			log.trace("Calculando Digito Verificador Geral do Código de Barras...");
 
 		// Instanciando o objeto irá calcular o dígito verificador da guia.
 		GuiaCodigoDeBarrasDV calculadorDV = new GuiaCodigoDeBarrasDV(modulo);
 
 		// Preparando o conjunto de informações que será a base para o cálculo
 		// do dígito verificador, conforme normas da FEBRABAN.
-		StringBuilder toCalculateDV = new StringBuilder(produto.write())
+		StringBuilder baseCalculoDV = new StringBuilder(produto.write())
 		.append(segmento.write())
 		.append(valorReferencia.write())
 		.append(valor.write())
@@ -350,7 +371,7 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 		// Realizando o cálculo dígito verificador e em seguida armazenando 
 		// a informação no campo "digitoVerificadorGeral".
 		digitoVerificadorGeral.setValue(
-				calculadorDV.calcule(toCalculateDV.toString())
+				calculadorDV.calcule(baseCalculoDV.toString())
 				);
 
 		if (log.isDebugEnabled())

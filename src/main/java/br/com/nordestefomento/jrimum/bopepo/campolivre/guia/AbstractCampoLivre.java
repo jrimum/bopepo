@@ -95,8 +95,11 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * 
 	 * @throws NotSupportedBancoException Caso o banco informado no convênio não 
 	 * tenha nenhuma implementação de campo livre.
-	 * @throws NotSupportedCampoLivreException Caso exista implementações de campo livre para o banco informa
-	 * no convênio, mas nenhuma dessas implementações foram adequadas para os dados da arrecadação.
+	 * 
+	 * @throws NotSupportedCampoLivreException Caso exista implementações de campo 
+	 * livre para o banco informa no convênio, mas nenhuma dessas implementações 
+	 * foram adequadas para os dados da arrecadação.
+	 * 
 	 * @throws CampoLivreException Caso ocorra algum problema na geração do campo livre.
 	 */
 	static CampoLivre create(Arrecadacao arrecadacao) {
