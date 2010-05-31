@@ -655,8 +655,10 @@ class ViewerPDF {
 		OrgaoRecebedor orgaoRecebedor = guia.getArrecadacao().getOrgaoRecebedor();
 		Image imgLogoBanco = Image.getInstance(orgaoRecebedor.getImgLogo(),	null);
 
-		if (isNotNull(imgLogoBanco))
-			setImagemNoCampo("txtLogoOrgaoRecebedor", imgLogoBanco);
+		if (isNotNull(imgLogoBanco)) {
+			setImagemNoCampo("txtLogoOrgaoRecebedor1", imgLogoBanco);
+			setImagemNoCampo("txtLogoOrgaoRecebedor2", imgLogoBanco);
+		}
 		
 	}
 	
