@@ -107,14 +107,14 @@ public final class Guia {
 	 */
 	private String instrucaoAoSacado;
 	
-	private String instrucao1;
-	private String instrucao2;
-	private String instrucao3;
-	private String instrucao4;
-	private String instrucao5;
-	private String instrucao6;
-	private String instrucao7;
-	private String instrucao8;
+	private String instrucaoAoCaixa1;
+	private String instrucaoAoCaixa2;
+	private String instrucaoAoCaixa3;
+	private String instrucaoAoCaixa4;
+	private String instrucaoAoCaixa5;
+	private String instrucaoAoCaixa6;
+	private String instrucaoAoCaixa7;
+	private String instrucaoAoCaixa8;
 
 	/**
 	 * @see #setTextosExtras(Map)
@@ -333,6 +333,120 @@ public final class Guia {
 		return instrucaoAoSacado;
 	}
 
+
+	/**
+	 * @return the instrucaoAoCaixa1
+	 */
+	public String getInstrucaoAoCaixa1() {
+		return instrucaoAoCaixa1;
+	}
+
+	/**
+	 * @return the instrucaoAoCaixa2
+	 */
+	public String getInstrucaoAoCaixa2() {
+		return instrucaoAoCaixa2;
+	}
+
+	/**
+	 * @return the instrucaoAoCaixa3
+	 */
+	public String getInstrucaoAoCaixa3() {
+		return instrucaoAoCaixa3;
+	}
+
+	/**
+	 * @return the instrucaoAoCaixa4
+	 */
+	public String getInstrucaoAoCaixa4() {
+		return instrucaoAoCaixa4;
+	}
+
+	/**
+	 * @return the instrucaoAoCaixa5
+	 */
+	public String getInstrucaoAoCaixa5() {
+		return instrucaoAoCaixa5;
+	}
+
+	/**
+	 * @return the instrucaoAoCaixa6
+	 */
+	public String getInstrucaoAoCaixa6() {
+		return instrucaoAoCaixa6;
+	}
+
+	/**
+	 * @return the instrucaoAoCaixa7
+	 */
+	public String getInstrucaoAoCaixa7() {
+		return instrucaoAoCaixa7;
+	}
+
+	/**
+	 * @return the instrucaoAoCaixa8
+	 */
+	public String getInstrucaoAoCaixa8() {
+		return instrucaoAoCaixa8;
+	}
+
+	/**
+	 * @param instrucaoAoCaixa1 the instrucaoAoCaixa1 to set
+	 */
+	public void setInstrucaoAoCaixa1(String instrucaoAoCaixa1) {
+		this.instrucaoAoCaixa1 = instrucaoAoCaixa1;
+	}
+
+	/**
+	 * @param instrucaoAoCaixa2 the instrucaoAoCaixa2 to set
+	 */
+	public void setInstrucaoAoCaixa2(String instrucaoAoCaixa2) {
+		this.instrucaoAoCaixa2 = instrucaoAoCaixa2;
+	}
+
+	/**
+	 * @param instrucaoAoCaixa3 the instrucaoAoCaixa3 to set
+	 */
+	public void setInstrucaoAoCaixa3(String instrucaoAoCaixa3) {
+		this.instrucaoAoCaixa3 = instrucaoAoCaixa3;
+	}
+
+	/**
+	 * @param instrucaoAoCaixa4 the instrucaoAoCaixa4 to set
+	 */
+	public void setInstrucaoAoCaixa4(String instrucaoAoCaixa4) {
+		this.instrucaoAoCaixa4 = instrucaoAoCaixa4;
+	}
+
+	/**
+	 * @param instrucaoAoCaixa5 the instrucaoAoCaixa5 to set
+	 */
+	public void setInstrucaoAoCaixa5(String instrucaoAoCaixa5) {
+		this.instrucaoAoCaixa5 = instrucaoAoCaixa5;
+	}
+
+	/**
+	 * @param instrucaoAoCaixa6 the instrucaoAoCaixa6 to set
+	 */
+	public void setInstrucaoAoCaixa6(String instrucaoAoCaixa6) {
+		this.instrucaoAoCaixa6 = instrucaoAoCaixa6;
+	}
+
+	/**
+	 * @param instrucaoAoCaixa7 the instrucaoAoCaixa7 to set
+	 */
+	public void setInstrucaoAoCaixa7(String instrucaoAoCaixa7) {
+		this.instrucaoAoCaixa7 = instrucaoAoCaixa7;
+	}
+
+	/**
+	 * @param instrucaoAoCaixa8 the instrucaoAoCaixa8 to set
+	 */
+	public void setInstrucaoAoCaixa8(String instrucaoAoCaixa8) {
+		this.instrucaoAoCaixa8 = instrucaoAoCaixa8;
+	}
+
+
 	/**
 	 * <p>
 	 *  Instrução adicional ao sacado, para visualizar o conceito de negócio de sacado consultar o 
@@ -343,118 +457,6 @@ public final class Guia {
 	 */
 	public void setInstrucaoAoSacado(String insturcaoAoSacado) {
 		this.instrucaoAoSacado = insturcaoAoSacado;
-	}
-
-	/**
-	 * @return the instrucao1
-	 */
-	public String getInstrucao1() {
-		return instrucao1;
-	}
-
-	/**
-	 * @param instrucao1 the instrucao1 to set
-	 */
-	public void setInstrucao1(String instrucao1) {
-		this.instrucao1 = instrucao1;
-	}
-
-	/**
-	 * @return the instrucao2
-	 */
-	public String getInstrucao2() {
-		return instrucao2;
-	}
-
-	/**
-	 * @param instrucao2 the instrucao2 to set
-	 */
-	public void setInstrucao2(String instrucao2) {
-		this.instrucao2 = instrucao2;
-	}
-
-	/**
-	 * @return the instrucao3
-	 */
-	public String getInstrucao3() {
-		return instrucao3;
-	}
-
-	/**
-	 * @param instrucao3 the instrucao3 to set
-	 */
-	public void setInstrucao3(String instrucao3) {
-		this.instrucao3 = instrucao3;
-	}
-
-	/**
-	 * @return the instrucao4
-	 */
-	public String getInstrucao4() {
-		return instrucao4;
-	}
-
-	/**
-	 * @param instrucao4 the instrucao4 to set
-	 */
-	public void setInstrucao4(String instrucao4) {
-		this.instrucao4 = instrucao4;
-	}
-
-	/**
-	 * @return the instrucao5
-	 */
-	public String getInstrucao5() {
-		return instrucao5;
-	}
-
-	/**
-	 * @param instrucao5 the instrucao5 to set
-	 */
-	public void setInstrucao5(String instrucao5) {
-		this.instrucao5 = instrucao5;
-	}
-
-	/**
-	 * @return the instrucao6
-	 */
-	public String getInstrucao6() {
-		return instrucao6;
-	}
-
-	/**
-	 * @param instrucao6 the instrucao6 to set
-	 */
-	public void setInstrucao6(String instrucao6) {
-		this.instrucao6 = instrucao6;
-	}
-
-	/**
-	 * @return the instrucao7
-	 */
-	public String getInstrucao7() {
-		return instrucao7;
-	}
-
-	/**
-	 * @param instrucao7 the instrucao7 to set
-	 */
-	public void setInstrucao7(String instrucao7) {
-		this.instrucao7 = instrucao7;
-	}
-
-	/**
-	 * @return the instrucao8
-	 */
-	public String getInstrucao8() {
-		return instrucao8;
-	}
-
-	/**
-	 * @param instrucao8 the instrucao8 to set
-	 */
-	public void setInstrucao8(String instrucao8) {
-		this.instrucao8 = instrucao8;
 	}
 
 	public Map<String, String> getTextosExtras() {

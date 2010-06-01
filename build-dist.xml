@@ -5,8 +5,10 @@
     <target name="limpar">
     	<echo message="Limpando o diretorio 'dist'..." />
         
-    	<mkdir dir="dist"/>
-    	<delete file="$dist/**/*" />
+    	<mkdir dir="dist"/> 	
+    	<delete>
+			<fileset dir="dist" includes="**/*"/>
+		</delete>
 	</target>
 
 	

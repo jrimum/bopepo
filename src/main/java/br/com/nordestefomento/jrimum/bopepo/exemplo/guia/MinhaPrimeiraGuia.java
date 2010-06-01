@@ -51,9 +51,9 @@ public class MinhaPrimeiraGuia {
 		
 		
 		Guia guia = new Guia(arrecadacao);
-		guia.setInstrucao1("PAGAMENTO SOMENTE À VISTA (EM ESPÉCIE) E NO BANCO DO BRASIL.");
-		guia.setInstrucao2("PREFERENCIAMENTE DEVE SER PAGA NOS TERMINAIS DE AUTO-ATENDIMENTO,");
-		guia.setInstrucao3("CORRESPONDENTES BANCÁRIOS E INTERNET");
+		guia.setInstrucaoAoCaixa1("PAGAMENTO SOMENTE À VISTA (EM ESPÉCIE) E NO BANCO DO BRASIL.");
+		guia.setInstrucaoAoCaixa2("PREFERENCIAMENTE DEVE SER PAGA NOS TERMINAIS DE AUTO-ATENDIMENTO,");
+		guia.setInstrucaoAoCaixa3("CORRESPONDENTES BANCÁRIOS E INTERNET");
 
 		guia.addTextosExtras("txtCampoExtraOpcaoCargo", "Cargo: Estagiário  -  Lotação: Região 1/Comarca Natal  -  Cidade de prova: Natal-RN");
 		guia.addTextosExtras("txtCampoExtraNumeroInscricao", "13772");

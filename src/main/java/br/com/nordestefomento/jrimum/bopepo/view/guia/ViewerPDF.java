@@ -536,9 +536,9 @@ class ViewerPDF {
 	}
 
 	private void setInstrucaoAoCaixa() throws IOException, DocumentException {
-		form.setField("txtInstrucaoAoCaixa1", guia.getInstrucao1());
-		form.setField("txtInstrucaoAoCaixa2", guia.getInstrucao2());
-		form.setField("txtInstrucaoAoCaixa3", guia.getInstrucao3());
+		form.setField("txtInstrucaoAoCaixa1", guia.getInstrucaoAoCaixa1());
+		form.setField("txtInstrucaoAoCaixa2", guia.getInstrucaoAoCaixa2());
+		form.setField("txtInstrucaoAoCaixa3", guia.getInstrucaoAoCaixa3());
 	}
 
 	private void setValorDocumento() throws IOException, DocumentException {
