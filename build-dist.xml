@@ -19,7 +19,9 @@
 			<fileset dir="src/main/resources"/>
     		
     		<fileset dir="../_JRimum${versao}/target/classes"/>    		
-    		<fileset dir="../_JRimum${versao}/src/main/resources"/>    		
+    		<fileset dir="../_JRimum${versao}/src/main/resources"> 
+    			<exclude name="log4j.properties"/>
+    		</fileset>
 
     		<fileset dir="../Domkee${versao}/target/classes"/>    		
     		<fileset dir="../Domkee${versao}/src/main/resources"/>    		
