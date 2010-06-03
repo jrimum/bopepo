@@ -269,4 +269,9 @@ public enum BancoSuportado implements Serializable{
 	public String getSegmento() {
 		return segmento;
 	}
+	
+	
+	public BancoSuportado findByCodigoDeCompensacaoBACEN(String  codigoDeCompensacaoBACEN) {
+		return suportados.get(codigoDeCompensacaoBACEN);	
+	}
 }
