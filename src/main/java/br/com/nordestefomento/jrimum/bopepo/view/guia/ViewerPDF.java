@@ -652,14 +652,15 @@ class ViewerPDF {
 	private void setLogoOrgaoRecebedor() throws MalformedURLException, IOException,
 			DocumentException {
 
+		Image imgLogoBanco = null;
 		OrgaoRecebedor orgaoRecebedor = guia.getArrecadacao().getOrgaoRecebedor();
-		Image imgLogoBanco = Image.getInstance(orgaoRecebedor.getImgLogo(),	null);
-
-		if (isNotNull(imgLogoBanco)) {
+		
+		if (isNotNull(orgaoRecebedor.getImgLogo())) {
+			imgLogoBanco = Image.getInstance(orgaoRecebedor.getImgLogo(),	null);
+			
 			setImagemNoCampo("txtLogoOrgaoRecebedor1", imgLogoBanco);
 			setImagemNoCampo("txtLogoOrgaoRecebedor2", imgLogoBanco);
 		}
-		
 	}
 	
 	
