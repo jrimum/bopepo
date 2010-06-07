@@ -3,6 +3,8 @@ package br.com.nordestefomento.jrimum.bopepo;
 import org.apache.commons.lang.StringUtils;
 
 import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
+import br.com.nordestefomento.jrimum.utilix.StringUtil;
+import br.com.nordestefomento.jrimum.vallia.digitoverificador.BoletoLinhaDigitavelDV;
 
 /**
  * <p>
@@ -12,145 +14,193 @@ import br.com.nordestefomento.jrimum.utilix.ObjectUtil;
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  */
-public class BoletoUtil {
+public final class BoletoUtil {
 
 	/*
 	 * Regras REGEX.
 	 */
+	private static final String CODIGO_DE_BARRAS_REGEX = "\\d{44}";
 	private static final String LINHA_DIGITAVEL_NUMERICA_REGEX = "\\d{47}";
 	private static final String LINHA_DIGITAVEL_FORMATADA_REGEX = "\\d{5}\\.\\d{5} \\d{5}\\.\\d{6} \\d{5}\\.\\d{6} \\d{1} \\d{14}";
 	/*
 	 * Mensagens.
 	 */
+	private static final String MSG_CODIGO_DE_BARRAS = "Código de barras inválido!";
 	private static final String MSG_LINHA_INVALIDA = "Linha digitável inválida!";
 	private static final String MSG_STR_VAZIA = "String vazia [ \"%s\" ] tamanho [ %d ].";
 	private static final String MSG_NAO_FORMATADA = "String formatada [ \"%s\" ] de tamanho [ %d ] está fora do padrão [ \"ddddd.ddddd ddddd.dddddd ddddd.dddddd d dddddddddddddd\" ] tamanho = 54.";
 	private static final String MSG_STR_NUMERICA = "String numérica [ \"%s\" ] de tamanho [ %d ] está fora do padrão [ \"ddddddddddddddddddddddddddddddddddddddddddddddd\" ] tamanho = 47.";
 
-	public static void main(String[] args) {
-
-		String s = "39991.23452 67000.000009 00222.268922 3 43710000000965";
-
-		/*
-		 * Todos os dados a partir da linha digitával
-		 */
-		String n = linhaDigitavelFormatadaEmNumerica(s);
-
-		/*
-		 * Transformando em código de barras.
-		 */
-		String c = linhaDigitavelNumericaEmCodigoDeBarras(n);
-
-		/*
-		 * Recuperando dados a partir do código de barras
-		 */
-		String banco = getCodigoDoBancoDoCodigoDeBarras(c);
-
-		String codigoMoeda = getCodigoDaMoedaDoCodigoDeBarras(c);
-
-		String fatorDeVencimento = getFatorDeVencimentoDoCodigoDeBarras(c);
-
-		String valor = getValorDoTituloDoCodigoDeBarras(c);
-
-		String campoLivre = getCampoLivreDoCodigoDeBarras(c);
-
-		/*
-		 * Transformando código de barras em linha digitával formatada.
-		 */
-		String l = codigoDeBarrasEmLinhaDigitavel(c);
-
-		/*
-		 * Recuperando dados a partir da linha digitável
-		 */
-		banco = getCodigoDoBancoDaLinhaDigitavel(l);
-
-		codigoMoeda = getCodigoDaMoedaDaLinhaDigitavel(l);
-
-		fatorDeVencimento = getFatorDeVencimentoDaLinhaDigitavel(l);
-
-		valor = getValorDoTituloDaLinhaDigitavel(l);
-
-		campoLivre = getCampoLivreDaLinhaDigitavel(l);
-
-	}
-
-	public static String getCampoLivreDaLinhaDigitavel(String l) {
+	public static final String getCampoLivreDaLinhaDigitavel(String linhaDigitavel) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static String getValorDoTituloDaLinhaDigitavel(String l) {
+	public static final String getValorDoTituloDaLinhaDigitavel(String linhaDigitavel) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static String getFatorDeVencimentoDaLinhaDigitavel(String l) {
+	public static final String getFatorDeVencimentoDaLinhaDigitavel(String linhaDigitavel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public static final String getDigitoVerificadorGeralDaLinhaDigitavel(String linhaDigitavel) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static String getCodigoDaMoedaDaLinhaDigitavel(String l) {
+	public static final String getCodigoDaMoedaDaLinhaDigitavel(String linhaDigitavel) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static String getCodigoDoBancoDaLinhaDigitavel(String l) {
+	public static final String getCodigoDoBancoDaLinhaDigitavel(String linhaDigitavel) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static String getCampoLivreDoCodigoDeBarras(String c) {
-		// TODO Auto-generated method stub
-		return null;
+	public static final String getCampoLivreDoCodigoDeBarras(String codigoDeBarras) {
+		
+		checkFormatoCodigoDeBarras(codigoDeBarras);
+		
+		return StringUtils.trim(codigoDeBarras).substring(19, 44);
 	}
 
-	public static String getValorDoTituloDoCodigoDeBarras(String c) {
-		// TODO Auto-generated method stub
-		return null;
+	public static final String getValorDoTituloDoCodigoDeBarras(String codigoDeBarras) {
+		
+		checkFormatoCodigoDeBarras(codigoDeBarras);
+		
+		return StringUtils.trim(codigoDeBarras).substring(9, 19);
 	}
 
-	public static String getFatorDeVencimentoDoCodigoDeBarras(String c) {
-		// TODO Auto-generated method stub
-		return null;
+	public static final String getFatorDeVencimentoDoCodigoDeBarras(String codigoDeBarras) {
+		
+		checkFormatoCodigoDeBarras(codigoDeBarras);
+		
+		return StringUtils.trim(codigoDeBarras).substring(5, 9);
+	}
+	
+	public static final String getDigitoVerificadorGeralDoCodigoDeBarras(String codigoDeBarras) {
+		
+		checkFormatoCodigoDeBarras(codigoDeBarras);
+		
+		return StringUtils.trim(codigoDeBarras).substring(4, 5);
 	}
 
-	public static String getCodigoDaMoedaDoCodigoDeBarras(String c) {
-		// TODO Auto-generated method stub
-		return null;
+	public static final String getCodigoDaMoedaDoCodigoDeBarras(String codigoDeBarras) {
+		
+		checkFormatoCodigoDeBarras(codigoDeBarras);
+		
+		return StringUtils.trim(codigoDeBarras).substring(3, 4);
 	}
 
-	public static String getCodigoDoBancoDoCodigoDeBarras(String c) {
-		// TODO Auto-generated method stub
-		return null;
+	public static final String getCodigoDoBancoDoCodigoDeBarras(String codigoDeBarras) {
+		
+		checkFormatoCodigoDeBarras(codigoDeBarras);
+		
+		return StringUtils.trim(codigoDeBarras).substring(0, 3);
 	}
-
-	public static String codigoDeBarrasEmLinhaDigitavel(String c) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public static String linhaDigitavelFormatadaEmCodigoDeBarras(
-			String linhaDigitavel) {
-
-		return linhaDigitavelNumericaEmCodigoDeBarras(linhaDigitavelFormatadaEmNumerica(linhaDigitavel));
-	}
-
-	public static String linhaDigitavelNumericaEmCodigoDeBarras(
-			String linhaDigitavel) {
-
-		checkFormatoLinhaDigitavelNumerica(linhaDigitavel);
-
-		// TODO IMPL
-
-		return null;
+	
+	/**
+	 * <p>
+	 * Transforma um código de barras em uma linha digitável no formato FEBRABAN.
+	 * </p>
+	 * <p>
+	 * "<strong>dddddddddddddddddddddddddddddddddddddddddddd</strong>"
+	 * <br />
+	 * <b>&rArr;</b>
+	 * <br />
+	 * "<strong>ddddd.ddddd ddddd.dddddd ddddd.dddddd d dddddddddddddd</strong>"
+	 * </p>
+	 * 
+	 * @see #checkFormatoCodigoDeBarras(String)
+	 * 
+	 * @param codigoDeBarras
+	 *            string contendo somente números
+	 * @return linha digitável contendo somente números
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws CodigoDeBarrasException
+	 *             quando a string não está no formato válido
+	 */
+	public static final String codigoDeBarrasEmLinhaDigitavelFormatada(String codigoDeBarras) {
+		
+		return linhaDigitavelNumericaEmFormatada(codigoDeBarrasEmLinhaDigitavelNumerica(codigoDeBarras));
 	}
 
 	/**
 	 * <p>
-	 * Remove formatação e espaços de uma linha digitável no formato FEBRABAN:
+	 * Transforma um código de barras em uma linha digitável numérica.
+	 * </p>
+	 * <p>
+	 * "<strong>dddddddddddddddddddddddddddddddddddddddddddd</strong>"
+	 * <br />
+	 * <b>&rArr;</b>
+	 * <br />
+	 * "<strong>ddddddddddddddddddddddddddddddddddddddddddddddd</strong>"
+	 * </p>
+	 * 
+	 * @see #checkFormatoCodigoDeBarras(String)
+	 * 
+	 * @param codigoDeBarras
+	 *            string contendo somente números
+	 * @return linha digitável contendo somente números
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws CodigoDeBarrasException
+	 *             quando a string não está no formato válido
+	 */
+	public static final String codigoDeBarrasEmLinhaDigitavelNumerica(String codigoDeBarras) {
+		
+		checkFormatoCodigoDeBarras(codigoDeBarras);
+		
+		final BoletoLinhaDigitavelDV calculadorDV = new BoletoLinhaDigitavelDV();
+
+		final StringBuilder linhaDigitavel = new StringBuilder();
+		
+		final String c = StringUtils.trim(codigoDeBarras);
+		
+		//campo1
+		//banco
+		linhaDigitavel.append(c.substring(0, 3));
+		//moeda
+		linhaDigitavel.append(c.substring(3, 4));
+		linhaDigitavel.append(c.substring(19,24));
+		linhaDigitavel.append(calculadorDV.calcule(linhaDigitavel.toString()));
+		
+		//campo2
+		linhaDigitavel.append(c.substring(24, 34));
+		linhaDigitavel.append(calculadorDV.calcule(c.substring(24, 34)));
+		
+		//campo3
+		linhaDigitavel.append(c.substring(34,44));
+		linhaDigitavel.append(calculadorDV.calcule(c.substring(34,44)));
+		
+		//campo4=DV_Geral
+		linhaDigitavel.append(c.substring(4, 5));
+		
+		//campo5
+		linhaDigitavel.append(c.substring(5, 19));
+		
+		return linhaDigitavel.toString();	
+	}
+
+	/**
+	 * <p>
+	 * Transforma uma linha digitável no formato FEBRABAN em um código de barras.
 	 * </p>
 	 * <p>
 	 * "<strong>ddddd.ddddd ddddd.dddddd ddddd.dddddd d dddddddddddddd</strong>"
+	 * <br />
+	 * <b>&rArr;</b>
+	 * <br />
+	 * "<strong>dddddddddddddddddddddddddddddddddddddddddddd</strong>"
 	 * </p>
 	 * 
 	 * @see #checkExistsLinhaDigitavel(String)
@@ -166,7 +216,87 @@ public class BoletoUtil {
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static String linhaDigitavelFormatadaEmNumerica(String linhaDigitavel)
+	public static final String linhaDigitavelFormatadaEmCodigoDeBarras(
+			String linhaDigitavel) {
+
+		return linhaDigitavelNumericaEmCodigoDeBarras(linhaDigitavelFormatadaEmNumerica(linhaDigitavel));
+	}
+
+	/**
+	 * <p>
+	 * Transforma uma linha digitável não formatada em um código de barras.
+	 * </p>
+	 * <p>
+	 * "<strong>ddddddddddddddddddddddddddddddddddddddddddddddd</strong>"
+	 * <br />
+	 * <b>&rArr;</b>
+	 * <br />
+	 * "<strong>dddddddddddddddddddddddddddddddddddddddddddd</strong>"
+	 * </p>
+	 * 
+	 * @see #checkExistsLinhaDigitavel(String)
+	 * @see #checkFormatoLinhaDigitavelFormatada(String)
+	 * 
+	 * @param linhaDigitavel
+	 *            string no formato FEBRABAN
+	 * @return linha digitável contendo somente números
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws LinhaDigitavelException
+	 *             quando a string não está no formato válido
+	 */
+	public static final String linhaDigitavelNumericaEmCodigoDeBarras(
+			String linhaDigitavel) throws NullPointerException,
+			IllegalArgumentException, LinhaDigitavelException {
+
+		checkFormatoLinhaDigitavelNumerica(linhaDigitavel);
+
+		final StringBuilder codigoDeBarras = new StringBuilder();
+		
+		final String l = StringUtils.trim(linhaDigitavel);
+		
+		//banco
+		codigoDeBarras.append(l.substring(0, 3));
+		//moeda
+		codigoDeBarras.append(l.substring(3, 4));
+		
+		codigoDeBarras.append(l.substring(32,33));
+		codigoDeBarras.append(l.substring(33, 47));
+		codigoDeBarras.append(l.substring(4, 9));
+		codigoDeBarras.append(l.substring(10, 20));
+		codigoDeBarras.append(l.substring(21, 31));
+		
+		return codigoDeBarras.toString();
+	}
+
+	/**
+	 * <p>
+	 * Remove formatação e espaços de uma linha digitável no formato FEBRABAN:
+	 * </p>
+	 * <p>
+	 * "<strong>ddddd.ddddd ddddd.dddddd ddddd.dddddd d dddddddddddddd</strong>"
+	 * <br />
+	 * <b>&rArr;</b>
+	 * <br />
+	 * "<strong>ddddddddddddddddddddddddddddddddddddddddddddddd</strong>"
+	 * </p>
+	 * 
+	 * @see #checkExistsLinhaDigitavel(String)
+	 * @see #checkFormatoLinhaDigitavelFormatada(String)
+	 * 
+	 * @param linhaDigitavel
+	 *            string no formato FEBRABAN
+	 * @return linha digitável contendo somente números
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws LinhaDigitavelException
+	 *             quando a string não está no formato válido
+	 */
+	public static final String linhaDigitavelFormatadaEmNumerica(String linhaDigitavel)
 			throws NullPointerException, IllegalArgumentException,
 			LinhaDigitavelException {
 
@@ -175,8 +305,86 @@ public class BoletoUtil {
 		return linhaDigitavel.replaceAll(" ", StringUtils.EMPTY).replaceAll(
 				"\\.", StringUtils.EMPTY);
 	}
+	
+	/**
+	 * <p>
+	 * Transforma linha digitável númerica em FEBRABAN:
+	 * </p>
+	 * <p>
+	 * "<strong>ddddddddddddddddddddddddddddddddddddddddddddddd</strong>"
+	 * <br />
+	 * <b>&rArr;</b>
+	 * <br />
+	 * "<strong>ddddd.ddddd ddddd.dddddd ddddd.dddddd d dddddddddddddd</strong>"
+	 * </p>
+	 * 
+	 * @see #checkExistsLinhaDigitavel(String)
+	 * @see #checkFormatoLinhaDigitavelNumerica(String)
+	 * 
+	 * @param linhaDigitavel
+	 *            string no formato FEBRABAN
+	 * @return linha digitável contendo somente números
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws LinhaDigitavelException
+	 *             quando a string não está no formato válido
+	 */
+	public static final String linhaDigitavelNumericaEmFormatada(String linhaDigitavel)
+			throws NullPointerException, IllegalArgumentException,
+			LinhaDigitavelException {
 
-	public static boolean isLinhaDigitavelFormatadaValida(String linhaDigitavel) {
+		checkFormatoLinhaDigitavelNumerica(linhaDigitavel);
+
+		final StringBuilder linhaFormatada = new StringBuilder();
+		
+		final String l = StringUtils.trim(linhaDigitavel);
+		
+		linhaFormatada.append(l.substring(0, 5));
+		linhaFormatada.append(".");
+		linhaFormatada.append(l.substring(5, 10));
+		linhaFormatada.append(StringUtil.WHITE_SPACE);
+		linhaFormatada.append(l.substring(10, 15));
+		linhaFormatada.append(".");
+		linhaFormatada.append(l.substring(15, 21));
+		linhaFormatada.append(StringUtil.WHITE_SPACE);
+		linhaFormatada.append(l.substring(21, 26));
+		linhaFormatada.append(".");
+		linhaFormatada.append(l.substring(26, 32));
+		linhaFormatada.append(StringUtil.WHITE_SPACE);
+		linhaFormatada.append(l.substring(32, 33));
+		linhaFormatada.append(StringUtil.WHITE_SPACE);
+		linhaFormatada.append(l.substring(33));
+		
+		return linhaFormatada.toString();
+	}
+	
+	/**
+	 * <p>Informa se um dado código de barras é válido ou não.</p>
+	 * 
+	 * @param codigoDeBarras
+	 * @return true = valida
+	 */
+	public static final boolean isCodigoDeBarrasValido(String codigoDeBarras) {
+
+		if (StringUtils.isNotBlank(codigoDeBarras)) {
+
+			return codigoDeBarras.trim().matches(
+					CODIGO_DE_BARRAS_REGEX);
+		} else {
+
+			return false;
+		}
+	}
+
+	/**
+	 * <p>Informa se uma dada linha digitável formatada é válida ou não.</p>
+	 * 
+	 * @param linhaDigitavel
+	 * @return true = valida
+	 */
+	public static final boolean isLinhaDigitavelFormatadaValida(String linhaDigitavel) {
 
 		if (StringUtils.isNotBlank(linhaDigitavel)) {
 
@@ -188,7 +396,14 @@ public class BoletoUtil {
 		}
 	}
 
-	public static boolean isLinhaDigitavelNumericaValida(String linhaDigitavel) {
+	
+	/**
+	 * <p>Informa se uma dada linha digitável é válida ou não.</p>
+	 * 
+	 * @param linhaDigitavel
+	 * @return true = valida
+	 */
+	public static final boolean isLinhaDigitavelNumericaValida(String linhaDigitavel) {
 
 		if (StringUtils.isNotBlank(linhaDigitavel)) {
 
@@ -236,7 +451,7 @@ public class BoletoUtil {
 	 * 
 	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
 	 */
-	public static void checkFormatoLinhaDigitavelFormatada(String linhaDigitavel)
+	public static final void checkFormatoLinhaDigitavelFormatada(String linhaDigitavel)
 			throws NullPointerException, IllegalArgumentException,
 			LinhaDigitavelException {
 
@@ -299,7 +514,7 @@ public class BoletoUtil {
 	 *             quando a string não está no formato válido
 	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
 	 */
-	public static void checkFormatoLinhaDigitavelNumerica(String linhaDigitavel)
+	public static final void checkFormatoLinhaDigitavelNumerica(String linhaDigitavel)
 			throws NullPointerException, IllegalArgumentException,
 			LinhaDigitavelException {
 
@@ -311,6 +526,55 @@ public class BoletoUtil {
 					+ String.format(MSG_STR_NUMERICA, linhaDigitavel,
 							linhaDigitavel.length())
 					+ " A linha deve conter apenas 47 dígitos númericos [0-9]!");
+		}
+
+	}
+	
+	/**
+	 * <p>
+	 * Verifica se o código de barras <strong>não é nulo</strong>, <strong>não é
+	 * vazio</strong> e <strong>é numérico</strong>, obedecendo o seguinte
+	 * formato:
+	 *</p>
+	 * <p>
+	 * "<strong>dddddddddddddddddddddddddddddddddddddddddddd</strong>"
+	 * </p>
+	 * <p>
+	 * Onde o número de dígitos é igual a 44.
+	 * </p>
+	 * <p>
+	 * <ul>
+	 * <li>Caso a string seja nula, lança uma <code>NullPointerException</code>;
+	 * </li>
+	 * <li>Caso seja vazia, lança uma <code>IllegalArgumentException</code>;</li>
+	 * <li>Caso não esteja no formato especificado, lança uma
+	 * <code>LinhaDigitavelException</code>.</li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @see #checkExistsLinhaDigitavel(String)
+	 * 
+	 * @param codigoDeBarras
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws CodigoDeBarrasException
+	 *             quando a string não está no formato válido
+	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+	 */
+	public static final void checkFormatoCodigoDeBarras(String codigoDeBarras)
+			throws NullPointerException, IllegalArgumentException,
+			CodigoDeBarrasException {
+
+		checkExistsCodigoDeBarras(codigoDeBarras);
+
+		if (!isCodigoDeBarrasValido(codigoDeBarras)) {
+			throw new CodigoDeBarrasException(MSG_CODIGO_DE_BARRAS
+					+ " "
+					+ String.format(MSG_STR_NUMERICA, codigoDeBarras,
+							codigoDeBarras.length())
+					+ " O código de barras deve conter apenas 44 dígitos númericos [0-9]!");
 		}
 
 	}
@@ -332,7 +596,7 @@ public class BoletoUtil {
 	 *             quando a string é vazia
 	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
 	 */
-	public static void checkExistsLinhaDigitavel(String linhaDigitavel)
+	public static final void checkExistsLinhaDigitavel(String linhaDigitavel)
 			throws NullPointerException, IllegalArgumentException {
 
 		ObjectUtil.checkNotNull(linhaDigitavel, MSG_LINHA_INVALIDA);
@@ -342,6 +606,36 @@ public class BoletoUtil {
 					+ " "
 					+ String.format(MSG_STR_VAZIA, linhaDigitavel,
 							linhaDigitavel.length()));
+		}
+	}
+	
+	/**
+	 * <p>
+	 * Verifica se código de barras <strong>não é nulo</strong> e <strong>não é
+	 * vazio</strong>. Caso nula lança uma <code>NullPointerException</code>,
+	 * caso vazia lança uma <code>IllegalArgumentException</code>.
+	 * </p>
+	 * <p>
+	 * Considera-se vazia se <code>linhaDigitavel.trim().length()</code> == 0.
+	 * </p>
+	 * 
+	 * @param codigoDeBarras
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+	 */
+	public static final void checkExistsCodigoDeBarras(String codigoDeBarras)
+			throws NullPointerException, IllegalArgumentException {
+
+		ObjectUtil.checkNotNull(codigoDeBarras, MSG_LINHA_INVALIDA);
+
+		if (StringUtils.isBlank(codigoDeBarras)) {
+			throw new IllegalArgumentException(MSG_CODIGO_DE_BARRAS
+					+ " "
+					+ String.format(MSG_STR_VAZIA, codigoDeBarras,
+							codigoDeBarras.length()));
 		}
 	}
 }
