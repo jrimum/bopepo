@@ -271,7 +271,7 @@ public enum BancoSuportado implements Serializable{
 	}
 	
 	
-	public BancoSuportado findByCodigoDeCompensacaoBACEN(String  codigoDeCompensacaoBACEN) {
+	public static BancoSuportado findByCodigoDeCompensacaoBACEN(String  codigoDeCompensacaoBACEN) {
 		return suportados.get(codigoDeCompensacaoBACEN);	
 	}
 }
