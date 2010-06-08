@@ -8,7 +8,7 @@
   	<artifactId>jrimum</artifactId>
   	<groupId>jrimum</groupId>
   	<version>0.2.3-SNAPSHOT</version>
-  	<relativePath>../_JRimum/pom.xml</relativePath>
+  	<relativePath>../_JRimum-0.3-Litio/pom.xml</relativePath>
   </parent>
   <ciManagement>
   	<system>hudson</system>
