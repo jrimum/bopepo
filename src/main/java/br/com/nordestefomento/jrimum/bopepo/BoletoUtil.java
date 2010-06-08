@@ -31,72 +31,199 @@ public final class BoletoUtil {
 	private static final String MSG_NAO_FORMATADA = "String formatada [ \"%s\" ] de tamanho [ %d ] está fora do padrão [ \"ddddd.ddddd ddddd.dddddd ddddd.dddddd d dddddddddddddd\" ] tamanho = 54.";
 	private static final String MSG_STR_NUMERICA = "String numérica [ \"%s\" ] de tamanho [ %d ] está fora do padrão [ \"ddddddddddddddddddddddddddddddddddddddddddddddd\" ] tamanho = 47.";
 
-	public static final String getCampoLivreDaLinhaDigitavel(String linhaDigitavel) {
+	public static final String getCampoLivreDaLinhaDigitavelFormatada(
+			String linhaDigitavel) throws NullPointerException,
+			IllegalArgumentException, LinhaDigitavelException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static final String getValorDoTituloDaLinhaDigitavel(String linhaDigitavel) {
+	public static final String getValorDoTituloDaLinhaDigitavelFormatada(
+			String linhaDigitavel) throws NullPointerException,
+			IllegalArgumentException, LinhaDigitavelException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static final String getFatorDeVencimentoDaLinhaDigitavel(String linhaDigitavel) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public static final String getDigitoVerificadorGeralDaLinhaDigitavel(String linhaDigitavel) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public static final String getCodigoDaMoedaDaLinhaDigitavel(String linhaDigitavel) {
+	public static final String getFatorDeVencimentoDaLinhaDigitavelFormatada(
+			String linhaDigitavel) throws NullPointerException,
+			IllegalArgumentException, LinhaDigitavelException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static final String getCodigoDoBancoDaLinhaDigitavel(String linhaDigitavel) {
+	public static final String getDigitoVerificadorGeralDaLinhaDigitavelFormatada(
+			String linhaDigitavel) throws NullPointerException,
+			IllegalArgumentException, LinhaDigitavelException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static final String getCampoLivreDoCodigoDeBarras(String codigoDeBarras) {
+	public static final String getCodigoDaMoedaDaLinhaDigitavelFormatada(
+			String linhaDigitavel) throws NullPointerException,
+			IllegalArgumentException, LinhaDigitavelException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static final String getCodigoDoBancoDaLinhaDigitavelFormatada(
+			String linhaDigitavel) throws NullPointerException,
+			IllegalArgumentException, LinhaDigitavelException {
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * <p>
+	 * Retorna o campo livre de um dado código de barras.
+	 * </p>
+	 * 
+	 * @see #checkFormatoCodigoDeBarras(String)
+	 * 
+	 * @param codigoDeBarras
+	 *            string contendo somente números
+	 * @return código do banco em string
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws CodigoDeBarrasException
+	 *             quando a string não está no formato válido
+	 */
+	public static final String getCampoLivreDoCodigoDeBarras(
+			String codigoDeBarras) throws NullPointerException,
+			IllegalArgumentException, CodigoDeBarrasException {
 		
 		checkFormatoCodigoDeBarras(codigoDeBarras);
 		
 		return StringUtils.trim(codigoDeBarras).substring(19, 44);
 	}
 
-	public static final String getValorDoTituloDoCodigoDeBarras(String codigoDeBarras) {
+	/**
+	 * <p>
+	 * Retorna o valor do título de um dado código de barras.
+	 * </p>
+	 * 
+	 * @see #checkFormatoCodigoDeBarras(String)
+	 * 
+	 * @param codigoDeBarras
+	 *            string contendo somente números
+	 * @return código do banco em string
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws CodigoDeBarrasException
+	 *             quando a string não está no formato válido
+	 */
+	public static final String getValorDoTituloDoCodigoDeBarras(
+			String codigoDeBarras) throws NullPointerException,
+			IllegalArgumentException, CodigoDeBarrasException {
 		
 		checkFormatoCodigoDeBarras(codigoDeBarras);
 		
 		return StringUtils.trim(codigoDeBarras).substring(9, 19);
 	}
 
-	public static final String getFatorDeVencimentoDoCodigoDeBarras(String codigoDeBarras) {
+	/**
+	 * <p>
+	 * Retorna o fator de vencimento de um dado código de barras.
+	 * </p>
+	 * 
+	 * @see #checkFormatoCodigoDeBarras(String)
+	 * 
+	 * @param codigoDeBarras
+	 *            string contendo somente números
+	 * @return código do banco em string
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws CodigoDeBarrasException
+	 *             quando a string não está no formato válido
+	 */
+	public static final String getFatorDeVencimentoDoCodigoDeBarras(
+			String codigoDeBarras) throws NullPointerException,
+			IllegalArgumentException, CodigoDeBarrasException {
 		
 		checkFormatoCodigoDeBarras(codigoDeBarras);
 		
 		return StringUtils.trim(codigoDeBarras).substring(5, 9);
 	}
 	
-	public static final String getDigitoVerificadorGeralDoCodigoDeBarras(String codigoDeBarras) {
+	/**
+	 * <p>
+	 * Retorna o dígito verificador de um dado código de barras.
+	 * </p>
+	 * 
+	 * @see #checkFormatoCodigoDeBarras(String)
+	 * 
+	 * @param codigoDeBarras
+	 *            string contendo somente números
+	 * @return código do banco em string
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws CodigoDeBarrasException
+	 *             quando a string não está no formato válido
+	 */
+	public static final String getDigitoVerificadorGeralDoCodigoDeBarras(
+			String codigoDeBarras) throws NullPointerException,
+			IllegalArgumentException, CodigoDeBarrasException {
 		
 		checkFormatoCodigoDeBarras(codigoDeBarras);
 		
 		return StringUtils.trim(codigoDeBarras).substring(4, 5);
 	}
 
-	public static final String getCodigoDaMoedaDoCodigoDeBarras(String codigoDeBarras) {
+	/**
+	 * <p>
+	 * Retorna o código da moeda de um dado código de barras.
+	 * </p>
+	 * 
+	 * @see #checkFormatoCodigoDeBarras(String)
+	 * 
+	 * @param codigoDeBarras
+	 *            string contendo somente números
+	 * @return código do banco em string
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws CodigoDeBarrasException
+	 *             quando a string não está no formato válido
+	 */
+	public static final String getCodigoDaMoedaDoCodigoDeBarras(
+			String codigoDeBarras) throws NullPointerException,
+			IllegalArgumentException, CodigoDeBarrasException {
 		
 		checkFormatoCodigoDeBarras(codigoDeBarras);
 		
 		return StringUtils.trim(codigoDeBarras).substring(3, 4);
 	}
 
-	public static final String getCodigoDoBancoDoCodigoDeBarras(String codigoDeBarras) {
+	/**
+	 * <p>
+	 * Retorna o código do banco de um dado código de barras.
+	 * </p>
+	 * 
+	 * @see #checkFormatoCodigoDeBarras(String)
+	 * 
+	 * @param codigoDeBarras
+	 *            string contendo somente números
+	 * @return código do banco em string
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws CodigoDeBarrasException
+	 *             quando a string não está no formato válido
+	 */
+	public static final String getCodigoDoBancoDoCodigoDeBarras(
+			String codigoDeBarras) throws NullPointerException,
+			IllegalArgumentException, CodigoDeBarrasException {
 		
 		checkFormatoCodigoDeBarras(codigoDeBarras);
 		
@@ -127,7 +254,9 @@ public final class BoletoUtil {
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String codigoDeBarrasEmLinhaDigitavelFormatada(String codigoDeBarras) {
+	public static final String codigoDeBarrasEmLinhaDigitavelFormatada(
+			String codigoDeBarras) throws NullPointerException,
+			IllegalArgumentException, CodigoDeBarrasException {
 		
 		return linhaDigitavelNumericaEmFormatada(codigoDeBarrasEmLinhaDigitavelNumerica(codigoDeBarras));
 	}
@@ -156,7 +285,9 @@ public final class BoletoUtil {
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String codigoDeBarrasEmLinhaDigitavelNumerica(String codigoDeBarras) {
+	public static final String codigoDeBarrasEmLinhaDigitavelNumerica(
+			String codigoDeBarras) throws NullPointerException,
+			IllegalArgumentException, CodigoDeBarrasException {
 		
 		checkFormatoCodigoDeBarras(codigoDeBarras);
 		
@@ -217,7 +348,8 @@ public final class BoletoUtil {
 	 *             quando a string não está no formato válido
 	 */
 	public static final String linhaDigitavelFormatadaEmCodigoDeBarras(
-			String linhaDigitavel) {
+			String linhaDigitavel) throws NullPointerException,
+			IllegalArgumentException, LinhaDigitavelException {
 
 		return linhaDigitavelNumericaEmCodigoDeBarras(linhaDigitavelFormatadaEmNumerica(linhaDigitavel));
 	}

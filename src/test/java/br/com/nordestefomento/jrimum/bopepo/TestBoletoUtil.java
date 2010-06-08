@@ -90,37 +90,32 @@ public class TestBoletoUtil {
 	}
 
 	@Test
-	public void testGetCampoLivreDaLinhaDigitavel() {
+	public void testGetCampoLivreDaLinhaDigitavelFormatada() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetValorDoTituloDaLinhaDigitavel() {
+	public void testGetValorDoTituloDaLinhaDigitavelFormatada() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetFatorDeVencimentoDaLinhaDigitavel() {
+	public void testGetFatorDeVencimentoDaLinhaDigitavelFormatada() {
 		fail("Not yet implemented");
 	}
 	
 	@Test
-	public void testGetDigitoVerificadorGeralDaLinhaDigitavel() {
+	public void testGetDigitoVerificadorGeralDaLinhaDigitavelFormatada() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetCodigoDaMoedaDaLinhaDigitavel() {
+	public void testGetCodigoDaMoedaDaLinhaDigitavelFormatada() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetCodigoDoBancoDaLinhaDigitavel() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testCodigoDeBarrasEmLinhaDigitavel() {
+	public void testGetCodigoDoBancoDaLinhaDigitavelFormatada() {
 		fail("Not yet implemented");
 	}
 
