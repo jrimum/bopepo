@@ -31,47 +31,166 @@ public final class BoletoUtil {
 	private static final String MSG_NAO_FORMATADA = "String formatada [ \"%s\" ] de tamanho [ %d ] está fora do padrão [ \"ddddd.ddddd ddddd.dddddd ddddd.dddddd d dddddddddddddd\" ] tamanho = 54.";
 	private static final String MSG_STR_NUMERICA = "String numérica [ \"%s\" ] de tamanho [ %d ] está fora do padrão [ \"ddddddddddddddddddddddddddddddddddddddddddddddd\" ] tamanho = 47.";
 
+	/**
+	 * <p>
+	 * Retorna o campo livre de uma dada linha digitável.
+	 * </p>
+	 * 
+	 * @see #checkFormatoLinhaDigitavelFormatada(String)
+	 * 
+	 * @param linhaDigitavel
+	 *            string no formato FEBRABAN
+	 * @return código do banco em string
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws LinhaDigitavelException
+	 *             quando a string não está no formato válido
+	 */
 	public static final String getCampoLivreDaLinhaDigitavelFormatada(
 			String linhaDigitavel) throws NullPointerException,
 			IllegalArgumentException, LinhaDigitavelException {
-		// TODO Auto-generated method stub
-		return null;
+
+		checkFormatoLinhaDigitavelFormatada(linhaDigitavel);
+
+		String linhaNumerica = linhaDigitavelFormatadaEmNumerica(linhaDigitavel);
+
+		return new StringBuilder()
+		.append(linhaNumerica.substring(4, 9))
+		.append(linhaNumerica.substring(10, 20))
+		.append(linhaNumerica.substring(21, 31))
+		.toString();
 	}
 
+	/**
+	 * <p>
+	 * Retorna o valor do título de uma dada linha digitável.
+	 * </p>
+	 * 
+	 * @see #checkFormatoLinhaDigitavelFormatada(String)
+	 * 
+	 * @param linhaDigitavel
+	 *            string no formato FEBRABAN
+	 * @return código do banco em string
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws LinhaDigitavelException
+	 *             quando a string não está no formato válido
+	 */
 	public static final String getValorDoTituloDaLinhaDigitavelFormatada(
 			String linhaDigitavel) throws NullPointerException,
 			IllegalArgumentException, LinhaDigitavelException {
-		// TODO Auto-generated method stub
-		return null;
+
+		checkFormatoLinhaDigitavelFormatada(linhaDigitavel);
+
+		return linhaDigitavelFormatadaEmNumerica(linhaDigitavel).substring(37, 47);
 	}
 
+	/**
+	 * <p>
+	 * Retorna o fator de vencimento de uma dada linha digitável.
+	 * </p>
+	 * 
+	 * @see #checkFormatoLinhaDigitavelFormatada(String)
+	 * 
+	 * @param linhaDigitavel
+	 *            string no formato FEBRABAN
+	 * @return código do banco em string
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws LinhaDigitavelException
+	 *             quando a string não está no formato válido
+	 */
 	public static final String getFatorDeVencimentoDaLinhaDigitavelFormatada(
 			String linhaDigitavel) throws NullPointerException,
 			IllegalArgumentException, LinhaDigitavelException {
-		// TODO Auto-generated method stub
-		return null;
+
+		checkFormatoLinhaDigitavelFormatada(linhaDigitavel);
+
+		return linhaDigitavelFormatadaEmNumerica(linhaDigitavel).substring(33, 37);
 	}
 
+	/**
+	 * <p>
+	 * Retorna o dígito verificador geral de uma dada linha digitável.
+	 * </p>
+	 * 
+	 * @see #checkFormatoLinhaDigitavelFormatada(String)
+	 * 
+	 * @param linhaDigitavel
+	 *            string no formato FEBRABAN
+	 * @return código do banco em string
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws LinhaDigitavelException
+	 *             quando a string não está no formato válido
+	 */
 	public static final String getDigitoVerificadorGeralDaLinhaDigitavelFormatada(
 			String linhaDigitavel) throws NullPointerException,
 			IllegalArgumentException, LinhaDigitavelException {
-		// TODO Auto-generated method stub
-		return null;
+
+		checkFormatoLinhaDigitavelFormatada(linhaDigitavel);
+		
+		return linhaDigitavelFormatadaEmNumerica(linhaDigitavel).substring(32, 33);
 	}
 
+	/**
+	 * <p>
+	 * Retorna o código da moeda de uma dada linha digitável.
+	 * </p>
+	 * 
+	 * @see #checkFormatoLinhaDigitavelFormatada(String)
+	 * 
+	 * @param linhaDigitavel
+	 *            string no formato FEBRABAN
+	 * @return código do banco em string
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws LinhaDigitavelException
+	 *             quando a string não está no formato válido
+	 */
 	public static final String getCodigoDaMoedaDaLinhaDigitavelFormatada(
 			String linhaDigitavel) throws NullPointerException,
 			IllegalArgumentException, LinhaDigitavelException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		checkFormatoLinhaDigitavelFormatada(linhaDigitavel);
+		
+		return linhaDigitavelFormatadaEmNumerica(linhaDigitavel).substring(3, 4);
 	}
 
+	/**
+	 * <p>
+	 * Retorna o código do banco de uma dada linha digitável.
+	 * </p>
+	 * 
+	 * @see #checkFormatoLinhaDigitavelFormatada(String)
+	 * 
+	 * @param linhaDigitavel
+	 *            string no formato FEBRABAN
+	 * @return código do banco em string
+	 * @throws NullPointerException
+	 *             quando a string é nula
+	 * @throws IllegalArgumentException
+	 *             quando a string é vazia
+	 * @throws LinhaDigitavelException
+	 *             quando a string não está no formato válido
+	 */
 	public static final String getCodigoDoBancoDaLinhaDigitavelFormatada(
 			String linhaDigitavel) throws NullPointerException,
 			IllegalArgumentException, LinhaDigitavelException {
 		
-		// TODO Auto-generated method stub
-		return null;
+		checkFormatoLinhaDigitavelFormatada(linhaDigitavel);
+		
+		return linhaDigitavelFormatadaEmNumerica(linhaDigitavel).substring(0, 3);
 	}
 
 	/**

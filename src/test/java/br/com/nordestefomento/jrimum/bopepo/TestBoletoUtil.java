@@ -91,32 +91,44 @@ public class TestBoletoUtil {
 
 	@Test
 	public void testGetCampoLivreDaLinhaDigitavelFormatada() {
-		fail("Not yet implemented");
+		
+		assertEquals(CAMPO_LIVRE_EXPECTED, BoletoUtil.getCampoLivreDaLinhaDigitavelFormatada(LINHA_DIGITAVEL_FORMATADA_EXPECTED));
+		assertTrue(!CAMPO_LIVRE_EXPECTED.equals(BoletoUtil.getCampoLivreDaLinhaDigitavelFormatada(LINHA_DIGITAVEL_FORMATADA_EXPECTED.replace("0", "1"))));
 	}
 
 	@Test
 	public void testGetValorDoTituloDaLinhaDigitavelFormatada() {
-		fail("Not yet implemented");
+		
+		assertEquals(VALOR_NOMINAL_EXPECTED, BoletoUtil.getValorDoTituloDaLinhaDigitavelFormatada(LINHA_DIGITAVEL_FORMATADA_EXPECTED));
+		assertTrue(!VALOR_NOMINAL_EXPECTED.equals(BoletoUtil.getValorDoTituloDaLinhaDigitavelFormatada(LINHA_DIGITAVEL_FORMATADA_EXPECTED.replace("0", "1"))));
 	}
 
 	@Test
 	public void testGetFatorDeVencimentoDaLinhaDigitavelFormatada() {
-		fail("Not yet implemented");
+		
+		assertEquals(FATOR_DE_VENCIMENTO_EXPECTED, BoletoUtil.getFatorDeVencimentoDaLinhaDigitavelFormatada(LINHA_DIGITAVEL_FORMATADA_EXPECTED));
+		assertTrue(!FATOR_DE_VENCIMENTO_EXPECTED.equals(BoletoUtil.getFatorDeVencimentoDaLinhaDigitavelFormatada(LINHA_DIGITAVEL_FORMATADA_EXPECTED.replace("7", "9"))));
 	}
 	
 	@Test
 	public void testGetDigitoVerificadorGeralDaLinhaDigitavelFormatada() {
-		fail("Not yet implemented");
+		
+		assertEquals(CODIGO_DV_GERAL_EXPECTED, BoletoUtil.getDigitoVerificadorGeralDaLinhaDigitavelFormatada(LINHA_DIGITAVEL_FORMATADA_EXPECTED));
+		assertTrue(!CODIGO_DV_GERAL_EXPECTED.equals(BoletoUtil.getDigitoVerificadorGeralDaLinhaDigitavelFormatada(LINHA_DIGITAVEL_FORMATADA_EXPECTED.replace("3", "6"))));
 	}
 
 	@Test
 	public void testGetCodigoDaMoedaDaLinhaDigitavelFormatada() {
-		fail("Not yet implemented");
+		
+		assertEquals(CODIGO_DA_MOEDA_EXPECTED, BoletoUtil.getCodigoDaMoedaDaLinhaDigitavelFormatada(LINHA_DIGITAVEL_FORMATADA_EXPECTED));
+		assertTrue(!CODIGO_DA_MOEDA_EXPECTED.equals(BoletoUtil.getCodigoDaMoedaDaLinhaDigitavelFormatada(LINHA_DIGITAVEL_FORMATADA_EXPECTED.replace("9", "5"))));
 	}
 
 	@Test
 	public void testGetCodigoDoBancoDaLinhaDigitavelFormatada() {
-		fail("Not yet implemented");
+		
+		assertEquals(CODIGO_DO_BANCO_EXPECTED, BoletoUtil.getCodigoDoBancoDaLinhaDigitavelFormatada(LINHA_DIGITAVEL_FORMATADA_EXPECTED));
+		assertTrue(!CODIGO_DE_BARRAS_EXPECTED.equals(BoletoUtil.getCodigoDoBancoDaLinhaDigitavelFormatada(LINHA_DIGITAVEL_FORMATADA_EXPECTED.replace("9", "4"))));
 	}
 
 	@Test
