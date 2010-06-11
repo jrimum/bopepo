@@ -27,8 +27,8 @@ public class MinhaPrimeiraGuia {
 	public static void main(String[] args) throws ParseException, BadElementException, MalformedURLException, IOException {
 	
 		Image imageOrgaoRecebedor = null;
-		// Linux: imageOrgaoRecebedor = ImageIO.read(new File("/home/user/JRiLogo.png");
-		// Windows: imageOrgaoRecebedor = ImageIO.read(new File("C:/JRiLogo.png");
+		// Linux: imageOrgaoRecebedor = ImageIO.read(new File("/home/user/JRiLogo.png"));
+		// Windows: imageOrgaoRecebedor = ImageIO.read(new File("C:/JRiLogo.png"));
 		
 		File templatePersonalizado = null;
 		// Linux: templatePersonalizado = new File("/home/user/MeuTemplate.pdf");
