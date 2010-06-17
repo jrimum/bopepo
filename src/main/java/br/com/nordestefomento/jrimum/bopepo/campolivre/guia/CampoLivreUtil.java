@@ -42,7 +42,8 @@ public class CampoLivreUtil  {
 	}
 
 	public static boolean existeEspacoEmBranco(String campoLivreStr, TipoSeguimento tipoSeguimento) {
-		return !(StringUtils.remove(campoLivreStr, ' ').length() == getTamanhoCorreto(tipoSeguimento));
+		int tamanhoAtual = campoLivreStr.length();
+		return !(StringUtils.remove(campoLivreStr, ' ').length() == tamanhoAtual);
 	}
 
 	public static boolean naoExisteEspacoEmBranco(CampoLivre campoLivre, TipoSeguimento tipoSeguimento) {
@@ -61,14 +62,14 @@ public class CampoLivreUtil  {
 		StringBuilder msgErro = new StringBuilder();
 		
 		if (  !tamanhoEstaCorreto(campoLivre, tipoSeguimento)  ) {
-			if (tamanhoAtual > tamanhoAtual)
-				msgErro.append("O tamanho da String [" + tamanhoAtual + "] é maior que o esperado [" + tamanhoEsperado + "]!");
+			if (tamanhoAtual > tamanhoEsperado)
+				msgErro.append("O tamanho da String [" + tamanhoAtual + "] é maior que o esperado [" + tamanhoEsperado + "]! ");
 			else
-				msgErro.append("O tamanho da String [" + tamanhoAtual + "] é menor que o especificado [" + tamanhoEsperado + "]!");			
+				msgErro.append("O tamanho da String [" + tamanhoAtual + "] é menor que o especificado [" + tamanhoEsperado + "]! ");			
 		}
 		
 		if (existeEspacoEmBranco(campoLivre, tipoSeguimento)) 
-			msgErro.append("Um campo livre possui espaços em branco");
+			msgErro.append("O campo livre possui espaços em branco, e isto não pode ocorrer.");
 		
 		if (  msgErro.length() > 0  )
 			throw new CampoLivreException(msgErro.toString());
