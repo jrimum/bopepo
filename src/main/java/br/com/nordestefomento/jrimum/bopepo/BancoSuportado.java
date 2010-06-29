@@ -235,7 +235,16 @@ public enum BancoSuportado implements Serializable{
 	 * 
 	 * @since 0.2
 	 */
-	BANCO_SAFRA("422", "58160789000128", "BANCO SAFRA S.A.", "Banco Múltiplo");
+	BANCO_SAFRA("422", "58160789000128", "BANCO SAFRA S.A.", "Banco Múltiplo"),
+	
+	/**
+	 * Tipo enumerado que representa o <strong>Banco Rural</strong>, código de
+	 * compensação <strong><tt>453</tt></strong> <a
+	 * href="http://www.rural.com.br/">site</a>.
+	 * 
+	 * @since 0.2
+	 */
+	BANCO_RURAL("453", "58160789000128", "BANCO RURAL S.A.", "Banco Múltiplo");
 
 	/**
 	 * Singleton <code>Map</code> para pesquisa por bancos suportados no
@@ -273,6 +282,8 @@ public enum BancoSuportado implements Serializable{
 		suportados.put(NOSSA_CAIXA.codigoDeCompensacaoBACEN, NOSSA_CAIXA);
 		
 		suportados.put(BANCO_DO_ESTADO_DO_ESPIRITO_SANTO.codigoDeCompensacaoBACEN, BANCO_DO_ESTADO_DO_ESPIRITO_SANTO);
+		
+		suportados.put(BANCO_RURAL.codigoDeCompensacaoBACEN, BANCO_RURAL);
 	}
 
 	/**
