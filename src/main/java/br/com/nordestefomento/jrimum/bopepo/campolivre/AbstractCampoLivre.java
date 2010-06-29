@@ -173,6 +173,10 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 						case BANCO_DO_ESTADO_DO_ESPIRITO_SANTO:
 							campoLivre = AbstractCLBanestes.create(titulo);
 							break;
+							
+						case BANCO_RURAL:
+							campoLivre = AbstractCLBancoRural.create(titulo);
+							break;
 					}
 				} else {
 					/*
