@@ -170,12 +170,10 @@ public class TestBoleto{
 		
 		boleto.setCampoLivre(new CampoLivre() {
 			
-			@Override
 			public String write() {
 				return "1234567890123456789012345";
 			}
 			
-			@Override
 			public void read(String g) {
 			}
 		});
@@ -192,12 +190,10 @@ public class TestBoleto{
 			
 			private static final long serialVersionUID = 1L;
 			
-			@Override
 			public String write() {
 				return "1234567890123456789012345000";
 			}
 			
-			@Override
 			public void read(String g) {
 			}
 		});
@@ -210,12 +206,10 @@ public class TestBoleto{
 	
 			private static final long serialVersionUID = 1L;
 
-			@Override
 			public String write() {
 				return "12345678901234567890";
 			}
 			
-			@Override
 			public void read(String g) {
 			}
 		});
