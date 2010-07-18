@@ -2,6 +2,10 @@ package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
+/**
+ * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a>
+ *
+ */
 public class AbstractCLBancoRural extends AbstractCampoLivre {
 
 	private static final long serialVersionUID = 1L;

@@ -5,6 +5,10 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.Field;
 import org.jrimum.utilix.Filler;
 
+/**
+ * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a>
+ *
+ */
 public class CLBancoRuralCobrancaRegistrada extends AbstractCLBancoRural{
 	
 	private static final long serialVersionUID = -5166628254198207874L;

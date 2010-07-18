@@ -89,6 +89,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
  * @author Misael Barreto
  * @author Rômulo Augusto
  * @author Samuel Valério
+ * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a>
  * 
  * @see org.jrimum.bopepo.campolivre.CampoLivre
  * @see org.jrimum.domkee.financeiro.banco.Banco
@@ -241,6 +242,8 @@ public enum BancoSuportado implements Serializable{
 	 * Tipo enumerado que representa o <strong>Banco Rural</strong>, código de
 	 * compensação <strong><tt>453</tt></strong> <a
 	 * href="http://www.rural.com.br/">site</a>.
+	 * 
+	 * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a>
 	 * 
 	 * @since 0.2
 	 */
