@@ -46,12 +46,16 @@ abstract class AbstractCLCaixaEconomicaFederal extends AbstractCampoLivre {
 	
 	private static final int NOSSO_NUMERO_SINCO = 17;
 
+	private static final int NOSSO_NUMERO_SICOB = 11;
+
 	protected AbstractCLCaixaEconomicaFederal(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
 	}
 
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException{
+		
 		CampoLivre campoLivre = null;
+		
 		String nossoNumero = titulo.getNossoNumero();
 		
 		if(StringUtils.isNotBlank(nossoNumero)) {
@@ -59,6 +63,9 @@ abstract class AbstractCLCaixaEconomicaFederal extends AbstractCampoLivre {
 				case NOSSO_NUMERO_SINCO:
 					campoLivre = new CLCaixaEconomicaFederalSINCO(titulo);
 					break;
+				case NOSSO_NUMERO_SICOB:
+					campoLivre = new CLCaixaEconomicaFederalSICOB(titulo);
+					break;	
 			}
 		}
 		
@@ -68,8 +75,7 @@ abstract class AbstractCLCaixaEconomicaFederal extends AbstractCampoLivre {
 					" comprimento de " + NOSSO_NUMERO_SINCO + " " + 
 					"(SINCO) caracteres"
 			);
-		}
-		else {
+		}else {
 			return campoLivre;
 		}
 	}
