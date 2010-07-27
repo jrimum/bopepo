@@ -80,10 +80,10 @@ public class TestCLBancoReal extends CampoLivreTest {
 		titulo.setNumeroDoDocumento("1234567890123");
 		titulo.setNossoNumero("5020");
 		
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasse(CLBancoReal.class);
-		setStrCampoLivre("1018001632491234567890123");
+		setClasseGeradoraDoCampoLivre(CLBancoReal.class);
+		setCampoLivreValidoAsString("1018001632491234567890123");
 	}
 
 }

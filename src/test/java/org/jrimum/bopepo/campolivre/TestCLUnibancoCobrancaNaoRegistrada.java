@@ -99,75 +99,75 @@ public class TestCLUnibancoCobrancaNaoRegistrada extends CampoLivreTest {
 		titulo.setNossoNumero("11223344556677");
 		titulo.setDigitoDoNossoNumero("7");
 
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasse(CLUnibancoCobrancaNaoRegistrada.class);
-		setStrCampoLivre("5123456100112233445566777");
+		setClasseGeradoraDoCampoLivre(CLUnibancoCobrancaNaoRegistrada.class);
+		setCampoLivreValidoAsString("5123456100112233445566777");
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComContaNula() {
 
 		titulo.getContaBancaria().setNumeroDaConta(null);
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComContaNegativa() {
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(-23));
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComDigitoDaContaNula() {
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(23, null));
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComDigitoDaContaNegativa() {
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(2, "-3"));
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComDigitoDaContaNaoNumerico() {
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(-23, "X"));
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNula() {
 
 		titulo.setNossoNumero(null);
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNegativo() {
 
 		titulo.setNossoNumero("-012345679012345");
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNaoNumerico() {
 
 		titulo.setNossoNumero("123456790123y45");
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 	}
 
 	@Test
 	public final void testITextStream() {
 
-		assertEquals(TEST_CASE, campoLivre.write());
+		assertEquals(TEST_CASE, getCampoLivreToTest().write());
 
-		campoLivre.read(TEST_CASE);
+		getCampoLivreToTest().read(TEST_CASE);
 
-		assertEquals(TEST_CASE, campoLivre.write());
+		assertEquals(TEST_CASE, getCampoLivreToTest().write());
 	}
 }

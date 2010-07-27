@@ -79,10 +79,10 @@ public class TestCLBanrisulCobrancaRegistrada extends CampoLivreTest {
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("22832563");
 
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasse(CLBanrisulCobrancaRegistrada.class);
-		setStrCampoLivre("1110000000012283256304172");
+		setClasseGeradoraDoCampoLivre(CLBanrisulCobrancaRegistrada.class);
+		setCampoLivreValidoAsString("1110000000012283256304172");
 	}
 
 	@Test(expected=CampoLivreException.class)

@@ -81,18 +81,18 @@ public class TestCLMercantilDoBrasil extends CampoLivreTest {
 		titulo.setNossoNumero("1234567890");
 		titulo.setDigitoDoNossoNumero("5");
 		
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasse(CLMercantilDoBrasil.class);
-		setStrCampoLivre("1234123456789051234567892"); //Sem desconto
+		setClasseGeradoraDoCampoLivre(CLMercantilDoBrasil.class);
+		setCampoLivreValidoAsString("1234123456789051234567892"); //Sem desconto
 	}
 	
 	@Test
 	public void testWriteComDesconto() {
 		
 		titulo.setDesconto(BigDecimal.TEN);
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		Assert.assertEquals("1234123456789051234567890", campoLivre.write());
+		Assert.assertEquals("1234123456789051234567890", getCampoLivreToTest().write());
 	}
 }

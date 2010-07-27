@@ -135,55 +135,55 @@ public class TestCLUnibancoCobrancaRegistrada extends CampoLivreTest {
 
 		titulo.setDataDoVencimento(cal.getTime());
 
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasse(CLUnibancoCobrancaRegistrada.class);
-		setStrCampoLivre("0401123100019112233445540");
+		setClasseGeradoraDoCampoLivre(CLUnibancoCobrancaRegistrada.class);
+		setCampoLivreValidoAsString("0401123100019112233445540");
 	}
 
 	@Test
 	public final void testGetInstance() {
 
-		assertNotNull(campoLivre);
-		assertTrue(campoLivre instanceof CLUnibancoCobrancaRegistrada);
+		assertNotNull(getCampoLivreToTest());
+		assertTrue(getCampoLivreToTest() instanceof CLUnibancoCobrancaRegistrada);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComAgenciaNula() {
 
 		titulo.getContaBancaria().setAgencia(null);
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNulo() {
 
 		titulo.setNossoNumero(null);
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNegativo() {
 
 		titulo.setNossoNumero("-012345679012345");
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNaoNumerico() {
 
 		titulo.setNossoNumero("123456790123y45");
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 	}
 
 	@Test
 	public final void testITextStream() {
 
-		assertEquals(TEST_CASE, campoLivre.write());
+		assertEquals(TEST_CASE, getCampoLivreToTest().write());
 
-		campoLivre.read(TEST_CASE);
+		getCampoLivreToTest().read(TEST_CASE);
 
-		assertEquals(TEST_CASE, campoLivre.write());
+		assertEquals(TEST_CASE, getCampoLivreToTest().write());
 	}
 
 }

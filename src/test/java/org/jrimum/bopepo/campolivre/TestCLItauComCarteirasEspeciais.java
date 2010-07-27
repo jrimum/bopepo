@@ -83,10 +83,10 @@ public class TestCLItauComCarteirasEspeciais extends CampoLivreTest {
 		titulo.setNumeroDoDocumento("1234567");
 		titulo.setNossoNumero("12345678");
 		
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasse(CLItauComCarteirasEspeciais.class);
-		setStrCampoLivre("1981234567812345671234580");
+		setClasseGeradoraDoCampoLivre(CLItauComCarteirasEspeciais.class);
+		setCampoLivreValidoAsString("1981234567812345671234580");
 	}
 	
 }

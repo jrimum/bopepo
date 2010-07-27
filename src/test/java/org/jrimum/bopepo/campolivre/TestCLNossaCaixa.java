@@ -78,10 +78,10 @@ public class TestCLNossaCaixa extends CampoLivreTest {
 		titulo.setNossoNumero("997654321");
 		titulo.setDigitoDoNossoNumero("1");
 		
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasse(CLNossaCaixa.class);
-		setStrCampoLivre("9976543210001300281815107");
+		setClasseGeradoraDoCampoLivre(CLNossaCaixa.class);
+		setCampoLivreValidoAsString("9976543210001300281815107");
 	}
 	
 	@Test(expected = CampoLivreException.class)
@@ -90,7 +90,7 @@ public class TestCLNossaCaixa extends CampoLivreTest {
 		Integer codigo = null;
 		titulo.getContaBancaria().getModalidade().setCodigo(codigo);
 		
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 	}
 	
 	@Test(expected = CampoLivreException.class)
@@ -98,6 +98,6 @@ public class TestCLNossaCaixa extends CampoLivreTest {
 	
 		titulo.getContaBancaria().getModalidade().setCodigo(10);
 		
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 	}
 }

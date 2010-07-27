@@ -78,10 +78,10 @@ public class TestCLBanestes extends CampoLivreTest {
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("10297");
 		
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 
-		setClasse(CLBanestes.class);
-		setStrCampoLivre("0001029700007730070402182");
+		setClasseGeradoraDoCampoLivre(CLBanestes.class);
+		setCampoLivreValidoAsString("0001029700007730070402182");
 	}
 	
 	/**
@@ -100,9 +100,9 @@ public class TestCLBanestes extends CampoLivreTest {
 		carteira.setTipoCobranca(TipoDeCobranca.SEM_REGISTRO);
 		setCarteiraDoTitulo(carteira);
 		
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		assertEquals("Testando um campo livre válido da carteira sem registro.", "0001029700007730070202108", campoLivre.write());
+		assertEquals("Testando um campo livre válido da carteira sem registro.", "0001029700007730070202108", getCampoLivreToTest().write());
 	}
 	
 	@Test
@@ -110,9 +110,9 @@ public class TestCLBanestes extends CampoLivreTest {
 		
 		setCarteiraDoTitulo(new Carteira(3, TipoDeCobranca.COM_REGISTRO));
 
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		assertEquals("Testando um campo livre válido da carteira caucionada.", "0001029700007730070302196", campoLivre.write());
+		assertEquals("Testando um campo livre válido da carteira caucionada.", "0001029700007730070302196", getCampoLivreToTest().write());
 	}
 	
 	@Test(expected=CampoLivreException.class)

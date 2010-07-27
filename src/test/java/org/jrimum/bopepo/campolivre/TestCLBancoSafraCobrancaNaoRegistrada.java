@@ -80,9 +80,9 @@ public class TestCLBancoSafraCobrancaNaoRegistrada extends CampoLivreTest {
 		titulo.setNumeroDoDocumento("1234567");
 		titulo.setNossoNumero("12345678");
 		
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasse(CLBancoSafraCobrancaNaoRegistrada.class);
-		setStrCampoLivre("7123457000000000123456784");
+		setClasseGeradoraDoCampoLivre(CLBancoSafraCobrancaNaoRegistrada.class);
+		setCampoLivreValidoAsString("7123457000000000123456784");
 	}
 }

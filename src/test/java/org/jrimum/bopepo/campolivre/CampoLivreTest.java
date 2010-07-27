@@ -51,37 +51,45 @@ import org.junit.Test;
  */
 public class CampoLivreTest {
 	
-	private Class<? extends CampoLivre> classe;
+	private Class<? extends CampoLivre> classeGeradoraDoCampoLivre;
 	
-	private String str;
+	private String campoLivreValidoAsString;
 	
-	protected CampoLivre campoLivre;
+	private CampoLivre campoLivreToTest;
 	
-	protected void setClasse(Class<? extends CampoLivre> classe) {
-		this.classe = classe;
+	protected void setClasseGeradoraDoCampoLivre(Class<? extends CampoLivre> classe) {
+		this.classeGeradoraDoCampoLivre = classe;
 	}
 	
-	protected void setStrCampoLivre(String str) {
-		this.str = str;
+	protected void setCampoLivreValidoAsString(String campoLivreValidoAsString) {
+		this.campoLivreValidoAsString = campoLivreValidoAsString;
+	}
+	
+	protected void setCampoLivreToTest(CampoLivre campoLivreToTest) {
+		this.campoLivreToTest = campoLivreToTest;
+	}
+	
+	public CampoLivre getCampoLivreToTest() {
+		return campoLivreToTest;
 	}
 
 	@Test
-	public void testCreate() {
-		assertNotNull(campoLivre);
+	public void assertCriacaoDoCampoLivreSemFalha() {
+		assertNotNull(campoLivreToTest);
 	}
 	
 	@Test
 	public void testLength() {
-		assertEquals(25, campoLivre.write().length());
+		assertEquals(25, campoLivreToTest.write().length());
 	}
 	
 	@Test
 	public void testType() {
-		assertEquals(classe, campoLivre.getClass());
+		assertEquals(classeGeradoraDoCampoLivre, campoLivreToTest.getClass());
 	}
 	
 	@Test
 	public void testWrite() {
-		assertEquals(str, campoLivre.write());
+		assertEquals(campoLivreValidoAsString, campoLivreToTest.write());
 	}
 }

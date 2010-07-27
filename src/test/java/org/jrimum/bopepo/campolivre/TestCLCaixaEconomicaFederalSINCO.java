@@ -77,16 +77,18 @@ public class TestCLCaixaEconomicaFederalSINCO extends CampoLivreTest {
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("10000000020061732");
 		
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasse(CLCaixaEconomicaFederalSINCO.class);
-		setStrCampoLivre("1000002910000000020061732");
+		setClasseGeradoraDoCampoLivre(CLCaixaEconomicaFederalSINCO.class);
+		setCampoLivreValidoAsString("1000002910000000020061732");
 	}
 
 	@Test(expected = NotSupportedCampoLivreException.class)
 	public void testNossoNumeroMaiorQue17() {
 		
+		System.err.println("SUB");
+		
 		titulo.setNossoNumero("010000000020061732");
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 	}
 }

@@ -74,10 +74,10 @@ public class TestCLBancoDoBrasilNN17 extends CampoLivreTest {
 		Titulo titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("12345678901234567");
 		
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasse(CLBancoDoBrasilNN17.class);
-		setStrCampoLivre("1234561234567890123456721");
+		setClasseGeradoraDoCampoLivre(CLBancoDoBrasilNN17.class);
+		setCampoLivreValidoAsString("1234561234567890123456721");
 	}
 
 }

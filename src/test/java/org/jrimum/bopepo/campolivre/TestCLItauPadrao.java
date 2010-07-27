@@ -86,10 +86,10 @@ public class TestCLItauPadrao extends CampoLivreTest {
 		titulo.setNumeroDoDocumento("1234567");
 		titulo.setNossoNumero("12345678");
 		
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasse(CLItauPadrao.class);
-		setStrCampoLivre("1101234567880057123457000");
+		setClasseGeradoraDoCampoLivre(CLItauPadrao.class);
+		setCampoLivreValidoAsString("1101234567880057123457000");
 	}
 
 	@Test
@@ -97,9 +97,9 @@ public class TestCLItauPadrao extends CampoLivreTest {
 		
 		titulo.getContaBancaria().setCarteira(new Carteira(198));
 		
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		assertEquals(25, campoLivre.write().length());
-		assertEquals("1981234567812345671234580", campoLivre.write());
+		assertEquals(25, getCampoLivreToTest().write().length());
+		assertEquals("1981234567812345671234580", getCampoLivreToTest().write());
 	}
 }

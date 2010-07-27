@@ -83,9 +83,9 @@ public class TestCLBradesco extends CampoLivreTest {
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("12345678901");
 		
-		campoLivre = CampoLivreFactory.create(titulo);
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasse(CLBradesco.class);
-		setStrCampoLivre("1234051234567890100067890");
+		setClasseGeradoraDoCampoLivre(CLBradesco.class);
+		setCampoLivreValidoAsString("1234051234567890100067890");
 	}
 }
