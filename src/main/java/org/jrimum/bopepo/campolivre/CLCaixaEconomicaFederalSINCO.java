@@ -27,7 +27,6 @@
  * 
  */
 
-
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
@@ -36,9 +35,9 @@ import org.jrimum.utilix.Field;
 import org.jrimum.utilix.Filler;
 
 /**
- * 
+ * <p>
  * O campo livre para o modelo SINCO segue esta forma:
- * 
+ * </p>
  * <table border="1" cellpadding="0" cellspacing="0" style="border-collapse:
  * collapse" bordercolor="#111111" width="60%" id="campolivre">
  * <thead>
@@ -72,8 +71,6 @@ import org.jrimum.utilix.Filler;
  * </tbody>
  * </table>
  * 
- * 
- * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author Misael Barreto 
  * @author Rômulo Augusto
@@ -85,23 +82,19 @@ import org.jrimum.utilix.Filler;
  */
 class CLCaixaEconomicaFederalSINCO extends AbstractCLCaixaEconomicaFederal {
 
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7642075752245778160L;
 	
 	/**
-	 * 
+	 * Quantidade de campos. Tamanho da lista de campos.
 	 */
 	private static final Integer FIELDS_LENGTH = 4;
 
 	/**
 	 * <p>
-	 *   Dado um título, cria um campo livre para o padrão do Banco Caixa Econômica
-	 *   Federal que tenha o serviço SINCO.
+	 * Dado um título, cria um campo livre para o padrão do Banco Caixa Econômica
+	 * Federal que tenha o serviço SINCO.
 	 * </p>
-	 * @param titulo título com as informações para geração do campo livre
+	 * @param titulo Título com as informações para geração do campo livre.
 	 */
 	CLCaixaEconomicaFederalSINCO(Titulo titulo) {
 		super(FIELDS_LENGTH, STRING_LENGTH);
@@ -116,7 +109,5 @@ class CLCaixaEconomicaFederalSINCO extends AbstractCLCaixaEconomicaFederal {
 		
 		this.add(new Field<Integer>(9, 1));
 		this.add(new Field<String>(nossoNumero, 17));
-		
 	}
-	
 }

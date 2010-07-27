@@ -70,12 +70,11 @@ abstract class AbstractCLCaixaEconomicaFederal extends AbstractCampoLivre {
 		}
 		
 		if (isNull(campoLivre)) {
-			throw new NotSupportedCampoLivreException (
-					"Campo livre disponível somente para títulos com " +
-					" comprimento de " + NOSSO_NUMERO_SINCO + " " + 
-					"(SINCO) caracteres"
-			);
-		}else {
+			throw new NotSupportedCampoLivreException(
+					String.format("Campo Livre não suportado para o Nosso Número [%s] de tamanho [%s]. " +
+					"Apenas títulos com Nosso Número de tamanho(s) [%s] são suportados.", nossoNumero, 
+					(StringUtils.isBlank(nossoNumero) ? "0" : nossoNumero.length()), NOSSO_NUMERO_SICOB + "," + NOSSO_NUMERO_SINCO));
+		} else {
 			return campoLivre;
 		}
 	}

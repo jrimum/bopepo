@@ -27,7 +27,6 @@
  * 
  */
 
-
 package org.jrimum.bopepo.campolivre;
 
 import org.junit.Before;
@@ -45,7 +44,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * <p>
- * Teste unitário do campo livre do banco caixa econômica federal
+ * Teste unitário do campo livre do banco caixa econômica federal para o serviço SINCO.
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
