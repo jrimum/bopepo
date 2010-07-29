@@ -44,7 +44,7 @@ import org.junit.Test;
 /**
  * Classe de teste para a fábrica de campos livres da CEF.
  * 
- * @author Rômulo Augusto
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  */
 public class TestAbstractCLCaixaEconomicaFederal {
 

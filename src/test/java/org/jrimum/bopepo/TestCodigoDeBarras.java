@@ -62,8 +62,8 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * 
  * 
  * @author Gilmar P.S.L
- * @author Misael Barreto
- * @author Rômulo Augusto
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @since 0.2
  * 

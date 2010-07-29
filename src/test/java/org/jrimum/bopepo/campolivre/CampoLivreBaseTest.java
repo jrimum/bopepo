@@ -43,7 +43,7 @@ import org.junit.Test;
  * Todos os testes de campo livre devem herdar desta classe.
  * </p>
  * 
- * @author Rômulo Augusto
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  *
  * @since 0.2
  * 

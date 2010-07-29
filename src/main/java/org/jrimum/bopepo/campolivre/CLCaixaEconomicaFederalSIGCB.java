@@ -92,7 +92,7 @@ import org.jrimum.vallia.digitoverificador.Modulo;
  * </table>
  * 
  * @author Rogério Kleinkauf - Colaborador do campo livre SIGCB
- * @author Rômulo Augusto
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @since 0.2
  * 

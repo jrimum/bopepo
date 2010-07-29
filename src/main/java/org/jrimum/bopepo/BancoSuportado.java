@@ -86,8 +86,8 @@ import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
- * @author Misael Barreto
- * @author Rômulo Augusto
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * @author Samuel Valério
  * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a>
  * 

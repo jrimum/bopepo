@@ -43,7 +43,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
  * do Unibanco com cobrança registrada
  * </p>
  * 
- * @author Rômulo Augusto
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @version 0.2
  */

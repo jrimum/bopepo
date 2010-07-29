@@ -42,7 +42,7 @@ import org.junit.Before;
  * Teste unitário do campo livre do banco caixa econômica federal para o serviço SIGCB.
  * </p>
  * 
- * @author Rômulo Augusto
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @since 0.2
  * 

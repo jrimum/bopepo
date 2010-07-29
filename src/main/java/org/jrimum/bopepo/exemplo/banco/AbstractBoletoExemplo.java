@@ -59,7 +59,7 @@ import org.jrimum.utilix.DateUtil;
  * A subclasse deve implementar esses métodos de acordo com o banco e campo live usados
  * </p>
  * 
- * @author Rômulo Augusto
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @version 0.2
  */

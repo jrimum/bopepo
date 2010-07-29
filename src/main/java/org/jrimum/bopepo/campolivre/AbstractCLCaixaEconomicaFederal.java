@@ -39,8 +39,8 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * Fábrica para os campos livres da Caixa Econômica Federal. 
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author Misael Barreto 
- * @author Rômulo Augusto
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a> 
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * @author Rogério Kleinkauf - Colaborador do campo livre SIGCB
  * 
  * @since 0.2

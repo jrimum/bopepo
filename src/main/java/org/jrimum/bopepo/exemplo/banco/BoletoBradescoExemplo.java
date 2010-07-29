@@ -42,7 +42,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
  * do banco Bradesco
  * </p>
  * 
- * @author Rômulo Augusto
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @version 0.2
  */

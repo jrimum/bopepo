@@ -42,7 +42,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
  * do Banco do Brasil com Nosso Número 17
  * </p>
  * 
- * @author Rômulo Augusto
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @version 0.2
  */

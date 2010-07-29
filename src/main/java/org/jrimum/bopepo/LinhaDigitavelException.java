@@ -41,8 +41,8 @@ package org.jrimum.bopepo;
  * 
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author Misael Barreto
- * @author Rômulo Augusto
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @see br.com.nordestefomento.jrimum.JRimumException
  * @see org.jrimum.bopepo.LinhaDigitavel

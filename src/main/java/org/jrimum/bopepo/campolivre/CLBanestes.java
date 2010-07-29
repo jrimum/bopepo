@@ -88,8 +88,8 @@ import org.jrimum.vallia.digitoverificador.TipoDeModulo;
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
- * @author Misael Barreto
- * @author Rômulo Augusto
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * @author Samuel Valerio
  * 
  * @since 0.2

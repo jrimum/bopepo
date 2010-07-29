@@ -41,7 +41,7 @@ import org.jrimum.bopepo.view.BoletoViewer;
  * Executa todos os exemplos de geração de boletos
  * </p>
  *  
- * @author Rômulo Augusto
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @version 0.2
  */

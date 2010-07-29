@@ -40,7 +40,7 @@ import org.jrimum.utilix.StringUtil;
  * Teste da classe CampoLivreFactory.
  * </p>
  * 
- * @author Rômulo augusto
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @since 0.2
  * 

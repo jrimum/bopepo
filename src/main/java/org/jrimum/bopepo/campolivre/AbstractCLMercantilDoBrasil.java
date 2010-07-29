@@ -45,7 +45,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * EXEMPLO:
  * </p> 
  * 
- * @author Rômulo Augusto
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @version 0.2
  */
