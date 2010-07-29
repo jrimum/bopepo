@@ -30,6 +30,7 @@
  */
 	
 package org.jrimum.bopepo.campolivre;
+import static org.jrimum.vallia.digitoverificador.Modulo.MOD10;
 
 import java.util.Arrays;
 
@@ -107,7 +108,7 @@ abstract class AbstractCLItau extends AbstractCampoLivre {
 	protected Integer calculeDigitoVerificador(String campo) {
 				
 		int restoDivisao = Modulo.calculeMod10(campo, 1, 2);
-		int digito = Modulo.MOD10 - restoDivisao;
+		int digito = MOD10 - restoDivisao;
 		
 		if(digito > 9) {
 			digito = 0;
