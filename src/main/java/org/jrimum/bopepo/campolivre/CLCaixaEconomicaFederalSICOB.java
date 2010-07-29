@@ -18,7 +18,7 @@ import org.jrimum.utilix.ObjectUtil;
 public class CLCaixaEconomicaFederalSICOB extends AbstractCLCaixaEconomicaFederal {
 	
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 5585190685525441426L;
 	
@@ -32,7 +32,8 @@ public class CLCaixaEconomicaFederalSICOB extends AbstractCLCaixaEconomicaFedera
 	 *   Dado um título, cria um campo livre para o padrão do Banco Caixa Econômica
 	 *   Federal que tenha o serviço SINCO.
 	 * </p>
-	 * @param titulo título com as informações para geração do campo livre
+	 * 
+	 * @param titulo - Título com as informações para geração do campo livre
 	 */
 	CLCaixaEconomicaFederalSICOB(Titulo titulo) {
 		
@@ -56,11 +57,11 @@ public class CLCaixaEconomicaFederalSICOB extends AbstractCLCaixaEconomicaFedera
 	
 		this.add(new Field<Integer>(conta.getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
 		
-		if(titulo.getParametrosBancarios().contemComNome("CNPV")){
+		if(titulo.getParametrosBancarios().contemComNome("CodigoOperacao")){
 			
-			Integer cnpv = titulo.getParametrosBancarios().getValor("CNPV");
+			Integer cnpv = titulo.getParametrosBancarios().getValor("CodigoOperacao");
 		
-			ObjectUtil.checkNotNull(titulo.getParametrosBancarios(), "Parâmetro bancário CNPV inválido [CNPV==null]!");
+			ObjectUtil.checkNotNull(titulo.getParametrosBancarios(), "Parâmetro bancário código operação inválido [CodigoOperacao==null]!");
 				
 			this.add(new Field<Integer>(cnpv, 3, Filler.ZERO_LEFT));
 			
@@ -68,7 +69,7 @@ public class CLCaixaEconomicaFederalSICOB extends AbstractCLCaixaEconomicaFedera
 			
 		}else{
 			
-			throw new CampoLivreException("Parâmetro bancário CNPV (Operação Código Cedente) não encontrado!");
+			throw new CampoLivreException("Parâmetro bancário código operação (\"CodigoOperacao\") não encontrado!");
 		}
 		
 	}
