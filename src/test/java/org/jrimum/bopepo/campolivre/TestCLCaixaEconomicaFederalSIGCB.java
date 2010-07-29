@@ -30,10 +30,12 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
+import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Before;
 
@@ -60,10 +62,11 @@ public class TestCLCaixaEconomicaFederalSIGCB extends CampoLivreBaseTest {
 		
 		ContaBancaria contaBancaria = new ContaBancaria();
 		
-		NumeroDaConta numeroDaConta = new NumeroDaConta(5507);
+		NumeroDaConta numeroDaConta = new NumeroDaConta(5507,"7");
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		
 		contaBancaria.setBanco(BancoSuportado.CAIXA_ECONOMICA_FEDERAL.create());
+		contaBancaria.setCarteira(new Carteira(24, TipoDeCobranca.COM_REGISTRO));
 		
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("000000000000019");
