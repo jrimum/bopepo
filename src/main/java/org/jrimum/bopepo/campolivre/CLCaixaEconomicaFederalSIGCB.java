@@ -28,6 +28,7 @@
  */
 
 package org.jrimum.bopepo.campolivre;
+import static org.jrimum.vallia.digitoverificador.Modulo.MOD11;
 
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
@@ -112,6 +113,21 @@ class CLCaixaEconomicaFederalSIGCB extends AbstractCLCaixaEconomicaFederal {
 	private static final Integer FIELDS_LENGTH = 8;
 
 	/**
+	 * Modalidade de cobrança.
+	 */
+	private static final int COBRANCA_REGISTRADA = 1;
+	
+	/**
+	 * Modalidade de cobrança.
+	 */
+	private static final int COBRANCA_NAO_REGISTRADA = 2;
+	
+	/**
+	 * Constante que indica emissão de boleto pelo cedente. 
+	 */
+	private static final int EMISSAO_CEDENTE = 4;
+
+	/**
 	 * <p>
 	 * Dado um título, cria um campo livre para o padrão do Banco Caixa
 	 * Econômica Federal que tenha o serviço SIGCB.
@@ -125,30 +141,33 @@ class CLCaixaEconomicaFederalSIGCB extends AbstractCLCaixaEconomicaFederal {
 		super(FIELDS_LENGTH, STRING_LENGTH);
 
 		ContaBancaria conta = titulo.getContaBancaria();
-
 		String nossoNumero = titulo.getNossoNumero();
 
-		Integer dVCodigoDoCedente = calculeDigitoVerificadorDoCampoLivre(conta.getNumeroDaConta().getCodigoDaConta().toString());
+		Integer dVCodigoDoCedente = calculeDigitoVerificador(conta.getNumeroDaConta().getCodigoDaConta().toString());
 
 		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(dVCodigoDoCedente, 1));
-
 		this.add(new Field<String>(nossoNumero.substring(0, 3), 3));
-		this.add(new Field<Integer>(2, 1));
+		
+		if(conta.getCarteira().isComRegistro()){
+			
+			this.add(new Field<Integer>(COBRANCA_REGISTRADA, 1));
+			
+		}else{
+			
+			this.add(new Field<Integer>(COBRANCA_NAO_REGISTRADA, 1));
+		}
 
 		this.add(new Field<String>(nossoNumero.substring(3, 6), 3));
-		this.add(new Field<Integer>(4, 1));
-
+		this.add(new Field<Integer>(EMISSAO_CEDENTE, 1));
 		this.add(new Field<String>(nossoNumero.substring(6, 15), 9));
 
-		String numeroParaCalculo = gereNumeroParaCalculoDoDigitoVerificadorDoCampoLivre(titulo, dVCodigoDoCedente);
-
-		this.add(new Field<Integer>(calculeDigitoVerificadorDoCampoLivre(numeroParaCalculo), 1));
+		this.add(new Field<Integer>(calculeDigitoVerificador(gereCampoLivre()), 1));
 	}
 
 	/**
 	 * <p>
-	 * Gera o número que serve para calcular o digito verificador do campoLivre
+	 * Gera o número que serve para calcular o digito verificador do campoLivre, que é todo o campo livre menos o dígito verificador.
 	 * </p>
 	 * <p>
 	 * Os campos utilizados são:
@@ -171,18 +190,14 @@ class CLCaixaEconomicaFederalSIGCB extends AbstractCLCaixaEconomicaFederal {
 	 * 
 	 * @since 0.2
 	 */
-	private String gereNumeroParaCalculoDoDigitoVerificadorDoCampoLivre(Titulo titulo, Integer dVCodigoDoCedente) {
+	private String gereCampoLivre() {
 
 		StringBuilder numeroParaCalculo = new StringBuilder();
 		
-		numeroParaCalculo.append(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta());
-		numeroParaCalculo.append(dVCodigoDoCedente);
-		numeroParaCalculo.append(titulo.getNossoNumero().substring(0, 3));
-		numeroParaCalculo.append(2);
-		numeroParaCalculo.append(titulo.getNossoNumero().substring(3, 6));
-		numeroParaCalculo.append(4);
-		numeroParaCalculo.append(titulo.getNossoNumero().substring(6, 15));
-
+		for(Field<?> f : this){
+			numeroParaCalculo.append(f.write());
+		}
+		
 		return numeroParaCalculo.toString();
 	}
 
@@ -192,26 +207,32 @@ class CLCaixaEconomicaFederalSIGCB extends AbstractCLCaixaEconomicaFederal {
 	 * </p>
 	 * 
 	 * @param numeroParaCalculo
-	 * @return
+	 * @return digito
 	 * 
-	 * @since
+	 * @since 0.2
 	 */
-	private int calculeDigitoVerificadorDoCampoLivre(String numeroParaCalculo) {
+	private int calculeDigitoVerificador(String numeroParaCalculo) {
 		
 		int soma = Modulo.calculeSomaSequencialMod11(numeroParaCalculo.toString(), 2, 9);
 
 		int dvCampoLivre;
-		if (soma < 11) {
-			dvCampoLivre = 11 - soma;
-
+		
+		if (soma < MOD11) {
+			
+			dvCampoLivre = MOD11 - soma;
+			
 		} else {
 		
-			int restoDiv11 = soma % 11;
-			int subResto = 11 - restoDiv11;
+			int restoDiv11 = soma % MOD11;
+			
+			int subResto = MOD11 - restoDiv11;
 			
 			if (subResto > 9) {
+			
 				dvCampoLivre = 0;
+			
 			} else {
+				
 				dvCampoLivre = subResto;
 			}
 		}
