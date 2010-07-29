@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  * 
- * Created at: 30/03/2008 - 18:14:15
+ * Created at: 28/07/2010 - 21:45:00
  * 
  * ================================================================================
  * 
@@ -23,69 +23,49 @@
  * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
  * reger permissões e limitações sob esta LICENÇA.
  * 
- * Criado em: 30/03/2008 - 18:14:15
+ * Criado em: 28/07/2010 - 21:45:00
  * 
  */
 
-
 package org.jrimum.bopepo.campolivre;
 
-import org.junit.Before;
-
 import org.jrimum.bopepo.BancoSuportado;
-import org.jrimum.bopepo.campolivre.CLBradesco;
-import org.jrimum.bopepo.campolivre.CampoLivreFactory;
+import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
- * <p>
- * Teste unitário do campo livre do banco bradesco
- * </p>
+ * Classe de teste para a fábrica de campos livres da CEF.
  * 
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author Misael Barreto
  * @author Rômulo Augusto
- * @author <a href="http://www.nordeste-fomento.com.br">Nordeste Fomento Mercantil</a>
- * 
- * @since 0.2
- * 
- * @version 0.2
- *
  */
-public class TestCLBradesco extends CampoLivreBaseTest {
+public class TestAbstractCLCaixaEconomicaFederal {
 
 	private Titulo titulo;
-
+	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		
 		Sacado sacado = new Sacado("Sacado");
 		Cedente cedente = new Cedente("Cedente");
-
-		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(BancoSuportado.BANCO_BRADESCO.create());
 		
-		Agencia agencia = new Agencia(1234, "1");
-		contaBancaria.setAgencia(agencia);
-		
-		contaBancaria.setCarteira(new Carteira(5));
-		
-		NumeroDaConta numeroDaConta = new NumeroDaConta();
-		numeroDaConta.setCodigoDaConta(6789);
-		contaBancaria.setNumeroDaConta(numeroDaConta);
+		ContaBancaria contaBancaria = new ContaBancaria(BancoSuportado.CAIXA_ECONOMICA_FEDERAL.create());
+		contaBancaria.setCarteira(new Carteira(1));
+		contaBancaria.setAgencia(new Agencia(12345, "x"));
 		
 		titulo = new Titulo(contaBancaria, sacado, cedente);
-		titulo.setNossoNumero("12345678901");
-		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
-		
-		setClasseGeradoraDoCampoLivre(CLBradesco.class);
-		setCampoLivreValidoAsString("1234051234567890100067890");
+	}
+	
+	@Test(expected = NotSupportedCampoLivreException.class)
+	public void quandoTamanhoNossoNumeroDiferenteDe11_15_17DisparaExcecao() {
+		titulo.setNossoNumero("123456789");
+		AbstractCLCaixaEconomicaFederal.create(titulo);
 	}
 }

@@ -59,7 +59,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * 
  * @version 0.2
  */
-public class TestCLNossaCaixa extends CampoLivreTest {
+public class TestCLNossaCaixa extends CampoLivreBaseTest {
 
 	private Titulo titulo;
 	

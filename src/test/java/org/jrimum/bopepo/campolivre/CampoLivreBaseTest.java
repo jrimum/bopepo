@@ -49,7 +49,7 @@ import org.junit.Test;
  * 
  * @version 0.2
  */
-public class CampoLivreTest {
+public class CampoLivreBaseTest {
 	
 	private Class<? extends CampoLivre> classeGeradoraDoCampoLivre;
 	
@@ -74,22 +74,22 @@ public class CampoLivreTest {
 	}
 
 	@Test
-	public void assertCriacaoDoCampoLivreSemFalha() {
+	public void seCriacaoDoCampoLivreOcorreSemFalha() {
 		assertNotNull(campoLivreToTest);
 	}
 	
 	@Test
-	public void testLength() {
+	public void seTamanhoDoCampoLivreEscritoIgualA25() {
 		assertEquals(25, campoLivreToTest.write().length());
 	}
 	
 	@Test
-	public void testType() {
+	public void seClasseDaInstaciaDoCampoLivreEstaCorreta() {
 		assertEquals(classeGeradoraDoCampoLivre, campoLivreToTest.getClass());
 	}
 	
 	@Test
-	public void testWrite() {
+	public void seCampoLivreEscritoEstaCorreto() {
 		assertEquals(campoLivreValidoAsString, campoLivreToTest.write());
 	}
 }

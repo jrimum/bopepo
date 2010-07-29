@@ -29,18 +29,13 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import org.jrimum.bopepo.BancoSuportado;
-import org.jrimum.bopepo.campolivre.CLCaixaEconomicaFederalSINCO;
-import org.jrimum.bopepo.campolivre.CampoLivreFactory;
-import org.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.junit.Before;
 
 /**
  * <p>
@@ -56,7 +51,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * 
  * @version 0.2
  */
-public class TestCLCaixaEconomicaFederalSINCO extends CampoLivreTest {
+public class TestCLCaixaEconomicaFederalSINCO extends CampoLivreBaseTest {
 	
 	private Titulo titulo;
 
@@ -81,14 +76,5 @@ public class TestCLCaixaEconomicaFederalSINCO extends CampoLivreTest {
 		
 		setClasseGeradoraDoCampoLivre(CLCaixaEconomicaFederalSINCO.class);
 		setCampoLivreValidoAsString("1000002910000000020061732");
-	}
-
-	@Test(expected = NotSupportedCampoLivreException.class)
-	public void testNossoNumeroMaiorQue17() {
-		
-		System.err.println("SUB");
-		
-		titulo.setNossoNumero("010000000020061732");
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 	}
 }

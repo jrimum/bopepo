@@ -33,7 +33,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * @version 0.2
  *
  */
-public class TestCLUnibancoCobrancaNaoRegistrada extends CampoLivreTest {
+public class TestCLUnibancoCobrancaNaoRegistrada extends CampoLivreBaseTest {
 
 	/**
 	 * String Campo Livre.

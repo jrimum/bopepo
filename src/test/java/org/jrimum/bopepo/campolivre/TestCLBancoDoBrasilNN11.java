@@ -57,7 +57,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * 
  * @version 0.2
  */
-public class TestCLBancoDoBrasilNN11 extends CampoLivreTest {
+public class TestCLBancoDoBrasilNN11 extends CampoLivreBaseTest {
 
 	@Before
 	public void setUp() throws Exception {
