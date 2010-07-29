@@ -89,7 +89,8 @@ import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
  * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * @author Samuel Valério
- * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a>
+ * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a> -
+ *         Colaborador do campo livre CLBancoRuralCobrancaRegistrada
  * 
  * @see org.jrimum.bopepo.campolivre.CampoLivre
  * @see org.jrimum.domkee.financeiro.banco.Banco

@@ -36,12 +36,15 @@ import org.apache.commons.lang.StringUtils;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
- * Fábrica para os campos livres da Caixa Econômica Federal. 
+ * <p>
+ * Fábrica para os campos livres da Caixa Econômica Federal.
+ * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a> 
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
- * @author Rogério Kleinkauf - Colaborador do campo livre SIGCB
+ * @author <a href="mailto:rogerio@visaosoft.com.br">Rogério Kleinkauf</a> -
+ *         Colaborador do campo livre SIGCB
  * 
  * @since 0.2
  * 

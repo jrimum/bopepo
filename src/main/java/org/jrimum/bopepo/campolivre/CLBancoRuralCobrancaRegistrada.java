@@ -6,8 +6,9 @@ import org.jrimum.utilix.Field;
 import org.jrimum.utilix.Filler;
 
 /**
+ * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a>
- *
  */
 public class CLBancoRuralCobrancaRegistrada extends AbstractCLBancoRural{
 	
