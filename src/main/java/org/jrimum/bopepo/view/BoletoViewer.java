@@ -30,8 +30,8 @@
 
 package org.jrimum.bopepo.view;
 
-import static org.jrimum.utilix.ObjectUtil.isNotNull;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
+import static org.jrimum.utilix.ObjectUtil.isNotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -42,7 +42,6 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jrimum.bopepo.Boleto;
-
 
 import com.lowagie.text.DocumentException;
 
@@ -140,9 +139,7 @@ public class BoletoViewer {
 		File group = null;
 		
 		if (validatePathName(pathName) && validateBoletosList(boletos)) {
-//			if (validateBoletosList(boletos)) {
-				group = groupInOnePDF(pathName, boletos, new BoletoViewer());
-//			}
+			group = groupInOnePDF(pathName, boletos, new BoletoViewer());
 		}
 
 		return group;
@@ -153,11 +150,7 @@ public class BoletoViewer {
 		File group = null;
 
 		if (validatePathName(destPathName) &&validateBoletosList(boletos) && validatePathName(templatePathName)) {
-//			if (validateBoletosList(boletos)) {
-//				if (validatePathName(templatePathName)) {
-					group = groupInOnePDF(destPathName, boletos, new BoletoViewer().setTemplate(templatePathName));
-//				}
-//			}
+			group = groupInOnePDF(destPathName, boletos, new BoletoViewer().setTemplate(templatePathName));
 		}
 					
 		return group;
@@ -168,9 +161,7 @@ public class BoletoViewer {
 		File group = null;
 
 		if (validatePathName(destPathName) && validateBoletosList(boletos) && validateFile(templateFile, "template")) {
-//			if (validateBoletosList(boletos))
-//				if (validateFile(templateFile, "template"))
-					group = groupInOnePDF(destPathName, boletos, new BoletoViewer().setTemplate(templateFile));
+			group = groupInOnePDF(destPathName, boletos, new BoletoViewer().setTemplate(templateFile));
 		}
 					
 		return group;

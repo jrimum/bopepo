@@ -36,13 +36,14 @@ import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.domkee.financeiro.banco.hsbc.TipoIdentificadorCNR;
-import org.jrimum.utilix.Field;
-import org.jrimum.utilix.Filler;
 import org.jrimum.utilix.ObjectUtil;
+import org.jrimum.utilix.text.Field;
+import org.jrimum.utilix.text.Filler;
 
 /**
- * 
+ * <p>
  * 	O campo livre do HSBC, para cobrança não registrada(CNR), deve seguir esta forma:
+ * </p>
  * 
  * 	<table border="1" cellpadding="0" cellspacing="0" style="border-collapse:
  * 	collapse" bordercolor="#111111" width="60%" id="campolivre">
@@ -157,8 +158,7 @@ class CLHSBCCobrancaNaoRegistrada extends AbstractCLHSBC {
 
 	}
 
-	private String getDataVencimentoFormatoJuliano(
-			TipoIdentificadorCNR tipoIdentificadorCNR, Date vencimento) {
+	private String getDataVencimentoFormatoJuliano(TipoIdentificadorCNR tipoIdentificadorCNR, Date vencimento) {
 
 		switch (tipoIdentificadorCNR) {
 
@@ -198,8 +198,7 @@ class CLHSBCCobrancaNaoRegistrada extends AbstractCLHSBC {
 		}
 	}
 
-	private void checkExistsParametroTipoIdentificadorCNR(
-			ParametrosBancariosMap parametros) {
+	private void checkExistsParametroTipoIdentificadorCNR(ParametrosBancariosMap parametros) {
 
 		TipoIdentificadorCNR tipoIdentificadorCNR = parametros
 				.getValor(TipoIdentificadorCNR.class.getName());

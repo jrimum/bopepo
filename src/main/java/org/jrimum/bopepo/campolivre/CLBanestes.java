@@ -32,8 +32,8 @@ package org.jrimum.bopepo.campolivre;
 import static org.jrimum.utilix.ObjectUtil.exists;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.Field;
-import org.jrimum.utilix.Filler;
+import org.jrimum.utilix.text.Field;
+import org.jrimum.utilix.text.Filler;
 import org.jrimum.vallia.digitoverificador.Modulo;
 import org.jrimum.vallia.digitoverificador.TipoDeModulo;
 

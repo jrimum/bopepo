@@ -67,7 +67,7 @@ public class TestCLHSBCCobrancaNaoRegistrada {
 	}
 
 	/**
-	 * Test method for {@link org.jrimum.utilix.AbstractLineOfFields#write()}.
+	 * Test method for {@link org.jrimum.utilix.text.AbstractLineOfFields#write()}.
 	 */
 	@Test
 	public final void testWrite() {

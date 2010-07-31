@@ -38,8 +38,8 @@ import org.apache.log4j.Logger;
 import org.jrimum.bopepo.BancoSuportado;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.AbstractLineOfFields;
 import org.jrimum.utilix.ObjectUtil;
+import org.jrimum.utilix.text.AbstractLineOfFields;
 
 /**
  * <p>

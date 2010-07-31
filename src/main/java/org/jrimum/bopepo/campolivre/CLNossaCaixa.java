@@ -33,8 +33,8 @@ import java.util.Arrays;
 
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.Field;
-import org.jrimum.utilix.Filler;
+import org.jrimum.utilix.text.Field;
+import org.jrimum.utilix.text.Filler;
 import org.jrimum.vallia.digitoverificador.Modulo;
 import org.jrimum.vallia.digitoverificador.TipoDeModulo;
 

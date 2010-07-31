@@ -32,9 +32,9 @@ package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.Field;
-import org.jrimum.utilix.Filler;
-import org.jrimum.utilix.StringUtil;
+import org.jrimum.utilix.text.Field;
+import org.jrimum.utilix.text.Filler;
+import org.jrimum.utilix.text.StringUtil;
 import org.jrimum.vallia.digitoverificador.Modulo;
 import org.jrimum.vallia.digitoverificador.TipoDeModulo;
 
@@ -172,13 +172,14 @@ class CLBancoReal extends AbstractCLBancoReal {
 			
 			int restoSubtracao = (10 - restoDivisao);
 			
-			if(restoSubtracao == 10)
+			if(restoSubtracao == 10){
 				dV = "0";
-			else
+			}else{
+				
 				dV = ""+restoSubtracao;
+			}
 			
 			return dV;
-			
 		}
 	
 }

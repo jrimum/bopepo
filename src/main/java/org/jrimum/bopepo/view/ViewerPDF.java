@@ -48,6 +48,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
 import org.jrimum.bopepo.BancoSuportado;
 import org.jrimum.bopepo.Boleto;
+import org.jrimum.bopepo.pdf.PDFUtil;
+import org.jrimum.bopepo.pdf.RectanglePDF;
 import org.jrimum.domkee.comum.pessoa.endereco.Endereco;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
@@ -55,9 +57,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
 import org.jrimum.utilix.DateUtil;
 import org.jrimum.utilix.FileUtil;
-import org.jrimum.utilix.MonetaryUtil;
-import org.jrimum.utilix.PDFUtil;
-import org.jrimum.utilix.RectanglePDF;
+import org.jrimum.utilix.text.MonetaryUtil;
 
 
 import com.lowagie.text.DocumentException;

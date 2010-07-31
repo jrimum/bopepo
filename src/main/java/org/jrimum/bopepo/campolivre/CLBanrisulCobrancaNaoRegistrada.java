@@ -30,8 +30,8 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.Field;
-import org.jrimum.utilix.Filler;
+import org.jrimum.utilix.text.Field;
+import org.jrimum.utilix.text.Filler;
 
 /**
  * 

@@ -33,7 +33,7 @@ import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
 import org.jrimum.bopepo.campolivre.CampoLivreFactory;
-import org.jrimum.utilix.StringUtil;
+import org.jrimum.utilix.text.StringUtil;
 
 /**
  * <p>

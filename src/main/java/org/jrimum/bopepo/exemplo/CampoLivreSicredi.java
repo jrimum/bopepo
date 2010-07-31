@@ -42,9 +42,9 @@ import org.jrimum.bopepo.campolivre.CampoLivreException;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.AbstractLineOfFields;
-import org.jrimum.utilix.Field;
-import org.jrimum.utilix.Filler;
+import org.jrimum.utilix.text.AbstractLineOfFields;
+import org.jrimum.utilix.text.Field;
+import org.jrimum.utilix.text.Filler;
 import org.jrimum.vallia.digitoverificador.Modulo;
 import org.jrimum.vallia.digitoverificador.TipoDeModulo;
 

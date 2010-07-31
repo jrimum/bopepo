@@ -33,10 +33,10 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.Field;
-import org.jrimum.utilix.Filler;
 import org.jrimum.utilix.ObjectUtil;
-import org.jrimum.utilix.StringUtil;
+import org.jrimum.utilix.text.Field;
+import org.jrimum.utilix.text.Filler;
+import org.jrimum.utilix.text.StringUtil;
 
 
 /**
