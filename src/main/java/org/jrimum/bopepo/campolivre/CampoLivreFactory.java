@@ -35,7 +35,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
-import org.jrimum.utilix.text.StringUtil;
+import org.jrimum.utilix.text.Strings;
 
 
 /**
@@ -100,7 +100,7 @@ public final class CampoLivreFactory {
 		
 		Objects.checkNotNull(strCampoLivre);
 		
-		StringUtil.checkNotBlank(strCampoLivre, "O Campo Livre não deve ser vazio!");
+		Strings.checkNotBlank(strCampoLivre, "O Campo Livre não deve ser vazio!");
 		
 		strCampoLivre = StringUtils.strip(strCampoLivre); 
 		

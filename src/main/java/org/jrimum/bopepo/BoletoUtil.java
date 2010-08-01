@@ -2,7 +2,7 @@ package org.jrimum.bopepo;
 
 import org.apache.commons.lang.StringUtils;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.StringUtil;
+import org.jrimum.utilix.text.Strings;
 import org.jrimum.vallia.digitoverificador.BoletoLinhaDigitavelDV;
 
 /**
@@ -594,17 +594,17 @@ public final class BoletoUtil {
 		linhaFormatada.append(l.substring(0, 5));
 		linhaFormatada.append(".");
 		linhaFormatada.append(l.substring(5, 10));
-		linhaFormatada.append(StringUtil.WHITE_SPACE);
+		linhaFormatada.append(Strings.WHITE_SPACE);
 		linhaFormatada.append(l.substring(10, 15));
 		linhaFormatada.append(".");
 		linhaFormatada.append(l.substring(15, 21));
-		linhaFormatada.append(StringUtil.WHITE_SPACE);
+		linhaFormatada.append(Strings.WHITE_SPACE);
 		linhaFormatada.append(l.substring(21, 26));
 		linhaFormatada.append(".");
 		linhaFormatada.append(l.substring(26, 32));
-		linhaFormatada.append(StringUtil.WHITE_SPACE);
+		linhaFormatada.append(Strings.WHITE_SPACE);
 		linhaFormatada.append(l.substring(32, 33));
-		linhaFormatada.append(StringUtil.WHITE_SPACE);
+		linhaFormatada.append(Strings.WHITE_SPACE);
 		linhaFormatada.append(l.substring(33));
 		
 		return linhaFormatada.toString();

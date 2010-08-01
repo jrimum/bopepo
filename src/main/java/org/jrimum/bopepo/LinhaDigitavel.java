@@ -35,7 +35,7 @@ import org.apache.log4j.Logger;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.AbstractLineOfFields;
 import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.StringUtil;
+import org.jrimum.utilix.text.Strings;
 import org.jrimum.vallia.digitoverificador.BoletoLinhaDigitavelDV;
 
 
@@ -267,13 +267,13 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 	public String write(){
 		
 		return new StringBuilder(innerCampo1.write()).
-		append(StringUtil.WHITE_SPACE).
+		append(Strings.WHITE_SPACE).
 		append(innerCampo2.write()).
-		append(StringUtil.WHITE_SPACE).
+		append(Strings.WHITE_SPACE).
 		append(innerCampo3.write()).
-		append(StringUtil.WHITE_SPACE).
+		append(Strings.WHITE_SPACE).
 		append(campo4.write()).
-		append(StringUtil.WHITE_SPACE).
+		append(Strings.WHITE_SPACE).
 		append(innerCampo5.write()).toString();
 
 	}

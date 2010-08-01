@@ -6,7 +6,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
-import org.jrimum.utilix.text.StringUtil;
+import org.jrimum.utilix.text.Strings;
 
 /**
  * 
@@ -130,7 +130,7 @@ class CLUnibancoCobrancaNaoRegistrada extends AbstractCLUnibanco {
 		
 		if(StringUtils.isNumeric(titulo.getNossoNumero())){
 			
-			if(Long.valueOf(StringUtil.removeStartWithZeros(titulo.getNossoNumero()))>0){
+			if(Long.valueOf(Strings.removeStartWithZeros(titulo.getNossoNumero()))>0){
 				
 				this.add(new Field<String>(titulo.getNossoNumero(), 14,Filler.ZERO_LEFT));
 				

@@ -34,7 +34,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
-import org.jrimum.utilix.text.StringUtil;
+import org.jrimum.utilix.text.Strings;
 import org.jrimum.vallia.digitoverificador.Modulo;
 import org.jrimum.vallia.digitoverificador.TipoDeModulo;
 
@@ -119,7 +119,7 @@ class CLBancoReal extends AbstractCLBancoReal {
 		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
 		this.add(new Field<String>(calculeDigitoDaPosicao31(titulo.getNumeroDoDocumento(), conta.getAgencia().getCodigo(), conta.getNumeroDaConta().getCodigoDaConta()), 1, Filler.ZERO_LEFT));
 		
-		this.add(new Field<String>(StringUtil.eliminateSymbols(titulo.getNumeroDoDocumento()), 13, Filler.ZERO_LEFT));
+		this.add(new Field<String>(Strings.eliminateSymbols(titulo.getNumeroDoDocumento()), 13, Filler.ZERO_LEFT));
 		
 	}
 	

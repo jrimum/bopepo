@@ -30,7 +30,7 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.apache.commons.lang.StringUtils;
-import org.jrimum.utilix.text.StringUtil;
+import org.jrimum.utilix.text.Strings;
 import org.junit.Test;
 
 /**
@@ -57,6 +57,6 @@ public class TestCampoLivreFactory {
 	public void testCreateStringBlank() {
 		
 		CampoLivreFactory.create(StringUtils.EMPTY);
-		CampoLivreFactory.create(StringUtil.WHITE_SPACE);
+		CampoLivreFactory.create(Strings.WHITE_SPACE);
 	}
 }
