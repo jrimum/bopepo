@@ -51,7 +51,6 @@ import org.junit.runners.Suite;
 ( 
 		{ 
 			TestBoleto.class,
-			TestViewPDF.class,
 			TestCodigoDeBarras.class,
 			TestBancoSuportado.class,
 			TestLinhaDigitavel.class,

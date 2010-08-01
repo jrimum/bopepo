@@ -42,6 +42,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jrimum.bopepo.Boleto;
+import org.jrimum.utilix.ObjectUtil;
 
 import com.lowagie.text.DocumentException;
 
@@ -149,7 +150,7 @@ public class BoletoViewer {
 
 		File group = null;
 
-		if (validatePathName(destPathName) &&validateBoletosList(boletos) && validatePathName(templatePathName)) {
+		if (validatePathName(destPathName) && validateBoletosList(boletos) && validatePathName(templatePathName)) {
 			group = groupInOnePDF(destPathName, boletos, new BoletoViewer().setTemplate(templatePathName));
 		}
 					
@@ -184,33 +185,32 @@ public class BoletoViewer {
 	public static List<File> onePerPDF(String path, String extensao, List<Boleto> boletos) {
 		
 		List<File> files = new ArrayList<File>();
-
-		if (isNotNull(path, "path") && isNotNull(boletos, "boletos")) {
-
-			if(StringUtils.isNotBlank(path)) {
+		
+		ObjectUtil.checkNotNull(path,"Path inválido!");
+		ObjectUtil.checkNotNull(extensao, "Extensão inválida!");
+		ObjectUtil.checkNotNull(boletos,"Lista de boletos inválida!");
+		
+		if(StringUtils.isNotBlank(path)) {
+			
+			if(!boletos.isEmpty()) {
 				
-				if(!boletos.isEmpty()) {
-					
-					files.addAll(ViewerPDF.onePerPDF(path, extensao, boletos));
-					
-				} else {
-					throw new IllegalArgumentException("A Lista de boletos está vazia!");
-				}
+				files.addAll(ViewerPDF.onePerPDF(path, extensao, boletos));
 				
 			} else {
-				throw new IllegalArgumentException("Path(Diretório) destinado a geração dos arquivos não contém informação!");
+				throw new IllegalArgumentException("A Lista de boletos está vazia!");
 			}
+			
+		} else {
+			throw new IllegalArgumentException("Path(Diretório) destinado a geração dos arquivos não contém informação!");
 		}
 		
 		return files;
 	}
 
-	
 	public File getTemplate() {
 		return viewerPDF.getTemplate();
 	}
 
-	
 	/**
 	 * <p>
 	 * Define o template que será utilizado para construir o boleto.
@@ -348,57 +348,49 @@ public class BoletoViewer {
 	 */
 	public BoletoViewer setBoleto(Boleto boleto) {
 		
-		if(isNotNull(boleto, "boleto")) {
-			updateViewerPDF(boleto);
-		}
+		ObjectUtil.checkNotNull(boleto);
+		
+		updateViewerPDF(boleto);
 		
 		return this;
 	}
 
 	private static boolean validatePathName(String pathName){
 		
-		boolean ok = false;
+		ObjectUtil.checkNotNull(pathName);
 		
-		if (isNotNull(pathName, "pathName")) {
+		if(StringUtils.isNotBlank(pathName)) {
 			
-			if(StringUtils.isNotBlank(pathName)) {
-				ok = true;
-			} else {
-				throw new IllegalArgumentException("Path(Diretório) destinado a geração do(s) arquivo(s) não contém informação!");
-			}
+			return true;
+			
+		} else {
+			throw new IllegalArgumentException("Path(Diretório) destinado a geração do(s) arquivo(s) não contém informação!");
 		}
-		
-		return ok;
 	}
 	
 	private static boolean validateFile(File file, String name){
 		
-		boolean ok = false;
-		
 		if (isNotNull(file)) {
-				ok = true;
+			
+			return true;
+			
 		} else {
+			
 			throw new NullPointerException("File(Arquivo) destinado a geração do(s) documento(s) [" + name + "] nulo!");
 		}
-		
-		return ok;
 	}
 	
 	private static boolean validateBoletosList(List<Boleto> boletos){
 		
-		boolean ok = false;
+		ObjectUtil.checkNotNull(boletos);
 		
-		if (isNotNull(boletos, "boletos")) {
+		if(!boletos.isEmpty()) {
 			
-			if(!boletos.isEmpty()) {
-				ok = true;
-				
-			} else {
-				throw new IllegalArgumentException("A Lista de boletos está vazia!");
-			}
+			return true;
+			
+		} else {
+			throw new IllegalArgumentException("A Lista de boletos está vazia!");
 		}
-		
-		return ok;
 	}
 	
 	private static File groupInOnePDF(String pathName, List<Boleto> boletos, BoletoViewer boletoViewer){
@@ -408,9 +400,9 @@ public class BoletoViewer {
 
 	private void initViewerPDF(String templatePathName, File template, Boleto boleto) {
 		
-		if (isNotNull(boleto, "boleto")) {
-			this.viewerPDF = new ViewerPDF(boleto);
-		}
+		ObjectUtil.checkNotNull(boleto);
+			
+		this.viewerPDF = new ViewerPDF(boleto);
 		
 		/*
 		 * O arquivo tem prioridade 

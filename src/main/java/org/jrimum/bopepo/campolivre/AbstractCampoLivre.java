@@ -34,12 +34,12 @@ import static org.jrimum.utilix.ObjectUtil.isNotNull;
 import static org.jrimum.utilix.ObjectUtil.isNull;
 
 import org.apache.log4j.Logger;
-
 import org.jrimum.bopepo.BancoSuportado;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.ObjectUtil;
 import org.jrimum.utilix.text.AbstractLineOfFields;
+import org.jrimum.utilix.text.Field;
 
 /**
  * <p>
@@ -236,6 +236,28 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		return (isNotNull(conta) && isNotNull(conta.getBanco()) 
 				&& isCodigoDeCompensacaoOK(conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado()));
 
+	}
+
+	/**
+	 * <p>
+	 * Gera o campo livre a parir dos campos armazenados sem verificar se está
+	 * compatível com número de fields declarado pelo campo livre. Isso implica
+	 * que a string retornada poderá ser menor do que 25 caracteres.
+	 * </p>
+	 * 
+	 * @return string a partir dos campos contidos até o momento.
+	 * 
+	 * @since 0.2
+	 */
+	protected String writeFields() {
+
+		StringBuilder campoLivreAtual = new StringBuilder();
+		
+		for(Field<?> f : this){
+			campoLivreAtual.append(f.write());
+		}
+		
+		return campoLivreAtual.toString();
 	}
 	
 	@Override

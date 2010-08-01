@@ -1,7 +1,6 @@
 package org.jrimum.bopepo;
 
 import org.apache.commons.lang.StringUtils;
-
 import org.jrimum.utilix.ObjectUtil;
 import org.jrimum.utilix.text.StringUtil;
 import org.jrimum.vallia.digitoverificador.BoletoLinhaDigitavelDV;

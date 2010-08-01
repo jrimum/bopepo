@@ -30,14 +30,12 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancoSuportado;
-import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 

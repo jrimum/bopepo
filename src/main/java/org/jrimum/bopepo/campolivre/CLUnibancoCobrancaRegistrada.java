@@ -1,14 +1,12 @@
 package org.jrimum.bopepo.campolivre;
 
-import static org.jrimum.utilix.ObjectUtil.isNotNull;
-
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
-
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.DateUtil;
+import org.jrimum.utilix.ObjectUtil;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
 import org.jrimum.utilix.text.StringUtil;
@@ -98,46 +96,56 @@ class CLUnibancoCobrancaRegistrada extends AbstractCLUnibanco {
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		
+		ObjectUtil.checkNotNull(conta,"Conta Bancária NULA!");
+		ObjectUtil.checkNotNull(titulo.getDataDoVencimento(), "Data de vencimento do título NULA!");
+		ObjectUtil.checkNotNull(conta.getAgencia().getCodigo(), "Número da Agência Bancária NULO!");
+		ObjectUtil.checkNotNull(conta.getAgencia().getDigitoVerificador(),"Dígito da Agência Bancária NULO!");
+		ObjectUtil.checkNotNull(titulo.getNossoNumero(),"Nosso Número NULO!");
+		
 		this.add(new Field<String>(CODIGO_TRANSACAO, 2));
-		
-		if(isNotNull(titulo.getDataDoVencimento(), "Data de vencimento do título"))
-			this.add(new Field<Date>(titulo.getDataDoVencimento(), 6,
-					DateUtil.FORMAT_YYMMDD));
-			else
-				throw new CampoLivreException(new IllegalArgumentException("Data de vencimento do título inválida: "+titulo.getDataDoVencimento()));
-		
-		if(isNotNull(conta.getAgencia().getCodigo(), "Número da Agência Bancária"))
-			if(conta.getAgencia().getCodigo() > 0)
-				this.add(new Field<Integer>(conta.getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
-			else
-				throw new CampoLivreException(new IllegalArgumentException("Agência bancária com valor inválido, a agência deve ser um número inteiro positivo, e não: "+conta.getNumeroDaConta().getCodigoDaConta()));
+		this.add(new Field<Date>(titulo.getDataDoVencimento(), 6, DateUtil.FORMAT_YYMMDD));
+			
+		if(conta.getAgencia().getCodigo() > 0){
+			
+			this.add(new Field<Integer>(conta.getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
+			
+		}else{
+			
+			throw new CampoLivreException(new IllegalArgumentException("Agência bancária com valor inválido, a agência deve ser um número inteiro positivo, e não: "+conta.getNumeroDaConta().getCodigoDaConta()));
+		}
 		
 		
-		if(isNotNull(conta.getAgencia().getDigitoVerificador(),"Dígito da Agência Bancária"))
-			if (StringUtils.isNumeric(conta.getAgencia().getDigitoVerificador())) {
+		if (StringUtils.isNumeric(conta.getAgencia().getDigitoVerificador())) {
+			
+			Integer digitoDaAgencia = Integer.valueOf(conta.getAgencia().getDigitoVerificador());  
+			
+			if(digitoDaAgencia>=0){
 				
-				Integer digitoDaAgencia = Integer.valueOf(conta.getAgencia().getDigitoVerificador());  
+				this.add(new Field<Integer>(Integer.valueOf(digitoDaAgencia), 1));
+			}else{
 				
-				if(digitoDaAgencia>=0)
-					this.add(new Field<Integer>(Integer.valueOf(digitoDaAgencia), 1));
-				else
-					throw new CampoLivreException(new IllegalArgumentException("O dígito da agência deve ser um número interio não-negativo, e não: ["+conta.getAgencia().getDigitoVerificador()+"]"));
-			}else
-				throw new CampoLivreException(new IllegalArgumentException("O dígito da agência deve ser numérico, e não: ["+conta.getAgencia().getDigitoVerificador()+"]"));
+				throw new CampoLivreException(new IllegalArgumentException("O dígito da agência deve ser um número interio não-negativo, e não: ["+conta.getAgencia().getDigitoVerificador()+"]"));
+			}
+		}else{
+			
+			throw new CampoLivreException(new IllegalArgumentException("O dígito da agência deve ser numérico, e não: ["+conta.getAgencia().getDigitoVerificador()+"]"));
+		}
 		
-		
-		if(isNotNull(titulo.getNossoNumero(),"Nosso Número"))
-			if(StringUtils.isNumeric(titulo.getNossoNumero())){
-				if(Long.valueOf(StringUtil.removeStartWithZeros(titulo.getNossoNumero()))>0)
-					this.add(new Field<String>(titulo.getNossoNumero(), 11,Filler.ZERO_LEFT));
-				else
-					throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser um número natural positivo, e não: ["+titulo.getNossoNumero()+"]"));
-			}else
-				throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser numérico, e não: ["+titulo.getNossoNumero()+"]"));
-
+		if(StringUtils.isNumeric(titulo.getNossoNumero())){
+			
+			if(Long.valueOf(StringUtil.removeStartWithZeros(titulo.getNossoNumero()))>0){
+				
+				this.add(new Field<String>(titulo.getNossoNumero(), 11,Filler.ZERO_LEFT));
+			}else{
+				
+				throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser um número natural positivo, e não: ["+titulo.getNossoNumero()+"]"));
+			}
+		}else{
+			
+			throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser numérico, e não: ["+titulo.getNossoNumero()+"]"));
+		}
 		
 		this.add(new Field<String>(calculeSuperDigito(titulo.getNossoNumero()), 1));
-		
 	}
 
 	/**

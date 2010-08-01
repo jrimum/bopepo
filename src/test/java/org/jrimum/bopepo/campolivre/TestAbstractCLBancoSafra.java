@@ -30,13 +30,7 @@
 	
 package org.jrimum.bopepo.campolivre;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import org.jrimum.bopepo.BancoSuportado;
-import org.jrimum.bopepo.campolivre.CampoLivreException;
-import org.jrimum.bopepo.campolivre.CampoLivreFactory;
-import org.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
@@ -45,6 +39,8 @@ import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * <p>

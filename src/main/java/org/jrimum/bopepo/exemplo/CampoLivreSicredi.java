@@ -30,13 +30,12 @@
 
 package org.jrimum.bopepo.exemplo;
 
-import static org.jrimum.utilix.ObjectUtil.isNotNull;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.apache.commons.lang.StringUtils.isNumeric;
+import static org.jrimum.utilix.ObjectUtil.isNotNull;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-
 import org.jrimum.bopepo.campolivre.CampoLivre;
 import org.jrimum.bopepo.campolivre.CampoLivreException;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
@@ -200,7 +199,6 @@ public class CampoLivreSicredi extends AbstractLineOfFields implements CampoLivr
 		}
 	}
 
-	@SuppressWarnings("unused")
 	private CampoLivreSicredi(Integer fieldsLength, Integer stringLength) {
 		super(FIELDS_LENGTH, STRING_LENGTH);
 
@@ -213,7 +211,8 @@ public class CampoLivreSicredi extends AbstractLineOfFields implements CampoLivr
 		String nossoNumero = titulo.getNossoNumero();
 		String dvNossoNumero = titulo.getDigitoDoNossoNumero();
 
-		if (isNotNull(nossoNumero, "Nosso Número")) {
+//		if (isNotNull(nossoNumero, "Nosso Número")) {
+		if (isNotNull(nossoNumero)) {
 			if (isNotBlank(nossoNumero) && isNumeric(nossoNumero)) {
 
 				if (nossoNumero.length() == 8)
@@ -228,7 +227,8 @@ public class CampoLivreSicredi extends AbstractLineOfFields implements CampoLivr
 								+ nossoNumero);
 		}
 
-		if (isNotNull(dvNossoNumero, "Dígito Verificador do Nosso Número")) {
+//		if (isNotNull(dvNossoNumero, "Dígito Verificador do Nosso Número")) {
+		if (isNotNull(dvNossoNumero)) {
 			if (isNotBlank(dvNossoNumero) && isNumeric(dvNossoNumero)) {
 
 				Integer dvNN = Integer.valueOf(dvNossoNumero);
@@ -258,7 +258,8 @@ public class CampoLivreSicredi extends AbstractLineOfFields implements CampoLivr
 
 		InnerCooperativaDeCredito cooperativa = null;
 
-		if (isNotNull(agencia.getCodigo(), "Número da Agência Sicredi")) {
+//		if (isNotNull(agencia.getCodigo(), "Número da Agência Sicredi")) {
+		if (isNotNull(agencia.getCodigo())) {
 			if (agencia.getCodigo() > 0) {
 				if (String.valueOf(agencia.getCodigo()).length() <= 4) {
 
@@ -276,7 +277,8 @@ public class CampoLivreSicredi extends AbstractLineOfFields implements CampoLivr
 								+ agencia.getCodigo());
 		}
 
-		if (isNotNull(agencia.getDigitoVerificador(), "Dígito da Agência Sicredi")) {
+//		if (isNotNull(agencia.getDigitoVerificador(), "Dígito da Agência Sicredi")) {
+		if (isNotNull(agencia.getDigitoVerificador())) {
 			if (StringUtils.isNumeric(agencia.getDigitoVerificador())) {
 
 				if (String.valueOf(agencia.getDigitoVerificador()).length() <= 2) {
@@ -311,8 +313,8 @@ public class CampoLivreSicredi extends AbstractLineOfFields implements CampoLivr
 
 		StringBuilder codigoDoCedente = new StringBuilder();
 
-		if (isNotNull(conta.getCodigoDaConta(),
-				"Número da Conta/Código do Cedente Sicredi")) {
+//		if (isNotNull(conta.getCodigoDaConta(), "Número da Conta/Código do Cedente Sicredi")) {
+		if (isNotNull(conta.getCodigoDaConta())) {
 
 			if (conta.getCodigoDaConta() > 0) {
 				if (conta.getCodigoDaConta().toString().length() <= 5) {

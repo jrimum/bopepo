@@ -29,17 +29,14 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import org.junit.Before;
-
 import org.jrimum.bopepo.BancoSuportado;
-import org.jrimum.bopepo.campolivre.CLBancoDoBrasilNN10;
-import org.jrimum.bopepo.campolivre.CampoLivreFactory;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.junit.Before;
 
 /**
  * <p>

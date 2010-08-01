@@ -41,11 +41,6 @@ import java.util.GregorianCalendar;
 
 import junit.framework.Assert;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import org.jrimum.bopepo.BancoSuportado;
-import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.campolivre.CampoLivre;
 import org.jrimum.bopepo.campolivre.NotSupportedBancoException;
 import org.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
@@ -58,6 +53,8 @@ import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeMoeda;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.DateUtil;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * <p>

@@ -192,13 +192,7 @@ class CLCaixaEconomicaFederalSIGCB extends AbstractCLCaixaEconomicaFederal {
 	 */
 	private String gereCampoLivre() {
 
-		StringBuilder numeroParaCalculo = new StringBuilder();
-		
-		for(Field<?> f : this){
-			numeroParaCalculo.append(f.write());
-		}
-		
-		return numeroParaCalculo.toString();
+		return writeFields();
 	}
 
 	/**

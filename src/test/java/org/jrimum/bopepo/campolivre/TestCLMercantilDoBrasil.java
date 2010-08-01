@@ -33,18 +33,15 @@ import java.math.BigDecimal;
 
 import junit.framework.Assert;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import org.jrimum.bopepo.BancoSuportado;
-import org.jrimum.bopepo.campolivre.CLMercantilDoBrasil;
-import org.jrimum.bopepo.campolivre.CampoLivreFactory;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * <p>

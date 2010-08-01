@@ -30,10 +30,8 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.apache.commons.lang.StringUtils;
-import org.junit.Test;
-
-import org.jrimum.bopepo.campolivre.CampoLivreFactory;
 import org.jrimum.utilix.text.StringUtil;
+import org.junit.Test;
 
 /**
  * <p>

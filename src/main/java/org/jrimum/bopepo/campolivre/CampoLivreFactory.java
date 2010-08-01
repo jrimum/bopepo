@@ -31,7 +31,6 @@ package org.jrimum.bopepo.campolivre;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.ObjectUtil;
 import org.jrimum.utilix.text.Field;

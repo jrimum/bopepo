@@ -59,7 +59,6 @@ import org.jrimum.utilix.DateUtil;
 import org.jrimum.utilix.FileUtil;
 import org.jrimum.utilix.text.MonetaryUtil;
 
-
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;
 import com.lowagie.text.pdf.AcroFields;

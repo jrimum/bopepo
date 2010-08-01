@@ -1,6 +1,7 @@
 package org.jrimum.bopepo.campolivre;
 
 import static org.jrimum.utilix.ObjectUtil.exists;
+
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;

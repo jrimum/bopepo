@@ -30,15 +30,14 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import static org.jrimum.utilix.ObjectUtil.isNotNull;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.apache.commons.lang.StringUtils.isNumeric;
 
 import org.apache.commons.lang.StringUtils;
-
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.utilix.ObjectUtil;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
 import org.jrimum.vallia.digitoverificador.Modulo;
@@ -193,38 +192,36 @@ class CLSicredi extends AbstractCLSicredi {
 		String nossoNumero = titulo.getNossoNumero();
 		String dvNossoNumero = titulo.getDigitoDoNossoNumero();
 
-		if (isNotNull(nossoNumero, "Nosso Número")) {
-			
-			if (isNotBlank(nossoNumero) && isNumeric(nossoNumero)) {
+		ObjectUtil.checkNotNull(nossoNumero,"Nosso Número NULO!");
+		
+		if (isNotBlank(nossoNumero) && isNumeric(nossoNumero)) {
 
-				if (nossoNumero.length() == 8) {
-					nossoNumeroComposto = nossoNumero;
-					
-				} else {
-					new IllegalArgumentException("Nosso número deve ter exatamente 8 dígitos: " + nossoNumero);
-				}
+			if (nossoNumero.length() == 8) {
+				nossoNumeroComposto = nossoNumero;
 				
 			} else {
-				new IllegalArgumentException("Nosso número deve conter somente números e não: " + nossoNumero);
+				new IllegalArgumentException("Nosso número deve ter exatamente 8 dígitos: " + nossoNumero);
 			}
+			
+		} else {
+			new IllegalArgumentException("Nosso número deve conter somente números e não: " + nossoNumero);
 		}
 
-		if (isNotNull(dvNossoNumero, "Dígito Verificador do Nosso Número")) {
-			
-			if (isNotBlank(dvNossoNumero) && isNumeric(dvNossoNumero)) {
+		ObjectUtil.checkNotNull(dvNossoNumero,"Dígito Verificador do Nosso Número NULO!");
 
-				Integer dvNN = Integer.valueOf(dvNossoNumero);
+		if (isNotBlank(dvNossoNumero) && isNumeric(dvNossoNumero)) {
 
-				if (dvNN >= 0 && dvNN <= 9) {
-					nossoNumeroComposto += dvNN.toString();
-					
-				} else {
-					new IllegalArgumentException("O dígito Verificador do Nosso Número deve ser um número natural não-negativo de 0 a 9, e não: [" + dvNN + "]");
-				}
+			Integer dvNN = Integer.valueOf(dvNossoNumero);
 
+			if (dvNN >= 0 && dvNN <= 9) {
+				nossoNumeroComposto += dvNN.toString();
+				
 			} else {
-				new IllegalArgumentException("Nosso número deve conter somente números e não: " + nossoNumero);
+				new IllegalArgumentException("O dígito Verificador do Nosso Número deve ser um número natural não-negativo de 0 a 9, e não: [" + dvNN + "]");
 			}
+
+		} else {
+			new IllegalArgumentException("Nosso número deve conter somente números e não: " + nossoNumero);
 		}
 
 		if (nossoNumeroComposto.length() != 9) {
@@ -238,45 +235,44 @@ class CLSicredi extends AbstractCLSicredi {
 
 		InnerCooperativaDeCredito cooperativa = null;
 
-		if (isNotNull(agencia.getCodigo(), "Número da Agência Sicredi")) {
+		ObjectUtil.checkNotNull(agencia.getCodigo(),"Número da Agência Sicredi NULO!");
+		
+		if (agencia.getCodigo() > 0) {
 			
-			if (agencia.getCodigo() > 0) {
-				
-				if (String.valueOf(agencia.getCodigo()).length() <= 4) {
+			if (String.valueOf(agencia.getCodigo()).length() <= 4) {
 
-					cooperativa = new InnerCooperativaDeCredito();
+				cooperativa = new InnerCooperativaDeCredito();
 
-					cooperativa.codigo = "" + agencia.getCodigo();
+				cooperativa.codigo = "" + agencia.getCodigo();
 
-				} else {
-					new IllegalArgumentException("Número da Agência Sicredi deve conter no máximo 4 dígitos (SEM O DIGITO VERIFICADOR) e não: " + agencia.getCodigo());
-				}
-				
 			} else {
-				new IllegalArgumentException("Número da Agência Sicredi com valor inválido: " + agencia.getCodigo());
+				new IllegalArgumentException("Número da Agência Sicredi deve conter no máximo 4 dígitos (SEM O DIGITO VERIFICADOR) e não: " + agencia.getCodigo());
 			}
+			
+		} else {
+			new IllegalArgumentException("Número da Agência Sicredi com valor inválido: " + agencia.getCodigo());
 		}
 
-		if (isNotNull(agencia.getDigitoVerificador(), "Dígito da Agência Sicredi")) {
-			if (StringUtils.isNumeric(agencia.getDigitoVerificador())) {
+		ObjectUtil.checkNotNull(agencia.getDigitoVerificador(),"Dígito da Agência Sicredi NULO!");
+		
+		if (StringUtils.isNumeric(agencia.getDigitoVerificador())) {
 
-				if (String.valueOf(agencia.getDigitoVerificador()).length() <= 2) {
+			if (String.valueOf(agencia.getDigitoVerificador()).length() <= 2) {
 
-					Integer digitoDaAgencia = Integer.valueOf(agencia.getDigitoVerificador());
+				Integer digitoDaAgencia = Integer.valueOf(agencia.getDigitoVerificador());
 
-					if (digitoDaAgencia >= 0) {
-						cooperativa.posto = digitoDaAgencia.toString();
-					} else {
-						new IllegalArgumentException("O dígito da Agência Sicredi deve ser um número natural não-negativo, e não: [" + agencia.getDigitoVerificador() + "]");
-					}
-
+				if (digitoDaAgencia >= 0) {
+					cooperativa.posto = digitoDaAgencia.toString();
 				} else {
-					new IllegalArgumentException("Dígito da Agência Sicredi deve conter no máximo 2 dígitos e não: " + agencia.getCodigo());
+					new IllegalArgumentException("O dígito da Agência Sicredi deve ser um número natural não-negativo, e não: [" + agencia.getDigitoVerificador() + "]");
 				}
-				
-			} else {
-				new IllegalArgumentException("O dígito da Agência Sicredi deve ser numérico, e não: [" + agencia.getDigitoVerificador() + "]");
+
+			}else {
+				new IllegalArgumentException("Dígito da Agência Sicredi deve conter no máximo 2 dígitos e não: " + agencia.getCodigo());
 			}
+			
+		}else {
+			new IllegalArgumentException("O dígito da Agência Sicredi deve ser numérico, e não: [" + agencia.getDigitoVerificador() + "]");
 		}
 
 		return cooperativa;
@@ -284,48 +280,48 @@ class CLSicredi extends AbstractCLSicredi {
 
 	String componhaCodigoDoCedente(NumeroDaConta conta) {// 5digitos sem dv
 
+		
 		final String msg = "<<<ATENÇÃO>>> O dígito da Conta/Código do Cedente Sicredi deve ser fornecido somente quando o número da (Conta/Código do Cedente) " +
 				"for composto de 1 a 4 dígitos, e não: [" + conta.getDigitoDaConta() + "]";
 
 		StringBuilder codigoDoCedente = new StringBuilder();
 
-		if (isNotNull(conta.getCodigoDaConta(), "Número da Conta/Código do Cedente Sicredi")) {
+		ObjectUtil.checkNotNull(conta.getCodigoDaConta(),"Número da Conta/Código do Cedente Sicredi NULO!");
+		
+		if (conta.getCodigoDaConta() > 0) {
+			
+			if (conta.getCodigoDaConta().toString().length() <= 5) {
 
-			if (conta.getCodigoDaConta() > 0) {
-				
-				if (conta.getCodigoDaConta().toString().length() <= 5) {
+				codigoDoCedente.append(conta.getCodigoDaConta().toString());
 
-					codigoDoCedente.append(conta.getCodigoDaConta().toString());
-
-					if (conta.getCodigoDaConta().toString().length() < 5) {// ComDigito
+				if (conta.getCodigoDaConta().toString().length() < 5) {// ComDigito
+					
+					if (isNotBlank(conta.getDigitoDaConta())) {
 						
-						if (isNotBlank(conta.getDigitoDaConta())) {
-							
-							if (isNumeric(conta.getDigitoDaConta())) {
+						if (isNumeric(conta.getDigitoDaConta())) {
 
-								Integer digitoDaConta = Integer.valueOf(conta.getDigitoDaConta());
+							Integer digitoDaConta = Integer.valueOf(conta.getDigitoDaConta());
 
-								if (digitoDaConta >= 0) {
-									codigoDoCedente.append(digitoDaConta);
-								} else {
-									new IllegalArgumentException("O dígito da Conta/Código do Cedente Sicredi deve ser um número natural não-negativo, e não: [" + conta.getDigitoDaConta() + "]");
-								}
-
+							if (digitoDaConta >= 0) {
+								codigoDoCedente.append(digitoDaConta);
 							} else {
-								throw new CampoLivreException(new IllegalArgumentException("O dígito da Conta/Código do Cedente Sicredi deve ser numérico, e não: [" + conta.getDigitoDaConta() + "]"));
+								new IllegalArgumentException("O dígito da Conta/Código do Cedente Sicredi deve ser um número natural não-negativo, e não: [" + conta.getDigitoDaConta() + "]");
 							}
-						} else {
-							System.out.println(msg);
-						}
-					}
 
-				} else {
-					new IllegalArgumentException("Número da Conta/Código do Cedente Sicredi deve conter no máximo 6 dígitos (SEM O DIGITO VERIFICADOR) e não: " + conta.getCodigoDaConta());
+						} else {
+							throw new CampoLivreException(new IllegalArgumentException("O dígito da Conta/Código do Cedente Sicredi deve ser numérico, e não: [" + conta.getDigitoDaConta() + "]"));
+						}
+					} else {
+						System.out.println(msg);
+					}
 				}
-				
+
 			} else {
-				new IllegalArgumentException("Número da Conta/Código do Cedente Sicredi com valor inválido: " + conta.getCodigoDaConta());
+				new IllegalArgumentException("Número da Conta/Código do Cedente Sicredi deve conter no máximo 6 dígitos (SEM O DIGITO VERIFICADOR) e não: " + conta.getCodigoDaConta());
 			}
+			
+		} else {
+			new IllegalArgumentException("Número da Conta/Código do Cedente Sicredi com valor inválido: " + conta.getCodigoDaConta());
 		}
 
 		return codigoDoCedente.toString();
@@ -335,15 +331,7 @@ class CLSicredi extends AbstractCLSicredi {
 
 		Integer dv = 0;
 
-		this.setStringLength(STRING_LENGTH - 1);
-		this.setFieldsLength(FIELDS_LENGTH - 1);
-
-		String campoLivreSemDv = this.write();
-
-		this.setFieldsLength(FIELDS_LENGTH);
-		this.setStringLength(STRING_LENGTH);
-
-		int resto = modulo11.calcule(campoLivreSemDv);
+		int resto = modulo11.calcule(writeFields());
 
 		if (resto != 0 && resto != 1) {
 

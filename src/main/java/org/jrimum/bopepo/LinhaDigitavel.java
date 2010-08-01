@@ -32,7 +32,6 @@ package org.jrimum.bopepo;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-
 import org.jrimum.utilix.ObjectUtil;
 import org.jrimum.utilix.text.AbstractLineOfFields;
 import org.jrimum.utilix.text.Field;

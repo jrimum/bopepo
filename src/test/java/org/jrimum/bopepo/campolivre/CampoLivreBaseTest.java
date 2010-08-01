@@ -29,9 +29,9 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import org.jrimum.bopepo.campolivre.CampoLivre;
 import org.junit.Test;
 
 /**

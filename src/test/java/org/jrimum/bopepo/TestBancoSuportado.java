@@ -32,7 +32,6 @@ package org.jrimum.bopepo;
 
 import static org.junit.Assert.assertEquals;
 
-import org.jrimum.bopepo.BancoSuportado;
 import org.junit.Test;
 
 /**

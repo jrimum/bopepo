@@ -6,9 +6,6 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
-import org.jrimum.bopepo.BoletoUtil;
-import org.jrimum.bopepo.CodigoDeBarrasException;
-import org.jrimum.bopepo.LinhaDigitavelException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

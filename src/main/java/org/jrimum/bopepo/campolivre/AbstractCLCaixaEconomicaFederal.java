@@ -32,7 +32,6 @@ package org.jrimum.bopepo.campolivre;
 import static org.jrimum.utilix.ObjectUtil.isNull;
 
 import org.apache.commons.lang.StringUtils;
-
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**

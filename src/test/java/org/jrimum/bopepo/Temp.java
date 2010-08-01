@@ -1,7 +1,5 @@
 package org.jrimum.bopepo;
 
-import org.jrimum.vallia.digitoverificador.Modulo;
-import org.jrimum.vallia.digitoverificador.TipoDeModulo;
 
 public class Temp {
 

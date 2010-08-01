@@ -33,7 +33,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import org.jrimum.bopepo.BancoUtil;
 import org.junit.Test;
 
 
