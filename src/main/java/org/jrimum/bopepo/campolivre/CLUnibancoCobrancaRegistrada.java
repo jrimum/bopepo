@@ -1,11 +1,12 @@
 package org.jrimum.bopepo.campolivre;
 
+import static org.jrimum.utilix.text.DateFormat.YYMMDD;
+
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.DateUtil;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
@@ -103,7 +104,7 @@ class CLUnibancoCobrancaRegistrada extends AbstractCLUnibanco {
 		Objects.checkNotNull(titulo.getNossoNumero(),"Nosso Número NULO!");
 		
 		this.add(new Field<String>(CODIGO_TRANSACAO, 2));
-		this.add(new Field<Date>(titulo.getDataDoVencimento(), 6, DateUtil.FORMAT_YYMMDD));
+		this.add(new Field<Date>(titulo.getDataDoVencimento(), 6, YYMMDD.copy()));
 			
 		if(conta.getAgencia().getCodigo() > 0){
 			

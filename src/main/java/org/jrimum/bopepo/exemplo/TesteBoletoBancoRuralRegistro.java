@@ -1,5 +1,7 @@
 package org.jrimum.bopepo.exemplo;
 
+import static org.jrimum.utilix.text.DateFormat.DDMMYYYY_B;
+
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -22,8 +24,6 @@ import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeMoeda;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
-import org.jrimum.utilix.DateUtil;
-
 /**
  * 
  * <p>
@@ -89,8 +89,8 @@ public class TesteBoletoBancoRuralRegistro {
 		titulo.setNossoNumero("2224491");
 		titulo.setDigitoDoNossoNumero("1");
 		titulo.setValor(BigDecimal.valueOf(9.65));
-		titulo.setDataDoDocumento(DateUtil.parse("05/09/2008"));
-		titulo.setDataDoVencimento(DateUtil.parse("25/09/2009"));
+		titulo.setDataDoDocumento(DDMMYYYY_B.parse("05/09/2008"));
+		titulo.setDataDoVencimento(DDMMYYYY_B.parse("25/09/2009"));
 		titulo.setAceite(EnumAceite.A);
 		titulo.setEnumMoeda(TipoDeMoeda.REAL);
 		/*

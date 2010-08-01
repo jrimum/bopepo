@@ -30,6 +30,7 @@
 package org.jrimum.bopepo;
 
 import static org.jrimum.utilix.Objects.isNull;
+import static org.jrimum.utilix.text.DateFormat.DDMMYYYY_B;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -150,10 +151,10 @@ public class BancoUtil implements Serializable {
 						"Para o cálculo do fator de"
 								+ " vencimento se faz necessário informar uma data entre"
 								+ " "
-								+ DateUtil.FORMAT_DD_MM_YYYY
+								+ DDMMYYYY_B
 										.format(DATA_BASE_DO_FATOR_DE_VENCIMENTO)
 								+ " e "
-								+ DateUtil.FORMAT_DD_MM_YYYY
+								+ DDMMYYYY_B
 										.format(DATA_LIMITE_DO_FATOR_DE_VENCIMENTO));
 			} else {
 				fator = (int) DateUtil.calculeDiferencaEmDias(

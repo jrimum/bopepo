@@ -31,6 +31,7 @@ package org.jrimum.bopepo;
 
 import static org.jrimum.utilix.Objects.isNotNull;
 import static org.jrimum.utilix.Objects.isNull;
+import static org.jrimum.utilix.text.DateFormat.DDMMYYYY_B;
 
 import java.awt.Image;
 import java.util.Date;
@@ -43,7 +44,6 @@ import org.jrimum.bopepo.campolivre.CampoLivreFactory;
 import org.jrimum.bopepo.campolivre.NotSupportedBancoException;
 import org.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.DateUtil;
 import org.jrimum.utilix.Objects;
 
 /**
@@ -69,8 +69,6 @@ import org.jrimum.utilix.Objects;
  * @version 0.2
  */
 public final class Boleto {
-	
-	private static final long serialVersionUID = 4436063640418293021L;
 	
 	private static Logger log = Logger.getLogger(Boleto.class);
 
@@ -158,8 +156,9 @@ public final class Boleto {
 			this.setCampoLivre(CampoLivreFactory.create(titulo));
 			this.load();
 			
-			if(log.isDebugEnabled())
+			if(log.isDebugEnabled()){
 				log.debug("boleto instance : " + this);
+			}
 			
 		}else {
 			IllegalArgumentException e = new IllegalArgumentException("Título nulo!");
@@ -203,8 +202,10 @@ public final class Boleto {
 			throw e;
 		}
 		
-		if(log.isDebugEnabled() || log.isTraceEnabled())
+		if(log.isDebugEnabled() || log.isTraceEnabled()){
+			
 			log.trace("Boleto Instanciado : "+this);
+		}
 		
 	}
 
@@ -214,7 +215,10 @@ public final class Boleto {
 		linhaDigitavel = new LinhaDigitavel(codigoDeBarras);
 		dataDeProcessamento = new Date();
 		
-		log.info("Data de Processamento do Boleto : "+DateUtil.FORMAT_DD_MM_YYYY.format(dataDeProcessamento));
+		if(log.isInfoEnabled()){
+			
+			log.info("Data de Processamento do Boleto : "+DDMMYYYY_B.format(dataDeProcessamento));
+		}
 	}
 	
 	/**

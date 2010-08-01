@@ -35,6 +35,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -52,7 +54,6 @@ import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeMoeda;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.DateUtil;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -151,10 +152,10 @@ public class TestBoleto{
 	 */
 	@Test
 	public void testGetDataDeProcessamento() {
-		
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		Date agora = new Date();
 		
-		assertEquals(DateUtil.FORMAT_DD_MM_YYYY.format(agora), DateUtil.FORMAT_DD_MM_YYYY.format(boleto.getDataDeProcessamento()));
+		assertEquals(df.format(agora), df.format(boleto.getDataDeProcessamento()));
 	}
 
 	@Test(expected = NullPointerException.class)
@@ -162,6 +163,7 @@ public class TestBoleto{
 		boleto.setCampoLivre(null);
 	}
 	
+	@SuppressWarnings("serial")
 	@Test
 	public void testSetCampoLivreTamanhoCorreto() {
 		

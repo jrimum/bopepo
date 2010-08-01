@@ -28,9 +28,9 @@
  */
 
 package org.jrimum.bopepo.view;
-
 import static org.jrimum.utilix.Objects.isNotNull;
 import static org.jrimum.utilix.Objects.isNull;
+import static org.jrimum.utilix.text.DateFormat.DDMMYYYY_B;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -56,7 +56,6 @@ import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
-import org.jrimum.utilix.DateUtil;
 import org.jrimum.utilix.text.MonetaryUtil;
 
 import com.lowagie.text.DocumentException;
@@ -533,7 +532,7 @@ class ViewerPDF {
 	}
 
 	private void setDataProcessamento() throws IOException, DocumentException {
-		form.setField("txtFcDataProcessamento", DateUtil.FORMAT_DD_MM_YYYY.format(boleto.getDataDeProcessamento()));
+		form.setField("txtFcDataProcessamento", DDMMYYYY_B.format(boleto.getDataDeProcessamento()));
 	}
 
 	private void setAceite() throws IOException, DocumentException {
@@ -550,7 +549,7 @@ class ViewerPDF {
 	}
 
 	private void setDataDocumento() throws IOException, DocumentException {
-		form.setField("txtFcDataDocumento", DateUtil.FORMAT_DD_MM_YYYY.format(boleto.getTitulo().getDataDoDocumento()));
+		form.setField("txtFcDataDocumento", DDMMYYYY_B.format(boleto.getTitulo().getDataDoDocumento()));
 	}
 
 	private void setLocalPagamento() throws IOException, DocumentException {
@@ -725,7 +724,7 @@ class ViewerPDF {
 		// Obtendo uma string com a data de vencimento formatada 
 		// no padrão "dd/mm/yyyy".
 		// Ex: 03/07/2008.
-		String dataFormatada = DateUtil.FORMAT_DD_MM_YYYY.format(boleto.getTitulo().getDataDoVencimento());
+		String dataFormatada = DDMMYYYY_B.format(boleto.getTitulo().getDataDoVencimento());
 		
 		// Realizando a impressão da data de vencimeto no boleto.
 		form.setField("txtRsDataVencimento", dataFormatada);
