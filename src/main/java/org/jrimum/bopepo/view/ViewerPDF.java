@@ -56,7 +56,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
 import org.jrimum.utilix.DateUtil;
-import org.jrimum.utilix.FileUtil;
+import org.jrimum.utilix.Files;
 import org.jrimum.utilix.text.MonetaryUtil;
 
 import com.lowagie.text.DocumentException;
@@ -158,7 +158,7 @@ class ViewerPDF {
 
 		try {
 			
-			arq = FileUtil.bytes2File(pathName, PDFUtil.mergeFiles(boletosEmBytes));
+			arq = Files.bytesToFile(pathName, PDFUtil.mergeFiles(boletosEmBytes));
 			
 		} catch (FileNotFoundException e) {
 			
@@ -212,7 +212,7 @@ class ViewerPDF {
 
 			processarPdf();
 			
-			file = FileUtil.bytes2File(pathName, outputStream.toByteArray());
+			file = Files.bytesToFile(pathName, outputStream.toByteArray());
 			
 		} catch (FileNotFoundException e) {
 			
@@ -249,7 +249,7 @@ class ViewerPDF {
 
 			processarPdf();
 			
-			baos = FileUtil.bytes2Stream(outputStream.toByteArray());
+			baos = Files.bytesToStream(outputStream.toByteArray());
 			
 		} catch (IOException e) {
 			
