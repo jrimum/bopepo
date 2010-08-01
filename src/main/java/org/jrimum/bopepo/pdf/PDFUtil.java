@@ -30,7 +30,7 @@
 
 package org.jrimum.bopepo.pdf;
 
-import static org.jrimum.utilix.ObjectUtil.isNotNull;
+import static org.jrimum.utilix.Objects.isNotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;

@@ -1,7 +1,7 @@
 package org.jrimum.bopepo;
 
 import org.apache.commons.lang.StringUtils;
-import org.jrimum.utilix.ObjectUtil;
+import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.StringUtil;
 import org.jrimum.vallia.digitoverificador.BoletoLinhaDigitavelDV;
 
@@ -849,7 +849,7 @@ public final class BoletoUtil {
 	public static final void checkExistsLinhaDigitavel(String linhaDigitavel)
 			throws NullPointerException, IllegalArgumentException {
 
-		ObjectUtil.checkNotNull(linhaDigitavel, MSG_LINHA_INVALIDA);
+		Objects.checkNotNull(linhaDigitavel, MSG_LINHA_INVALIDA);
 
 		if (StringUtils.isBlank(linhaDigitavel)) {
 			throw new IllegalArgumentException(MSG_LINHA_INVALIDA
@@ -879,7 +879,7 @@ public final class BoletoUtil {
 	public static final void checkExistsCodigoDeBarras(String codigoDeBarras)
 			throws NullPointerException, IllegalArgumentException {
 
-		ObjectUtil.checkNotNull(codigoDeBarras, MSG_LINHA_INVALIDA);
+		Objects.checkNotNull(codigoDeBarras, MSG_LINHA_INVALIDA);
 
 		if (StringUtils.isBlank(codigoDeBarras)) {
 			throw new IllegalArgumentException(MSG_CODIGO_DE_BARRAS

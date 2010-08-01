@@ -2,7 +2,7 @@ package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.ObjectUtil;
+import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
 
@@ -39,7 +39,7 @@ public class CLCaixaEconomicaFederalSICOB extends AbstractCLCaixaEconomicaFedera
 		
 		super(FIELDS_LENGTH, STRING_LENGTH);
 		
-		ObjectUtil.checkNotNull(titulo.getParametrosBancarios(), "Parâmetros bancários necessários [titulo.getParametrosBancarios()==null]!");
+		Objects.checkNotNull(titulo.getParametrosBancarios(), "Parâmetros bancários necessários [titulo.getParametrosBancarios()==null]!");
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		
@@ -61,7 +61,7 @@ public class CLCaixaEconomicaFederalSICOB extends AbstractCLCaixaEconomicaFedera
 			
 			Integer cnpv = titulo.getParametrosBancarios().getValor("CodigoOperacao");
 		
-			ObjectUtil.checkNotNull(titulo.getParametrosBancarios(), "Parâmetro bancário código operação inválido [CodigoOperacao==null]!");
+			Objects.checkNotNull(titulo.getParametrosBancarios(), "Parâmetro bancário código operação inválido [CodigoOperacao==null]!");
 				
 			this.add(new Field<Integer>(cnpv, 3, Filler.ZERO_LEFT));
 			

@@ -6,7 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.DateUtil;
-import org.jrimum.utilix.ObjectUtil;
+import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
 import org.jrimum.utilix.text.StringUtil;
@@ -96,11 +96,11 @@ class CLUnibancoCobrancaRegistrada extends AbstractCLUnibanco {
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		
-		ObjectUtil.checkNotNull(conta,"Conta Bancária NULA!");
-		ObjectUtil.checkNotNull(titulo.getDataDoVencimento(), "Data de vencimento do título NULA!");
-		ObjectUtil.checkNotNull(conta.getAgencia().getCodigo(), "Número da Agência Bancária NULO!");
-		ObjectUtil.checkNotNull(conta.getAgencia().getDigitoVerificador(),"Dígito da Agência Bancária NULO!");
-		ObjectUtil.checkNotNull(titulo.getNossoNumero(),"Nosso Número NULO!");
+		Objects.checkNotNull(conta,"Conta Bancária NULA!");
+		Objects.checkNotNull(titulo.getDataDoVencimento(), "Data de vencimento do título NULA!");
+		Objects.checkNotNull(conta.getAgencia().getCodigo(), "Número da Agência Bancária NULO!");
+		Objects.checkNotNull(conta.getAgencia().getDigitoVerificador(),"Dígito da Agência Bancária NULO!");
+		Objects.checkNotNull(titulo.getNossoNumero(),"Nosso Número NULO!");
 		
 		this.add(new Field<String>(CODIGO_TRANSACAO, 2));
 		this.add(new Field<Date>(titulo.getDataDoVencimento(), 6, DateUtil.FORMAT_YYMMDD));

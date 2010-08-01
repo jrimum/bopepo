@@ -32,7 +32,7 @@ package org.jrimum.bopepo;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.jrimum.utilix.ObjectUtil;
+import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.AbstractLineOfFields;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.StringUtil;
@@ -530,6 +530,6 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 
 	@Override
 	public String toString() {
-		return ObjectUtil.toString(this);
+		return Objects.toString(this);
 	}
 }

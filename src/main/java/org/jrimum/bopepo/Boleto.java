@@ -29,8 +29,8 @@
 
 package org.jrimum.bopepo;
 
-import static org.jrimum.utilix.ObjectUtil.isNotNull;
-import static org.jrimum.utilix.ObjectUtil.isNull;
+import static org.jrimum.utilix.Objects.isNotNull;
+import static org.jrimum.utilix.Objects.isNull;
 
 import java.awt.Image;
 import java.util.Date;
@@ -44,7 +44,7 @@ import org.jrimum.bopepo.campolivre.NotSupportedBancoException;
 import org.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.DateUtil;
-import org.jrimum.utilix.ObjectUtil;
+import org.jrimum.utilix.Objects;
 
 /**
  * <p>
@@ -233,7 +233,7 @@ public final class Boleto {
 	 */
 	public void setCampoLivre(CampoLivre campoLivre) {
 		
-		ObjectUtil.checkNotNull(campoLivre);
+		Objects.checkNotNull(campoLivre);
 		
 		int length = campoLivre.write().length();
 		
@@ -508,6 +508,6 @@ public final class Boleto {
 
 	@Override
 	public String toString() {
-		return ObjectUtil.toString(this);
+		return Objects.toString(this);
 	}
 }

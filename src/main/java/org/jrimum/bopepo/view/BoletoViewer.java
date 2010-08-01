@@ -31,7 +31,7 @@
 package org.jrimum.bopepo.view;
 
 import static org.apache.commons.lang.StringUtils.isNotBlank;
-import static org.jrimum.utilix.ObjectUtil.isNotNull;
+import static org.jrimum.utilix.Objects.isNotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -42,7 +42,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jrimum.bopepo.Boleto;
-import org.jrimum.utilix.ObjectUtil;
+import org.jrimum.utilix.Objects;
 
 import com.lowagie.text.DocumentException;
 
@@ -186,9 +186,9 @@ public class BoletoViewer {
 		
 		List<File> files = new ArrayList<File>();
 		
-		ObjectUtil.checkNotNull(path,"Path inválido!");
-		ObjectUtil.checkNotNull(extensao, "Extensão inválida!");
-		ObjectUtil.checkNotNull(boletos,"Lista de boletos inválida!");
+		Objects.checkNotNull(path,"Path inválido!");
+		Objects.checkNotNull(extensao, "Extensão inválida!");
+		Objects.checkNotNull(boletos,"Lista de boletos inválida!");
 		
 		if(StringUtils.isNotBlank(path)) {
 			
@@ -348,7 +348,7 @@ public class BoletoViewer {
 	 */
 	public BoletoViewer setBoleto(Boleto boleto) {
 		
-		ObjectUtil.checkNotNull(boleto);
+		Objects.checkNotNull(boleto);
 		
 		updateViewerPDF(boleto);
 		
@@ -357,7 +357,7 @@ public class BoletoViewer {
 
 	private static boolean validatePathName(String pathName){
 		
-		ObjectUtil.checkNotNull(pathName);
+		Objects.checkNotNull(pathName);
 		
 		if(StringUtils.isNotBlank(pathName)) {
 			
@@ -382,7 +382,7 @@ public class BoletoViewer {
 	
 	private static boolean validateBoletosList(List<Boleto> boletos){
 		
-		ObjectUtil.checkNotNull(boletos);
+		Objects.checkNotNull(boletos);
 		
 		if(!boletos.isEmpty()) {
 			
@@ -400,7 +400,7 @@ public class BoletoViewer {
 
 	private void initViewerPDF(String templatePathName, File template, Boleto boleto) {
 		
-		ObjectUtil.checkNotNull(boleto);
+		Objects.checkNotNull(boleto);
 			
 		this.viewerPDF = new ViewerPDF(boleto);
 		

@@ -32,7 +32,7 @@ package org.jrimum.bopepo.campolivre;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.ObjectUtil;
+import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
 import org.jrimum.utilix.text.StringUtil;
@@ -98,7 +98,7 @@ public final class CampoLivreFactory {
 		
 		CampoLivre campoLivre = null;
 		
-		ObjectUtil.checkNotNull(strCampoLivre);
+		Objects.checkNotNull(strCampoLivre);
 		
 		StringUtil.checkNotBlank(strCampoLivre, "O Campo Livre não deve ser vazio!");
 		
@@ -160,6 +160,6 @@ public final class CampoLivreFactory {
 
 	@Override
 	public String toString() {
-		return ObjectUtil.toString(this);
+		return Objects.toString(this);
 	}
 }

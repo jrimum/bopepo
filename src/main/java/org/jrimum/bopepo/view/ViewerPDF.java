@@ -29,8 +29,8 @@
 
 package org.jrimum.bopepo.view;
 
-import static org.jrimum.utilix.ObjectUtil.isNotNull;
-import static org.jrimum.utilix.ObjectUtil.isNull;
+import static org.jrimum.utilix.Objects.isNotNull;
+import static org.jrimum.utilix.Objects.isNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -967,7 +967,7 @@ class ViewerPDF {
 	/**
 	 * Exibe os valores de instância.
 	 * 
-	 * @see org.jrimum.utilix.ObjectUtil#toString()
+	 * @see org.jrimum.utilix.Objects#toString()
 	 */
 	@Override
 	public String toString() {

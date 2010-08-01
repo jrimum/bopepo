@@ -3,7 +3,7 @@ package org.jrimum.bopepo.campolivre;
 import org.apache.commons.lang.StringUtils;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.ObjectUtil;
+import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
 import org.jrimum.utilix.text.StringUtil;
@@ -93,11 +93,11 @@ class CLUnibancoCobrancaNaoRegistrada extends AbstractCLUnibanco {
 
 		ContaBancaria conta = titulo.getContaBancaria();
 		
-		ObjectUtil.checkNotNull(conta,"Conta Bancária NULA!");
-		ObjectUtil.checkNotNull(conta.getNumeroDaConta(),"Número da Conta Bancária NULO!");
-		ObjectUtil.checkNotNull(conta.getNumeroDaConta().getCodigoDaConta(),"Código da Conta Bancária NULO!");
-		ObjectUtil.checkNotNull(conta.getNumeroDaConta().getDigitoDaConta(),"Dígito da Conta Bancária NULO!");
-		ObjectUtil.checkNotNull(titulo.getNossoNumero(),"Nosso Número NULO!");
+		Objects.checkNotNull(conta,"Conta Bancária NULA!");
+		Objects.checkNotNull(conta.getNumeroDaConta(),"Número da Conta Bancária NULO!");
+		Objects.checkNotNull(conta.getNumeroDaConta().getCodigoDaConta(),"Código da Conta Bancária NULO!");
+		Objects.checkNotNull(conta.getNumeroDaConta().getDigitoDaConta(),"Dígito da Conta Bancária NULO!");
+		Objects.checkNotNull(titulo.getNossoNumero(),"Nosso Número NULO!");
 		
 		this.add(new Field<Integer>(CODIGO_TRANSACAO, 1));
 

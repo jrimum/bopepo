@@ -30,14 +30,14 @@
 package org.jrimum.bopepo.campolivre;
 
 import static org.jrimum.domkee.financeiro.banco.febraban.Banco.isCodigoDeCompensacaoOK;
-import static org.jrimum.utilix.ObjectUtil.isNotNull;
-import static org.jrimum.utilix.ObjectUtil.isNull;
+import static org.jrimum.utilix.Objects.isNotNull;
+import static org.jrimum.utilix.Objects.isNull;
 
 import org.apache.log4j.Logger;
 import org.jrimum.bopepo.BancoSuportado;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.ObjectUtil;
+import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.AbstractLineOfFields;
 import org.jrimum.utilix.text.Field;
 
@@ -80,7 +80,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 */
 	private static final long serialVersionUID = 4605730904122445595L;
 	
-	private static Logger log = Logger.getLogger(ObjectUtil.class);
+	private static Logger log = Logger.getLogger(Objects.class);
 
 	protected AbstractCampoLivre(Integer fieldsLength, Integer stringLength) {
 		super(fieldsLength, stringLength);
@@ -262,6 +262,6 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	
 	@Override
 	public String toString() {
-		return ObjectUtil.toString(this);
+		return Objects.toString(this);
 	}
 }

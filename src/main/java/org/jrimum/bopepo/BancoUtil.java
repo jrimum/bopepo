@@ -29,7 +29,7 @@
 
 package org.jrimum.bopepo;
 
-import static org.jrimum.utilix.ObjectUtil.isNull;
+import static org.jrimum.utilix.Objects.isNull;
 
 import java.io.Serializable;
 import java.util.Calendar;

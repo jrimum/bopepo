@@ -36,7 +36,7 @@ import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.domkee.financeiro.banco.hsbc.TipoIdentificadorCNR;
-import org.jrimum.utilix.ObjectUtil;
+import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
 
@@ -187,7 +187,7 @@ class CLHSBCCobrancaNaoRegistrada extends AbstractCLHSBC {
 
 	private void checkExistsParametrosBancarios(Titulo titulo) {
 
-		if (ObjectUtil.isNull(titulo.getParametrosBancarios())
+		if (Objects.isNull(titulo.getParametrosBancarios())
 				&& titulo.getParametrosBancarios().isVazio()) {
 
 			throw new CampoLivreException(
@@ -203,7 +203,7 @@ class CLHSBCCobrancaNaoRegistrada extends AbstractCLHSBC {
 		TipoIdentificadorCNR tipoIdentificadorCNR = parametros
 				.getValor(TipoIdentificadorCNR.class.getName());
 
-		if (ObjectUtil.isNull(tipoIdentificadorCNR)) {
+		if (Objects.isNull(tipoIdentificadorCNR)) {
 
 			throw new CampoLivreException(
 					"Parâmetro bancário ["

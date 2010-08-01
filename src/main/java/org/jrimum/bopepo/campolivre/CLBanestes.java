@@ -29,7 +29,7 @@
  */
 package org.jrimum.bopepo.campolivre;
 
-import static org.jrimum.utilix.ObjectUtil.exists;
+import static org.jrimum.utilix.Objects.exists;
 
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;

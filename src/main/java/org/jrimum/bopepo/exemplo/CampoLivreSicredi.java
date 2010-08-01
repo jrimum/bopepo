@@ -32,7 +32,7 @@ package org.jrimum.bopepo.exemplo;
 
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.apache.commons.lang.StringUtils.isNumeric;
-import static org.jrimum.utilix.ObjectUtil.isNotNull;
+import static org.jrimum.utilix.Objects.isNotNull;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;

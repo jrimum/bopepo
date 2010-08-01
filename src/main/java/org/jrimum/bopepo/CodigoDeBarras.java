@@ -40,7 +40,7 @@ import org.apache.log4j.Logger;
 import org.jrimum.bopepo.campolivre.CampoLivre;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.ObjectUtil;
+import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.AbstractLineOfFields;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
@@ -371,6 +371,6 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 
 	@Override
 	public String toString() {
-		return ObjectUtil.toString(this);
+		return Objects.toString(this);
 	}
 }

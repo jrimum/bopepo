@@ -37,7 +37,7 @@ import org.apache.commons.lang.StringUtils;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.ObjectUtil;
+import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
 import org.jrimum.vallia.digitoverificador.Modulo;
@@ -192,7 +192,7 @@ class CLSicredi extends AbstractCLSicredi {
 		String nossoNumero = titulo.getNossoNumero();
 		String dvNossoNumero = titulo.getDigitoDoNossoNumero();
 
-		ObjectUtil.checkNotNull(nossoNumero,"Nosso Número NULO!");
+		Objects.checkNotNull(nossoNumero,"Nosso Número NULO!");
 		
 		if (isNotBlank(nossoNumero) && isNumeric(nossoNumero)) {
 
@@ -207,7 +207,7 @@ class CLSicredi extends AbstractCLSicredi {
 			new IllegalArgumentException("Nosso número deve conter somente números e não: " + nossoNumero);
 		}
 
-		ObjectUtil.checkNotNull(dvNossoNumero,"Dígito Verificador do Nosso Número NULO!");
+		Objects.checkNotNull(dvNossoNumero,"Dígito Verificador do Nosso Número NULO!");
 
 		if (isNotBlank(dvNossoNumero) && isNumeric(dvNossoNumero)) {
 
@@ -235,7 +235,7 @@ class CLSicredi extends AbstractCLSicredi {
 
 		InnerCooperativaDeCredito cooperativa = null;
 
-		ObjectUtil.checkNotNull(agencia.getCodigo(),"Número da Agência Sicredi NULO!");
+		Objects.checkNotNull(agencia.getCodigo(),"Número da Agência Sicredi NULO!");
 		
 		if (agencia.getCodigo() > 0) {
 			
@@ -253,7 +253,7 @@ class CLSicredi extends AbstractCLSicredi {
 			new IllegalArgumentException("Número da Agência Sicredi com valor inválido: " + agencia.getCodigo());
 		}
 
-		ObjectUtil.checkNotNull(agencia.getDigitoVerificador(),"Dígito da Agência Sicredi NULO!");
+		Objects.checkNotNull(agencia.getDigitoVerificador(),"Dígito da Agência Sicredi NULO!");
 		
 		if (StringUtils.isNumeric(agencia.getDigitoVerificador())) {
 
@@ -286,7 +286,7 @@ class CLSicredi extends AbstractCLSicredi {
 
 		StringBuilder codigoDoCedente = new StringBuilder();
 
-		ObjectUtil.checkNotNull(conta.getCodigoDaConta(),"Número da Conta/Código do Cedente Sicredi NULO!");
+		Objects.checkNotNull(conta.getCodigoDaConta(),"Número da Conta/Código do Cedente Sicredi NULO!");
 		
 		if (conta.getCodigoDaConta() > 0) {
 			
