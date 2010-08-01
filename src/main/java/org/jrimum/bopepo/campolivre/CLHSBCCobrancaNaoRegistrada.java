@@ -181,8 +181,9 @@ class CLHSBCCobrancaNaoRegistrada extends AbstractCLHSBC {
 		Calendar c = Calendar.getInstance();
 		c.setTime(vencimento);
 
-		return String.valueOf(c.get(Calendar.DAY_OF_YEAR))
-				+ String.valueOf(c.get(Calendar.YEAR) % 10);
+		return new StringBuilder(String.valueOf(c.get(Calendar.DAY_OF_YEAR)))
+				.append(String.valueOf(c.get(Calendar.YEAR) % 10))
+				.toString();
 	}
 
 	private void checkExistsParametrosBancarios(Titulo titulo) {
