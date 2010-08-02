@@ -81,7 +81,7 @@ import org.jrimum.utilix.text.Filler;
  * 			<td>4</td>
  * 			<td>9(4) </td>
  * 			<td>Fator de vencimento</td>
- * 			<td>Data do vencimento no formato juliano</td>
+ * 			<td>ou Data do vencimento no formato juliano</td>
  * 		</tr>
  * 
  * 		<tr>

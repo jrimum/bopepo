@@ -31,16 +31,26 @@
 package org.jrimum.bopepo;
 
 import org.jrimum.bopepo.campolivre.TestAbstractCLBancoSafra;
+import org.jrimum.bopepo.campolivre.TestAbstractCLCaixaEconomicaFederal;
+import org.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN10;
 import org.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN11;
 import org.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN17;
 import org.jrimum.bopepo.campolivre.TestCLBancoReal;
+import org.jrimum.bopepo.campolivre.TestCLBancoSafraCobrancaNaoRegistrada;
+import org.jrimum.bopepo.campolivre.TestCLBancoSafraCobrancaRegistrada;
 import org.jrimum.bopepo.campolivre.TestCLBanestes;
 import org.jrimum.bopepo.campolivre.TestCLBanrisulCobrancaNaoRegistrada;
 import org.jrimum.bopepo.campolivre.TestCLBanrisulCobrancaRegistrada;
 import org.jrimum.bopepo.campolivre.TestCLBradesco;
+import org.jrimum.bopepo.campolivre.TestCLCaixaEconomicaFederalSIGCB;
 import org.jrimum.bopepo.campolivre.TestCLCaixaEconomicaFederalSINCO;
+import org.jrimum.bopepo.campolivre.TestCLHSBCCobrancaNaoRegistrada;
 import org.jrimum.bopepo.campolivre.TestCLItauComCarteirasEspeciais;
 import org.jrimum.bopepo.campolivre.TestCLItauPadrao;
+import org.jrimum.bopepo.campolivre.TestCLMercantilDoBrasil;
+import org.jrimum.bopepo.campolivre.TestCLNossaCaixa;
+import org.jrimum.bopepo.campolivre.TestCLUnibancoCobrancaNaoRegistrada;
+import org.jrimum.bopepo.campolivre.TestCLUnibancoCobrancaRegistrada;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -51,20 +61,32 @@ import org.junit.runners.Suite;
 ( 
 		{ 
 			TestBoleto.class,
-			TestCodigoDeBarras.class,
+			TestBoletoUtil.class,
+			TestBancoUtil.class,
 			TestBancoSuportado.class,
+			TestCodigoDeBarras.class,
 			TestLinhaDigitavel.class,
 			TestAbstractCLBancoSafra.class,
+			TestAbstractCLCaixaEconomicaFederal.class,
+			TestCLBancoDoBrasilNN10.class,
 			TestCLBancoDoBrasilNN11.class,
 			TestCLBancoDoBrasilNN17.class,
 			TestCLBancoReal.class,
-			TestCLBradesco.class,
-			TestCLCaixaEconomicaFederalSINCO.class,
-			TestCLItauPadrao.class,
-			TestCLItauComCarteirasEspeciais.class,
-			TestCLBanrisulCobrancaRegistrada.class,
+			TestCLBancoSafraCobrancaNaoRegistrada.class,
+			TestCLBancoSafraCobrancaRegistrada.class,
+			TestCLBanestes.class,
 			TestCLBanrisulCobrancaNaoRegistrada.class,
-			TestCLBanestes.class
+			TestCLBanrisulCobrancaRegistrada.class,
+			TestCLBradesco.class,
+			TestCLCaixaEconomicaFederalSIGCB.class,
+			TestCLCaixaEconomicaFederalSINCO.class,
+			TestCLHSBCCobrancaNaoRegistrada.class,
+			TestCLItauComCarteirasEspeciais.class,
+			TestCLItauPadrao.class,
+			TestCLMercantilDoBrasil.class,
+			TestCLNossaCaixa.class,
+			TestCLUnibancoCobrancaNaoRegistrada.class,
+			TestCLUnibancoCobrancaRegistrada.class
 		}
 )
 public class TestSuiteBopepo {

@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
@@ -18,12 +19,13 @@ import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.domkee.financeiro.banco.hsbc.TipoIdentificadorCNR;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author misael
- *
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a> 
  */
 public class TestCLHSBCCobrancaNaoRegistrada {
 
@@ -38,7 +40,7 @@ public class TestCLHSBCCobrancaNaoRegistrada {
 	public void setUp() throws Exception {
 	
 		NumeroDaConta numeroDaConta = new NumeroDaConta();
-		numeroDaConta.setCodigoDaConta(3003);
+		numeroDaConta.setCodigoDaConta(8351202);
 		numeroDaConta.setDigitoDaConta("2");
 
 		ContaBancaria contaBancaria = new ContaBancaria();
@@ -50,8 +52,9 @@ public class TestCLHSBCCobrancaNaoRegistrada {
 		Cedente cedente = new Cedente("Cedente");
 		
 		titulo = new Titulo(contaBancaria, sacado, cedente);
-		titulo.setNossoNumero("41234567894");
-		titulo.setDataDoVencimento(new GregorianCalendar(2000, Calendar.JULY, 4).getTime());			
+		titulo.setNossoNumero("0000239104761");
+		titulo.setDataDoVencimento(new GregorianCalendar(2008, Calendar.JULY, 4).getTime());
+		titulo.setParametrosBancarios(new ParametrosBancariosMap(TipoIdentificadorCNR.class.getName(), TipoIdentificadorCNR.COM_VENCIMENTO));
 	}
 
 	/**
@@ -72,16 +75,9 @@ public class TestCLHSBCCobrancaNaoRegistrada {
 		clHsbcCNR = CampoLivreFactory.create(titulo);
 		
 		assertTrue(clHsbcCNR.write().length() == 25);
-		assertEquals("0003003004123456789410012", clHsbcCNR.write());
+		assertEquals("8351202000023910476118682", clHsbcCNR.write());
 		
-		
-		// Alterando alguns dados do título
-		titulo.getContaBancaria();
-		titulo.setNossoNumero("4412345678944");
-		clHsbcCNR = CampoLivreFactory.create(titulo);
-		
-		assertTrue(clHsbcCNR.write().length() == 25);
-		assertEquals("0003333441234567894410012", clHsbcCNR.write());		
+		//TODO
 	}
 
 }
