@@ -38,7 +38,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.apache.commons.lang.time.DateUtils;
-import org.jrimum.utilix.DateUtil;
+import org.jrimum.utilix.Dates;
 
 /**
  * <p>
@@ -157,7 +157,7 @@ public class BancoUtil implements Serializable {
 								+ DDMMYYYY_B
 										.format(DATA_LIMITE_DO_FATOR_DE_VENCIMENTO));
 			} else {
-				fator = (int) DateUtil.calculeDiferencaEmDias(
+				fator = (int) Dates.calculeDiferencaEmDias(
 						DATA_BASE_DO_FATOR_DE_VENCIMENTO, dataVencTruncada);
 			}
 		}
