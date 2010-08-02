@@ -67,17 +67,8 @@ import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
 
 /**
- * 
  * <p>
- * DEFINIÇÃO DA CLASSE
- * </p>
- * 
- * <p>
- * OBJETIVO/PROPÓSITO
- * </p>
- * 
- * <p>
- * EXEMPLO:
+ * Classe utilizada para preencher o PDF do boleto com os dados do título e boleto.
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
@@ -90,11 +81,6 @@ class ViewerPDF {
 
 	// TODO Teste no teste unitário.
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
 	private static Logger log = Logger.getLogger(ViewerPDF.class);
 
 	private static URL TEMPLATE_PADRAO_COM_SACADOR_AVALISTA = ViewerPDF.class.getResource("/pdf/BoletoTemplateComSacadorAvalista.pdf");
@@ -477,6 +463,7 @@ class ViewerPDF {
 		setOutraDeducao();
 		setMoraMulta();
 		setOutroAcrescimo();
+		setValorCobrado();
 		setInstrucaoAoSacado();
 		setInstrucaoAoCaixa();
 		setSacado();
@@ -679,28 +666,27 @@ class ViewerPDF {
 		form.setField("txtFcInstrucaoAoCaixa8", boleto.getInstrucao8());
 	}
 
-	private void setMoraMulta() throws IOException, DocumentException {
-
-		form.setField("txtRsMoraMulta", StringUtils.EMPTY);
-		form.setField("txtFcMoraMulta", StringUtils.EMPTY);
-	}
-
 	private void setInstrucaoAoSacado() throws IOException, DocumentException {
 
 		form.setField("txtRsInstrucaoAoSacado", boleto.getInstrucaoAoSacado());
 	}
 
+	private void setMoraMulta() throws IOException, DocumentException {
+
+		form.setField("txtRsMoraMulta", MONEY_DD_BR.format(boleto.getTitulo().getMora()));
+		form.setField("txtFcMoraMulta", MONEY_DD_BR.format(boleto.getTitulo().getMora()));
+	}
+	
 	private void setOutroAcrescimo() throws IOException, DocumentException {
 
-		form.setField("txtRsOutroAcrescimo", StringUtils.EMPTY);
-		form.setField("txtFcOutroAcrescimo", StringUtils.EMPTY);
+		form.setField("txtRsOutroAcrescimo", MONEY_DD_BR.format(boleto.getTitulo().getAcrecimo()));
+		form.setField("txtFcOutroAcrescimo", MONEY_DD_BR.format(boleto.getTitulo().getAcrecimo()));
 	}
 
 	private void setOutraDeducao() throws IOException, DocumentException {
 
-		form.setField("txtRsOutraDeducao", StringUtils.EMPTY);
-		form.setField("txtFcOutraDeducao", StringUtils.EMPTY);
-
+		form.setField("txtRsOutraDeducao", MONEY_DD_BR.format(boleto.getTitulo().getDeducao()));
+		form.setField("txtFcOutraDeducao", MONEY_DD_BR.format(boleto.getTitulo().getDeducao()));
 	}
 
 	private void setDescontoAbatimento() throws IOException, DocumentException {
@@ -710,13 +696,17 @@ class ViewerPDF {
 			form.setField("txtRsDescontoAbatimento", MONEY_DD_BR.format(boleto.getTitulo().getDesconto()));
 			form.setField("txtFcDescontoAbatimento", MONEY_DD_BR.format(boleto.getTitulo().getDesconto()));
 		}
-		
 	}
-
 	private void setValorDocumento() throws IOException, DocumentException {
 
 		form.setField("txtRsValorDocumento", MONEY_DD_BR.format(boleto.getTitulo().getValor()));
 		form.setField("txtFcValorDocumento", MONEY_DD_BR.format(boleto.getTitulo().getValor()));
+	}
+
+	private void setValorCobrado() throws IOException, DocumentException {
+
+		form.setField("txtRsValorCobrado", MONEY_DD_BR.format(boleto.getTitulo().getValorCobrado()));
+		form.setField("txtFcValorCobrado", MONEY_DD_BR.format(boleto.getTitulo().getValorCobrado()));
 	}
 
 	private void setDataVencimeto() throws IOException, DocumentException {
