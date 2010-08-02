@@ -214,7 +214,7 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		this.codigoDoBanco.setValue(contaBancaria.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado());
 		
-		this.codigoDaMoeda.setValue(titulo.getEnumMoeda().getCodigo());
+		this.codigoDaMoeda.setValue(titulo.getTipoDeMoeda().getCodigo());
 		
 		//Was here DigitoVerificador 
 		//But wait

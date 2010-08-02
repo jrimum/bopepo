@@ -92,7 +92,7 @@ public class TesteBoletoBancoRuralRegistro {
 		titulo.setDataDoDocumento(DDMMYYYY_B.parse("05/09/2008"));
 		titulo.setDataDoVencimento(DDMMYYYY_B.parse("25/09/2009"));
 		titulo.setAceite(EnumAceite.A);
-		titulo.setEnumMoeda(TipoDeMoeda.REAL);
+		titulo.setTipoDeMoeda(TipoDeMoeda.REAL);
 		/*
 		 * INFORMANDO MAIS DADOS BANCÁRIOS, QUANDO NECESSÁRIO.
 		 * Dependendo do banco, talvez seja necessário informar mais dados além de: 

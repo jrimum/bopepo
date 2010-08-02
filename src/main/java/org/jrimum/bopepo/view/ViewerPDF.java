@@ -768,8 +768,8 @@ class ViewerPDF {
 
 	private void setEspecie() throws IOException, DocumentException {
 
-		form.setField("txtRsEspecie", boleto.getTitulo().getEnumMoeda().name());
-		form.setField("txtFcEspecie", boleto.getTitulo().getEnumMoeda().name());
+		form.setField("txtRsEspecie", boleto.getTitulo().getTipoDeMoeda().name());
+		form.setField("txtFcEspecie", boleto.getTitulo().getTipoDeMoeda().name());
 	}
 
 	private void setLinhaDigitavel() throws DocumentException, IOException {

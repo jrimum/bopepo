@@ -96,7 +96,7 @@ public class TestCodigoDeBarras{
 
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("12345678901");
-		titulo.setEnumMoeda(TipoDeMoeda.REAL);
+		titulo.setTipoDeMoeda(TipoDeMoeda.REAL);
 		titulo.setValor(BigDecimal.valueOf(100.23));
 		titulo.setDataDoVencimento(VENCIMENTO);
 		
