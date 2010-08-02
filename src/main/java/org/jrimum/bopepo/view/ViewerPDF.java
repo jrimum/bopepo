@@ -31,6 +31,7 @@ package org.jrimum.bopepo.view;
 import static org.jrimum.utilix.Objects.isNotNull;
 import static org.jrimum.utilix.Objects.isNull;
 import static org.jrimum.utilix.text.DateFormat.DDMMYYYY_B;
+import static org.jrimum.utilix.text.DecimalFormat.MONEY_DD_BR;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -56,7 +57,6 @@ import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
-import org.jrimum.utilix.text.MonetaryUtil;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;
@@ -707,16 +707,16 @@ class ViewerPDF {
 
 		if(isNotNull(boleto.getTitulo().getDesconto())){
 			
-			form.setField("txtRsDescontoAbatimento", MonetaryUtil.FORMAT_REAL.format(boleto.getTitulo().getDesconto()));
-			form.setField("txtFcDescontoAbatimento", MonetaryUtil.FORMAT_REAL.format(boleto.getTitulo().getDesconto()));
+			form.setField("txtRsDescontoAbatimento", MONEY_DD_BR.format(boleto.getTitulo().getDesconto()));
+			form.setField("txtFcDescontoAbatimento", MONEY_DD_BR.format(boleto.getTitulo().getDesconto()));
 		}
 		
 	}
 
 	private void setValorDocumento() throws IOException, DocumentException {
 
-		form.setField("txtRsValorDocumento", MonetaryUtil.FORMAT_REAL.format(boleto.getTitulo().getValor()));
-		form.setField("txtFcValorDocumento", MonetaryUtil.FORMAT_REAL.format(boleto.getTitulo().getValor()));
+		form.setField("txtRsValorDocumento", MONEY_DD_BR.format(boleto.getTitulo().getValor()));
+		form.setField("txtFcValorDocumento", MONEY_DD_BR.format(boleto.getTitulo().getValor()));
 	}
 
 	private void setDataVencimeto() throws IOException, DocumentException {
