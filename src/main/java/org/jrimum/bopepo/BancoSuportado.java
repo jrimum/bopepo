@@ -37,7 +37,6 @@ import org.jrimum.domkee.financeiro.banco.febraban.Banco;
 import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
 
 /**
- * 
  * <p>
  * Enumeração dos bancos segundo o <a href="http://www.bcb.gov.br>Banco Central
  * do Brasil</a> que são suportados por este componente na tarefa de geração de
