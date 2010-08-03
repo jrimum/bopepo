@@ -519,6 +519,7 @@ class ViewerPDF {
 	}
 
 	private void setDataProcessamento() throws IOException, DocumentException {
+		
 		form.setField("txtFcDataProcessamento", DDMMYYYY_B.format(boleto.getDataDeProcessamento()));
 	}
 
@@ -673,20 +674,29 @@ class ViewerPDF {
 
 	private void setMoraMulta() throws IOException, DocumentException {
 
-		form.setField("txtRsMoraMulta", MONEY_DD_BR.format(boleto.getTitulo().getMora()));
-		form.setField("txtFcMoraMulta", MONEY_DD_BR.format(boleto.getTitulo().getMora()));
+		if(isNotNull(boleto.getTitulo().getMora())){
+		
+			form.setField("txtRsMoraMulta", MONEY_DD_BR.format(boleto.getTitulo().getMora()));
+			form.setField("txtFcMoraMulta", MONEY_DD_BR.format(boleto.getTitulo().getMora()));
+		}
 	}
 	
 	private void setOutroAcrescimo() throws IOException, DocumentException {
 
-		form.setField("txtRsOutroAcrescimo", MONEY_DD_BR.format(boleto.getTitulo().getAcrecimo()));
-		form.setField("txtFcOutroAcrescimo", MONEY_DD_BR.format(boleto.getTitulo().getAcrecimo()));
+		if(isNotNull(boleto.getTitulo().getAcrecimo())){
+		
+			form.setField("txtRsOutroAcrescimo", MONEY_DD_BR.format(boleto.getTitulo().getAcrecimo()));
+			form.setField("txtFcOutroAcrescimo", MONEY_DD_BR.format(boleto.getTitulo().getAcrecimo()));
+		}
 	}
 
 	private void setOutraDeducao() throws IOException, DocumentException {
-
-		form.setField("txtRsOutraDeducao", MONEY_DD_BR.format(boleto.getTitulo().getDeducao()));
-		form.setField("txtFcOutraDeducao", MONEY_DD_BR.format(boleto.getTitulo().getDeducao()));
+		
+		if(isNotNull(boleto.getTitulo().getDeducao())){
+			
+			form.setField("txtRsOutraDeducao", MONEY_DD_BR.format(boleto.getTitulo().getDeducao()));
+			form.setField("txtFcOutraDeducao", MONEY_DD_BR.format(boleto.getTitulo().getDeducao()));
+		}
 	}
 
 	private void setDescontoAbatimento() throws IOException, DocumentException {
@@ -699,27 +709,35 @@ class ViewerPDF {
 	}
 	private void setValorDocumento() throws IOException, DocumentException {
 
-		form.setField("txtRsValorDocumento", MONEY_DD_BR.format(boleto.getTitulo().getValor()));
-		form.setField("txtFcValorDocumento", MONEY_DD_BR.format(boleto.getTitulo().getValor()));
+		if(isNotNull(boleto.getTitulo().getValor())){
+			
+			form.setField("txtRsValorDocumento", MONEY_DD_BR.format(boleto.getTitulo().getValor()));
+			form.setField("txtFcValorDocumento", MONEY_DD_BR.format(boleto.getTitulo().getValor()));
+		}
 	}
 
 	private void setValorCobrado() throws IOException, DocumentException {
 
-		form.setField("txtRsValorCobrado", MONEY_DD_BR.format(boleto.getTitulo().getValorCobrado()));
-		form.setField("txtFcValorCobrado", MONEY_DD_BR.format(boleto.getTitulo().getValorCobrado()));
+		if(isNotNull(boleto.getTitulo().getValorCobrado())){
+			
+			form.setField("txtRsValorCobrado", MONEY_DD_BR.format(boleto.getTitulo().getValorCobrado()));
+			form.setField("txtFcValorCobrado", MONEY_DD_BR.format(boleto.getTitulo().getValorCobrado()));
+		}
 	}
 
+	/**
+	 * Data no formata "dd/mm/yyyy"
+	 * 
+	 * @throws IOException
+	 * @throws DocumentException
+	 */
 	private void setDataVencimeto() throws IOException, DocumentException {
 
-		// Obtendo uma string com a data de vencimento formatada 
-		// no padrão "dd/mm/yyyy".
-		// Ex: 03/07/2008.
-		String dataFormatada = DDMMYYYY_B.format(boleto.getTitulo().getDataDoVencimento());
-		
-		// Realizando a impressão da data de vencimeto no boleto.
-		form.setField("txtRsDataVencimento", dataFormatada);
-		form.setField("txtFcDataVencimento", dataFormatada);
-		
+		if(isNotNull(boleto.getTitulo().getDataDoVencimento())){
+			
+			form.setField("txtRsDataVencimento",  DDMMYYYY_B.format(boleto.getTitulo().getDataDoVencimento()));
+			form.setField("txtFcDataVencimento",  DDMMYYYY_B.format(boleto.getTitulo().getDataDoVencimento()));
+		}
 	}
 
 	private void setAbstractCPRFCedente() throws IOException, DocumentException {
@@ -745,7 +763,8 @@ class ViewerPDF {
 
 		Carteira carteira = boleto.getTitulo().getContaBancaria().getCarteira();
 		
-		if (isNotNull(carteira) & isNotNull(carteira.getCodigo())) {
+		if (isNotNull(carteira) && isNotNull(carteira.getCodigo())) {
+			
 			form.setField("txtFcCarteira", carteira.getCodigo().toString());
 		}
 	}	
