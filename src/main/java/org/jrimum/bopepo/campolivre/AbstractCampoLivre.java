@@ -177,8 +177,13 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 						case BANCO_RURAL:
 							campoLivre = AbstractCLBancoRural.create(titulo);
 							break;
+							
+						case BANCO_SANTANDER:
+							campoLivre = AbstractCLSantander.create(titulo);
+							break;
 					}
 				} else {
+					
 					/*
 					 * Se chegar até este ponto, é sinal de que para o banco em
 					 * questão, apesar de estar definido no EnumBancos, não há
@@ -197,6 +202,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 				 * genérica que será utilizada somente em último caso.
 				 */
 				if (isNull(campoLivre)) {
+					
 					throw new NotSupportedCampoLivreException(
 							"Não há implementações de campo livre para o banco "
 									+ contaBancaria.getBanco()
@@ -208,14 +214,20 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		
 		} catch(Exception e) {
 			
-			if(e instanceof CampoLivreException)
+			if(e instanceof CampoLivreException){
+				
 				throw (CampoLivreException)e;
-			else
-				throw new CampoLivreException(e);		
+				
+			}else{
+				
+				throw new CampoLivreException(e);
+			}
 		}
 
-		if (log.isDebugEnabled() || log.isTraceEnabled())
+		if (log.isDebugEnabled() || log.isTraceEnabled()){
+			
 			log.trace("Campo Livre Instanciado : " + campoLivre);
+		}
 
 		return campoLivre;
 	}
@@ -235,7 +247,6 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 
 		return (isNotNull(conta) && isNotNull(conta.getBanco()) 
 				&& isCodigoDeCompensacaoOK(conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado()));
-
 	}
 
 	/**
@@ -262,6 +273,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	
 	@Override
 	public String toString() {
+		
 		return Objects.toString(this);
 	}
 }

@@ -32,7 +32,6 @@ package org.jrimum.bopepo.campolivre;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
- * 
  * <p>
  * Interface comum para todos os campos livres do Banco Real que venham a existir.
  * </p>
