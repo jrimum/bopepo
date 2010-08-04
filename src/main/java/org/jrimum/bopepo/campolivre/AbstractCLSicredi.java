@@ -36,10 +36,10 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * Super classe para a família de campos livres do banco Sicredi.
  * </p>
  * 
- * @author Rômulo Augsuto
- *
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  */
-class AbstractCLSicredi extends AbstractCampoLivre {
+abstract class AbstractCLSicredi extends AbstractCampoLivre {
 
 	/**
 	 * 

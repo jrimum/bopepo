@@ -111,6 +111,7 @@ class CLBancoDoBrasilNN11 extends AbstractCLBancoDoBrasil {
 	 * @param titulo título com as informações para geração do campo livre
 	 */
 	CLBancoDoBrasilNN11(Titulo titulo) {
+		
 		super(FIELDS_LENGTH, STRING_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
@@ -122,7 +123,5 @@ class CLBancoDoBrasilNN11 extends AbstractCLBancoDoBrasil {
 		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 8, Filler.ZERO_LEFT));
 		
 		this.add(new Field<Integer>(conta.getCarteira().getCodigo(), 2, Filler.ZERO_LEFT));
-		
 	}
-
 }

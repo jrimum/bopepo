@@ -45,7 +45,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
  * 
  * <p>
  * Aqui se encontram todos os bancos sob a <a
- * href="http://www.bcb.gov.br/?CHEQUESCOMPE">supervisão da BACEN</a> em
+ * href="http://www.bcb.gov.br/?RELINST">supervisão da BACEN</a> em
  * funcionamento no país e que possuem pelo menos uma implementação de
  * <code>ICampoLivre</code>.
  * </p>
@@ -132,7 +132,16 @@ public enum BancoSuportado implements Serializable{
 	 */
 	BANCO_DO_ESTADO_DO_ESPIRITO_SANTO("021", "28127603000178", 
 			"BANCO DO ESTADO DO ESPIRITO SANTO S.A.", "Banco Múltiplo"),
-	
+			
+	/**
+	 * Tipo enumerado que representa o Santander <strong>Banco Santander
+	 * (Brasil) S. A.</strong>, código de compensação <strong><tt>033</tt>
+	 * </strong> <a href="http://www.santander.com.br"> site</a>.
+	 * 
+	 * @since 0.2
+	 */
+	BANCO_SANTANDER("033", "90400888000142",
+			"Banco Santander (Brasil) S. A.", "Banco Mútiplo"),
 
 	/**
 	 * Tipo enumerado que representa o Banrisul, Banco <strong>do Estado do Rio Grande do Sul</strong>,
@@ -170,8 +179,6 @@ public enum BancoSuportado implements Serializable{
 	BANCO_BRADESCO("237", "60746948000112", "BANCO BRADESCO S.A.",
 			"Banco Múltiplo"),
 
-	
-			
 	/**
 	 * Tipo enumerado que representa o <strong>Banco Itaú</strong>, código de
 	 * compensação <strong><tt>341</tt></strong> <a
@@ -287,6 +294,8 @@ public enum BancoSuportado implements Serializable{
 		suportados.put(BANCO_DO_ESTADO_DO_ESPIRITO_SANTO.codigoDeCompensacaoBACEN, BANCO_DO_ESTADO_DO_ESPIRITO_SANTO);
 		
 		suportados.put(BANCO_RURAL.codigoDeCompensacaoBACEN, BANCO_RURAL);
+		
+		suportados.put(BANCO_SANTANDER.codigoDeCompensacaoBACEN, BANCO_SANTANDER);
 	}
 
 	/**

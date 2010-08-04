@@ -335,9 +335,11 @@ class ViewerPDF {
 		URL templateFromResource = null;
 
 		if (boleto.getTitulo().hasSacadorAvalista()) {
+			
 			templateFromResource = TEMPLATE_PADRAO_COM_SACADOR_AVALISTA;
 			
 		} else {
+			
 			templateFromResource = TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA;
 		}
 
@@ -356,6 +358,7 @@ class ViewerPDF {
 	 * @since
 	 */
 	private boolean isTemplateFromResource() {
+		
 		return isNull(getTemplate());
 	}
 
@@ -373,9 +376,11 @@ class ViewerPDF {
 	private void inicializar() throws IOException, DocumentException {
 
 		if (isTemplateFromResource()) {
+			
 			reader = new PdfReader(getTemplateFromResource());
 			
 		} else {
+			
 			reader = new PdfReader(getTemplate().getAbsolutePath());
 		}
 
@@ -514,7 +519,7 @@ class ViewerPDF {
 			cb = stamper.getOverContent(field.getPage());
 			Image imgBarCode = barCode.createImageWithBarcode(cb, null, null);
 			
-			PDFUtil.changeField2Image(stamper, field, imgBarCode);
+			PDFUtil.changeFieldToImage(stamper, field, imgBarCode);
 		}
 	}
 
@@ -884,7 +889,7 @@ class ViewerPDF {
 			posCampoImgLogo = form.getFieldPositions(nomeDoCampo);
 			
 			if (isNotNull(posCampoImgLogo)) {
-				PDFUtil.changeField2Image(stamper, posCampoImgLogo, imagem);
+				PDFUtil.changeFieldToImage(stamper, posCampoImgLogo, imagem);
 			}
 		}
 	}

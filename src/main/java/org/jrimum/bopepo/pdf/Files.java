@@ -40,7 +40,6 @@ import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Strings;
 
 /**
- * 
  * <p>
  * Utilitário para manipular arquivos e fluxos de arquivos.
  * </p>

@@ -32,7 +32,6 @@ package org.jrimum.bopepo.pdf;
 import com.lowagie.text.Rectangle;
 
 /**
- * 
  * <p>
  * Classe adapter para facilitar as operações com os fields pdf com a lib iText.
  * </p>
@@ -48,7 +47,8 @@ public class RectanglePDF extends Rectangle {
 	private int page;
 
 	/**
-	 * For each of this groups the values are: [page, llx, lly, urx, ury].
+	 *Constrói um retângulo com os seguintes valores do array: 
+	 *[page, llx, lly, urx, ury].
 	 */
 	public RectanglePDF(float[] positions) {
 		super(positions[1], positions[2], positions[3], positions[4]);

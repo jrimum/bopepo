@@ -33,7 +33,6 @@ package org.jrimum.bopepo.pdf;
 import static org.jrimum.utilix.Objects.isNotNull;
 
 import java.io.ByteArrayOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +48,6 @@ import com.lowagie.text.pdf.PdfStamper;
 import com.lowagie.text.pdf.SimpleBookmark;
 
 /**
- * 
  * <p>
  * Serviços e atividades relacionadas a manipulação de Objetos relacionados a
  * PDF (provavelmente da lib iText).
@@ -62,12 +60,7 @@ import com.lowagie.text.pdf.SimpleBookmark;
  * 
  * @version 0.2
  */
-public class PDFUtil implements Serializable {
-
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 317122634334581419L;
+public class PDFUtil{
 
 	protected static final Logger LOG = Logger.getLogger(PDFUtil.class);
 
@@ -84,12 +77,12 @@ public class PDFUtil implements Serializable {
 	 * 
 	 * @since 0.2
 	 */
-	public static RectanglePDF changeField2Image(PdfStamper stamper,
+	public static RectanglePDF changeFieldToImage(PdfStamper stamper,
 			float[] positions, Image image) throws DocumentException {
 
 		RectanglePDF rect = new RectanglePDF(positions);
 
-		return changeField2Image(stamper, rect, image);
+		return changeFieldToImage(stamper, rect, image);
 	}
 
 	/**
@@ -105,7 +98,7 @@ public class PDFUtil implements Serializable {
 	 * 
 	 * @since 0.2
 	 */
-	public static RectanglePDF changeField2Image(PdfStamper stamper,
+	public static RectanglePDF changeFieldToImage(PdfStamper stamper,
 			RectanglePDF rect, Image image) throws DocumentException {
 
 		// Ajustando o tamanho da imagem de acordo com o tamanho do campo.
@@ -233,7 +226,6 @@ public class PDFUtil implements Serializable {
 				LOG.error("", e);
 			}
 		}
-
 		return bytes;
 	}
 }

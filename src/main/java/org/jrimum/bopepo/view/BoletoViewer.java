@@ -47,7 +47,6 @@ import org.jrimum.utilix.Objects;
 import com.lowagie.text.DocumentException;
 
 /**
- * 
  * <p>
  * Agrupa as formas de visualização de um boleto.
  * </p>
@@ -70,7 +69,6 @@ import com.lowagie.text.DocumentException;
  * 
  * @version 0.2
  */
-
 public class BoletoViewer {
 
 	//TODO Teste no teste unitário.
@@ -78,8 +76,6 @@ public class BoletoViewer {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
 	private static Logger log = Logger.getLogger(BoletoViewer.class);
 
 	/**
