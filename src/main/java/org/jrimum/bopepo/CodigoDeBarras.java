@@ -48,10 +48,7 @@ import org.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV;
 
 
 /**
- * 
  * É um número único para cada Boleto composto dos seguintes campos:
- * 
- * <br />
  * 
  * <table border="1" cellpadding="0" cellspacing="0" style="border-collapse:
  * collapse" bordercolor="#111111" width="85%" id="composição"> <thead>
@@ -62,6 +59,7 @@ import org.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV;
  * <th>Conteúdo</th>
  * </tr>
  * </thead>
+ * <tbody>
  * <tr>
  * <td>01-03</td>
  * <td>3</td>
@@ -99,6 +97,7 @@ import org.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV;
  * <td>Field livre – utilizado de acordo com a especificação interna do banco
  * emissor</td>
  * </tr>
+ * </tbody>
  * </table>
  * 
  * 

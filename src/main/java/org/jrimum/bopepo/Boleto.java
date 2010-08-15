@@ -353,7 +353,7 @@ public final class Boleto {
 	/**
 	 * <p>
 	 *  Instrução adicional ao sacado, para visualizar o conceito de negócio de sacado consultar o 
-	 * <a href="http://jrimum.nordestefomento.com.br/wprojeto/wiki/Glossario">glossário</a>.
+	 * <a href="http://www.jrimum.org/bopepo">glossário</a>.
 	 * </p>
 	 * 
 	 * @param insturcaoAoSacado the insturcaoAoSacado to set

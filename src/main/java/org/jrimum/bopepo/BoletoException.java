@@ -40,7 +40,6 @@ package org.jrimum.bopepo;
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * 
- * @see br.com.nordestefomento.jrimum.JRimumException
  * @see org.jrimum.bopepo.BoletoException
  * 
  * @since 0.2

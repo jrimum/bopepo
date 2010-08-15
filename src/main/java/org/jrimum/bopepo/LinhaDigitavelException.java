@@ -44,7 +44,6 @@ package org.jrimum.bopepo;
  * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
- * @see br.com.nordestefomento.jrimum.JRimumException
  * @see org.jrimum.bopepo.LinhaDigitavel
  * 
  * @since 0.2

@@ -691,15 +691,12 @@ public final class BoletoUtil {
 	 * 
 	 * @param linhaDigitavel
 	 *            string no formato FEBRABAN
-	 * @return linha digitável contendo somente números
 	 * @throws NullPointerException
 	 *             quando a string é nula
 	 * @throws IllegalArgumentException
 	 *             quando a string é vazia
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
-	 * 
-	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
 	 */
 	public static final void checkFormatoLinhaDigitavelFormatada(String linhaDigitavel)
 			throws NullPointerException, IllegalArgumentException,
@@ -762,7 +759,6 @@ public final class BoletoUtil {
 	 *             quando a string é vazia
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
-	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
 	 */
 	public static final void checkFormatoLinhaDigitavelNumerica(String linhaDigitavel)
 			throws NullPointerException, IllegalArgumentException,
@@ -811,7 +807,6 @@ public final class BoletoUtil {
 	 *             quando a string é vazia
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
-	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
 	 */
 	public static final void checkFormatoCodigoDeBarras(String codigoDeBarras)
 			throws NullPointerException, IllegalArgumentException,
@@ -844,7 +839,6 @@ public final class BoletoUtil {
 	 *             quando a string é nula
 	 * @throws IllegalArgumentException
 	 *             quando a string é vazia
-	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
 	 */
 	public static final void checkExistsLinhaDigitavel(String linhaDigitavel)
 			throws NullPointerException, IllegalArgumentException {
@@ -874,7 +868,6 @@ public final class BoletoUtil {
 	 *             quando a string é nula
 	 * @throws IllegalArgumentException
 	 *             quando a string é vazia
-	 * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
 	 */
 	public static final void checkExistsCodigoDeBarras(String codigoDeBarras)
 			throws NullPointerException, IllegalArgumentException {

@@ -29,7 +29,7 @@
 
 /**
  * Classes e utilitários responsáveis pela geração de boletos e derivados como: 
- * {@link Boleto}, {@link BancosSuportados}, {@link CodigoDeBarras}, {@link LinhaDigitavel}, {@link BoletoUtil}, etc.
+ * {@link org.jrimum.bopepo.Boleto}, {@link org.jrimum.bopepo.BancosSuportados}, {@link org.jrimum.bopepo.CodigoDeBarras}, {@link org.jrimum.bopepo.LinhaDigitavel}, {@link org.jrimum.bopepo.BoletoUtil}, etc.
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  */
