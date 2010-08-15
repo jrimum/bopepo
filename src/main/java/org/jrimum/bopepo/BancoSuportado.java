@@ -279,13 +279,11 @@ public enum BancoSuportado implements Serializable{
 
 		suportados.put(BANCO_DO_BRASIL.codigoDeCompensacaoBACEN, BANCO_DO_BRASIL);
 
-		suportados.put(CAIXA_ECONOMICA_FEDERAL.codigoDeCompensacaoBACEN,
-				CAIXA_ECONOMICA_FEDERAL);
+		suportados.put(CAIXA_ECONOMICA_FEDERAL.codigoDeCompensacaoBACEN, CAIXA_ECONOMICA_FEDERAL);
 
 		suportados.put(BANCO_BRADESCO.codigoDeCompensacaoBACEN, BANCO_BRADESCO);
 
-		suportados.put(BANCO_ABN_AMRO_REAL.codigoDeCompensacaoBACEN,
-				BANCO_ABN_AMRO_REAL);
+		suportados.put(BANCO_ABN_AMRO_REAL.codigoDeCompensacaoBACEN, BANCO_ABN_AMRO_REAL);
 
 		suportados.put(UNIBANCO.codigoDeCompensacaoBACEN, UNIBANCO);
 
@@ -306,6 +304,8 @@ public enum BancoSuportado implements Serializable{
 		suportados.put(BANCO_RURAL.codigoDeCompensacaoBACEN, BANCO_RURAL);
 		
 		suportados.put(BANCO_SANTANDER.codigoDeCompensacaoBACEN, BANCO_SANTANDER);
+		
+		suportados.put(BANCO_INTEMEDIUM.codigoDeCompensacaoBACEN, BANCO_INTEMEDIUM);
 	}
 
 	/**
