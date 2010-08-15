@@ -88,8 +88,10 @@ import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
  * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * @author Samuel Valério
+ * @author <a href="mailto:lukas.antunes@virtualsistemas.com.br">Lukas
+ *         Antunes</a> - Colaborador com o banco Intermedium (077)
  * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a> -
- *         Colaborador do campo livre CLBancoRuralCobrancaRegistrada
+ *         Colaborador com o banco Rural (453)
  * 
  * @see org.jrimum.bopepo.campolivre.CampoLivre
  * @see org.jrimum.domkee.financeiro.banco.Banco
@@ -98,7 +100,6 @@ import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
  * 
  * @version 0.2
  */
-
 public enum BancoSuportado implements Serializable{
 
 	// TODO FAZER um link para a lista de componentes suportados no javadoc
@@ -152,6 +153,15 @@ public enum BancoSuportado implements Serializable{
 	 */
 	BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL("041", "92702067000196", 
 			"BANCO DO ESTADO DO RIO GRANDE DO SUL S.A.", "Banco Múltiplo"),
+			
+	/**
+	 * Tipo enumerado que representa o BANISA, Banco <strong>Intermedium</strong>,
+	 * código de compensação <strong><tt>077</tt></strong> <a href="http://www.bancointermedium.com.br/">
+	 * site</a>.
+	 * 
+	 * @since 0.2
+	 */
+	BANCO_INTEMEDIUM("077", "00416968000101", "BANCO INTERMEDIUM S.A.", "Banco Múltiplo"),	
 			
 	/**
 	 * Tipo enumerado que representa o Banco <strong>Caixa Econômica Federal</strong>,

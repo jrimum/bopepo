@@ -57,8 +57,7 @@ import org.jrimum.utilix.text.Field;
  * <dl>
  * <dt><strong>Field Livre:</strong>
  * <dd>É um espaço reservado no código de barras e a sua implementação varia de
- * banco para banco.</dd>
- * </dt>
+ * banco para banco.</dd></dt>
  * </dl>
  * </p>
  * 
@@ -66,8 +65,10 @@ import org.jrimum.utilix.text.Field;
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
- * @author <a href="http://www.nordestefomento.com.br">Nordeste Fomento
- *         Mercantil</a>
+ * @author <a href="mailto:lukas.antunes@virtualsistemas.com.br">Lukas
+ *         Antunes</a> - Colaborador com o banco Intermedium (077)
+ * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a> -
+ *         Colaborador com o banco Rural (453)
  * 
  * @since 0.2
  * 
@@ -181,6 +182,10 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 						case BANCO_SANTANDER:
 							campoLivre = AbstractCLSantander.create(titulo);
 							break;
+							
+						case BANCO_INTEMEDIUM:
+							campoLivre = AbstractCLBancoIntermedium.create(titulo);
+						break;
 					}
 				} else {
 					
