@@ -93,7 +93,7 @@ class CLUnibancoCobrancaRegistrada extends AbstractCLUnibanco {
 	 * @param titulo título com as informações para geração do campo livre
 	 */
 	CLUnibancoCobrancaRegistrada(Titulo titulo) {
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		

@@ -54,8 +54,8 @@ abstract class AbstractCLBancoReal extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = -2020155324741631945L;
 
-	protected AbstractCLBancoReal(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
+	protected AbstractCLBancoReal(Integer fieldsLength) {
+		super(fieldsLength);
 	}
 
 	static CampoLivre create(Titulo titulo){

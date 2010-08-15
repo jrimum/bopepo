@@ -154,7 +154,7 @@ class CLSicredi extends AbstractCLSicredi {
 
 	protected CLSicredi(Titulo titulo) {
 		
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 		
 		try {
 

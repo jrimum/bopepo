@@ -55,8 +55,8 @@ abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
 	private static final long serialVersionUID = -7324315662526104153L;
 
 
-	protected AbstractCLBancoDoBrasil(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
+	protected AbstractCLBancoDoBrasil(Integer fieldsLength) {
+		super(fieldsLength);
 	}
 
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException{

@@ -56,8 +56,8 @@ abstract class AbstractCLNossaCaixa extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = 3806982587407010815L;
 
-	protected AbstractCLNossaCaixa(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
+	protected AbstractCLNossaCaixa(Integer fieldsLength) {
+		super(fieldsLength);
 	}
 	
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {

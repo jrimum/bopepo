@@ -13,8 +13,8 @@ abstract class AbstractCLBancoRural extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = -602454445158254612L;
 
-	protected AbstractCLBancoRural(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
+	protected AbstractCLBancoRural(Integer fieldsLength) {
+		super(fieldsLength);
 	}
 
 	static CampoLivre create(Titulo titulo) {

@@ -118,7 +118,7 @@ public class CLBancoSantander extends AbstractCLSantander implements CampoLivre 
 	private static final int CARTEIRA_SIMPLES_SEM_REGISTRO = 102;
 
 	CLBancoSantander(Titulo titulo) {
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 
 		ContaBancaria conta = titulo.getContaBancaria();
 		StringBuilder nossoNumero = new StringBuilder(titulo.getNossoNumero());

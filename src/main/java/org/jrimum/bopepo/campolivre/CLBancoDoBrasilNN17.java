@@ -109,7 +109,7 @@ class CLBancoDoBrasilNN17 extends AbstractCLBancoDoBrasil{
 	 * @param titulo título com as informações para geração do campo livre
 	 */
 	CLBancoDoBrasilNN17(Titulo titulo) {
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		String nossoNumero = titulo.getNossoNumero();

@@ -117,7 +117,7 @@ class CLBancoIntermedium extends AbstractCLBancoIntermedium {
 	 */
 	CLBancoIntermedium(Titulo titulo) {
 		
-		super(FIELDS_LENGTH,STRING_LENGTH);
+		super(FIELDS_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		

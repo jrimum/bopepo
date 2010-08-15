@@ -46,8 +46,8 @@ abstract class AbstractCLSicredi extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = -55594606026629224L;
 	
-	protected AbstractCLSicredi(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
+	protected AbstractCLSicredi(Integer fieldsLength) {
+		super(fieldsLength);
 	}
 	
 	static CampoLivre create(Titulo titulo) {

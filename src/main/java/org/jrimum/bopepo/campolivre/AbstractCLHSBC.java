@@ -29,9 +29,6 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
@@ -57,27 +54,20 @@ abstract class AbstractCLHSBC extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = 3179450500491723317L;
 
-	protected AbstractCLHSBC(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
+	protected AbstractCLHSBC(Integer fieldsLength) {
+		super(fieldsLength);
 
 	}
 
 	static CampoLivre create(Titulo titulo) {
 
-		CampoLivre campoLivre = null;
-		ContaBancaria conta = titulo.getContaBancaria();
-
-		if (conta.getCarteira().getTipoCobranca() == TipoDeCobranca.SEM_REGISTRO) {
-
-			campoLivre = new CLHSBCCobrancaNaoRegistrada(titulo);
-
-		} else {
-			throw new CampoLivreException("Atualmente para o banco" + " "
-					+ BancosSuportados.HSBC.getInstituicao()
-					+ " só é possível a montagem do campo livre para carteiras"
-					+ " não registradas.");
+		switch(titulo.getContaBancaria().getCarteira().getTipoCobranca()){
+		case SEM_REGISTRO:
+			return new CLHSBCCobrancaNaoRegistrada(titulo);
+		case COM_REGISTRO:
+			return new CLHSBCCobrancaRegistrada(titulo);
+		default:
+			return null;
 		}
-
-		return campoLivre;
 	}
 }

@@ -108,7 +108,7 @@ class CLBanestes extends AbstractCLBanestes {
 
 	public CLBanestes(Titulo titulo) {
 		
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 		
 		this.add(new Field<Integer>(Integer.valueOf(titulo.getNossoNumero()), 8, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 11, Filler.ZERO_LEFT));

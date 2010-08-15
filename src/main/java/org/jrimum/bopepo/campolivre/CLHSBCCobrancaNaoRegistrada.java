@@ -128,7 +128,7 @@ class CLHSBCCobrancaNaoRegistrada extends AbstractCLHSBC {
 	 */
 	CLHSBCCobrancaNaoRegistrada(Titulo titulo) {
 
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 
 		checkExistsParametrosBancarios(titulo);
 		checkExistsParametroTipoIdentificadorCNR(titulo

@@ -55,8 +55,8 @@ abstract class AbstractCLBradesco extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = -1733227746617862639L;
 
-	protected AbstractCLBradesco(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
+	protected AbstractCLBradesco(Integer fieldsLength) {
+		super(fieldsLength);
 		
 	}
 

@@ -56,8 +56,8 @@ abstract class AbstractCLMercantilDoBrasil extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = -6705784312499730452L;
 
-	protected AbstractCLMercantilDoBrasil(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
+	protected AbstractCLMercantilDoBrasil(Integer fieldsLength) {
+		super(fieldsLength);
 	}
 	
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {

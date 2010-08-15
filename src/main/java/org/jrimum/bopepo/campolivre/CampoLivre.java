@@ -52,5 +52,5 @@ public interface CampoLivre extends TextStream{
 	/**
 	 * Tamanho do Campo Livre, igual para qualquer que seja o banco.
 	 */
-	static final Integer STRING_LENGTH = 25;
+	Integer STRING_LENGTH = 25;
 }

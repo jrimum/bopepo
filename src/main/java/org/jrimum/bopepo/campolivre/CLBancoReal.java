@@ -111,7 +111,7 @@ class CLBancoReal extends AbstractCLBancoReal {
 	 * @param titulo título com as informações para geração do campo livre
 	 */
 	CLBancoReal(Titulo titulo) {
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		

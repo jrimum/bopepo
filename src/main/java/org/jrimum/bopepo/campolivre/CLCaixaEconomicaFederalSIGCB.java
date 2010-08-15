@@ -138,7 +138,7 @@ class CLCaixaEconomicaFederalSIGCB extends AbstractCLCaixaEconomicaFederal {
 	 */
 	CLCaixaEconomicaFederalSIGCB(Titulo titulo) {
 		
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 
 		ContaBancaria conta = titulo.getContaBancaria();
 		String nossoNumero = titulo.getNossoNumero();

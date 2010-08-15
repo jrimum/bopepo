@@ -19,7 +19,7 @@ public class CLBancoRuralCobrancaRegistrada extends AbstractCLBancoRural{
 	private static final int TIPO_COBRANCA = 0;
 
 	CLBancoRuralCobrancaRegistrada(Titulo titulo) {
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 			

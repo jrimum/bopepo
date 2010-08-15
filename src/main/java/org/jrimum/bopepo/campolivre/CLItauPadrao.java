@@ -129,7 +129,7 @@ class CLItauPadrao extends AbstractCLItau {
 	 * @param titulo título com as informações para geração do campo livre
 	 */
 	public CLItauPadrao(Titulo titulo) {
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		

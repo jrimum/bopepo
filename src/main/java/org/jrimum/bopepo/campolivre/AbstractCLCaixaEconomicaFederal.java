@@ -62,8 +62,8 @@ abstract class AbstractCLCaixaEconomicaFederal extends AbstractCampoLivre {
 	
 	private static final int NOSSO_NUMERO_SIGCB = 15;
 
-	protected AbstractCLCaixaEconomicaFederal(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
+	protected AbstractCLCaixaEconomicaFederal(Integer fieldsLength) {
+		super(fieldsLength);
 	}
 
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException{

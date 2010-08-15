@@ -64,8 +64,8 @@ abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = -259398499475894938L;
 
-	protected AbstractCLBanrisul(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
+	protected AbstractCLBanrisul(Integer fieldsLength) {
+		super(fieldsLength);
 	}
 
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {

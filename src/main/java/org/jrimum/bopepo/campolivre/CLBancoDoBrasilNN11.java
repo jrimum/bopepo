@@ -112,7 +112,7 @@ class CLBancoDoBrasilNN11 extends AbstractCLBancoDoBrasil {
 	 */
 	CLBancoDoBrasilNN11(Titulo titulo) {
 		
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		String nossoNumero = titulo.getNossoNumero();

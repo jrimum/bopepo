@@ -97,7 +97,7 @@ class CLCaixaEconomicaFederalSINCO extends AbstractCLCaixaEconomicaFederal {
 	 * @param titulo Título com as informações para geração do campo livre.
 	 */
 	CLCaixaEconomicaFederalSINCO(Titulo titulo) {
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		

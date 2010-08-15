@@ -37,7 +37,7 @@ public class CLCaixaEconomicaFederalSICOB extends AbstractCLCaixaEconomicaFedera
 	 */
 	CLCaixaEconomicaFederalSICOB(Titulo titulo) {
 		
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 		
 		Objects.checkNotNull(titulo.getParametrosBancarios(), "Parâmetros bancários necessários [titulo.getParametrosBancarios()==null]!");
 		

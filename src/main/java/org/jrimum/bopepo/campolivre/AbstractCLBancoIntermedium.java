@@ -54,9 +54,8 @@ abstract class AbstractCLBancoIntermedium extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = -8103863452995430046L;
 
-	protected AbstractCLBancoIntermedium(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
-		
+	protected AbstractCLBancoIntermedium(Integer fieldsLength) {
+		super(fieldsLength);
 	}
 
 	static CampoLivre create(Titulo titulo){

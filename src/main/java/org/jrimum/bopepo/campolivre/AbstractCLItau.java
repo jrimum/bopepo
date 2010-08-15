@@ -66,8 +66,8 @@ abstract class AbstractCLItau extends AbstractCampoLivre {
 	 */
 	private static final Integer[] CARTEIRAS_ESPECIAIS = {106, 107, 122, 142, 143, 195, 196, 198};
 
-	protected AbstractCLItau(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
+	protected AbstractCLItau(Integer fieldsLength) {
+		super(fieldsLength);
 	}
 	
 	static CampoLivre create(Titulo titulo){

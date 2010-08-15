@@ -118,7 +118,7 @@ class CLBancoSafraCobrancaNaoRegistrada extends AbstractCLBancoSafra {
 	 * @param titulo título com as informações para geração do campo livre
 	 */
 	CLBancoSafraCobrancaNaoRegistrada(Titulo titulo) {
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		

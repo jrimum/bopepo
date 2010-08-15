@@ -102,7 +102,7 @@ class CLMercantilDoBrasil extends AbstractCLMercantilDoBrasil {
 	 * @param titulo título com as informações para geração do campo livre
 	 */
 	CLMercantilDoBrasil(Titulo titulo) {
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 		
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		

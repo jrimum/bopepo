@@ -158,7 +158,7 @@ class CLNossaCaixa extends AbstractCLNossaCaixa {
 	
 	protected CLNossaCaixa(Titulo titulo) {
 
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 		
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		Integer modalidadeContaConvertida = convertaModalidadeDaConta(contaBancaria.getModalidade().getCodigoAsInteger());

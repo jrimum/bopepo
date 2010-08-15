@@ -109,7 +109,7 @@ class CLBanrisulCobrancaNaoRegistrada extends AbstractCLBanrisul {
 	private static final Integer FIELDS_LENGTH = 7;
 
 	CLBanrisulCobrancaNaoRegistrada(Titulo titulo) {
-		super(FIELDS_LENGTH, STRING_LENGTH);
+		super(FIELDS_LENGTH);
 
 		this.add(new Field<Integer>(2, 1));
 		this.add(new Field<String>("1", 1));

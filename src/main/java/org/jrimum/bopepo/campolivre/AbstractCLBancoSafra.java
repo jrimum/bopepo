@@ -51,8 +51,8 @@ abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
 	
 	protected static final int SISTEMA = 7;
 
-	protected AbstractCLBancoSafra(Integer fieldsLength, Integer stringLength) {
-		super(fieldsLength, stringLength);
+	protected AbstractCLBancoSafra(Integer fieldsLength) {
+		super(fieldsLength);
 	}
 
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
