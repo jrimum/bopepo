@@ -2,7 +2,7 @@ package org.jrimum.bopepo.campolivre;
 
 import static org.junit.Assert.assertEquals;
 
-import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
@@ -85,7 +85,7 @@ public class TestCLUnibancoCobrancaNaoRegistrada extends CampoLivreBaseTest {
 		Cedente cedente = new Cedente("Cedente");
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(BancoSuportado.UNIBANCO.create());
+		contaBancaria.setBanco(BancosSuportados.UNIBANCO.create());
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(123456, "1"));
 		contaBancaria.setCarteira(new Carteira(123, TipoDeCobranca.SEM_REGISTRO));
 		contaBancaria.setAgencia(new Agencia(01234, "1"));

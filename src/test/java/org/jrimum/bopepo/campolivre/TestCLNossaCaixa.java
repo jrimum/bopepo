@@ -30,7 +30,7 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
@@ -65,7 +65,7 @@ public class TestCLNossaCaixa extends CampoLivreBaseTest {
 		Sacado sacado = new Sacado("Sacado");
 		Cedente cedente = new Cedente("Cedente");
 		
-		ContaBancaria contaBancaria = new ContaBancaria(BancoSuportado.NOSSA_CAIXA.create());
+		ContaBancaria contaBancaria = new ContaBancaria(BancosSuportados.NOSSA_CAIXA.create());
 		contaBancaria.setAgencia(new Agencia(1, "1"));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(2818));
 		contaBancaria.setModalidade(new Modalidade(13));

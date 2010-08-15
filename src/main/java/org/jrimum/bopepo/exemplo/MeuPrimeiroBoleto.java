@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.view.BoletoViewer;
 import org.jrimum.domkee.comum.pessoa.endereco.CEP;
@@ -51,7 +51,7 @@ public class MeuPrimeiroBoleto {
 		Cedente cedente = new Cedente("PROJETO JRimum", "00.000.208/0001-00");
 
 		// Informando dados sobre a conta bancária do cendente.
-		Banco banco = BancoSuportado.NOSSA_CAIXA.create();
+		Banco banco = BancosSuportados.NOSSA_CAIXA.create();
 		ContaBancaria contaBancariaCed = new ContaBancaria(banco);
 		contaBancariaCed.setBanco(banco);
 		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(123456, "0"));

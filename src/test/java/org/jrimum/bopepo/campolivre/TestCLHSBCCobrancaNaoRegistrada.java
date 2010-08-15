@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
@@ -44,7 +44,7 @@ public class TestCLHSBCCobrancaNaoRegistrada {
 		numeroDaConta.setDigitoDaConta("2");
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(BancoSuportado.HSBC.create());
+		contaBancaria.setBanco(BancosSuportados.HSBC.create());
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		contaBancaria.setCarteira(new Carteira(1, TipoDeCobranca.SEM_REGISTRO));
 

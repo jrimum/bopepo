@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.view.BoletoViewer;
 import org.jrimum.domkee.comum.pessoa.endereco.CEP;
@@ -50,7 +50,7 @@ public class TesteBoletoBancoRuralRegistro {
 		Cedente cedente = new Cedente("Fernando Dias de Souza", "00.000.208/0001-00");
 		
 		// Informando dados sobre a conta bancária do cendente.		
-		Banco banco = BancoSuportado.BANCO_RURAL.create();
+		Banco banco = BancosSuportados.BANCO_RURAL.create();
 		
 		ContaBancaria contaBancariaCed = new ContaBancaria(banco);
 		NumeroDaConta numeroConta = new NumeroDaConta(1234567);

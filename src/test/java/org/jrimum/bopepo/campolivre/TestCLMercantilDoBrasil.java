@@ -33,7 +33,7 @@ import java.math.BigDecimal;
 
 import junit.framework.Assert;
 
-import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
@@ -69,7 +69,7 @@ public class TestCLMercantilDoBrasil extends CampoLivreBaseTest {
 		Cedente cedente = new Cedente("Cedente");
 		
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(BancoSuportado.MERCANTIL_DO_BRASIL.create());
+		contaBancaria.setBanco(BancosSuportados.MERCANTIL_DO_BRASIL.create());
 		
 		contaBancaria.setAgencia(new Agencia(1234, "1"));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(123456789));

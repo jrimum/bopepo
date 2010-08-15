@@ -31,7 +31,7 @@ package org.jrimum.bopepo.campolivre;
 
 import static org.junit.Assert.assertEquals;
 
-import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
@@ -67,7 +67,7 @@ public class TestCLBanestes extends CampoLivreBaseTest {
 		Sacado sacado = new Sacado("Sacado");
 		Cedente cedente = new Cedente("Cedente");
 
-		ContaBancaria contaBancaria = new ContaBancaria(BancoSuportado.BANCO_DO_ESTADO_DO_ESPIRITO_SANTO.create());
+		ContaBancaria contaBancaria = new ContaBancaria(BancosSuportados.BANCO_DO_ESTADO_DO_ESPIRITO_SANTO.create());
 		contaBancaria.setCarteira(new Carteira(4, TipoDeCobranca.COM_REGISTRO));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(7730070));
 

@@ -30,7 +30,7 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
@@ -66,7 +66,7 @@ public class TestCLItauComCarteirasEspeciais extends CampoLivreBaseTest {
 		Cedente cedente = new Cedente("Cedente");
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(BancoSuportado.BANCO_ITAU.create());
+		contaBancaria.setBanco(BancosSuportados.BANCO_ITAU.create());
 		
 		contaBancaria.setAgencia(new Agencia(57, "1"));
 		contaBancaria.setCarteira(new Carteira(198));

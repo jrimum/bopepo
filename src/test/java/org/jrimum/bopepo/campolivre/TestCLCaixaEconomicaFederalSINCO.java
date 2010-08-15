@@ -29,7 +29,7 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
@@ -67,7 +67,7 @@ public class TestCLCaixaEconomicaFederalSINCO extends CampoLivreBaseTest {
 		numeroDaConta.setCodigoDaConta(2);
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		
-		contaBancaria.setBanco(BancoSuportado.CAIXA_ECONOMICA_FEDERAL.create());
+		contaBancaria.setBanco(BancosSuportados.CAIXA_ECONOMICA_FEDERAL.create());
 		
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("10000000020061732");

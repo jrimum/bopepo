@@ -29,7 +29,7 @@
  */
 package org.jrimum.bopepo.exemplo.banco;
 
-import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 
 /**
@@ -49,8 +49,8 @@ import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 public class BoletoBBNossoNumero17Exemplo extends AbstractBoletoExemplo {
 
 	@Override
-	protected BancoSuportado getBancoSuportado() {
-		return BancoSuportado.BANCO_DO_BRASIL;
+	protected BancosSuportados getBancoSuportado() {
+		return BancosSuportados.BANCO_DO_BRASIL;
 	}
 
 	@Override

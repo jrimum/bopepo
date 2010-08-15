@@ -29,7 +29,7 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
@@ -73,7 +73,7 @@ abstract class AbstractCLHSBC extends AbstractCampoLivre {
 
 		} else {
 			throw new CampoLivreException("Atualmente para o banco" + " "
-					+ BancoSuportado.HSBC.getInstituicao()
+					+ BancosSuportados.HSBC.getInstituicao()
 					+ " só é possível a montagem do campo livre para carteiras"
 					+ " não registradas.");
 		}

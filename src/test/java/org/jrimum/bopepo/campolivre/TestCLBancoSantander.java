@@ -1,6 +1,6 @@
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
@@ -38,7 +38,7 @@ public class TestCLBancoSantander extends CampoLivreBaseTest {
 		NumeroDaConta numeroDaConta = new NumeroDaConta(1625462,"9");
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		
-		contaBancaria.setBanco(BancoSuportado.BANCO_SANTANDER.create());
+		contaBancaria.setBanco(BancosSuportados.BANCO_SANTANDER.create());
 		contaBancaria.setCarteira(new Carteira(101, TipoDeCobranca.COM_REGISTRO, "101- Cobrança Simples Rápida COM Registro"));
 		
 		titulo = new Titulo(contaBancaria, sacado, cedente);

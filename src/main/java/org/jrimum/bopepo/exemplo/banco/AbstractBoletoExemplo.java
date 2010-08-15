@@ -35,7 +35,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.domkee.comum.pessoa.endereco.Endereco;
 import org.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;
@@ -97,7 +97,7 @@ public abstract class AbstractBoletoExemplo {
 	
 	protected abstract Carteira getCarteira();
 	
-	protected abstract BancoSuportado getBancoSuportado();
+	protected abstract BancosSuportados getBancoSuportado();
 	
 	/**
 	 * <p>

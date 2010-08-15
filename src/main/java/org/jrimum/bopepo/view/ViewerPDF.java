@@ -47,7 +47,7 @@ import javax.imageio.ImageIO;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.log4j.Logger;
-import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.pdf.Files;
 import org.jrimum.bopepo.pdf.PDFUtil;
@@ -809,7 +809,7 @@ class ViewerPDF {
 
 		} else {
 
-			if (BancoSuportado.isSuportado(conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
+			if (BancosSuportados.isSuportado(conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
 
 				URL url = this.getClass().getResource("/img/"
 											+ conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado()

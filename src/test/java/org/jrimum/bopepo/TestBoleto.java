@@ -87,7 +87,7 @@ public class TestBoleto{
 		Cedente cedente = new Cedente("Cedente");
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(BancoSuportado.BANCO_BRADESCO.create());
+		contaBancaria.setBanco(BancosSuportados.BANCO_BRADESCO.create());
 		
 		Agencia agencia = new Agencia(1234, "1");
 		contaBancaria.setAgencia(agencia);

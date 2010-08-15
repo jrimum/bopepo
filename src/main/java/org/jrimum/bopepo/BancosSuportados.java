@@ -100,7 +100,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
  * 
  * @version 0.2
  */
-public enum BancoSuportado implements Serializable{
+public enum BancosSuportados implements Serializable{
 
 	// TODO FAZER um link para a lista de componentes suportados no javadoc
 	// dessa classe.
@@ -272,8 +272,8 @@ public enum BancoSuportado implements Serializable{
 	 * 
 	 * @since 0.2
 	 */
-	public static final HashMap<String, BancoSuportado> suportados = new HashMap<String, BancoSuportado>(
-			BancoSuportado.values().length);
+	public static final HashMap<String, BancosSuportados> suportados = new HashMap<String, BancosSuportados>(
+			BancosSuportados.values().length);
 
 	static {
 
@@ -358,7 +358,7 @@ public enum BancoSuportado implements Serializable{
 	 * @since 0.2
 	 * 
 	 */
-	private BancoSuportado(String codigoDeCompensacaoBACEN, String cnpj,
+	private BancosSuportados(String codigoDeCompensacaoBACEN, String cnpj,
 			String instituicao, String segmento) {
 		this.codigoDeCompensacaoBACEN = codigoDeCompensacaoBACEN;
 		this.cNPJ = cnpj;

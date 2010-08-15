@@ -45,9 +45,9 @@ public class TestBancoSuportado{
 		
 		//bancos implementados
 		
-		assertEquals(BancoSuportado.BANCO_DO_BRASIL.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "001");
-		assertEquals(BancoSuportado.BANCO_BRADESCO.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "237");
-		assertEquals(BancoSuportado.CAIXA_ECONOMICA_FEDERAL.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "104");
+		assertEquals(BancosSuportados.BANCO_DO_BRASIL.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "001");
+		assertEquals(BancosSuportados.BANCO_BRADESCO.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "237");
+		assertEquals(BancosSuportados.CAIXA_ECONOMICA_FEDERAL.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "104");
 		
 	}
 }

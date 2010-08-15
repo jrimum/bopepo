@@ -36,7 +36,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 
-import org.jrimum.bopepo.BancoSuportado;
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
@@ -121,7 +121,7 @@ public class TestCLUnibancoCobrancaRegistrada extends CampoLivreBaseTest {
 		Cedente cedente = new Cedente("Cedente");
 
 		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(BancoSuportado.UNIBANCO.create());
+		contaBancaria.setBanco(BancosSuportados.UNIBANCO.create());
 		contaBancaria.setAgencia(new Agencia(1, "9"));
 		contaBancaria.setCarteira(new Carteira(123,TipoDeCobranca.COM_REGISTRO));
 
