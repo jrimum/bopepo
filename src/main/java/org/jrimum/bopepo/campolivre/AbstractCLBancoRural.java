@@ -3,8 +3,18 @@ package org.jrimum.bopepo.campolivre;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
- * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a>
- *
+ * <p>
+ * Interface comum para todos os campos livres do Banco Santander que venham a
+ * existir.
+ * </p>
+ * 
+ * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a> -
+ *         Colaborador com o campo livre {@code CLBancoRuralCobrancaRegistrada}
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * 
+ * @since 0.2
+ * 
+ * @version 0.2
  */
 abstract class AbstractCLBancoRural extends AbstractCampoLivre {
 
@@ -13,11 +23,44 @@ abstract class AbstractCLBancoRural extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = -602454445158254612L;
 
+	/**
+	 * O código reduzido campos livre: {@code CLBancoRuralCobrancaNaoRegistrada}
+	 * e {@code CLBancoRuralCobrancaNaoRegistradaSeguradora}
+	 */
+	static final String CODIGO_REDUZIDO = "CODIGO_REDUZIDO";
+
 	protected AbstractCLBancoRural(Integer fieldsLength) {
 		super(fieldsLength);
 	}
 
 	static CampoLivre create(Titulo titulo) {
-		return new CLBancoRuralCobrancaRegistrada(titulo);
+		
+		switch(titulo.getContaBancaria().getCarteira().getTipoCobranca()){
+		case SEM_REGISTRO:
+			return campoSemRegistro(titulo);
+		case COM_REGISTRO:
+			return new CLBancoRuralCobrancaRegistrada(titulo);
+		default:
+			return null;
+		}
+	}
+
+	/**
+	 * Determina e cria um campo livre de cobrança não registrada.
+	 * 
+	 * @param titulo
+	 *            - título com as informações para geração do campo livre
+	 * @return campo livre ou null
+	 */
+	private static CampoLivre campoSemRegistro(Titulo titulo) {
+		
+		switch(titulo.getNossoNumero().length()){
+		case NN10:
+			return new CLBancoRuralCobrancaNaoRegistradaSeguradora(titulo);
+		case NN15:
+			return new CLBancoRuralCobrancaNaoRegistrada(titulo);
+		default:
+			return null;
+		}
 	}
 }

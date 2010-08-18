@@ -30,7 +30,6 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
@@ -111,16 +110,13 @@ class CLBancoReal extends AbstractCLBancoReal {
 	 * @param titulo título com as informações para geração do campo livre
 	 */
 	CLBancoReal(Titulo titulo) {
+		
 		super(FIELDS_LENGTH);
 		
-		ContaBancaria conta = titulo.getContaBancaria();
-		
-		this.add(new Field<Integer>(conta.getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
-		this.add(new Field<String>(calculeDigitoDaPosicao31(titulo.getNumeroDoDocumento(), conta.getAgencia().getCodigo(), conta.getNumeroDaConta().getCodigoDaConta()), 1, Filler.ZERO_LEFT));
-		
+		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
+		this.add(new Field<String>(calculeDigitoDaPosicao31(titulo.getNumeroDoDocumento(), titulo.getContaBancaria().getAgencia().getCodigo(), titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta()), 1, Filler.ZERO_LEFT));
 		this.add(new Field<String>(Strings.eliminateSymbols(titulo.getNumeroDoDocumento()), 13, Filler.ZERO_LEFT));
-		
 	}
 	
 	/**

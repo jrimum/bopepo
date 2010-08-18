@@ -54,32 +54,25 @@ abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = -7324315662526104153L;
 
-
 	protected AbstractCLBancoDoBrasil(Integer fieldsLength) {
 		super(fieldsLength);
 	}
 
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException{
-				
-		CampoLivre campoLivre = null;
-		
-		if (titulo.getNossoNumero().length() == 10) {
-			campoLivre = new CLBancoDoBrasilNN10(titulo);
-		}
-		else if (titulo.getNossoNumero().length() == 11) {
-			campoLivre = new CLBancoDoBrasilNN11(titulo);
-		}
-		else if (titulo.getNossoNumero().length() == 17) {
-			campoLivre = new CLBancoDoBrasilNN17(titulo);	
-		}
-		else {
-			throw new NotSupportedCampoLivreException(
-				"Campo livre diponível somente para títulos com nosso número " +
-				"composto por 10 posições(convênio com 7), 11 posições ou " +
-				"17 posições(convênio com 6)."
-			);
-		}
 
-		return campoLivre;
+		switch(titulo.getNossoNumero().length()){
+		case NN10:
+			return new CLBancoDoBrasilNN10(titulo);
+		case NN11:
+			return new CLBancoDoBrasilNN11(titulo);
+		case NN17:
+			return new CLBancoDoBrasilNN17(titulo);
+		default:
+			throw new NotSupportedCampoLivreException(
+					"Campo livre diponível somente para títulos com nosso número " +
+					"composto por 10 posições(convênio com 7), 11 posições ou " +
+					"17 posições(convênio com 6)."
+				);
+		}
 	}
 }

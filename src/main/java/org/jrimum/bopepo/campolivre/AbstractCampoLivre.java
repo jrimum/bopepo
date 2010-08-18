@@ -30,12 +30,9 @@
 package org.jrimum.bopepo.campolivre;
 
 import static org.jrimum.domkee.financeiro.banco.febraban.Banco.isCodigoDeCompensacaoOK;
-import static org.jrimum.utilix.Objects.isNotNull;
 
 import org.apache.log4j.Logger;
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.domkee.financeiro.banco.Banco;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.AbstractLineOfFields;
@@ -82,6 +79,26 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	private static final long serialVersionUID = 4605730904122445595L;
 	
 	private static Logger log = Logger.getLogger(Objects.class);
+	
+	/**
+	 * Nosso número com 10 posições.
+	 */
+	static final int NN10 = 10;
+	
+	/**
+	 * Nosso número com 11 posições.
+	 */
+	static final int NN11 = 11;
+	
+	/**
+	 * Nosso número com 15 posições.
+	 */
+	static final int NN15 = 15;
+	
+	/**
+	 * Nosso número com 17 posições.
+	 */
+	static final int NN17 = 17;
 
 	/**
 	 * <p>Subclasses não precisam definir o tamanho.</p>

@@ -29,7 +29,6 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
@@ -119,20 +118,11 @@ class CLBancoIntermedium extends AbstractCLBancoIntermedium {
 		
 		super(FIELDS_LENGTH);
 		
-		ContaBancaria conta = titulo.getContaBancaria();
-		
-		String nossoNumero = titulo.getNossoNumero();
-		
-		this.add(new Field<Integer>(conta.getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
-		
+		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(CONSTANTE_70, 2));
-		
-		this.add(new Field<String>(nossoNumero, 11, Filler.ZERO_LEFT));	
-		
-		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
-		
-		this.add(new Field<String>(conta.getNumeroDaConta().getDigitoDaConta(), 1, Filler.ZERO_LEFT));
-		
+		this.add(new Field<String>(titulo.getNossoNumero(), 11, Filler.ZERO_LEFT));	
+		this.add(new Field<Integer>( titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
+		this.add(new Field<String>( titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta(), 1, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(CONSTANTE_0, 1));
 	}
 
