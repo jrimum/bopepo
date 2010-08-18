@@ -29,7 +29,6 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
@@ -40,8 +39,8 @@ import org.jrimum.utilix.text.Filler;
  * </p>
  * 
  * 	<table border="1" cellpadding="0" cellspacing="0" style="border-collapse:
- * 	collapse" bordercolor="#111111" width="60%" id="campolivre">
- * 		<thead>
+ * 	collapse" bordercolor="#111111" width="100%" id="campolivre">
+ * 		<thead bgcolor="#DEDEDE">
  * 			<tr>
  *				<th>Posição </th>
  * 				<th>Tamanho</th>
@@ -50,43 +49,43 @@ import org.jrimum.utilix.text.Filler;
  * 				<th>Conteúdo (terminologia do banco)</th>
  * 			</tr>
  * 		</thead>
- * <tbody>
+ *		<tbody style="text-align:center">
  * 		<tr>
  * 			<td>20-30</td>
  * 			<td>11</td>
  * 			<td>9(11) </td>
- * 			<td>Nosso número com dígito</td>
- * 			<td>Número Bancário</td>
+ * 			<td style="text-align:left;padding-left:10px">Nosso número com dígito</td>
+ * 			<td style="text-align:left;padding-left:10">Número Bancário</td>
  * 		</tr>
  *   	<tr>
  * 			<td>31-34</td>
  * 			<td>4</td>
  * 			<td>9(4) </td>
- * 			<td>Código da Agência.</td>
- * 			<td>Código da Agência.</td>
+ * 			<td style="text-align:left;padding-left:10">Código da Agência.</td>
+ * 			<td style="text-align:left;padding-left:10">Código da Agência.</td>
  * 		</tr>
  *    	<tr>
  * 			<td>35-41</td>
  * 			<td>7</td>
  * 			<td>9(7) </td>
- * 			<td>Conta Corrente.</td>
- * 			<td>Conta de cobrança.</td>
+ * 			<td style="text-align:left;padding-left:10">Conta Corrente.</td>
+ * 			<td style="text-align:left;padding-left:10">Conta de cobrança.</td>
  * 		</tr>
  *     	<tr>
  * 			<td>42-43</td>
  * 			<td>2</td>
  * 			<td>9(2) </td>
- * 			<td>Código da carteira="00"</td>
- * 			<td>Código da carteira="00"</td>
+ * 			<td style="text-align:left;padding-left:10">Código da carteira="00"</td>
+ * 			<td style="text-align:left;padding-left:10">Código da carteira="00"</td>
  * 		</tr>
  * 		<tr>
  * 			<td>44-44</td>
  * 			<td>2</td>
  * 			<td>9(2) </td>
- * 			<td>Constante="1"</td>
- * 			<td>Código do aplicativo da Cobrança (COB) = "1"</td>
+ * 			<td style="text-align:left;padding-left:10">Constante="1"</td>
+ * 			<td style="text-align:left;padding-left:10">Código do aplicativo da Cobrança (COB) = "1"</td>
  * 		</tr>
- * </tbody>
+ * 		</tbody>
  * </table>
  * 
  * 
@@ -119,16 +118,13 @@ public class CLHSBCCobrancaRegistrada extends AbstractCLHSBC{
 	 * @param titulo - título com as informações para geração do campo livre
 	 */
 	CLHSBCCobrancaRegistrada(Titulo titulo) {
-		super(FIELDS_LENGTH);
 		
-		ContaBancaria conta = titulo.getContaBancaria();
+		super(FIELDS_LENGTH);
 		
 		this.add(new Field<String>(titulo.getNossoNumero(), 10, Filler.ZERO_LEFT));	
 		this.add(new Field<String>(titulo.getDigitoDoNossoNumero(), 1));	
-		
-		this.add(new Field<Integer>(conta.getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
-		
+		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
 		this.add(new Field<String>(CODIGO_DA_CARTEIRA, 2));
 		this.add(new Field<Integer>(CODIGO_DO_APLICATIVO, 1));
 	}
