@@ -77,7 +77,7 @@ import org.jrimum.utilix.text.Filler;
  * </table>
  * </p>
  * 
- * <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @since 0.2
  * 

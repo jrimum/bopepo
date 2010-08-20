@@ -35,7 +35,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
- * @author Gilmar
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a> 
  *
  */
 public class TestBancoSuportado{

@@ -54,7 +54,7 @@ import com.lowagie.text.pdf.SimpleBookmark;
  * </p>
  * 
  * 
- * @author Gilmar P.S.L.
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a> 
  * 
  * @since 0.2
  * 

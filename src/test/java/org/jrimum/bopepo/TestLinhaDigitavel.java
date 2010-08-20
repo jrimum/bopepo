@@ -51,7 +51,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author Gilmar
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a> 
  *
  */
 public class TestLinhaDigitavel{
