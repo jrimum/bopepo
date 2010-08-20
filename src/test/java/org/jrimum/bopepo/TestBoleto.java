@@ -63,8 +63,8 @@ import org.junit.Test;
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
- * @author Misael
- * @author Rômulo
+ * <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
+ * <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @since 0.2
  * 

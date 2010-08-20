@@ -62,7 +62,7 @@ import org.jrimum.utilix.Objects;
  * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a> 
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * @author <a href="http://www.nordestefomento.com.br">Nordeste Fomento Mercantil</a>
- * @author Samuel
+ * @author <a href="mailto:samuelvalerio@gmail.com">Samuel Valério</a>
  * 
  * @since 0.2
  * 

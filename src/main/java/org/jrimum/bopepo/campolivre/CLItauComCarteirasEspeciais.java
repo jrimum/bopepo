@@ -103,7 +103,7 @@ import org.jrimum.utilix.text.Filler;
  * <pre>
  * </p>
  * 
- * @author Romulo
+ * <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @since 0.2
  * 
