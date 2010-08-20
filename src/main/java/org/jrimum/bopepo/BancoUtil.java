@@ -123,7 +123,6 @@ public class BancoUtil implements Serializable {
 	 * inversa, ou seja, adicionar à data base o fator de vencimento capturado.
 	 * Obtendo então a data de vencimento deste boleto.
 	 * </p>
-	 * 
 	 * @param dataVencimento
 	 *            data de vencimento de um título
 	 * @return fator de vencimento calculado

@@ -71,8 +71,6 @@ import com.lowagie.text.DocumentException;
  */
 public class BoletoViewer {
 
-	//TODO Teste no teste unitário.
-	
 	/**
 	 * 
 	 */

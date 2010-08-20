@@ -48,10 +48,13 @@ import org.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV;
 
 
 /**
+ * <p>
  * É um número único para cada Boleto composto dos seguintes campos:
- * 
+ * </p>
+ * <div>
  * <table border="1" cellpadding="0" cellspacing="0" style="border-collapse:
- * collapse" bordercolor="#111111" width="85%" id="composição"> <thead>
+ * 	collapse" bordercolor="#111111" width="100%"> 
+ * <thead bgcolor="#DEDEDE">
  * <tr>
  * <th>Posição </th>
  * <th>Tamanho</th>
@@ -59,48 +62,47 @@ import org.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV;
  * <th>Conteúdo</th>
  * </tr>
  * </thead>
- * <tbody>
+ * <tbody style="text-align:center">
  * <tr>
  * <td>01-03</td>
  * <td>3</td>
- * <td>9(3)</td>
- * <td>Identificação do banco </td>
+ * <td style="text-align:right;padding-right:10px">9(3)</td>
+ * <td style="text-align:left;padding-left:10px">Identificação do banco </td>
  * </tr>
  * <tr>
  * <td>04-04 </td>
  * <td>1 </td>
- * <td>9 </td>
- * <td>Código moeda (9-Real) </td>
+ * <td style="text-align:right;padding-right:10px">9 </td>
+ * <td style="text-align:left;padding-left:10px">Código moeda (9-Real) </td>
  * </tr>
  * <tr>
  * <td>05-05 </td>
  * <td>1 </td>
- * <td>9 </td>
- * <td>Dígito verificador do composição de barras (DV) </td>
+ * <td style="text-align:right;padding-right:10px">9 </td>
+ * <td style="text-align:left;padding-left:10px">Dígito verificador do composição de barras (DV) </td>
  * </tr>
  * <tr>
  * <td>06-09 </td>
  * <td>4 </td>
- * <td>9(4)</td>
- * <td>Posições 06 a 09 – fator de vencimento</td>
+ * <td style="text-align:right;padding-right:10px">9(4)</td>
+ * <td style="text-align:left;padding-left:10px">Posições 06 a 09 – fator de vencimento</td>
  * </tr>
  * <tr>
  * <td>10-19</td>
  * <td>10</td>
- * <td>9(08)v99</td>
- * <td>Posições 10 a 19 – valor nominal do título&nbsp;</td>
+ * <td style="text-align:right;padding-right:10px">9(08)v99</td>
+ * <td style="text-align:left;padding-left:10px">Posições 10 a 19 – valor nominal do título&nbsp;</td>
  * </tr>
  * <tr>
  * <td>20-44 </td>
  * <td>25 </td>
- * <td>9(25) </td>
- * <td>Field livre – utilizado de acordo com a especificação interna do banco
+ * <td style="text-align:right;padding-right:10px">9(25) </td>
+ * <td style="text-align:left;padding-left:10px">Field livre – utilizado de acordo com a especificação interna do banco
  * emissor</td>
  * </tr>
  * </tbody>
  * </table>
- * 
- * 
+ * </div>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a> 
