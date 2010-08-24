@@ -34,6 +34,7 @@ import java.math.BigDecimal;
 import junit.framework.Assert;
 
 import org.jrimum.bopepo.BancosSuportados;
+import org.jrimum.bopepo.excludes.CampoLivreBaseTest;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;

@@ -32,6 +32,7 @@ package org.jrimum.bopepo.campolivre;
 import static org.junit.Assert.assertEquals;
 
 import org.jrimum.bopepo.BancosSuportados;
+import org.jrimum.bopepo.excludes.CampoLivreBaseTest;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;

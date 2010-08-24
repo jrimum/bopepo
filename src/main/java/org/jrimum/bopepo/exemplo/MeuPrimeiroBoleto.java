@@ -107,6 +107,10 @@ public class MeuPrimeiroBoleto {
 		titulo.setTipoDeDocumento(TipoDeTitulo.DM_DUPLICATA_MERCANTIL);
 		titulo.setAceite(EnumAceite.A);
 		titulo.setDesconto(new BigDecimal(0.05));
+		titulo.setDeducao(BigDecimal.ZERO);
+		titulo.setMora(BigDecimal.ZERO);
+		titulo.setAcrecimo(BigDecimal.ZERO);
+		titulo.setValorCobrado(BigDecimal.ZERO);
 
 		/*
 		 * INFORMANDO MAIS DADOS BANCÁRIOS, QUANDO NECESSÁRIO. Dependendo do
@@ -119,7 +123,7 @@ public class MeuPrimeiroBoleto {
 		 * Definidos como padrão pela FEBRABAN. Verifique na documentação.
 		 */
 		titulo.setParametrosBancarios(new ParametrosBancariosMap("dadoNecessario",
-				"Por exemplo, uma constante string").adicione("outroDadoNecessario:Constante1", new Integer(1)));
+				"2").adicione("outroDadoNecessario:Constante1", new Integer(1)));
 		
 		/*
 		 * Para recuperar um dado

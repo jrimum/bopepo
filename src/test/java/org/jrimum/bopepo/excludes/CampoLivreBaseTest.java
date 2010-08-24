@@ -27,11 +27,12 @@
  * 
  */
 
-package org.jrimum.bopepo.campolivre;
+package org.jrimum.bopepo.excludes;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.jrimum.bopepo.campolivre.CampoLivre;
 import org.junit.Test;
 
 /**

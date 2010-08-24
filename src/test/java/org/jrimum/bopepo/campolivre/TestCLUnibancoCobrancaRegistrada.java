@@ -37,6 +37,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Calendar;
 
 import org.jrimum.bopepo.BancosSuportados;
+import org.jrimum.bopepo.excludes.CampoLivreBaseTest;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
