@@ -30,8 +30,6 @@
 
 package org.jrimum.bopepo;
 
-import org.jrimum.bopepo.campolivre.TestAbstractCLBancoSafra;
-import org.jrimum.bopepo.campolivre.TestAbstractCLCaixaEconomicaFederal;
 import org.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN10;
 import org.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN11;
 import org.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN17;
@@ -66,8 +64,6 @@ import org.junit.runners.Suite;
 			TestBancoSuportado.class,
 			TestCodigoDeBarras.class,
 			TestLinhaDigitavel.class,
-			TestAbstractCLBancoSafra.class,
-			TestAbstractCLCaixaEconomicaFederal.class,
 			TestCLBancoDoBrasilNN10.class,
 			TestCLBancoDoBrasilNN11.class,
 			TestCLBancoDoBrasilNN17.class,
