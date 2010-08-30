@@ -136,7 +136,7 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 	 * Data Base de 07.10.1997, data usada pela FEBRABAN para realizar o cálculo
 	 * do fator de vencimento.
 	 * 
-	 * @see FatorDeVencimento#calculceFatorDeVencimento(Date)
+	 * @see FatorDeVencimento#toFator(Date)
 	 */
 	public static final Date DATA_BASE_DO_FATOR_DE_VENCIMENTO = new GregorianCalendar(
 			1997, Calendar.OCTOBER, 7).getTime();
@@ -163,7 +163,7 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 	 * Representa a quantidade de dias decorridos da data base à data de
 	 * vencimento do título.
 	 * 
-	 * @see FatorDeVencimento#calculceFatorDeVencimento(Date)
+	 * @see FatorDeVencimento#toFator(Date)
 	 */
 	private Field<Integer> fatorDeVencimento;
 	
@@ -283,7 +283,7 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 	private void calculateAndSetFatorDeVencimento(Date vencimento) {
 
 		fatorDeVencimento.setValue(
-				FatorDeVencimento.calculceFatorDeVencimento(vencimento));
+				FatorDeVencimento.toFator(vencimento));
 	}
 
 	/**

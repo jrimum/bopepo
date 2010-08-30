@@ -31,48 +31,77 @@ package org.jrimum.bopepo;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
 
 
 public class TestFatorDeVencimento {
 
-	GregorianCalendar data = new GregorianCalendar();
+	private GregorianCalendar data = new GregorianCalendar();
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testCalculeFatorDeVencimentoDataNull() {
+	public void testToFatorComDataNula() {
 
-		FatorDeVencimento.calculceFatorDeVencimento(null);
+		FatorDeVencimento.toFator(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testCalculeFatorDeVencimentoDataMenorQueDataBase() {
+	public void testToFatorComDataMenorQueDataBase() {
 
 		data.set(1997, Calendar.JANUARY, 1);
 
-		FatorDeVencimento.calculceFatorDeVencimento(data.getTime());
+		FatorDeVencimento.toFator(data.getTime());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testCalculeFatorDeVencimentoDataMaiorQueDataLimite() {
+	public void testToFatorComDataMaiorQueDataLimite() {
 
 		data.set(2025, Calendar.FEBRUARY, 22);
 
-		FatorDeVencimento.calculceFatorDeVencimento(data.getTime());
+		FatorDeVencimento.toFator(data.getTime());
 	}
 
 	@Test
-	public final void testCalculceFatorDeVencimento() {
+	public final void testToFator() {
 
 		data.set(2000, Calendar.JULY, 3);
-		assertEquals(1000, FatorDeVencimento.calculceFatorDeVencimento(data.getTime()));
+		assertEquals(1000, FatorDeVencimento.toFator(data.getTime()));
 
 		data.set(2000, Calendar.JULY, 5);
-		assertEquals(1002, FatorDeVencimento.calculceFatorDeVencimento(data.getTime()));
+		assertEquals(1002, FatorDeVencimento.toFator(data.getTime()));
 
 		data.set(2025, Calendar.FEBRUARY, 21);
-		assertEquals(9999, FatorDeVencimento.calculceFatorDeVencimento(data.getTime()));
+		assertEquals(9999, FatorDeVencimento.toFator(data.getTime()));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testToDateComFatorMenorQueLimiteBase() {
+
+		FatorDeVencimento.toDate(-1);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testToDateComFatorMaiorQueLimiteMaximo() {
+
+		FatorDeVencimento.toDate(10000);
 	}
 
+	@Test
+	public final void testToDate() {
+		
+		data.set(2000, Calendar.JULY, 3);
+		Date date = DateUtils.truncate(data.getTime() ,Calendar.DATE);
+		assertEquals(date, FatorDeVencimento.toDate(1000));
+
+		data.set(2000, Calendar.JULY, 5);
+		date = DateUtils.truncate(data.getTime() ,Calendar.DATE);
+		assertEquals(date, FatorDeVencimento.toDate(1002));
+		
+		data.set(2025, Calendar.FEBRUARY, 21);
+		date = DateUtils.truncate(data.getTime() ,Calendar.DATE);
+		assertEquals(date, FatorDeVencimento.toDate(9999));
+	}
 }

@@ -29,10 +29,10 @@
 
 package org.jrimum.bopepo;
 
+import static java.lang.String.format;
 import static org.jrimum.utilix.Objects.isNull;
 import static org.jrimum.utilix.text.DateFormat.DDMMYYYY_B;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -69,8 +69,15 @@ public class FatorDeVencimento{
 	 * FEBRABAN.
 	 * </p>
 	 */
-	private static final Date DATA_BASE_DO_FATOR_DE_VENCIMENTO = new GregorianCalendar(
-			1997, Calendar.OCTOBER, 7).getTime();
+	private static final Calendar BASE_DO_FATOR_DE_VENCIMENTO = new GregorianCalendar(1997, Calendar.OCTOBER, 7);
+	
+	/**
+	 * <p>
+	 * Data base para o cálculo do fator de vencimento fixada em 07/10/1997 pela
+	 * FEBRABAN.
+	 * </p>
+	 */
+	private static final Date DATA_BASE_DO_FATOR_DE_VENCIMENTO = BASE_DO_FATOR_DE_VENCIMENTO.getTime();
 
 	/**
 	 *<p>
@@ -78,8 +85,7 @@ public class FatorDeVencimento{
 	 * 07/10/1997.
 	 * </p>
 	 */
-	private static final Date DATA_LIMITE_DO_FATOR_DE_VENCIMENTO = new GregorianCalendar(
-			2025, Calendar.FEBRUARY, 21).getTime();
+	private static final Date DATA_LIMITE_DO_FATOR_DE_VENCIMENTO = new GregorianCalendar(2025, Calendar.FEBRUARY, 21).getTime();
 
 	/**
 	 * <p>
@@ -123,42 +129,92 @@ public class FatorDeVencimento{
 	 * inversa, ou seja, adicionar à data base o fator de vencimento capturado.
 	 * Obtendo então a data de vencimento deste boleto.
 	 * </p>
-	 * @param dataVencimento
+	 * @param data
 	 *            data de vencimento de um título
 	 * @return fator de vencimento calculado
 	 * @throws IllegalArgumentException
 	 * 
 	 * @since 0.2
 	 */
-	public static int calculceFatorDeVencimento(Date dataVencimento)
-			throws IllegalArgumentException {
+	public static int toFator(Date data) throws IllegalArgumentException {
 
-		if (isNull(dataVencimento)) {
+		if (isNull(data)) {
 			
-			throw new IllegalArgumentException(
-					"Impossível realizar o cálculo do fator"
-							+ " de vencimento de uma data nula.");
+			throw new IllegalArgumentException("Impossível realizar o cálculo do fator de vencimento de uma data nula!");
+			
 		} else {
 			
-			Date dataVencTruncada = DateUtils.truncate(dataVencimento, Calendar.DATE);
+			Date dataTruncada = DateUtils.truncate(data, Calendar.DATE);
 			
-			if (dataVencTruncada.before(DATA_BASE_DO_FATOR_DE_VENCIMENTO)
-					|| dataVencTruncada.after(DATA_LIMITE_DO_FATOR_DE_VENCIMENTO)) {
+			checkIntervalo(dataTruncada);
 				
-				throw new IllegalArgumentException(
-						"Para o cálculo do fator de"
-								+ " vencimento se faz necessário informar uma data entre"
-								+ " "
-								+ DDMMYYYY_B
-										.format(DATA_BASE_DO_FATOR_DE_VENCIMENTO)
-								+ " e "
-								+ DDMMYYYY_B
-										.format(DATA_LIMITE_DO_FATOR_DE_VENCIMENTO));
-			} else {
-				
-				return (int) Dates.calculeDiferencaEmDias(
-						DATA_BASE_DO_FATOR_DE_VENCIMENTO, dataVencTruncada);
-			}
+			return (int) Dates.calculeDiferencaEmDias(DATA_BASE_DO_FATOR_DE_VENCIMENTO, dataTruncada);
+		}
+	}
+	
+	/**
+	 * <p>
+	 * Transforma um fator de vencimento em um objeto data da forma inversa
+	 * descrita em {@link #toFator(Date)}.
+	 * </p>
+	 * 
+	 * @param fator
+	 *            - Número entre o intervalo (incluíndo) 0 e 9999
+	 * @return Data do vencimento
+	 * @throws IllegalArgumentException
+	 *             Caso o {@code fator} < 0 ou {@code fator} > 9999
+	 */
+	public static Date toDate(int fator) throws IllegalArgumentException {
+		
+		checkIntervalo(fator);
+		
+		Calendar date = (Calendar) BASE_DO_FATOR_DE_VENCIMENTO.clone();
+		
+		date.add(Calendar.DAY_OF_YEAR, fator);
+		
+		return  DateUtils.truncate(date.getTime(), Calendar.DATE);
+	}
+
+	/**
+	 * <p>
+	 * Lança exceção caso a {@code dataVencimentoTruncada} esteja fora do
+	 * intervalo entre a {@link #DATA_BASE_DO_FATOR_DE_VENCIMENTO} e a
+	 * {@link #DATA_LIMITE_DO_FATOR_DE_VENCIMENTO}.
+	 * </p>
+	 * 
+	 * @param dataVencimentoTruncada
+	 *            data de vencimento truncada com {@code
+	 *            DateUtils.truncate(date, Calendar.DATE)}
+	 * @throws IllegalArgumentException
+	 *             Caso a data esteja {@code dataVencimentoTruncada} esteja fora
+	 *             do intervalo entre a
+	 *             {@link #DATA_BASE_DO_FATOR_DE_VENCIMENTO} e a
+	 *             {@link #DATA_LIMITE_DO_FATOR_DE_VENCIMENTO}
+	 */
+	private static void checkIntervalo(Date dataVencimentoTruncada) throws IllegalArgumentException {
+		
+		if(dataVencimentoTruncada.before(DATA_BASE_DO_FATOR_DE_VENCIMENTO)
+				|| dataVencimentoTruncada.after(DATA_LIMITE_DO_FATOR_DE_VENCIMENTO)) {
+			
+			throw new IllegalArgumentException(
+					format("Para o cálculo do fator de vencimento se faz necessário informar uma data entre %s e %s.",
+					DDMMYYYY_B.format(DATA_BASE_DO_FATOR_DE_VENCIMENTO), DDMMYYYY_B.format(DATA_LIMITE_DO_FATOR_DE_VENCIMENTO)));
+					
+		}
+	}
+	
+	/**
+	 * <p>Lança exceção caso o {@code fator} estja fora do intervalo.</p> 
+	 * 
+	 * @param fatorDeVencimento - Número entre o intervalo (incluíndo) 0 e 9999
+	 * @throws IllegalArgumentException Caso o {@code fator} < 0 ou {@code fator} > 9999
+	 */
+	private static void checkIntervalo(int fatorDeVencimento) throws IllegalArgumentException {
+
+		if (fatorDeVencimento < 0 || fatorDeVencimento > 9999) {
+
+			throw new IllegalArgumentException(
+					"Impossível transformar em data um fator menor que zero! O fator de vencimento deve ser um número entre 0 e 9999.");
 		}
 	}
 }
