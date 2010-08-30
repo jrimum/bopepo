@@ -1,8 +1,12 @@
 package org.jrimum.bopepo;
 
-import org.apache.commons.lang.StringUtils;
-import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Strings;
+import static org.apache.commons.lang.StringUtils.EMPTY;
+import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang.StringUtils.isNotBlank;
+import static org.apache.commons.lang.StringUtils.trim;
+import static org.jrimum.utilix.Objects.checkNotNull;
+import static org.jrimum.utilix.text.Strings.WHITE_SPACE;
+
 import org.jrimum.vallia.digitoverificador.BoletoLinhaDigitavelDV;
 
 /**
@@ -215,7 +219,7 @@ public final class BoletoUtil {
 		
 		checkFormatoCodigoDeBarras(codigoDeBarras);
 		
-		return StringUtils.trim(codigoDeBarras).substring(19, 44);
+		return trim(codigoDeBarras).substring(19, 44);
 	}
 
 	/**
@@ -241,7 +245,7 @@ public final class BoletoUtil {
 		
 		checkFormatoCodigoDeBarras(codigoDeBarras);
 		
-		return StringUtils.trim(codigoDeBarras).substring(9, 19);
+		return trim(codigoDeBarras).substring(9, 19);
 	}
 
 	/**
@@ -267,7 +271,7 @@ public final class BoletoUtil {
 		
 		checkFormatoCodigoDeBarras(codigoDeBarras);
 		
-		return StringUtils.trim(codigoDeBarras).substring(5, 9);
+		return trim(codigoDeBarras).substring(5, 9);
 	}
 	
 	/**
@@ -293,7 +297,7 @@ public final class BoletoUtil {
 		
 		checkFormatoCodigoDeBarras(codigoDeBarras);
 		
-		return StringUtils.trim(codigoDeBarras).substring(4, 5);
+		return trim(codigoDeBarras).substring(4, 5);
 	}
 
 	/**
@@ -319,7 +323,7 @@ public final class BoletoUtil {
 		
 		checkFormatoCodigoDeBarras(codigoDeBarras);
 		
-		return StringUtils.trim(codigoDeBarras).substring(3, 4);
+		return trim(codigoDeBarras).substring(3, 4);
 	}
 
 	/**
@@ -345,7 +349,7 @@ public final class BoletoUtil {
 		
 		checkFormatoCodigoDeBarras(codigoDeBarras);
 		
-		return StringUtils.trim(codigoDeBarras).substring(0, 3);
+		return trim(codigoDeBarras).substring(0, 3);
 	}
 	
 	/**
@@ -413,7 +417,7 @@ public final class BoletoUtil {
 
 		final StringBuilder linhaDigitavel = new StringBuilder();
 		
-		final String c = StringUtils.trim(codigoDeBarras);
+		final String c = trim(codigoDeBarras);
 		
 		//campo1
 		//banco
@@ -505,7 +509,7 @@ public final class BoletoUtil {
 
 		final StringBuilder codigoDeBarras = new StringBuilder();
 		
-		final String l = StringUtils.trim(linhaDigitavel);
+		final String l = trim(linhaDigitavel);
 		
 		//banco
 		codigoDeBarras.append(l.substring(0, 3));
@@ -552,8 +556,8 @@ public final class BoletoUtil {
 
 		checkFormatoLinhaDigitavelFormatada(linhaDigitavel);
 
-		return linhaDigitavel.replaceAll(" ", StringUtils.EMPTY).replaceAll(
-				"\\.", StringUtils.EMPTY);
+		return linhaDigitavel.replaceAll(WHITE_SPACE, EMPTY).replaceAll(
+				"\\.", EMPTY);
 	}
 	
 	/**
@@ -589,22 +593,22 @@ public final class BoletoUtil {
 
 		final StringBuilder linhaFormatada = new StringBuilder();
 		
-		final String l = StringUtils.trim(linhaDigitavel);
+		final String l = trim(linhaDigitavel);
 		
 		linhaFormatada.append(l.substring(0, 5));
 		linhaFormatada.append(".");
 		linhaFormatada.append(l.substring(5, 10));
-		linhaFormatada.append(Strings.WHITE_SPACE);
+		linhaFormatada.append(WHITE_SPACE);
 		linhaFormatada.append(l.substring(10, 15));
 		linhaFormatada.append(".");
 		linhaFormatada.append(l.substring(15, 21));
-		linhaFormatada.append(Strings.WHITE_SPACE);
+		linhaFormatada.append(WHITE_SPACE);
 		linhaFormatada.append(l.substring(21, 26));
 		linhaFormatada.append(".");
 		linhaFormatada.append(l.substring(26, 32));
-		linhaFormatada.append(Strings.WHITE_SPACE);
+		linhaFormatada.append(WHITE_SPACE);
 		linhaFormatada.append(l.substring(32, 33));
-		linhaFormatada.append(Strings.WHITE_SPACE);
+		linhaFormatada.append(WHITE_SPACE);
 		linhaFormatada.append(l.substring(33));
 		
 		return linhaFormatada.toString();
@@ -618,7 +622,7 @@ public final class BoletoUtil {
 	 */
 	public static final boolean isCodigoDeBarrasValido(String codigoDeBarras) {
 
-		if (StringUtils.isNotBlank(codigoDeBarras)) {
+		if (isNotBlank(codigoDeBarras)) {
 
 			return codigoDeBarras.trim().matches(
 					CODIGO_DE_BARRAS_REGEX);
@@ -636,7 +640,7 @@ public final class BoletoUtil {
 	 */
 	public static final boolean isLinhaDigitavelFormatadaValida(String linhaDigitavel) {
 
-		if (StringUtils.isNotBlank(linhaDigitavel)) {
+		if (isNotBlank(linhaDigitavel)) {
 
 			return linhaDigitavel.trim().matches(
 					LINHA_DIGITAVEL_FORMATADA_REGEX);
@@ -655,7 +659,7 @@ public final class BoletoUtil {
 	 */
 	public static final boolean isLinhaDigitavelNumericaValida(String linhaDigitavel) {
 
-		if (StringUtils.isNotBlank(linhaDigitavel)) {
+		if (isNotBlank(linhaDigitavel)) {
 
 			return linhaDigitavel.trim()
 					.matches(LINHA_DIGITAVEL_NUMERICA_REGEX);
@@ -843,9 +847,9 @@ public final class BoletoUtil {
 	public static final void checkExistsLinhaDigitavel(String linhaDigitavel)
 			throws NullPointerException, IllegalArgumentException {
 
-		Objects.checkNotNull(linhaDigitavel, MSG_LINHA_INVALIDA);
+		checkNotNull(linhaDigitavel, MSG_LINHA_INVALIDA);
 
-		if (StringUtils.isBlank(linhaDigitavel)) {
+		if (isBlank(linhaDigitavel)) {
 			throw new IllegalArgumentException(MSG_LINHA_INVALIDA
 					+ " "
 					+ String.format(MSG_STR_VAZIA, linhaDigitavel,
@@ -872,9 +876,9 @@ public final class BoletoUtil {
 	public static final void checkExistsCodigoDeBarras(String codigoDeBarras)
 			throws NullPointerException, IllegalArgumentException {
 
-		Objects.checkNotNull(codigoDeBarras, MSG_LINHA_INVALIDA);
+		checkNotNull(codigoDeBarras, MSG_LINHA_INVALIDA);
 
-		if (StringUtils.isBlank(codigoDeBarras)) {
+		if (isBlank(codigoDeBarras)) {
 			throw new IllegalArgumentException(MSG_CODIGO_DE_BARRAS
 					+ " "
 					+ String.format(MSG_STR_VAZIA, codigoDeBarras,

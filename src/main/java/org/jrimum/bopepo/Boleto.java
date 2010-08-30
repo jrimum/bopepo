@@ -225,6 +225,7 @@ public final class Boleto {
 	 * @return the campoLivre
 	 */
 	public CampoLivre getCampoLivre() {
+		
 		return campoLivre;
 	}
 
