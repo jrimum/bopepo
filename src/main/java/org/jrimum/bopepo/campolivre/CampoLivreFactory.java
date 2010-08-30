@@ -34,7 +34,6 @@ import static org.apache.commons.lang.StringUtils.isNumeric;
 import static org.apache.commons.lang.StringUtils.remove;
 import static org.apache.commons.lang.StringUtils.strip;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.Objects;
@@ -90,7 +89,7 @@ public final class CampoLivreFactory {
 	}
 	
 	/**
-	 * Devolve um CampoLivre de acordo a partir de uma String.
+	 * Devolve um CampoLivre a partir de uma String.
 	 * 
 	 * @param strCampoLivre
 	 * 
