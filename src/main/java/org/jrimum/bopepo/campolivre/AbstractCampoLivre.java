@@ -320,6 +320,27 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		}
 	}
 	
+	final static void checkAgencia(Titulo titulo){
+		
+		Objects.checkNotNull(titulo.getContaBancaria().getAgencia(), "Agência bancária do título não pode ser nula!");
+	}
+	
+	final static void checkCodigoDaAgencia(Titulo titulo){
+		
+		Objects.checkNotNull(titulo.getContaBancaria().getAgencia().getCodigo(), "Código da agência bancária não pode ser nulo!");
+		
+		if(titulo.getContaBancaria().getAgencia().getCodigo() < 1){
+			
+			throw new IllegalArgumentException(format("Código da agência bancária deve ser um número inteiro natural positivo e não [%s].",titulo.getContaBancaria().getAgencia().getCodigo()));
+		}
+	}
+	
+	final static void checkDigitoDoCodigoDaAgencia(Titulo titulo){
+		
+		Objects.checkNotNull(titulo.getContaBancaria().getAgencia().getDigitoVerificador(), "Dígito do código da agência bancária não pode ser nulo!");
+		Strings.checkNotBlank(titulo.getContaBancaria().getAgencia().getDigitoVerificador(), "Dígito do código da agência bancária não pode ser vazio!");
+	}
+	
 	final static void checkNumeroDaConta(Titulo titulo){
 		
 		Objects.checkNotNull(titulo.getContaBancaria().getNumeroDaConta(), "Número da conta bancária do título não pode ser nulo!");
