@@ -15,7 +15,7 @@ import org.jrimum.utilix.text.Filler;
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * 
  */
-public class CLCaixaEconomicaFederalSICOB extends AbstractCLCaixaEconomicaFederal {
+class CLCaixaEconomicaFederalSICOB extends AbstractCLCaixaEconomicaFederal {
 	
 	/**
 	 *

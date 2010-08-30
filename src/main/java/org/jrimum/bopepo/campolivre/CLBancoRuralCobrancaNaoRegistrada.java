@@ -61,7 +61,7 @@ import org.jrimum.utilix.text.Filler;
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  */
-public class CLBancoRuralCobrancaNaoRegistrada extends AbstractCLBancoRural{
+class CLBancoRuralCobrancaNaoRegistrada extends AbstractCLBancoRural{
 
 	/**
 	 * 

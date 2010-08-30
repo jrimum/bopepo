@@ -97,7 +97,7 @@ import org.jrimum.utilix.text.Filler;
  * 
  * @version 0.2
  */
-public class CLHSBCCobrancaRegistrada extends AbstractCLHSBC{
+class CLHSBCCobrancaRegistrada extends AbstractCLHSBC{
 
 	/**
 	 * 

@@ -75,7 +75,7 @@ import org.jrimum.utilix.text.Filler;
  * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a>
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  */
-public class CLBancoRuralCobrancaRegistrada extends AbstractCLBancoRural{
+class CLBancoRuralCobrancaRegistrada extends AbstractCLBancoRural{
 	
 	private static final long serialVersionUID = -5166628254198207874L;
 	
