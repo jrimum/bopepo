@@ -29,6 +29,11 @@
 
 package org.jrimum.bopepo.campolivre;
 
+import static org.apache.commons.lang.StringUtils.EMPTY;
+import static org.apache.commons.lang.StringUtils.isNumeric;
+import static org.apache.commons.lang.StringUtils.remove;
+import static org.apache.commons.lang.StringUtils.strip;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
@@ -67,7 +72,7 @@ public final class CampoLivreFactory {
 
 	/**
 	 * <p>
-	 * Devolve um <code>CampoLivre</code> de acordo com o Banco contido na conta do Cedente.
+	 * Devolve um <code>CampoLivre</code> de acordo com o Banco contido na conta bancária do título.
 	 * </p> 
 	 * <p>
 	 * Caso exista implementação para o banco o retorno terá uma referência não nula.
@@ -102,19 +107,19 @@ public final class CampoLivreFactory {
 		
 		Strings.checkNotBlank(strCampoLivre, "O Campo Livre não deve ser vazio!");
 		
-		strCampoLivre = StringUtils.strip(strCampoLivre); 
+		strCampoLivre = strip(strCampoLivre); 
 		
 		if (strCampoLivre.length() == CampoLivre.STRING_LENGTH) {
 
-			if (StringUtils.remove(strCampoLivre, ' ').length() == CampoLivre.STRING_LENGTH) {
+			if (remove(strCampoLivre, ' ').length() == CampoLivre.STRING_LENGTH) {
 
-				if (StringUtils.isNumeric(strCampoLivre)) {
+				if (isNumeric(strCampoLivre)) {
 
 					campoLivre = new CampoLivre() {
 
 						private static final long serialVersionUID = -7592488081807235080L;
 
-						Field<String> campo = new Field<String>(StringUtils.EMPTY,
+						Field<String> campo = new Field<String>(EMPTY,
 								STRING_LENGTH, Filler.ZERO_LEFT);
 
 						
@@ -134,7 +139,7 @@ public final class CampoLivreFactory {
 					
 					IllegalArgumentException e = new IllegalArgumentException("O Campo Livre [ " + strCampoLivre + " ] deve ser uma String numérica!");
 					
-					log.error(StringUtils.EMPTY, e);
+					log.error(EMPTY, e);
 					
 					throw e;
 				}
@@ -142,7 +147,7 @@ public final class CampoLivreFactory {
 				
 				IllegalArgumentException e = new IllegalArgumentException("O Campo Livre [ " + strCampoLivre + " ] não deve conter espaços em branco!");
 				
-				log.error(StringUtils.EMPTY, e);
+				log.error(EMPTY, e);
 				
 				throw e;
 			}
@@ -150,7 +155,7 @@ public final class CampoLivreFactory {
 			
 			IllegalArgumentException e = new IllegalArgumentException("O tamanho do Campo Livre [ " + strCampoLivre + " ] deve ser igual a 25 e não ["+strCampoLivre.length()+"]!");
 			
-			log.error(StringUtils.EMPTY, e);
+			log.error(EMPTY, e);
 			
 			throw e;
 		}

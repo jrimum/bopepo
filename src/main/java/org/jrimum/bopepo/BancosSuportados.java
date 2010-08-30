@@ -120,8 +120,7 @@ public enum BancosSuportados implements Serializable{
 	 * 
 	 * @since 0.2
 	 */
-	BANCO_DO_BRASIL("001", "00000000000191", "BANCO DO BRASIL S.A.",
-			"Banco do Brasil - Banco Múltiplo"),
+	BANCO_DO_BRASIL("001", "00000000000191", "BANCO DO BRASIL S.A.", "Banco do Brasil - Banco Múltiplo"),
 			
 	/**
 	 * Tipo enumerado que representa o Banestes, Banco <strong>do Estado do Espírito Santo</strong>,
@@ -131,8 +130,7 @@ public enum BancosSuportados implements Serializable{
 	 * 
 	 * @since 0.2
 	 */
-	BANCO_DO_ESTADO_DO_ESPIRITO_SANTO("021", "28127603000178", 
-			"BANCO DO ESTADO DO ESPIRITO SANTO S.A.", "Banco Múltiplo"),
+	BANCO_DO_ESTADO_DO_ESPIRITO_SANTO("021", "28127603000178", "BANCO DO ESTADO DO ESPIRITO SANTO S.A.", "Banco Múltiplo"),
 			
 	/**
 	 * Tipo enumerado que representa o Santander <strong>Banco Santander
@@ -141,8 +139,7 @@ public enum BancosSuportados implements Serializable{
 	 * 
 	 * @since 0.2
 	 */
-	BANCO_SANTANDER("033", "90400888000142",
-			"Banco Santander (Brasil) S. A.", "Banco Mútiplo"),
+	BANCO_SANTANDER("033", "90400888000142", "Banco Santander (Brasil) S. A.", "Banco Mútiplo"),
 
 	/**
 	 * Tipo enumerado que representa o Banrisul, Banco <strong>do Estado do Rio Grande do Sul</strong>,
@@ -151,8 +148,7 @@ public enum BancosSuportados implements Serializable{
 	 * 
 	 * @since 0.2
 	 */
-	BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL("041", "92702067000196", 
-			"BANCO DO ESTADO DO RIO GRANDE DO SUL S.A.", "Banco Múltiplo"),
+	BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL("041", "92702067000196", "BANCO DO ESTADO DO RIO GRANDE DO SUL S.A.", "Banco Múltiplo"),
 			
 	/**
 	 * Tipo enumerado que representa o BANISA, Banco <strong>Intermedium</strong>,
@@ -170,8 +166,7 @@ public enum BancosSuportados implements Serializable{
 	 * 
 	 * @since 0.2
 	 */
-	CAIXA_ECONOMICA_FEDERAL("104", "00360305000104", "CAIXA ECONOMICA FEDERAL",
-			"Caixa Econômica Federal"),
+	CAIXA_ECONOMICA_FEDERAL("104", "00360305000104", "CAIXA ECONOMICA FEDERAL", "Caixa Econômica Federal"),
 
 	/**
 	 * Tipo enumerado que representa o Banco <strong>Nossa Caixa</strong>, código
@@ -186,8 +181,7 @@ public enum BancosSuportados implements Serializable{
 	 * 
 	 * @since 0.2
 	 */
-	BANCO_BRADESCO("237", "60746948000112", "BANCO BRADESCO S.A.",
-			"Banco Múltiplo"),
+	BANCO_BRADESCO("237", "60746948000112", "BANCO BRADESCO S.A.", "Banco Múltiplo"),
 
 	/**
 	 * Tipo enumerado que representa o <strong>Banco Itaú</strong>, código de
@@ -198,8 +192,6 @@ public enum BancosSuportados implements Serializable{
 	 */
 	BANCO_ITAU("341", "60701190000104", "BANCO ITAÚ S.A.", "Banco Múltiplo"),
 
-	
-	
 	/**
 	 * Tipo enumerado que representa o <strong>Banco ABN AMRO Real</strong>
 	 * (<a href="http://www.bancoreal.com.br">http://www.bancoreal.com.br</a>),
@@ -211,9 +203,7 @@ public enum BancosSuportados implements Serializable{
 	 * </p>
 	 * @since 0.2
 	 */
-	BANCO_ABN_AMRO_REAL("356", "33066408000115", "BANCO ABN AMRO REAL S.A.",
-			"Banco Múltiplo"),
-
+	BANCO_ABN_AMRO_REAL("356", "33066408000115", "BANCO ABN AMRO REAL S.A.", "Banco Múltiplo"),
 
 	/**
 	 * Tipo enumerado que representa o <strong>Banco Mercantil do Brasil</strong>
@@ -232,8 +222,6 @@ public enum BancosSuportados implements Serializable{
 	 */
 	HSBC("399", "01701201000189", "HSBC BANK BRASIL S.A.", "Banco Múltiplo"),
 
-	
-	
 	/**
 	 * Tipo enumerado que representa o <strong>Unibanco</strong>, código de
 	 * compensação <strong><tt>409</tt></strong> <a
@@ -241,11 +229,8 @@ public enum BancosSuportados implements Serializable{
 	 * 
 	 * @since 0.2
 	 */
-	UNIBANCO("409", "33700394000140",
-			"UNIBANCO-UNIAO DE BANCOS BRASILEIROS S.A.", "Banco Múltiplo"),
+	UNIBANCO("409", "33700394000140", "UNIBANCO-UNIAO DE BANCOS BRASILEIROS S.A.", "Banco Múltiplo"),
 
-	
-			
 	/**
 	 * Tipo enumerado que representa o <strong>Unibanco</strong>, código de
 	 * compensação <strong><tt>422</tt></strong> <a
@@ -358,6 +343,7 @@ public enum BancosSuportados implements Serializable{
 	 */
 	private BancosSuportados(String codigoDeCompensacaoBACEN, String cnpj,
 			String instituicao, String segmento) {
+		
 		this.codigoDeCompensacaoBACEN = codigoDeCompensacaoBACEN;
 		this.cNPJ = cnpj;
 		this.instituicao = instituicao;

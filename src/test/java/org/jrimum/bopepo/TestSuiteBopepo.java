@@ -62,7 +62,7 @@ import org.junit.runners.Suite;
 		{ 
 			TestBoleto.class,
 			TestBoletoUtil.class,
-			TestBancoUtil.class,
+			TestFatorDeVencimento.class,
 			TestBancoSuportado.class,
 			TestCodigoDeBarras.class,
 			TestLinhaDigitavel.class,

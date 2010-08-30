@@ -36,14 +36,14 @@ import java.util.GregorianCalendar;
 import org.junit.Test;
 
 
-public class TestBancoUtil {
+public class TestFatorDeVencimento {
 
 	GregorianCalendar data = new GregorianCalendar();
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCalculeFatorDeVencimentoDataNull() {
 
-		BancoUtil.calculceFatorDeVencimento(null);
+		FatorDeVencimento.calculceFatorDeVencimento(null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -51,7 +51,7 @@ public class TestBancoUtil {
 
 		data.set(1997, Calendar.JANUARY, 1);
 
-		BancoUtil.calculceFatorDeVencimento(data.getTime());
+		FatorDeVencimento.calculceFatorDeVencimento(data.getTime());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -59,20 +59,20 @@ public class TestBancoUtil {
 
 		data.set(2025, Calendar.FEBRUARY, 22);
 
-		BancoUtil.calculceFatorDeVencimento(data.getTime());
+		FatorDeVencimento.calculceFatorDeVencimento(data.getTime());
 	}
 
 	@Test
 	public final void testCalculceFatorDeVencimento() {
 
 		data.set(2000, Calendar.JULY, 3);
-		assertEquals(1000, BancoUtil.calculceFatorDeVencimento(data.getTime()));
+		assertEquals(1000, FatorDeVencimento.calculceFatorDeVencimento(data.getTime()));
 
 		data.set(2000, Calendar.JULY, 5);
-		assertEquals(1002, BancoUtil.calculceFatorDeVencimento(data.getTime()));
+		assertEquals(1002, FatorDeVencimento.calculceFatorDeVencimento(data.getTime()));
 
 		data.set(2025, Calendar.FEBRUARY, 21);
-		assertEquals(9999, BancoUtil.calculceFatorDeVencimento(data.getTime()));
+		assertEquals(9999, FatorDeVencimento.calculceFatorDeVencimento(data.getTime()));
 	}
 
 }

@@ -56,7 +56,7 @@ import org.jrimum.utilix.Dates;
  * 
  * @version 0.2
  */
-public class BancoUtil implements Serializable {
+public class FatorDeVencimento{
 
 	/**
 	 *
@@ -133,19 +133,18 @@ public class BancoUtil implements Serializable {
 	public static int calculceFatorDeVencimento(Date dataVencimento)
 			throws IllegalArgumentException {
 
-		Date dataVencTruncada = null;
-		int fator;
-
 		if (isNull(dataVencimento)) {
+			
 			throw new IllegalArgumentException(
 					"Impossível realizar o cálculo do fator"
 							+ " de vencimento de uma data nula.");
 		} else {
-			dataVencTruncada = DateUtils
-					.truncate(dataVencimento, Calendar.DATE);
+			
+			Date dataVencTruncada = DateUtils.truncate(dataVencimento, Calendar.DATE);
+			
 			if (dataVencTruncada.before(DATA_BASE_DO_FATOR_DE_VENCIMENTO)
-					|| dataVencTruncada
-							.after(DATA_LIMITE_DO_FATOR_DE_VENCIMENTO)) {
+					|| dataVencTruncada.after(DATA_LIMITE_DO_FATOR_DE_VENCIMENTO)) {
+				
 				throw new IllegalArgumentException(
 						"Para o cálculo do fator de"
 								+ " vencimento se faz necessário informar uma data entre"
@@ -156,11 +155,10 @@ public class BancoUtil implements Serializable {
 								+ DDMMYYYY_B
 										.format(DATA_LIMITE_DO_FATOR_DE_VENCIMENTO));
 			} else {
-				fator = (int) Dates.calculeDiferencaEmDias(
+				
+				return (int) Dates.calculeDiferencaEmDias(
 						DATA_BASE_DO_FATOR_DE_VENCIMENTO, dataVencTruncada);
 			}
 		}
-
-		return fator;
 	}
 }
