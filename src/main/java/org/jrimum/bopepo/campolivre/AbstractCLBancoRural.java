@@ -30,10 +30,14 @@ abstract class AbstractCLBancoRural extends AbstractCampoLivre {
 	static final String CODIGO_REDUZIDO = "CODIGO_REDUZIDO";
 
 	protected AbstractCLBancoRural(Integer fieldsLength) {
+		
 		super(fieldsLength);
 	}
 
 	static CampoLivre create(Titulo titulo) {
+		
+		checkCarteira(titulo);
+		checkRegistroDaCarteira(titulo);
 		
 		switch(titulo.getContaBancaria().getCarteira().getTipoCobranca()){
 		case SEM_REGISTRO:
@@ -54,13 +58,18 @@ abstract class AbstractCLBancoRural extends AbstractCampoLivre {
 	 */
 	private static CampoLivre campoSemRegistro(Titulo titulo) {
 		
+		checkNossoNumero(titulo);
+		
 		switch(titulo.getNossoNumero().length()){
 		case NN10:
 			return new CLBancoRuralCobrancaNaoRegistradaSeguradora(titulo);
 		case NN15:
 			return new CLBancoRuralCobrancaNaoRegistrada(titulo);
 		default:
-			return null;
+			throw new NotSupportedCampoLivreException(
+					"Combrança sem registro com campo livre diponível somente para títulos com nosso número" 
+					+ " composto por 10 posições(apólice de seguro com I.O.S.) e 15 posições(padrão)."
+				);
 		}
 	}
 }

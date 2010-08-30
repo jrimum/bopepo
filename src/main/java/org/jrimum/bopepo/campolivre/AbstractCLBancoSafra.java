@@ -30,10 +30,6 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import static org.jrimum.utilix.Objects.exists;
-
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
@@ -52,38 +48,22 @@ abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
 	protected static final int SISTEMA = 7;
 
 	protected AbstractCLBancoSafra(Integer fieldsLength) {
+		
 		super(fieldsLength);
 	}
 
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 
-		CampoLivre campoLivre = null;
-
-		ContaBancaria conta = titulo.getContaBancaria(); 
-
-		if (exists(conta.getCarteira().getTipoCobranca())) {
-			
-			if(exists(conta.getNumeroDaConta().getDigitoDaConta())) {
-
-				if (conta.getCarteira().getTipoCobranca() == TipoDeCobranca.COM_REGISTRO) {
-	
-					campoLivre = new CLBancoSafraCobrancaRegistrada(titulo);
-	
-				} else {// Sem_Registro
-	
-					campoLivre = new CLBancoSafraCobrancaNaoRegistrada(titulo);
-				}
-			}
-			else {
-				throw new CampoLivreException(new IllegalArgumentException(
-						"Defina o dígito verificador do número da conta bancária."));
-			}
-
-		} else {
-			throw new NotSupportedCampoLivreException(
-					"Campo livre indeterminado, defina o tipo de cobrança para a carteira usada.");
+		checkCarteira(titulo);
+		checkRegistroDaCarteira(titulo);
+		
+		switch(titulo.getContaBancaria().getCarteira().getTipoCobranca()){
+		case COM_REGISTRO:
+			return new CLBancoSafraCobrancaRegistrada(titulo);
+		case SEM_REGISTRO:
+			return new CLBancoSafraCobrancaNaoRegistrada(titulo);
+		default:
+			return null;
 		}
-
-		return campoLivre;
 	}
 }

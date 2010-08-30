@@ -29,6 +29,7 @@
 
 package org.jrimum.bopepo.campolivre;
 
+import static java.lang.String.format;
 import static org.jrimum.domkee.financeiro.banco.febraban.Banco.isCodigoDeCompensacaoOK;
 
 import org.apache.log4j.Logger;
@@ -37,6 +38,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.AbstractLineOfFields;
 import org.jrimum.utilix.text.Field;
+import org.jrimum.utilix.text.Strings;
 
 /**
  * <p>
@@ -104,6 +106,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * <p>Subclasses não precisam definir o tamanho.</p>
 	 */
 	private AbstractCampoLivre(Integer fieldsLength, Integer stringLength) {
+		
 		super(fieldsLength, stringLength);
 	}
 	
@@ -113,7 +116,8 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * @param fieldsLength - Número de campos
 	 */
 	protected AbstractCampoLivre(Integer fieldsLength) {
-		super(fieldsLength, CampoLivre.STRING_LENGTH);
+		
+		super (fieldsLength, CampoLivre.STRING_LENGTH);
 	}
 
 	/**
@@ -147,13 +151,14 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 
 		try{
 		
-			if (log.isDebugEnabled()){
-				
-				log.debug("Campo Livre do Banco: " + titulo.getContaBancaria().getBanco().getNome());
-			}
-
+			checkTitulo(titulo);
 			checkContaBancaria(titulo);
 			checkBanco(titulo);
+			
+			if (log.isDebugEnabled()){
+				
+				log.debug(format("Campo Livre do Banco: %s", titulo.getContaBancaria().getBanco().getNome()));
+			}
 			
 			if (BancosSuportados.isSuportado( titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
 
@@ -244,22 +249,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 			throw new CampoLivreException(e);
 		}
 	}
-
-	private static void checkBanco(Titulo titulo) {
-		
-		Objects.checkNotNull(titulo.getContaBancaria().getBanco(), "Banco da conta bancária do título nulo!");
-		
-		if(!isCodigoDeCompensacaoOK(titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado())){
-			
-			throw new IllegalArgumentException(String.format("Código de compensação [%s] inválido!", titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado()));
-		}
-	}
-
-	private static void checkContaBancaria(Titulo titulo) {
-		
-		Objects.checkNotNull(titulo.getContaBancaria(), "Conta bancária do título nula!");
-	}
-
+	
 	/**
 	 * <p>
 	 * Gera o campo livre a parir dos campos armazenados sem verificar se está
@@ -271,7 +261,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * 
 	 * @since 0.2
 	 */
-	protected String writeFields() {
+	final String writeFields() {
 
 		StringBuilder campoLivreAtual = new StringBuilder();
 		
@@ -281,7 +271,91 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		
 		return campoLivreAtual.toString();
 	}
+
+	/*
+	 * Validações inicias.
+	 */
 	
+	private static void checkTitulo(Titulo titulo){
+		
+		Objects.checkNotNull(titulo, "Título não pode ser nulo!");
+	}
+	
+	private static void checkContaBancaria(Titulo titulo) {
+		
+		Objects.checkNotNull(titulo.getContaBancaria(), "Conta bancária do título não pode ser nula!");
+	}
+	
+	private static void checkBanco(Titulo titulo) {
+		
+		Objects.checkNotNull(titulo.getContaBancaria().getBanco(), "Banco da conta bancária do título não pode ser nulo!");
+		
+		if(!isCodigoDeCompensacaoOK(titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado())){
+			
+			throw new IllegalArgumentException(String.format("Código de compensação [%s] inválido!", titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado()));
+		}
+	}
+
+	/*
+	 * Validações para subclasses.
+	 */
+	
+	final static void checkCarteira(Titulo titulo){
+		
+		Objects.checkNotNull(titulo.getContaBancaria().getCarteira(), "Carteira da conta bancária do título não pode ser nula!");
+	}
+	
+	final static void checkRegistroDaCarteira(Titulo titulo){
+		
+		Objects.checkNotNull(titulo.getContaBancaria().getCarteira().getTipoCobranca(), "Tipo de cobrança (COM ou SEM registro) da carteira não pode ser nulo!");
+	}
+	
+	final static void checkCodigoDaCarteira(Titulo titulo){
+		
+		Objects.checkNotNull(titulo.getContaBancaria().getCarteira().getCodigo(), "Código da carteira não pode ser nulo!");
+		
+		if(titulo.getContaBancaria().getCarteira().getCodigo() < 1){
+			
+			throw new IllegalArgumentException(format("Código da carteira deve ser um número inteiro natural positivo e não [%s].",titulo.getContaBancaria().getCarteira().getCodigo()));
+		}
+	}
+	
+	final static void checkNumeroDaConta(Titulo titulo){
+		
+		Objects.checkNotNull(titulo.getContaBancaria().getNumeroDaConta(), "Número da conta bancária do título não pode ser nulo!");
+	}
+	
+	final static void checkCodigoDoNumeroDaConta(Titulo titulo){
+		
+		Objects.checkNotNull(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), "Código do número da conta bancária não pode ser nulo!");
+		
+		if(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta() < 1){
+			
+			throw new IllegalArgumentException(format("Código do número da conta bancária deve ser um número inteiro natural positivo e não [%s].",titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta()));
+		}
+	}
+	
+	final static void checkDigitoDoCodigoDoNumeroDaConta(Titulo titulo){
+		
+		Objects.checkNotNull(titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta(), "Dígito do código do número da conta bancária não pode ser nulo!");
+		Strings.checkNotBlank(titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta(), "Dígito do código do número da conta bancária não pode ser vazio!");
+	}
+	
+	final static void checkNossoNumero(Titulo titulo){
+		
+		Objects.checkNotNull(titulo.getNossoNumero(), "Nosso número do título não pode ser nulo!");
+		Strings.checkNotBlank(titulo.getNossoNumero(), "Nosso número do título não pode ser vazio!");
+	}
+	
+	final static void checkDigitoDoNossoNumero(Titulo titulo){
+		
+		Objects.checkNotNull(titulo.getDigitoDoNossoNumero(), "Dígito do nosso número do título não pode ser nulo!");
+		Strings.checkNotBlank(titulo.getDigitoDoNossoNumero(), "Dígito do nosso número do título não pode ser vazio!");
+	}
+	
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		

@@ -55,11 +55,14 @@ abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
 	private static final long serialVersionUID = -7324315662526104153L;
 
 	protected AbstractCLBancoDoBrasil(Integer fieldsLength) {
+		
 		super(fieldsLength);
 	}
 
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException{
 
+		checkNossoNumero(titulo);
+		
 		switch(titulo.getNossoNumero().length()){
 		case NN10:
 			return new CLBancoDoBrasilNN10(titulo);

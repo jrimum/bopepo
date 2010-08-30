@@ -65,26 +65,24 @@ abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 	private static final long serialVersionUID = -259398499475894938L;
 
 	protected AbstractCLBanrisul(Integer fieldsLength) {
+		
 		super(fieldsLength);
 	}
 
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 		
-		final CampoLivre campoLivre;
-
+		checkCarteira(titulo);
+		checkRegistroDaCarteira(titulo);
+		
 		switch (titulo.getContaBancaria().getCarteira().getTipoCobranca()) {
 
 			case COM_REGISTRO:
-				campoLivre = new CLBanrisulCobrancaRegistrada(titulo);
-				break;
+				return new CLBanrisulCobrancaRegistrada(titulo);
 			case SEM_REGISTRO:
-				campoLivre = new CLBanrisulCobrancaNaoRegistrada(titulo);
-				break;
+				return new CLBanrisulCobrancaNaoRegistrada(titulo);
 			default:
 				throw new NotSupportedCampoLivreException("Campo livre diponível apenas para carteiras com ou sem cobrança.");
 		}
-
-		return campoLivre;
 	}
 
 	/**

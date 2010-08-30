@@ -29,9 +29,8 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import static org.jrimum.utilix.Objects.isNull;
+import static java.lang.String.format;
 
-import org.apache.commons.lang.StringUtils;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
@@ -56,48 +55,29 @@ abstract class AbstractCLCaixaEconomicaFederal extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = -4104858478390595830L;
 	
-	private static final int NOSSO_NUMERO_SINCO = 17;
-
-	private static final int NOSSO_NUMERO_SICOB = 11;
-	
-	private static final int NOSSO_NUMERO_SIGCB = 15;
-
 	protected AbstractCLCaixaEconomicaFederal(Integer fieldsLength) {
+		
 		super(fieldsLength);
 	}
 
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException{
 		
-		CampoLivre campoLivre = null;
+		checkNossoNumero(titulo);
 		
-		String nossoNumero = titulo.getNossoNumero();
-		
-		if(StringUtils.isNotBlank(nossoNumero)) {
-			
-			switch(nossoNumero.length()) {
-				
-				case NOSSO_NUMERO_SICOB:
-					campoLivre = new CLCaixaEconomicaFederalSICOB(titulo);
-					break;
-
-				case NOSSO_NUMERO_SIGCB:
-					campoLivre = new CLCaixaEconomicaFederalSIGCB(titulo);
-					break;
-					
-				case NOSSO_NUMERO_SINCO:
-					campoLivre = new CLCaixaEconomicaFederalSINCO(titulo);
-					break;
-			}
-		}
-		
-		if (isNull(campoLivre)) {
+		switch(titulo.getNossoNumero().length()){
+		case NN11:
+			return new CLCaixaEconomicaFederalSICOB(titulo);
+		case NN15:
+			return new CLCaixaEconomicaFederalSIGCB(titulo);
+		case NN17:
+			return new CLCaixaEconomicaFederalSINCO(titulo);
+		default:
 			throw new NotSupportedCampoLivreException(
-					String.format("Campo Livre não suportado para o Nosso Número [%s] de tamanho [%s]. " +
-					"Apenas títulos com Nosso Número de tamanho [%s] são suportados (SICOB, SIGCB e SINCO respectivamente).", 
-					nossoNumero, (StringUtils.isBlank(nossoNumero) ? "0" : nossoNumero.length()), 
-					NOSSO_NUMERO_SICOB + "," + NOSSO_NUMERO_SIGCB + "," + NOSSO_NUMERO_SINCO));
-		} else {
-			return campoLivre;
+					format("Campo Livre não suportado para o Nosso Número [%s] de tamanho [%s]." 
+					+ " Apenas títulos com Nosso Número de tamanho [%s] são suportados (SICOB, SIGCB e SINCO respectivamente)."
+					,titulo.getNossoNumero(), titulo.getNossoNumero().length() 
+					,NN11 + "," + NN15 + "," + NN17)
+					);
 		}
 	}
 }

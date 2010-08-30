@@ -54,22 +54,19 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * @version 0.2
  */
 abstract class AbstractCLBanestes extends AbstractCampoLivre {
-
-	protected AbstractCLBanestes(Integer fieldsLength) {
-		super(fieldsLength);
-	}
 	
-	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
-		final CampoLivre campoLivre;
-		
-		campoLivre = new CLBanestes(titulo);
-		
-		return campoLivre;
-	}
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2713363808443832056L;
 
+	protected AbstractCLBanestes(Integer fieldsLength) {
+		
+		super(fieldsLength);
+	}
+	
+	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
+		
+		return new CLBanestes(titulo);
+	}
 }

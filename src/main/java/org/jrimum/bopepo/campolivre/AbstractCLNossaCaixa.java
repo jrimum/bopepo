@@ -57,6 +57,7 @@ abstract class AbstractCLNossaCaixa extends AbstractCampoLivre {
 	private static final long serialVersionUID = 3806982587407010815L;
 
 	protected AbstractCLNossaCaixa(Integer fieldsLength) {
+		
 		super(fieldsLength);
 	}
 	

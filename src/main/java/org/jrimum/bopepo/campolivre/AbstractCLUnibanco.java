@@ -1,7 +1,5 @@
 package org.jrimum.bopepo.campolivre;
 
-import static org.jrimum.utilix.Objects.exists;
-
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.vallia.digitoverificador.Modulo;
 
@@ -13,26 +11,22 @@ abstract class AbstractCLUnibanco extends AbstractCampoLivre {
 	private static final long serialVersionUID = -6169577742706045367L;
 
 	protected AbstractCLUnibanco(Integer fieldsLength) {
+		
 		super(fieldsLength);
 	}
 
-	static CampoLivre create(Titulo titulo)
-			throws NotSupportedCampoLivreException {
+	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 
-		if (exists(titulo.getContaBancaria().getCarteira().getTipoCobranca())) {
+		checkCarteira(titulo);
+		checkRegistroDaCarteira(titulo);
 
-			switch(titulo.getContaBancaria().getCarteira().getTipoCobranca()){
-			case SEM_REGISTRO:
-				return new CLUnibancoCobrancaNaoRegistrada(titulo);
-			case COM_REGISTRO:
-				return new CLUnibancoCobrancaRegistrada(titulo);
-			default:
-				return null;
-			}
-
-		} else {
-			throw new NotSupportedCampoLivreException(
-					"Campo livre indeterminado, defina o tipo de cobrança para a carteira usada.");
+		switch(titulo.getContaBancaria().getCarteira().getTipoCobranca()){
+		case SEM_REGISTRO:
+			return new CLUnibancoCobrancaNaoRegistrada(titulo);
+		case COM_REGISTRO:
+			return new CLUnibancoCobrancaRegistrada(titulo);
+		default:
+			return null;
 		}
 	}
 
@@ -70,5 +64,4 @@ abstract class AbstractCLUnibanco extends AbstractCampoLivre {
 		return dv;
 
 	}
-
 }

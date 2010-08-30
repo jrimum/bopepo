@@ -32,9 +32,9 @@
 package org.jrimum.bopepo.campolivre;
 import static org.jrimum.vallia.digitoverificador.Modulo.MOD10;
 
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.vallia.digitoverificador.Modulo;
 
@@ -64,30 +64,41 @@ abstract class AbstractCLItau extends AbstractCampoLivre {
 	 * para identificação do título liquidado (8 do Nosso Número e 7 do Seu Número).
 	 * </p>
 	 */
-	private static final Integer[] CARTEIRAS_ESPECIAIS = {106, 107, 122, 142, 143, 195, 196, 198};
+	private static final Set<Integer> CARTEIRAS_ESPECIAIS = new HashSet<Integer>(8);
+	
+	static{
+		
+		CARTEIRAS_ESPECIAIS.add(106);
+		CARTEIRAS_ESPECIAIS.add(107);
+		CARTEIRAS_ESPECIAIS.add(122);
+		CARTEIRAS_ESPECIAIS.add(142);
+		CARTEIRAS_ESPECIAIS.add(143);
+		CARTEIRAS_ESPECIAIS.add(195);
+		CARTEIRAS_ESPECIAIS.add(196);
+		CARTEIRAS_ESPECIAIS.add(198);
+	}
 
 	protected AbstractCLItau(Integer fieldsLength) {
+		
 		super(fieldsLength);
 	}
 	
 	static CampoLivre create(Titulo titulo){
 		
-		CampoLivre campoLivre = null;
-		ContaBancaria conta = titulo.getContaBancaria();
+		checkCarteira(titulo);
+		checkCodigoDaCarteira(titulo);
 		
 		/*
 		 * Se a carteira for especial, a forma de construir o campo livre será diferente.
 		 */
-		if(Arrays.binarySearch(CARTEIRAS_ESPECIAIS, conta.getCarteira().getCodigo()) >= 0) {
+		if(CARTEIRAS_ESPECIAIS.contains(titulo.getContaBancaria().getCarteira().getCodigo())) {
 			
-			campoLivre = new CLItauComCarteirasEspeciais(titulo);
-		}
-		else {
+			return new CLItauComCarteirasEspeciais(titulo);
 			
-			campoLivre = new CLItauPadrao(titulo);
+		}else {
+			
+			return new CLItauPadrao(titulo);
 		}
-		
-		return campoLivre;
 	}
 	
 	/**

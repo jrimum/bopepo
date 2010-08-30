@@ -55,11 +55,14 @@ abstract class AbstractCLHSBC extends AbstractCampoLivre {
 	private static final long serialVersionUID = 3179450500491723317L;
 
 	protected AbstractCLHSBC(Integer fieldsLength) {
+		
 		super(fieldsLength);
-
 	}
 
 	static CampoLivre create(Titulo titulo) {
+		
+		checkCarteira(titulo);
+		checkRegistroDaCarteira(titulo);
 
 		switch(titulo.getContaBancaria().getCarteira().getTipoCobranca()){
 		case SEM_REGISTRO:

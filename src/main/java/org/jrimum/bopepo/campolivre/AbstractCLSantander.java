@@ -22,10 +22,12 @@ abstract class AbstractCLSantander extends AbstractCampoLivre {
 	private static final long serialVersionUID = 1882819688182515282L;
 
 	protected AbstractCLSantander(Integer fieldsLength) {
+		
 		super(fieldsLength);
 	}
 
 	static CampoLivre create(Titulo titulo) {
+		
 		return new CLBancoSantander(titulo);
 	}
 }
