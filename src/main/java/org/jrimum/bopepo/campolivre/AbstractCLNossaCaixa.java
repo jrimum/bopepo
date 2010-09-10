@@ -32,22 +32,17 @@ package org.jrimum.bopepo.campolivre;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
- * 
- * <p>
- * DEFINIÇÃO DA CLASSE
+ *<p>
+ * Interface comum para todos os campos livres do Banco Nossa Caixa que venham a
+ * existir.
  * </p>
  * 
- * <p>
- * OBJETIVO/PROPÓSITO
- * </p>
- * 
- * <p>
- * EXEMPLO:
- * </p> 
- * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
- * @version 0.2 
+ * @since 0.2
+ * 
+ * @version 0.2
  */
 abstract class AbstractCLNossaCaixa extends AbstractCampoLivre {
 
@@ -56,11 +51,21 @@ abstract class AbstractCLNossaCaixa extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = 3806982587407010815L;
 
+	/**
+	 * <p>Cria um campo livre com um determinado número de campos</p>
+	 * 
+	 * @see AbstractCampoLivre
+	 * 
+	 * @param fieldsLength - Número de campos
+	 */
 	protected AbstractCLNossaCaixa(Integer fieldsLength) {
 		
 		super(fieldsLength);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 					
 		return new CLNossaCaixa(titulo);

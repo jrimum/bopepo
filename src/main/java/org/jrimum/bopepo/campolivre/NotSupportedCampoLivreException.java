@@ -31,7 +31,6 @@
 package org.jrimum.bopepo.campolivre;
 
 
-
 /**
  * 
  * <p>
@@ -46,7 +45,6 @@ package org.jrimum.bopepo.campolivre;
  * 
  * @version 0.2
  */
-	
 public class NotSupportedCampoLivreException extends CampoLivreException {
 
 	/**
@@ -54,25 +52,36 @@ public class NotSupportedCampoLivreException extends CampoLivreException {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 
+	 */
 	public NotSupportedCampoLivreException() {
 		super();
-		
 	}
 
+	/**
+	 * @param message
+	 * @param cause
+	 */
 	public NotSupportedCampoLivreException(String message, Throwable cause) {
 		super(message, cause);
 		
 	}
 
+	/**
+	 * @param message
+	 */
 	public NotSupportedCampoLivreException(String message) {
 		super(message);
 		
 	}
 
+	/**
+	 * @param cause
+	 */
 	public NotSupportedCampoLivreException(Throwable cause) {
 		super(cause);
 		
 	}
-
 	
 }

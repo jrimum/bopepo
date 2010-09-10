@@ -21,11 +21,21 @@ abstract class AbstractCLSantander extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = 1882819688182515282L;
 
+	/**
+	 * <p>Cria um campo livre com um determinado número de campos</p>
+	 * 
+	 * @see AbstractCampoLivre
+	 * 
+	 * @param fieldsLength - Número de campos
+	 */
 	protected AbstractCLSantander(Integer fieldsLength) {
 		
 		super(fieldsLength);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	static CampoLivre create(Titulo titulo) {
 		
 		return new CLBancoSantander(titulo);

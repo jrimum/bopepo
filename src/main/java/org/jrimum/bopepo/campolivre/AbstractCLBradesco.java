@@ -33,10 +33,10 @@ package org.jrimum.bopepo.campolivre;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
- * 
- * Descrição:
- * 
- * 
+ *<p>
+ * Interface comum para todos os campos livres do Banco Bradesco que venham a
+ * existir.
+ * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
@@ -55,12 +55,22 @@ abstract class AbstractCLBradesco extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = -1733227746617862639L;
 
+	/**
+	 * <p>Cria um campo livre com um determinado número de campos</p>
+	 * 
+	 * @see AbstractCampoLivre
+	 * 
+	 * @param fieldsLength - Número de campos
+	 */
 	protected AbstractCLBradesco(Integer fieldsLength) {
 		
 		super(fieldsLength);
 		
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	static CampoLivre create(Titulo titulo){
 		
 		return new CLBradesco(titulo);

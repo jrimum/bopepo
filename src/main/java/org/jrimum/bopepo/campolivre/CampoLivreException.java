@@ -31,7 +31,6 @@
 package org.jrimum.bopepo.campolivre;
 
 /**
- * 
  * <p>
  * Qualquer exceção gerada durante a geração de um campo livre gera uma <code>CampoLivreException</code>. Centraliza e localiza os problemas relativos a geração de um campo livre.
  * </p>

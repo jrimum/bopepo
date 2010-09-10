@@ -32,16 +32,9 @@ package org.jrimum.bopepo.campolivre;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
- * 
- * <p>
- * Fábrica de campos livre do Banco Banestes.
- * </p>
- * 
- * <p>
- * Objetivos:
- * <ul>
- *   <li>Instaciar campos livre</li>
- * </ul>
+ *<p>
+ * Interface comum para todos os campos livres do Banco Banestes que venham a
+ * existir.
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
@@ -60,11 +53,21 @@ abstract class AbstractCLBanestes extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = 2713363808443832056L;
 
+	/**
+	 * <p>Cria um campo livre com um determinado número de campos</p>
+	 * 
+	 * @see AbstractCampoLivre
+	 * 
+	 * @param fieldsLength - Número de campos
+	 */
 	protected AbstractCLBanestes(Integer fieldsLength) {
 		
 		super(fieldsLength);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 		
 		return new CLBanestes(titulo);

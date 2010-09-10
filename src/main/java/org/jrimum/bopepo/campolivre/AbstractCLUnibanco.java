@@ -10,11 +10,21 @@ abstract class AbstractCLUnibanco extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = -6169577742706045367L;
 
+	/**
+	 * <p>Cria um campo livre com um determinado número de campos</p>
+	 * 
+	 * @see AbstractCampoLivre
+	 * 
+	 * @param fieldsLength - Número de campos
+	 */
 	protected AbstractCLUnibanco(Integer fieldsLength) {
 		
 		super(fieldsLength);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 
 		checkCarteira(titulo);
@@ -35,10 +45,6 @@ abstract class AbstractCLUnibanco extends AbstractCampoLivre {
 	 * Calcula o dígito verificador para
 	 * <em>referência do cliente (cobrança sem registro)</em> e base para
 	 * cálculo do <em>super dígito do nosso numero (cobrança com registro)</em>.
-	 * </p>
-	 * 
-	 * <p>
-	 * 
 	 * </p>
 	 * 
 	 * @param numero

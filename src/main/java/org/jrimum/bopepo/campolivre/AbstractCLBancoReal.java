@@ -54,11 +54,21 @@ abstract class AbstractCLBancoReal extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = -2020155324741631945L;
 
+	/**
+	 * <p>Cria um campo livre com um determinado número de campos</p>
+	 * 
+	 * @see AbstractCampoLivre
+	 * 
+	 * @param fieldsLength - Número de campos
+	 */
 	protected AbstractCLBancoReal(Integer fieldsLength) {
 		
 		super(fieldsLength);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	static CampoLivre create(Titulo titulo){
 		
 		return new CLBancoReal(titulo);

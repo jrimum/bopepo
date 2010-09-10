@@ -32,6 +32,18 @@ package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
+/**
+ *<p>
+ * Interface comum para todos os campos livres do Banco Safra que venham a
+ * existir.
+ * </p>
+ * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * 
+ * @since 0.2
+ * 
+ * @version 0.2
+ */
 abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
 	
 	/**
@@ -47,11 +59,21 @@ abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
 	
 	protected static final int SISTEMA = 7;
 
+	/**
+	 * <p>Cria um campo livre com um determinado número de campos</p>
+	 * 
+	 * @see AbstractCampoLivre
+	 * 
+	 * @param fieldsLength - Número de campos
+	 */
 	protected AbstractCLBancoSafra(Integer fieldsLength) {
 		
 		super(fieldsLength);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 
 		checkCarteira(titulo);

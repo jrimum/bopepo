@@ -34,8 +34,9 @@ import static java.lang.String.format;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
- * <p>
- * Fábrica para os campos livres da Caixa Econômica Federal.
+ *<p>
+ * Interface comum para todos os campos livres do Banco Caixa Econômica Federal
+ * que venham a existir.
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
@@ -55,11 +56,21 @@ abstract class AbstractCLCaixaEconomicaFederal extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = -4104858478390595830L;
 	
+	/**
+	 * <p>Cria um campo livre com um determinado número de campos</p>
+	 * 
+	 * @see AbstractCampoLivre
+	 * 
+	 * @param fieldsLength - Número de campos
+	 */
 	protected AbstractCLCaixaEconomicaFederal(Integer fieldsLength) {
 		
 		super(fieldsLength);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException{
 		
 		checkNossoNumero(titulo);

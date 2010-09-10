@@ -54,11 +54,21 @@ abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = -7324315662526104153L;
 
+	/**
+	 * <p>Cria um campo livre com um determinado número de campos</p>
+	 * 
+	 * @see AbstractCampoLivre
+	 * 
+	 * @param fieldsLength - Número de campos
+	 */
 	protected AbstractCLBancoDoBrasil(Integer fieldsLength) {
 		
 		super(fieldsLength);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException{
 
 		checkNossoNumero(titulo);

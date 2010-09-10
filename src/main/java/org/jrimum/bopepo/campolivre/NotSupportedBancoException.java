@@ -31,9 +31,7 @@
 package org.jrimum.bopepo.campolivre;
 
 
-
 /**
- * 
  * <p>
  * Exceção indicadora de não existência de um referido banco ou problemas com dados de um banco.
  * </p>
@@ -47,7 +45,6 @@ package org.jrimum.bopepo.campolivre;
  * 
  * @version 0.2
  */
-	
 public class NotSupportedBancoException extends CampoLivreException {
 
 	/**
@@ -60,19 +57,33 @@ public class NotSupportedBancoException extends CampoLivreException {
 								"o mesmo.";
 	
 	
+	/**
+	 * 
+	 */
 	public NotSupportedBancoException() {
 		super(msg);
 	}
 	
+	/**
+	 * @param message
+	 * @param cause
+	 */
 	@SuppressWarnings("unused")
 	private NotSupportedBancoException(String message, Throwable cause) {
 		super(message, cause);
 	}
+	
+	/**
+	 * @param message
+	 */
 	@SuppressWarnings("unused")
 	private NotSupportedBancoException(String message) {
 		super(message);
 	}
 	
+	/**
+	 * @param cause
+	 */
 	@SuppressWarnings("unused")
 	private NotSupportedBancoException(Throwable cause) {
 		super(msg, cause);

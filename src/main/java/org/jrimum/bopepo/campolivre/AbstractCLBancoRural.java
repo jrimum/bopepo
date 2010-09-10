@@ -29,11 +29,21 @@ abstract class AbstractCLBancoRural extends AbstractCampoLivre {
 	 */
 	static final String CODIGO_REDUZIDO = "CODIGO_REDUZIDO";
 
+	/**
+	 * <p>Cria um campo livre com um determinado número de campos</p>
+	 * 
+	 * @see AbstractCampoLivre
+	 * 
+	 * @param fieldsLength - Número de campos
+	 */
 	protected AbstractCLBancoRural(Integer fieldsLength) {
 		
 		super(fieldsLength);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	static CampoLivre create(Titulo titulo) {
 		
 		checkCarteira(titulo);

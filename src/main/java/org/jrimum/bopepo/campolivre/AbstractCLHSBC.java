@@ -54,11 +54,21 @@ abstract class AbstractCLHSBC extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = 3179450500491723317L;
 
+	/**
+	 * <p>Cria um campo livre com um determinado número de campos</p>
+	 * 
+	 * @see AbstractCampoLivre
+	 * 
+	 * @param fieldsLength - Número de campos
+	 */
 	protected AbstractCLHSBC(Integer fieldsLength) {
 		
 		super(fieldsLength);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	static CampoLivre create(Titulo titulo) {
 		
 		checkCarteira(titulo);

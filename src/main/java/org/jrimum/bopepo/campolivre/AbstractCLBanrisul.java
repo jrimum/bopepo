@@ -35,17 +35,9 @@ import org.jrimum.utilix.text.Field;
 import org.jrimum.vallia.digitoverificador.Modulo;
 
 /**
- * 
- * <p>
- * Fábrica de campos livre do Banco Banrisul.
- * </p>
- * 
- * <p>
- * Objetivos:
- * <ul>
- *   <li>Escolher qual é o campo livre a ser instanciado, baseado no tipo de cobrança;</li>
- *   <li>Agrupar métodos em comum dos campos livres existentes.</li>
- * </ul>
+ *<p>
+ * Interface comum para todos os campos livres do Banco Banrisul que venham a
+ * existir.
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
@@ -64,11 +56,21 @@ abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 	 */
 	private static final long serialVersionUID = -259398499475894938L;
 
+	/**
+	 * <p>Cria um campo livre com um determinado número de campos</p>
+	 * 
+	 * @see AbstractCampoLivre
+	 * 
+	 * @param fieldsLength - Número de campos
+	 */
 	protected AbstractCLBanrisul(Integer fieldsLength) {
 		
 		super(fieldsLength);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 		
 		checkCarteira(titulo);

@@ -38,11 +38,11 @@ import java.util.Set;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.vallia.digitoverificador.Modulo;
 
-
 /**
- * <p>
- * Fábrica para os campos livres do Banco Itaú.
- * </p> 
+ *<p>
+ * Interface comum para todos os campos livres do Banco Itaú que venham a
+ * existir.
+ * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
@@ -78,11 +78,21 @@ abstract class AbstractCLItau extends AbstractCampoLivre {
 		CARTEIRAS_ESPECIAIS.add(198);
 	}
 
+	/**
+	 * <p>Cria um campo livre com um determinado número de campos</p>
+	 * 
+	 * @see AbstractCampoLivre
+	 * 
+	 * @param fieldsLength - Número de campos
+	 */
 	protected AbstractCLItau(Integer fieldsLength) {
 		
 		super(fieldsLength);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	static CampoLivre create(Titulo titulo){
 		
 		checkCarteira(titulo);

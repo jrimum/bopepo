@@ -138,7 +138,8 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * @throws CampoLivreException
 	 *             Caso ocorra algum problema na geração do campo livre.
 	 */
-	static CampoLivre create(Titulo titulo) {
+	static CampoLivre create(Titulo titulo) throws NotSupportedBancoException,
+			NotSupportedCampoLivreException, CampoLivreException {
 
 		if (log.isTraceEnabled()){
 			
