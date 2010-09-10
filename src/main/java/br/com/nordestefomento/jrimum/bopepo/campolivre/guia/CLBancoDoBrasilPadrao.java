@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  * 
- * Created at: 30/03/2008 - 18:07:47
+ * Created at: 30/03/2008 - 18:08:37
  * 
  * ================================================================================
  * 
@@ -23,7 +23,7 @@
  * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
  * reger permissões e limitações sob esta LICENÇA.
  * 
- * Criado em: 30/03/2008 - 18:07:47
+ * Criado em: 30/03/2008 - 18:08:37
  * 
  */
 
@@ -31,7 +31,10 @@
 package br.com.nordestefomento.jrimum.bopepo.campolivre.guia;
 
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
-import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
+import br.com.nordestefomento.jrimum.utilix.DateUtil;
+import br.com.nordestefomento.jrimum.utilix.Field;
+import br.com.nordestefomento.jrimum.utilix.Filler;
+
 
 /**
  * 
@@ -42,34 +45,38 @@ import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoS
  * 
  * @version 0.3
  */
-abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
-	
+class CLBancoDoBrasilPadrao extends AbstractCLBancoDoBrasil { 
 	/**
-	 *
+	 * 
 	 */
-	private static final long serialVersionUID = -7324315662526104153L;
+	private static final long serialVersionUID = 4697152038277741060L;
+	/**
+	 * 
+	 */
+	private static final Integer FIELDS_LENGTH = 3;
 
+	/**
+	 * <p>
+	 *   Dada uma arrecadacão, cria um campo livre para o padrão do Banco do Brasil
+	 *   para todos os tipos de segmento (exceto o 9).  
+	 * </p>
+	 * @param arrecadacao título com as informações para geração do campo livre
+	 */
+	CLBancoDoBrasilPadrao(Arrecadacao arrecadacao) {
+		super(FIELDS_LENGTH, arrecadacao.getOrgaoRecebedor().getTipoSeguimento());
+		
+		// Data de vencimento no formato YYYYMMDD.
+		// Tamanho: 8	
+		String dataFormatadaYYYYMMDD = DateUtil.FORMAT_YYYYMMDD.format(arrecadacao.getDataDoVencimento());
+		this.add(new Field<String>(dataFormatadaYYYYMMDD, 8));	
 
-	protected AbstractCLBancoDoBrasil(Integer fieldsLength, TipoSeguimento tipoSeguimento) {
-		super(fieldsLength, tipoSeguimento);
+		// Código do convênio.
+		// Tamanho: 6
+		this.add(new Field<Integer>(arrecadacao.getConvenio().getNumero(), 6, Filler.ZERO_LEFT));
+		
+		// Número da guia (nosso número)
+		// Tamanho: 7
+		this.add(new Field<String>(arrecadacao.getNossoNumero(), 7, Filler.ZERO_LEFT));
 	}
 
-	
-	static CampoLivre create(Arrecadacao arrecadacao) throws NotSupportedCampoLivreException {			
-		
-		CampoLivre campoLivre = null;
-		TipoSeguimento tipoSeguimento = null;
-		
-		tipoSeguimento = arrecadacao.getOrgaoRecebedor().getTipoSeguimento();
-		
-		if (tipoSeguimento == TipoSeguimento.USO_EXCLUSIVO_BANCO) {
-			campoLivre = new CLBancoDoBrasilSegmento9(arrecadacao);	
-		}
-		else {
-			campoLivre = new CLBancoDoBrasilPadrao(arrecadacao); 
-		}
-
-		return campoLivre;
-	}
-	
 }

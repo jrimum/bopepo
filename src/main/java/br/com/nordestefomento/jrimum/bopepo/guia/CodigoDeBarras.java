@@ -293,7 +293,10 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 		digitoVerificadorGeral = new Field<Integer>(0, 1, Filler.ZERO_LEFT);
 		valor = new Field<BigDecimal>(new BigDecimal(0), 11, Filler.ZERO_LEFT);
 		
-		// Configurando o tamanho dos campos campos orgão e campo livre. 
+		// Configurando o tamanho dos campos orgão e campo livre. 
+		// Se o tipo de seguimento for USO_EXCLUSIVO_BANCO (9), a identificação do órgão
+		// será feita com o código do banco, com tamanho 4. Caso contrário, a identificaão
+		// será feita com os 8 primeiros dígitos do CNPJ do órgão recebedor. 
 		if (arrecadacao.getOrgaoRecebedor().getTipoSeguimento() == TipoSeguimento.USO_EXCLUSIVO_BANCO) {
 			this.orgao = new Field<String>("0", 4, Filler.ZERO_LEFT);
 			this.campoLivre = new Field<String>(StringUtils.EMPTY, 25);

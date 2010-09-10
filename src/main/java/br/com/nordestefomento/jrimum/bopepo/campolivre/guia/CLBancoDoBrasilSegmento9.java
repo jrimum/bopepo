@@ -56,23 +56,31 @@ class CLBancoDoBrasilSegmento9 extends AbstractCLBancoDoBrasil {
 
 	/**
 	 * <p>
-	 *   Dado uma arrecadacão, cria um campo livre para o padrão do Banco do Brasil
-	 *   para o tipo de segmento 9 e tipo de valor referencia 6 ou 8.  
+	 *   Dada uma arrecadacão, cria um campo livre para o padrão do Banco do Brasil
+	 *   para o tipo de segmento 9.  
 	 * </p>
 	 * @param arrecadacao título com as informações para geração do campo livre
 	 */
 	CLBancoDoBrasilSegmento9(Arrecadacao arrecadacao) {
 		super(FIELDS_LENGTH, arrecadacao.getOrgaoRecebedor().getTipoSeguimento());
 		
-
+		// Dois primeiros dígitos do CNPJ do órgão recebedor.
+		// Tamanho: 2
 		String digitos11Com12DoCNPJ = arrecadacao.getOrgaoRecebedor().getCNPJ().getCodigoFormatadoSemPontuacao().substring(10,12);
 		this.add(new Field<String>(digitos11Com12DoCNPJ, 2, Filler.ZERO_LEFT));
 		
+		// Código do convênio.
+		// Tamanho: 6
 		this.add(new Field<Integer>(arrecadacao.getConvenio().getNumero(), 6, Filler.ZERO_LEFT));
 		
+		// Data de vencimento no formato YYYYMMDD.
+		// Tamanho: 8	
 		String dataFormatadaYYYYMMDD = DateUtil.FORMAT_YYYYMMDD.format(arrecadacao.getDataDoVencimento());
 		this.add(new Field<String>(dataFormatadaYYYYMMDD, 8));	
 
+		
+		// Número da guia (nosso número)
+		// Tamanho: 9
 		this.add(new Field<String>(arrecadacao.getNossoNumero(), 9, Filler.ZERO_LEFT));
 		
 	}
