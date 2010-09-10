@@ -18,21 +18,26 @@
 
     	<jar destfile="dist/Bopepo${versao}.jar">
 			<fileset dir="target/classes"/>
+			<fileset dir="src/main/java"/>
 			<fileset dir="src/main/resources"/>
     		
     		<fileset dir="../_JRimum${versao}/target/classes"/>    		
+    		<fileset dir="../_JRimum${versao}/src/main/java"/> 
     		<fileset dir="../_JRimum${versao}/src/main/resources"> 
     			<exclude name="log4j.properties"/>
     		</fileset>
 
     		<fileset dir="../Domkee${versao}/target/classes"/>    		
+    		<fileset dir="../Domkee${versao}/src/main/java"/>    		
     		<fileset dir="../Domkee${versao}/src/main/resources"/>    		
 
     		<fileset dir="../Vallia${versao}/target/classes"/>    		
+    		<fileset dir="../Vallia${versao}/src/main/java"/>    		
     		<fileset dir="../Vallia${versao}/src/main/resources"/>    		
 
     		<fileset dir="../Utilix${versao}/target/classes"/>    		
     		<fileset dir="../Utilix${versao}/src/main/resources"/>    		
+    		<fileset dir="../Utilix${versao}/src/main/java"/>    		
     	</jar>
     </target>
 	
