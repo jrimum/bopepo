@@ -53,7 +53,7 @@ class CLBancoDoBrasilPadrao extends AbstractCLBancoDoBrasil {
 	/**
 	 * 
 	 */
-	private static final Integer FIELDS_LENGTH = 3;
+	private static final Integer FIELDS_LENGTH = 2;
 
 	/**
 	 * <p>
@@ -70,13 +70,10 @@ class CLBancoDoBrasilPadrao extends AbstractCLBancoDoBrasil {
 		String dataFormatadaYYYYMMDD = DateUtil.FORMAT_YYYYMMDD.format(arrecadacao.getDataDoVencimento());
 		this.add(new Field<String>(dataFormatadaYYYYMMDD, 8));	
 
-		// Código do convênio.
-		// Tamanho: 6
-		this.add(new Field<Integer>(arrecadacao.getConvenio().getNumero(), 6, Filler.ZERO_LEFT));
-		
+	
 		// Número da guia (nosso número)
-		// Tamanho: 7
-		this.add(new Field<String>(arrecadacao.getNossoNumero(), 7, Filler.ZERO_LEFT));
+		// Tamanho: 13
+		this.add(new Field<String>(arrecadacao.getNossoNumero(), 13, Filler.ZERO_LEFT));
 	}
 
 }

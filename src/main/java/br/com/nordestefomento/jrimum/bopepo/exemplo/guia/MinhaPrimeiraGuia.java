@@ -49,7 +49,7 @@ public class MinhaPrimeiraGuia {
 		 * recebedor
 		 * ======================================
 		 */			
-		OrgaoRecebedor orgaoRecebedor = new OrgaoRecebedor("JRIMUM ORG", "66.308.410/0001-02", TipoSeguimento.USO_EXCLUSIVO_BANCO);		
+		OrgaoRecebedor orgaoRecebedor = new OrgaoRecebedor("JRIMUM ORG", "66.308.410/0001-02", TipoSeguimento.CARNES_E_ASSEMELHADOS_OU_DEMAIS);		
 		// Se houver uma imagem(Ex: logo) do órgão recebedor... 
 		if (ObjectUtil.isNotNull(imageOrgaoRecebedor)) {
 			orgaoRecebedor.setImgLogo(imageOrgaoRecebedor);
