@@ -104,7 +104,7 @@ class CLHSBCCobrancaRegistrada extends AbstractCLHSBC{
 	 */
 	private static final long serialVersionUID = -5052841093486791338L;
 	
-	private static final Integer FIELDS_LENGTH = 5;
+	private static final Integer FIELDS_LENGTH = 6;
 
 	private static final String CODIGO_DA_CARTEIRA = "00";
 
