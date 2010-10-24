@@ -87,7 +87,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
- * @author <a href="mailto:samuelvalerio@gmail.com">Samuel Valério</a> Valério
+ * @author <a href="mailto:samuelvalerio@gmail.com">Samuel Valério</a>
  * @author <a href="mailto:lukas.antunes@virtualsistemas.com.br">Lukas
  *         Antunes</a> - Colaborador com o banco Intermedium (077)
  * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a> -
@@ -101,9 +101,6 @@ import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
  * @version 0.2
  */
 public enum BancosSuportados implements Serializable{
-
-	// TODO FAZER um link para a lista de componentes suportados no javadoc
-	// dessa classe.
 
 	/*
 	 * <=====================================================================>
@@ -247,7 +244,18 @@ public enum BancosSuportados implements Serializable{
 	 * 
 	 * @since 0.2
 	 */
-	BANCO_RURAL("453", "58160789000128", "BANCO RURAL S.A.", "Banco Múltiplo");
+	BANCO_RURAL("453", "58160789000128", "BANCO RURAL S.A.", "Banco Múltiplo"),
+	
+	/**
+	 * Tipo enumerado que representa o <strong>Banco Sicredi</strong>, código de
+	 * compensação <strong><tt>748</tt></strong> <a
+	 * href="http://www.sicredi.com.br/">site</a>.
+	 * 
+	 * @since 0.2
+	 */
+	BANCO_SICREDI("748", "01181521000155", "BANCO COOPERATIVO SICREDI S.A.", "Banco Mútiplo Cooperativo"),
+	
+	;
 
 	/**
 	 * Singleton <code>Map</code> para pesquisa por bancos suportados no
