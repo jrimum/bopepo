@@ -1,3 +1,32 @@
+/* 
+ * Copyright 2008 JRimum Project
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ * 
+ * Created at: 01/11/2010 - 09:37:00
+ *
+ * ================================================================================
+ *
+ * Direitos autorais 2008 JRimum Project
+ *
+ * Licenciado sob a Licença Apache, Versão 2.0 ("LICENÇA"); você não pode 
+ * usar esse arquivo exceto em conformidade com a esta LICENÇA. Você pode obter uma 
+ * cópia desta LICENÇA em http://www.apache.org/licenses/LICENSE-2.0 A menos que 
+ * haja exigência legal ou acordo por escrito, a distribuição de software sob esta 
+ * LICENÇA se dará “COMO ESTÁ”, SEM GARANTIAS OU CONDIÇÕES DE QUALQUER TIPO, sejam 
+ * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
+ * e limitações sob esta LICENÇA.
+ * 
+ * Criado em: 01/11/2010 - 09:37:00
+ * 
+ */
 package org.jrimum.bopepo.exemplo;
 
 import java.io.File;
@@ -5,14 +34,12 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.view.BoletoViewer;
 import org.jrimum.domkee.comum.pessoa.endereco.CEP;
 import org.jrimum.domkee.comum.pessoa.endereco.Endereco;
 import org.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;
 import org.jrimum.domkee.financeiro.banco.Banco;
-import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
@@ -27,11 +54,12 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
 
 /**
- * 
  * <p>
  * Exemplo de código para geração de um boleto simples.
  * </p>
- * 
+ * <p>
+ * Utiliza dados genéricos (fictícios), como o banco e o campo livre.
+ * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
@@ -51,12 +79,11 @@ public class MeuPrimeiroBoleto {
 		Cedente cedente = new Cedente("PROJETO JRimum", "00.000.208/0001-00");
 
 		// Informando dados sobre a conta bancária do cendente.
-		Banco banco = BancosSuportados.NOSSA_CAIXA.create();
+		Banco banco = new JRimumBank();
 		ContaBancaria contaBancariaCed = new ContaBancaria(banco);
 		contaBancariaCed.setBanco(banco);
 		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(123456, "0"));
-		contaBancariaCed.setCarteira(new Carteira(123,
-				TipoDeCobranca.SEM_REGISTRO));
+		contaBancariaCed.setCarteira(new Carteira(123, TipoDeCobranca.SEM_REGISTRO));
 		contaBancariaCed.setModalidade(new Modalidade(4));
 		contaBancariaCed.setAgencia(new Agencia(1234, "1"));
 		cedente.addContaBancaria(contaBancariaCed);
@@ -64,8 +91,7 @@ public class MeuPrimeiroBoleto {
 		/*
 		 * INFORMANDO DADOS SOBRE O SACADO.
 		 */
-		Sacado sacado = new Sacado("JavaDeveloper Pronto Para Férias",
-				"222.222.222-22");
+		Sacado sacado = new Sacado("JavaDeveloper Pronto Para Férias", "222.222.222-22");
 
 		// Informando o endereço do sacado.
 		Endereco enderecoSac = new Endereco();
@@ -80,8 +106,7 @@ public class MeuPrimeiroBoleto {
 		/*
 		 * INFORMANDO DADOS SOBRE O SACADOR AVALISTA.
 		 */
-		SacadorAvalista sacadorAvalista = new SacadorAvalista(
-				"Nordeste Fomento Mercantil", "00.000.000/0001-91");
+		SacadorAvalista sacadorAvalista = new SacadorAvalista("JRimum Enterprise", "00.000.000/0001-91");
 
 		// Informando o endereço do sacador avalista.
 		Endereco enderecoSacAval = new Endereco();
@@ -96,8 +121,7 @@ public class MeuPrimeiroBoleto {
 		/*
 		 * INFORMANDO OS DADOS SOBRE O TÍTULO.
 		 */
-		Titulo titulo = new Titulo(contaBancariaCed, sacado, cedente,
-				sacadorAvalista);
+		Titulo titulo = new Titulo(contaBancariaCed, sacado, cedente, sacadorAvalista);
 		titulo.setNumeroDoDocumento("123456");
 		titulo.setNossoNumero("993456789");
 		titulo.setDigitoDoNossoNumero("5");
@@ -113,28 +137,10 @@ public class MeuPrimeiroBoleto {
 		titulo.setValorCobrado(BigDecimal.ZERO);
 
 		/*
-		 * INFORMANDO MAIS DADOS BANCÁRIOS, QUANDO NECESSÁRIO. Dependendo do
-		 * banco, talvez seja necessário informar mais dados além de:
-		 * 
-		 * > Valor do título; > Vencimento; > Nosso número; > Código do banco >
-		 * Data de vencimento; > Agência/Código do cedente; > Código da
-		 * carteira; > Código da moeda;
-		 * 
-		 * Definidos como padrão pela FEBRABAN. Verifique na documentação.
-		 */
-		titulo.setParametrosBancarios(new ParametrosBancariosMap("dadoNecessario",
-				"2").adicione("outroDadoNecessario:Constante1", new Integer(1)));
-		
-		/*
-		 * Para recuperar um dado
-		 */
-		String dado = titulo.getParametrosBancarios().getValor("dadoNecessario");
-		System.out.println("Parâmetros Bancários: um dado necessário. "+dado);
-
-		/*
 		 * INFORMANDO OS DADOS SOBRE O BOLETO.
 		 */
-		Boleto boleto = new Boleto(titulo);
+		Boleto boleto = new Boleto(titulo, new CampoLivreJRimumBank(titulo));
+		
 		boleto.setLocalPagamento("Pagável preferencialmente na Rede X ou em "
 				+ "qualquer Banco até o Vencimento.");
 		boleto.setInstrucaoAoSacado("Senhor sacado, sabemos sim que o valor "
@@ -157,8 +163,7 @@ public class MeuPrimeiroBoleto {
 		 * GERANDO O BOLETO BANCÁRIO.
 		 */
 		// Instanciando um objeto "BoletoViewer", classe responsável pela
-		// geração
-		// do boleto bancário.
+		// geração do boleto bancário.
 		BoletoViewer boletoViewer = new BoletoViewer(boleto);
 
 		// Gerando o arquivo. No caso o arquivo mencionado será salvo na mesma
@@ -171,6 +176,11 @@ public class MeuPrimeiroBoleto {
 		mostreBoletoNaTela(arquivoPdf);
 	}
 
+	/**
+	 * Exibe o arquivo na tela.
+	 * 
+	 * @param arquivoBoleto
+	 */
 	private static void mostreBoletoNaTela(File arquivoBoleto) {
 
 		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();

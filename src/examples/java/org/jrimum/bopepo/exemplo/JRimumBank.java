@@ -10,7 +10,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  * 
- * Created at: 16/09/2009 - 00:44:51
+ * Created at: 01/11/2010 - 09:37:00
  *
  * ================================================================================
  *
@@ -24,43 +24,29 @@
  * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
  * e limitações sob esta LICENÇA.
  * 
- * Criado em: 16/09/2009 - 00:44:51
+ * Criado em: 01/11/2010 - 09:37:00
  * 
  */
-package org.jrimum.bopepo.exemplo.banco;
+package org.jrimum.bopepo.exemplo;
 
-import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import javax.swing.ImageIcon;
+
+import org.jrimum.domkee.comum.pessoa.id.cprf.CNPJ;
+import org.jrimum.domkee.financeiro.banco.febraban.Banco;
+import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
+import org.jrimum.utilix.ClassLoaders;
 
 /**
+ * Banco fictício usado para exemplos genéricos.
  * 
- * <p>
- * Exemplo do boleto para o Banco do Brasil com Nosso Número 11
- * </p>
- * <p>
- * Mostra um exemplo funcional que gere um boleto para a implementação de campo livre
- * do Banco do Brasil com Nosso Número 11
- * </p>
- * 
- * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
- * 
- * @version 0.2
+ * @author Rômulo Augusto
  */
-public class BoletoBBNossoNumero11Exemplo extends AbstractBoletoExemplo {
+public class JRimumBank extends Banco {
+	
+	private static final long serialVersionUID = -1249001983382787936L;
 
-	@Override
-	protected BancosSuportados getBancoSuportado() {
-		return BancosSuportados.BANCO_DO_BRASIL;
+	public JRimumBank() {
+		super(new CodigoDeCompensacaoBACEN("999"), "JRimum Bank", new CNPJ("02756617000167"), 
+				"Banco Múltiplo", new ImageIcon(ClassLoaders.getResource("/img/999.png")).getImage());
 	}
-
-	@Override
-	protected Carteira getCarteira() {
-		return new Carteira(5);
-	}
-
-	@Override
-	protected String getNossoNumero() {
-		return "12345678901";
-	}
-
 }

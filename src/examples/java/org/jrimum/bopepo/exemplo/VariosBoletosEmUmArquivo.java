@@ -62,7 +62,7 @@ public class VariosBoletosEmUmArquivo {
 		 * É bem simples, consiga os boletos 
 		 */
 
-		List<Boleto> boletos = ExemplosUtil.getVariosBoletos();
+		List<Boleto> boletos = Exemplos.getVariosBoletos();
 		
 		/*
 		 * Depois diga o nome do diretorio/arquivo para onde os boletos serão gerados com template padrão. 

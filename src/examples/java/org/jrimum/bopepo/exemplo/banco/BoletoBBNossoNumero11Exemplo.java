@@ -10,7 +10,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  * 
- * Created at: 18/05/2008 - 21:13:29
+ * Created at: 16/09/2009 - 00:44:51
  *
  * ================================================================================
  *
@@ -24,72 +24,47 @@
  * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
  * e limitações sob esta LICENÇA.
  * 
- * Criado em: 18/05/2008 - 21:13:29
+ * Criado em: 16/09/2009 - 00:44:51
  * 
  */
+package org.jrimum.bopepo.exemplo.banco;
 
-package org.jrimum.bopepo.exemplo;
-
-import java.io.File;
-import java.util.List;
-
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
-import org.jrimum.bopepo.view.BoletoViewer;
-
-
+import org.jrimum.bopepo.exemplo.Exemplos;
+import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * 
  * <p>
- * Exemplo de código para geração de vários boletos em um único arquivo PDF.
+ * Exemplo do boleto para o Banco do Brasil com Nosso Número 11
+ * </p>
+ * <p>
+ * Mostra um exemplo funcional que gere um boleto para a implementação de campo livre
+ * do Banco do Brasil com Nosso Número 11
  * </p>
  * 
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
- * 
- * @since 0.2
  * 
  * @version 0.2
  */
-
-public class VariosBoletosEmVariosArquivos {
-
+public class BoletoBBNossoNumero11Exemplo {
 
 	public static void main(String[] args) {
 		
-		/*
-		 * É bem simples, consiga os boletos 
-		 */
-
-		List<Boleto> boletos = ExemplosUtil.getVariosBoletos();
+		Titulo titulo = Exemplos.crieTitulo();
 		
-		/*
-		 * Depois diga o nome do diretorio para onde os boletos serão gerados. 
-		 */
+		//Campos específicos para o Banco do Brasil com nosso número 11.
+		titulo.setNossoNumero("12345678901");
 		
-		BoletoViewer.onePerPDF("./", ".pdf", boletos);
-	
+		ContaBancaria contaBancaria = titulo.getContaBancaria();
+		contaBancaria.setBanco(BancosSuportados.BANCO_DO_BRASIL.create());
+		contaBancaria.setCarteira(new Carteira(5));
 		
-		/*
-		 * Pronto, agora vamos conferir um: 
-		 */
+		Boleto boleto = Exemplos.crieBoleto(titulo);
 		
-		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
-			
-		try{
-	
-			desktop.open(new File("Boleto1.pdf"));
-	
-		}catch(Exception e){
-			throw new RuntimeException("Arquivo não gerado!",e);
-		}
-		
-		/*
-		 * É sério, é só isso mesmo!
-		 * Se não acredita confira os vários arquivos que estão no diretório. 
-		 */
-		
+		Exemplos.execute(boleto);
 	}
-
 }

@@ -54,7 +54,6 @@ public class BoletoExemploExecutor {
 	private void init() {
 		
 		AbstractBoletoExemplo.newInstance(BoletoBradescoExemplo.class);
-		AbstractBoletoExemplo.newInstance(BoletoBBNossoNumero11Exemplo.class);
 		AbstractBoletoExemplo.newInstance(BoletoBBNossoNumero17Exemplo.class);
 		AbstractBoletoExemplo.newInstance(BoletoBancoRealExemplo.class);
 		AbstractBoletoExemplo.newInstance(BoletoItauCarteirasPadroesExemplo.class);

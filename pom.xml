@@ -46,6 +46,18 @@
 	</properties>
 	
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/test/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/examples/resources</directory>
+			</resource>
+		</resources>
+		
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -55,6 +67,26 @@
 					<source>1.5</source>
 					<target>1.5</target>
 				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>add-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/examples/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 
 			<plugin>
