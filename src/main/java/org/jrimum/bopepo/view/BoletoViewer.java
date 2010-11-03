@@ -35,27 +35,26 @@ import static org.jrimum.utilix.Objects.isNotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jrimum.bopepo.Boleto;
+import org.jrimum.utilix.Collections;
 import org.jrimum.utilix.Objects;
-
-import com.lowagie.text.DocumentException;
 
 /**
  * <p>
- * Agrupa as formas de visualização de um boleto.
+ * Agrupa as formas de <strong>"visão"</strong> de um boleto.
  * </p>
  * 
  * <p>
- * EXEMPLO de formas de visualização:
+ * Exemplo de formas de visualização:
  * <ul>
  * <li>PDF</li>
  * <li>Stream</li>
+ * <li>Array de Bytes</li>
  * <li>Array de Bytes</li>
  * </ul>
  * </p>
@@ -77,89 +76,125 @@ public class BoletoViewer {
 	private static Logger log = Logger.getLogger(BoletoViewer.class);
 
 	/**
-	 * <p> Engine responsável pela visualização em formato <em>PDF</em>.
+	 * <p>
+	 * Engine responsável pela visualização em formato <em>PDF</em>.
+	 * </p>
 	 */
-	private ViewerPDF viewerPDF;
+	private PdfViewer pdfViewer;
 
+	
 	/**
+	 * <p>
+	 * Instancia o visualizador com o template padrão.
+	 * </p>
+	 * 
 	 * @param boleto
-	 * @throws DocumentException
-	 * @throws IOException
+	 *            - Boleto preenchido
 	 */
 	public BoletoViewer(Boleto boleto) {
 		initViewerPDF(null, null, boleto);			
 	}
-	
+
 	/**
-	 * @param boleto
-	 * @param templatePathName
+	 * <p>
+	 * Instancia o visualizador com um template determinado.
+	 * </p>
 	 * 
+	 * @param boleto
+	 *            - Boleto preenchido
+	 * @param templatePathName
+	 *            - Template PDF o qual o boleto será gerado
 	 */
 	public BoletoViewer(Boleto boleto, String templatePathName) {
 		initViewerPDF(templatePathName, null, boleto);
 	}
 	
 	/**
-	 * @param boleto
-	 * @param template
+	 * <p>
+	 * Instancia o visualizador com um template determinado.
+	 * </p>
 	 * 
+	 * @param boleto
+	 *            - Boleto preenchido
+	 * @param templatePathName
+	 *            - Template PDF o qual o boleto será gerado
 	 */
 	public BoletoViewer(Boleto boleto, File template) {
 		initViewerPDF(null, template, boleto);
 	}
 
 	/**
-	 *<p> Para uso interno do componente </p> 
+	 * Para uso interno do componente
 	 */
-	protected BoletoViewer() {
-		this.viewerPDF = new ViewerPDF();
+	private BoletoViewer() {
+		this.pdfViewer = new PdfViewer();
 	}
 
 	/**
 	 * <p>
-	 * Agrupo vários boletos em um único pdf.
+	 * Agrupo vários boletos em um único PDF.
 	 * </p>
 	 * 
-	 * @param pathName
-	 *            Caminho no qual será gerado o pdf
+	 * @param pathNameDest
+	 *            Caminho no qual será gerado o PDF
 	 * @param boletos
 	 *            Boletos a serem agrupados
-	 * @return Arquivo pdf
+	 *            
+	 * @return Arquivo PDF
 	 * 
 	 * 
 	 * @since 0.2
 	 */
-	public static File groupInOnePDF(String pathName, List<Boleto> boletos) {
+	public static File groupInOnePDF(String pathNameDest, List<Boleto> boletos) {
 
-		File group = null;
+		checkPathDest(pathNameDest);
+		checkBoletosList(boletos);
 		
-		if (validatePathName(pathName) && validateBoletosList(boletos)) {
-			group = groupInOnePDF(pathName, boletos, new BoletoViewer());
-		}
-
-		return group;
-	}
-
-	public static File groupInOnePDF(String destPathName, List<Boleto> boletos, String templatePathName) {
-
-		File group = null;
-
-		if (validatePathName(destPathName) && validateBoletosList(boletos) && validatePathName(templatePathName)) {
-			group = groupInOnePDF(destPathName, boletos, new BoletoViewer().setTemplate(templatePathName));
-		}
-					
-		return group;
+		return PdfViewer.groupInOnePDF(boletos, new BoletoViewer(), new File(pathNameDest));
 	}
 	
-	public static File groupInOnePDF(String destPathName, List<Boleto> boletos, File templateFile) {
+	public static File groupInOnePDF(File file, List<Boleto> boletos) {
 
-		File group = null;
+		checkFileDest(file);
+		checkBoletosList(boletos);
+		
+		return PdfViewer.groupInOnePDF(boletos, new BoletoViewer(), file);
+	}
 
-		if (validatePathName(destPathName) && validateBoletosList(boletos) && validateFile(templateFile, "template")) {
-			group = groupInOnePDF(destPathName, boletos, new BoletoViewer().setTemplate(templateFile));
-		}
+	public static File groupInOnePDF(String pathNameDest, List<Boleto> boletos, String templatePathName) {
+
+		checkPathDest(pathNameDest);
+		checkBoletosList(boletos);
+		checkPathTemplate(templatePathName);
+		
+		return PdfViewer.groupInOnePDF(boletos, new BoletoViewer().setTemplate(templatePathName), new File(pathNameDest));
+	}
+	
+	public static File groupInOnePDF(String pathNameDest, List<Boleto> boletos, File templateFile) {
+
+		checkPathDest(pathNameDest);
+		checkBoletosList(boletos);
+		checkFileTemplate(templateFile);
+		
+		return PdfViewer.groupInOnePDF(boletos, new BoletoViewer().setTemplate(templateFile), new File(pathNameDest));
+	}
+	
+	public static File groupInOnePDF(File file, List<Boleto> boletos, String templatePathName) {
+
+		checkFileDest(file);
+		checkBoletosList(boletos);
+		checkPathTemplate(templatePathName);
+		
+		return PdfViewer.groupInOnePDF(boletos, new BoletoViewer().setTemplate(templatePathName), file);
+	}
+	
+	public static File groupInOnePDF(File file, List<Boleto> boletos, File template) {
+
+		checkFileDest(file);
+		checkBoletosList(boletos);
+		checkFileTemplate(template);
 					
-		return group;
+		return PdfViewer.groupInOnePDF(boletos, new BoletoViewer().setTemplate(template), file);
 	}
 
 	/**
@@ -188,7 +223,7 @@ public class BoletoViewer {
 			
 			if(!boletos.isEmpty()) {
 				
-				files.addAll(ViewerPDF.onePerPDF(path, extensao, boletos));
+				files.addAll(PdfViewer.onePerPDF(path, extensao, boletos));
 				
 			} else {
 				throw new IllegalArgumentException("A Lista de boletos está vazia!");
@@ -202,7 +237,8 @@ public class BoletoViewer {
 	}
 
 	public File getTemplate() {
-		return viewerPDF.getTemplate();
+		
+		return pdfViewer.getTemplate();
 	}
 
 	/**
@@ -216,13 +252,10 @@ public class BoletoViewer {
 	 */
 	public BoletoViewer setTemplate(File template) {
 
-		if(isNotNull(template)) {
-			this.viewerPDF.setTemplate(template);
+		checkFileTemplate(template);
 			
-		} else {
-			throw new NullPointerException("Arquivo de template inválido: valor [null]");
-		}
-		
+		this.pdfViewer.setTemplate(template);
+			
 		return this;
 	}
 
@@ -239,13 +272,11 @@ public class BoletoViewer {
 		
 	public BoletoViewer setTemplate(String pathName) {
 		
-		if(isNotBlank(pathName)) {
-			viewerPDF.setTemplate(pathName);
-			
-		} else {
-			throw new IllegalArgumentException("Caminho do template inválido: valor [" + pathName + "]");
-		}
 		
+		checkPathTemplate(pathName);
+		
+		this.pdfViewer.setTemplate(pathName);
+			
 		return this;
 	}
 	
@@ -261,8 +292,8 @@ public class BoletoViewer {
 
 		final String PADRAO = null;
 
-		if (isNotNull(viewerPDF)) {
-			viewerPDF.setTemplate(PADRAO);
+		if (isNotNull(pdfViewer)) {
+			pdfViewer.setTemplate(PADRAO);
 		}
 
 		return this;
@@ -282,10 +313,10 @@ public class BoletoViewer {
 	public File getPdfAsFile(String pathName) {
 
 		if (log.isDebugEnabled()) {
-			log.debug("documento instance : " + viewerPDF);
+			log.debug("documento instance : " + pdfViewer);
 		}
 
-		return viewerPDF.getFile(pathName);
+		return pdfViewer.getFile(pathName);
 	}
 
 	/**
@@ -300,10 +331,10 @@ public class BoletoViewer {
 	public ByteArrayOutputStream getPdfAsStream() {
 
 		if (log.isDebugEnabled()) {
-			log.debug("documento instance : " + viewerPDF);
+			log.debug("documento instance : " + pdfViewer);
 		}
 
-		return viewerPDF.getStream();
+		return pdfViewer.getStream();
 
 	}
 
@@ -319,10 +350,10 @@ public class BoletoViewer {
 	public byte[] getPdfAsByteArray() {
 
 		if (log.isDebugEnabled()) {
-			log.debug("documento instance : " + viewerPDF);
+			log.debug("documento instance : " + pdfViewer);
 		}
 
-		return viewerPDF.getBytes();
+		return pdfViewer.getBytes();
 	}
 
 	/**
@@ -331,7 +362,7 @@ public class BoletoViewer {
 	 * @since 0.2
 	 */
 	public Boleto getBoleto() {
-		return viewerPDF.getBoleto();
+		return pdfViewer.getBoleto();
 	}
 
 	/**
@@ -349,73 +380,32 @@ public class BoletoViewer {
 		return this;
 	}
 
-	private static boolean validatePathName(String pathName){
-		
-		Objects.checkNotNull(pathName);
-		
-		if(StringUtils.isNotBlank(pathName)) {
-			
-			return true;
-			
-		} else {
-			throw new IllegalArgumentException("Path(Diretório) destinado a geração do(s) arquivo(s) não contém informação!");
-		}
-	}
-	
-	private static boolean validateFile(File file, String name){
-		
-		if (isNotNull(file)) {
-			
-			return true;
-			
-		} else {
-			
-			throw new NullPointerException("File(Arquivo) destinado a geração do(s) documento(s) [" + name + "] nulo!");
-		}
-	}
-	
-	private static boolean validateBoletosList(List<Boleto> boletos){
-		
-		Objects.checkNotNull(boletos);
-		
-		if(!boletos.isEmpty()) {
-			
-			return true;
-			
-		} else {
-			throw new IllegalArgumentException("A Lista de boletos está vazia!");
-		}
-	}
-	
-	private static File groupInOnePDF(String pathName, List<Boleto> boletos, BoletoViewer boletoViewer){
-		
-		return ViewerPDF.groupInOnePDF(pathName, boletos, boletoViewer);		
-	}
-
 	private void initViewerPDF(String templatePathName, File template, Boleto boleto) {
 		
 		Objects.checkNotNull(boleto);
 			
-		this.viewerPDF = new ViewerPDF(boleto);
+		this.pdfViewer = new PdfViewer(boleto);
 		
 		/*
 		 * O arquivo tem prioridade 
 		 */
 		if (isNotBlank(templatePathName) && isNotNull(template)) {
+			
 			setTemplate(template);
 			
 		} else {
 			
 			if (isNotBlank(templatePathName)) {
+				
 				setTemplate(templatePathName);
 			}
 			
 			if (isNotNull(template)) {
+				
 				setTemplate(template);
 			}
 		}
 	}
-	
 	
 	/**
 	 * <p>
@@ -424,16 +414,54 @@ public class BoletoViewer {
 	 * 
 	 * @param boleto
 	 * 
-	 * @since 
+	 * @since 0.2
 	 */
-		
 	private void updateViewerPDF(Boleto boleto) {
 
-		if(isNotNull(this.viewerPDF)) {
-			this.viewerPDF = new ViewerPDF(boleto, this.viewerPDF.getTemplate());
+		if(isNotNull(this.pdfViewer)) {
+			
+			this.pdfViewer = new PdfViewer(boleto, this.pdfViewer.getTemplate());
 			
 		} else {
-			this.viewerPDF = new ViewerPDF(boleto);
+			
+			this.pdfViewer = new PdfViewer(boleto);
 		}
+	}
+	
+
+	private static void checkPathDest(String path){
+		
+		checkString(path, "Caminho destinado a geração do(s) arquivo(s) não contém informação!");
+	}
+	
+	private static void checkPathTemplate(String path){
+		
+		checkString(path, "Caminho do template não contém informação!");
+	}
+	
+	private static void checkString(String str, String msg){
+		
+		Objects.checkNotNull(str);
+		
+		if(StringUtils.isBlank(str)) {
+			
+			throw new IllegalArgumentException(msg);
+		}
+	}
+	
+	private static void checkFileDest(File file){
+		
+		Objects.checkNotNull(file, "Arquivo destinado a geração do(s) boleto(s) nulo!");
+	}
+	
+	private static void checkFileTemplate(File file){
+		
+		Objects.checkNotNull(file, "Arquivo de template nulo!");
+	}
+	
+	private static void checkBoletosList(List<Boleto> boletos){
+		
+		Objects.checkNotNull(boletos,"Lista de boletos nula!");
+		Collections.checkNotEmpty(boletos, "A Lista de boletos está vazia!");
 	}
 }

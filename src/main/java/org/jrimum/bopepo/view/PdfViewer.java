@@ -77,12 +77,12 @@ import com.lowagie.text.pdf.PdfStamper;
  * 
  * @version 0.2
  */
-class ViewerPDF {
+class PdfViewer {
 
-	private static Logger log = Logger.getLogger(ViewerPDF.class);
+	private static Logger log = Logger.getLogger(PdfViewer.class);
 
-	private static URL TEMPLATE_PADRAO_COM_SACADOR_AVALISTA = ViewerPDF.class.getResource("/pdf/BoletoTemplateComSacadorAvalista.pdf");
-	private static URL TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA = ViewerPDF.class.getResource("/pdf/BoletoTemplateSemSacadorAvalista.pdf");
+	private static URL TEMPLATE_PADRAO_COM_SACADOR_AVALISTA = PdfViewer.class.getResource("/pdf/BoletoTemplateComSacadorAvalista.pdf");
+	private static URL TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA = PdfViewer.class.getResource("/pdf/BoletoTemplateSemSacadorAvalista.pdf");
 
 	private static final String HIFEN_SEPERADOR = "-";
 	
@@ -103,7 +103,7 @@ class ViewerPDF {
 	 * 
 	 * @since 0.2
 	 */
-	ViewerPDF() {
+	PdfViewer() {
 	}
 	
 	/**
@@ -113,7 +113,7 @@ class ViewerPDF {
 	 * 
 	 * @since 0.2
 	 */
-	ViewerPDF(Boleto boleto) {
+	PdfViewer(Boleto boleto) {
 		
 		this.boleto = boleto;
 	}
@@ -125,7 +125,7 @@ class ViewerPDF {
 	 * 
 	 * @since 0.2
 	 */
-	ViewerPDF(Boleto boleto, File template) {
+	PdfViewer(Boleto boleto, File template) {
 		
 		this.boleto = boleto;
 		
@@ -136,15 +136,15 @@ class ViewerPDF {
 	 * <p>
 	 * SOBRE O MÉTODO
 	 * </p>
-	 * 
-	 * @param pathName arquivo de destino
 	 * @param boletos a serem agrupados
 	 * @param boletoViewer visualizador
+	 * @param pathName arquivo de destino
+	 * 
 	 * @return File contendo boletos gerados
 	 * 
 	 * @since 0.2
 	 */
-	protected static File groupInOnePDF(String pathName, List<Boleto> boletos, BoletoViewer boletoViewer) {
+	protected static File groupInOnePDF(List<Boleto> boletos, BoletoViewer boletoViewer, File fileDest) {
 
 		File arq = null;
 
@@ -156,17 +156,13 @@ class ViewerPDF {
 
 		try {
 			
-			arq = Files.bytesToFile(pathName, PDFUtil.mergeFiles(boletosEmBytes));
+			arq = Files.bytesToFile(fileDest, PDFUtil.mergeFiles(boletosEmBytes));
 			
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			
 			log.error("Erro durante geração do PDF." + e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro durante geração do PDF. Causado por " + e.getLocalizedMessage(), e);
 			
-		} catch (IOException e) {
-
-			log.error("Erro durante geração do PDF." + e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro durante geração do PDF. Causado por " + e.getLocalizedMessage(), e);
+			throw new IllegalStateException("Erro durante geração do PDF. Causado por " + e.getLocalizedMessage(), e);
 		}
 
 		return arq;
