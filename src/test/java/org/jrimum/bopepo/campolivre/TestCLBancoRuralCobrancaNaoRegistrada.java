@@ -52,7 +52,7 @@ public class TestCLBancoRuralCobrancaNaoRegistrada extends CampoLivreBaseTest {
 		titulo.setNossoNumero("123456789012345");
 		
 		// Código Reduzido do Cliente fornecido pelo Banco
-		titulo.setParametrosBancarios( new ParametrosBancariosMap().adicione(AbstractCLBancoRural.CODIGO_REDUZIDO, new Integer(123)));
+		titulo.setParametrosBancarios( new ParametrosBancariosMap(AbstractCLBancoRural.CODIGO_REDUZIDO, 123));
 		
 		
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));

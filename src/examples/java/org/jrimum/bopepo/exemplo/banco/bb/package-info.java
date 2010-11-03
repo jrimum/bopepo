@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  * 
- * Created at: 14/08/2010 - 20:50:14
+ * Created at: 02/11/2010 - 18:06:18
  * 
  * ================================================================================
  * 
@@ -23,13 +23,14 @@
  * TIPO, sejam expressas ou tácitas. Veja a LICENÇA para a redação específica a
  * reger permissões e limitações sob esta LICENÇA.
  * 
- * Criado em: 14/08/2010 - 20:50:14
+ * Criado em: 02/11/2010 - 18:06:18
  * 
  */
 
 /**
- * Exemplos demosntrativos envolvendo a geração de boletos.
+ * Exemplos de geração de boletos para o Banco do Brasil.
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  */
-package org.jrimum.bopepo.exemplo;
+package org.jrimum.bopepo.exemplo.banco.bb;
