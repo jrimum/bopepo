@@ -40,7 +40,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * Exemplo do boleto para o Banco do Brasil com Nosso Número 11
  * </p>
  * <p>
- * Mostra um exemplo funcional que gere um boleto para a implementação de campo livre
+ * Mostra um exemplo funcional que gera um boleto para a implementação de campo livre
  * do Banco do Brasil com Nosso Número 11
  * </p>
  * 
