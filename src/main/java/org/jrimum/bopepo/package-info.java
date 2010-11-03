@@ -13,7 +13,7 @@
  * 
  * ================================================================================
  * 
- * Direitos autorais 2008 JRimum Project
+ * Direitos autorais 2010 JRimum Project
  * 
  * Licenciado sob a Licença Apache, Versão 2.0 ("LICENÇA"); você não pode usar
  * esse arquivo exceto em conformidade com a esta LICENÇA. Você pode obter uma

@@ -93,7 +93,7 @@ public class BoletoViewer {
 	/**
 	 * @param boleto
 	 * @param templatePathName
-	 * @throws JRimumException
+	 * 
 	 */
 	public BoletoViewer(Boleto boleto, String templatePathName) {
 		initViewerPDF(templatePathName, null, boleto);
@@ -102,7 +102,7 @@ public class BoletoViewer {
 	/**
 	 * @param boleto
 	 * @param template
-	 * @throws JRimumException
+	 * 
 	 */
 	public BoletoViewer(Boleto boleto, File template) {
 		initViewerPDF(null, template, boleto);
@@ -125,7 +125,7 @@ public class BoletoViewer {
 	 * @param boletos
 	 *            Boletos a serem agrupados
 	 * @return Arquivo pdf
-	 * @throws JRimumException
+	 * 
 	 * 
 	 * @since 0.2
 	 */
@@ -171,7 +171,7 @@ public class BoletoViewer {
 	 * @param extensao TODO
 	 * @param boletos Boletos a partir dos quais serão gerados os arquivos
 	 * @return Vários arquivos pdf
-	 * @throws JRimumException
+	 * 
 	 * 
 	 * @since 0.2
 	 */

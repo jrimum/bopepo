@@ -79,8 +79,6 @@ import com.lowagie.text.pdf.PdfStamper;
  */
 class ViewerPDF {
 
-	// TODO Teste no teste unitário.
-
 	private static Logger log = Logger.getLogger(ViewerPDF.class);
 
 	private static URL TEMPLATE_PADRAO_COM_SACADOR_AVALISTA = ViewerPDF.class.getResource("/pdf/BoletoTemplateComSacadorAvalista.pdf");
@@ -99,16 +97,34 @@ class ViewerPDF {
 	private File template;
 
 	/**
-	 *<p> Para uso interno do componente </p> 
+	 *<p>
+	 * Para uso interno do componente
+	 * </p>
+	 * 
+	 * @since 0.2
 	 */
 	ViewerPDF() {
 	}
 	
+	/**
+	 *<p>
+	 * Para uso interno do componente
+	 * </p>
+	 * 
+	 * @since 0.2
+	 */
 	ViewerPDF(Boleto boleto) {
 		
 		this.boleto = boleto;
 	}
 	
+	/**
+	 *<p>
+	 * Para uso interno do componente
+	 * </p>
+	 * 
+	 * @since 0.2
+	 */
 	ViewerPDF(Boleto boleto, File template) {
 		
 		this.boleto = boleto;
@@ -125,9 +141,6 @@ class ViewerPDF {
 	 * @param boletos a serem agrupados
 	 * @param boletoViewer visualizador
 	 * @return File contendo boletos gerados
-	 * 
-	 * @throws JRimumException Quando ocorrer um problema na geração do PDF que está fora do controle
-	 * da biblioteca.
 	 * 
 	 * @since 0.2
 	 */
@@ -222,7 +235,7 @@ class ViewerPDF {
 	}
 
 	/**
-	 * @throws JRimumException
+	 *
 	 * 
 	 * @return
 	 */
@@ -253,7 +266,7 @@ class ViewerPDF {
 	}
 
 	/**
-	 * @throws JRimumException
+	 *
 	 * 
 	 * @return
 	 */
