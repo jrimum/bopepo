@@ -40,6 +40,21 @@
 		<url>http://www.jrimum.org/svn/bopepo</url>
 	</scm>
 	
+	<developers>
+		<developer>
+			<name>Gilmar P. S. L.</name>
+			<email>gilmatryx@gmail.com</email>
+		</developer>
+		<developer>
+			<name>Misael Barreto</name>
+			<email>misaelbarreto@gmail.com</email>
+		</developer>
+		<developer>
+			<name>Rômulo Augusto</name>
+			<email>romulomail@gmail.com</email>
+		</developer>
+	</developers>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -122,60 +137,6 @@
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<source>1.5</source>
-					<targetJdk>1.5</targetJdk>
-					<linkXref>true</linkXref>
-				</configuration>
-				<executions>
-					<execution>
-						<id>attach-pmd</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>pmd</goal>
-							<goal>cpd</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>2.5</version>
-				<executions>
-					<execution>
-						<id>attach-checkstyle</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>checkstyle</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jxr-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<linkJavadoc>true</linkJavadoc>
-				</configuration>
-				<executions>
-					<execution>
-						<id>attach-jxr</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>jxr</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.7</version>
 				<executions>
@@ -190,6 +151,16 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
+		</plugins>
+	</reporting>
 	
 	<dependencies>
 		<dependency>
