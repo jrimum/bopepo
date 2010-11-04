@@ -30,7 +30,7 @@
 
 package org.jrimum.bopepo.view;
 
-import static org.apache.commons.lang.StringUtils.isNotBlank;
+import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.jrimum.utilix.Objects.isNotNull;
 
 import java.io.ByteArrayOutputStream;
@@ -55,7 +55,7 @@ import org.jrimum.utilix.Objects;
  * <li>PDF</li>
  * <li>Stream</li>
  * <li>Array de Bytes</li>
- * <li>Array de Bytes</li>
+ * <li>Outros</li>
  * </ul>
  * </p>
  * 
@@ -91,7 +91,29 @@ public class BoletoViewer {
 	 *            - Boleto preenchido
 	 */
 	public BoletoViewer(Boleto boleto) {
-		initViewerPDF(null, null, boleto);
+
+		Objects.checkNotNull(boleto);
+
+		this.pdfViewer = new PdfViewer(boleto);
+	}
+
+	/**
+	 * <p>
+	 * Instancia o visualizador com um template determinado.
+	 * </p>
+	 * 
+	 * @param boleto
+	 *            - Boleto preenchido
+	 * @param templatePath
+	 *            - Template PDF o qual o boleto será gerado
+	 */
+	public BoletoViewer(Boleto boleto, String templatePath) {
+
+		Objects.checkNotNull(boleto);
+
+		setTemplate(templatePath);
+
+		this.pdfViewer = new PdfViewer(boleto);
 	}
 
 	/**
@@ -104,43 +126,35 @@ public class BoletoViewer {
 	 * @param templatePathName
 	 *            - Template PDF o qual o boleto será gerado
 	 */
-	public BoletoViewer(Boleto boleto, String templatePathName) {
-		initViewerPDF(templatePathName, null, boleto);
-	}
+	public BoletoViewer(Boleto boleto, File templateFile) {
 
-	/**
-	 * <p>
-	 * Instancia o visualizador com um template determinado.
-	 * </p>
-	 * 
-	 * @param boleto
-	 *            - Boleto preenchido
-	 * @param templatePathName
-	 *            - Template PDF o qual o boleto será gerado
-	 */
-	public BoletoViewer(Boleto boleto, File template) {
-		initViewerPDF(null, template, boleto);
+		Objects.checkNotNull(boleto);
+
+		setTemplate(templateFile);
+
+		this.pdfViewer = new PdfViewer(boleto);
 	}
 
 	/**
 	 * Para uso interno do componente
 	 */
 	BoletoViewer() {
+
 		this.pdfViewer = new PdfViewer();
 	}
 
 	/**
 	 * <p>
-	 * Agrupa vários boletos em um único PDF.
+	 * Agrupa os boletos da lista em um único arquivo PDF.
 	 * </p>
 	 * 
+	 * 
 	 * @param boletos
-	 *            Boletos a serem agrupados
+	 *            - Lista com os boletos a serem agrupados
 	 * @param destPath
-	 *            Caminho no qual será gerado o PDF
+	 *            - Caminho para o arquivo que armazenará os boletos
 	 * 
-	 * @return Arquivo PDF
-	 * 
+	 * @return Arquivo PDF gerado com os boletos da lista
 	 * 
 	 * @since 0.2
 	 */
@@ -153,6 +167,21 @@ public class BoletoViewer {
 				new BoletoViewer());
 	}
 
+	/**
+	 * <p>
+	 * Agrupa os boletos da lista em um único arquivo PDF.
+	 * </p>
+	 * 
+	 * 
+	 * @param boletos
+	 *            - Lista com os boletos a serem agrupados
+	 * @param destPath
+	 *            - Arquivo que armazenará os boletos
+	 * 
+	 * @return Arquivo PDF gerado com os boletos da lista
+	 * 
+	 * @since 0.2
+	 */
 	public static File groupInOnePDF(List<Boleto> boletos, File destFile) {
 
 		checkBoletosList(boletos);
@@ -161,6 +190,22 @@ public class BoletoViewer {
 		return PdfViewer.groupInOnePDF(boletos, destFile, new BoletoViewer());
 	}
 
+	/**
+	 * <p>
+	 * Agrupa os boletos da lista em um único arquivo PDF.
+	 * </p>
+	 * 
+	 * 
+	 * @param boletos
+	 *            - Lista com os boletos a serem agrupados
+	 * @param destPath
+	 *            - Caminho para o arquivo que armazenará os boletos
+	 * @param templatePath
+	 *            - Caminho para o arquivo com o template para geração
+	 * @return Arquivo PDF gerado com os boletos da lista
+	 * 
+	 * @since 0.2
+	 */
 	public static File groupInOnePDF(List<Boleto> boletos, String destPath,
 			String templatePath) {
 
@@ -172,6 +217,22 @@ public class BoletoViewer {
 				new BoletoViewer().setTemplate(templatePath));
 	}
 
+	/**
+	 * <p>
+	 * Agrupa os boletos da lista em um único arquivo PDF.
+	 * </p>
+	 * 
+	 * 
+	 * @param boletos
+	 *            - Lista com os boletos a serem agrupados
+	 * @param destPath
+	 *            - Caminho para o arquivo que armazenará os boletos
+	 * @param templateFile
+	 *            - Arquivo com o template para geração
+	 * @return Arquivo PDF gerado com os boletos da lista
+	 * 
+	 * @since 0.2
+	 */
 	public static File groupInOnePDF(List<Boleto> boletos, String destPath,
 			File templateFile) {
 
@@ -183,6 +244,22 @@ public class BoletoViewer {
 				new BoletoViewer().setTemplate(templateFile));
 	}
 
+	/**
+	 * <p>
+	 * Agrupa os boletos da lista em um único arquivo PDF.
+	 * </p>
+	 * 
+	 * 
+	 * @param boletos
+	 *            - Lista com os boletos a serem agrupados
+	 * @param destFile
+	 *            - Arquivo que armazenará os boletos
+	 * @param templatePath
+	 *            - Caminho para o arquivo com o template para geração
+	 * @return Arquivo PDF gerado com os boletos da lista
+	 * 
+	 * @since 0.2
+	 */
 	public static File groupInOnePDF(List<Boleto> boletos, File destFile,
 			String templatePath) {
 
@@ -194,6 +271,22 @@ public class BoletoViewer {
 				.setTemplate(templatePath));
 	}
 
+	/**
+	 * <p>
+	 * Agrupa os boletos da lista em um único arquivo PDF.
+	 * </p>
+	 * 
+	 * 
+	 * @param boletos
+	 *            - Lista com os boletos a serem agrupados
+	 * @param destFile
+	 *            - Arquivo que armazenará os boletos
+	 * @param templateFile
+	 *            - Arquivo com o template para geração
+	 * @return Arquivo PDF gerado com os boletos da lista
+	 * 
+	 * @since 0.2
+	 */
 	public static File groupInOnePDF(List<Boleto> boletos, File destFile,
 			File templateFile) {
 
@@ -210,6 +303,162 @@ public class BoletoViewer {
 	 * Gera o arquivo PDF para cada boleto contido na lista. O nome do arquivo
 	 * segue a forma:<br />
 	 * <br />
+	 * <tt>diretorio + (/ ou \\) + (indice do arquivo na lista + 1) + ".pdf"</tt>
+	 * </p>
+	 * 
+	 * <p>
+	 * Exemplo, uma lista com 3 boletos: {@code onePerPDF(boletos, file);} <br />
+	 * <br />
+	 * Arquivos gerados:
+	 * <ul>
+	 * <li><strong>1.pdf</strong></li>
+	 * <li><strong>2.pdf</strong></li>
+	 * <li><strong>3.pdf</strong></li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @param boletos
+	 *            - Lista com os boletos a serem agrupados
+	 * @param destPath
+	 *            - Diretório o qual os boletos serão criados
+	 * 
+	 * @return Lista contendo os arquivos PDF gerados a partir da lista de
+	 *         boletos
+	 * 
+	 * @since 0.2
+	 */
+	public static List<File> onePerPDF(List<Boleto> boletos, String destPath) {
+
+		checkBoletosList(boletos);
+		checkDestPath(destPath);
+
+		return onePerPDF(boletos, new File(destPath), EMPTY, EMPTY);
+	}
+
+	/**
+	 * <p>
+	 * Gera o arquivo PDF para cada boleto contido na lista. O nome do arquivo
+	 * segue a forma:<br />
+	 * <br />
+	 * <tt>diretorio + (/ ou \\) + (indice do arquivo na lista + 1) + ".pdf"</tt>
+	 * </p>
+	 * 
+	 * <p>
+	 * Exemplo, uma lista com 3 boletos: {@code onePerPDF(boletos, file);} <br />
+	 * <br />
+	 * Arquivos gerados:
+	 * <ul>
+	 * <li><strong>1.pdf</strong></li>
+	 * <li><strong>2.pdf</strong></li>
+	 * <li><strong>3.pdf</strong></li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @param boletos
+	 *            - Lista com os boletos a serem agrupados
+	 * @param destDir
+	 *            - Diretório o qual os boletos serão criados
+	 * 
+	 * @return Lista contendo os arquivos PDF gerados a partir da lista de
+	 *         boletos
+	 * 
+	 * @since 0.2
+	 */
+	public static List<File> onePerPDF(List<Boleto> boletos, File destDir) {
+
+		checkBoletosList(boletos);
+		checkDestDir(destDir);
+
+		return onePerPDF(boletos, destDir, EMPTY, EMPTY);
+	}
+
+	/**
+	 * <p>
+	 * Gera o arquivo PDF para cada boleto contido na lista. O nome do arquivo
+	 * segue a forma:<br />
+	 * <br />
+	 * <tt>diretorio + (/ ou \\) prefixo + (indice do arquivo na lista + 1) + ".pdf"</tt>
+	 * </p>
+	 * 
+	 * <p>
+	 * Exemplo, uma lista com 3 boletos: {@code onePerPDF(boletos, file,
+	 * "BoletoPrefixo");} <br />
+	 * <br />
+	 * Arquivos gerados:
+	 * <ul>
+	 * <li><strong>BoletoPrefixo1.pdf</strong></li>
+	 * <li><strong>BoletoPrefixo2.pdf</strong></li>
+	 * <li><strong>BoletoPrefixo3.pdf</strong></li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @param boletos
+	 *            - Lista com os boletos a serem agrupados
+	 * @param destPath
+	 *            - Diretório o qual os boletos serão criados
+	 * @param prefixo
+	 *            - Prefixo do nome do arquivo
+	 * 
+	 * @return Lista contendo os arquivos PDF gerados a partir da lista de
+	 *         boletos
+	 * 
+	 * @since 0.2
+	 */
+	public static List<File> onePerPDF(List<Boleto> boletos, String destPath,
+			String prefixo) {
+
+		checkBoletosList(boletos);
+		checkDestPath(destPath);
+
+		return onePerPDF(boletos, new File(destPath), prefixo, EMPTY);
+	}
+
+	/**
+	 * <p>
+	 * Gera o arquivo PDF para cada boleto contido na lista. O nome do arquivo
+	 * segue a forma:<br />
+	 * <br />
+	 * <tt>diretorio + (/ ou \\) prefixo + (indice do arquivo na lista + 1) + ".pdf"</tt>
+	 * </p>
+	 * 
+	 * <p>
+	 * Exemplo, uma lista com 3 boletos: {@code onePerPDF(boletos, file,
+	 * "BoletoPrefixo");} <br />
+	 * <br />
+	 * Arquivos gerados:
+	 * <ul>
+	 * <li><strong>BoletoPrefixo1.pdf</strong></li>
+	 * <li><strong>BoletoPrefixo2.pdf</strong></li>
+	 * <li><strong>BoletoPrefixo3.pdf</strong></li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @param boletos
+	 *            - Lista com os boletos a serem agrupados
+	 * @param destDir
+	 *            - Diretório o qual os boletos serão criados
+	 * @param prefixo
+	 *            - Prefixo do nome do arquivo
+	 * 
+	 * @return Lista contendo os arquivos PDF gerados a partir da lista de
+	 *         boletos
+	 * 
+	 * @since 0.2
+	 */
+	public static List<File> onePerPDF(List<Boleto> boletos, File destDir,
+			String prefixo) {
+
+		checkBoletosList(boletos);
+		checkDestDir(destDir);
+
+		return onePerPDF(boletos, destDir, prefixo, EMPTY);
+	}
+
+	/**
+	 * <p>
+	 * Gera o arquivo PDF para cada boleto contido na lista. O nome do arquivo
+	 * segue a forma:<br />
+	 * <br />
 	 * <tt>diretorio + (/ ou \\) prefixo + (indice do arquivo na lista + 1) + sufixo + ".pdf"</tt>
 	 * </p>
 	 * 
@@ -219,9 +468,51 @@ public class BoletoViewer {
 	 * <br />
 	 * Arquivos gerados:
 	 * <ul>
-	 * <li><strong>BoletoPrefixo1exSufixo.pdf</li>
-	 * <li><strong>BoletoPrefixo2exSufixo.pdf</li>
-	 * <li><strong>BoletoPrefixo3exSufixo.pdf</li>
+	 * <li><strong>BoletoPrefixo1exSufixo.pdf</strong></li>
+	 * <li><strong>BoletoPrefixo2exSufixo.pdf</strong></li>
+	 * <li><strong>BoletoPrefixo3exSufixo.pdf</strong></li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @param boletos
+	 *            - Lista com os boletos a serem agrupados
+	 * @param destPath
+	 *            - Diretório o qual os boletos serão criados
+	 * @param prefixo
+	 *            - Prefixo do nome do arquivo
+	 * @param sufixo
+	 *            - Sufixo do nome do arquivo
+	 * @return Lista contendo os arquivos PDF gerados a partir da lista de
+	 *         boletos
+	 * 
+	 * @since 0.2
+	 */
+	public static List<File> onePerPDF(List<Boleto> boletos, String destPath,
+			String prefixo, String sufixo) {
+
+		checkBoletosList(boletos);
+		checkDestPath(destPath);
+
+		return onePerPDF(boletos, new File(destPath), prefixo, sufixo);
+	}
+
+	/**
+	 * <p>
+	 * Gera o arquivo PDF para cada boleto contido na lista. O nome do arquivo
+	 * segue a forma:<br />
+	 * <br />
+	 * <tt>diretorio + (/ ou \\) prefixo + (indice do arquivo na lista + 1) + sufixo + ".pdf"</tt>
+	 * </p>
+	 * 
+	 * <p>
+	 * Exemplo, uma lista com 3 boletos: {@code onePerPDF(boletos, file,
+	 * "BoletoPrefixo", "exSufixo");} <br />
+	 * <br />
+	 * Arquivos gerados:
+	 * <ul>
+	 * <li><strong>BoletoPrefixo1exSufixo.pdf</strong></li>
+	 * <li><strong>BoletoPrefixo2exSufixo.pdf</strong></li>
+	 * <li><strong>BoletoPrefixo3exSufixo.pdf</strong></li>
 	 * </ul>
 	 * </p>
 	 * 
@@ -254,7 +545,7 @@ public class BoletoViewer {
 	/**
 	 * <p>
 	 * Retorna o aquivo template utilizado pelo visualizador, que pode ser o
-	 * padrão ou outro.
+	 * template padrão ou outro.
 	 * </p>
 	 * 
 	 * @return Arquivo template
@@ -327,7 +618,6 @@ public class BoletoViewer {
 	 * @param destPath
 	 *            - Caminho onde será criado o arquivo pdf
 	 * @return Boleo em File
-	 * @throws IllegalArgumentException
 	 * 
 	 * @since 0.2
 	 */
@@ -362,12 +652,12 @@ public class BoletoViewer {
 
 	/**
 	 * <p>
-	 * Retorna o boleto em uma stream.
+	 * Retorna o boleto em uma stream de bytes.
 	 * </p>
 	 * 
 	 * @return Boleto em ByteArrayOutputStream
 	 * 
-	 * @since 0.1
+	 * @since 0.2
 	 */
 	public ByteArrayOutputStream getPdfAsStream() {
 
@@ -386,7 +676,7 @@ public class BoletoViewer {
 	 * 
 	 * @return Boleto em byte[]
 	 * 
-	 * @since 0.1
+	 * @since 0.2
 	 */
 	public byte[] getPdfAsByteArray() {
 
@@ -398,18 +688,26 @@ public class BoletoViewer {
 	}
 
 	/**
-	 * @return the boleto
+	 * <p>
+	 * Retorna o boleto usado pelo visualizador
+	 * </p>
+	 * 
+	 * @return o boleto
 	 * 
 	 * @since 0.2
 	 */
 	public Boleto getBoleto() {
-		
+
 		return pdfViewer.getBoleto();
 	}
 
 	/**
+	 * <p>
+	 * Atribui um boleto para uso no visualizador. {@code Null} não é permitido.
+	 * </p>
+	 * 
 	 * @param boleto
-	 *            the boleto to set
+	 *            - Boleto a ser visualizado
 	 * 
 	 * @since 0.2
 	 */
@@ -420,34 +718,6 @@ public class BoletoViewer {
 		updateViewerPDF(boleto);
 
 		return this;
-	}
-
-	private void initViewerPDF(String templatePathName, File template,
-			Boleto boleto) {
-
-		Objects.checkNotNull(boleto);
-
-		this.pdfViewer = new PdfViewer(boleto);
-
-		/*
-		 * O arquivo tem prioridade
-		 */
-		if (isNotBlank(templatePathName) && isNotNull(template)) {
-
-			setTemplate(template);
-
-		} else {
-
-			if (isNotBlank(templatePathName)) {
-
-				setTemplate(templatePathName);
-			}
-
-			if (isNotNull(template)) {
-
-				setTemplate(template);
-			}
-		}
 	}
 
 	/**
@@ -496,13 +766,14 @@ public class BoletoViewer {
 
 		Objects.checkNotNull(file,
 				"Diretório destinado a geração do(s) boleto(s) nulo!");
-		
-		if(!file.isDirectory()){
-			
-			throw new IllegalArgumentException("Isto não é um diretório válido!");
+
+		if (!file.isDirectory()) {
+
+			throw new IllegalArgumentException(
+					"Isto não é um diretório válido!");
 		}
 	}
-	
+
 	private static void checkDestFile(File file) {
 
 		Objects.checkNotNull(file,
