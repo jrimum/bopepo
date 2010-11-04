@@ -68,7 +68,7 @@ public class VariosBoletosEmVariosArquivos {
 		 * Depois diga o nome do diretorio para onde os boletos serão gerados. 
 		 */
 		
-		BoletoViewer.onePerPDF("./", ".pdf", boletos);
+		BoletoViewer.onePerPDF(boletos, new File("./"), "exemplo", "");
 	
 		
 		/*
@@ -79,7 +79,7 @@ public class VariosBoletosEmVariosArquivos {
 			
 		try{
 	
-			desktop.open(new File("Boleto1.pdf"));
+//			desktop.open(new File("Boleto1.pdf"));
 	
 		}catch(Exception e){
 			throw new RuntimeException("Arquivo não gerado!",e);

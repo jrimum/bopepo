@@ -82,7 +82,6 @@ public class BoletoViewer {
 	 */
 	private PdfViewer pdfViewer;
 
-	
 	/**
 	 * <p>
 	 * Instancia o visualizador com o template padrão.
@@ -92,7 +91,7 @@ public class BoletoViewer {
 	 *            - Boleto preenchido
 	 */
 	public BoletoViewer(Boleto boleto) {
-		initViewerPDF(null, null, boleto);			
+		initViewerPDF(null, null, boleto);
 	}
 
 	/**
@@ -108,7 +107,7 @@ public class BoletoViewer {
 	public BoletoViewer(Boleto boleto, String templatePathName) {
 		initViewerPDF(templatePathName, null, boleto);
 	}
-	
+
 	/**
 	 * <p>
 	 * Instancia o visualizador com um template determinado.
@@ -126,118 +125,144 @@ public class BoletoViewer {
 	/**
 	 * Para uso interno do componente
 	 */
-	private BoletoViewer() {
+	BoletoViewer() {
 		this.pdfViewer = new PdfViewer();
 	}
 
 	/**
 	 * <p>
-	 * Agrupo vários boletos em um único PDF.
+	 * Agrupa vários boletos em um único PDF.
 	 * </p>
 	 * 
-	 * @param pathNameDest
-	 *            Caminho no qual será gerado o PDF
 	 * @param boletos
 	 *            Boletos a serem agrupados
-	 *            
+	 * @param destPath
+	 *            Caminho no qual será gerado o PDF
+	 * 
 	 * @return Arquivo PDF
 	 * 
 	 * 
 	 * @since 0.2
 	 */
-	public static File groupInOnePDF(String pathNameDest, List<Boleto> boletos) {
+	public static File groupInOnePDF(List<Boleto> boletos, String destPath) {
 
-		checkPathDest(pathNameDest);
 		checkBoletosList(boletos);
-		
-		return PdfViewer.groupInOnePDF(boletos, new BoletoViewer(), new File(pathNameDest));
-	}
-	
-	public static File groupInOnePDF(File file, List<Boleto> boletos) {
+		checkDestPath(destPath);
 
-		checkFileDest(file);
-		checkBoletosList(boletos);
-		
-		return PdfViewer.groupInOnePDF(boletos, new BoletoViewer(), file);
+		return PdfViewer.groupInOnePDF(boletos, new File(destPath),
+				new BoletoViewer());
 	}
 
-	public static File groupInOnePDF(String pathNameDest, List<Boleto> boletos, String templatePathName) {
+	public static File groupInOnePDF(List<Boleto> boletos, File destFile) {
 
-		checkPathDest(pathNameDest);
 		checkBoletosList(boletos);
-		checkPathTemplate(templatePathName);
-		
-		return PdfViewer.groupInOnePDF(boletos, new BoletoViewer().setTemplate(templatePathName), new File(pathNameDest));
+		checkDestFile(destFile);
+
+		return PdfViewer.groupInOnePDF(boletos, destFile, new BoletoViewer());
 	}
-	
-	public static File groupInOnePDF(String pathNameDest, List<Boleto> boletos, File templateFile) {
 
-		checkPathDest(pathNameDest);
+	public static File groupInOnePDF(List<Boleto> boletos, String destPath,
+			String templatePath) {
+
 		checkBoletosList(boletos);
-		checkFileTemplate(templateFile);
-		
-		return PdfViewer.groupInOnePDF(boletos, new BoletoViewer().setTemplate(templateFile), new File(pathNameDest));
+		checkDestPath(destPath);
+		checkTemplatePath(templatePath);
+
+		return PdfViewer.groupInOnePDF(boletos, new File(destPath),
+				new BoletoViewer().setTemplate(templatePath));
 	}
-	
-	public static File groupInOnePDF(File file, List<Boleto> boletos, String templatePathName) {
 
-		checkFileDest(file);
+	public static File groupInOnePDF(List<Boleto> boletos, String destPath,
+			File templateFile) {
+
 		checkBoletosList(boletos);
-		checkPathTemplate(templatePathName);
-		
-		return PdfViewer.groupInOnePDF(boletos, new BoletoViewer().setTemplate(templatePathName), file);
+		checkDestPath(destPath);
+		checkTemplateFile(templateFile);
+
+		return PdfViewer.groupInOnePDF(boletos, new File(destPath),
+				new BoletoViewer().setTemplate(templateFile));
 	}
-	
-	public static File groupInOnePDF(File file, List<Boleto> boletos, File template) {
 
-		checkFileDest(file);
+	public static File groupInOnePDF(List<Boleto> boletos, File destFile,
+			String templatePath) {
+
 		checkBoletosList(boletos);
-		checkFileTemplate(template);
-					
-		return PdfViewer.groupInOnePDF(boletos, new BoletoViewer().setTemplate(template), file);
+		checkDestFile(destFile);
+		checkTemplatePath(templatePath);
+
+		return PdfViewer.groupInOnePDF(boletos, destFile, new BoletoViewer()
+				.setTemplate(templatePath));
+	}
+
+	public static File groupInOnePDF(List<Boleto> boletos, File destFile,
+			File templateFile) {
+
+		checkBoletosList(boletos);
+		checkDestFile(destFile);
+		checkTemplateFile(templateFile);
+
+		return PdfViewer.groupInOnePDF(boletos, destFile, new BoletoViewer()
+				.setTemplate(templateFile));
 	}
 
 	/**
 	 * <p>
-	 * Gera vários arquivos pdf, cada qual com o seu boleto.
+	 * Gera o arquivo PDF para cada boleto contido na lista. O nome do arquivo
+	 * segue a forma:<br />
+	 * <br />
+	 * <tt>diretorio + (/ ou \\) prefixo + (indice do arquivo na lista + 1) + sufixo + ".pdf"</tt>
 	 * </p>
 	 * 
-	 * @param path Caminho no qual será gerados os arquivos
-	 * @param extensao TODO
-	 * @param boletos Boletos a partir dos quais serão gerados os arquivos
-	 * @return Vários arquivos pdf
+	 * <p>
+	 * Exemplo, uma lista com 3 boletos: {@code onePerPDF(boletos, file,
+	 * "BoletoPrefixo", "exSufixo");} <br />
+	 * <br />
+	 * Arquivos gerados:
+	 * <ul>
+	 * <li><strong>BoletoPrefixo1exSufixo.pdf</li>
+	 * <li><strong>BoletoPrefixo2exSufixo.pdf</li>
+	 * <li><strong>BoletoPrefixo3exSufixo.pdf</li>
+	 * </ul>
+	 * </p>
 	 * 
+	 * @param boletos
+	 *            - Lista com os boletos a serem agrupados
+	 * @param fileDest
+	 *            - Diretório o qual os boletos serão criados
+	 * @param prefixo
+	 *            - Prefixo do nome do arquivo
+	 * @param sufixo
+	 *            - Sufixo do nome do arquivo
+	 * @return Lista contendo os arquivos PDF gerados a partir da lista de
+	 *         boletos
 	 * 
 	 * @since 0.2
 	 */
+	public static List<File> onePerPDF(List<Boleto> boletos, File destDir,
+			String prefixo, String sufixo) {
 
-	public static List<File> onePerPDF(String path, String extensao, List<Boleto> boletos) {
-		
-		List<File> files = new ArrayList<File>();
-		
-		Objects.checkNotNull(path,"Path inválido!");
-		Objects.checkNotNull(extensao, "Extensão inválida!");
-		Objects.checkNotNull(boletos,"Lista de boletos inválida!");
-		
-		if(StringUtils.isNotBlank(path)) {
-			
-			if(!boletos.isEmpty()) {
-				
-				files.addAll(PdfViewer.onePerPDF(path, extensao, boletos));
-				
-			} else {
-				throw new IllegalArgumentException("A Lista de boletos está vazia!");
-			}
-			
-		} else {
-			throw new IllegalArgumentException("Path(Diretório) destinado a geração dos arquivos não contém informação!");
-		}
-		
+		checkBoletosList(boletos);
+		checkDestDir(destDir);
+
+		List<File> files = new ArrayList<File>(boletos.size());
+
+		files.addAll(PdfViewer.onePerPDF(boletos, destDir, prefixo, sufixo));
+
 		return files;
 	}
 
+	/**
+	 * <p>
+	 * Retorna o aquivo template utilizado pelo visualizador, que pode ser o
+	 * padrão ou outro.
+	 * </p>
+	 * 
+	 * @return Arquivo template
+	 * 
+	 * @since 0.2
+	 */
 	public File getTemplate() {
-		
+
 		return pdfViewer.getTemplate();
 	}
 
@@ -252,34 +277,29 @@ public class BoletoViewer {
 	 */
 	public BoletoViewer setTemplate(File template) {
 
-		checkFileTemplate(template);
-			
+		checkTemplateFile(template);
+
 		this.pdfViewer.setTemplate(template);
-			
+
 		return this;
 	}
 
-	
 	/**
-	 * <p>
 	 * @see BoletoViewer#setTemplate(File)
-	 * </p>
 	 * 
 	 * @param pathName
 	 * 
 	 * @since 0.2
 	 */
-		
 	public BoletoViewer setTemplate(String pathName) {
-		
-		
-		checkPathTemplate(pathName);
-		
+
+		checkTemplatePath(pathName);
+
 		this.pdfViewer.setTemplate(pathName);
-			
+
 		return this;
 	}
-	
+
 	/**
 	 * <p>
 	 * Caso algum template tenha sido utilizado, este método define que após sua
@@ -290,10 +310,10 @@ public class BoletoViewer {
 	 */
 	public BoletoViewer removeTemplate() {
 
-		final String PADRAO = null;
+		final String DEFAULT = null;
 
 		if (isNotNull(pdfViewer)) {
-			pdfViewer.setTemplate(PADRAO);
+			pdfViewer.setTemplate(DEFAULT);
 		}
 
 		return this;
@@ -304,19 +324,40 @@ public class BoletoViewer {
 	 * Retorna o boleto em um arquivo pdf.
 	 * </p>
 	 * 
-	 * @param pathName Caminho onde será criado o arquivo pdf
-	 * @return File
+	 * @param destPath
+	 *            - Caminho onde será criado o arquivo pdf
+	 * @return Boleo em File
 	 * @throws IllegalArgumentException
 	 * 
 	 * @since 0.2
 	 */
-	public File getPdfAsFile(String pathName) {
+	public File getPdfAsFile(String destPath) {
 
 		if (log.isDebugEnabled()) {
 			log.debug("documento instance : " + pdfViewer);
 		}
 
-		return pdfViewer.getFile(pathName);
+		return pdfViewer.getFile(destPath);
+	}
+
+	/**
+	 * <p>
+	 * Retorna o boleto em um arquivo pdf.
+	 * </p>
+	 * 
+	 * @param destFile
+	 *            - Caminho onde será criado o arquivo pdf
+	 * @return Boleto em File
+	 * 
+	 * @since 0.2
+	 */
+	public File getPdfAsFile(File destFile) {
+
+		if (log.isDebugEnabled()) {
+			log.debug("documento instance : " + pdfViewer);
+		}
+
+		return pdfViewer.getFile(destFile);
 	}
 
 	/**
@@ -324,7 +365,7 @@ public class BoletoViewer {
 	 * Retorna o boleto em uma stream.
 	 * </p>
 	 * 
-	 * @return ByteArrayOutputStream
+	 * @return Boleto em ByteArrayOutputStream
 	 * 
 	 * @since 0.1
 	 */
@@ -343,7 +384,7 @@ public class BoletoViewer {
 	 * Retorna o boleto em um array de bytes.
 	 * </p>
 	 * 
-	 * @return byte[]
+	 * @return Boleto em byte[]
 	 * 
 	 * @since 0.1
 	 */
@@ -362,6 +403,7 @@ public class BoletoViewer {
 	 * @since 0.2
 	 */
 	public Boleto getBoleto() {
+		
 		return pdfViewer.getBoleto();
 	}
 
@@ -372,41 +414,42 @@ public class BoletoViewer {
 	 * @since 0.2
 	 */
 	public BoletoViewer setBoleto(Boleto boleto) {
-		
+
 		Objects.checkNotNull(boleto);
-		
+
 		updateViewerPDF(boleto);
-		
+
 		return this;
 	}
 
-	private void initViewerPDF(String templatePathName, File template, Boleto boleto) {
-		
+	private void initViewerPDF(String templatePathName, File template,
+			Boleto boleto) {
+
 		Objects.checkNotNull(boleto);
-			
+
 		this.pdfViewer = new PdfViewer(boleto);
-		
+
 		/*
-		 * O arquivo tem prioridade 
+		 * O arquivo tem prioridade
 		 */
 		if (isNotBlank(templatePathName) && isNotNull(template)) {
-			
+
 			setTemplate(template);
-			
+
 		} else {
-			
+
 			if (isNotBlank(templatePathName)) {
-				
+
 				setTemplate(templatePathName);
 			}
-			
+
 			if (isNotNull(template)) {
-				
+
 				setTemplate(template);
 			}
 		}
 	}
-	
+
 	/**
 	 * <p>
 	 * Atualiza o objeto BoletoViewer mantendo as "invariantes".
@@ -418,50 +461,62 @@ public class BoletoViewer {
 	 */
 	private void updateViewerPDF(Boleto boleto) {
 
-		if(isNotNull(this.pdfViewer)) {
-			
+		if (isNotNull(this.pdfViewer)) {
+
 			this.pdfViewer = new PdfViewer(boleto, this.pdfViewer.getTemplate());
-			
+
 		} else {
-			
+
 			this.pdfViewer = new PdfViewer(boleto);
 		}
 	}
-	
 
-	private static void checkPathDest(String path){
-		
-		checkString(path, "Caminho destinado a geração do(s) arquivo(s) não contém informação!");
+	private static void checkDestPath(String path) {
+
+		checkString(path,
+				"Caminho destinado a geração do(s) arquivo(s) não contém informação!");
 	}
-	
-	private static void checkPathTemplate(String path){
-		
+
+	private static void checkTemplatePath(String path) {
+
 		checkString(path, "Caminho do template não contém informação!");
 	}
-	
-	private static void checkString(String str, String msg){
-		
+
+	private static void checkString(String str, String msg) {
+
 		Objects.checkNotNull(str);
-		
-		if(StringUtils.isBlank(str)) {
-			
+
+		if (StringUtils.isBlank(str)) {
+
 			throw new IllegalArgumentException(msg);
 		}
 	}
-	
-	private static void checkFileDest(File file){
+
+	private static void checkDestDir(File file) {
+
+		Objects.checkNotNull(file,
+				"Diretório destinado a geração do(s) boleto(s) nulo!");
 		
-		Objects.checkNotNull(file, "Arquivo destinado a geração do(s) boleto(s) nulo!");
+		if(!file.isDirectory()){
+			
+			throw new IllegalArgumentException("Isto não é um diretório válido!");
+		}
 	}
 	
-	private static void checkFileTemplate(File file){
-		
+	private static void checkDestFile(File file) {
+
+		Objects.checkNotNull(file,
+				"Arquivo destinado a geração do(s) boleto(s) nulo!");
+	}
+
+	private static void checkTemplateFile(File file) {
+
 		Objects.checkNotNull(file, "Arquivo de template nulo!");
 	}
-	
-	private static void checkBoletosList(List<Boleto> boletos){
-		
-		Objects.checkNotNull(boletos,"Lista de boletos nula!");
+
+	private static void checkBoletosList(List<Boleto> boletos) {
+
+		Objects.checkNotNull(boletos, "Lista de boletos nula!");
 		Collections.checkNotEmpty(boletos, "A Lista de boletos está vazia!");
 	}
 }

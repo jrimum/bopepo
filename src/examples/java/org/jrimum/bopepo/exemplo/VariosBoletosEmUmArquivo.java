@@ -74,7 +74,7 @@ public class VariosBoletosEmUmArquivo {
 		 * OU então diga o nome do diretorio/arquivo para onde os boletos serão gerados com um template personalizado. 
 		 */
 		
-		BoletoViewer.groupInOnePDF("TesteVariosEmUmPersonalizado.pdf", boletos);
+		BoletoViewer.groupInOnePDF(boletos, "TesteVariosEmUmPersonalizado.pdf");
 //		BoletoViewer.groupInOnePDF("TesteVariosEmUmPersonalizado.pdf", boletos,new File("TemplatePersonalizado.pdf"));
 		
 		/*
