@@ -44,26 +44,22 @@ public final class BoletoUtil {
 	 * @param linhaDigitavel
 	 *            string no formato FEBRABAN
 	 * @return código do banco em string
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
 	public static final String getCampoLivreDaLinhaDigitavelFormatada(
-			String linhaDigitavel) throws NullPointerException,
+			String linhaDigitavel) throws 
 			IllegalArgumentException, LinhaDigitavelException {
 
 		checkFormatoLinhaDigitavelFormatada(linhaDigitavel);
 
 		String linhaNumerica = linhaDigitavelFormatadaEmNumerica(linhaDigitavel);
 
-		return new StringBuilder()
-		.append(linhaNumerica.substring(4, 9))
-		.append(linhaNumerica.substring(10, 20))
-		.append(linhaNumerica.substring(21, 31))
-		.toString();
+		return new StringBuilder().append(linhaNumerica.substring(4, 9))
+				.append(linhaNumerica.substring(10, 20)).append(
+						linhaNumerica.substring(21, 31)).toString();
 	}
 
 	/**
@@ -76,20 +72,19 @@ public final class BoletoUtil {
 	 * @param linhaDigitavel
 	 *            string no formato FEBRABAN
 	 * @return código do banco em string
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
 	public static final String getValorDoTituloDaLinhaDigitavelFormatada(
-			String linhaDigitavel) throws NullPointerException,
+			String linhaDigitavel) throws 
 			IllegalArgumentException, LinhaDigitavelException {
 
 		checkFormatoLinhaDigitavelFormatada(linhaDigitavel);
 
-		return linhaDigitavelFormatadaEmNumerica(linhaDigitavel).substring(37, 47);
+		return linhaDigitavelFormatadaEmNumerica(linhaDigitavel).substring(37,
+				47);
 	}
 
 	/**
@@ -102,20 +97,19 @@ public final class BoletoUtil {
 	 * @param linhaDigitavel
 	 *            string no formato FEBRABAN
 	 * @return código do banco em string
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
 	public static final String getFatorDeVencimentoDaLinhaDigitavelFormatada(
-			String linhaDigitavel) throws NullPointerException,
+			String linhaDigitavel) throws 
 			IllegalArgumentException, LinhaDigitavelException {
 
 		checkFormatoLinhaDigitavelFormatada(linhaDigitavel);
 
-		return linhaDigitavelFormatadaEmNumerica(linhaDigitavel).substring(33, 37);
+		return linhaDigitavelFormatadaEmNumerica(linhaDigitavel).substring(33,
+				37);
 	}
 
 	/**
@@ -128,20 +122,19 @@ public final class BoletoUtil {
 	 * @param linhaDigitavel
 	 *            string no formato FEBRABAN
 	 * @return código do banco em string
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
 	public static final String getDigitoVerificadorGeralDaLinhaDigitavelFormatada(
-			String linhaDigitavel) throws NullPointerException,
+			String linhaDigitavel) throws 
 			IllegalArgumentException, LinhaDigitavelException {
 
 		checkFormatoLinhaDigitavelFormatada(linhaDigitavel);
-		
-		return linhaDigitavelFormatadaEmNumerica(linhaDigitavel).substring(32, 33);
+
+		return linhaDigitavelFormatadaEmNumerica(linhaDigitavel).substring(32,
+				33);
 	}
 
 	/**
@@ -154,20 +147,19 @@ public final class BoletoUtil {
 	 * @param linhaDigitavel
 	 *            string no formato FEBRABAN
 	 * @return código do banco em string
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
 	public static final String getCodigoDaMoedaDaLinhaDigitavelFormatada(
-			String linhaDigitavel) throws NullPointerException,
+			String linhaDigitavel) throws 
 			IllegalArgumentException, LinhaDigitavelException {
-		
+
 		checkFormatoLinhaDigitavelFormatada(linhaDigitavel);
-		
-		return linhaDigitavelFormatadaEmNumerica(linhaDigitavel).substring(3, 4);
+
+		return linhaDigitavelFormatadaEmNumerica(linhaDigitavel)
+				.substring(3, 4);
 	}
 
 	/**
@@ -180,20 +172,19 @@ public final class BoletoUtil {
 	 * @param linhaDigitavel
 	 *            string no formato FEBRABAN
 	 * @return código do banco em string
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
 	public static final String getCodigoDoBancoDaLinhaDigitavelFormatada(
-			String linhaDigitavel) throws NullPointerException,
+			String linhaDigitavel) throws 
 			IllegalArgumentException, LinhaDigitavelException {
-		
+
 		checkFormatoLinhaDigitavelFormatada(linhaDigitavel);
-		
-		return linhaDigitavelFormatadaEmNumerica(linhaDigitavel).substring(0, 3);
+
+		return linhaDigitavelFormatadaEmNumerica(linhaDigitavel)
+				.substring(0, 3);
 	}
 
 	/**
@@ -206,19 +197,17 @@ public final class BoletoUtil {
 	 * @param codigoDeBarras
 	 *            string contendo somente números
 	 * @return código do banco em string
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *            quando a string é nula ou  quando a string é vazia
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
 	public static final String getCampoLivreDoCodigoDeBarras(
-			String codigoDeBarras) throws NullPointerException,
+			String codigoDeBarras) throws 
 			IllegalArgumentException, CodigoDeBarrasException {
-		
+
 		checkFormatoCodigoDeBarras(codigoDeBarras);
-		
+
 		return trim(codigoDeBarras).substring(19, 44);
 	}
 
@@ -232,19 +221,17 @@ public final class BoletoUtil {
 	 * @param codigoDeBarras
 	 *            string contendo somente números
 	 * @return código do banco em string
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
 	public static final String getValorDoTituloDoCodigoDeBarras(
-			String codigoDeBarras) throws NullPointerException,
+			String codigoDeBarras) throws 
 			IllegalArgumentException, CodigoDeBarrasException {
-		
+
 		checkFormatoCodigoDeBarras(codigoDeBarras);
-		
+
 		return trim(codigoDeBarras).substring(9, 19);
 	}
 
@@ -258,22 +245,20 @@ public final class BoletoUtil {
 	 * @param codigoDeBarras
 	 *            string contendo somente números
 	 * @return código do banco em string
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
 	public static final String getFatorDeVencimentoDoCodigoDeBarras(
-			String codigoDeBarras) throws NullPointerException,
+			String codigoDeBarras) throws 
 			IllegalArgumentException, CodigoDeBarrasException {
-		
+
 		checkFormatoCodigoDeBarras(codigoDeBarras);
-		
+
 		return trim(codigoDeBarras).substring(5, 9);
 	}
-	
+
 	/**
 	 * <p>
 	 * Retorna o dígito verificador de um dado código de barras.
@@ -284,19 +269,17 @@ public final class BoletoUtil {
 	 * @param codigoDeBarras
 	 *            string contendo somente números
 	 * @return código do banco em string
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
 	public static final String getDigitoVerificadorGeralDoCodigoDeBarras(
-			String codigoDeBarras) throws NullPointerException,
+			String codigoDeBarras) throws 
 			IllegalArgumentException, CodigoDeBarrasException {
-		
+
 		checkFormatoCodigoDeBarras(codigoDeBarras);
-		
+
 		return trim(codigoDeBarras).substring(4, 5);
 	}
 
@@ -310,19 +293,17 @@ public final class BoletoUtil {
 	 * @param codigoDeBarras
 	 *            string contendo somente números
 	 * @return código do banco em string
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
 	public static final String getCodigoDaMoedaDoCodigoDeBarras(
-			String codigoDeBarras) throws NullPointerException,
+			String codigoDeBarras) throws 
 			IllegalArgumentException, CodigoDeBarrasException {
-		
+
 		checkFormatoCodigoDeBarras(codigoDeBarras);
-		
+
 		return trim(codigoDeBarras).substring(3, 4);
 	}
 
@@ -336,31 +317,28 @@ public final class BoletoUtil {
 	 * @param codigoDeBarras
 	 *            string contendo somente números
 	 * @return código do banco em string
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
 	public static final String getCodigoDoBancoDoCodigoDeBarras(
-			String codigoDeBarras) throws NullPointerException,
+			String codigoDeBarras) throws 
 			IllegalArgumentException, CodigoDeBarrasException {
-		
+
 		checkFormatoCodigoDeBarras(codigoDeBarras);
-		
+
 		return trim(codigoDeBarras).substring(0, 3);
 	}
-	
+
 	/**
 	 * <p>
-	 * Transforma um código de barras em uma linha digitável no formato FEBRABAN.
+	 * Transforma um código de barras em uma linha digitável no formato
+	 * FEBRABAN.
 	 * </p>
 	 * <p>
-	 * "<strong>dddddddddddddddddddddddddddddddddddddddddddd</strong>"
-	 * <br />
-	 * <b>&rArr;</b>
-	 * <br />
+	 * "<strong>dddddddddddddddddddddddddddddddddddddddddddd</strong>" <br />
+	 * <b>&rArr;</b> <br />
 	 * "<strong>ddddd.ddddd ddddd.dddddd ddddd.dddddd d dddddddddddddd</strong>"
 	 * </p>
 	 * 
@@ -369,17 +347,15 @@ public final class BoletoUtil {
 	 * @param codigoDeBarras
 	 *            string contendo somente números
 	 * @return linha digitável contendo somente números
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *              quando a string é nula ou quando a string é vazia
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
 	public static final String codigoDeBarrasEmLinhaDigitavelFormatada(
-			String codigoDeBarras) throws NullPointerException,
+			String codigoDeBarras) throws
 			IllegalArgumentException, CodigoDeBarrasException {
-		
+
 		return linhaDigitavelNumericaEmFormatada(codigoDeBarrasEmLinhaDigitavelNumerica(codigoDeBarras));
 	}
 
@@ -388,10 +364,8 @@ public final class BoletoUtil {
 	 * Transforma um código de barras em uma linha digitável numérica.
 	 * </p>
 	 * <p>
-	 * "<strong>dddddddddddddddddddddddddddddddddddddddddddd</strong>"
-	 * <br />
-	 * <b>&rArr;</b>
-	 * <br />
+	 * "<strong>dddddddddddddddddddddddddddddddddddddddddddd</strong>" <br />
+	 * <b>&rArr;</b> <br />
 	 * "<strong>ddddddddddddddddddddddddddddddddddddddddddddddd</strong>"
 	 * </p>
 	 * 
@@ -400,59 +374,58 @@ public final class BoletoUtil {
 	 * @param codigoDeBarras
 	 *            string contendo somente números
 	 * @return linha digitável contendo somente números
-	 * @throws NullPointerException
-	 *             quando a string é nula
+	 *            
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *            quando a string é nula ou quando a string é vazia
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
 	public static final String codigoDeBarrasEmLinhaDigitavelNumerica(
-			String codigoDeBarras) throws NullPointerException,
+			String codigoDeBarras) throws
 			IllegalArgumentException, CodigoDeBarrasException {
-		
+
 		checkFormatoCodigoDeBarras(codigoDeBarras);
-		
+
 		final BoletoLinhaDigitavelDV calculadorDV = new BoletoLinhaDigitavelDV();
 
 		final StringBuilder linhaDigitavel = new StringBuilder();
-		
+
 		final String c = trim(codigoDeBarras);
-		
-		//campo1
-		//banco
+
+		// campo1
+		// banco
 		linhaDigitavel.append(c.substring(0, 3));
-		//moeda
+		// moeda
 		linhaDigitavel.append(c.substring(3, 4));
-		linhaDigitavel.append(c.substring(19,24));
+		linhaDigitavel.append(c.substring(19, 24));
 		linhaDigitavel.append(calculadorDV.calcule(linhaDigitavel.toString()));
-		
-		//campo2
+
+		// campo2
 		linhaDigitavel.append(c.substring(24, 34));
 		linhaDigitavel.append(calculadorDV.calcule(c.substring(24, 34)));
-		
-		//campo3
-		linhaDigitavel.append(c.substring(34,44));
-		linhaDigitavel.append(calculadorDV.calcule(c.substring(34,44)));
-		
-		//campo4=DV_Geral
+
+		// campo3
+		linhaDigitavel.append(c.substring(34, 44));
+		linhaDigitavel.append(calculadorDV.calcule(c.substring(34, 44)));
+
+		// campo4=DV_Geral
 		linhaDigitavel.append(c.substring(4, 5));
-		
-		//campo5
+
+		// campo5
 		linhaDigitavel.append(c.substring(5, 19));
-		
-		return linhaDigitavel.toString();	
+
+		return linhaDigitavel.toString();
 	}
 
 	/**
 	 * <p>
-	 * Transforma uma linha digitável no formato FEBRABAN em um código de barras.
+	 * Transforma uma linha digitável no formato FEBRABAN em um código de
+	 * barras.
 	 * </p>
 	 * <p>
 	 * "<strong>ddddd.ddddd ddddd.dddddd ddddd.dddddd d dddddddddddddd</strong>"
 	 * <br />
-	 * <b>&rArr;</b>
-	 * <br />
+	 * <b>&rArr;</b> <br />
 	 * "<strong>dddddddddddddddddddddddddddddddddddddddddddd</strong>"
 	 * </p>
 	 * 
@@ -462,15 +435,13 @@ public final class BoletoUtil {
 	 * @param linhaDigitavel
 	 *            string no formato FEBRABAN
 	 * @return linha digitável contendo somente números
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *              quando a string é nula ou quando a string é vazia
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
 	public static final String linhaDigitavelFormatadaEmCodigoDeBarras(
-			String linhaDigitavel) throws NullPointerException,
+			String linhaDigitavel) throws
 			IllegalArgumentException, LinhaDigitavelException {
 
 		return linhaDigitavelNumericaEmCodigoDeBarras(linhaDigitavelFormatadaEmNumerica(linhaDigitavel));
@@ -481,10 +452,8 @@ public final class BoletoUtil {
 	 * Transforma uma linha digitável não formatada em um código de barras.
 	 * </p>
 	 * <p>
-	 * "<strong>ddddddddddddddddddddddddddddddddddddddddddddddd</strong>"
-	 * <br />
-	 * <b>&rArr;</b>
-	 * <br />
+	 * "<strong>ddddddddddddddddddddddddddddddddddddddddddddddd</strong>" <br />
+	 * <b>&rArr;</b> <br />
 	 * "<strong>dddddddddddddddddddddddddddddddddddddddddddd</strong>"
 	 * </p>
 	 * 
@@ -494,34 +463,32 @@ public final class BoletoUtil {
 	 * @param linhaDigitavel
 	 *            string no formato FEBRABAN
 	 * @return linha digitável contendo somente números
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
 	public static final String linhaDigitavelNumericaEmCodigoDeBarras(
-			String linhaDigitavel) throws NullPointerException,
+			String linhaDigitavel) throws
 			IllegalArgumentException, LinhaDigitavelException {
 
 		checkFormatoLinhaDigitavelNumerica(linhaDigitavel);
 
 		final StringBuilder codigoDeBarras = new StringBuilder();
-		
+
 		final String l = trim(linhaDigitavel);
-		
-		//banco
+
+		// banco
 		codigoDeBarras.append(l.substring(0, 3));
-		//moeda
+		// moeda
 		codigoDeBarras.append(l.substring(3, 4));
-		
-		codigoDeBarras.append(l.substring(32,33));
+
+		codigoDeBarras.append(l.substring(32, 33));
 		codigoDeBarras.append(l.substring(33, 47));
 		codigoDeBarras.append(l.substring(4, 9));
 		codigoDeBarras.append(l.substring(10, 20));
 		codigoDeBarras.append(l.substring(21, 31));
-		
+
 		return codigoDeBarras.toString();
 	}
 
@@ -532,8 +499,7 @@ public final class BoletoUtil {
 	 * <p>
 	 * "<strong>ddddd.ddddd ddddd.dddddd ddddd.dddddd d dddddddddddddd</strong>"
 	 * <br />
-	 * <b>&rArr;</b>
-	 * <br />
+	 * <b>&rArr;</b> <br />
 	 * "<strong>ddddddddddddddddddddddddddddddddddddddddddddddd</strong>"
 	 * </p>
 	 * 
@@ -543,32 +509,28 @@ public final class BoletoUtil {
 	 * @param linhaDigitavel
 	 *            string no formato FEBRABAN
 	 * @return linha digitável contendo somente números
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String linhaDigitavelFormatadaEmNumerica(String linhaDigitavel)
-			throws NullPointerException, IllegalArgumentException,
+	public static final String linhaDigitavelFormatadaEmNumerica(
+			String linhaDigitavel) throws IllegalArgumentException,
 			LinhaDigitavelException {
 
 		checkFormatoLinhaDigitavelFormatada(linhaDigitavel);
 
-		return linhaDigitavel.replaceAll(WHITE_SPACE, EMPTY).replaceAll(
-				"\\.", EMPTY);
+		return linhaDigitavel.replaceAll(WHITE_SPACE, EMPTY).replaceAll("\\.",
+				EMPTY);
 	}
-	
+
 	/**
 	 * <p>
 	 * Transforma linha digitável númerica em FEBRABAN:
 	 * </p>
 	 * <p>
-	 * "<strong>ddddddddddddddddddddddddddddddddddddddddddddddd</strong>"
-	 * <br />
-	 * <b>&rArr;</b>
-	 * <br />
+	 * "<strong>ddddddddddddddddddddddddddddddddddddddddddddddd</strong>" <br />
+	 * <b>&rArr;</b> <br />
 	 * "<strong>ddddd.ddddd ddddd.dddddd ddddd.dddddd d dddddddddddddd</strong>"
 	 * </p>
 	 * 
@@ -578,23 +540,21 @@ public final class BoletoUtil {
 	 * @param linhaDigitavel
 	 *            string no formato FEBRABAN
 	 * @return linha digitável contendo somente números
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String linhaDigitavelNumericaEmFormatada(String linhaDigitavel)
-			throws NullPointerException, IllegalArgumentException,
-			LinhaDigitavelException {
+	public static final String linhaDigitavelNumericaEmFormatada(
+			String linhaDigitavel) throws
+			IllegalArgumentException, LinhaDigitavelException {
 
 		checkFormatoLinhaDigitavelNumerica(linhaDigitavel);
 
 		final StringBuilder linhaFormatada = new StringBuilder();
-		
+
 		final String l = trim(linhaDigitavel);
-		
+
 		linhaFormatada.append(l.substring(0, 5));
 		linhaFormatada.append(".");
 		linhaFormatada.append(l.substring(5, 10));
@@ -610,12 +570,14 @@ public final class BoletoUtil {
 		linhaFormatada.append(l.substring(32, 33));
 		linhaFormatada.append(WHITE_SPACE);
 		linhaFormatada.append(l.substring(33));
-		
+
 		return linhaFormatada.toString();
 	}
-	
+
 	/**
-	 * <p>Informa se um dado código de barras é válido ou não.</p>
+	 * <p>
+	 * Informa se um dado código de barras é válido ou não.
+	 * </p>
 	 * 
 	 * @param codigoDeBarras
 	 * @return true = valida
@@ -624,8 +586,7 @@ public final class BoletoUtil {
 
 		if (isNotBlank(codigoDeBarras)) {
 
-			return codigoDeBarras.trim().matches(
-					CODIGO_DE_BARRAS_REGEX);
+			return codigoDeBarras.trim().matches(CODIGO_DE_BARRAS_REGEX);
 		} else {
 
 			return false;
@@ -633,12 +594,15 @@ public final class BoletoUtil {
 	}
 
 	/**
-	 * <p>Informa se uma dada linha digitável formatada é válida ou não.</p>
+	 * <p>
+	 * Informa se uma dada linha digitável formatada é válida ou não.
+	 * </p>
 	 * 
 	 * @param linhaDigitavel
 	 * @return true = valida
 	 */
-	public static final boolean isLinhaDigitavelFormatadaValida(String linhaDigitavel) {
+	public static final boolean isLinhaDigitavelFormatadaValida(
+			String linhaDigitavel) {
 
 		if (isNotBlank(linhaDigitavel)) {
 
@@ -650,14 +614,16 @@ public final class BoletoUtil {
 		}
 	}
 
-	
 	/**
-	 * <p>Informa se uma dada linha digitável é válida ou não.</p>
+	 * <p>
+	 * Informa se uma dada linha digitável é válida ou não.
+	 * </p>
 	 * 
 	 * @param linhaDigitavel
 	 * @return true = valida
 	 */
-	public static final boolean isLinhaDigitavelNumericaValida(String linhaDigitavel) {
+	public static final boolean isLinhaDigitavelNumericaValida(
+			String linhaDigitavel) {
 
 		if (isNotBlank(linhaDigitavel)) {
 
@@ -683,7 +649,7 @@ public final class BoletoUtil {
 	 * </p>
 	 * <p>
 	 * <ul>
-	 * <li>Caso a string seja nula, lança uma <code>NullPointerException</code>;
+	 * <li>Caso a string seja nula, lança uma <code>IllegalArgumentException</code>;
 	 * </li>
 	 * <li>Caso seja vazia, lança uma <code>IllegalArgumentException</code>;</li>
 	 * <li>Caso não esteja no formato especificado, lança uma
@@ -695,16 +661,14 @@ public final class BoletoUtil {
 	 * 
 	 * @param linhaDigitavel
 	 *            string no formato FEBRABAN
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *              quando a string é nula ou quando a string é vazia
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static final void checkFormatoLinhaDigitavelFormatada(String linhaDigitavel)
-			throws NullPointerException, IllegalArgumentException,
-			LinhaDigitavelException {
+	public static final void checkFormatoLinhaDigitavelFormatada(
+			String linhaDigitavel) throws
+			IllegalArgumentException, LinhaDigitavelException {
 
 		checkExistsLinhaDigitavel(linhaDigitavel);
 
@@ -746,7 +710,7 @@ public final class BoletoUtil {
 	 * </p>
 	 * <p>
 	 * <ul>
-	 * <li>Caso a string seja nula, lança uma <code>NullPointerException</code>;
+	 * <li>Caso a string seja nula, lança uma <code>IllegalArgumentException</code>;
 	 * </li>
 	 * <li>Caso seja vazia, lança uma <code>IllegalArgumentException</code>;</li>
 	 * <li>Caso não esteja no formato especificado, lança uma
@@ -757,16 +721,14 @@ public final class BoletoUtil {
 	 * @see #checkExistsLinhaDigitavel(String)
 	 * 
 	 * @param linhaDigitavel
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static final void checkFormatoLinhaDigitavelNumerica(String linhaDigitavel)
-			throws NullPointerException, IllegalArgumentException,
-			LinhaDigitavelException {
+	public static final void checkFormatoLinhaDigitavelNumerica(
+			String linhaDigitavel) throws
+			IllegalArgumentException, LinhaDigitavelException {
 
 		checkExistsLinhaDigitavel(linhaDigitavel);
 
@@ -779,7 +741,7 @@ public final class BoletoUtil {
 		}
 
 	}
-	
+
 	/**
 	 * <p>
 	 * Verifica se o código de barras <strong>não é nulo</strong>, <strong>não é
@@ -794,7 +756,7 @@ public final class BoletoUtil {
 	 * </p>
 	 * <p>
 	 * <ul>
-	 * <li>Caso a string seja nula, lança uma <code>NullPointerException</code>;
+	 * <li>Caso a string seja nula, lança uma <code>IllegalArgumentException</code>;
 	 * </li>
 	 * <li>Caso seja vazia, lança uma <code>IllegalArgumentException</code>;</li>
 	 * <li>Caso não esteja no formato especificado, lança uma
@@ -805,25 +767,24 @@ public final class BoletoUtil {
 	 * @see #checkExistsLinhaDigitavel(String)
 	 * 
 	 * @param codigoDeBarras
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
 	public static final void checkFormatoCodigoDeBarras(String codigoDeBarras)
-			throws NullPointerException, IllegalArgumentException,
+			throws IllegalArgumentException,
 			CodigoDeBarrasException {
 
 		checkExistsCodigoDeBarras(codigoDeBarras);
 
 		if (!isCodigoDeBarrasValido(codigoDeBarras)) {
-			throw new CodigoDeBarrasException(MSG_CODIGO_DE_BARRAS
-					+ " "
-					+ String.format(MSG_STR_NUMERICA, codigoDeBarras,
-							codigoDeBarras.length())
-					+ " O código de barras deve conter apenas 44 dígitos númericos [0-9]!");
+			throw new CodigoDeBarrasException(
+					MSG_CODIGO_DE_BARRAS
+							+ " "
+							+ String.format(MSG_STR_NUMERICA, codigoDeBarras,
+									codigoDeBarras.length())
+							+ " O código de barras deve conter apenas 44 dígitos númericos [0-9]!");
 		}
 
 	}
@@ -831,7 +792,7 @@ public final class BoletoUtil {
 	/**
 	 * <p>
 	 * Verifica se a linha digitável <strong>não é nula</strong> e <strong>não é
-	 * vazia</strong>. Caso nula lança uma <code>NullPointerException</code>,
+	 * vazia</strong>. Caso nula lança uma <code>IllegalArgumentException</code>,
 	 * caso vazia lança uma <code>IllegalArgumentException</code>.
 	 * </p>
 	 * <p>
@@ -839,13 +800,12 @@ public final class BoletoUtil {
 	 * </p>
 	 * 
 	 * @param linhaDigitavel
-	 * @throws NullPointerException
-	 *             quando a string é nula
+	 * 
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 */
 	public static final void checkExistsLinhaDigitavel(String linhaDigitavel)
-			throws NullPointerException, IllegalArgumentException {
+			throws IllegalArgumentException {
 
 		checkNotNull(linhaDigitavel, MSG_LINHA_INVALIDA);
 
@@ -856,11 +816,11 @@ public final class BoletoUtil {
 							linhaDigitavel.length()));
 		}
 	}
-	
+
 	/**
 	 * <p>
 	 * Verifica se código de barras <strong>não é nulo</strong> e <strong>não é
-	 * vazio</strong>. Caso nula lança uma <code>NullPointerException</code>,
+	 * vazio</strong>. Caso nula lança uma <code>IllegalArgumentException</code>,
 	 * caso vazia lança uma <code>IllegalArgumentException</code>.
 	 * </p>
 	 * <p>
@@ -868,13 +828,11 @@ public final class BoletoUtil {
 	 * </p>
 	 * 
 	 * @param codigoDeBarras
-	 * @throws NullPointerException
-	 *             quando a string é nula
 	 * @throws IllegalArgumentException
-	 *             quando a string é vazia
+	 *             quando a string é nula ou quando a string é vazia
 	 */
 	public static final void checkExistsCodigoDeBarras(String codigoDeBarras)
-			throws NullPointerException, IllegalArgumentException {
+			throws IllegalArgumentException {
 
 		checkNotNull(codigoDeBarras, MSG_LINHA_INVALIDA);
 

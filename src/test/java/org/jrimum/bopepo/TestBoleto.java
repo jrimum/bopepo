@@ -158,7 +158,7 @@ public class TestBoleto{
 		assertEquals(df.format(agora), df.format(boleto.getDataDeProcessamento()));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testSetCampoLivreNull() {
 		
 		boleto = new Boleto(titulo, null);
