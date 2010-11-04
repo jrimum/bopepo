@@ -188,9 +188,9 @@ class PdfViewer {
 	 * <br />
 	 * Arquivos gerados:
 	 * <ul>
-	 * <li><strong>BoletoPrefixo1exSufixo.pdf</li>
-	 * <li><strong>BoletoPrefixo2exSufixo.pdf</li>
-	 * <li><strong>BoletoPrefixo3exSufixo.pdf</li>
+	 * <li><strong>BoletoPrefixo1exSufixo.pdf</strong></li>
+	 * <li><strong>BoletoPrefixo2exSufixo.pdf</strong></li>
+	 * <li><strong>BoletoPrefixo3exSufixo.pdf</strong></li>
 	 * </ul>
 	 * </p>
 	 * 
@@ -212,8 +212,6 @@ class PdfViewer {
 		final List<File> arquivos = new ArrayList<File>(boletos.size());
 		final BoletoViewer bv = new BoletoViewer();
 		int cont = 1;
-
-		
 		
 		for (Boleto bop : boletos) {
 			arquivos.add(bv.setBoleto(bop).getPdfAsFile(destDir.getAbsolutePath() + File.separator + prefixo + cont++ + sufixo + ".pdf"));
