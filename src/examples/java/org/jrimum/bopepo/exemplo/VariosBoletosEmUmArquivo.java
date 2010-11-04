@@ -68,14 +68,13 @@ public class VariosBoletosEmUmArquivo {
 		 * Depois diga o nome do diretorio/arquivo para onde os boletos serão gerados com template padrão. 
 		 */
 		
-		//BoletoViewer.groupInOnePDF("TesteVariosEmUm.pdf", boletos);
+		BoletoViewer.groupInOnePDF(boletos, "TesteVariosEmUm.pdf");
 	
 		/*
 		 * OU então diga o nome do diretorio/arquivo para onde os boletos serão gerados com um template personalizado. 
 		 */
 		
-		BoletoViewer.groupInOnePDF(boletos, "TesteVariosEmUmPersonalizado.pdf");
-//		BoletoViewer.groupInOnePDF("TesteVariosEmUmPersonalizado.pdf", boletos,new File("TemplatePersonalizado.pdf"));
+		//BoletoViewer.groupInOnePDF("TesteVariosEmUmPersonalizado.pdf", boletos,new File("TemplatePersonalizado.pdf"));
 		
 		/*
 		 * Pronto, agora vamos conferir: 
@@ -85,7 +84,8 @@ public class VariosBoletosEmUmArquivo {
 			
 		try{
 	
-			desktop.open(new File("TesteVariosEmUmPersonalizado.pdf"));
+			desktop.open(new File("TesteVariosEmUm.pdf"));
+			//desktop.open(new File("TesteVariosEmUmPersonalizado.pdf"));
 	
 		}catch(Exception e){
 			throw new RuntimeException("Arquivo não gerado!",e);
