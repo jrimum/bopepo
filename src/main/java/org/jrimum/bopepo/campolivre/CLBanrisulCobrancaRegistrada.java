@@ -34,61 +34,87 @@ import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
 
 /**
+ * <p>
+ * Representação do campo livre usado para boletos com carteiras (
+ * <em>cobrança</em>) com registro.
+ * </p>
  * 
  * <p>
- * Representação do campo livre usado para boletos com carteiras (<em>cobrança</em>)
- * com registro.
+ * O campo livre do Barisul para cobrança registrada (Cobrança Normal
+ * "com registro" - Sistema BDL/Carteira de Letras) deve seguir esta forma:
  * </p>
  * 
- * <p>
- * Layout:<br />
- * <div align="center">
- * <p align="center">
- * <font face="Arial">Cobrança Normal (com registro) - CAMPO LIVRE - Sistema BDL/Carteira de Letras</font>
- * </p>
- * 
- * <table border="1" cellpadding="0" cellspacing="0" style="border-collapse:
- * collapse" bordercolor="#111111" >
+ * <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="campolivre">
+ * <thead bgcolor="#DEDEDE">
  * <tr>
- * <td align="center" bgcolor="#C0C0C0"><strong><font face="Arial">Posição</font></strong></td>
- * <td bgcolor="#C0C0C0"><strong><font face="Arial">Campo Livre No Código De
- * Barras (20 a 44)</font></strong></td>
+ * <th>Posição</th>
+ * <th>Tamanho</th>
+ * <th>Picture</th>
+ * <th>Conteúdo (terminologia padrão)</th>
+ * <th>Conteúdo (terminologia do banco)</th>
+ * </tr>
+ * </thead> <tbody style="text-align:center">
  * <tr>
- * <td align="center"><font face="Arial">20 a 20</font></td>
- * <td><font face="Arial">Produto = "1" Cobrança Normal, Fichário emitido pelo BANRISUL</font></td>
- * 
+ * <td>20-20</td>
+ * <td>1</td>
+ * <td>9(1)</td>
+ * <td style="text-align:left;padding-left:10px">Tipo de Cobrança: constante = 1
+ * </td>
+ * <td style="text-align:left;padding-left:10">"1" Cobrança Normal, Fichário
+ * emitido pelo BANRISUL</td>
  * </tr>
  * <tr>
- * <td align="center"><font face="Arial">21 a 21</font></td>
- * <td><font face="Arial">Constante = "1"</font></td>
+ * <td>21-21</td>
+ * <td>1</td>
+ * <td>9(1)</td>
+ * <td style="text-align:left;padding-left:10">Constante "1"</td>
+ * <td style="text-align:left;padding-left:10">Constante "1"</td>
  * </tr>
  * <tr>
- * <td align="center"><font face="Arial">22 a 24</font></td>
- * 
- * <td><font face="Arial">Agência Cedente sem Número de Controle</font></td>
+ * <td>22-25</td>
+ * <td>4</td>
+ * <td>9(4)</td>
+ * <td style="text-align:left;padding-left:10">Código da Agência sem digito
+ * verificador</td>
+ * <td style="text-align:left;padding-left:10">Código da Agência, com quatro
+ * dígitos, sem o Número de Controle.</td>
  * </tr>
  * <tr>
- * <td align="center"><font face="Arial">25 a 31</font></td>
- * 
- * <td><font face="Arial">Código do Cedente sem Número de Controle</font></td>
+ * <td>26-32</td>
+ * <td>7</td>
+ * <td>9(7)</td>
+ * <td style="text-align:left;padding-left:10">Código do Cedente sem dígito
+ * verificador</td>
+ * <td style="text-align:left;padding-left:10">Código do Cedente sem Número de
+ * Controle.</td>
  * </tr>
  * <tr>
- * <td align="center"><font face="Arial">32 a 39</font></td>
- * <td><font face="Arial">Nosso Número sem Número de Controle</font></td>
+ * <td>33-40</td>
+ * <td>8</td>
+ * <td>9(8)</td>
+ * <td style="text-align:left;padding-left:10">Seu número sem dígito verificador
+ * </td>
+ * <td style="text-align:left;padding-left:10">Nosso Número sem Número de
+ * Controle</td>
  * </tr>
- * 
  * <tr>
- * <td align="center"><font face="Arial">40 a 42</font></td>
- * <td><font face="Arial">Constante = "041"</font></td>
+ * <td>41-42</td>
+ * <td>2</td>
+ * <td>9(2)</td>
+ * <td style="text-align:left;padding-left:10">Constante "40"</td>
+ * <td style="text-align:left;padding-left:10">Constante "40"</td>
  * </tr>
- * 
  * <tr>
- * <td align="center"><font face="Arial">43 a 44</font></td>
- * <td><font face="Arial">Duplo Dígito referente às posições 20 a 42 (módulos 10 e 11)</font></td>
+ * <td>43-44</td>
+ * <td>2</td>
+ * <td>9(2)</td>
+ * <td style="text-align:left;padding-left:10">Dois dígitos verificadores
+ * calculados com os campos anteriores pelos (módulos 10 e 11)</td>
+ * <td style="text-align:left;padding-left:10">Duplo Dígito referente às
+ * posições 20 a 42 (módulos 10 e 11)</td>
  * </tr>
- * 
- * </table> </div>
- * </p>
+ * </tbody>
+ * </table>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
@@ -113,17 +139,11 @@ class CLBanrisulCobrancaRegistrada extends AbstractCLBanrisul {
 
 		this.add(new Field<Integer>(1, 1));
 		this.add(new Field<String>("1", 1));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia()
-				.getCodigo(), 3, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria()
-				.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(Integer.valueOf(titulo.getNossoNumero()),
-				8, Filler.ZERO_LEFT));
-		this.add(new Field<String>("041", 3));
-		this
-				.add(new Field<String>(
-						calculaDuploDigito(concateneOsCamposExistentesAteOMomento()),
-						2));
+		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(Integer.valueOf(titulo.getNossoNumero()),8, Filler.ZERO_LEFT));
+		this.add(new Field<String>("40", 2));
+		this.add(new Field<String>(calculaDuploDigito(concateneOsCamposExistentesAteOMomento()),2));
 	}
 
 }
