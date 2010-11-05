@@ -66,7 +66,7 @@ public class MeuPrimeiroBoletoPersonalizado {
 		File templatePersonalizado = new File(ClassLoaders.getResource("/templates/BoletoTemplatePersonalizacaoSimples.pdf").getFile());
 		BoletoViewer boletoViewer = new BoletoViewer(boleto, templatePersonalizado);
 
-		File arquivoPdf = boletoViewer.getPdfAsFile("MeuPrimeiroBoleto.pdf");
+		File arquivoPdf = boletoViewer.getPdfAsFile("MeuBoletoPersonalizado.pdf");
 
 		mostreBoletoNaTela(arquivoPdf);
 	}
