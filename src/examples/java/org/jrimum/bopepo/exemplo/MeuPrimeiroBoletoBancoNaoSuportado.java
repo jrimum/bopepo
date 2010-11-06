@@ -34,7 +34,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.campolivre.CampoLivre;
 import org.jrimum.bopepo.view.BoletoViewer;
