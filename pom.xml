@@ -3,11 +3,11 @@
   <groupId>jrimum</groupId>
   <artifactId>bopepo</artifactId>
   <name>Projeto Bopepo</name>
-  <version>0.2.3-SNAPSHOT</version>
+  <version>0.3.0-SNAPSHOT</version>
   <parent>
   	<artifactId>jrimum</artifactId>
   	<groupId>jrimum</groupId>
-  	<version>0.2.3-SNAPSHOT</version>
+  	<version>0.3.0-SNAPSHOT</version>
   	<relativePath>../_JRimum-0.3-Litio/pom.xml</relativePath>
   </parent>
   <ciManagement>
@@ -32,7 +32,7 @@
   	<dependency>
   		<groupId>jrimum</groupId>
   		<artifactId>domkee</artifactId>
-  		<version>0.2.3-SNAPSHOT</version>
+  		<version>0.3.0-SNAPSHOT</version>
   	</dependency>
   </dependencies>
 </project>
