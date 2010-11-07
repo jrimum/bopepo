@@ -69,16 +69,16 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 	 * Tamanho dos campos mais os espaços entre eles. <br/>
 	 * 44 posições do código de barras <br/>
 	 * + <font color="red">4 dígitos verificadores</font><br/>
-	 * + 4 espaços em branco (entre cada campo e seu dígito verificador): <br/>
-	 * + 3 espaços em branco (para separar os campos): <br/>
-	 * Ex: 89610000001 <font size="4" color="red">8</font>
-	 *     00000001011 <font size="4" color="red">6</font>
-	 *     05449201004 <font size="4" color="red">3</font>
-	 *     26011145220 <font size="4" color="red">7</font>
+	 * + 4 hífens (1 entre cada campo e seu dígito verificador): <br/>
+	 * + 6 espaços em branco (2 entre um campo e outro): <br/>
+	 * Ex: 89610000001-<font size="4" color="red">8</font>
+	 *     00000001011-<font size="4" color="red">6</font>
+	 *     05449201004-<font size="4" color="red">3</font>
+	 *     26011145220-<font size="4" color="red">7</font>
 	 *     <br/>
  	 * </p>
 	 */
-	private static final Integer STRING_LENGTH = 55;
+	private static final Integer STRING_LENGTH = 58;
 
 	/**
 	 * 
@@ -152,9 +152,12 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 	public String write(){
 		StringBuilder lineOfFields = new StringBuilder(innerCampo1.write()).
 			append(StringUtil.WHITE_SPACE).
+			append(StringUtil.WHITE_SPACE).
 			append(innerCampo2.write()).
 			append(StringUtil.WHITE_SPACE).
+			append(StringUtil.WHITE_SPACE).
 			append(innerCampo3.write()).
+			append(StringUtil.WHITE_SPACE).
 			append(StringUtil.WHITE_SPACE).
 			append(innerCampo4.write());
 		
@@ -197,7 +200,7 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 			for(Field<?> field : this)
 				lineOfFields.append(field.write());
 			
-			lineOfFields.insert(11, " ");
+			lineOfFields.insert(11, "-");
 			isConsistent(lineOfFields);
 
 			return lineOfFields.toString();
