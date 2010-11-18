@@ -211,6 +211,10 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 						
 					case BANCO_INTEMEDIUM:
 						return AbstractCLBancoIntermedium.create(titulo);
+						
+					case BANCO_SICREDI:
+						return AbstractCLSicredi.create(titulo);
+						
 					default:
 						/*
 						 * Se chegar neste ponto e nenhum campo livre foi definido, então é
