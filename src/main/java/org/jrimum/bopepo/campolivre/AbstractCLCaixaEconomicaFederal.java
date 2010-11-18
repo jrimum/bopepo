@@ -76,7 +76,7 @@ abstract class AbstractCLCaixaEconomicaFederal extends AbstractCampoLivre {
 		checkNossoNumero(titulo);
 		
 		switch(titulo.getNossoNumero().length()){
-		case NN11:
+		case NN10:
 			return new CLCaixaEconomicaFederalSICOB(titulo);
 		case NN15:
 			return new CLCaixaEconomicaFederalSIGCB(titulo);
@@ -87,7 +87,7 @@ abstract class AbstractCLCaixaEconomicaFederal extends AbstractCampoLivre {
 					format("Campo Livre não suportado para o Nosso Número [%s] de tamanho [%s]." 
 					+ " Apenas títulos com Nosso Número de tamanho [%s] são suportados (SICOB, SIGCB e SINCO respectivamente)."
 					,titulo.getNossoNumero(), titulo.getNossoNumero().length() 
-					,NN11 + "," + NN15 + "," + NN17)
+					,NN10 + "," + NN15 + "," + NN17)
 					);
 		}
 	}
