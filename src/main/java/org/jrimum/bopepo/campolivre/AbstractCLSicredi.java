@@ -50,24 +50,27 @@ abstract class AbstractCLSicredi extends AbstractCampoLivre {
 	 * 
 	 */
 	private static final long serialVersionUID = -55594606026629224L;
-	
+
 	/**
-	 * <p>Cria um campo livre com um determinado número de campos</p>
+	 * <p>
+	 * Cria um campo livre com um determinado número de campos
+	 * </p>
 	 * 
 	 * @see AbstractCampoLivre
 	 * 
-	 * @param fieldsLength - Número de campos
+	 * @param fieldsLength
+	 *            - Número de campos
 	 */
 	protected AbstractCLSicredi(Integer fieldsLength) {
-		
+
 		super(fieldsLength);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	static CampoLivre create(Titulo titulo) {
-		
+
 		return new CLSicredi(titulo);
 	}
 }
