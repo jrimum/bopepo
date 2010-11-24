@@ -110,7 +110,6 @@ import org.jrimum.vallia.digitoverificador.TipoDeModulo;
  * @see org.jrimum.bopepo.campolivre.AbstractCampoLivre
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author <a href="http://jrimum.nordestefomento.com.br/wprojeto">JRimum</a>
  */
 class CLSicredi extends AbstractCLSicredi {
 
@@ -125,10 +124,17 @@ class CLSicredi extends AbstractCLSicredi {
 	
 	/**
 	 * <p>
-	 * Código númerico correspondente ao tipo de cobrança: "3" - SICREDI.
+	 * Código númerico correspondente ao tipo de cobrança: "1" - Com Registro.
 	 * </p>
 	 */
-	private static final String COBRANCA = "3";
+	private static final String COBRANCA_COM_REGISTRO = "1";
+	
+	/**
+	 * <p>
+	 * Código númerico correspondente ao tipo de cobrança: "3" - Sem Registro.
+	 * </p>
+	 */
+	private static final String COBRANCA_SEM_REGISTRO = "3";
 
 	/**
 	 * <p>
@@ -137,13 +143,6 @@ class CLSicredi extends AbstractCLSicredi {
 	 * </p>
 	 */
 	private static final String CARTEIRA = "1";
-
-	/**
-	 * <p>
-	 * Primeira posição do campo livre.
-	 * </p>
-	 */
-	private static final Field<String> FIELD_COBRANCA = new Field<String>(COBRANCA, 1);
 
 	/**
 	 * <p>
@@ -156,177 +155,37 @@ class CLSicredi extends AbstractCLSicredi {
 		
 		super(FIELDS_LENGTH);
 		
-		try {
+		throw new UnsupportedOperationException("CAMPO LIVRE AINDA NÃO IMPLEMENTADO NESSE SNAPSHOT!");
+		
+		//TODO FAZER
+		
+//		if(titulo.getContaBancaria().getCarteira().isComRegistro()){
+//			
+//			this.add(new Field<String>(COBRANCA_COM_REGISTRO, 1));
+//			
+//		}else{
+//			
+//			this.add(new Field<String>(COBRANCA_SEM_REGISTRO, 1));
+//		}
+//		
+//		this.add(FIELD_CARTEIRA);
+//
+//		this.add(new Field<String>(titulo.getNossoNumero(), 9, Filler.ZERO_LEFT));
+//
+//
+//		if (titulo.getValor() != null && titulo.getValor().doubleValue() > 0) {
+//			
+//			this.add(new Field<String>("1", 1));
+//			
+//		} else {
+//			this.add(new Field<String>("0", 1));
+//		}
+//
+//		this.add(new Field<String>("0", 1));
+//		this.add(new Field<String>(calculeDigitoVerificador(), 1));
 
-			this.add(FIELD_COBRANCA);
-			this.add(FIELD_CARTEIRA);
-
-			this.add(new Field<String>(loadNossoNumero(titulo), 9, Filler.ZERO_LEFT));
-
-			InnerCooperativaDeCredito cooperativa = loadCooperativaDeCredito(titulo.getContaBancaria().getAgencia());
-
-			this.add(new Field<String>(cooperativa.codigo, 4, Filler.ZERO_LEFT));
-			this.add(new Field<String>(cooperativa.posto, 2, Filler.ZERO_LEFT));
-
-			this.add(new Field<String>(componhaCodigoDoCedente(titulo.getContaBancaria().getNumeroDaConta()), 5, Filler.ZERO_LEFT));
-
-			if (titulo.getValor() != null && titulo.getValor().doubleValue() > 0) {
-				this.add(new Field<String>("1", 1));
-				
-			} else {
-				this.add(new Field<String>("0", 1));
-			}
-
-			this.add(new Field<String>("0", 1));
-			this.add(new Field<String>(calculeDigitoVerificador(), 1));
-
-		} catch (Exception e) {
-			throw new CampoLivreException("Ocorreu um problema ao tentar gerar o campo livre Sicredi.", e);
-		}
 	}
 	
-	private String loadNossoNumero(Titulo titulo) {
-
-		String nossoNumeroComposto = null;
-
-		String nossoNumero = titulo.getNossoNumero();
-		String dvNossoNumero = titulo.getDigitoDoNossoNumero();
-
-		Objects.checkNotNull(nossoNumero,"Nosso Número NULO!");
-		
-		if (isNotBlank(nossoNumero) && isNumeric(nossoNumero)) {
-
-			if (nossoNumero.length() == 8) {
-				nossoNumeroComposto = nossoNumero;
-				
-			} else {
-				new IllegalArgumentException("Nosso número deve ter exatamente 8 dígitos: " + nossoNumero);
-			}
-			
-		} else {
-			new IllegalArgumentException("Nosso número deve conter somente números e não: " + nossoNumero);
-		}
-
-		Objects.checkNotNull(dvNossoNumero,"Dígito Verificador do Nosso Número NULO!");
-
-		if (isNotBlank(dvNossoNumero) && isNumeric(dvNossoNumero)) {
-
-			Integer dvNN = Integer.valueOf(dvNossoNumero);
-
-			if (dvNN >= 0 && dvNN <= 9) {
-				nossoNumeroComposto += dvNN.toString();
-				
-			} else {
-				new IllegalArgumentException("O dígito Verificador do Nosso Número deve ser um número natural não-negativo de 0 a 9, e não: [" + dvNN + "]");
-			}
-
-		} else {
-			new IllegalArgumentException("Nosso número deve conter somente números e não: " + nossoNumero);
-		}
-
-		if (nossoNumeroComposto.length() != 9) {
-			throw new IllegalStateException("Nosso número [" + nossoNumeroComposto + "] com tamanho diferente da especificação (9)");
-		}
-
-		return nossoNumeroComposto.toString();
-	}
-
-	InnerCooperativaDeCredito loadCooperativaDeCredito(Agencia agencia) {
-
-		InnerCooperativaDeCredito cooperativa = null;
-
-		Objects.checkNotNull(agencia.getCodigo(),"Número da Agência Sicredi NULO!");
-		
-		if (agencia.getCodigo() > 0) {
-			
-			if (String.valueOf(agencia.getCodigo()).length() <= 4) {
-
-				cooperativa = new InnerCooperativaDeCredito();
-
-				cooperativa.codigo = "" + agencia.getCodigo();
-
-			} else {
-				new IllegalArgumentException("Número da Agência Sicredi deve conter no máximo 4 dígitos (SEM O DIGITO VERIFICADOR) e não: " + agencia.getCodigo());
-			}
-			
-		} else {
-			new IllegalArgumentException("Número da Agência Sicredi com valor inválido: " + agencia.getCodigo());
-		}
-
-		Objects.checkNotNull(agencia.getDigitoVerificador(),"Dígito da Agência Sicredi NULO!");
-		
-		if (StringUtils.isNumeric(agencia.getDigitoVerificador())) {
-
-			if (String.valueOf(agencia.getDigitoVerificador()).length() <= 2) {
-
-				Integer digitoDaAgencia = Integer.valueOf(agencia.getDigitoVerificador());
-
-				if (digitoDaAgencia >= 0) {
-					cooperativa.posto = digitoDaAgencia.toString();
-				} else {
-					new IllegalArgumentException("O dígito da Agência Sicredi deve ser um número natural não-negativo, e não: [" + agencia.getDigitoVerificador() + "]");
-				}
-
-			}else {
-				new IllegalArgumentException("Dígito da Agência Sicredi deve conter no máximo 2 dígitos e não: " + agencia.getCodigo());
-			}
-			
-		}else {
-			new IllegalArgumentException("O dígito da Agência Sicredi deve ser numérico, e não: [" + agencia.getDigitoVerificador() + "]");
-		}
-
-		return cooperativa;
-	}
-
-	String componhaCodigoDoCedente(NumeroDaConta conta) {// 5digitos sem dv
-
-		
-		final String msg = "<<<ATENÇÃO>>> O dígito da Conta/Código do Cedente Sicredi deve ser fornecido somente quando o número da (Conta/Código do Cedente) " +
-				"for composto de 1 a 4 dígitos, e não: [" + conta.getDigitoDaConta() + "]";
-
-		StringBuilder codigoDoCedente = new StringBuilder();
-
-		Objects.checkNotNull(conta.getCodigoDaConta(),"Número da Conta/Código do Cedente Sicredi NULO!");
-		
-		if (conta.getCodigoDaConta() > 0) {
-			
-			if (conta.getCodigoDaConta().toString().length() <= 5) {
-
-				codigoDoCedente.append(conta.getCodigoDaConta().toString());
-
-				if (conta.getCodigoDaConta().toString().length() < 5) {// ComDigito
-					
-					if (isNotBlank(conta.getDigitoDaConta())) {
-						
-						if (isNumeric(conta.getDigitoDaConta())) {
-
-							Integer digitoDaConta = Integer.valueOf(conta.getDigitoDaConta());
-
-							if (digitoDaConta >= 0) {
-								codigoDoCedente.append(digitoDaConta);
-							} else {
-								new IllegalArgumentException("O dígito da Conta/Código do Cedente Sicredi deve ser um número natural não-negativo, e não: [" + conta.getDigitoDaConta() + "]");
-							}
-
-						} else {
-							throw new CampoLivreException(new IllegalArgumentException("O dígito da Conta/Código do Cedente Sicredi deve ser numérico, e não: [" + conta.getDigitoDaConta() + "]"));
-						}
-					} else {
-						System.out.println(msg);
-					}
-				}
-
-			} else {
-				new IllegalArgumentException("Número da Conta/Código do Cedente Sicredi deve conter no máximo 6 dígitos (SEM O DIGITO VERIFICADOR) e não: " + conta.getCodigoDaConta());
-			}
-			
-		} else {
-			new IllegalArgumentException("Número da Conta/Código do Cedente Sicredi com valor inválido: " + conta.getCodigoDaConta());
-		}
-
-		return codigoDoCedente.toString();
-	}
-
 	private String calculeDigitoVerificador() {
 
 		Integer dv = 0;
@@ -340,13 +199,5 @@ class CLSicredi extends AbstractCLSicredi {
 			dv = resto;
 
 		return "" + dv;
-	}
-
-	class InnerCooperativaDeCredito {
-
-		String codigo;
-
-		String posto;
-
 	}
 }
