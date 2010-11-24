@@ -24,7 +24,7 @@ import org.jrimum.utilix.text.Filler;
  * <td>20-20</td>
  * <td>1</td>
  * <td>9(1)</td>
- * <td style="text-align:left;padding-left:10px">Tipo de Cobrança - 9</td>
+ * <td style="text-align:left;padding-left:10">Tipo de Cobrança - 9</td>
  * <td style="text-align:left;padding-left:10">Tipo de Cobrança - 9</td>
  * </tr>
  * <tr>
@@ -90,7 +90,7 @@ class CLBancoRuralCobrancaNaoRegistrada extends AbstractCLBancoRural{
 	 * </p>
 	 * 
 	 * @param titulo
-	 *            - título com as informações para geração do campo livre
+	 *            - Título com as informações para geração do campo livre
 	 */
 	CLBancoRuralCobrancaNaoRegistrada(Titulo titulo) {
 		
