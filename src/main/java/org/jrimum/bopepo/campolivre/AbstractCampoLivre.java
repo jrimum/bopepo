@@ -32,6 +32,7 @@ package org.jrimum.bopepo.campolivre;
 import static java.lang.String.format;
 import static org.jrimum.domkee.financeiro.banco.febraban.Banco.isCodigoDeCompensacaoOK;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
@@ -152,18 +153,18 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 
 		try{
 		
-			checkTitulo(titulo);
-			checkContaBancaria(titulo);
-			checkBanco(titulo);
+			checkTituloNotNull(titulo);
+			checkContaBancariaNotNull(titulo);
+			checkBancoNotNull(titulo);
 			
 			if (log.isDebugEnabled()){
 				
 				log.debug(format("Campo Livre do Banco: %s", titulo.getContaBancaria().getBanco().getNome()));
 			}
 			
-			if (BancosSuportados.isSuportado( titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
+			if (BancosSuportados.isSuportado(titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
 
-				BancosSuportados banco = BancosSuportados.suportados.get( titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado());
+				final BancosSuportados banco = BancosSuportados.suportados.get( titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado());
 
 				switch (banco) {
 
@@ -281,17 +282,47 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * Validações inicias.
 	 */
 	
-	private static void checkTitulo(Titulo titulo){
+	/**
+	 * <p>
+	 * Verifica se o título não é nulo, senão lança uma {@code
+	 * IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	private static void checkTituloNotNull(Titulo titulo){
 		
 		Objects.checkNotNull(titulo, "Título não pode ser nulo!");
 	}
 	
-	private static void checkContaBancaria(Titulo titulo) {
+	/**
+	 * <p>
+	 * Verifica se a conta bancária do título não é nula, senão lança uma
+	 * {@code IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	private static void checkContaBancariaNotNull(Titulo titulo) {
 		
 		Objects.checkNotNull(titulo.getContaBancaria(), "Conta bancária do título não pode ser nula!");
 	}
 	
-	private static void checkBanco(Titulo titulo) {
+	/**
+	 * <p>
+	 * Verifica se o banco da conta bancária do título não é nulo, senão lança
+	 * uma {@code IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	private static void checkBancoNotNull(Titulo titulo) {
 		
 		Objects.checkNotNull(titulo.getContaBancaria().getBanco(), "Banco da conta bancária do título não pode ser nulo!");
 		
@@ -305,17 +336,48 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * Validações para subclasses.
 	 */
 	
-	final static void checkCarteira(Titulo titulo){
+	/**
+	 * <p>
+	 * Verifica se a carteira da conta bancária do título não é nula, senão
+	 * lança uma {@code IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkCarteiraNotNull(Titulo titulo){
 		
 		Objects.checkNotNull(titulo.getContaBancaria().getCarteira(), "Carteira da conta bancária do título não pode ser nula!");
 	}
 	
-	final static void checkRegistroDaCarteira(Titulo titulo){
+	/**
+	 * <p>
+	 * Verifica se o tipo da carteira da conta bancária do título não é nulo,
+	 * senão lança uma {@code IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkRegistroDaCarteiraNotNull(Titulo titulo){
 		
 		Objects.checkNotNull(titulo.getContaBancaria().getCarteira().getTipoCobranca(), "Tipo de cobrança (COM ou SEM registro) da carteira não pode ser nulo!");
 	}
 	
-	final static void checkCodigoDaCarteira(Titulo titulo){
+	/**
+	 * <p>
+	 * Verifica se o códigoda carteira da conta bancária do título não é nulo e
+	 * se é um número > 0, caso contrário lança uma {@code
+	 * IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkCodigoDaCarteira(Titulo titulo){
 		
 		Objects.checkNotNull(titulo.getContaBancaria().getCarteira().getCodigo(), "Código da carteira não pode ser nulo!");
 		
@@ -325,12 +387,32 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		}
 	}
 	
-	final static void checkAgencia(Titulo titulo){
+	/**
+	 * <p>
+	 * Verifica se a agência da conta bancária do título não é nula, senão lança
+	 * uma {@code IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkAgenciaNotNull(Titulo titulo){
 		
 		Objects.checkNotNull(titulo.getContaBancaria().getAgencia(), "Agência bancária do título não pode ser nula!");
 	}
 	
-	final static void checkCodigoDaAgencia(Titulo titulo){
+	/**
+	 * <p>
+	 * Verifica se o código do do número da agência bancária não é nulo e se é
+	 * um número > 0, caso contrário lança uma {@code IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkCodigoDaAgencia(Titulo titulo){
 		
 		Objects.checkNotNull(titulo.getContaBancaria().getAgencia().getCodigo(), "Código da agência bancária não pode ser nulo!");
 		
@@ -340,18 +422,50 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		}
 	}
 	
-	final static void checkDigitoDoCodigoDaAgencia(Titulo titulo){
+	/**
+	 * <p>
+	 * Verifica se o dígito verificador do número da conta bancária não é nulo,
+	 * não é vazio e se é numérico, caso contrário lança uma {@code
+	 * IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkDigitoDoCodigoDaAgencia(Titulo titulo){
 		
-		Objects.checkNotNull(titulo.getContaBancaria().getAgencia().getDigitoVerificador(), "Dígito do código da agência bancária não pode ser nulo!");
-		Strings.checkNotBlank(titulo.getContaBancaria().getAgencia().getDigitoVerificador(), "Dígito do código da agência bancária não pode ser vazio!");
+		Objects.checkNotNull(titulo.getContaBancaria().getAgencia().getDigitoVerificador(), "Dígito verificador da agência bancária não pode ser nulo!");
+		Strings.checkNotBlank(titulo.getContaBancaria().getAgencia().getDigitoVerificador(), format("Dígito verificador [\"%s\"] da agência bancária não pode ser vazio!",titulo.getContaBancaria().getAgencia().getDigitoVerificador()));
+		Strings.checkNotNumeric(titulo.getContaBancaria().getAgencia().getDigitoVerificador(), format("Nesse contexto o dígito verificador [\"%s\"] da agência bancária deve ser numérico!", titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta()));
 	}
 	
-	final static void checkNumeroDaConta(Titulo titulo){
+	/**
+	 * <p>
+	 * Verifica se o número da conta da conta bancária do título não é nulo,
+	 * senão lança uma {@code IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkNumeroDaContaNotNull(Titulo titulo){
 		
 		Objects.checkNotNull(titulo.getContaBancaria().getNumeroDaConta(), "Número da conta bancária do título não pode ser nulo!");
 	}
 	
-	final static void checkCodigoDoNumeroDaConta(Titulo titulo){
+	/**
+	 * <p>
+	 * Verifica se o código do do número da conta bancária não é nulo e se é um
+	 * número > 0, caso contrário lança uma {@code IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkCodigoDoNumeroDaConta(Titulo titulo){
 		
 		Objects.checkNotNull(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), "Código do número da conta bancária não pode ser nulo!");
 		
@@ -361,22 +475,102 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		}
 	}
 	
-	final static void checkDigitoDoCodigoDoNumeroDaConta(Titulo titulo){
+	/**
+	 * <p>
+	 * Verifica se o dígito verificador do número da conta bancária não é nulo,
+	 * não é vazio e se é numérico, caso contrário lança uma {@code
+	 * IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkDigitoDoCodigoDoNumeroDaConta(Titulo titulo){
 		
-		Objects.checkNotNull(titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta(), "Dígito do código do número da conta bancária não pode ser nulo!");
-		Strings.checkNotBlank(titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta(), "Dígito do código do número da conta bancária não pode ser vazio!");
+		Objects.checkNotNull(titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta(), "Dígito verificador do número da conta bancária não pode ser nulo!");
+		Strings.checkNotBlank(titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta(), format("Dígito verificador [\"%s\"] do número da conta bancária não pode ser vazio!", titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta()));
+		Strings.checkNotNumeric(titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta(), format("Nesse contexto o dígito verificador [\"%s\"] do número da conta deve ser numérico!", titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta()));
 	}
 	
-	final static void checkNossoNumero(Titulo titulo){
+	/**
+	 * <p>
+	 * Verifica se onosso número do título não é nulo, não é vazio e se é
+	 * numérico, caso contrário lança uma {@code IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkNossoNumero(Titulo titulo){
 		
 		Objects.checkNotNull(titulo.getNossoNumero(), "Nosso número do título não pode ser nulo!");
-		Strings.checkNotBlank(titulo.getNossoNumero(), "Nosso número do título não pode ser vazio!");
+		Strings.checkNotBlank(titulo.getNossoNumero(), format("Nosso número [\"%s\"] do título não pode ser vazio!", titulo.getNossoNumero()));
+		Strings.checkNotNumeric(titulo.getNossoNumero(), format("Nosso número [\"%s\"] do título deve ser numérico!", titulo.getNossoNumero()));
 	}
 	
-	final static void checkDigitoDoNossoNumero(Titulo titulo){
+	/**
+	 * <p>
+	 * Verifica se o nosso número do título tem o tamanho determinado, caso
+	 * contrário lança uma {@code IllegalArgumentException} com a mensagem
+	 * <tt>"Tamanho do nosso número [%s] diferente do esperado [%s]!"</tt>.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * @param length
+	 *            - Tamanho que deve ser
+	 * @param msg
+	 *            - Mensagem para erro
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkTamanhoNossoNumero(Titulo titulo, int length) {
+
+		checkTamanhoNossoNumero(titulo, length, format(
+				"Tamanho [%s] do nosso número [\"%s\"] diferente do esperado [%s]!",
+				StringUtils.length(titulo.getNossoNumero()), titulo.getNossoNumero(), length));
+	}
+	
+	/**
+	 * <p>
+	 * Verifica se o nosso número do título tem o tamanho determinado, caso
+	 * contrário lança uma {@code IllegalArgumentException} com a mensagem
+	 * determinada.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * @param length
+	 *            - Tamanho que deve ser
+	 * @param msg
+	 *            - Mensagem para erro
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkTamanhoNossoNumero(Titulo titulo, int length, String msg){
 		
-		Objects.checkNotNull(titulo.getDigitoDoNossoNumero(), "Dígito do nosso número do título não pode ser nulo!");
-		Strings.checkNotBlank(titulo.getDigitoDoNossoNumero(), "Dígito do nosso número do título não pode ser vazio!");
+		if(titulo.getNossoNumero().length() != length){
+			
+			throw new IllegalArgumentException(msg);
+		}
+	}
+	
+	/**
+	 * <p>
+	 * Verifica se o dígito verificador do nosso número do título não é nulo,
+	 * não é vazio e se é numérico, caso contrário lança uma {@code
+	 * IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkDigitoDoNossoNumero(Titulo titulo){
+		
+		Objects.checkNotNull(titulo.getDigitoDoNossoNumero(), "Dígito verificador do nosso número do título não pode ser nulo!");
+		Strings.checkNotBlank(titulo.getDigitoDoNossoNumero(), format("Dígito verificador [\"%s\"] do nosso número do título não pode ser vazio!", titulo.getDigitoDoNossoNumero()));
+		Strings.checkNotNumeric(titulo.getNossoNumero(), format("Nesse contexto o dígito verificador [\"%s\"] do nosso número deve ser numérico!", titulo.getDigitoDoNossoNumero()));
 	}
 	
 	/**
