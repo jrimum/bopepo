@@ -95,7 +95,7 @@ abstract class AbstractCLItau extends AbstractCampoLivre {
 	 */
 	static CampoLivre create(Titulo titulo){
 		
-		checkCarteira(titulo);
+		checkCarteiraNotNull(titulo);
 		checkCodigoDaCarteira(titulo);
 		
 		/*
