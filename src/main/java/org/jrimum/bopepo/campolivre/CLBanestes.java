@@ -213,7 +213,7 @@ class CLBanestes extends AbstractCLBanestes {
 		
 		// se não houver resto, primeiroDV = 0
 		// caso contrário, primeiroDV = 10 - resto
-		primeiroDV = (byte) (restoDoModulo10 == 0 ? 0 : 10 - restoDoModulo10);
+		primeiroDV = (byte) ((restoDoModulo10 == 0) ? 0 : 10 - restoDoModulo10);
 		return primeiroDV;
 	}
 
