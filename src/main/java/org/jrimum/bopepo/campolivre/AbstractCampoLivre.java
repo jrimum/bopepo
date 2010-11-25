@@ -84,6 +84,11 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	private static Logger log = Logger.getLogger(Objects.class);
 	
 	/**
+	 * Nosso número com 9 posições.
+	 */
+	static final int NN9 = 9;
+	
+	/**
 	 * Nosso número com 10 posições.
 	 */
 	static final int NN10 = 10;
@@ -424,7 +429,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	
 	/**
 	 * <p>
-	 * Verifica se o código do do número da agência bancária não é nulo e se é
+	 * Verifica se o código do número da agência bancária não é nulo e se é
 	 * um número > 0, caso contrário lança uma {@code IllegalArgumentException}.
 	 * </p>
 	 * 
@@ -439,6 +444,27 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		if(titulo.getContaBancaria().getAgencia().getCodigo() < 1){
 			
 			throw new IllegalArgumentException(format("Código da agência bancária deve ser um número inteiro natural positivo e não [%s].",titulo.getContaBancaria().getAgencia().getCodigo()));
+		}
+	}
+
+	/**
+	 * <p>
+	 * Verifica se o código do número da agência da conta bancária do título é
+	 * um número menor que o limite informado, caso contrário lança uma {@code
+	 * IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * @param limite
+	 *            - Limite máximo permitido
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkCodigoDaAgenciaMenorQue(Titulo titulo, int limite){
+		
+		if(titulo.getContaBancaria().getAgencia().getCodigo() >= limite){
+			
+			throw new IllegalArgumentException(format("Código [%s] da agência deve ser um número menor que [%s].", titulo.getContaBancaria().getCarteira().getCodigo(), limite));
 		}
 	}
 	

@@ -125,6 +125,7 @@ class CLBradesco extends AbstractCLBradesco {
 		
 		checkAgenciaNotNull(titulo);
 		checkCodigoDaAgencia(titulo);//necessario caso seja uma interface
+		checkCodigoDaAgenciaMenorQue(titulo, 10000);
 		checkCarteiraNotNull(titulo);
 		checkCodigoDaCarteira(titulo);
 		checkCodigoDaCarteiraMenorQue(titulo, 100);
