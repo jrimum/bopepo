@@ -25,7 +25,7 @@
 
 	<issueManagement>
 		<system>TRAC</system>
-		<url>http://www.jrimum.org/utilix</url>
+		<url>http://www.jrimum.org/bopepo</url>
 	</issueManagement>
 
 	<ciManagement>
@@ -110,6 +110,7 @@
 				<configuration>
 					<descriptors>
                         <descriptor>src/main/assembly/bopepo-dependencias-jrimum.xml</descriptor>
+                        <descriptor>src/main/assembly/bopepo-dependencias-jrimum-src.xml</descriptor>
                     </descriptors>
 				</configuration>
 				<executions>
@@ -141,27 +142,18 @@
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.1.2</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.7</version>
+				<configuration>
+					<includeDependencySources>true</includeDependencySources>
+					<dependencySourceIncludes>
+						<dependencySourceInclude>org.jrimum:*</dependencySourceInclude>
+					</dependencySourceIncludes>
+				</configuration>
 				<executions>
 					<execution>
 						<id>attach-javadoc</id>
-						<phase>verify</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>jar</goal>
 						</goals>
