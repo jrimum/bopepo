@@ -1,3 +1,34 @@
+/* 
+ * Copyright 2010 JRimum Project
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ * 
+ * Created at: 27/01/2010 - 00:53:43
+ *
+ * ================================================================================
+ *
+ * Direitos autorais 2010 JRimum Project
+ *
+ * Licenciado sob a Licença Apache, Versão 2.0 ("LICENÇA"); você não pode 
+ * usar esse arquivo exceto em conformidade com a esta LICENÇA. Você pode obter uma 
+ * cópia desta LICENÇA em http://www.apache.org/licenses/LICENSE-2.0 A menos que 
+ * haja exigência legal ou acordo por escrito, a distribuição de software sob esta 
+ * LICENÇA se dará “COMO ESTÁ”, SEM GARANTIAS OU CONDIÇÕES DE QUALQUER TIPO, sejam 
+ * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
+ * e limitações sob esta LICENÇA.
+ * 
+ * Criado em: 27/01/2010 - 00:53:43
+ * 
+ */
+
+
 package org.jrimum.bopepo;
 
 import static org.apache.commons.lang.StringUtils.EMPTY;
@@ -16,6 +47,10 @@ import org.jrimum.vallia.digitoverificador.BoletoLinhaDigitavelDV;
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+ * 
+ * @since 0.2
+ * 
+ * @version 0.2
  */
 public final class BoletoUtil {
 
@@ -35,6 +70,17 @@ public final class BoletoUtil {
 	private static final String MSG_STR_NUMERICA = "String numérica [ \"%s\" ] de tamanho [ %d ] está fora do padrão [ \"ddddddddddddddddddddddddddddddddddddddddddddddd\" ] tamanho = 47.";
 
 	/**
+	 * Utility class pattern: classe não instanciável
+	 * 
+	 * @throws AssertionError
+	 *             caso haja alguma tentativa de utilização deste construtor.
+	 */
+	private BoletoUtil(){
+
+		throw new AssertionError("NOT SUPORTED OPERATION!");
+	}
+	
+	/**
 	 * <p>
 	 * Retorna o campo livre de uma dada linha digitável.
 	 * </p>
@@ -49,13 +95,13 @@ public final class BoletoUtil {
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String getCampoLivreDaLinhaDigitavelFormatada(
+	public static String getCampoLivreDaLinhaDigitavelFormatada(
 			String linhaDigitavel) throws 
 			IllegalArgumentException, LinhaDigitavelException {
 
 		checkFormatoLinhaDigitavelFormatada(linhaDigitavel);
 
-		String linhaNumerica = linhaDigitavelFormatadaEmNumerica(linhaDigitavel);
+		final String linhaNumerica = linhaDigitavelFormatadaEmNumerica(linhaDigitavel);
 
 		return new StringBuilder().append(linhaNumerica.substring(4, 9))
 				.append(linhaNumerica.substring(10, 20)).append(
@@ -77,7 +123,7 @@ public final class BoletoUtil {
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String getValorDoTituloDaLinhaDigitavelFormatada(
+	public static String getValorDoTituloDaLinhaDigitavelFormatada(
 			String linhaDigitavel) throws 
 			IllegalArgumentException, LinhaDigitavelException {
 
@@ -102,7 +148,7 @@ public final class BoletoUtil {
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String getFatorDeVencimentoDaLinhaDigitavelFormatada(
+	public static String getFatorDeVencimentoDaLinhaDigitavelFormatada(
 			String linhaDigitavel) throws 
 			IllegalArgumentException, LinhaDigitavelException {
 
@@ -127,7 +173,7 @@ public final class BoletoUtil {
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String getDigitoVerificadorGeralDaLinhaDigitavelFormatada(
+	public static String getDigitoVerificadorGeralDaLinhaDigitavelFormatada(
 			String linhaDigitavel) throws 
 			IllegalArgumentException, LinhaDigitavelException {
 
@@ -152,7 +198,7 @@ public final class BoletoUtil {
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String getCodigoDaMoedaDaLinhaDigitavelFormatada(
+	public static String getCodigoDaMoedaDaLinhaDigitavelFormatada(
 			String linhaDigitavel) throws 
 			IllegalArgumentException, LinhaDigitavelException {
 
@@ -177,7 +223,7 @@ public final class BoletoUtil {
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String getCodigoDoBancoDaLinhaDigitavelFormatada(
+	public static String getCodigoDoBancoDaLinhaDigitavelFormatada(
 			String linhaDigitavel) throws 
 			IllegalArgumentException, LinhaDigitavelException {
 
@@ -202,7 +248,7 @@ public final class BoletoUtil {
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String getCampoLivreDoCodigoDeBarras(
+	public static String getCampoLivreDoCodigoDeBarras(
 			String codigoDeBarras) throws 
 			IllegalArgumentException, CodigoDeBarrasException {
 
@@ -226,7 +272,7 @@ public final class BoletoUtil {
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String getValorDoTituloDoCodigoDeBarras(
+	public static String getValorDoTituloDoCodigoDeBarras(
 			String codigoDeBarras) throws 
 			IllegalArgumentException, CodigoDeBarrasException {
 
@@ -250,7 +296,7 @@ public final class BoletoUtil {
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String getFatorDeVencimentoDoCodigoDeBarras(
+	public static String getFatorDeVencimentoDoCodigoDeBarras(
 			String codigoDeBarras) throws 
 			IllegalArgumentException, CodigoDeBarrasException {
 
@@ -274,7 +320,7 @@ public final class BoletoUtil {
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String getDigitoVerificadorGeralDoCodigoDeBarras(
+	public static String getDigitoVerificadorGeralDoCodigoDeBarras(
 			String codigoDeBarras) throws 
 			IllegalArgumentException, CodigoDeBarrasException {
 
@@ -298,7 +344,7 @@ public final class BoletoUtil {
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String getCodigoDaMoedaDoCodigoDeBarras(
+	public static String getCodigoDaMoedaDoCodigoDeBarras(
 			String codigoDeBarras) throws 
 			IllegalArgumentException, CodigoDeBarrasException {
 
@@ -322,7 +368,7 @@ public final class BoletoUtil {
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String getCodigoDoBancoDoCodigoDeBarras(
+	public static String getCodigoDoBancoDoCodigoDeBarras(
 			String codigoDeBarras) throws 
 			IllegalArgumentException, CodigoDeBarrasException {
 
@@ -352,7 +398,7 @@ public final class BoletoUtil {
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String codigoDeBarrasEmLinhaDigitavelFormatada(
+	public static String codigoDeBarrasEmLinhaDigitavelFormatada(
 			String codigoDeBarras) throws
 			IllegalArgumentException, CodigoDeBarrasException {
 
@@ -380,7 +426,7 @@ public final class BoletoUtil {
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String codigoDeBarrasEmLinhaDigitavelNumerica(
+	public static String codigoDeBarrasEmLinhaDigitavelNumerica(
 			String codigoDeBarras) throws
 			IllegalArgumentException, CodigoDeBarrasException {
 
@@ -440,7 +486,7 @@ public final class BoletoUtil {
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String linhaDigitavelFormatadaEmCodigoDeBarras(
+	public static String linhaDigitavelFormatadaEmCodigoDeBarras(
 			String linhaDigitavel) throws
 			IllegalArgumentException, LinhaDigitavelException {
 
@@ -468,7 +514,7 @@ public final class BoletoUtil {
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String linhaDigitavelNumericaEmCodigoDeBarras(
+	public static String linhaDigitavelNumericaEmCodigoDeBarras(
 			String linhaDigitavel) throws
 			IllegalArgumentException, LinhaDigitavelException {
 
@@ -514,7 +560,7 @@ public final class BoletoUtil {
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String linhaDigitavelFormatadaEmNumerica(
+	public static String linhaDigitavelFormatadaEmNumerica(
 			String linhaDigitavel) throws IllegalArgumentException,
 			LinhaDigitavelException {
 
@@ -545,7 +591,7 @@ public final class BoletoUtil {
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static final String linhaDigitavelNumericaEmFormatada(
+	public static String linhaDigitavelNumericaEmFormatada(
 			String linhaDigitavel) throws
 			IllegalArgumentException, LinhaDigitavelException {
 
@@ -582,7 +628,7 @@ public final class BoletoUtil {
 	 * @param codigoDeBarras
 	 * @return true = valida
 	 */
-	public static final boolean isCodigoDeBarrasValido(String codigoDeBarras) {
+	public static boolean isCodigoDeBarrasValido(String codigoDeBarras) {
 
 		if (isNotBlank(codigoDeBarras)) {
 
@@ -601,7 +647,7 @@ public final class BoletoUtil {
 	 * @param linhaDigitavel
 	 * @return true = valida
 	 */
-	public static final boolean isLinhaDigitavelFormatadaValida(
+	public static boolean isLinhaDigitavelFormatadaValida(
 			String linhaDigitavel) {
 
 		if (isNotBlank(linhaDigitavel)) {
@@ -622,7 +668,7 @@ public final class BoletoUtil {
 	 * @param linhaDigitavel
 	 * @return true = valida
 	 */
-	public static final boolean isLinhaDigitavelNumericaValida(
+	public static boolean isLinhaDigitavelNumericaValida(
 			String linhaDigitavel) {
 
 		if (isNotBlank(linhaDigitavel)) {
@@ -666,7 +712,7 @@ public final class BoletoUtil {
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static final void checkFormatoLinhaDigitavelFormatada(
+	public static void checkFormatoLinhaDigitavelFormatada(
 			String linhaDigitavel) throws
 			IllegalArgumentException, LinhaDigitavelException {
 
@@ -726,7 +772,7 @@ public final class BoletoUtil {
 	 * @throws LinhaDigitavelException
 	 *             quando a string não está no formato válido
 	 */
-	public static final void checkFormatoLinhaDigitavelNumerica(
+	public static void checkFormatoLinhaDigitavelNumerica(
 			String linhaDigitavel) throws
 			IllegalArgumentException, LinhaDigitavelException {
 
@@ -772,7 +818,7 @@ public final class BoletoUtil {
 	 * @throws CodigoDeBarrasException
 	 *             quando a string não está no formato válido
 	 */
-	public static final void checkFormatoCodigoDeBarras(String codigoDeBarras)
+	public static void checkFormatoCodigoDeBarras(String codigoDeBarras)
 			throws IllegalArgumentException,
 			CodigoDeBarrasException {
 
@@ -804,7 +850,7 @@ public final class BoletoUtil {
 	 * @throws IllegalArgumentException
 	 *             quando a string é nula ou quando a string é vazia
 	 */
-	public static final void checkExistsLinhaDigitavel(String linhaDigitavel)
+	public static void checkExistsLinhaDigitavel(String linhaDigitavel)
 			throws IllegalArgumentException {
 
 		checkNotNull(linhaDigitavel, MSG_LINHA_INVALIDA);
@@ -831,7 +877,7 @@ public final class BoletoUtil {
 	 * @throws IllegalArgumentException
 	 *             quando a string é nula ou quando a string é vazia
 	 */
-	public static final void checkExistsCodigoDeBarras(String codigoDeBarras)
+	public static void checkExistsCodigoDeBarras(String codigoDeBarras)
 			throws IllegalArgumentException {
 
 		checkNotNull(codigoDeBarras, MSG_LINHA_INVALIDA);
