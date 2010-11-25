@@ -368,7 +368,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	
 	/**
 	 * <p>
-	 * Verifica se o códigoda carteira da conta bancária do título não é nulo e
+	 * Verifica se o código da carteira da conta bancária do título não é nulo e
 	 * se é um número > 0, caso contrário lança uma {@code
 	 * IllegalArgumentException}.
 	 * </p>
@@ -384,6 +384,26 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		if(titulo.getContaBancaria().getCarteira().getCodigo() < 1){
 			
 			throw new IllegalArgumentException(format("Código da carteira deve ser um número inteiro natural positivo e não [%s].",titulo.getContaBancaria().getCarteira().getCodigo()));
+		}
+	}
+	
+	/**
+	 * <p>
+	 * Verifica se o código da carteira da conta bancária do título é um número
+	 * menor que o limite informado, caso contrário lança uma {@code
+	 * IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * @param limite - Limite máximo permitido
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkCodigoDaCarteiraMenorQue(Titulo titulo, int limite){
+		
+		if(titulo.getContaBancaria().getCarteira().getCodigo() >= limite){
+			
+			throw new IllegalArgumentException(format("Código [%s] da carteira deve ser um número menor que [%s].", titulo.getContaBancaria().getCarteira().getCodigo(), limite));
 		}
 	}
 	
@@ -472,6 +492,26 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		if(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta() < 1){
 			
 			throw new IllegalArgumentException(format("Código do número da conta bancária deve ser um número inteiro natural positivo e não [%s].",titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta()));
+		}
+	}
+	
+	/**
+	 * <p>
+	 * Verifica se o código do número da conta bancária do título é um número
+	 * menor que o limite informado, caso contrário lança uma {@code
+	 * IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * @param limite - Limite máximo permitido
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkCodigoDoNumeroDaContaMenorQue(Titulo titulo, int limite){
+		
+		if(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta() >= limite){
+			
+			throw new IllegalArgumentException(format("Código [%s] do número da conta deve ser um número menor que [%s].", titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), limite));
 		}
 	}
 	
