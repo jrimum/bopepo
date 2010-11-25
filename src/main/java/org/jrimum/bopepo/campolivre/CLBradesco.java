@@ -119,18 +119,20 @@ class CLBradesco extends AbstractCLBradesco {
 	 * 
 	 * @param titulo - Título com as informações para geração do campo livre
 	 */
-	CLBradesco(Titulo titulo){
+	protected CLBradesco(Titulo titulo){
 		
 		super(FIELDS_LENGTH);
 		
 		checkAgenciaNotNull(titulo);
-		checkCodigoDaAgencia(titulo);
+		checkCodigoDaAgencia(titulo);//necessario caso seja uma interface
 		checkCarteiraNotNull(titulo);
 		checkCodigoDaCarteira(titulo);
+		checkCodigoDaCarteiraMenorQue(titulo, 100);
 		checkNossoNumero(titulo);
 		checkTamanhoNossoNumero(titulo, NN11);
 		checkNumeroDaContaNotNull(titulo);
 		checkCodigoDoNumeroDaConta(titulo);
+		checkCodigoDoNumeroDaContaMenorQue(titulo, 10000000);
 		
 		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), 2, Filler.ZERO_LEFT));
