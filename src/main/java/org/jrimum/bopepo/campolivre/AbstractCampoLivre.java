@@ -30,6 +30,7 @@
 package org.jrimum.bopepo.campolivre;
 
 import static java.lang.String.format;
+import static java.math.BigDecimal.ZERO;
 import static org.jrimum.domkee.financeiro.banco.febraban.Banco.isCodigoDeCompensacaoOK;
 
 import org.apache.commons.lang.StringUtils;
@@ -82,6 +83,11 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	private static final long serialVersionUID = 4605730904122445595L;
 	
 	private static Logger log = Logger.getLogger(Objects.class);
+	
+	/**
+	 * Nosso número com 8 posições.
+	 */
+	static final int NN8 = 8;
 	
 	/**
 	 * Nosso número com 9 posições.
@@ -395,7 +401,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	/**
 	 * <p>
 	 * Verifica se o código da carteira da conta bancária do título é um número
-	 * menor que o limite informado, caso contrário lança uma {@code
+	 * menor que ou igual ao limite informado, caso contrário lança uma {@code
 	 * IllegalArgumentException}.
 	 * </p>
 	 * 
@@ -404,11 +410,11 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * 
 	 * @since 0.2
 	 */
-	protected final static void checkCodigoDaCarteiraMenorQue(Titulo titulo, int limite){
+	protected final static void checkCodigoDaCarteiraMenorOuIgualQue(Titulo titulo, int limite){
 		
-		if(titulo.getContaBancaria().getCarteira().getCodigo() >= limite){
+		if(titulo.getContaBancaria().getCarteira().getCodigo() > limite){
 			
-			throw new IllegalArgumentException(format("Código [%s] da carteira deve ser um número menor que [%s].", titulo.getContaBancaria().getCarteira().getCodigo(), limite));
+			throw new IllegalArgumentException(format("Código [%s] da carteira deve ser um número menor que ou igual a [%s].", titulo.getContaBancaria().getCarteira().getCodigo()-1, limite));
 		}
 	}
 	
@@ -450,7 +456,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	/**
 	 * <p>
 	 * Verifica se o código do número da agência da conta bancária do título é
-	 * um número menor que o limite informado, caso contrário lança uma {@code
+	 * um número menor que ou igual ao limite informado, caso contrário lança uma {@code
 	 * IllegalArgumentException}.
 	 * </p>
 	 * 
@@ -460,11 +466,11 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * 
 	 * @since 0.2
 	 */
-	protected final static void checkCodigoDaAgenciaMenorQue(Titulo titulo, int limite){
+	protected final static void checkCodigoDaAgenciaMenorOuIgualQue(Titulo titulo, int limite){
 		
-		if(titulo.getContaBancaria().getAgencia().getCodigo() >= limite){
+		if(titulo.getContaBancaria().getAgencia().getCodigo() > limite){
 			
-			throw new IllegalArgumentException(format("Código [%s] da agência deve ser um número menor que [%s].", titulo.getContaBancaria().getCarteira().getCodigo(), limite));
+			throw new IllegalArgumentException(format("Código [%s] da agência deve ser um número menor que ou igual a [%s].", titulo.getContaBancaria().getAgencia().getCodigo()-1, limite));
 		}
 	}
 	
@@ -524,7 +530,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	/**
 	 * <p>
 	 * Verifica se o código do número da conta bancária do título é um número
-	 * menor que o limite informado, caso contrário lança uma {@code
+	 * menor que ou igual ao limite informado, caso contrário lança uma {@code
 	 * IllegalArgumentException}.
 	 * </p>
 	 * 
@@ -533,11 +539,11 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * 
 	 * @since 0.2
 	 */
-	protected final static void checkCodigoDoNumeroDaContaMenorQue(Titulo titulo, int limite){
+	protected final static void checkCodigoDoNumeroDaContaMenorOuIgualQue(Titulo titulo, int limite){
 		
-		if(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta() >= limite){
+		if(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta() > limite){
 			
-			throw new IllegalArgumentException(format("Código [%s] do número da conta deve ser um número menor que [%s].", titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), limite));
+			throw new IllegalArgumentException(format("Código [%s] do número da conta deve ser um número menor que ou igual a [%s].", titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta()-1, limite));
 		}
 	}
 	
@@ -573,7 +579,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		
 		Objects.checkNotNull(titulo.getNossoNumero(), "Nosso número do título não pode ser nulo!");
 		Strings.checkNotBlank(titulo.getNossoNumero(), format("Nosso número [\"%s\"] do título não pode ser vazio!", titulo.getNossoNumero()));
-		Strings.checkNotNumeric(titulo.getNossoNumero(), format("Nosso número [\"%s\"] do título deve ser numérico!", titulo.getNossoNumero()));
+		Strings.checkNotNumeric(titulo.getNossoNumero(), format("Nosso número [\"%s\"] do título deve conter somente dígitos numéricos!", titulo.getNossoNumero()));
 	}
 	
 	/**
@@ -586,12 +592,10 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * @param titulo
 	 * @param length
 	 *            - Tamanho que deve ser
-	 * @param msg
-	 *            - Mensagem para erro
 	 * 
 	 * @since 0.2
 	 */
-	protected final static void checkTamanhoNossoNumero(Titulo titulo, int length) {
+	protected final static void checkTamanhoDoNossoNumero(Titulo titulo, int length) {
 
 		checkTamanhoNossoNumero(titulo, length, format(
 				"Tamanho [%s] do nosso número [\"%s\"] diferente do esperado [%s]!",
@@ -640,6 +644,96 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	}
 	
 	/**
+	 * <p>
+	 * Verifica se o dígito do nosso número do título tem o tamanho determinado, caso
+	 * contrário lança uma {@code IllegalArgumentException} com a mensagem
+	 * <tt>"Tamanho [%s] do dígito do nosso número [\"%s\"] diferente do esperado [%s]!"</tt>.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * @param length
+	 *            - Tamanho que deve ser
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkTamanhoDigitoDoNossoNumero(Titulo titulo, int length) {
+
+		checkTamanhoDigitoDoNossoNumero(titulo, length, format(
+				"Tamanho [%s] do dígito do nosso número [\"%s\"] diferente do esperado [%s]!",
+				StringUtils.length(titulo.getDigitoDoNossoNumero()), titulo.getDigitoDoNossoNumero(), length));
+	}
+	
+	/**
+	 * <p>
+	 * Verifica se o dígito do nosso número do título tem o tamanho determinado, caso
+	 * contrário lança uma {@code IllegalArgumentException} com a mensagem
+	 * determinada.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * @param length
+	 *            - Tamanho que deve ser
+	 * @param msg
+	 *            - Mensagem para erro
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkTamanhoDigitoDoNossoNumero(Titulo titulo, int length, String msg){
+		
+		if(titulo.getDigitoDoNossoNumero().length() != length){
+			
+			throw new IllegalArgumentException(msg);
+		}
+	}
+	
+	/**
+	 * <p>
+	 * Verifica se o valor do título não é nulo, caso contrário lança uma
+	 * {@code IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkValor(Titulo titulo){
+		
+		Objects.checkNotNull(titulo.getValor(), "Valor do título não pode ser nulo!");
+		
+		if(titulo.getValor().compareTo(ZERO) == -1){
+			
+			throw new IllegalArgumentException(format("O valro do título deve ser um número positivo ou zero e não [%s].",titulo.getValor()));
+		}
+	}
+	
+	/**
+	 * <p>
+	 * Verifica se o título contém {@code ParametrosBancariosMap} e se este
+	 * contém um valor não é nulo do parâmetro determinado, caso contrário lança
+	 * uma {@code IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * @param param
+	 *            - Parâmetro a ser validado
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkParametrosBancarios(Titulo titulo, String param){
+		
+		Objects.checkNotNull(titulo.getParametrosBancarios(), format("O parâmetro bancário [\"%s\"] é necessário! [titulo.getParametrosBancarios() == null]",param));
+		
+		if(titulo.getParametrosBancarios().contemComNome(param)){
+			
+			Objects.checkNotNull(titulo.getParametrosBancarios().getValor(param), format("Parâmetro bancário [\"%s\"] não contém valor!", param));
+		
+		}else{
+				
+			throw new IllegalArgumentException(format("Parâmetro bancário [\"%s\"] não encontrado!",param));
+		}
+	}
+	
+	/**
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -647,4 +741,5 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		
 		return Objects.toString(this);
 	}
+	
 }
