@@ -63,22 +63,14 @@ public class TestCLBradesco extends CampoLivreBaseTest {
 	@Before
 	public void setUp() throws Exception {
 
-		Sacado sacado = new Sacado("Sacado");
-		Cedente cedente = new Cedente("Cedente");
-
 		ContaBancaria contaBancaria = new ContaBancaria();
+
 		contaBancaria.setBanco(BancosSuportados.BANCO_BRADESCO.create());
-
-		Agencia agencia = new Agencia(1234, "1");
-		contaBancaria.setAgencia(agencia);
-
+		contaBancaria.setAgencia(new Agencia(1234, "1"));
 		contaBancaria.setCarteira(new Carteira(5));
+		contaBancaria.setNumeroDaConta(new NumeroDaConta(6789));
 
-		NumeroDaConta numeroDaConta = new NumeroDaConta();
-		numeroDaConta.setCodigoDaConta(6789);
-		contaBancaria.setNumeroDaConta(numeroDaConta);
-
-		titulo = new Titulo(contaBancaria, sacado, cedente);
+		titulo = new Titulo(contaBancaria, new Sacado("S"), new Cedente("C"));
 		titulo.setNossoNumero("12345678901");
 
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
@@ -88,112 +80,74 @@ public class TestCLBradesco extends CampoLivreBaseTest {
 	}
 
 	@Test(expected = CampoLivreException.class)
-	public void seNaoPermiteAgenciaNull() {
+	public void seNaoPermiteAgenciaNula() {
 
-		titulo.getContaBancaria().setAgencia(null);
+		seNaoPermiteAgenciaNula(titulo);
+	}
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaAgenciaAcimaDe4Digitos() {
 
-		seCampoLivreEscritoEstaCorreto();
+		seNaoPermiteNumeroDaAgenciaComDigitosAcimaDoLimite(titulo, 10000);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteCarteiraNull() {
 
-		titulo.getContaBancaria().setCarteira(null);
-
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
-
-		seCampoLivreEscritoEstaCorreto();
+		seNaoPermiteCarteiraNula(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteCarteiraComCodigoNegativo() {
 
-		titulo.getContaBancaria().setCarteira(new Carteira(-1));
-
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
-
-		seCampoLivreEscritoEstaCorreto();
+		seNaoPermiteCarteiraComCodigoNegativo(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteCarteiraComCodigoAcimaDe2Digitos() {
 
-		titulo.getContaBancaria().setCarteira(new Carteira(111));
-
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
-
-		seCampoLivreEscritoEstaCorreto();
+		seNaoPermiteCarteiraComCodigoAcimaDoLimite(titulo, 111);
 	}
-	
+
 	@Test(expected = CampoLivreException.class)
-	public void seNaoPermiteNossoNumeroNull() {
+	public void seNaoPermiteNossoNumeroNulo() {
 
-		titulo.setNossoNumero(null);
-
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
-
-		seCampoLivreEscritoEstaCorreto();
+		seNaoPermiteNossoNumeroNulo(titulo);
 	}
-	
+
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNossoNumeroComBrancos() {
 
-		titulo.setNossoNumero("           ");
-
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
-
-		seCampoLivreEscritoEstaCorreto();
+		seNaoPermiteNossoNumeroComBrancos(titulo, CLBradesco.NOSSO_NUMERO_LENGTH);
 	}
-	
+
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNossoNumeroComEspacos() {
 
-		titulo.setNossoNumero("01234 56789");
-
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
-
-		seCampoLivreEscritoEstaCorreto();
+		seNaoPermiteNossoNumeroComEspacos(titulo, CLBradesco.NOSSO_NUMERO_LENGTH);
 	}
-	
+
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNossoNumeroComTamanhoDiferenteDe11() {
 
-		titulo.setNossoNumero("0123456789");
-
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
-
-		seCampoLivreEscritoEstaCorreto();
+		seNaoPermiteNossoNumeroComTamanhoDiferenteDoEspecificado(titulo, CLBradesco.NOSSO_NUMERO_LENGTH - 1);
 	}
-	
+
 	@Test(expected = CampoLivreException.class)
-	public void seNaoPermiteNumeroDaContaNull() {
+	public void seNaoPermiteNumeroDaContaNulo() {
 
-		titulo.getContaBancaria().setNumeroDaConta(null);
-
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
-
-		seCampoLivreEscritoEstaCorreto();
+		seNaoPermiteNumeroDaContaNulo(titulo);
 	}
-	
+
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNumeroDaContaComCodigoNegativo() {
 
-		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(-1));
-
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
-
-		seCampoLivreEscritoEstaCorreto();
+		seNaoPermiteNumeroDaContaComCodigoNegativo(titulo);
 	}
-	
+
 	@Test(expected = CampoLivreException.class)
-	public void seNaoPermitNumeroDaContaComCodigoAcimaDe7Digitos() {
+	public void seNaoPermiteNumeroDaContaComCodigoAcimaDe7Digitos() {
 
-		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(12345678));
-
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
-
-		seCampoLivreEscritoEstaCorreto();
+		seNaoPermiteNumeroDaContaComCodigoAcimaDoLimite(titulo, 12345678);
 	}
 }
