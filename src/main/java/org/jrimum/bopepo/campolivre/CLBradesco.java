@@ -110,7 +110,37 @@ class CLBradesco extends AbstractCLBradesco {
 	/**
 	 * Número de campos.
 	 */
-	private static final Integer FIELDS_LENGTH = Integer.valueOf(5);
+	protected static final Integer FIELDS_LENGTH = Integer.valueOf(5);
+
+	/**
+	 * Tamanho do campo Agência. 
+	 */
+	protected static final Integer AGENCIA_LENGTH = Integer.valueOf(4);
+	
+	/**
+	 * Tamanho do campo Carteira. 
+	 */
+	protected static final Integer CARTEIRA_LENGTH = Integer.valueOf(2);
+	
+	/**
+	 * Tamanho do campo Nosso Número. 
+	 */
+	protected static final Integer NOSSO_NUMERO_LENGTH = Integer.valueOf(11);
+	
+	/**
+	 * Tamanho do campo Conta. 
+	 */
+	protected static final Integer CONTA_LENGTH = Integer.valueOf(7);
+	
+	/**
+	 * Tamanho do campo Constante. 
+	 */
+	protected static final Integer CONSTANTE_LENGTH = Integer.valueOf(1);
+	
+	/**
+	 * Valor do campo Constante =  "0". 
+	 */
+	protected static final Integer CONSTANTE_VALUE = Integer.valueOf(0);
 	
 	/**
 	 * <p>
@@ -125,21 +155,20 @@ class CLBradesco extends AbstractCLBradesco {
 		
 		checkAgenciaNotNull(titulo);
 		checkCodigoDaAgencia(titulo);//necessario caso seja uma interface
-		checkCodigoDaAgenciaMenorQue(titulo, 10000);
+		checkCodigoDaAgenciaMenorOuIgualQue(titulo, 9999);
 		checkCarteiraNotNull(titulo);
 		checkCodigoDaCarteira(titulo);
-		checkCodigoDaCarteiraMenorQue(titulo, 100);
+		checkCodigoDaCarteiraMenorOuIgualQue(titulo, 99);
 		checkNossoNumero(titulo);
-		checkTamanhoNossoNumero(titulo, NN11);
+		checkTamanhoDoNossoNumero(titulo, NN11);
 		checkNumeroDaContaNotNull(titulo);
 		checkCodigoDoNumeroDaConta(titulo);
-		checkCodigoDoNumeroDaContaMenorQue(titulo, 10000000);
+		checkCodigoDoNumeroDaContaMenorOuIgualQue(titulo, 9999999);
 		
-		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), 2, Filler.ZERO_LEFT));
-		this.add(new Field<String>(titulo.getNossoNumero(), 11, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(0, 1));
+		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), AGENCIA_LENGTH, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), CARTEIRA_LENGTH, Filler.ZERO_LEFT));
+		this.add(new Field<String>(titulo.getNossoNumero(), NOSSO_NUMERO_LENGTH, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(CONSTANTE_VALUE, CONSTANTE_LENGTH));
 	}
-	
 }
