@@ -32,8 +32,10 @@ package org.jrimum.bopepo.exemplo.banco.bradesco;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.exemplo.Exemplos;
+import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
@@ -55,12 +57,26 @@ public class BoletoBradescoExemplo {
 		
 		Titulo titulo = Exemplos.crieTitulo();
 		
-		//Campos específicos para o Banco Bradesco.
-		titulo.setNossoNumero("12345678901");
+		/*
+		 * Campos específicos para o Banco Bradesco.
+		 */
 		
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
+		
+		//Banco bradesco 237
 		contaBancaria.setBanco(BancosSuportados.BANCO_BRADESCO.create());
-		contaBancaria.setCarteira(new Carteira(30));
+		
+		//Agência com no máximo 4 dígitos
+		contaBancaria.setAgencia(new Agencia(1234));
+
+		//Carteira com no máximo 2 dígitos 
+		contaBancaria.setCarteira(new Carteira(12));
+		
+		//Nosso número com 11 dígitos
+		titulo.setNossoNumero("01234567891");
+		
+		//Número da conta com no máxiom 7 dígitos
+		contaBancaria.setNumeroDaConta(new NumeroDaConta(1234567));
 		
 		Boleto boleto = Exemplos.crieBoleto(titulo);
 		
