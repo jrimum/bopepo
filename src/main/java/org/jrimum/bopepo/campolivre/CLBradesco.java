@@ -103,42 +103,42 @@ import org.jrimum.utilix.text.Filler;
 class CLBradesco extends AbstractCLBradesco {
 	
 	/**
-	 * 
+	 * {@code serialVersionUID = -1253549781074159862L}
 	 */
 	private static final long serialVersionUID = -1253549781074159862L;
 
 	/**
-	 * Número de campos.
+	 * Número de campos = 5.
 	 */
 	protected static final Integer FIELDS_LENGTH = Integer.valueOf(5);
 
 	/**
-	 * Tamanho do campo Agência. 
+	 * Tamanho do campo Agência = 4. 
 	 */
 	protected static final Integer AGENCIA_LENGTH = Integer.valueOf(4);
 	
 	/**
-	 * Tamanho do campo Carteira. 
+	 * Tamanho do campo Carteira = 2. 
 	 */
 	protected static final Integer CARTEIRA_LENGTH = Integer.valueOf(2);
 	
 	/**
-	 * Tamanho do campo Nosso Número. 
+	 * Tamanho do campo Nosso Número = 11. 
 	 */
 	protected static final Integer NOSSO_NUMERO_LENGTH = Integer.valueOf(11);
 	
 	/**
-	 * Tamanho do campo Conta. 
+	 * Tamanho do campo Conta = 7. 
 	 */
 	protected static final Integer CONTA_LENGTH = Integer.valueOf(7);
 	
 	/**
-	 * Tamanho do campo Constante. 
+	 * Tamanho do campo Constante = 1. 
 	 */
 	protected static final Integer CONSTANTE_LENGTH = Integer.valueOf(1);
 	
 	/**
-	 * Valor do campo Constante =  "0". 
+	 * Valor do campo Constante =  0. 
 	 */
 	protected static final Integer CONSTANTE_VALUE = Integer.valueOf(0);
 	
