@@ -71,7 +71,7 @@ abstract class AbstractCLCaixaEconomicaFederal extends AbstractCampoLivre {
 	/**
 	 * {@inheritDoc}
 	 */
-	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException{
+	protected static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException{
 		
 		checkNossoNumero(titulo);
 		

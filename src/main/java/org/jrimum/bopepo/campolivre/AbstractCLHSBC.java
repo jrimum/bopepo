@@ -69,7 +69,7 @@ abstract class AbstractCLHSBC extends AbstractCampoLivre {
 	/**
 	 * {@inheritDoc}
 	 */
-	static CampoLivre create(Titulo titulo) {
+	 protected static CampoLivre create(Titulo titulo) {
 		
 		checkCarteiraNotNull(titulo);
 		checkRegistroDaCarteiraNotNull(titulo);

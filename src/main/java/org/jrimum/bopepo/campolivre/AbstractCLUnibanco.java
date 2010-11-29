@@ -25,7 +25,7 @@ abstract class AbstractCLUnibanco extends AbstractCampoLivre {
 	/**
 	 * {@inheritDoc}
 	 */
-	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
+	protected static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 
 		checkCarteiraNotNull(titulo);
 		checkRegistroDaCarteiraNotNull(titulo);

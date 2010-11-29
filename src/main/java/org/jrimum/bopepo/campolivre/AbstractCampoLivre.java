@@ -150,7 +150,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * @throws CampoLivreException
 	 *             Caso ocorra algum problema na geração do campo livre.
 	 */
-	static CampoLivre create(Titulo titulo) throws NotSupportedBancoException,
+	protected static CampoLivre create(Titulo titulo) throws NotSupportedBancoException,
 			NotSupportedCampoLivreException, CampoLivreException {
 
 		if (log.isTraceEnabled()){
@@ -278,7 +278,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * 
 	 * @since 0.2
 	 */
-	final String writeFields() {
+	protected final String writeFields() {
 
 		StringBuilder campoLivreAtual = new StringBuilder();
 		
@@ -543,7 +543,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		
 		if(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta() > limite){
 			
-			throw new IllegalArgumentException(format("Código [%s] do número da conta deve ser um número menor que ou igual a [%s].", titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta()-1, limite));
+			throw new IllegalArgumentException(format("Código [%s] do número da conta deve ser um número menor que ou igual a [%s].", titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), limite));
 		}
 	}
 	
