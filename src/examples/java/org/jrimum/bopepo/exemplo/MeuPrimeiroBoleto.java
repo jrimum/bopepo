@@ -118,7 +118,7 @@ public class MeuPrimeiroBoleto {
 		
 		Titulo titulo = new Titulo(contaBancaria, sacado, cedente, sacadorAvalista);
 		titulo.setNumeroDoDocumento("123456");
-		titulo.setNossoNumero("993456789");
+		titulo.setNossoNumero("99345678912");
 		titulo.setDigitoDoNossoNumero("5");
 		titulo.setValor(BigDecimal.valueOf(0.23));
 		titulo.setDataDoDocumento(new Date());
