@@ -78,10 +78,13 @@ import org.jrimum.utilix.text.Strings;
 abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoLivre {
 
 	/**
-	 * 
+	 * {@code serialVersionUID = 4605730904122445595L}
 	 */
 	private static final long serialVersionUID = 4605730904122445595L;
 	
+	/**
+	 * Looger.
+	 */
 	private static Logger log = Logger.getLogger(Objects.class);
 	
 	/**
@@ -266,6 +269,35 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 			throw new CampoLivreException(e);
 		}
 	}
+	
+	/**
+	 * @param titulo
+	 * @return
+	 * 
+	 * @since 0.2
+	 */
+	protected final CampoLivre build(Titulo titulo){
+		
+		checkValues(titulo);
+		
+		addFields(titulo);
+		
+		return this;
+	}
+	
+	/**
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	protected abstract void checkValues(Titulo titulo);
+	
+	/**
+	 * @param titulo
+	 * 
+	 * @since 0.2
+	 */
+	protected abstract void addFields(Titulo titulo);
 	
 	/**
 	 * <p>
