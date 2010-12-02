@@ -61,11 +61,12 @@ abstract class AbstractCLBradesco extends AbstractCampoLivre {
 	 * @see AbstractCampoLivre
 	 * 
 	 * @param fieldsLength - Número de campos
+	 * 
+	 * @since 0.2
 	 */
 	protected AbstractCLBradesco(Integer fieldsLength) {
 		
 		super(fieldsLength);
-		
 	}
 
 	/**
@@ -73,6 +74,6 @@ abstract class AbstractCLBradesco extends AbstractCampoLivre {
 	 */
 	protected static CampoLivre create(Titulo titulo){
 		
-		return new CLBradesco(titulo);
+		return new CLBradesco().build(titulo);
 	}
 }
