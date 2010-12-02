@@ -71,6 +71,6 @@ abstract class AbstractCLSicredi extends AbstractCampoLivre {
 	 */
 	protected static CampoLivre create(Titulo titulo) {
 
-		return new CLSicredi(titulo);
+		return new CLSicredi().build(titulo);
 	}
 }
