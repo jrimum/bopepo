@@ -212,4 +212,16 @@ class CLHSBCCobrancaNaoRegistrada extends AbstractCLHSBC {
 							+ " ] não encontrado em \"Titulo.parametrosBancarios\". O nome do parâmetro deve ser o \"qualify name\" da classe.");
 		}
 	}
+	
+	@Override
+	protected void addFields(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
+
+	@Override
+	protected void checkValues(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
 }

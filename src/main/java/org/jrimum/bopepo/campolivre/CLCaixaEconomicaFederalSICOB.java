@@ -136,4 +136,16 @@ class CLCaixaEconomicaFederalSICOB extends AbstractCLCaixaEconomicaFederal {
 			throw new IllegalArgumentException(format("Para a cobrança SICOB o nosso número [%s] deve começar com 9 que é o identificador da \"carteira rápida\" [9NNNNNNNNN] ou 80, 81 e 82 para \"carteira sem registro\" [82NNNNNNNN]!", nn));
 		}
 	}
+	
+	@Override
+	protected void addFields(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
+
+	@Override
+	protected void checkValues(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
 }

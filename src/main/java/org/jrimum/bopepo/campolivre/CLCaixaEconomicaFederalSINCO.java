@@ -110,4 +110,16 @@ class CLCaixaEconomicaFederalSINCO extends AbstractCLCaixaEconomicaFederal {
 		this.add(new Field<Integer>(9, 1));
 		this.add(new Field<String>(nossoNumero, 17));
 	}
+	
+	@Override
+	protected void addFields(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
+
+	@Override
+	protected void checkValues(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
 }

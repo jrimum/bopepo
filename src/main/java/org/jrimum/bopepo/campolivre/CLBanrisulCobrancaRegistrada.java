@@ -146,4 +146,15 @@ class CLBanrisulCobrancaRegistrada extends AbstractCLBanrisul {
 		this.add(new Field<String>(calculaDuploDigito(concateneOsCamposExistentesAteOMomento()),2));
 	}
 
+	@Override
+	protected void addFields(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
+
+	@Override
+	protected void checkValues(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
 }

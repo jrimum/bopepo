@@ -126,4 +126,15 @@ class CLBancoIntermedium extends AbstractCLBancoIntermedium {
 		this.add(new Field<Integer>(CONSTANTE_0, 1));
 	}
 
+	@Override
+	protected void addFields(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
+
+	@Override
+	protected void checkValues(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
 }
