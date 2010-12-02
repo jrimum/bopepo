@@ -144,14 +144,18 @@ class CLBradesco extends AbstractCLBradesco {
 	
 	/**
 	 * <p>
-	 *   Dado um título, cria um campo livre para o padrão do Banco Bradesco.
+	 *   Cria um campo livre instanciando o número de fields ({@code FIELDS_LENGTH}) deste campo.
 	 * </p>
 	 * 
-	 * @param titulo - Título com as informações para geração do campo livre
+	 * @since 0.2
 	 */
-	protected CLBradesco(Titulo titulo){
+	protected CLBradesco() {
 		
 		super(FIELDS_LENGTH);
+	}
+	
+	@Override
+	protected void checkValues(Titulo titulo){
 		
 		checkAgenciaNotNull(titulo);
 		checkCodigoDaAgencia(titulo);//necessario caso seja uma interface
@@ -164,6 +168,10 @@ class CLBradesco extends AbstractCLBradesco {
 		checkNumeroDaContaNotNull(titulo);
 		checkCodigoDoNumeroDaConta(titulo);
 		checkCodigoDoNumeroDaContaMenorOuIgualQue(titulo, 9999999);
+	}
+	
+	@Override
+	protected void addFields(Titulo titulo) {
 		
 		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), AGENCIA_LENGTH, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), CARTEIRA_LENGTH, Filler.ZERO_LEFT));
