@@ -319,14 +319,19 @@ public class Exemplos {
 	 * @param boleto
 	 */
 	public static void execute(Boleto boleto) {
-		
-		BoletoViewer viewer = new BoletoViewer(boleto);
-		File boletoPDF = viewer.getPdfAsFile("BOLETO_" + boleto.getClass().getSimpleName().toUpperCase() + ".PDF");
-		
-		mostreBoletoNaTela(boletoPDF);
+		execute(boleto, null);
 	}
 	
-	private static void mostreBoletoNaTela(File arquivoBoleto) {
+	public static void executeComTemplate(Boleto boleto, File template) {
+		execute(boleto, template);
+	}
+	
+	/**
+	 * Abre o arquivo no aplicativo padrão do sistema.
+	 * 
+	 * @param arquivoBoleto
+	 */
+	public static void mostreBoletoNaTela(File arquivoBoleto) {
 		
 		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
 		
@@ -336,5 +341,18 @@ public class Exemplos {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private static void execute(Boleto boleto, File template) {
+		
+		BoletoViewer viewer = new BoletoViewer(boleto);
+		
+		if (template != null) {
+			viewer.setTemplate(template);
+		}
+		
+		File boletoPDF = viewer.getPdfAsFile("BOLETO_" + boleto.getClass().getSimpleName().toUpperCase() + ".PDF");
+		
+		mostreBoletoNaTela(boletoPDF);
 	}
 }

@@ -30,7 +30,6 @@
 package org.jrimum.bopepo.exemplo;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
@@ -68,22 +67,6 @@ public class MeuPrimeiroBoletoPersonalizado {
 
 		File arquivoPdf = boletoViewer.getPdfAsFile("MeuBoletoPersonalizado.pdf");
 
-		mostreBoletoNaTela(arquivoPdf);
-	}
-
-	/**
-	 * Exibe o arquivo na tela.
-	 * 
-	 * @param arquivoBoleto
-	 */
-	private static void mostreBoletoNaTela(File arquivoBoleto) {
-
-		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
-		
-		try {
-			desktop.open(arquivoBoleto);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Exemplos.mostreBoletoNaTela(arquivoPdf);
 	}
 }
