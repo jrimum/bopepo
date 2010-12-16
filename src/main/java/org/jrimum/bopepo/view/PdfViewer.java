@@ -803,16 +803,12 @@ class PdfViewer {
 	private void setLogoBanco() throws MalformedURLException, IOException, DocumentException {
 		
 		// Através da conta bancária será descoberto a imagem que representa o
-		// banco, com base
-		// no código do banco.
+		// banco, com base no código do banco.
 		ContaBancaria conta = boleto.getTitulo().getContaBancaria();
 		Image imgLogoBanco = null;
 
 		if (isNotNull(conta.getBanco().getImgLogo())) {
-
 			imgLogoBanco = Image.getInstance(conta.getBanco().getImgLogo(), null);
-
-			setImageLogo(imgLogoBanco);
 
 		} else {
 
@@ -827,30 +823,29 @@ class PdfViewer {
 				}
 
 				if (isNotNull(imgLogoBanco)) {
-
 					// Esta imagem gerada aqui é do tipo java.awt.Image
 					conta.getBanco().setImgLogo(ImageIO.read(url));
+
+					// Se o banco em questão é suportado nativamente pelo
+					// componente, então um alerta será exibido.
+					if (log.isDebugEnabled()) {
+						log.debug("Banco sem imagem da logo informada. "
+								+ "Com base no código de compensação do banco, uma imagem foi "
+								+ "encontrada no resource e está sendo utilizada.");
+					}
 				}
 
-				// Se o banco em questão é suportado nativamente pelo
-				// componente,
-				// então um alerta será exibido.
-				if (log.isDebugEnabled()) {
-					log.debug("Banco sem imagem da logo informada. "
-							+ "Com base no código do banco, uma imagem foi "
-							+ "encontrada no resource e está sendo utilizada.");
-				}
 
+			} 
+			
+			
+			if (isNotNull(imgLogoBanco)) {
 				setImageLogo(imgLogoBanco);
-
-			} else {
-
+			} 
+			else {
 				// Sem imagem, um alerta é exibido.
 				log.warn("Banco sem imagem definida. O nome da instituição será usado como logo.");
-
-				form.setField("txtRsLogoBanco", conta.getBanco().getNome());
-				form.setField("txtFcLogoBanco", conta.getBanco().getNome());
-
+				setTextLogo(conta.getBanco().getNome());
 			}
 		}
 	}
@@ -921,6 +916,28 @@ class PdfViewer {
 		// FICHA DE COMPENSAÇÃO
 		setImagemNoCampo("txtFcLogoBanco",imgLogoBanco);	
 	}
+	
+	/**
+	 * <p>
+	 * Coloca a nome do banco na ficha de compensação do boleto e no recibo do
+	 * sacado.
+	 * </p>
+	 * 
+	 * @param nomeBanco
+	 * @throws DocumentException
+	 * @throws IOException 
+	 * 
+	 * @since 0.2
+	 */
+	private void setTextLogo(String nomeBanco) throws IOException, DocumentException {
+
+		// RECIBO DO SACADO
+		form.setField("txtRsLogoBanco",nomeBanco);
+
+		// FICHA DE COMPENSAÇÃO
+		form.setField("txtFcLogoBanco",nomeBanco);	
+	}	
+	
 
 	
 	private void setCodigoBanco() throws IOException, DocumentException {

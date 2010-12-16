@@ -70,6 +70,8 @@ import org.jrimum.utilix.text.Strings;
  *         Antunes</a> - Colaborador com o banco Intermedium (077)
  * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a> -
  *         Colaborador com o banco Rural (453)
+ * @author <a href="mailto:pporto@gmail.com">Paulo Porto</a> - 
+ * 		   Colaborador com o Banco do Nordeste do Brasil (004).
  * 
  * @since 0.2
  * 
@@ -87,6 +89,11 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 */
 	private static Logger log = Logger.getLogger(Objects.class);
 	
+	/**
+	 * Nosso número com 7 posições.
+	 */
+	static final int NN7 = 7;
+
 	/**
 	 * Nosso número com 8 posições.
 	 */
@@ -187,6 +194,9 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 					
 					case BANCO_DO_BRASIL:
 						return AbstractCLBancoDoBrasil.create(titulo);
+	
+					case BANCO_DO_NORDESTE_DO_BRASIL:
+						return AbstractCLBancoDoNordesteDoBrasil.create(titulo);
 	
 					case BANCO_ABN_AMRO_REAL:
 						return AbstractCLBancoReal.create(titulo);
@@ -508,7 +518,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	
 	/**
 	 * <p>
-	 * Verifica se o dígito verificador do número da conta bancária não é nulo,
+	 * Verifica se o dígito verificador da agência da conta bancária não é nulo,
 	 * não é vazio e se é numérico, caso contrário lança uma {@code
 	 * IllegalArgumentException}.
 	 * </p>

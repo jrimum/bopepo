@@ -92,6 +92,8 @@ import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
  *         Antunes</a> - Colaborador com o banco Intermedium (077)
  * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a> -
  *         Colaborador com o banco Rural (453)
+ * @author <a href="mailto:pporto@gmail.com">Paulo Porto</a> - 
+ * 		   Colaborador com o Banco do Nordeste do Brasil (004).
  * 
  * @see org.jrimum.bopepo.campolivre.CampoLivre
  * @see org.jrimum.domkee.financeiro.banco.Banco
@@ -118,7 +120,15 @@ public enum BancosSuportados implements Serializable{
 	 * @since 0.2
 	 */
 	BANCO_DO_BRASIL("001", "00000000000191", "BANCO DO BRASIL S.A.", "Banco do Brasil - Banco Múltiplo"),
-			
+		
+	/**
+	 * Tipo enumerado que representa o <strong>Banco do Nordeste do Brasil</strong>, código
+	 * de compensação <strong><tt>004</tt></strong> (<a href="http://www.bnb.gov.br">site</a>).
+	 * 
+	 * @since 0.2-Helio
+	 */	
+	BANCO_DO_NORDESTE_DO_BRASIL("004","07237373000120", "BANCO DO NORDESTE DO BRASIL S.A.","Banco Múltiplo"),		
+	
 	/**
 	 * Tipo enumerado que representa o Banestes, Banco <strong>do Estado do Espírito Santo</strong>,
 	 * código de compensação <strong><tt>021</tt></strong>
@@ -269,6 +279,8 @@ public enum BancosSuportados implements Serializable{
 	static {
 
 		suportados.put(BANCO_DO_BRASIL.codigoDeCompensacaoBACEN, BANCO_DO_BRASIL);
+
+		suportados.put(BANCO_DO_NORDESTE_DO_BRASIL.codigoDeCompensacaoBACEN, BANCO_DO_NORDESTE_DO_BRASIL);
 
 		suportados.put(CAIXA_ECONOMICA_FEDERAL.codigoDeCompensacaoBACEN, CAIXA_ECONOMICA_FEDERAL);
 

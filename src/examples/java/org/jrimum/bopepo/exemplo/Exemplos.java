@@ -254,6 +254,15 @@ public class Exemplos {
 	}
 	
 	/**
+	 * Cria um título com dados padrão sem sacador avalista.
+	 * 
+	 * @return
+	 */
+	public static Titulo crieTituloSemSacadorAvalista() {		
+		return crieTitulo(crieCedente(), crieSacado(), null);
+	}	
+	
+	/**
 	 * Cria um título a partir de um cedente, um sacado e um sacador avalista.
 	 * 
 	 * @param cedente
