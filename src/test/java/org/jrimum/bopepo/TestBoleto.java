@@ -158,21 +158,22 @@ public class TestBoleto{
 		assertEquals(df.format(agora), df.format(boleto.getDataDeProcessamento()));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testSetCampoLivreNull() {
-		boleto.setCampoLivre(null);
+		
+		boleto = new Boleto(titulo, null);
 	}
 	
 	@SuppressWarnings("serial")
 	@Test
 	public void testSetCampoLivreTamanhoCorreto() {
 		
-		boleto.setCampoLivre(new CampoLivre() {
-			
+		boleto = new Boleto(titulo, new CampoLivre() {
+
 			public String write() {
 				return "1234567890123456789012345";
 			}
-			
+
 			public void read(String g) {
 			}
 		});
@@ -185,14 +186,14 @@ public class TestBoleto{
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetCampoLivreTamanhoMaior() {
 		
-		boleto.setCampoLivre(new CampoLivre() {
-			
+		boleto = new Boleto(titulo, new CampoLivre() {
+
 			private static final long serialVersionUID = 1L;
-			
+
 			public String write() {
 				return "1234567890123456789012345000";
 			}
-			
+
 			public void read(String g) {
 			}
 		});
@@ -201,14 +202,14 @@ public class TestBoleto{
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetCampoLivreTamanhoMenor() {
 		
-		boleto.setCampoLivre(new CampoLivre() {
-	
+		boleto = new Boleto(titulo, new CampoLivre() {
+
 			private static final long serialVersionUID = 1L;
 
 			public String write() {
 				return "12345678901234567890";
 			}
-			
+
 			public void read(String g) {
 			}
 		});

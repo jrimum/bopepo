@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jrimum</groupId>
 	<artifactId>bopepo</artifactId>
@@ -9,7 +9,7 @@
 	<version>0.3.1-SNAPSHOT</version>
 	<description>Projeto open source de componentes de software para o domínio de negócios do Brasil.</description>
 	<url>http://www.jrimum.org/bopepo</url>
-	
+
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -25,27 +25,54 @@
 
 	<issueManagement>
 		<system>TRAC</system>
-		<url>http://www.jrimum.org/utilix</url>
+		<url>http://www.jrimum.org/bopepo</url>
 	</issueManagement>
-	
+
 	<ciManagement>
 		<system>hudson</system>
 		<url>http://localhost:8080/hudson</url>
 	</ciManagement>
-	
+
 	<scm>
 		<connection>scm:svn:http://www.jrimum.org/svn/bopepo</connection>
 		<developerConnection>scm:svn:http://www.jrimum.org/svn/bopepo</developerConnection>
 		<tag>HEAD</tag>
 		<url>http://www.jrimum.org/svn/bopepo</url>
 	</scm>
-	
+
+	<developers>
+		<developer>
+			<name>Gilmar P. S. L.</name>
+			<email>gilmatryx@gmail.com</email>
+		</developer>
+		<developer>
+			<name>Misael Barreto</name>
+			<email>misaelbarreto@gmail.com</email>
+		</developer>
+		<developer>
+			<name>Rômulo Augusto</name>
+			<email>romulomail@gmail.com</email>
+		</developer>
+	</developers>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
-	
+
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/test/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/examples/resources</directory>
+			</resource>
+		</resources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -58,98 +85,75 @@
 			</plugin>
 
 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>add-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/examples/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<descriptors>
+                        <descriptor>src/main/assembly/bopepo-dependencias-jrimum.xml</descriptor>
+                        <descriptor>src/main/assembly/bopepo-dependencias-jrimum-src.xml</descriptor>
+                    </descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.5</version>
 				<configuration>
-					<skipTests>false</skipTests>
+					<skipTests>true</skipTests>
 					<includes>
 						<include>org/jrimum/bopepo/**/*</include>
 					</includes>
 					<excludes>
-					<exclude>org/jrimum/bopepo/excludes/**/*</exclude>
-					<exclude>org/jrimum/bopepo/**/*$*</exclude> <!-- Exclui classes internas anônimas para evitar erros -->
-				</excludes>
+						<exclude>org/jrimum/bopepo/excludes/**/*</exclude>
+						<exclude>org/jrimum/bopepo/**/*$*</exclude> <!-- Exclui classes internas anônimas para evitar erros -->
+					</excludes>
 				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.1.2</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<source>1.5</source>
-					<targetJdk>1.5</targetJdk>
-					<linkXref>true</linkXref>
-				</configuration>
-				<executions>
-					<execution>
-						<id>attach-pmd</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>pmd</goal>
-							<goal>cpd</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>2.5</version>
-				<executions>
-					<execution>
-						<id>attach-checkstyle</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>checkstyle</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jxr-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<linkJavadoc>true</linkJavadoc>
-				</configuration>
-				<executions>
-					<execution>
-						<id>attach-jxr</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>jxr</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.7</version>
+				<configuration>
+					<includeDependencySources>true</includeDependencySources>
+					<dependencySourceIncludes>
+						<dependencySourceInclude>org.jrimum:*</dependencySourceInclude>
+					</dependencySourceIncludes>
+				</configuration>
 				<executions>
 					<execution>
 						<id>attach-javadoc</id>
-						<phase>verify</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>jar</goal>
 						</goals>
@@ -158,7 +162,17 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
+		</plugins>
+	</reporting>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.jrimum</groupId>
@@ -191,5 +205,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 </project>

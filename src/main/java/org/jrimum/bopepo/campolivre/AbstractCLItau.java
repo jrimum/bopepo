@@ -93,9 +93,9 @@ abstract class AbstractCLItau extends AbstractCampoLivre {
 	/**
 	 * {@inheritDoc}
 	 */
-	static CampoLivre create(Titulo titulo){
+	protected static CampoLivre create(Titulo titulo){
 		
-		checkCarteira(titulo);
+		checkCarteiraNotNull(titulo);
 		checkCodigoDaCarteira(titulo);
 		
 		/*

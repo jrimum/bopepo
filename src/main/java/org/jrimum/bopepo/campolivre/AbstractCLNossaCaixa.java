@@ -66,7 +66,7 @@ abstract class AbstractCLNossaCaixa extends AbstractCampoLivre {
 	/**
 	 * {@inheritDoc}
 	 */
-	static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
+	protected static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 					
 		return new CLNossaCaixa(titulo);
 	}

@@ -155,27 +155,39 @@ class CLBancoReal extends AbstractCLBancoReal {
 	 * 
 	 * @since 0.2
 	 */	
-	private String calculeDigitoDaPosicao31(String nossoNumero, Integer agencia, Integer contaCorrente){
-			
-			StringBuilder formula = new StringBuilder();
-			String dV = null;
-			
-			formula.append(Filler.ZERO_LEFT.fill(nossoNumero,13));
-			formula.append(Filler.ZERO_LEFT.fill(agencia, 4));
-			formula.append(Filler.ZERO_LEFT.fill(contaCorrente, 7));
-			
-			int restoDivisao = modulo10.calcule(formula.toString());
-			
-			int restoSubtracao = (10 - restoDivisao);
-			
-			if(restoSubtracao == 10){
-				dV = "0";
-			}else{
-				
-				dV = ""+restoSubtracao;
-			}
-			
-			return dV;
+	private String calculeDigitoDaPosicao31(String nossoNumero,
+			Integer agencia, Integer contaCorrente) {
+
+		StringBuilder formula = new StringBuilder();
+		String dV = null;
+
+		formula.append(Filler.ZERO_LEFT.fill(nossoNumero, 13));
+		formula.append(Filler.ZERO_LEFT.fill(agencia, 4));
+		formula.append(Filler.ZERO_LEFT.fill(contaCorrente, 7));
+
+		int restoDivisao = modulo10.calcule(formula.toString());
+
+		int restoSubtracao = (10 - restoDivisao);
+
+		if (restoSubtracao == 10) {
+			dV = "0";
+		} else {
+
+			dV = "" + restoSubtracao;
 		}
+
+		return dV;
+	}
 	
+	@Override
+	protected void addFields(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
+
+	@Override
+	protected void checkValues(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
 }

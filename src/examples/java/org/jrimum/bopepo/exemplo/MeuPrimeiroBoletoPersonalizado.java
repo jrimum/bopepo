@@ -10,7 +10,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  * 
- * Created at: 16/09/2009 - 00:44:51
+ * Created at: 01/11/2010 - 09:37:00
  *
  * ================================================================================
  *
@@ -24,43 +24,49 @@
  * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
  * e limitações sob esta LICENÇA.
  * 
- * Criado em: 16/09/2009 - 00:44:51
+ * Criado em: 01/11/2010 - 09:37:00
  * 
  */
-package org.jrimum.bopepo.exemplo.banco;
+package org.jrimum.bopepo.exemplo;
+
+import java.io.File;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import org.jrimum.bopepo.Boleto;
+import org.jrimum.bopepo.view.BoletoViewer;
+import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.utilix.ClassLoaders;
 
 /**
- * 
  * <p>
- * Exemplo do boleto para o Banco do Brasil com Nosso Número 11
+ * Exemplo de código para geração de um boleto simples usando um template personalizado.
  * </p>
  * <p>
- * Mostra um exemplo funcional que gere um boleto para a implementação de campo livre
- * do Banco do Brasil com Nosso Número 11
+ * Utiliza a classe utilitária <code>Exemplos</code> para criar os objetos necessários para gerar o boleto.
  * </p>
  * 
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
+ * @since 0.2
+ * 
  * @version 0.2
  */
-public class BoletoBBNossoNumero11Exemplo extends AbstractBoletoExemplo {
+public class MeuPrimeiroBoletoPersonalizado {
 
-	@Override
-	protected BancosSuportados getBancoSuportado() {
-		return BancosSuportados.BANCO_DO_BRASIL;
+	public static void main(String[] args) {
+
+		Titulo titulo = Exemplos.crieTitulo();
+		titulo.getContaBancaria().setBanco(BancosSuportados.BANCO_DO_BRASIL.create());
+		titulo.setNossoNumero("1234567890");
+		
+		Boleto boleto = Exemplos.crieBoleto(titulo);
+		
+		//Informando o template personalizado:
+		File templatePersonalizado = new File(ClassLoaders.getResource("/templates/BoletoTemplatePersonalizacaoSimples.pdf").getFile());
+		BoletoViewer boletoViewer = new BoletoViewer(boleto, templatePersonalizado);
+
+		File arquivoPdf = boletoViewer.getPdfAsFile("MeuBoletoPersonalizado.pdf");
+
+		Exemplos.mostreBoletoNaTela(arquivoPdf);
 	}
-
-	@Override
-	protected Carteira getCarteira() {
-		return new Carteira(5);
-	}
-
-	@Override
-	protected String getNossoNumero() {
-		return "12345678901";
-	}
-
 }

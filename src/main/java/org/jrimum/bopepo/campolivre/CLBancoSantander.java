@@ -163,4 +163,16 @@ class CLBancoSantander extends AbstractCLSantander implements CampoLivre {
 							.getCodigo()));
 		}
 	}
+	
+	@Override
+	protected void addFields(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
+
+	@Override
+	protected void checkValues(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
 }

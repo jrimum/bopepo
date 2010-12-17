@@ -107,4 +107,16 @@ class CLBancoRuralCobrancaNaoRegistradaSeguradora extends AbstractCLBancoRural{
 		this.add( new Field<String>( titulo.getDigitoDoNossoNumero(), 1 , Filler.ZERO_LEFT ) );
 		this.add( new Field<BigDecimal>((BigDecimal)titulo.getParametrosBancarios().getValor("VALOR_IOS"), 7, Filler.ZERO_LEFT));
 	}
+	
+	@Override
+	protected void addFields(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
+
+	@Override
+	protected void checkValues(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
 }

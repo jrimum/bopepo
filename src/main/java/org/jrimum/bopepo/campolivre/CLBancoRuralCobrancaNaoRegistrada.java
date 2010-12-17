@@ -24,7 +24,7 @@ import org.jrimum.utilix.text.Filler;
  * <td>20-20</td>
  * <td>1</td>
  * <td>9(1)</td>
- * <td style="text-align:left;padding-left:10px">Tipo de Cobrança - 9</td>
+ * <td style="text-align:left;padding-left:10">Tipo de Cobrança - 9</td>
  * <td style="text-align:left;padding-left:10">Tipo de Cobrança - 9</td>
  * </tr>
  * <tr>
@@ -90,7 +90,7 @@ class CLBancoRuralCobrancaNaoRegistrada extends AbstractCLBancoRural{
 	 * </p>
 	 * 
 	 * @param titulo
-	 *            - título com as informações para geração do campo livre
+	 *            - Título com as informações para geração do campo livre
 	 */
 	CLBancoRuralCobrancaNaoRegistrada(Titulo titulo) {
 		
@@ -101,5 +101,17 @@ class CLBancoRuralCobrancaNaoRegistrada extends AbstractCLBancoRural{
 		this.add( new Field<Integer>((Integer)titulo.getParametrosBancarios().getValor(CODIGO_REDUZIDO), 3, Filler.ZERO_LEFT ) );
 		this.add( new Field<String>( titulo.getNossoNumero(), 15 , Filler.ZERO_LEFT ) );
 		this.add( new Field<String>( ZEROS, 3));
+	}
+	
+	@Override
+	protected void addFields(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
+
+	@Override
+	protected void checkValues(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
 	}
 }

@@ -128,4 +128,16 @@ class CLHSBCCobrancaRegistrada extends AbstractCLHSBC{
 		this.add(new Field<String>(CODIGO_DA_CARTEIRA, 2));
 		this.add(new Field<Integer>(CODIGO_DO_APLICATIVO, 1));
 	}
+	
+	@Override
+	protected void addFields(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
+
+	@Override
+	protected void checkValues(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
 }

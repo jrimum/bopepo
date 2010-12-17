@@ -70,8 +70,8 @@ public class TestCLBanrisulCobrancaRegistrada extends CampoLivreBaseTest {
 		
 		ContaBancaria contaBancaria = new ContaBancaria(BancosSuportados.BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.create());
 		contaBancaria.setCarteira(new Carteira(1, TipoDeCobranca.COM_REGISTRO));
-		contaBancaria.setAgencia(new Agencia(100, "1"));
-		contaBancaria.setNumeroDaConta(new NumeroDaConta(1));
+		contaBancaria.setAgencia(new Agencia(1102));
+		contaBancaria.setNumeroDaConta(new NumeroDaConta(9000150));
 
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("22832563");
@@ -79,7 +79,7 @@ public class TestCLBanrisulCobrancaRegistrada extends CampoLivreBaseTest {
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
 		setClasseGeradoraDoCampoLivre(CLBanrisulCobrancaRegistrada.class);
-		setCampoLivreValidoAsString("1110000000012283256304172");
+		setCampoLivreValidoAsString("1111029000150228325634071");
 	}
 
 	@Test(expected=CampoLivreException.class)
@@ -111,9 +111,9 @@ public class TestCLBanrisulCobrancaRegistrada extends CampoLivreBaseTest {
 	}
 
 	@Test(expected=CampoLivreException.class)
-	public void criacaoAgenciaComCodigoMaiorQue3Digitos() {
+	public void criacaoAgenciaComCodigoMaiorQue4Digitos() {
 		
-		titulo.getContaBancaria().setAgencia(new Agencia(1000, "1"));
+		titulo.getContaBancaria().setAgencia(new Agencia(10000, "1"));
 		CampoLivreFactory.create(titulo);
 	}
 	

@@ -69,10 +69,10 @@ abstract class AbstractCLHSBC extends AbstractCampoLivre {
 	/**
 	 * {@inheritDoc}
 	 */
-	static CampoLivre create(Titulo titulo) {
+	 protected static CampoLivre create(Titulo titulo) {
 		
-		checkCarteira(titulo);
-		checkRegistroDaCarteira(titulo);
+		checkCarteiraNotNull(titulo);
+		checkRegistroDaCarteiraNotNull(titulo);
 
 		switch(titulo.getContaBancaria().getCarteira().getTipoCobranca()){
 		case SEM_REGISTRO:

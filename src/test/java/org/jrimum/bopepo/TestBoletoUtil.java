@@ -218,7 +218,7 @@ public class TestBoletoUtil {
 		}
 	}
 	
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testCheckExistsCodigoDeBarrasComArgumentoStringNull() {
 
 		BoletoUtil.checkExistsCodigoDeBarras(null);
@@ -296,7 +296,7 @@ public class TestBoletoUtil {
 		}
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testCheckExistsLinhaDigitavelComArgumentoStringNull() {
 
 		BoletoUtil.checkExistsLinhaDigitavel(null);
@@ -319,7 +319,7 @@ public class TestBoletoUtil {
 		}
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testLinhaDigitavelFormatadaEmNumericaComArgumentoNull() {
 
 		BoletoUtil.linhaDigitavelFormatadaEmNumerica(null);
@@ -365,7 +365,7 @@ public class TestBoletoUtil {
 		assertTrue(!LINHA_DIGITAVEL_NUMERICA_EXPECTED.equals(BoletoUtil.linhaDigitavelFormatadaEmNumerica(LINHA_DIGITAVEL_FORMATADA_EXPECTED.replace("8", "3"))));
 	}
 	
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testLinhaDigitavelNumericaEmFormatadaComArgumentoNull() {
 
 		BoletoUtil.linhaDigitavelNumericaEmFormatada(null);

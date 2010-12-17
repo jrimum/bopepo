@@ -146,4 +146,15 @@ class CLUnibancoCobrancaNaoRegistrada extends AbstractCLUnibanco {
 		this.add(new Field<String>(calculeDigitoEmModulo11(titulo.getNossoNumero()), 1));			
 	}
 	
+	@Override
+	protected void addFields(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
+
+	@Override
+	protected void checkValues(Titulo titulo) {
+		// TODO IMPLEMENTAR
+		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+	}
 }

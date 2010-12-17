@@ -27,18 +27,20 @@
  * Criado em: 16/09/2009 - 00:44:51
  * 
  */
-package org.jrimum.bopepo.exemplo.banco;
+package org.jrimum.bopepo.exemplo.banco.bb;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import org.jrimum.bopepo.Boleto;
+import org.jrimum.bopepo.exemplo.Exemplos;
+import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
- * 
  * <p>
  * Exemplo do boleto para o Banco do Brasil com Nosso Número 17
  * </p>
  * <p>
- * Mostra um exemplo funcional que gere um boleto para a implementação de campo livre
+ * Mostra um exemplo funcional que gera um boleto para a implementação de campo livre
  * do Banco do Brasil com Nosso Número 17
  * </p>
  * 
@@ -46,21 +48,20 @@ import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
  * 
  * @version 0.2
  */
-public class BoletoBBNossoNumero17Exemplo extends AbstractBoletoExemplo {
-
-	@Override
-	protected BancosSuportados getBancoSuportado() {
-		return BancosSuportados.BANCO_DO_BRASIL;
+public class BoletoBBNossoNumero17Exemplo {
+	
+	public static void main(String[] args) {
+		
+		Titulo titulo = Exemplos.crieTitulo();
+		
+		//Campos específicos para o Banco do Brasil com nosso número 17.
+		titulo.setNossoNumero("12345678901234567");
+		
+		ContaBancaria contaBancaria = titulo.getContaBancaria();
+		contaBancaria.setBanco(BancosSuportados.BANCO_DO_BRASIL.create());
+		
+		Boleto boleto = Exemplos.crieBoleto(titulo);
+		
+		Exemplos.execute(boleto);
 	}
-
-	@Override
-	protected Carteira getCarteira() {
-		return new Carteira(5);
-	}
-
-	@Override
-	protected String getNossoNumero() {
-		return "12345678901234567";
-	}
-
 }

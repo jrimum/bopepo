@@ -32,7 +32,16 @@ package org.jrimum.bopepo.excludes;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import org.jrimum.bopepo.campolivre.CampoLivre;
+import org.jrimum.bopepo.campolivre.CampoLivreException;
+import org.jrimum.bopepo.campolivre.CampoLivreFactory;
+import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Test;
 
 /**
@@ -44,6 +53,7 @@ import org.junit.Test;
  * Todos os testes de campo livre devem herdar desta classe.
  * </p>
  * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  *
  * @since 0.2
@@ -58,6 +68,177 @@ public class CampoLivreBaseTest {
 	
 	private CampoLivre campoLivreToTest;
 	
+	public CampoLivre getCampoLivreToTest() {
+		
+		return campoLivreToTest;
+	}
+
+	@Test
+	public void seCriacaoDoCampoLivreOcorreSemFalha() {
+		
+		assertNotNull(campoLivreToTest);
+	}
+	
+	@Test
+	public void seTamanhoDoCampoLivreEscritoIgualA25() {
+		
+		assertEquals(25, campoLivreToTest.write().length());
+	}
+	
+	@Test
+	public void seClasseDaInstaciaDoCampoLivreEstaCorreta() {
+		
+		assertEquals(classeGeradoraDoCampoLivre, campoLivreToTest.getClass());
+	}
+	
+	@Test
+	public void seCampoLivreEscritoEstaCorreto() {
+		
+		assertEquals(campoLivreValidoAsString, campoLivreToTest.write());
+	}
+	
+	/*
+	 * Testes para uso específico
+	 */
+	
+	protected void seNaoPermiteAgenciaNula(Titulo titulo) throws CampoLivreException{
+
+		titulo.getContaBancaria().setAgencia(null);
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+	
+	protected void seNaoPermiteNumeroDaAgenciaComDigitosAcimaDoLimite(Titulo titulo, int limiteAcima) throws CampoLivreException {
+
+		titulo.getContaBancaria().setAgencia(new Agencia(limiteAcima));
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+
+	protected void seNaoPermiteCarteiraNula(Titulo titulo) throws CampoLivreException {
+
+		titulo.getContaBancaria().setCarteira(null);
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+	
+	protected void seNaoPermiteCarteiraComCodigoNegativo(Titulo titulo) throws CampoLivreException{
+
+		titulo.getContaBancaria().setCarteira(new Carteira(-1));
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+
+	protected void seNaoPermiteCarteiraComCodigoAcimaDoLimite(Titulo titulo, int limiteAcima) throws CampoLivreException{
+
+		titulo.getContaBancaria().setCarteira(new Carteira(limiteAcima));
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+
+	protected void seNaoPermiteNossoNumeroNulo(Titulo titulo) throws CampoLivreException{
+
+		titulo.setNossoNumero(null);
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+
+	protected void seNaoPermiteNossoNumeroComBrancos(Titulo titulo, int nnLength) throws CampoLivreException{
+
+		StringBuilder nnBlank = new StringBuilder(nnLength);
+	
+		for(int i = 1; i <= nnLength; i++){
+			nnBlank.append(" ");
+		}
+		
+		titulo.setNossoNumero(nnBlank.toString());
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+
+	protected void seNaoPermiteNossoNumeroComEspacos(Titulo titulo, int nnLength) throws CampoLivreException{
+
+		//Nosso número randômico
+		String nnRadom = nossoNumeroRadom(nnLength);
+		
+		char[] nn = nnRadom.toCharArray();
+		
+		//Com espaço (+ ou -) no meio
+		nn[nnRadom.length()/2] = ' ';
+		
+		titulo.setNossoNumero(nn.toString());
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+
+	protected void seNaoPermiteNossoNumeroComTamanhoDiferenteDoEspecificado(Titulo titulo, int nnOutLength) throws CampoLivreException{
+
+		titulo.setNossoNumero(nossoNumeroRadom(nnOutLength));
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+
+	protected void seNaoPermiteNumeroDaContaNulo(Titulo titulo) throws CampoLivreException{
+
+		titulo.getContaBancaria().setNumeroDaConta(null);
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+
+	protected void seNaoPermiteNumeroDaContaComCodigoNegativo(Titulo titulo) throws CampoLivreException{
+
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(-1));
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+
+	protected void seNaoPermiteNumeroDaContaComCodigoAcimaDoLimite(Titulo titulo, int limiteAcima) throws CampoLivreException{
+
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(limiteAcima));
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+	
+	/*
+	 * Acessores
+	 */
+	
 	protected void setClasseGeradoraDoCampoLivre(Class<? extends CampoLivre> classe) {
 		this.classeGeradoraDoCampoLivre = classe;
 	}
@@ -70,27 +251,25 @@ public class CampoLivreBaseTest {
 		this.campoLivreToTest = campoLivreToTest;
 	}
 	
-	public CampoLivre getCampoLivreToTest() {
-		return campoLivreToTest;
-	}
-
-	@Test
-	public void seCriacaoDoCampoLivreOcorreSemFalha() {
-		assertNotNull(campoLivreToTest);
-	}
-	
-	@Test
-	public void seTamanhoDoCampoLivreEscritoIgualA25() {
-		assertEquals(25, campoLivreToTest.write().length());
+	/**
+	 * Gera um nosso numero randomicamente com o tamanho determinado.
+	 * 
+	 * @param nnLength
+	 * @return geraNossoNumero
+	 */
+	protected String nossoNumeroRadom(int nnLength){
+		
+		//Nosso número randômico
+		return new BigDecimal(Math.random()).movePointRight(nnLength).setScale(0,RoundingMode.DOWN).toString();
 	}
 	
-	@Test
-	public void seClasseDaInstaciaDoCampoLivreEstaCorreta() {
-		assertEquals(classeGeradoraDoCampoLivre, campoLivreToTest.getClass());
-	}
-	
-	@Test
-	public void seCampoLivreEscritoEstaCorreto() {
-		assertEquals(campoLivreValidoAsString, campoLivreToTest.write());
+	/**
+	 * Simplesmente escreve o campo livre executando o método {@code write()}.
+	 * 
+	 * @return campo livre
+	 */
+	protected String writeCampoLivre(){
+		
+		return campoLivreToTest.write();
 	}
 }

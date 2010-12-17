@@ -27,7 +27,6 @@
  * 
  */
 
-
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancosSuportados;
@@ -40,21 +39,22 @@ import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Before;
+import org.junit.Test;
 
 /**
  * <p>
- * Teste unitário do campo livre do banco bradesco
+ * Teste unitário do campo livre do banco bradesco.
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
- * @author <a href="http://www.nordestefomento.com.br">Nordeste Fomento Mercantil</a>
+ * @author <a href="http://www.nordestefomento.com.br">Nordeste Fomento
+ *         Mercantil</a>
  * 
  * @since 0.2
  * 
  * @version 0.2
- *
  */
 public class TestCLBradesco extends CampoLivreBaseTest {
 
@@ -62,28 +62,92 @@ public class TestCLBradesco extends CampoLivreBaseTest {
 
 	@Before
 	public void setUp() throws Exception {
-		
-		Sacado sacado = new Sacado("Sacado");
-		Cedente cedente = new Cedente("Cedente");
 
 		ContaBancaria contaBancaria = new ContaBancaria();
+
 		contaBancaria.setBanco(BancosSuportados.BANCO_BRADESCO.create());
-		
-		Agencia agencia = new Agencia(1234, "1");
-		contaBancaria.setAgencia(agencia);
-		
+		contaBancaria.setAgencia(new Agencia(1234, "1"));
 		contaBancaria.setCarteira(new Carteira(5));
-		
-		NumeroDaConta numeroDaConta = new NumeroDaConta();
-		numeroDaConta.setCodigoDaConta(6789);
-		contaBancaria.setNumeroDaConta(numeroDaConta);
-		
-		titulo = new Titulo(contaBancaria, sacado, cedente);
+		contaBancaria.setNumeroDaConta(new NumeroDaConta(6789));
+
+		titulo = new Titulo(contaBancaria, new Sacado("S"), new Cedente("C"));
 		titulo.setNossoNumero("12345678901");
-		
+
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
-		
+
 		setClasseGeradoraDoCampoLivre(CLBradesco.class);
 		setCampoLivreValidoAsString("1234051234567890100067890");
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteAgenciaNula() {
+
+		seNaoPermiteAgenciaNula(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaAgenciaAcimaDe4Digitos() {
+
+		seNaoPermiteNumeroDaAgenciaComDigitosAcimaDoLimite(titulo, 10000);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteCarteiraNull() {
+
+		seNaoPermiteCarteiraNula(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteCarteiraComCodigoNegativo() {
+
+		seNaoPermiteCarteiraComCodigoNegativo(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteCarteiraComCodigoAcimaDe2Digitos() {
+
+		seNaoPermiteCarteiraComCodigoAcimaDoLimite(titulo, 111);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNossoNumeroNulo() {
+
+		seNaoPermiteNossoNumeroNulo(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNossoNumeroComBrancos() {
+
+		seNaoPermiteNossoNumeroComBrancos(titulo, CLBradesco.NOSSO_NUMERO_LENGTH);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNossoNumeroComEspacos() {
+
+		seNaoPermiteNossoNumeroComEspacos(titulo, CLBradesco.NOSSO_NUMERO_LENGTH);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNossoNumeroComTamanhoDiferenteDe11() {
+
+		seNaoPermiteNossoNumeroComTamanhoDiferenteDoEspecificado(titulo, CLBradesco.NOSSO_NUMERO_LENGTH - 1);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaContaNulo() {
+
+		seNaoPermiteNumeroDaContaNulo(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaContaComCodigoNegativo() {
+
+		seNaoPermiteNumeroDaContaComCodigoNegativo(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaContaComCodigoAcimaDe7Digitos() {
+
+		seNaoPermiteNumeroDaContaComCodigoAcimaDoLimite(titulo, 12345678);
 	}
 }

@@ -222,6 +222,8 @@ public final class Boleto {
 	}
 	
 	/**
+	 * <p></p>
+	 * 
 	 * @return the campoLivre
 	 */
 	public CampoLivre getCampoLivre() {
@@ -236,7 +238,7 @@ public final class Boleto {
 	 * 
 	 * @param campoLivre the campoLivre to set
 	 */
-	public void setCampoLivre(CampoLivre campoLivre) {
+	private void setCampoLivre(CampoLivre campoLivre) {
 		
 		Objects.checkNotNull(campoLivre);
 		

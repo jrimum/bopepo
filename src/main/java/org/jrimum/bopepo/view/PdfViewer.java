@@ -35,7 +35,6 @@ import static org.jrimum.utilix.text.DecimalFormat.MONEY_DD_BR;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -77,14 +76,12 @@ import com.lowagie.text.pdf.PdfStamper;
  * 
  * @version 0.2
  */
-class ViewerPDF {
+class PdfViewer {
 
-	// TODO Teste no teste unitário.
+	private static Logger log = Logger.getLogger(PdfViewer.class);
 
-	private static Logger log = Logger.getLogger(ViewerPDF.class);
-
-	private static URL TEMPLATE_PADRAO_COM_SACADOR_AVALISTA = ViewerPDF.class.getResource("/pdf/BoletoTemplateComSacadorAvalista.pdf");
-	private static URL TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA = ViewerPDF.class.getResource("/pdf/BoletoTemplateSemSacadorAvalista.pdf");
+	private static URL TEMPLATE_PADRAO_COM_SACADOR_AVALISTA = PdfViewer.class.getResource("/pdf/BoletoTemplateComSacadorAvalista.pdf");
+	private static URL TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA = PdfViewer.class.getResource("/pdf/BoletoTemplateSemSacadorAvalista.pdf");
 
 	private static final String HIFEN_SEPERADOR = "-";
 	
@@ -99,39 +96,60 @@ class ViewerPDF {
 	private File template;
 
 	/**
-	 *<p> Para uso interno do componente </p> 
+	 *<p>
+	 * Para uso interno do componente
+	 * </p>
+	 * 
+	 * @since 0.2
 	 */
-	ViewerPDF() {
+	PdfViewer() {
 	}
 	
-	ViewerPDF(Boleto boleto) {
+	/**
+	 *<p>
+	 * Para uso interno do componente
+	 * </p>
+	 * 
+	 * @since 0.2
+	 */
+	PdfViewer(Boleto boleto) {
 		
 		this.boleto = boleto;
 	}
 	
-	ViewerPDF(Boleto boleto, File template) {
+	/**
+	 *<p>
+	 * Para uso interno do componente
+	 * </p>
+	 * 
+	 * @since 0.2
+	 */
+	PdfViewer(Boleto boleto, File template) {
 		
 		this.boleto = boleto;
 		
 		setTemplate(template);
 	}
 
+	
 	/**
 	 * <p>
-	 * SOBRE O MÉTODO
+	 * Agrupa os boletos da lista em um único arquivo PDF.
 	 * </p>
 	 * 
-	 * @param pathName arquivo de destino
-	 * @param boletos a serem agrupados
-	 * @param boletoViewer visualizador
-	 * @return File contendo boletos gerados
 	 * 
-	 * @throws JRimumException Quando ocorrer um problema na geração do PDF que está fora do controle
-	 * da biblioteca.
+	 * @param boletos
+	 *            - Lista com os boletos a serem agrupados
+	 * @param fileDest
+	 *            - Arquivo o qual armazenará os boletos
+	 * @param boletoViewer
+	 *            - Visualizador contendo o template para geração
+	 * 
+	 * @return Arquivo PDF gerado com os boletos da lista
 	 * 
 	 * @since 0.2
 	 */
-	protected static File groupInOnePDF(String pathName, List<Boleto> boletos, BoletoViewer boletoViewer) {
+	protected static File groupInOnePDF(List<Boleto> boletos, File fileDest, BoletoViewer boletoViewer) {
 
 		File arq = null;
 
@@ -143,144 +161,133 @@ class ViewerPDF {
 
 		try {
 			
-			arq = Files.bytesToFile(pathName, PDFUtil.mergeFiles(boletosEmBytes));
+			arq = Files.bytesToFile(fileDest, PDFUtil.mergeFiles(boletosEmBytes));
 			
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			
 			log.error("Erro durante geração do PDF." + e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro durante geração do PDF. Causado por " + e.getLocalizedMessage(), e);
 			
-		} catch (IOException e) {
-
-			log.error("Erro durante geração do PDF." + e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro durante geração do PDF. Causado por " + e.getLocalizedMessage(), e);
+			throw new IllegalStateException("Erro durante geração do PDF! Causado por " + e.getLocalizedMessage(), e);
 		}
 
 		return arq;
 	}
 
+
 	/**
 	 * <p>
-	 * SOBRE O MÉTODO
+	 * Gera o arquivo PDF para cada boleto contido na lista. O nome do arquivo
+	 * segue a forma:<br />
+	 * <br />
+	 * <tt>diretorio + (/ ou \\) prefixo + (indice do arquivo na lista + 1) + sufixo + ".pdf"</tt>
 	 * </p>
 	 * 
-	 * @param path
-	 * @param extensao TODO
+	 * <p>
+	 * Exemplo, uma lista com 3 boletos: {@code onePerPDF(boletos, file,
+	 * "BoletoPrefixo", "exSufixo");} <br />
+	 * <br />
+	 * Arquivos gerados:
+	 * <ul>
+	 * <li><strong>BoletoPrefixo1exSufixo.pdf</strong></li>
+	 * <li><strong>BoletoPrefixo2exSufixo.pdf</strong></li>
+	 * <li><strong>BoletoPrefixo3exSufixo.pdf</strong></li>
+	 * </ul>
+	 * </p>
+	 * 
 	 * @param boletos
-	 * @return List<File> com os boletos gerados.
+	 *            - Lista com os boletos a serem agrupados
+	 * @param fileDest
+	 *            - Diretório o qual os boletos serão criados
+	 * @param prefixo
+	 *            - Prefixo do nome do arquivo
+	 * @param sufixo
+	 *            - Sufixo do nome do arquivo
+	 * @return Lista contendo os arquivos PDF gerados a partir da lista de
+	 *         boletos
 	 * 
 	 * @since 0.2
 	 */
-	protected static List<File> onePerPDF(String path, String extensao, List<Boleto> boletos) {
+	protected static List<File> onePerPDF(List<Boleto> boletos, File destDir,String prefixo, String sufixo) {
 
-		List<File> arquivos = new ArrayList<File>(boletos.size());
+		final List<File> arquivos = new ArrayList<File>(boletos.size());
+		final BoletoViewer bv = new BoletoViewer();
 		int cont = 1;
-
+		
 		for (Boleto bop : boletos) {
-			arquivos.add(new BoletoViewer(bop).getPdfAsFile(path + "Boleto" + cont++ + extensao));
+			arquivos.add(bv.setBoleto(bop).getPdfAsFile(destDir.getAbsolutePath() + File.separator + prefixo + cont++ + sufixo + ".pdf"));
 		}
 
 		return arquivos;
 	}
 
+	protected File getFile(String destPath) {
+		
+	
+		return getFile(new File(destPath));
+	}
+	
 	/**
 	 * 
-	 * @param pathName
+	 * @param destPath
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	protected File getFile(String pathName) {
+	protected File getFile(File destFile) {
 		
-		File file = null;
-
 		try {
 
 			processarPdf();
 			
-			file = Files.bytesToFile(pathName, outputStream.toByteArray());
+			return Files.bytesToFile(destFile, outputStream.toByteArray());
 			
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			
-			log.error("Erro ao tentar acessar arquivo inexistente. " + e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro ao tentar acessar arquivo inexistente: [" + pathName + "]. " +
-					"Causado por " + e.getLocalizedMessage(), e);
+			log.error("Erro durante a criação do arquivo! " + e.getLocalizedMessage(), e);
 			
-		} catch (IOException e) {
-			
-			log.error("Erro durante a criação do arquivo. " + e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro durante a criação do arquivo: [" + pathName + "]. " +
-					"Causado por " + e.getLocalizedMessage(), e);
-			
-		} catch (DocumentException e) {
-			
-			log.error("Erro durante a criação do arquivo. " + e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro durante a criação do arquivo: [" + pathName + "]. " +
-					"Causado por " + e.getLocalizedMessage(), e);
+			throw new IllegalStateException("Erro ao tentar criar arquivo! " +"Causado por " + e.getLocalizedMessage(), e);
 		}
-		
-		return file;
 	}
 
 	/**
-	 * @throws JRimumException
+	 *
 	 * 
 	 * @return
 	 */
 	protected ByteArrayOutputStream getStream() {
 		
-		ByteArrayOutputStream baos = null;
-		
 		try {
 
 			processarPdf();
 			
-			baos = Files.bytesToStream(outputStream.toByteArray());
+			return Files.bytesToStream(outputStream.toByteArray());
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			
-			log.error("Erro durante a criação do stream. " + e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro durante a criação do stream. " +
-					"Causado por " + e.getLocalizedMessage(), e);
+			log.error("Erro durante a criação do stream! " + e.getLocalizedMessage(), e);
 			
-		} catch (DocumentException e) {
-			
-			log.error("Erro durante a criação do stream. " + e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro durante a criação do stream. " +
-					"Causado por " + e.getLocalizedMessage(), e);
+			throw new IllegalStateException("Erro durante a criação do stream! " +"Causado por " + e.getLocalizedMessage(), e);
 		}
-		
-		return baos;
 	}
 
 	/**
-	 * @throws JRimumException
+	 *
 	 * 
 	 * @return
 	 */
 	protected byte[] getBytes() {
 		
-		byte[] bytes = null;
-		
 		try {
 
 			processarPdf();
 			
-			bytes = outputStream.toByteArray();
+			return outputStream.toByteArray();
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			
-			log.error("Erro durante a criação do stream. " + e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro durante a criação do stream. " +
-					"Causado por " + e.getLocalizedMessage(), e);
+			log.error("Erro durante a criação do array de bytes! " + e.getLocalizedMessage(), e);
 			
-		} catch (DocumentException e) {
-			
-			log.error("Erro durante a criação do stream. " + e.getLocalizedMessage(), e);
-			throw new RuntimeException("Erro durante a criação do stream. " +
-					"Causado por " + e.getLocalizedMessage(), e);
+			throw new IllegalStateException("Erro durante a criação do array de bytes! " +"Causado por " + e.getLocalizedMessage(), e);
 		}
-		
-		return bytes;
 	}
 
 	protected File getTemplate() {
@@ -796,16 +803,12 @@ class ViewerPDF {
 	private void setLogoBanco() throws MalformedURLException, IOException, DocumentException {
 		
 		// Através da conta bancária será descoberto a imagem que representa o
-		// banco, com base
-		// no código do banco.
+		// banco, com base no código do banco.
 		ContaBancaria conta = boleto.getTitulo().getContaBancaria();
 		Image imgLogoBanco = null;
 
 		if (isNotNull(conta.getBanco().getImgLogo())) {
-
 			imgLogoBanco = Image.getInstance(conta.getBanco().getImgLogo(), null);
-
-			setImageLogo(imgLogoBanco);
 
 		} else {
 
@@ -820,30 +823,29 @@ class ViewerPDF {
 				}
 
 				if (isNotNull(imgLogoBanco)) {
-
 					// Esta imagem gerada aqui é do tipo java.awt.Image
 					conta.getBanco().setImgLogo(ImageIO.read(url));
+
+					// Se o banco em questão é suportado nativamente pelo
+					// componente, então um alerta será exibido.
+					if (log.isDebugEnabled()) {
+						log.debug("Banco sem imagem da logo informada. "
+								+ "Com base no código de compensação do banco, uma imagem foi "
+								+ "encontrada no resource e está sendo utilizada.");
+					}
 				}
 
-				// Se o banco em questão é suportado nativamente pelo
-				// componente,
-				// então um alerta será exibido.
-				if (log.isDebugEnabled()) {
-					log.debug("Banco sem imagem da logo informada. "
-							+ "Com base no código do banco, uma imagem foi "
-							+ "encontrada no resource e está sendo utilizada.");
-				}
 
+			} 
+			
+			
+			if (isNotNull(imgLogoBanco)) {
 				setImageLogo(imgLogoBanco);
-
-			} else {
-
+			} 
+			else {
 				// Sem imagem, um alerta é exibido.
 				log.warn("Banco sem imagem definida. O nome da instituição será usado como logo.");
-
-				form.setField("txtRsLogoBanco", conta.getBanco().getNome());
-				form.setField("txtFcLogoBanco", conta.getBanco().getNome());
-
+				setTextLogo(conta.getBanco().getNome());
 			}
 		}
 	}
@@ -914,6 +916,28 @@ class ViewerPDF {
 		// FICHA DE COMPENSAÇÃO
 		setImagemNoCampo("txtFcLogoBanco",imgLogoBanco);	
 	}
+	
+	/**
+	 * <p>
+	 * Coloca a nome do banco na ficha de compensação do boleto e no recibo do
+	 * sacado.
+	 * </p>
+	 * 
+	 * @param nomeBanco
+	 * @throws DocumentException
+	 * @throws IOException 
+	 * 
+	 * @since 0.2
+	 */
+	private void setTextLogo(String nomeBanco) throws IOException, DocumentException {
+
+		// RECIBO DO SACADO
+		form.setField("txtRsLogoBanco",nomeBanco);
+
+		// FICHA DE COMPENSAÇÃO
+		form.setField("txtFcLogoBanco",nomeBanco);	
+	}	
+	
 
 	
 	private void setCodigoBanco() throws IOException, DocumentException {

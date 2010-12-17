@@ -36,7 +36,7 @@ abstract class AbstractCLSantander extends AbstractCampoLivre {
 	/**
 	 * {@inheritDoc}
 	 */
-	static CampoLivre create(Titulo titulo) {
+	protected static CampoLivre create(Titulo titulo) {
 		
 		return new CLBancoSantander(titulo);
 	}
