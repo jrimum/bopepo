@@ -838,16 +838,17 @@ class PdfViewer {
 
 			} 
 			
-			
-			if (isNotNull(imgLogoBanco)) {
-				setImageLogo(imgLogoBanco);
-			} 
-			else {
-				// Sem imagem, um alerta é exibido.
-				log.warn("Banco sem imagem definida. O nome da instituição será usado como logo.");
-				setTextLogo(conta.getBanco().getNome());
-			}
 		}
+		
+		
+		if (isNotNull(imgLogoBanco)) {
+			setImageLogo(imgLogoBanco);
+		} 
+		else {
+			// Sem imagem, um alerta é exibido.
+			log.warn("Banco sem imagem definida. O nome da instituição será usado como logo.");
+			setTextLogo(conta.getBanco().getNome());
+		}		
 	}
 
 	/**

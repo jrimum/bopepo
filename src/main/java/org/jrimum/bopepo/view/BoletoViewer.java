@@ -146,6 +146,9 @@ public class BoletoViewer {
 	/**
 	 * <p>
 	 * Agrupa os boletos da lista em um único arquivo PDF.
+	 * Ex: Se a lista contém 10 boletos, ao final será gerado
+	 * um único arquivo PDF contendo os 10 boletos, sendo 1
+	 * boleto em cada página.
 	 * </p>
 	 * 
 	 * 
@@ -170,6 +173,9 @@ public class BoletoViewer {
 	/**
 	 * <p>
 	 * Agrupa os boletos da lista em um único arquivo PDF.
+	 * Ex: Se a lista contém 10 boletos, ao final será gerado
+	 * um único arquivo PDF contendo os 10 boletos, sendo 1
+	 * boleto em cada página.
 	 * </p>
 	 * 
 	 * 
@@ -193,6 +199,9 @@ public class BoletoViewer {
 	/**
 	 * <p>
 	 * Agrupa os boletos da lista em um único arquivo PDF.
+	 * Ex: Se a lista contém 10 boletos, ao final será gerado
+	 * um único arquivo PDF contendo os 10 boletos, sendo 1
+	 * boleto em cada página.
 	 * </p>
 	 * 
 	 * 
@@ -220,6 +229,9 @@ public class BoletoViewer {
 	/**
 	 * <p>
 	 * Agrupa os boletos da lista em um único arquivo PDF.
+	 * Ex: Se a lista contém 10 boletos, ao final será gerado
+	 * um único arquivo PDF contendo os 10 boletos, sendo 1
+	 * boleto em cada página.
 	 * </p>
 	 * 
 	 * 
@@ -247,6 +259,9 @@ public class BoletoViewer {
 	/**
 	 * <p>
 	 * Agrupa os boletos da lista em um único arquivo PDF.
+	 * Ex: Se a lista contém 10 boletos, ao final será gerado
+	 * um único arquivo PDF contendo os 10 boletos, sendo 1
+	 * boleto em cada página.
 	 * </p>
 	 * 
 	 * 
@@ -274,6 +289,9 @@ public class BoletoViewer {
 	/**
 	 * <p>
 	 * Agrupa os boletos da lista em um único arquivo PDF.
+	 * Ex: Se a lista contém 10 boletos, ao final será gerado
+	 * um único arquivo PDF contendo os 10 boletos, sendo 1
+	 * boleto em cada página.
 	 * </p>
 	 * 
 	 * 
