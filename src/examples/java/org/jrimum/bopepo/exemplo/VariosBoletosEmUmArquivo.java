@@ -32,15 +32,19 @@
 package org.jrimum.bopepo.exemplo;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.view.BoletoViewer;
-
-
+import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
+import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
+import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
- * 
  * <p>
  * Exemplo de código para geração de vários boletos em um único arquivo PDF.
  * </p>
@@ -53,50 +57,53 @@ import org.jrimum.bopepo.view.BoletoViewer;
  * 
  * @version 0.2
  */
-
 public class VariosBoletosEmUmArquivo {
 
 
 	public static void main(String[] args) {
-		/*
-		 * É bem simples, consiga os boletos 
-		 */
+		
+		Boleto boletoBB = crieBoletoBB();
+		Boleto boletoBradesco = crieBoletoBradesco();
+		
+		List<Boleto> boletos = new ArrayList<Boleto>();
+		boletos.add(boletoBB);
+		boletos.add(boletoBradesco);
 
-		List<Boleto> boletos = Exemplos.getVariosBoletos();
-		
-		/*
-		 * Depois diga o nome do diretorio/arquivo para onde os boletos serão gerados com template padrão. 
-		 */
-		
-		BoletoViewer.groupInOnePDF(boletos, "TesteVariosEmUm.pdf");
-	
-		/*
-		 * OU então diga o nome do diretorio/arquivo para onde os boletos serão gerados com um template personalizado. 
-		 */
-		
-		//BoletoViewer.groupInOnePDF("TesteVariosEmUmPersonalizado.pdf", boletos,new File("TemplatePersonalizado.pdf"));
-		
-		/*
-		 * Pronto, agora vamos conferir: 
-		 */
-		
-		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
-			
-		try{
-	
-			desktop.open(new File("TesteVariosEmUm.pdf"));
-			//desktop.open(new File("TesteVariosEmUmPersonalizado.pdf"));
-	
-		}catch(Exception e){
-			throw new RuntimeException("Arquivo não gerado!",e);
-		}
-		
-		/*
-		 * É sério, é só isso mesmo!
-		 * Acredita não?
-		 * Então faça novamente! 
-		 */
+		File pdf = BoletoViewer.groupInOnePDF(boletos, "PDFComVariosBoletos.pdf");
+		Exemplos.mostreBoletoNaTela(pdf);
+	}
 
+	/**
+	 * Cria um boleto do banco Bradesco.
+	 * @return
+	 */
+	private static Boleto crieBoletoBradesco() {
+		
+		Titulo tituloBradesco = Exemplos.crieTitulo();
+		tituloBradesco.setNossoNumero("01234567891");
+		
+		ContaBancaria contaBancariaBradesco = tituloBradesco.getContaBancaria();
+		contaBancariaBradesco.setBanco(BancosSuportados.BANCO_BRADESCO.create());
+		contaBancariaBradesco.setAgencia(new Agencia(1234));
+		contaBancariaBradesco.setCarteira(new Carteira(12));
+		contaBancariaBradesco.setNumeroDaConta(new NumeroDaConta(1234567));
+		
+		return Exemplos.crieBoleto(tituloBradesco);
+	}
+
+	/**
+	 * Cria um boleto do Banco do Brasil.
+	 * @return
+	 */
+	private static Boleto crieBoletoBB() {
+		
+		Titulo tituloBB = Exemplos.crieTitulo();
+		tituloBB .setNossoNumero("1234567890");
+		
+		ContaBancaria contaBancariaBB = tituloBB.getContaBancaria();
+		contaBancariaBB.setBanco(BancosSuportados.BANCO_DO_BRASIL.create());
+		
+		return Exemplos.crieBoleto(tituloBB);
 	}
 
 }
