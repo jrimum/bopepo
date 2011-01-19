@@ -17,6 +17,7 @@
 				<exclude>commons-lang:commons-lang</exclude>
 				<exclude>log4j:log4j</exclude>
 				<exclude>com.lowagie:itext</exclude>
+				<exclude>net.sf.jasperreports:jasperreports</exclude>
 			</excludes>
 		</dependencySet>
 	</dependencySets>

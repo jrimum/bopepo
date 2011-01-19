@@ -204,6 +204,45 @@
 			<version>4.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>3.7.6</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>xml-apis</artifactId>
+					<groupId>xml-apis</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jfreechart</artifactId>
+					<groupId>jfree</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jdtcore</artifactId>
+					<groupId>eclipse</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jcommon</artifactId>
+					<groupId>jfree</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-digester</artifactId>
+					<groupId>commons-digester</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-collections</artifactId>
+					<groupId>commons-collections</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-beanutils</artifactId>
+					<groupId>commons-beanutils</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 	</dependencies>
 
 </project>
