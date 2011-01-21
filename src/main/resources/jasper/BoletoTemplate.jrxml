@@ -4,7 +4,7 @@
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="15"/>
+	<property name="ireport.y" value="25"/>
 	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
@@ -80,129 +80,129 @@
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="387" splitType="Stretch">
+		<band height="392" splitType="Stretch">
 			<line>
-				<reportElement key="line-20" x="0" y="137" width="524" height="1"/>
+				<reportElement key="line-20" x="8" y="137" width="524" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-1" x="1" y="157" width="522" height="1"/>
+				<reportElement key="line-1" x="9" y="157" width="522" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-2" x="115" y="138" width="1" height="19"/>
+				<reportElement key="line-2" x="123" y="138" width="1" height="19"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-3" x="166" y="138" width="1" height="19"/>
+				<reportElement key="line-3" x="174" y="138" width="1" height="19"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-4" x="0" y="174" width="524" height="1"/>
+				<reportElement key="line-4" x="8" y="174" width="524" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-5" x="0" y="191" width="524" height="1"/>
+				<reportElement key="line-5" x="8" y="191" width="524" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-6" x="0" y="208" width="524" height="1"/>
+				<reportElement key="line-6" x="8" y="208" width="524" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-7" x="0" y="225" width="524" height="1"/>
+				<reportElement key="line-7" x="8" y="225" width="524" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-8" x="374" y="157" width="1" height="153"/>
+				<reportElement key="line-8" x="382" y="157" width="1" height="153"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-9" x="0" y="310" width="524" height="1"/>
+				<reportElement key="line-9" x="8" y="310" width="524" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-10" x="374" y="242" width="150" height="1"/>
+				<reportElement key="line-10" x="382" y="242" width="150" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-11" x="374" y="259" width="150" height="1"/>
+				<reportElement key="line-11" x="382" y="259" width="150" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-12" x="374" y="276" width="150" height="1"/>
+				<reportElement key="line-12" x="382" y="276" width="150" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-13" x="374" y="293" width="150" height="1"/>
+				<reportElement key="line-13" x="382" y="293" width="150" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-14" x="76" y="191" width="1" height="34"/>
+				<reportElement key="line-14" x="84" y="191" width="1" height="34"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-15" x="152" y="191" width="1" height="18"/>
+				<reportElement key="line-15" x="160" y="191" width="1" height="18"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-16" x="124" y="208" width="1" height="17"/>
+				<reportElement key="line-16" x="132" y="208" width="1" height="17"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-17" x="267" y="191" width="1" height="34"/>
+				<reportElement key="line-17" x="275" y="191" width="1" height="34"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-18" x="209" y="191" width="1" height="17"/>
+				<reportElement key="line-18" x="217" y="191" width="1" height="17"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-19" x="0" y="343" width="524" height="1"/>
+				<reportElement key="line-19" x="8" y="343" width="524" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement key="staticText-1" x="3" y="157" width="66" height="8"/>
+				<reportElement key="staticText-1" x="11" y="157" width="66" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -215,7 +215,7 @@
 				<text><![CDATA[Local de pagamento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-2" x="3" y="174" width="66" height="8"/>
+				<reportElement key="staticText-2" x="11" y="174" width="66" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -228,7 +228,7 @@
 				<text><![CDATA[Cedente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-3" x="3" y="191" width="66" height="8"/>
+				<reportElement key="staticText-3" x="11" y="191" width="66" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -241,7 +241,7 @@
 				<text><![CDATA[Data do Documento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-4" x="3" y="208" width="75" height="8"/>
+				<reportElement key="staticText-4" x="11" y="208" width="75" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -254,7 +254,7 @@
 				<text><![CDATA[Uso do Banco]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-5" x="3" y="226" width="149" height="8"/>
+				<reportElement key="staticText-5" x="11" y="226" width="149" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -267,7 +267,7 @@
 				<text><![CDATA[Instruções (texto de responsabilidade do Cedente)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-6" x="79" y="191" width="66" height="8"/>
+				<reportElement key="staticText-6" x="87" y="191" width="66" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -280,7 +280,7 @@
 				<text><![CDATA[Nº do Documento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-7" x="155" y="191" width="42" height="8"/>
+				<reportElement key="staticText-7" x="163" y="191" width="42" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -293,7 +293,7 @@
 				<text><![CDATA[Espécie Doc.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-8" x="212" y="191" width="22" height="8"/>
+				<reportElement key="staticText-8" x="220" y="191" width="22" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -306,7 +306,7 @@
 				<text><![CDATA[Aceite]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-9" x="270" y="191" width="88" height="8"/>
+				<reportElement key="staticText-9" x="278" y="191" width="88" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -319,7 +319,7 @@
 				<text><![CDATA[Data do Processamento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-10" x="79" y="208" width="35" height="8"/>
+				<reportElement key="staticText-10" x="87" y="208" width="35" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -332,7 +332,7 @@
 				<text><![CDATA[Carteira]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-11" x="126" y="208" width="24" height="8"/>
+				<reportElement key="staticText-11" x="135" y="208" width="24" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -345,7 +345,7 @@
 				<text><![CDATA[Espécie]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-12" x="185" y="208" width="66" height="8"/>
+				<reportElement key="staticText-12" x="193" y="208" width="66" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -358,7 +358,7 @@
 				<text><![CDATA[Quantidade]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-13" x="270" y="208" width="66" height="8"/>
+				<reportElement key="staticText-13" x="278" y="208" width="66" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -371,7 +371,7 @@
 				<text><![CDATA[Valor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-14" x="377" y="157" width="100" height="8"/>
+				<reportElement key="staticText-14" x="385" y="157" width="100" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -384,7 +384,7 @@
 				<text><![CDATA[Vencimento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-15" x="377" y="174" width="100" height="8"/>
+				<reportElement key="staticText-15" x="385" y="174" width="100" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -397,7 +397,7 @@
 				<text><![CDATA[Agência / Código do Cedente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-16" x="377" y="293" width="100" height="8"/>
+				<reportElement key="staticText-16" x="385" y="293" width="100" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -410,7 +410,7 @@
 				<text><![CDATA[(=) Valor cobrado]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-17" x="377" y="276" width="100" height="8"/>
+				<reportElement key="staticText-17" x="385" y="276" width="100" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -420,10 +420,10 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="6" isBold="false" pdfFontName="Helvetica"/>
 				</textElement>
-				<text><![CDATA[(=) Outros acréscimos]]></text>
+				<text><![CDATA[(+) Outros acréscimos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-18" x="377" y="259" width="100" height="8"/>
+				<reportElement key="staticText-18" x="385" y="259" width="100" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -436,7 +436,7 @@
 				<text><![CDATA[(+) Mora / Multa]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-19" x="377" y="242" width="100" height="8"/>
+				<reportElement key="staticText-19" x="385" y="242" width="100" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -449,7 +449,7 @@
 				<text><![CDATA[(-) Outros deduções]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-20" x="377" y="225" width="100" height="8"/>
+				<reportElement key="staticText-20" x="385" y="225" width="100" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -462,7 +462,7 @@
 				<text><![CDATA[(-) Descontos / Abatimentos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-21" x="377" y="208" width="100" height="8"/>
+				<reportElement key="staticText-21" x="385" y="208" width="100" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -475,7 +475,7 @@
 				<text><![CDATA[(=) Valor do Documento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-22" x="377" y="191" width="100" height="8"/>
+				<reportElement key="staticText-22" x="385" y="191" width="100" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -488,7 +488,7 @@
 				<text><![CDATA[Nosso Número]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-23" x="3" y="312" width="33" height="8"/>
+				<reportElement key="staticText-23" x="11" y="312" width="33" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -501,7 +501,7 @@
 				<text><![CDATA[Sacado :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-26" x="332" y="345" width="68" height="8"/>
+				<reportElement key="staticText-26" x="340" y="345" width="68" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -514,7 +514,7 @@
 				<text><![CDATA[Autenticação Mecânica]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-27" x="410" y="345" width="113" height="11"/>
+				<reportElement key="staticText-27" x="418" y="345" width="113" height="11"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -527,7 +527,7 @@
 				<text><![CDATA[FICHA DE COMPENSAÇÃO]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-1" x="120" y="138" width="42" height="17"/>
+				<reportElement key="textField-1" x="128" y="138" width="42" height="17"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -540,7 +540,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcCodBanco}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
-				<reportElement key="textField-2" stretchType="RelativeToTallestObject" x="172" y="138" width="342" height="17"/>
+				<reportElement key="textField-2" stretchType="RelativeToTallestObject" x="180" y="138" width="342" height="17"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -553,7 +553,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcLinhaDigitavel}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-3" x="5" y="164" width="347" height="9"/>
+				<reportElement key="textField-3" x="13" y="164" width="347" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -566,7 +566,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcLocalPagamento}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-4" x="5" y="181" width="347" height="9"/>
+				<reportElement key="textField-4" x="13" y="181" width="347" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -579,7 +579,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcCedente}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-5" x="5" y="198" width="66" height="9"/>
+				<reportElement key="textField-5" x="13" y="198" width="66" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -592,7 +592,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcDataDocumento}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-6" x="79" y="198" width="71" height="9"/>
+				<reportElement key="textField-6" x="87" y="198" width="71" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -605,7 +605,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcNumeroDocumento}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-7" x="155" y="198" width="51" height="9"/>
+				<reportElement key="textField-7" x="163" y="198" width="51" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -618,7 +618,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcEspecieDocumento}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-8" x="212" y="198" width="52" height="9"/>
+				<reportElement key="textField-8" x="220" y="198" width="52" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -631,7 +631,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcAceite}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-9" x="270" y="198" width="88" height="9"/>
+				<reportElement key="textField-9" x="278" y="198" width="88" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -644,7 +644,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcDataProcessamento}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-11" x="79" y="215" width="42" height="9"/>
+				<reportElement key="textField-11" x="87" y="215" width="42" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -657,7 +657,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcCarteira}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-12" x="127" y="215" width="51" height="9"/>
+				<reportElement key="textField-12" x="135" y="215" width="51" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -670,7 +670,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcEspecie}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement key="staticText-28" mode="Opaque" x="264" y="214" width="7" height="8"/>
+				<reportElement key="staticText-28" mode="Opaque" x="272" y="214" width="7" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -683,7 +683,7 @@
 				<text><![CDATA[X]]></text>
 			</staticText>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-15" x="431" y="164" width="80" height="9"/>
+				<reportElement key="textField-15" x="439" y="164" width="80" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -696,7 +696,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcDataVencimento}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-16" x="431" y="181" width="80" height="9"/>
+				<reportElement key="textField-16" x="439" y="181" width="80" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -709,7 +709,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcAgenciaCodigoCedente}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-18" x="431" y="215" width="80" height="9"/>
+				<reportElement key="textField-18" x="439" y="215" width="80" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -722,7 +722,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcValorDocumento}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-19" x="431" y="232" width="80" height="9"/>
+				<reportElement key="textField-19" x="439" y="232" width="80" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -735,7 +735,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcDescontoAbatimento}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-21" x="431" y="266" width="80" height="9"/>
+				<reportElement key="textField-21" x="439" y="266" width="80" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -748,7 +748,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcMoraMulta}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-24" x="5" y="234" width="357" height="9"/>
+				<reportElement key="textField-24" x="13" y="234" width="357" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -761,7 +761,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcInstrucaoAoCaixa1}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-31" x="37" y="311" width="477" height="9"/>
+				<reportElement key="textField-31" x="45" y="311" width="477" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -774,7 +774,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcSacadoL1}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-32" x="37" y="321" width="477" height="9"/>
+				<reportElement key="textField-32" x="45" y="321" width="477" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -787,7 +787,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcSacadoL2}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-34" x="37" y="331" width="477" height="9"/>
+				<reportElement key="textField-34" x="45" y="331" width="477" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -800,25 +800,25 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcSacadoL3}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement key="line-24" x="1" y="32" width="522" height="1"/>
+				<reportElement key="line-24" x="9" y="32" width="522" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-25" x="166" y="13" width="1" height="19"/>
+				<reportElement key="line-25" x="174" y="13" width="1" height="19"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-26" x="115" y="13" width="1" height="19"/>
+				<reportElement key="line-26" x="123" y="13" width="1" height="19"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement key="staticText-29" x="437" y="-2" width="87" height="17"/>
+				<reportElement key="staticText-29" x="445" y="-2" width="87" height="17"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -831,7 +831,7 @@
 				<text><![CDATA[RECIBO DO SACADO]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-35" x="120" y="13" width="42" height="17"/>
+				<reportElement key="textField-35" x="128" y="13" width="42" height="17"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -844,31 +844,31 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsCodBanco}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement key="line-30" x="342" y="33" width="1" height="17"/>
+				<reportElement key="line-30" x="350" y="33" width="1" height="17"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-31" x="150" y="49" width="1" height="17"/>
+				<reportElement key="line-31" x="158" y="49" width="1" height="17"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-32" x="1" y="66" width="522" height="1"/>
+				<reportElement key="line-32" x="9" y="66" width="522" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-33" x="388" y="33" width="1" height="50"/>
+				<reportElement key="line-33" x="396" y="33" width="1" height="50"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement key="staticText-31" x="260" y="49" width="60" height="8"/>
+				<reportElement key="staticText-31" x="268" y="49" width="60" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -881,7 +881,7 @@
 				<text><![CDATA[Data de Vencimento]]></text>
 			</staticText>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-37" x="263" y="56" width="46" height="9"/>
+				<reportElement key="textField-37" x="271" y="56" width="46" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -894,7 +894,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsDataVencimento}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement key="staticText-32" x="222" y="32" width="106" height="8"/>
+				<reportElement key="staticText-32" x="231" y="32" width="106" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -907,7 +907,7 @@
 				<text><![CDATA[Agência / Código do Cedente]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-38" x="226" y="39" width="106" height="9"/>
+				<reportElement key="textField-38" x="234" y="39" width="106" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -920,7 +920,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsAgenciaCodigoCedente}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement key="staticText-33" x="344" y="32" width="24" height="8"/>
+				<reportElement key="staticText-33" x="353" y="32" width="24" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -933,7 +933,7 @@
 				<text><![CDATA[Espécie]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-39" x="344" y="39" width="39" height="9"/>
+				<reportElement key="textField-39" x="352" y="39" width="39" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -946,7 +946,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsEspecie}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement key="staticText-34" x="390" y="32" width="37" height="8"/>
+				<reportElement key="staticText-34" x="399" y="32" width="37" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -959,25 +959,25 @@
 				<text><![CDATA[Quantidade]]></text>
 			</staticText>
 			<line>
-				<reportElement key="line-39" x="1" y="83" width="522" height="1"/>
+				<reportElement key="line-39" x="9" y="83" width="522" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-40" x="87" y="67" width="1" height="17"/>
+				<reportElement key="line-40" x="95" y="67" width="1" height="17"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-41" x="172" y="67" width="1" height="17"/>
+				<reportElement key="line-41" x="180" y="67" width="1" height="17"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement key="staticText-39" x="390" y="49" width="82" height="8"/>
+				<reportElement key="staticText-39" x="398" y="49" width="82" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -990,7 +990,7 @@
 				<text><![CDATA[Valor do Documento]]></text>
 			</staticText>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-43" x="390" y="56" width="74" height="9"/>
+				<reportElement key="textField-43" x="398" y="56" width="74" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1003,7 +1003,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsValorDocumento}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement key="staticText-40" x="2" y="66" width="80" height="8"/>
+				<reportElement key="staticText-40" x="11" y="66" width="80" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1016,7 +1016,7 @@
 				<text><![CDATA[(-) Descontos / Abatimentos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-41" x="175" y="66" width="82" height="8"/>
+				<reportElement key="staticText-41" x="183" y="66" width="82" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1029,7 +1029,7 @@
 				<text><![CDATA[(+) Mora / Multa]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-42" x="390" y="66" width="82" height="8"/>
+				<reportElement key="staticText-42" x="399" y="66" width="82" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1042,7 +1042,7 @@
 				<text><![CDATA[(=) Valor cobrado]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-44" x="2" y="49" width="66" height="8"/>
+				<reportElement key="staticText-44" x="11" y="49" width="66" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1055,7 +1055,7 @@
 				<text><![CDATA[Número do Documento]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-44" x="2" y="56" width="71" height="9"/>
+				<reportElement key="textField-44" x="13" y="56" width="71" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1068,7 +1068,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsNumeroDocumento}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement key="staticText-46" x="2" y="32" width="33" height="8"/>
+				<reportElement key="staticText-46" x="11" y="32" width="33" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1081,7 +1081,7 @@
 				<text><![CDATA[Cedente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement key="staticText-49" x="415" y="101" width="68" height="8"/>
+				<reportElement key="staticText-49" x="423" y="101" width="68" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1094,7 +1094,7 @@
 				<text><![CDATA[Autenticação Mecânica]]></text>
 			</staticText>
 			<image vAlign="Middle" isUsingCache="true">
-				<reportElement key="image-4" x="2" y="139" width="112" height="18">
+				<reportElement key="image-4" x="10" y="139" width="112" height="18">
 					<printWhenExpression><![CDATA[$F{txtFcLogoBanco} instanceof java.awt.Image]]></printWhenExpression>
 				</reportElement>
 				<box>
@@ -1106,7 +1106,7 @@
 				<imageExpression class="java.awt.Image"><![CDATA[$F{txtFcLogoBanco}]]></imageExpression>
 			</image>
 			<image vAlign="Middle" isUsingCache="true">
-				<reportElement key="image-5" x="2" y="14" width="112" height="18">
+				<reportElement key="image-5" x="10" y="14" width="112" height="18">
 					<printWhenExpression><![CDATA[$F{txtRsLogoBanco} instanceof java.awt.Image]]></printWhenExpression>
 				</reportElement>
 				<box>
@@ -1118,7 +1118,7 @@
 				<imageExpression class="java.awt.Image"><![CDATA[$F{txtRsLogoBanco}]]></imageExpression>
 			</image>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-49" x="383" y="197" width="128" height="9"/>
+				<reportElement key="textField-49" x="391" y="197" width="128" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1131,7 +1131,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcNossoNumero}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-50" x="442" y="39" width="79" height="9"/>
+				<reportElement key="textField-50" x="450" y="39" width="79" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1144,7 +1144,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsNossoNumero}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement key="staticText-51" x="3" y="83" width="33" height="8"/>
+				<reportElement key="staticText-51" x="11" y="83" width="33" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1157,7 +1157,7 @@
 				<text><![CDATA[Sacado]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-54" x="2" y="39" width="257" height="9"/>
+				<reportElement key="textField-54" x="13" y="39" width="257" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1170,7 +1170,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsCedente}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-55" x="5" y="90" width="256" height="9"/>
+				<reportElement key="textField-55" x="13" y="90" width="256" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1183,7 +1183,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsSacado}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-39" x="392" y="39" width="39" height="9"/>
+				<reportElement key="textField-39" x="400" y="39" width="39" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1196,7 +1196,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsQuantidade}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-43" x="5" y="73" width="74" height="9"/>
+				<reportElement key="textField-43" x="13" y="73" width="74" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1209,7 +1209,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsDescontoAbatimento}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-43" x="176" y="73" width="74" height="9"/>
+				<reportElement key="textField-43" x="184" y="73" width="74" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1222,7 +1222,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsMoraMulta}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-43" x="392" y="73" width="74" height="9"/>
+				<reportElement key="textField-43" x="400" y="73" width="74" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1235,7 +1235,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsValorCobrado}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-19" x="431" y="249" width="80" height="9"/>
+				<reportElement key="textField-19" x="439" y="249" width="80" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1248,7 +1248,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcOutraDeducao}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-21" x="431" y="283" width="80" height="9"/>
+				<reportElement key="textField-21" x="439" y="283" width="80" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1261,7 +1261,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcOutroAcrescimo}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-5" x="5" y="215" width="66" height="9"/>
+				<reportElement key="textField-5" x="13" y="215" width="66" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1274,7 +1274,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcUsoBanco}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-18" x="187" y="215" width="73" height="9"/>
+				<reportElement key="textField-18" x="195" y="215" width="73" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1287,7 +1287,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcQuantidade}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-18" x="297" y="215" width="73" height="9"/>
+				<reportElement key="textField-18" x="305" y="215" width="73" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1300,7 +1300,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcValor}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-21" x="431" y="300" width="80" height="9"/>
+				<reportElement key="textField-21" x="439" y="300" width="80" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1313,7 +1313,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcValorCobrado}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-24" x="5" y="252" width="357" height="9"/>
+				<reportElement key="textField-24" x="13" y="252" width="357" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1326,7 +1326,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcInstrucaoAoCaixa3}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-24" x="5" y="243" width="357" height="9"/>
+				<reportElement key="textField-24" x="13" y="243" width="357" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1339,7 +1339,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcInstrucaoAoCaixa2}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-24" x="5" y="261" width="357" height="9"/>
+				<reportElement key="textField-24" x="13" y="261" width="357" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1352,7 +1352,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcInstrucaoAoCaixa4}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-24" x="5" y="270" width="357" height="9"/>
+				<reportElement key="textField-24" x="13" y="270" width="357" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1365,7 +1365,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcInstrucaoAoCaixa5}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-24" x="5" y="279" width="357" height="9"/>
+				<reportElement key="textField-24" x="13" y="279" width="357" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1378,7 +1378,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcInstrucaoAoCaixa6}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-24" x="5" y="288" width="357" height="9"/>
+				<reportElement key="textField-24" x="13" y="288" width="357" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1391,31 +1391,31 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcInstrucaoAoCaixa7}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="1" y="345" width="319" height="35"/>
+				<reportElement x="9" y="345" width="319" height="35"/>
 				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Int2of5" drawText="false" checksumRequired="false" barWidth="0">
 					<jr:codeExpression><![CDATA[$F{txtFcCodigoBarra}]]></jr:codeExpression>
 				</jr:barbecue>
 			</componentElement>
 			<line>
-				<reportElement key="line-8" x="0" y="137" width="1" height="206"/>
+				<reportElement key="line-8" x="8" y="137" width="1" height="206"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-8" x="523" y="137" width="1" height="206"/>
+				<reportElement key="line-8" x="531" y="137" width="1" height="206"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-16" x="182" y="208" width="1" height="17"/>
+				<reportElement key="line-16" x="190" y="208" width="1" height="17"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-24" x="5" y="297" width="357" height="9"/>
+				<reportElement key="textField-24" x="13" y="297" width="357" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1428,13 +1428,13 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcInstrucaoAoCaixa8}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement key="line-20" x="0" y="130" width="524" height="1"/>
+				<reportElement key="line-20" x="8" y="130" width="524" height="1"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement key="staticText-14" x="466" y="121" width="57" height="8"/>
+				<reportElement key="staticText-14" x="474" y="121" width="57" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1447,31 +1447,31 @@
 				<text><![CDATA[Corte na linha abaixo]]></text>
 			</staticText>
 			<line>
-				<reportElement key="line-20" x="0" y="117" width="524" height="1"/>
+				<reportElement key="line-20" x="8" y="117" width="524" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-8" x="0" y="12" width="1" height="105"/>
+				<reportElement key="line-8" x="8" y="12" width="1" height="105"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-20" x="0" y="12" width="524" height="1"/>
+				<reportElement key="line-20" x="8" y="12" width="524" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-8" x="523" y="12" width="1" height="105"/>
+				<reportElement key="line-8" x="531" y="12" width="1" height="105"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-55" x="5" y="107" width="395" height="9"/>
+				<reportElement key="textField-55" x="13" y="107" width="395" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1484,7 +1484,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsInstrucaoAoSacado}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement key="staticText-51" x="2" y="100" width="33" height="8"/>
+				<reportElement key="staticText-51" x="11" y="100" width="33" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1497,31 +1497,31 @@
 				<text><![CDATA[Instruções]]></text>
 			</staticText>
 			<line>
-				<reportElement key="line-40" x="412" y="101" width="1" height="17"/>
+				<reportElement key="line-40" x="420" y="101" width="1" height="17"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-20" x="0" y="100" width="524" height="1"/>
+				<reportElement key="line-20" x="8" y="100" width="524" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-31" x="220" y="32" width="1" height="17"/>
+				<reportElement key="line-31" x="228" y="32" width="1" height="17"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement key="line-33" x="438" y="33" width="1" height="17"/>
+				<reportElement key="line-33" x="446" y="33" width="1" height="17"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement key="staticText-34" x="440" y="32" width="44" height="8"/>
+				<reportElement key="staticText-34" x="449" y="32" width="44" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1534,13 +1534,13 @@
 				<text><![CDATA[Nosso Número]]></text>
 			</staticText>
 			<line>
-				<reportElement key="line-24" x="1" y="49" width="522" height="1"/>
+				<reportElement key="line-24" x="9" y="49" width="522" height="1"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement key="staticText-41" x="153" y="49" width="42" height="8"/>
+				<reportElement key="staticText-41" x="161" y="49" width="42" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1553,13 +1553,13 @@
 				<text><![CDATA[CPF / CNPJ]]></text>
 			</staticText>
 			<line>
-				<reportElement key="line-31" x="257" y="49" width="1" height="17"/>
+				<reportElement key="line-31" x="265" y="49" width="1" height="17"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement key="staticText-40" x="89" y="66" width="80" height="8"/>
+				<reportElement key="staticText-40" x="97" y="66" width="80" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1572,7 +1572,7 @@
 				<text><![CDATA[(-) Outras deduções]]></text>
 			</staticText>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-43" x="92" y="73" width="74" height="9"/>
+				<reportElement key="textField-43" x="100" y="73" width="74" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1585,7 +1585,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsOutraDeducao}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-37" x="156" y="56" width="94" height="9"/>
+				<reportElement key="textField-37" x="164" y="56" width="94" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1598,7 +1598,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsCpfCnpj}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement key="staticText-41" x="275" y="66" width="82" height="8"/>
+				<reportElement key="staticText-41" x="283" y="66" width="82" height="8"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1611,13 +1611,13 @@
 				<text><![CDATA[(+) Outros acréscimos]]></text>
 			</staticText>
 			<line>
-				<reportElement key="line-41" x="272" y="67" width="1" height="17"/>
+				<reportElement key="line-41" x="280" y="67" width="1" height="17"/>
 				<graphicElement>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
-				<reportElement key="textField-2" stretchType="RelativeToTallestObject" x="172" y="13" width="342" height="17"/>
+				<reportElement key="textField-2" stretchType="RelativeToTallestObject" x="180" y="13" width="342" height="17"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1630,7 +1630,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtFcLinhaDigitavel}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-43" x="276" y="73" width="74" height="9"/>
+				<reportElement key="textField-43" x="284" y="73" width="74" height="9"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1643,7 +1643,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsOutroAcrescimo}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-35" x="5" y="14" width="42" height="17">
+				<reportElement key="textField-35" x="13" y="14" width="42" height="17">
 					<printWhenExpression><![CDATA[$F{txtRsLogoBanco} instanceof java.lang.String]]></printWhenExpression>
 				</reportElement>
 				<box>
@@ -1658,7 +1658,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{txtRsLogoBanco}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement key="textField-35" x="5" y="139" width="42" height="17">
+				<reportElement key="textField-35" x="13" y="139" width="42" height="17">
 					<printWhenExpression><![CDATA[$F{txtRsLogoBanco} instanceof java.lang.String]]></printWhenExpression>
 				</reportElement>
 				<box>
