@@ -111,9 +111,9 @@ public class BoletoViewer {
 
 		Objects.checkNotNull(boleto);
 
-		setTemplate(templatePath);
-
 		this.pdfViewer = new PdfViewer(boleto);
+		
+		setTemplate(templatePath);		
 	}
 
 	/**
