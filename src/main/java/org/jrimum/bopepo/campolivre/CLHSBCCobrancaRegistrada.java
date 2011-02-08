@@ -35,7 +35,7 @@ import org.jrimum.utilix.text.Filler;
 
 /**
  * <p>
- * 	O campo livre do HSBC, para cobrança não registrada(CNR), deve seguir esta forma:
+ * 	O campo livre do HSBC, para cobrança registrada(CSB), deve seguir esta forma:
  * </p>
  * 
  * 	<table border="1" cellpadding="0" cellspacing="0" style="border-collapse:
