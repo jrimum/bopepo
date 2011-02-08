@@ -213,7 +213,7 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 
 	/**
 	 * <p>
-	 * Cria uma linha digitável com a partir do código de barras passado.
+	 * Cria uma linha digitável a partir do código de barras passado.
 	 * </p>
 	 * 
 	 * @param codigoDeBarras
