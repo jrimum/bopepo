@@ -281,21 +281,34 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	}
 	
 	/**
+	 * <p>
+	 * Constrói um campo livre após executar os métodos
+	 * {@link #checkValues(Titulo)} e {@link #addFields(Titulo)}, retornando em
+	 * seguida esta instância pronta para escrita.
+	 * </p>
+	 * 
 	 * @param titulo
-	 * @return
+	 * 
+	 * @return a instância pronta para escrita
 	 * 
 	 * @since 0.2
 	 */
-	protected final CampoLivre build(Titulo titulo){
-		
+	protected final CampoLivre build(Titulo titulo) {
+
 		checkValues(titulo);
-		
+
 		addFields(titulo);
-		
+
 		return this;
 	}
 	
 	/**
+	 * <p>
+	 * Usado pelo método {@link #build(Titulo)} para verificar a consistência do
+	 * campo livre. Se algum inconsistência for verificada, este método deverá
+	 * lança-la.
+	 * </p>
+	 * 
 	 * @param titulo
 	 * 
 	 * @since 0.2
@@ -303,6 +316,11 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	protected abstract void checkValues(Titulo titulo);
 	
 	/**
+	 * <p>
+	 * Usado pelo método {@link #build(Titulo)}, adiciona os campos do campo
+	 * livre deixando-o pronto para escrita.
+	 * </p>
+	 * 
 	 * @param titulo
 	 * 
 	 * @since 0.2
