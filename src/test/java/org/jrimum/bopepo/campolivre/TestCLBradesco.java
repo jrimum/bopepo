@@ -84,6 +84,18 @@ public class TestCLBradesco extends CampoLivreBaseTest {
 
 		seNaoPermiteAgenciaNula(titulo);
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void seNaoPermiteAgenciaComCodigoNegativo() {
+
+		seNaoPermiteAgenciaComCodigoNegativo(titulo);
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteAgenciaComCodigoZero() {
+
+		seNaoPermiteAgenciaComCodigoZero(titulo);
+	}
 
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNumeroDaAgenciaAcimaDe4Digitos() {
@@ -137,6 +149,12 @@ public class TestCLBradesco extends CampoLivreBaseTest {
 	public void seNaoPermiteNumeroDaContaNulo() {
 
 		seNaoPermiteNumeroDaContaNulo(titulo);
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaContaComCodigoZero() {
+
+		seNaoPermiteNumeroDaContaComCodigoZero(titulo);
 	}
 
 	@Test(expected = CampoLivreException.class)
