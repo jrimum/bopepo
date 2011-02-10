@@ -39,6 +39,12 @@ import org.junit.Test;
  *
  */
 public class TestBancoSuportado{
+	
+	@Test
+	public void testQuantidade() {
+		
+		//TODO
+	}
 
 	@Test
 	public void testGetCodigo() {
