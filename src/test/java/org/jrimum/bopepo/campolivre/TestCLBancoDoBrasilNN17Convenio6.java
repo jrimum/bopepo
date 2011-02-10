@@ -42,7 +42,7 @@ import org.junit.Before;
 /**
  * 
  * Teste unitário do campo livre do banco do brasil com o nosso número
- * de tamanho igual a 17.
+ * de tamanho igual a 17 e convênio de 6 posições.
  * 
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
@@ -54,7 +54,7 @@ import org.junit.Before;
  * 
  * @version 0.2
  */
-public class TestCLBancoDoBrasilNN17 extends CampoLivreBaseTest {
+public class TestCLBancoDoBrasilNN17Convenio6 extends CampoLivreBaseTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -74,7 +74,7 @@ public class TestCLBancoDoBrasilNN17 extends CampoLivreBaseTest {
 		
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasseGeradoraDoCampoLivre(CLBancoDoBrasilNN17.class);
+		setClasseGeradoraDoCampoLivre(CLBancoDoBrasilNN17Convenio6.class);
 		setCampoLivreValidoAsString("1234561234567890123456721");
 	}
 
