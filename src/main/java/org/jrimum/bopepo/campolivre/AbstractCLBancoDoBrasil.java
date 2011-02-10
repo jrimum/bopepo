@@ -72,6 +72,8 @@ abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
 	protected static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException{
 
 		checkNossoNumero(titulo);
+		checkNumeroDaContaNotNull(titulo);
+		checkCodigoDoNumeroDaConta(titulo);
 		
 		switch(titulo.getNossoNumero().length()){
 		case NN10:
@@ -79,7 +81,11 @@ abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
 		case NN11:
 			return new CLBancoDoBrasilNN11(titulo);
 		case NN17:
-			return new CLBancoDoBrasilNN17(titulo);
+			if(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta() < 1000000){
+				return new CLBancoDoBrasilNN17Convenio6(titulo);
+			}else{
+				return new CLBancoDoBrasilNN17Convenio7().build(titulo);
+			}
 		default:
 			throw new NotSupportedCampoLivreException(
 					"Campo livre diponível somente para títulos com nosso número " +
