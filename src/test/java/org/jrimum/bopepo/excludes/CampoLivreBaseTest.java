@@ -38,6 +38,7 @@ import java.math.RoundingMode;
 import org.jrimum.bopepo.campolivre.CampoLivre;
 import org.jrimum.bopepo.campolivre.CampoLivreException;
 import org.jrimum.bopepo.campolivre.CampoLivreFactory;
+import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
@@ -109,6 +110,22 @@ public class CampoLivreBaseTest {
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
+	}
+	
+	protected void seNaoPermiteAgenciaComCodigoZero(Titulo titulo) throws CampoLivreException{
+
+		titulo.getContaBancaria().setAgencia(new Agencia(-0));
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+	
+	protected void seNaoPermiteAgenciaComCodigoNegativo(Titulo titulo) throws IllegalArgumentException{
+
+		//uma exceção deve ser lançada aqui
+		titulo.getContaBancaria().setAgencia(new Agencia(-1));
 	}
 	
 	protected void seNaoPermiteNumeroDaAgenciaComDigitosAcimaDoLimite(Titulo titulo, int limiteAcima) throws CampoLivreException {
@@ -214,6 +231,16 @@ public class CampoLivreBaseTest {
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
+	
+	protected void seNaoPermiteNumeroDaContaComCodigoZero(Titulo titulo) throws CampoLivreException{
+
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(0));
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
 
 	protected void seNaoPermiteNumeroDaContaComCodigoNegativo(Titulo titulo) throws CampoLivreException{
 
@@ -228,6 +255,48 @@ public class CampoLivreBaseTest {
 	protected void seNaoPermiteNumeroDaContaComCodigoAcimaDoLimite(Titulo titulo, int limiteAcima) throws CampoLivreException{
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(limiteAcima));
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+	
+	protected void seNaoPermiteParametroBancarioNulo(Titulo titulo) throws CampoLivreException{
+
+		titulo.setParametrosBancarios(null);
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+	
+	protected void seNaoPermiteParametroBancarioAusente(Titulo titulo) throws CampoLivreException{
+
+		titulo.setParametrosBancarios(new ParametrosBancariosMap());
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+	
+	protected void seNaoPermiteParametroBancarioSemValor(Titulo titulo, String parametro) throws IllegalArgumentException{
+		
+		//uma exceção deve ser lançada aqui
+		titulo.setParametrosBancarios(new ParametrosBancariosMap(parametro, null));
+	}
+	
+	protected void seNaoPermiteValorDoTituloNulo(Titulo titulo) throws NullPointerException{
+
+		//uma exceção deve ser lançada aqui
+		titulo.setValor(null);
+	}
+	
+	protected void seNaoPermiteValorDoTituloNegativo(Titulo titulo) throws CampoLivreException{
+
+		titulo.setValor(BigDecimal.valueOf(-23.4150));
 
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 
