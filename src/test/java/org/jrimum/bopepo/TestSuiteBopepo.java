@@ -32,7 +32,7 @@ package org.jrimum.bopepo;
 
 import org.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN10;
 import org.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN11;
-import org.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN17;
+import org.jrimum.bopepo.campolivre.TestCLBancoDoBrasilNN17Convenio6;
 import org.jrimum.bopepo.campolivre.TestCLBancoReal;
 import org.jrimum.bopepo.campolivre.TestCLBancoSafraCobrancaNaoRegistrada;
 import org.jrimum.bopepo.campolivre.TestCLBancoSafraCobrancaRegistrada;
@@ -47,6 +47,7 @@ import org.jrimum.bopepo.campolivre.TestCLItauComCarteirasEspeciais;
 import org.jrimum.bopepo.campolivre.TestCLItauPadrao;
 import org.jrimum.bopepo.campolivre.TestCLMercantilDoBrasil;
 import org.jrimum.bopepo.campolivre.TestCLNossaCaixa;
+import org.jrimum.bopepo.campolivre.TestCLSicredi;
 import org.jrimum.bopepo.campolivre.TestCLUnibancoCobrancaNaoRegistrada;
 import org.jrimum.bopepo.campolivre.TestCLUnibancoCobrancaRegistrada;
 import org.junit.runner.RunWith;
@@ -62,18 +63,19 @@ import org.junit.runners.Suite;
 			TestBoletoUtil.class,
 			TestFatorDeVencimento.class,
 			TestBancoSuportado.class,
+			TestCLBradesco.class,
+			TestCLSicredi.class,
 			TestCodigoDeBarras.class,
 			TestLinhaDigitavel.class,
 			TestCLBancoDoBrasilNN10.class,
 			TestCLBancoDoBrasilNN11.class,
-			TestCLBancoDoBrasilNN17.class,
+			TestCLBancoDoBrasilNN17Convenio6.class,
 			TestCLBancoReal.class,
 			TestCLBancoSafraCobrancaNaoRegistrada.class,
 			TestCLBancoSafraCobrancaRegistrada.class,
 			TestCLBanestes.class,
 			TestCLBanrisulCobrancaNaoRegistrada.class,
 			TestCLBanrisulCobrancaRegistrada.class,
-			TestCLBradesco.class,
 			TestCLCaixaEconomicaFederalSIGCB.class,
 			TestCLCaixaEconomicaFederalSINCO.class,
 			TestCLHSBCCobrancaNaoRegistrada.class,
