@@ -114,7 +114,6 @@ import org.jrimum.vallia.digitoverificador.TipoDeModulo;
  * @see org.jrimum.bopepo.campolivre.AbstractCampoLivre
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author <a href="http://jrimum.nordestefomento.com.br/wprojeto">JRimum</a>
  */
 
 @SuppressWarnings("serial")

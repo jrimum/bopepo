@@ -109,7 +109,7 @@ public class TesteBoletoBancoRuralRegistro {
 		 * Definidos como padrão pela FEBRABAN.
 		 * Verifique na documentação.
 		 */
-		titulo.setParametrosBancarios(new ParametrosBancariosMap());
+		titulo.setParametrosBancarios(new ParametrosBancariosMap("POST0_AGENCIA",2));
 		
 		/* 
 		 * INFORMANDO OS DADOS SOBRE O BOLETO.
