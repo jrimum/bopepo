@@ -47,6 +47,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
  * do Banco Bradesco
  * </p>
  * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @version 0.2
@@ -63,19 +64,29 @@ public class BoletoBradescoExemplo {
 		
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		
-		//Banco bradesco 237
+		/*
+		 * Banco bradesco 237
+		 */
 		contaBancaria.setBanco(BancosSuportados.BANCO_BRADESCO.create());
 		
-		//Agência com no máximo 4 dígitos
+		/*
+		 * Agência com no máximo 4 dígitos
+		 */
 		contaBancaria.setAgencia(new Agencia(1234));
 
-		//Carteira com no máximo 2 dígitos 
+		/*
+		 * Carteira com no máximo 2 dígitos 
+		 */
 		contaBancaria.setCarteira(new Carteira(12));
 		
-		//Nosso número com 11 dígitos
+		/*
+		 * Nosso número com 11 dígitos
+		 */
 		titulo.setNossoNumero("01234567891");
 		
-		//Número da conta com no máxiom 7 dígitos
+		/*
+		 * Número da conta com no máxiom 7 dígitos
+		 */
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(1234567));
 		
 		Boleto boleto = Exemplos.crieBoleto(titulo);
