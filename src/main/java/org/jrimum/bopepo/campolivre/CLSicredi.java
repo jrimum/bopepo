@@ -1,5 +1,5 @@
 /* 
- * Copyright 2008 JRimum Project
+ * Copyright 2010 JRimum Project
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -10,11 +10,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  * 
- * Created at: 03/10/2008 - 16:13:14
+ * Created at: 15/01/2010 - 20:40:59
  *
  * ================================================================================
  *
- * Direitos autorais 2008 JRimum Project
+ * Direitos autorais 2010 JRimum Project
  *
  * Licenciado sob a Licença Apache, Versão 2.0 ("LICENÇA"); você não pode 
  * usar esse arquivo exceto em conformidade com a esta LICENÇA. Você pode obter uma 
@@ -24,7 +24,7 @@
  * expressas ou tácitas. Veja a LICENÇA para a redação específica a reger permissões 
  * e limitações sob esta LICENÇA.
  * 
- * Criado em: 03/10/2008 - 16:13:14
+ * Criado em: 15/01/2010 - 20:40:59
  * 
  */
 
@@ -67,10 +67,16 @@ import org.jrimum.vallia.digitoverificador.TipoDeModulo;
  * <td style="text-align:left;padding-left:10">Código númerico correspondente ao tipo de carteira: "1" - carteira simples</td>
  * </tr>
  * <tr>
- * <td >22-30</td>
- * <td >9</td>
- * <td style="text-align:left;padding-left:10">Nosso Número (8) + dígito verificador (1)</td>
- * <td style="text-align:left;padding-left:10">Nosso Número (9)</td>
+ * <td >22-29</td>
+ * <td >8</td>
+ * <td style="text-align:left;padding-left:10">Nosso Número (8)</td>
+ * <td style="text-align:left;padding-left:10">Nosso Número</td>
+ * </tr>
+ * <tr>
+ * <td >30-30</td>
+ * <td >1</td>
+ * <td style="text-align:left;padding-left:10">DV do Nosso Número (1)</td>
+ * <td style="text-align:left;padding-left:10">Dígito Verificador do Nosso Número</td>
  * </tr>
  * <tr>
  * <td >31-34</td>
@@ -128,7 +134,7 @@ class CLSicredi extends AbstractCLSicredi {
 	/**
 	 * Número de campos = 9.
 	 */
-	protected static final Integer FIELDS_LENGTH = 9;
+	protected static final Integer FIELDS_LENGTH = 10;
 
 	/**
 	 * <p>
@@ -194,11 +200,11 @@ class CLSicredi extends AbstractCLSicredi {
 		checkDigitoDoNossoNumero(titulo);
 		checkTamanhoDigitoDoNossoNumero(titulo, 1);
 		checkCodigoDaAgencia(titulo);
-		checkCodigoDaAgenciaMenorOuIgualQue(titulo, 10000);
+		checkCodigoDaAgenciaMenorOuIgualQue(titulo, 99999);
 		checkParametrosBancarios(titulo, POSTO_DA_AGENCIA);
 		checkNumeroDaContaNotNull(titulo);
 		checkCodigoDoNumeroDaConta(titulo);
-		checkCodigoDoNumeroDaContaMenorOuIgualQue(titulo, 100000);
+		checkCodigoDoNumeroDaContaMenorOuIgualQue(titulo, 99999);
 		checkValor(titulo);
 	}
 	
@@ -215,10 +221,11 @@ class CLSicredi extends AbstractCLSicredi {
 		}
 		
 		this.add(FIELD_CARTEIRA);
-		this.add(new Field<String>(titulo.getNossoNumero()+titulo.getDigitoDoNossoNumero(), 9, Filler.ZERO_LEFT));
+		this.add(new Field<String>(titulo.getNossoNumero(), 8, Filler.ZERO_LEFT));
+		this.add(new Field<String>(titulo.getDigitoDoNossoNumero(), 1, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
 		this.add(new Field<Object>(titulo.getParametrosBancarios().getValor(POSTO_DA_AGENCIA), 2, Filler.ZERO_LEFT));
-		this.add(new Field<Object>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 5, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 5, Filler.ZERO_LEFT));
 		
 		if (titulo.getContaBancaria().getCarteira().isSemRegistro() && titulo.getValor().compareTo(ZERO) == 1) {
 			
