@@ -56,6 +56,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
+import org.jrimum.utilix.ClassLoaders;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;
@@ -80,8 +81,8 @@ class PdfViewer {
 
 	private static Logger log = Logger.getLogger(PdfViewer.class);
 
-	private static URL TEMPLATE_PADRAO_COM_SACADOR_AVALISTA = PdfViewer.class.getResource("/pdf/BoletoTemplateComSacadorAvalista.pdf");
-	private static URL TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA = PdfViewer.class.getResource("/pdf/BoletoTemplateSemSacadorAvalista.pdf");
+	private static URL TEMPLATE_PADRAO_COM_SACADOR_AVALISTA = ClassLoaders.getResource("/pdf/BoletoTemplateComSacadorAvalista.pdf",PdfViewer.class);
+	private static URL TEMPLATE_PADRAO_SEM_SACADOR_AVALISTA = ClassLoaders.getResource("/pdf/BoletoTemplateSemSacadorAvalista.pdf",PdfViewer.class);
 
 	private static final String HIFEN_SEPERADOR = "-";
 	
