@@ -83,6 +83,7 @@ public class TestCLSicredi extends CampoLivreBaseTest {
 		setCampoLivreValidoAsString("3107200003101650200623101");
 	}
 	
+
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteCarteiraNull() {
 
@@ -163,5 +164,101 @@ public class TestCLSicredi extends CampoLivreBaseTest {
 		seCampoLivreEscritoEstaCorreto();
 	}
 	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteDigitoDoNossoNumeroAusente() {
+
+		titulo.setDigitoDoNossoNumero("");
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		seCampoLivreEscritoEstaCorreto();
+	}
 	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteDigitoDoNossoNumeroComTamanhoDiferenteDe1() {
+
+		titulo.setDigitoDoNossoNumero("124");
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		seCampoLivreEscritoEstaCorreto();
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void seNaoPermiteAgenciaComCodigoNegativo() {
+
+		seNaoPermiteAgenciaComCodigoNegativo(titulo);
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteAgenciaComCodigoZero() {
+
+		seNaoPermiteAgenciaComCodigoZero(titulo);
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteAgenciaNula() {
+
+		seNaoPermiteAgenciaNula(titulo);
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaAgenciaAcimaDe4Digitos() {
+
+		seNaoPermiteNumeroDaAgenciaComDigitosAcimaDoLimite(titulo, 10000);
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteParametroBancarioNulo() {
+
+		seNaoPermiteParametroBancarioNulo(titulo);
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteParametroBancarioPostoDaAgenciaAusente() {
+
+		seNaoPermiteParametroBancarioAusente(titulo);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void seNaoPermiteParametroBancarioPostoDaAgenciaSemValor() {
+
+		seNaoPermiteParametroBancarioSemValor(titulo, "PostoDaAgencia");
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaContaNulo() {
+
+		seNaoPermiteNumeroDaContaNulo(titulo);
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaContaComCodigoZero() {
+
+		seNaoPermiteNumeroDaContaComCodigoZero(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaContaComCodigoNegativo() {
+
+		seNaoPermiteNumeroDaContaComCodigoNegativo(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaContaComCodigoAcimaDe5Digitos() {
+
+		seNaoPermiteNumeroDaContaComCodigoAcimaDoLimite(titulo, 123456);
+	}
+	
+	@Test(expected = NullPointerException.class)
+	public void seNaoPermiteValorDoTituloNulo() {
+
+		seNaoPermiteValorDoTituloNulo(titulo);
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteValorDoTituloNegativo() {
+
+		seNaoPermiteValorDoTituloNegativo(titulo);
+	}
 }
