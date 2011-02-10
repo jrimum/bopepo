@@ -135,12 +135,17 @@ class CLBradesco extends AbstractCLBradesco {
 	/**
 	 * Tamanho do campo Constante = 1. 
 	 */
-	protected static final Integer CONSTANTE_LENGTH = Integer.valueOf(1);
+	protected static final Integer CONSTANT_LENGTH = Integer.valueOf(1);
 	
 	/**
 	 * Valor do campo Constante =  0. 
 	 */
-	protected static final Integer CONSTANTE_VALUE = Integer.valueOf(0);
+	protected static final Integer CONSTANT_VALUE = Integer.valueOf(0);
+
+	/**
+	 * Constante em forma de campo {@link #CONSTANT_VALUE} e {@link #CONSTANT_LENGTH}.
+	 */
+	private static final Field<Integer> CONSTANT_FIELD = new Field<Integer>(CONSTANT_VALUE, CONSTANT_LENGTH);
 	
 	/**
 	 * <p>
@@ -158,7 +163,7 @@ class CLBradesco extends AbstractCLBradesco {
 	protected void checkValues(Titulo titulo){
 		
 		checkAgenciaNotNull(titulo);
-		checkCodigoDaAgencia(titulo);//necessario caso seja uma interface
+		checkCodigoDaAgencia(titulo);
 		checkCodigoDaAgenciaMenorOuIgualQue(titulo, 9999);
 		checkCarteiraNotNull(titulo);
 		checkCodigoDaCarteira(titulo);
@@ -177,6 +182,6 @@ class CLBradesco extends AbstractCLBradesco {
 		this.add(new Field<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), CARTEIRA_LENGTH, Filler.ZERO_LEFT));
 		this.add(new Field<String>(titulo.getNossoNumero(), NOSSO_NUMERO_LENGTH, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(CONSTANTE_VALUE, CONSTANTE_LENGTH));
+		this.add(CONSTANT_FIELD );
 	}
 }
