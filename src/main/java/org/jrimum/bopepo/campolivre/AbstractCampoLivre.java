@@ -397,10 +397,9 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		
 		Objects.checkNotNull(titulo.getContaBancaria().getBanco(), "Banco da conta bancária do título não pode ser nulo!");
 		
-		if(!isCodigoDeCompensacaoOK(titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado())){
-			
-			throw new IllegalArgumentException(String.format("Código de compensação [%s] inválido!", titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado()));
-		}
+		boolean expression = isCodigoDeCompensacaoOK(titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado()); 
+		
+		Objects.checkArgument(expression, format("Código de compensação [%s] inválido!", titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado()));
 	}
 
 	/*
@@ -452,10 +451,9 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		
 		Objects.checkNotNull(titulo.getContaBancaria().getCarteira().getCodigo(), "Código da carteira não pode ser nulo!");
 		
-		if(titulo.getContaBancaria().getCarteira().getCodigo() < 1){
-			
-			throw new IllegalArgumentException(format("Código da carteira deve ser um número inteiro natural positivo e não [%s].",titulo.getContaBancaria().getCarteira().getCodigo()));
-		}
+		boolean expression = titulo.getContaBancaria().getCarteira().getCodigo() > 0; 
+		
+		Objects.checkArgument(expression, format("Código da carteira deve ser um número inteiro natural positivo e não [%s].",titulo.getContaBancaria().getCarteira().getCodigo()));
 	}
 	
 	/**
@@ -472,10 +470,10 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 */
 	protected final static void checkCodigoDaCarteiraMenorOuIgualQue(Titulo titulo, int limite){
 		
-		if(titulo.getContaBancaria().getCarteira().getCodigo() > limite){
-			
-			throw new IllegalArgumentException(format("Código [%s] da carteira deve ser um número menor que ou igual a [%s].", titulo.getContaBancaria().getCarteira().getCodigo()-1, limite));
-		}
+		
+		boolean expression = titulo.getContaBancaria().getCarteira().getCodigo() <= limite;
+		
+		Objects.checkArgument(expression,format("Código [%s] da carteira deve ser um número menor que ou igual a [%s].", titulo.getContaBancaria().getCarteira().getCodigo(), limite));
 	}
 	
 	/**
@@ -507,10 +505,9 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		
 		Objects.checkNotNull(titulo.getContaBancaria().getAgencia().getCodigo(), "Código da agência bancária não pode ser nulo!");
 		
-		if(titulo.getContaBancaria().getAgencia().getCodigo() < 1){
-			
-			throw new IllegalArgumentException(format("Código da agência bancária deve ser um número inteiro natural positivo e não [%s].",titulo.getContaBancaria().getAgencia().getCodigo()));
-		}
+		boolean expression = titulo.getContaBancaria().getAgencia().getCodigo() > 0; 
+		
+		Objects.checkArgument(expression, format("Código da agência bancária deve ser um número inteiro natural positivo e não [%s].",titulo.getContaBancaria().getAgencia().getCodigo()));
 	}
 
 	/**
@@ -527,11 +524,10 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * @since 0.2
 	 */
 	protected final static void checkCodigoDaAgenciaMenorOuIgualQue(Titulo titulo, int limite){
+
+		boolean expression = titulo.getContaBancaria().getAgencia().getCodigo() <= limite;
 		
-		if(titulo.getContaBancaria().getAgencia().getCodigo() > limite){
-			
-			throw new IllegalArgumentException(format("Código [%s] da agência deve ser um número menor que ou igual a [%s].", titulo.getContaBancaria().getAgencia().getCodigo()-1, limite));
-		}
+		Objects.checkArgument(expression , format("Código [%s] da agência deve ser um número menor que ou igual a [%s].", titulo.getContaBancaria().getAgencia().getCodigo(), limite));
 	}
 	
 	/**
@@ -581,10 +577,9 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		
 		Objects.checkNotNull(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), "Código do número da conta bancária não pode ser nulo!");
 		
-		if(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta() < 1){
-			
-			throw new IllegalArgumentException(format("Código do número da conta bancária deve ser um número inteiro natural positivo e não [%s].",titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta()));
-		}
+		boolean expression = titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta() > 0;
+		
+		Objects.checkArgument(expression, format("Código do número da conta bancária deve ser um número inteiro natural positivo e não [%s].", titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta()));
 	}
 	
 	/**
@@ -601,10 +596,9 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 */
 	protected final static void checkCodigoDoNumeroDaContaMenorOuIgualQue(Titulo titulo, int limite){
 		
-		if(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta() > limite){
-			
-			throw new IllegalArgumentException(format("Código [%s] do número da conta deve ser um número menor que ou igual a [%s].", titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), limite));
-		}
+		boolean expression = titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta() <= limite; 
+
+		Objects.checkArgument(expression, format("Código [%s] do número da conta deve ser um número menor que ou igual a [%s].", titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), limite));
 	}
 	
 	/**
@@ -679,10 +673,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 */
 	protected final static void checkTamanhoNossoNumero(Titulo titulo, int length, String msg){
 		
-		if(titulo.getNossoNumero().length() != length){
-			
-			throw new IllegalArgumentException(msg);
-		}
+		Objects.checkArgument(titulo.getNossoNumero().length() == length, msg);
 	}
 	
 	/**
@@ -740,15 +731,12 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 */
 	protected final static void checkTamanhoDigitoDoNossoNumero(Titulo titulo, int length, String msg){
 		
-		if(titulo.getDigitoDoNossoNumero().length() != length){
-			
-			throw new IllegalArgumentException(msg);
-		}
+		Objects.checkArgument(titulo.getDigitoDoNossoNumero().length() == length, msg);
 	}
 	
 	/**
 	 * <p>
-	 * Verifica se o valor do título não é nulo, caso contrário lança uma
+	 * Verifica se o valor do título não é nulo e é positivo, caso contrário lança uma
 	 * {@code IllegalArgumentException}.
 	 * </p>
 	 * 
@@ -759,11 +747,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	protected final static void checkValor(Titulo titulo){
 		
 		Objects.checkNotNull(titulo.getValor(), "Valor do título não pode ser nulo!");
-		
-		if(titulo.getValor().compareTo(ZERO) == -1){
-			
-			throw new IllegalArgumentException(format("O valro do título deve ser um número positivo ou zero e não [%s].",titulo.getValor()));
-		}
+		Objects.checkArgument(titulo.getValor().compareTo(ZERO) >= 0, format("O valor do título deve ser um número positivo ou zero e não [%s].",titulo.getValor()));
 	}
 	
 	/**
@@ -782,15 +766,8 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	protected final static void checkParametrosBancarios(Titulo titulo, String param){
 		
 		Objects.checkNotNull(titulo.getParametrosBancarios(), format("O parâmetro bancário [\"%s\"] é necessário! [titulo.getParametrosBancarios() == null]",param));
-		
-		if(titulo.getParametrosBancarios().contemComNome(param)){
-			
-			Objects.checkNotNull(titulo.getParametrosBancarios().getValor(param), format("Parâmetro bancário [\"%s\"] não contém valor!", param));
-		
-		}else{
-				
-			throw new IllegalArgumentException(format("Parâmetro bancário [\"%s\"] não encontrado!",param));
-		}
+		Objects.checkArgument(titulo.getParametrosBancarios().contemComNome(param),format("Parâmetro bancário [\"%s\"] não encontrado!",param));
+		Objects.checkNotNull(titulo.getParametrosBancarios().getValor(param), format("Parâmetro bancário [\"%s\"] não contém valor!", param));
 	}
 	
 	/**
