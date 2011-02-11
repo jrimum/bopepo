@@ -36,7 +36,7 @@ public class TestCLBancoSantander extends CampoLivreBaseTest {
 		
 		ContaBancaria contaBancaria = new ContaBancaria();
 		
-		NumeroDaConta numeroDaConta = new NumeroDaConta(1625462,"9");
+		NumeroDaConta numeroDaConta = new NumeroDaConta(162546,"9");
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		
 		contaBancaria.setBanco(BancosSuportados.BANCO_SANTANDER.create());
@@ -49,7 +49,7 @@ public class TestCLBancoSantander extends CampoLivreBaseTest {
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
 		setClasseGeradoraDoCampoLivre(CLBancoSantander.class);
-		setCampoLivreValidoAsString("9162546200000000000270101");
+		setCampoLivreValidoAsString("9162546900000000000270101");
 		
 	}
 	
@@ -60,7 +60,7 @@ public class TestCLBancoSantander extends CampoLivreBaseTest {
 		
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setCampoLivreValidoAsString("9162546200000000000278101");
+		setCampoLivreValidoAsString("9162546900000000000278101");
 		
 		seCampoLivreEscritoEstaCorreto();
 	}

@@ -88,7 +88,7 @@ class CLBancoSantander extends AbstractCLSantander implements CampoLivre {
 	/**
 	 * 
 	 */
-	private static final Integer FIELDS_LENGTH = 5;
+	private static final Integer FIELDS_LENGTH = 6;
 
 	/**
 	 * Constante informada no manual.
@@ -125,7 +125,8 @@ class CLBancoSantander extends AbstractCLSantander implements CampoLivre {
 		nossoNumero.append(titulo.getDigitoDoNossoNumero());
 
 		this.add(new Field<Integer>(CONSTANTE, 1));
-		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
+		this.add(new Field<String>(conta.getNumeroDaConta().getDigitoDaConta(), 1));
 		
 		this.add(new Field<String>(nossoNumero.toString(), 13, Filler.ZERO_LEFT));
 
