@@ -121,8 +121,14 @@ public class MeuPrimeiroBoleto {
 		titulo.setNossoNumero("99345678912");
 		titulo.setDigitoDoNossoNumero("5");
 		titulo.setValor(BigDecimal.valueOf(0.23));
+		
+		// Para informar a data de maneira simples você pode utilizar as 
+		// classes utilitárias do JRimum. Abaixo temos alguns exemplos:
+		// (1) titulo.setDataDoVencimento(  DateFormat.DDMMYYYY_B.parse("11/03/2011")  );
+		// (2) titulo.setDataDoVencimento(  Dates.parse("11/03/2011", "dd/MM/yyyy")  );		
 		titulo.setDataDoDocumento(new Date());
-		titulo.setDataDoVencimento(new Date());
+		titulo.setDataDoVencimento(new Date());		
+		
 		titulo.setTipoDeDocumento(TipoDeTitulo.DM_DUPLICATA_MERCANTIL);
 		titulo.setAceite(EnumAceite.A);
 		titulo.setDesconto(new BigDecimal(0.05));
