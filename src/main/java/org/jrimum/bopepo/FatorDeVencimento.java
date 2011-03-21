@@ -77,7 +77,7 @@ public class FatorDeVencimento{
 	 * FEBRABAN.
 	 * </p>
 	 */
-	public static final Date DATA_BASE_DO_FATOR_DE_VENCIMENTO = BASE_DO_FATOR_DE_VENCIMENTO.getTime();
+	private static final Date DATA_BASE_DO_FATOR_DE_VENCIMENTO = BASE_DO_FATOR_DE_VENCIMENTO.getTime();
 
 	/**
 	 *<p>
@@ -85,7 +85,7 @@ public class FatorDeVencimento{
 	 * 07/10/1997.
 	 * </p>
 	 */
-	public static final Date DATA_LIMITE_DO_FATOR_DE_VENCIMENTO = new GregorianCalendar(2025, Calendar.FEBRUARY, 21).getTime();
+	private static final Date DATA_LIMITE_DO_FATOR_DE_VENCIMENTO = new GregorianCalendar(2025, Calendar.FEBRUARY, 21).getTime();
 
 	/**
 	 * <p>
