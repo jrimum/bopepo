@@ -31,9 +31,7 @@
 package org.jrimum.bopepo;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -131,15 +129,6 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 	 * 
 	 */
 	private static final Integer STRING_LENGTH = 44;
-
-	/**
-	 * Data Base de 07.10.1997, data usada pela FEBRABAN para realizar o cálculo
-	 * do fator de vencimento.
-	 * 
-	 * @see FatorDeVencimento#toFator(Date)
-	 */
-	public static final Date DATA_BASE_DO_FATOR_DE_VENCIMENTO = FatorDeVencimento.DATA_BASE_DO_FATOR_DE_VENCIMENTO;
-
 	
 	/**
 	 * Código do Banco.
