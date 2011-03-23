@@ -67,8 +67,8 @@ public class TestCLBradesco extends CampoLivreBaseTest {
 
 		contaBancaria.setBanco(BancosSuportados.BANCO_BRADESCO.create());
 		contaBancaria.setAgencia(new Agencia(1234, "1"));
-		contaBancaria.setCarteira(new Carteira(5));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(6789));
+		contaBancaria.setCarteira(new Carteira(5));
 
 		titulo = new Titulo(contaBancaria, new Sacado("S"), new Cedente("C"));
 		titulo.setNossoNumero("12345678901");
