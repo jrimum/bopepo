@@ -37,7 +37,7 @@ import org.jrimum.utilix.text.Filler;
 
 /**
  * <p>
- * O campo livre do Banco do Nordeste do Brasil deve seguir esta forma:
+ * O campo livre do Banco do Nordeste deve seguir esta forma:
  * </p>
  * 
  * <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="campolivre">
@@ -122,44 +122,44 @@ class CLBancoDoNordesteDoBrasil extends AbstractCLBancoDoNordesteDoBrasil {
 	/**
 	 * Número de campos = 7.
 	 */
-	protected static final Integer FIELDS_LENGTH = Integer.valueOf(7);
+	private static final Integer FIELDS_LENGTH = Integer.valueOf(7);
 
 	/**
 	 * Tamanho do campo Agência = 4. 
 	 */
-	protected static final Integer AGENCIA_LENGTH = Integer.valueOf(4);
+	private static final Integer AGENCIA_LENGTH = Integer.valueOf(4);
 
 	/**
 	 * Tamanho do campo Conta = 7. 
 	 */
-	protected static final Integer CONTA_LENGTH = Integer.valueOf(7);
+	private static final Integer CONTA_LENGTH = Integer.valueOf(7);
 
 	/**
 	 * Tamanho do campo Dígito da Conta = 1. 
 	 */
-	protected static final Integer DIGITO_CONTA_LENGTH = Integer.valueOf(1);
+	private static final Integer DIGITO_CONTA_LENGTH = Integer.valueOf(1);
 	
 
 	/**
 	 * Tamanho do campo Nosso Número = 7. 
 	 */
-	protected static final Integer NOSSO_NUMERO_LENGTH = Integer.valueOf(7);
+	private static final Integer NOSSO_NUMERO_LENGTH = Integer.valueOf(7);
 
 	/**
 	 * Tamanho do campo Dígito do Nosso Número = 1. 
 	 */
-	protected static final Integer DIGITO_NOSSO_NUMERO_LENGTH = Integer.valueOf(1);
+	private static final Integer DIGITO_NOSSO_NUMERO_LENGTH = Integer.valueOf(1);
 	
 	/**
 	 * Tamanho do campo Carteira = 2. 
 	 */
-	protected static final Integer CARTEIRA_LENGTH = Integer.valueOf(2);
+	private static final Integer CARTEIRA_LENGTH = Integer.valueOf(2);
 	
 	
 	/**
 	 * Tamanho do campo "Campo Zerado" = 3. 
 	 */
-	protected static final Integer CAMPO_ZERADO_LENGTH = Integer.valueOf(3);
+	private static final Integer CAMPO_ZERADO_LENGTH = Integer.valueOf(3);
 	
 	/**
 	 * Valor do campo "Campo Zerado" =  0. 
@@ -177,6 +177,11 @@ class CLBancoDoNordesteDoBrasil extends AbstractCLBancoDoNordesteDoBrasil {
 		super(FIELDS_LENGTH);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.jrimum.bopepo.campolivre.AbstractCampoLivre#checkValues(org.jrimum.domkee.financeiro.banco.febraban.Titulo)
+	 */
 	@Override
 	protected void checkValues(Titulo titulo){
 		
@@ -194,6 +199,11 @@ class CLBancoDoNordesteDoBrasil extends AbstractCLBancoDoNordesteDoBrasil {
 		checkCodigoDaCarteiraMenorOuIgualQue(titulo, 99);
 	}
 	
+	/**
+	 *  {@inheritDoc}
+	 *  
+	 * @see org.jrimum.bopepo.campolivre.AbstractCampoLivre#addFields(org.jrimum.domkee.financeiro.banco.febraban.Titulo)
+	 */
 	@Override
 	protected void addFields(Titulo titulo) {
 		
