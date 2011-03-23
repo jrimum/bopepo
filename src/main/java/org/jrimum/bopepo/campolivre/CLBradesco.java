@@ -36,7 +36,7 @@ import org.jrimum.utilix.text.Filler;
 
 /**
  * <p>
- * O campo livre do bradesco deve seguir esta forma:
+ * O campo livre do Bradesco deve seguir esta forma:
  * </p>
  * 
  * <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="campolivre">
@@ -159,6 +159,11 @@ class CLBradesco extends AbstractCLBradesco {
 		super(FIELDS_LENGTH);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.jrimum.bopepo.campolivre.AbstractCampoLivre#checkValues(org.jrimum.domkee.financeiro.banco.febraban.Titulo)
+	 */
 	@Override
 	protected void checkValues(Titulo titulo){
 		
@@ -175,6 +180,11 @@ class CLBradesco extends AbstractCLBradesco {
 		checkCodigoDoNumeroDaContaMenorOuIgualQue(titulo, 9999999);
 	}
 	
+	/**
+	 *  {@inheritDoc}
+	 *  
+	 * @see org.jrimum.bopepo.campolivre.AbstractCampoLivre#addFields(org.jrimum.domkee.financeiro.banco.febraban.Titulo)
+	 */
 	@Override
 	protected void addFields(Titulo titulo) {
 		
