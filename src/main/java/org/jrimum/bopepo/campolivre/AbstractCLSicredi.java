@@ -47,9 +47,9 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 abstract class AbstractCLSicredi extends AbstractCampoLivre {
 
 	/**
-	 * 
+	 * {@code serialVersionUID = 636384334503863949L}
 	 */
-	private static final long serialVersionUID = -55594606026629224L;
+	private static final long serialVersionUID = 636384334503863949L;
 
 	/**
 	 * <p>
