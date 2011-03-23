@@ -28,6 +28,7 @@
  */
 
 package org.jrimum.bopepo.view;
+import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.jrimum.utilix.Objects.isNotNull;
 import static org.jrimum.utilix.Objects.isNull;
 import static org.jrimum.utilix.text.DateFormat.DDMMYYYY_B;
@@ -36,10 +37,9 @@ import static org.jrimum.utilix.text.DecimalFormat.MONEY_DD_BR;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -94,133 +94,63 @@ class PdfViewer {
 
 	private Boleto boleto;
 
-	private File template;
+	private byte[] template;
 
 	/**
-	 *<p>
-	 * Para uso interno do componente
-	 * </p>
+	 * Modo full compression do PDF, default = true. 
 	 * 
 	 * @since 0.2
 	 */
-	PdfViewer() {
+	private boolean fullCompression = true;
+
+	/**
+	 * Para uso interno do componente
+	 * 
+	 * @since 0.2
+	 * 
+	 */
+	protected PdfViewer() {
 	}
 	
 	/**
-	 *<p>
 	 * Para uso interno do componente
-	 * </p>
+	 * 
+	 * @param boleto
 	 * 
 	 * @since 0.2
+	 * 
 	 */
-	PdfViewer(Boleto boleto) {
-		
+	protected PdfViewer(Boleto boleto) {
+
 		this.boleto = boleto;
 	}
 	
 	/**
-	 *<p>
 	 * Para uso interno do componente
-	 * </p>
+	 * 
+	 * @param boleto Boleto para visualização
+	 * @param template Template a ser utilizado na visualização
 	 * 
 	 * @since 0.2
+	 * 
 	 */
-	PdfViewer(Boleto boleto, File template) {
+	protected PdfViewer(Boleto boleto, byte[] template) {
 		
 		this.boleto = boleto;
 		
 		setTemplate(template);
 	}
-
 	
 	/**
-	 * <p>
-	 * Agrupa os boletos da lista em um único arquivo PDF.
-	 * </p>
+	 * Retorna o boleto em forma de arquivo PDF.
 	 * 
-	 * 
-	 * @param boletos
-	 *            - Lista com os boletos a serem agrupados
-	 * @param fileDest
-	 *            - Arquivo o qual armazenará os boletos
-	 * @param boletoViewer
-	 *            - Visualizador contendo o template para geração
-	 * 
-	 * @return Arquivo PDF gerado com os boletos da lista
+	 * @param destPath
+	 *            Caminho completo do arquivo o qual o boleto será gerado
+	 * @return Boleto em forma de arquivo PDF
 	 * 
 	 * @since 0.2
+	 * 
 	 */
-	protected static File groupInOnePDF(List<Boleto> boletos, File fileDest, BoletoViewer boletoViewer) {
-
-		File arq = null;
-
-		List<byte[]> boletosEmBytes = new ArrayList<byte[]>(boletos.size());
-
-		for (Boleto bop : boletos) {
-			boletosEmBytes.add(boletoViewer.setBoleto(bop).getPdfAsByteArray());
-		}
-
-		try {
-			
-			arq = Files.bytesToFile(fileDest, PDFUtil.mergeFiles(boletosEmBytes));
-			
-		} catch (Exception e) {
-			
-			log.error("Erro durante geração do PDF." + e.getLocalizedMessage(), e);
-			
-			throw new IllegalStateException("Erro durante geração do PDF! Causado por " + e.getLocalizedMessage(), e);
-		}
-
-		return arq;
-	}
-
-
-	/**
-	 * <p>
-	 * Gera o arquivo PDF para cada boleto contido na lista. O nome do arquivo
-	 * segue a forma:<br />
-	 * <br />
-	 * <tt>diretorio + (/ ou \\) prefixo + (indice do arquivo na lista + 1) + sufixo + ".pdf"</tt>
-	 * </p>
-	 * 
-	 * <p>
-	 * Exemplo, uma lista com 3 boletos: {@code onePerPDF(boletos, file,
-	 * "BoletoPrefixo", "exSufixo");} <br />
-	 * <br />
-	 * Arquivos gerados:
-	 * <ul>
-	 * <li><strong>BoletoPrefixo1exSufixo.pdf</strong></li>
-	 * <li><strong>BoletoPrefixo2exSufixo.pdf</strong></li>
-	 * <li><strong>BoletoPrefixo3exSufixo.pdf</strong></li>
-	 * </ul>
-	 * </p>
-	 * 
-	 * @param boletos
-	 *            - Lista com os boletos a serem agrupados
-	 * @param fileDest
-	 *            - Diretório o qual os boletos serão criados
-	 * @param prefixo
-	 *            - Prefixo do nome do arquivo
-	 * @param sufixo
-	 *            - Sufixo do nome do arquivo
-	 * @return Lista contendo os arquivos PDF gerados a partir da lista de
-	 *         boletos
-	 * 
-	 * @since 0.2
-	 */
-	protected static List<File> onePerPDF(List<Boleto> boletos, File destDir,String prefixo, String sufixo) {
-
-		final List<File> arquivos = new ArrayList<File>(boletos.size());
-		final BoletoViewer bv = new BoletoViewer();
-		int cont = 1;
-		
-		for (Boleto bop : boletos) {
-			arquivos.add(bv.setBoleto(bop).getPdfAsFile(destDir.getAbsolutePath() + File.separator + prefixo + cont++ + sufixo + ".pdf"));
-		}
-
-		return arquivos;
-	}
-
 	protected File getFile(String destPath) {
 		
 	
@@ -228,10 +158,16 @@ class PdfViewer {
 	}
 	
 	/**
+	 * Retorna o boleto em forma de arquivo PDF.
 	 * 
 	 * @param destPath
-	 * @return
-	 * @throws IllegalArgumentException
+	 *            Arquivo o qual o boleto será gerado
+	 * @return Boleto em forma de arquivo PDF
+	 * @throws IllegalStateException
+	 *             Caso ocorral algum problema imprevisto
+	 *             
+	 * @since 0.2
+	 * 
 	 */
 	protected File getFile(File destFile) {
 		
@@ -250,9 +186,12 @@ class PdfViewer {
 	}
 
 	/**
-	 *
+	 * Retorna o arquivo PDF em um stream de array de bytes.
 	 * 
-	 * @return
+	 * @return O PDF em stream
+	 * 
+	 * @since 0.2
+	 * 
 	 */
 	protected ByteArrayOutputStream getStream() {
 		
@@ -271,9 +210,12 @@ class PdfViewer {
 	}
 
 	/**
-	 *
+	 * Retorna o arquivo PDF em array de bytes.
 	 * 
-	 * @return
+	 * @return O PDF em array de bytes
+	 * 
+	 * @since 0.2
+	 * 
 	 */
 	protected byte[] getBytes() {
 		
@@ -291,36 +233,146 @@ class PdfViewer {
 		}
 	}
 
-	protected File getTemplate() {
+	/**
+	 * Retorna o template atual do viewer em array de bytes.
+	 * 
+	 * @return Template em bytes
+	 * 
+	 * @since 0.2
+	 * 
+	 */
+	protected byte[] getTemplate() {
 		return template;
 	}
-
-	protected void setTemplate(File template) {
+	
+	/**
+	 * Define o template que será utilizado para construir o boleto.
+	 * 
+	 * @param template
+	 * 
+	 * @since 0.2
+	 * 
+	 */
+	protected void setTemplate(byte[] template) {
 		this.template = template;
 	}
+	
+	/**
+	 * Define o template que será utilizado para construir o boleto.
+	 * 
+	 * @param templateUrl
+	 * 
+	 * @since 0.2
+	 * 
+	 */
+	protected void setTemplate(URL templateUrl) {
+		try {
+			setTemplate(templateUrl.openStream());
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
+	}
 
-	protected void setTemplate(String pathname) {
-		setTemplate(new File(pathname));
+	/**
+	 * Define o template que será utilizado para construir o boleto.
+	 * 
+	 * @param templateInput
+	 * 
+	 * @since 0.2
+	 * 
+	 */
+	protected void setTemplate(InputStream templateInput) {
+		try {
+			setTemplate(Files.toByteArray(templateInput));
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
+	}
+
+	/**
+	 * Define o template que será utilizado para construir o boleto.
+	 * 
+	 * @param templatePath
+	 * 
+	 * @since 0.2
+	 * 
+	 */
+	protected void setTemplate(String templatePath) {
+		setTemplate(new File(templatePath));
+	}
+
+	/**
+	 * Define o template que será utilizado para construir o boleto.
+	 * 
+	 * @param templateFile
+	 * 
+	 * @since 0.2
+	 * 
+	 */
+	protected void setTemplate(File templateFile) {
+		try {
+			setTemplate(Files.fileToBytes(templateFile));
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
+		}
+	}
+	
+	/**
+	 * Habilita o modo full compression do PDF veja
+	 * {@link com.lowagie.text.pdf.PdfStamper#setFullCompression()}.
+	 * 
+	 * <p>
+	 * Itext doc: <i>Sets the document's compression to the new 1.5 mode with
+	 * object streams and xref streams.</i>
+	 * </p>
+	 * 
+	 * @param option
+	 *            Escolha de compressão.
+	 *            
+	 * @since 0.2
+	 *        
+	 */
+	protected void setFullCompression(boolean option){
+		this.fullCompression = option;
+	}
+	
+	/**
+	 * Indica se o viewer foi habilitado a comprimir o pdf do boleto gerado.
+	 * 
+	 * @see #setFullCompression();
+	 * 
+	 * @return indicativo de compressão
+	 * 
+	 * @since 0.2
+	 * 
+	 */
+	private boolean isFullCompression() {
+		return this.fullCompression;
 	}
 
 	/**
 	 * @return the boleto
 	 * 
 	 * @since 0.2
+	 * 
 	 */
 	protected Boleto getBoleto() {
 		return this.boleto;
 	}
 	
 	/**
-	 * <p>
-	 * SOBRE O MÉTODO
-	 * </p>
+	 * Executa os seguintes métodos na sequência:
+	 * <ol>
+	 * <li>{@linkplain #inicializar()}</li>
+	 * <li>{@linkplain #preencher()}</li>
+	 * <li>{@linkplain #finalizar()}</li>
+	 * </ol>
 	 * 
 	 * @throws IOException
 	 * @throws DocumentException
 	 * 
-	 * @since
+	 * @since 0.2
+	 * 
 	 */
 	private void processarPdf() throws IOException, DocumentException {
 		
@@ -330,13 +382,13 @@ class PdfViewer {
 	}
 
 	/**
-	 * <p>
-	 * SOBRE O MÉTODO
-	 * </p>
+	 * Retorna o template padrão a ser usado, dependendo se o boleto é com ou
+	 * sem sacador avalsita.
 	 * 
-	 * @return URL template
+	 * @return URL do template padrão
 	 * 
-	 * @since
+	 * @since 0.2
+	 * 
 	 */
 	private URL getTemplateFromResource() {
 
@@ -355,15 +407,14 @@ class PdfViewer {
 	}
 
 	/**
-	 * <p>
 	 * Verifica se o template que será utilizado virá do resource ou é externo,
 	 * ou seja, se o usuário definiu ou não um template.
-	 * </p>
 	 * 
 	 * @return true caso o template que pode ser definido pelo usuário for null;
 	 *         false caso o usuário tenha definido um template.
 	 * 
-	 * @since
+	 * @since 0.2
+	 * 
 	 */
 	private boolean isTemplateFromResource() {
 		
@@ -371,16 +422,15 @@ class PdfViewer {
 	}
 
 	/**
-	 * <p>
-	 * SOBRE O MÉTODO
-	 * </p>
+	 * Inicializa os principais objetos para a escrita dos dados do boleto no
+	 * template PDF: {@code stamper}, {@code reader} e {@code outputStream}.
 	 * 
 	 * @throws IOException
 	 * @throws DocumentException
 	 * 
-	 * @since
+	 * @since 0.2
+	 * 
 	 */
-
 	private void inicializar() throws IOException, DocumentException {
 
 		if (isTemplateFromResource()) {
@@ -389,7 +439,7 @@ class PdfViewer {
 			
 		} else {
 			
-			reader = new PdfReader(getTemplate().getAbsolutePath());
+			reader = new PdfReader(getTemplate());
 		}
 
 		outputStream = new ByteArrayOutputStream();
@@ -398,14 +448,14 @@ class PdfViewer {
 	}
 
 	/**
-	 * <p>
-	 * SOBRE O MÉTODO
-	 * </p>
+	 * Finaliza a escrita de dados no template através do fechamento do {@code
+	 * stamper}, {@code reader} e {@code outputStream}.
 	 * 
 	 * @throws DocumentException
 	 * @throws IOException
 	 * 
-	 * @since
+	 * @since 0.2
+	 * 
 	 */
 	private void finalizar() throws DocumentException, IOException {
 
@@ -427,11 +477,14 @@ class PdfViewer {
 
 		reader.removeFields();/* Removes all the fields from the document. */
 
-		stamper.setFullCompression();/*
-										 * Sets the document's compression to
-										 * the new 1.5 mode with object streams
-										 * and xref streams.
-										 */
+		if(isFullCompression()){
+			
+			stamper.setFullCompression();/*
+											 * Sets the document's compression to
+											 * the new 1.5 mode with object streams
+											 * and xref streams.
+											 */
+		}
 
 		reader.eliminateSharedStreams();/*
 										 * Eliminates shared streams if they
@@ -448,15 +501,15 @@ class PdfViewer {
 	}
 
 	/**
-	 * <p>
-	 * SOBRE O MÉTODO
-	 * </p>
+	 * Preenche todos os campos do formulário PDF com os dados do boleto contido
+	 * na instância.
 	 * 
 	 * @throws MalformedURLException
 	 * @throws IOException
 	 * @throws DocumentException
 	 * 
-	 * @since
+	 * @since 0.2
+	 * 
 	 */
 	private void preencher() throws MalformedURLException, IOException, DocumentException {
 		
@@ -582,9 +635,10 @@ class PdfViewer {
 		form.setField("txtRsSacado", sb.toString());
 		form.setField("txtFcSacadoL1", sb.toString());
 
-		// TODO Código em teste
+		//clear
 		sb.delete(0, sb.length());
-		Endereco endereco = sacado.getEnderecos().iterator().next();
+		
+		Endereco endereco = sacado.getNextEndereco();
 		
 		setEndereco(endereco, "txtFcSacadoL2", "txtFcSacadoL3", sb);
 	}
@@ -617,9 +671,10 @@ class PdfViewer {
 			
 			form.setField("txtFcSacadorAvalistaL1", sb.toString());
 
-			// TODO Código em teste
+			//clear
 			sb.delete(0, sb.length());
-			Endereco endereco = sacadorAvalista.getEnderecos().iterator().next();
+			
+			Endereco endereco = sacadorAvalista.getNextEndereco();
 
 			setEndereco(endereco, "txtFcSacadorAvalistaL2", "txtFcSacadorAvalistaL3", sb);
 		}
@@ -630,11 +685,11 @@ class PdfViewer {
 		
 		if (isNotNull(endereco)) {
 			
-			if (isNotNull(endereco.getBairro())) {
+			if (isNotBlank(endereco.getBairro())) {
 				sb.append(endereco.getBairro());
 			}
 			
-			if (isNotNull(endereco.getLocalidade())) {
+			if (isNotBlank(endereco.getLocalidade())) {
 				sb.append(HIFEN_SEPERADOR);
 				sb.append(endereco.getLocalidade());
 			}
@@ -648,16 +703,16 @@ class PdfViewer {
 
 			sb.delete(0, sb.length());
 			
-			if (isNotNull(endereco.getLogradouro())) {
+			if (isNotBlank(endereco.getLogradouro())) {
 				sb.append(endereco.getLogradouro());
 			}
 
-			if (isNotNull(endereco.getNumero())) {
+			if (isNotBlank(endereco.getNumero())) {
 				sb.append(", n°: ");
 				sb.append(endereco.getNumero());
 			}
 
-			if (isNotNull(endereco.getCEP())) {
+			if (isNotNull(endereco.getCEP()) && isNotBlank(endereco.getCEP().getCep())) {
 				sb.append(" ");
 				sb.append(HIFEN_SEPERADOR);
 				sb.append(" CEP: ");
