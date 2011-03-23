@@ -51,7 +51,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 abstract class AbstractCLBradesco extends AbstractCampoLivre {
 
 	/**
-	 *
+	 * {@code serialVersionUID = -1733227746617862639L}
 	 */
 	private static final long serialVersionUID = -1733227746617862639L;
 
