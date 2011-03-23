@@ -72,8 +72,8 @@ public static void main(String[] args) {
 		contaBancaria.setBanco(BancosSuportados.BANCO_SICREDI.create());
 		
 		contaBancaria.setAgencia(new Agencia(165));
-		contaBancaria.setCarteira(new Carteira(1, TipoDeCobranca.SEM_REGISTRO));
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(623));
+		contaBancaria.setCarteira(new Carteira(1, TipoDeCobranca.SEM_REGISTRO));
 
 		titulo.setNossoNumero("07200003");
 		titulo.setDigitoDoNossoNumero("1");
