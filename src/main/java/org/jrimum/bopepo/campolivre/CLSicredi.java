@@ -41,7 +41,7 @@ import org.jrimum.vallia.digitoverificador.TipoDeModulo;
 
 /**
  * <p>
- * O campo livre do banco SICREDI deve seguir esta forma:
+ * O campo livre do banco Sicredi deve seguir esta forma:
  * </p>
  * 
  * <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="campolivre">
@@ -132,7 +132,7 @@ class CLSicredi extends AbstractCLSicredi {
 	private static final long serialVersionUID = 7697120719706717353L;
 	
 	/**
-	 * Número de campos = 9.
+	 * Número de campos = 10.
 	 */
 	protected static final Integer FIELDS_LENGTH = 10;
 
@@ -188,6 +188,11 @@ class CLSicredi extends AbstractCLSicredi {
 		super(FIELDS_LENGTH);
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.jrimum.bopepo.campolivre.AbstractCampoLivre#checkValues(org.jrimum.domkee.financeiro.banco.febraban.Titulo)
+	 */
 	@Override
 	protected void checkValues(Titulo titulo){
 		
@@ -208,6 +213,11 @@ class CLSicredi extends AbstractCLSicredi {
 		checkValor(titulo);
 	}
 	
+	/**
+	 *  {@inheritDoc}
+	 *  
+	 * @see org.jrimum.bopepo.campolivre.AbstractCampoLivre#addFields(org.jrimum.domkee.financeiro.banco.febraban.Titulo)
+	 */
 	@Override
 	protected void addFields(Titulo titulo) {
 		
