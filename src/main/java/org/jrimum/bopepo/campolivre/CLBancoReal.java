@@ -115,8 +115,8 @@ class CLBancoReal extends AbstractCLBancoReal {
 		
 		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
-		this.add(new Field<String>(calculeDigitoDaPosicao31(titulo.getNumeroDoDocumento(), titulo.getContaBancaria().getAgencia().getCodigo(), titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta()), 1, Filler.ZERO_LEFT));
-		this.add(new Field<String>(Strings.eliminateSymbols(titulo.getNumeroDoDocumento()), 13, Filler.ZERO_LEFT));
+		this.add(new Field<String>(calculeDigitoDaPosicao31(titulo.getNossoNumero(), titulo.getContaBancaria().getAgencia().getCodigo(), titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta()), 1, Filler.ZERO_LEFT));
+		this.add(new Field<String>(Strings.eliminateSymbols(titulo.getNossoNumero()), 13, Filler.ZERO_LEFT));
 	}
 	
 	/**
