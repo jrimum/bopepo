@@ -130,7 +130,7 @@ public enum BancosSuportados implements Serializable{
 	BANCO_DO_NORDESTE_DO_BRASIL("004","07237373000120", "BANCO DO NORDESTE DO BRASIL S.A.","Banco Múltiplo"),		
 	
 	/**
-	 * Tipo enumerado que representa o Banestes, Banco <strong>do Estado do Espírito Santo</strong>,
+	 * Tipo enumerado que representa o Banestes, <strong>Banco do Estado do Espírito Santo</strong>,
 	 * código de compensação <strong><tt>021</tt></strong>
 	 *  <a href="http://www.banestes.com.br">
 	 * site</a>.
@@ -146,7 +146,7 @@ public enum BancosSuportados implements Serializable{
 	 * 
 	 * @since 0.2
 	 */
-	BANCO_SANTANDER("033", "90400888000142", "Banco Santander (Brasil) S. A.", "Banco Mútiplo"),
+	BANCO_SANTANDER("033", "90400888000142", "BANCO SANTANDER (BRASIL) S. A.", "Banco Mútiplo"),
 
 	/**
 	 * Tipo enumerado que representa o Banrisul, Banco <strong>do Estado do Rio Grande do Sul</strong>,
@@ -264,7 +264,16 @@ public enum BancosSuportados implements Serializable{
 	 * @since 0.2
 	 */
 	BANCO_SICREDI("748", "01181521000155", "BANCO COOPERATIVO SICREDI S.A.", "Banco Mútiplo Cooperativo"),
-	
+
+	/**
+	 * Tipo enumerado que representa o <strong>Bancoob</strong>, código de
+	 * compensação <strong><tt>756</tt></strong> <a
+	 * href="http://www.bancoob.com.br/">site</a>.
+	 * 
+	 * @since 0.2
+	 */
+	BANCOOB("756", "02038232000164", "BANCO COOPERATIVO DO BRASIL S.A. - BANCOOB", "Banco Comercial Cooperativo"),
+
 	;
 
 	/**
@@ -311,6 +320,8 @@ public enum BancosSuportados implements Serializable{
 		suportados.put(BANCO_INTEMEDIUM.codigoDeCompensacaoBACEN, BANCO_INTEMEDIUM);
 
 		suportados.put(BANCO_SICREDI.codigoDeCompensacaoBACEN, BANCO_SICREDI);
+
+		suportados.put(BANCOOB.codigoDeCompensacaoBACEN, BANCOOB);
 	}
 
 	/**

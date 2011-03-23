@@ -240,6 +240,9 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 					case BANCO_SICREDI:
 						return AbstractCLSicredi.create(titulo);
 						
+					case BANCOOB:
+						return AbstractCLBancoob.create(titulo);	
+						
 					default:
 						/*
 						 * Se chegar neste ponto e nenhum campo livre foi definido, então é
@@ -274,7 +277,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 			
 		} catch(Exception e) {
 			/*
-			 * Encapsula-se ualquer outra exceção. 
+			 * Encapsula-se qualquer outra exceção. 
 			 */
 			throw new CampoLivreException(e);
 		}
@@ -469,7 +472,6 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * @since 0.2
 	 */
 	protected final static void checkCodigoDaCarteiraMenorOuIgualQue(Titulo titulo, int limite){
-		
 		
 		boolean expression = titulo.getContaBancaria().getCarteira().getCodigo() <= limite;
 		
