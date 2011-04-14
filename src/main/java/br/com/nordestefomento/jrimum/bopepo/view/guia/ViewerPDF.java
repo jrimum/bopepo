@@ -99,6 +99,7 @@ class ViewerPDF {
 	private static Logger log = Logger.getLogger(ViewerPDF.class);
 
 	private static URL TEMPLATE_PADRAO = ViewerPDF.class.getResource("/pdf/GuiaTemplate.pdf");
+	private static URL TEMPLATE_PADRAO_SEM_BANCO = ViewerPDF.class.getResource("/pdf/GuiaTemplateSemBanco.pdf");
 
 	private PdfReader reader;
 	private PdfStamper stamper;
@@ -368,7 +369,15 @@ class ViewerPDF {
 	 * @since
 	 */
 	private URL getTemplateFromResource() {
-		URL templateFromResource = TEMPLATE_PADRAO;
+		URL templateFromResource = null;
+		
+		if (  isNotNull(guia.getArrecadacao().getConvenio())
+			  && isNotNull(guia.getArrecadacao().getConvenio().getBanco())  ) {
+			templateFromResource = TEMPLATE_PADRAO;
+		} else {
+			templateFromResource = TEMPLATE_PADRAO_SEM_BANCO;			
+		}
+		
 		return templateFromResource;
 	}
 
@@ -602,50 +611,57 @@ class ViewerPDF {
 		Convenio convenio = guia.getArrecadacao().getConvenio();
 		Image imgLogoBanco = null;
 
-		if (isNotNull(convenio.getBanco().getImgLogo())) {
-			imgLogoBanco = Image.getInstance(convenio.getBanco().getImgLogo(),
-					null);
-			setImageLogo(imgLogoBanco);
-
-		} else {
-			if (BancoSuportado.isSuportado(convenio.getBanco()
-					.getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
-
-				URL url = this.getClass().getResource(
-						"/img/"
-								+ convenio.getBanco()
-										.getCodigoDeCompensacaoBACEN()
-										.getCodigoFormatado() + ".png");
-
-				if (isNotNull(url)) {
-					imgLogoBanco = Image.getInstance(url);
-				}
-
-				if (isNotNull(imgLogoBanco)) {
-
-					// Esta imagem gerada aqui é do tipo java.awt.Image
-					convenio.getBanco().setImgLogo(ImageIO.read(url));
-				}
-
-				// Se o banco em questão é suportado nativamente pelo
-				// componente,
-				// então um alerta será exibido.
-				if (log.isDebugEnabled()) {
-					log.debug("Banco sem imagem da logo informada. "
-							+ "Com base no código do banco, uma imagem foi "
-							+ "encontrada no resource e está sendo utilizada.");
-				}
-
+		// Se há um banco especificado...
+		if (isNotNull(convenio)  && isNotNull(convenio.getBanco())) {
+			
+			if (isNotNull(convenio.getBanco().getImgLogo())) {
+				imgLogoBanco = Image.getInstance(convenio.getBanco().getImgLogo(),
+						null);
 				setImageLogo(imgLogoBanco);
-
+				
 			} else {
-
-				// Sem imagem, um alerta é exibido.
-				log.warn("Banco sem imagem definida. O nome da instituição será usado como logo.");
-
-				form.setField("txtLogoBanco", convenio.getBanco().getNome());
+				if (BancoSuportado.isSuportado(convenio.getBanco()
+						.getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
+					
+					URL url = this.getClass().getResource(
+							"/img/"
+							+ convenio.getBanco()
+							.getCodigoDeCompensacaoBACEN()
+							.getCodigoFormatado() + ".png");
+					
+					if (isNotNull(url)) {
+						imgLogoBanco = Image.getInstance(url);
+					}
+					
+					if (isNotNull(imgLogoBanco)) {
+						
+						// Esta imagem gerada aqui é do tipo java.awt.Image
+						convenio.getBanco().setImgLogo(ImageIO.read(url));
+					}
+					
+					// Se o banco em questão é suportado nativamente pelo
+					// componente,
+					// então um alerta será exibido.
+					if (log.isDebugEnabled()) {
+						log.debug("Banco sem imagem da logo informada. "
+								+ "Com base no código do banco, uma imagem foi "
+								+ "encontrada no resource e está sendo utilizada.");
+					}
+					
+					setImageLogo(imgLogoBanco);
+					
+				} else {
+					
+					// Sem imagem, um alerta é exibido.
+					log.warn("Banco sem imagem definida. O nome da instituição será usado como logo.");
+					
+					form.setField("txtLogoBanco", convenio.getBanco().getNome());
+				}
 			}
+			
 		}
+		
+		
 	}
 
 	

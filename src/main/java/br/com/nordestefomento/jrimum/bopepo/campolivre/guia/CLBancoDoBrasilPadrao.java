@@ -58,7 +58,9 @@ class CLBancoDoBrasilPadrao extends AbstractCLBancoDoBrasil {
 	/**
 	 * <p>
 	 *   Dada uma arrecadacão, cria um campo livre para o padrão do Banco do Brasil
-	 *   para todos os tipos de segmento (exceto o 9).  
+	 *   para todos os tipos de segmento, exceto os seguimentos <b>"6. Carnes e Assemelhados ou demais"</b>
+	 *   e <b>"9. Uso exclusivo do banco"</b>. 
+	 *   O tamanho total do campo livre é 25.  
 	 * </p>
 	 * @param arrecadacao título com as informações para geração do campo livre
 	 */
@@ -72,8 +74,8 @@ class CLBancoDoBrasilPadrao extends AbstractCLBancoDoBrasil {
 
 	
 		// Número da guia (nosso número)
-		// Tamanho: 13
-		this.add(new Field<String>(arrecadacao.getNossoNumero(), 13, Filler.ZERO_LEFT));
+		// Tamanho: 17
+		this.add(new Field<String>(arrecadacao.getNossoNumero(), 17, Filler.ZERO_LEFT));
 	}
 
 }

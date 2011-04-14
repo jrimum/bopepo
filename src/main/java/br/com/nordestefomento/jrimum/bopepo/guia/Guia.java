@@ -142,9 +142,46 @@ public final class Guia {
 	 * @throws NotSupportedBancoException 
 	 * @throws NotSupportedCampoLivreException 
 	 */
-	public Guia(Arrecadacao arrecadacao)throws IllegalArgumentException, 
-	NotSupportedBancoException, NotSupportedCampoLivreException{
+	public Guia(Arrecadacao arrecadacao) throws IllegalArgumentException, 
+	NotSupportedBancoException, NotSupportedCampoLivreException{	
+		super();
 
+		try {
+			ObjectUtil.checkNotNull(arrecadacao);
+			ObjectUtil.checkNotNull(arrecadacao.getOrgaoRecebedor());
+			ObjectUtil.checkNotNull(arrecadacao.getOrgaoRecebedor().getTipoSeguimento());
+		} catch (Exception e) {
+			throw new IllegalArgumentException(e);
+		}
+
+		if (  isNull(arrecadacao.getConvenio()) || isNull(arrecadacao.getConvenio().getBanco())  ) {
+			throw new IllegalArgumentException("Como não há um banco especificado através do convênio, a informação do CAMPO LIVRE terá de ser informado manualmente.");			 
+		}
+		
+		
+		if(log.isTraceEnabled())
+			log.trace("Instanciando guia... ");
+		
+		if(log.isDebugEnabled())
+			log.debug("Arrecadacao instance : " + arrecadacao);
+		
+		if(log.isDebugEnabled())
+			log.debug("CampoLivre instance : " + campoLivre);
+		
+				
+		this.setArrecadacao(arrecadacao);
+		this.setCampoLivre(CampoLivreFactory.create(arrecadacao), arrecadacao.getOrgaoRecebedor().getTipoSeguimento());
+		this.load();
+			
+		if(log.isDebugEnabled() || log.isTraceEnabled())
+			log.trace("Guia instanciada : " + this);		
+		
+
+			
+			
+			
+			
+			
 		if(log.isTraceEnabled())
 			log.trace("Instanciando uma guia...");
 		
@@ -193,15 +230,12 @@ public final class Guia {
 			log.debug("Arrecadacao instance : " + arrecadacao);
 		
 		if(log.isDebugEnabled())
-			log.debug("campoLivre instance : " + campoLivre);
+			log.debug("CampoLivre instance : " + campoLivre);
 		
 				
 		this.setArrecadacao(arrecadacao);
 		this.setCampoLivre(campoLivre, arrecadacao.getOrgaoRecebedor().getTipoSeguimento());
 		this.load();
-			
-		if(log.isDebugEnabled())
-			log.debug("Arrecadaca instance : "+this);
 			
 		if(log.isDebugEnabled() || log.isTraceEnabled())
 			log.trace("Guia instanciada : " + this);

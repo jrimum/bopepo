@@ -11,6 +11,7 @@ import br.com.nordestefomento.jrimum.bopepo.guia.BancoSuportado;
 import br.com.nordestefomento.jrimum.bopepo.guia.Guia;
 import br.com.nordestefomento.jrimum.bopepo.view.guia.GuiaViewer;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.CodigoDeIdentificacaoFebraban;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Contribuinte;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Convenio;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.OrgaoRecebedor;
@@ -24,16 +25,7 @@ import com.lowagie.text.BadElementException;
 public class MinhaPrimeiraGuia {
 	
 	
-	public static void main(String[] args) throws ParseException, BadElementException, MalformedURLException, IOException {
-	
-		Image imageOrgaoRecebedor = null;
-		// Linux: imageOrgaoRecebedor = ImageIO.read(new File("/home/user/JRiLogo.png"));
-		// Windows: imageOrgaoRecebedor = ImageIO.read(new File("C:/JRiLogo.png"));
-		
-		File templatePersonalizado = null;
-		// Linux: templatePersonalizado = new File("/home/user/MeuTemplate.pdf");
-		// Windows:templatePersonalizado = new File("C:/MeuTemplate.pdf");
-		
+	public static void main(String[] args) throws ParseException, BadElementException, MalformedURLException, IOException {		
 		
 		/*
 		 * ======================================
@@ -49,7 +41,25 @@ public class MinhaPrimeiraGuia {
 		 * recebedor
 		 * ======================================
 		 */			
-		OrgaoRecebedor orgaoRecebedor = new OrgaoRecebedor("JRIMUM ORG", "66.308.410/0001-02", TipoSeguimento.CARNES_E_ASSEMELHADOS_OU_DEMAIS);		
+		OrgaoRecebedor orgaoRecebedor = new OrgaoRecebedor("JRIMUM ORG", TipoSeguimento.USO_EXCLUSIVO_BANCO);
+		/*
+		 * O CNPJ é obrigatório nos casos em que a identificação do órgão recebedor será feita através do CNPJ.
+		 * Isso ocorre quando o tipo de seguimento utilizado é o TipoSeguimento.CARNES_E_ASSEMELHADOS_OU_DEMAIS. 
+		 */
+		orgaoRecebedor.setCNPJ("66.308.410/0001-02");		
+		
+		/*
+		 * O código de identificação FEBRABAN é obrigatório nos casos em que a identificação do órgão será feita mediante este código.
+		 * Isso pode ocorrer para todos os tipos de seguimento, exceto para os seguimentos:
+		 *  - TipoSeguimento.CARNES_E_ASSEMELHADOS_OU_DEMAIS - Identificação feita através do CNPJ;
+		 *  - TipoSeguimento.USO_EXCLUSIVO_BANCO - Identificação feita através do código de compensação do banco e número do convênio
+		 *    entre o banco e o órgão recebedor. No caso, o número do convênio ficará armazenado na área do CAMPO LIVRE.
+		 */
+		orgaoRecebedor.setCodigoDeIdentificacaoFebraban(new CodigoDeIdentificacaoFebraban(2233));
+		
+		Image imageOrgaoRecebedor = null;
+		// Linux: imageOrgaoRecebedor = ImageIO.read(new File("/home/user/JRiLogo.png"));
+		// Windows: imageOrgaoRecebedor = ImageIO.read(new File("C:/JRiLogo.png"));
 		// Se houver uma imagem(Ex: logo) do órgão recebedor... 
 		if (ObjectUtil.isNotNull(imageOrgaoRecebedor)) {
 			orgaoRecebedor.setImgLogo(imageOrgaoRecebedor);
@@ -68,7 +78,7 @@ public class MinhaPrimeiraGuia {
 		 * Informando dados da Arrecadação
 		 * ======================================
 		 */				
-		Arrecadacao arrecadacao = new Arrecadacao(convenio, orgaoRecebedor, contribuinte);
+		Arrecadacao arrecadacao = new Arrecadacao(orgaoRecebedor, contribuinte, convenio);
 		arrecadacao.setTitulo("RECIBO DO CANDIDATO");
 		arrecadacao.setDescricao("Guia de Recebimento não Compensável para " +
 				"pagamento de Inscrição via Internet Para o Concurso JRimum - " +
@@ -87,13 +97,18 @@ public class MinhaPrimeiraGuia {
 		 * ======================================
 		 */				
 		Guia guia = new Guia(arrecadacao);
-		guia.setInstrucaoAoCaixa1("PAGAMENTO SOMENTE À VISTA NO BANCO DO BRASIL.");
+		guia.setInstrucaoAoCaixa1("PAGAMENTO SOMENTE À VISTA NO " + convenio.getBanco().getNome().toUpperCase() + ".");
 		guia.setInstrucaoAoCaixa2("PREFERENCIAMENTE DEVE SER PAGA NOS TERMINAIS DE AUTO-ATENDIMENTO,");
 		guia.setInstrucaoAoCaixa3("CORRESPONDENTES BANCÁRIOS E INTERNET");
 
 		// GuiaViewer é o responsável por prover uma visualização da guia.
 		GuiaViewer guiaViewer = new GuiaViewer(guia);
 		
+		
+		
+		File templatePersonalizado = null;
+		// Linux: templatePersonalizado = new File("/home/user/MeuTemplate.pdf");
+		// Windows:templatePersonalizado = new File("C:/MeuTemplate.pdf");		
 		// Se houver um template personalizado, com campos extras, novas informações podem
 		// ser adicionadas.
 		if (ObjectUtil.isNotNull(templatePersonalizado)) {

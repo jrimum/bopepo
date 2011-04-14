@@ -62,7 +62,10 @@ abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
 		
 		tipoSeguimento = arrecadacao.getOrgaoRecebedor().getTipoSeguimento();
 		
-		if (tipoSeguimento == TipoSeguimento.USO_EXCLUSIVO_BANCO) {
+		if (tipoSeguimento == TipoSeguimento.CARNES_E_ASSEMELHADOS_OU_DEMAIS) {
+			campoLivre = new CLBancoDoBrasilSegmento6(arrecadacao);	
+		}
+		else if (tipoSeguimento == TipoSeguimento.USO_EXCLUSIVO_BANCO) {
 			campoLivre = new CLBancoDoBrasilSegmento9(arrecadacao);	
 		}
 		else {

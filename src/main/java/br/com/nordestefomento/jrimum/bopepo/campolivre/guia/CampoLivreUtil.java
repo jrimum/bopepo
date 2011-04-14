@@ -19,11 +19,11 @@ public class CampoLivreUtil  {
 
 	public static Integer getTamanhoCorreto(TipoSeguimento tipoSeguimento) {
 		Integer tamanhoCorreto = null;
-		
-		if (tipoSeguimento == TipoSeguimento.USO_EXCLUSIVO_BANCO)
-			tamanhoCorreto = 25;
-		else
+
+		if (tipoSeguimento == TipoSeguimento.CARNES_E_ASSEMELHADOS_OU_DEMAIS)
 			tamanhoCorreto = 21;
+		else
+			tamanhoCorreto = 25;
 				
 		return tamanhoCorreto;
 	}
@@ -63,9 +63,9 @@ public class CampoLivreUtil  {
 		
 		if (  !tamanhoEstaCorreto(campoLivre, tipoSeguimento)  ) {
 			if (tamanhoAtual > tamanhoEsperado)
-				msgErro.append("O tamanho da String [" + tamanhoAtual + "] é maior que o esperado [" + tamanhoEsperado + "]! ");
+				msgErro.append("O tamanho do campo livre gerado [" + tamanhoAtual + "] é maior que o esperado [" + tamanhoEsperado + "] para o segmento \"" + tipoSeguimento.getCodigo() + "-" + tipoSeguimento.getDescricao() + "\".");
 			else
-				msgErro.append("O tamanho da String [" + tamanhoAtual + "] é menor que o especificado [" + tamanhoEsperado + "]! ");			
+				msgErro.append("O tamanho do campo livre gerado [" + tamanhoAtual + "] é menor que o esperado [" + tamanhoEsperado + "] para o segmento \"" + tipoSeguimento.getCodigo() + "-" + tipoSeguimento.getDescricao() + "\".");			
 		}
 		
 		if (existeEspacoEmBranco(campoLivre, tipoSeguimento)) 

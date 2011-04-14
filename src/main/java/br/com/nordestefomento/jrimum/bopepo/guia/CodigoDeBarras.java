@@ -36,7 +36,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import br.com.nordestefomento.jrimum.bopepo.campolivre.guia.CampoLivre;
+import br.com.nordestefomento.jrimum.domkee.comum.pessoa.id.cprf.CNPJ;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.Arrecadacao;
+import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.CodigoDeIdentificacaoFebraban;
 import br.com.nordestefomento.jrimum.domkee.financeiro.banco.febraban.guia.TipoSeguimento;
 import br.com.nordestefomento.jrimum.utilix.AbstractLineOfFields;
 import br.com.nordestefomento.jrimum.utilix.Field;
@@ -246,8 +248,12 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 	/**
 	 *  Identificação da Empresa/Órgão.
 	 *  Seu tamanho pode varias de acordo com a forma com a Empresa/Órgão Recebedor
-	 *  for identificado.
-	 *  
+	 *  for identificado. Dependedo do contexto, pode ser:
+	 *  <ul>
+	 *  	<li>4 dígitos do identificador do órgão recebedor junto a FEBRABAN. Com isto o CAMPO LIVRE ficará com o tamanho de 25 caracteres.</li>  
+	 *  	<li>Código de compensação do banco, formatado para ficar com 4 dígitos - Com isto o CAMPO LIVRE ficará com o tamanho de 25 caracteres.</li>  
+	 *  	<li>8 primeiros dígitos do CNPJ do órgão recebedor - Com isto o CAMPO LIVRE ficará com o tamanho de 21 caracteres.</li>  
+	 *  </ul>
 	 *   @see br.com.nordestefomento.jrimum.bopepo.guia.CodigoDeBarras
 	 */
 	private Field<String> orgao;
@@ -293,17 +299,28 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 		digitoVerificadorGeral = new Field<Integer>(0, 1, Filler.ZERO_LEFT);
 		valor = new Field<BigDecimal>(new BigDecimal(0), 11, Filler.ZERO_LEFT);
 		
-		// Configurando o tamanho dos campos orgão e campo livre. 
-		// Se o tipo de seguimento for USO_EXCLUSIVO_BANCO (9), a identificação do órgão
-		// será feita com o código do banco, com tamanho 4. Caso contrário, a identificaão
-		// será feita com os 8 primeiros dígitos do CNPJ do órgão recebedor. 
-		if (arrecadacao.getOrgaoRecebedor().getTipoSeguimento() == TipoSeguimento.USO_EXCLUSIVO_BANCO) {
-			this.orgao = new Field<String>("0", 4, Filler.ZERO_LEFT);
-			this.campoLivre = new Field<String>(StringUtils.EMPTY, 25);
-		}
-		else {
+		
+		
+		// *******************************************
+		// ORGÃO & CAMPO LIVRE - DEFINIÇÃO DO TAMANHO
+		// *******************************************
+		TipoSeguimento tipoSeguimentoDoOrgaoRecebedor = arrecadacao.getOrgaoRecebedor().getTipoSeguimento();
+
+		// Configurando o tamanho do campo ÕRGÃO e do campo CAMPO LIVRE. 
+		// Se o tipo de seguimento for o "6. Carnes e Assemelhados ou demais", a identificação do órgão
+		// será feita através dos 8 primeiros dígitos do seu CNPJ.
+		// Tamanho do campo órgão: 8
+		// Tamanho do campo livre: 21
+		if (arrecadacao.getOrgaoRecebedor().getTipoSeguimento() == TipoSeguimento.CARNES_E_ASSEMELHADOS_OU_DEMAIS) {
 			this.orgao = new Field<String>("0", 8, Filler.ZERO_LEFT);
 			this.campoLivre = new Field<String>(StringUtils.EMPTY, 21);
+		}
+		// Caso contrário, a identifição será feita através de um código de quatro dígitos. 
+		// Tamanho do campo órgão: 4
+		// Tamanho do campo livre: 25
+		else {
+			this.orgao = new Field<String>("0", 4, Filler.ZERO_LEFT);
+			this.campoLivre = new Field<String>(StringUtils.EMPTY, 25);
 		}
 			 
 		
@@ -323,20 +340,42 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 		this.valorReferencia.setValue(arrecadacao.getTipoValorReferencia().getCodigo());
 		this.valor.setValue(arrecadacao.getValorDocumento().movePointRight(2));
 		
-		if (arrecadacao.getOrgaoRecebedor().getTipoSeguimento() == TipoSeguimento.USO_EXCLUSIVO_BANCO) {
-			// Pegando o código do banco como inteiro. O filler deste campo vai se encarregar de deixar o código
-			// com quatro dígitos, com zeros à esquerda.
-			// Neste caso, a identificação do órgão recebedor será feita através
-			// do código do banco(presente no campo órgão) mais o código do 
-			// convênio (presente no campo livre) entre o banco e o órgão recebedor.
+		
+		// **********************
+		// ÕRGÃO - PREENCHIMENTO
+		// **********************
+		// Se o tipo de seguimento for o "6. Carnes e Assemelhados ou demais", a identificação do órgão
+		// será feita através dos 8 primeiros dígitos do seu CNPJ do órgão/empresa recebedor(a).
+		// Obs: Campo livre com tamanho 21.		
+		if (tipoSeguimentoDoOrgaoRecebedor == TipoSeguimento.CARNES_E_ASSEMELHADOS_OU_DEMAIS) {
+			CNPJ cnpjOrgaoRecebedor = arrecadacao.getOrgaoRecebedor().getCNPJ();
+			if (ObjectUtil.isNull(cnpjOrgaoRecebedor)) {
+				throw new CodigoDeBarrasException("Para o seguimento \"" + tipoSeguimentoDoOrgaoRecebedor.getCodigo() + "-" + tipoSeguimentoDoOrgaoRecebedor.getDescricao() + "\" é necessário informar o CNPJ do órgão recebedor.");
+			}
+			
+			String cnpjDoOrgaoRecebedorFormatadoSemPontucao = cnpjOrgaoRecebedor.getCodigoFormatadoSemPontuacao();
+			this.orgao.setValue(cnpjDoOrgaoRecebedorFormatadoSemPontucao.substring(0, 8));
+		} 
+		// Caso o seguimento seja o "9. Uso exclusivo do banco", o código utilizado será o código de compensação do banco,
+		// formatado para ficar com 4 posições. Ex: BB = "001" >>> "0001".
+		// Neste caso, a identificação do órgão recebedor será feita através do código do convênio entre o banco e o órgão 
+		// recebedor, presente no campo livre.
+		// Obs: Campo livre com tamanho 25.
+		else if (tipoSeguimentoDoOrgaoRecebedor == TipoSeguimento.USO_EXCLUSIVO_BANCO) {
 			this.orgao.setValue(arrecadacao.getConvenio().getBanco().getCodigoDeCompensacaoBACEN().getCodigo().toString());
 		}
+		// Caso contrário, o órgão será identificado através do código código que o órgão recebedor possui 
+		// junto a FEBRABAN. Ex: "2234", "0222".
+		// Obs: Campo livre com tamanho 25.
 		else {
-			// Caso contrário, a identificação será feita através dos 8 primeiros
-			// dígitos do CNPJ do órgão recebedor, presente no campo órgão.
-			String cnpjDoOrgaoRecebedorFormatadoSemPontucao = arrecadacao.getOrgaoRecebedor().getCNPJ().getCodigoFormatadoSemPontuacao();
-			this.orgao.setValue(cnpjDoOrgaoRecebedorFormatadoSemPontucao.substring(0, 8));
+			CodigoDeIdentificacaoFebraban codIdFebrabanDoOrgaoRecebedor = arrecadacao.getOrgaoRecebedor().getCodigoDeIdentificacaoFebraban();
+			if (ObjectUtil.isNull(codIdFebrabanDoOrgaoRecebedor)) {
+				throw new CodigoDeBarrasException("Para o seguimento \"" + tipoSeguimentoDoOrgaoRecebedor.getCodigo() + "-" + tipoSeguimentoDoOrgaoRecebedor.getDescricao() + "\" é necessário informar o código de identificação do órgão junto à FEBRABAN.");
+			}			
+
+			this.orgao.setValue(arrecadacao.getOrgaoRecebedor().getCodigoDeIdentificacaoFebraban().getCodigo().toString());		
 		}
+		
 		
 		// Escrevendo os dados do campo livre informado como parâmetro deste
 		// método.

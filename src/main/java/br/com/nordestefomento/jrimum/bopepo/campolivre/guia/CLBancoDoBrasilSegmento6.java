@@ -38,51 +38,43 @@ import br.com.nordestefomento.jrimum.utilix.Filler;
 
 /**
  * 
- * @author Misael Barreto
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
+ * @author <a href="mailto:erisvaldojunior@gmail.com">Erisvaldo Júnior</a>
  * 
  * @since 0.3
  * 
  * @version 0.3
  */
-class CLBancoDoBrasilSegmento9 extends AbstractCLBancoDoBrasil { 
+class CLBancoDoBrasilSegmento6 extends AbstractCLBancoDoBrasil { 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5437349135380008187L;
+	private static final long serialVersionUID = 4697152038277741060L;
 	/**
 	 * 
 	 */
-	private static final Integer FIELDS_LENGTH = 4;
+	private static final Integer FIELDS_LENGTH = 2;
 
 	/**
 	 * <p>
 	 *   Dada uma arrecadacão, cria um campo livre para o padrão do Banco do Brasil
-	 *   para o tipo de segmento <b>"9. Uso exclusivo do banco"</b>.
-	 *   O tamanho total do campo livre é 25.
+	 *   para o segmento <b>"6. Carnes e Assemelhados ou demais"</b>. 
+	 *   O tamanho total do campo livre é 21.
 	 * </p>
-	 * 
 	 * @param arrecadacao título com as informações para geração do campo livre
 	 */
-	CLBancoDoBrasilSegmento9(Arrecadacao arrecadacao) {
+	CLBancoDoBrasilSegmento6(Arrecadacao arrecadacao) {
 		super(FIELDS_LENGTH, arrecadacao.getOrgaoRecebedor().getTipoSeguimento());
-		
-		// Constante "01".
-		// Tamanho: 2
-		this.add(new Field<String>("01", 2));
-		
-		// Código do convênio.
-		// Tamanho: 6
-		this.add(new Field<Integer>(arrecadacao.getConvenio().getNumero(), 6, Filler.ZERO_LEFT));
 		
 		// Data de vencimento no formato YYYYMMDD.
 		// Tamanho: 8	
 		String dataFormatadaYYYYMMDD = DateUtil.FORMAT_YYYYMMDD.format(arrecadacao.getDataDoVencimento());
 		this.add(new Field<String>(dataFormatadaYYYYMMDD, 8));	
-		
+
+	
 		// Número da guia (nosso número)
-		// Tamanho: 9
-		this.add(new Field<String>(arrecadacao.getNossoNumero(), 9, Filler.ZERO_LEFT));
-		
+		// Tamanho: 13
+		this.add(new Field<String>(arrecadacao.getNossoNumero(), 13, Filler.ZERO_LEFT));
 	}
 
 }
