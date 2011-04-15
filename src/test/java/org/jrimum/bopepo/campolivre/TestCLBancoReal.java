@@ -76,7 +76,7 @@ public class TestCLBancoReal extends CampoLivreBaseTest {
 		
 		Titulo titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNumeroDoDocumento("1234567890123");
-		titulo.setNossoNumero("5020");
+		titulo.setNossoNumero("1234567890123");
 		
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
