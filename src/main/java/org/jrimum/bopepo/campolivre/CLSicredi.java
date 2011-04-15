@@ -34,6 +34,7 @@ import static java.lang.String.format;
 import static java.math.BigDecimal.ZERO;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
 import org.jrimum.vallia.digitoverificador.Modulo;
@@ -134,52 +135,40 @@ class CLSicredi extends AbstractCLSicredi {
 	/**
 	 * Número de campos = 10.
 	 */
-	protected static final Integer FIELDS_LENGTH = 10;
+	private static final Integer FIELDS_LENGTH = 10;
 
 	/**
-	 * <p>
 	 * Código númerico correspondente ao tipo de cobrança: "1" - Com Registro.
-	 * </p>
 	 */
 	private static final String COBRANCA_COM_REGISTRO = "1";
 	
 	/**
-	 * <p>
 	 * Código númerico correspondente ao tipo de cobrança: "3" - Sem Registro.
-	 * </p>
 	 */
 	private static final String COBRANCA_SEM_REGISTRO = "3";
 
 	/**
-	 * <p>
 	 * Valor constante do campo "Tipo da Carteira": "1" - carteira simples.
-	 * </p>
 	 */
 	private static final Integer CARTEIRA_SIMPLES_VALUE = Integer.valueOf(1);
 	
 	/**
-	 * <p>Nome do parâmetro bancário contendo o valor do posto da agência SICREDI.</p>
+	 * Nome do parâmetro bancário contendo o valor do posto da agência SICREDI.
 	 */
 	private static final String POSTO_DA_AGENCIA = "PostoDaAgencia";
 	
 	/**
-	 * <p>
 	 * Segunda posição do campo livre.
-	 * </p>
 	 */
 	private static final Field<Integer> FIELD_CARTEIRA = new Field<Integer>(CARTEIRA_SIMPLES_VALUE, 1);
 	
 	/**
-	 * <p>
 	 * Instância de módulo 11 para cálculo do DV do campo livre.   
-	 * </p>
 	 */
 	private static final Modulo modulo11 = new Modulo(TipoDeModulo.MODULO11);
 
 	/**
-	 * <p>
-	 *   Cria um campo livre instanciando o número de fields ({@code FIELDS_LENGTH}) deste campo.
-	 * </p>
+	 * Cria um campo livre instanciando o número de fields ({@code FIELDS_LENGTH}) deste campo.
 	 * 
 	 * @since 0.2
 	 */
@@ -251,32 +240,28 @@ class CLSicredi extends AbstractCLSicredi {
 	}
 	
 	/**
-	 * <p>
 	 * Verifica se o código da carteira da conta bancária do título é igual 1
 	 * (carteira simples), caso contrário lança uma {@code
 	 * IllegalArgumentException}.
-	 * </p>
 	 * 
 	 * @param titulo
 	 */
 	private void checkCarteiraSimples(Titulo titulo) {
 		
-		if(!titulo.getContaBancaria().getCarteira().getCodigo().equals(CARTEIRA_SIMPLES_VALUE)){
-		
-			throw new IllegalArgumentException(format("Apenas a carteira de código [1] \"carteira simples\" é permitida e não o código [%s]!", titulo.getContaBancaria().getCarteira().getCodigo()));
-		}
+		Objects.checkArgument(
+				titulo.getContaBancaria().getCarteira().getCodigo().equals(CARTEIRA_SIMPLES_VALUE),
+				format("Apenas a carteira de código [1] \"carteira simples\" é permitida e não o código [%s]!", titulo.getContaBancaria().getCarteira().getCodigo())
+		);
 	}
 
 	/**
-	 * <p>
 	 * Calcula o dígito verificador deste campo livre (posição 25 do campo livre
 	 * 44 do código de barras) com módulo 11 a partir das 24 posições deste
 	 * campo livre.
-	 * </p>
 	 * 
 	 * @return dígito verificador
 	 * 
-	 *  @since 0.2
+	 * @since 0.2
 	 */
 	private Integer calculeDigitoVerificador() {
 

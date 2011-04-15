@@ -110,37 +110,37 @@ class CLBradesco extends AbstractCLBradesco {
 	/**
 	 * Número de campos = 5.
 	 */
-	protected static final Integer FIELDS_LENGTH = Integer.valueOf(5);
+	private static final Integer FIELDS_LENGTH = Integer.valueOf(5);
 
 	/**
 	 * Tamanho do campo Agência = 4. 
 	 */
-	protected static final Integer AGENCIA_LENGTH = Integer.valueOf(4);
+	private static final Integer AGENCIA_LENGTH = Integer.valueOf(4);
 	
 	/**
 	 * Tamanho do campo Carteira = 2. 
 	 */
-	protected static final Integer CARTEIRA_LENGTH = Integer.valueOf(2);
+	private static final Integer CARTEIRA_LENGTH = Integer.valueOf(2);
 	
 	/**
 	 * Tamanho do campo Nosso Número = 11. 
 	 */
-	protected static final Integer NOSSO_NUMERO_LENGTH = Integer.valueOf(11);
+	private static final Integer NOSSO_NUMERO_LENGTH = Integer.valueOf(11);
 	
 	/**
 	 * Tamanho do campo Conta = 7. 
 	 */
-	protected static final Integer CONTA_LENGTH = Integer.valueOf(7);
+	private static final Integer CONTA_LENGTH = Integer.valueOf(7);
 	
 	/**
 	 * Tamanho do campo Constante = 1. 
 	 */
-	protected static final Integer CONSTANT_LENGTH = Integer.valueOf(1);
+	private static final Integer CONSTANT_LENGTH = Integer.valueOf(1);
 	
 	/**
 	 * Valor do campo Constante =  0. 
 	 */
-	protected static final Integer CONSTANT_VALUE = Integer.valueOf(0);
+	private static final Integer CONSTANT_VALUE = Integer.valueOf(0);
 
 	/**
 	 * Constante em forma de campo {@link #CONSTANT_VALUE} e {@link #CONSTANT_LENGTH}.
@@ -148,9 +148,7 @@ class CLBradesco extends AbstractCLBradesco {
 	private static final Field<Integer> CONSTANT_FIELD = new Field<Integer>(CONSTANT_VALUE, CONSTANT_LENGTH);
 	
 	/**
-	 * <p>
-	 *   Cria um campo livre instanciando o número de fields ({@code FIELDS_LENGTH}) deste campo.
-	 * </p>
+	 * Cria um campo livre instanciando o número de fields ({@code FIELDS_LENGTH}) deste campo.
 	 * 
 	 * @since 0.2
 	 */
