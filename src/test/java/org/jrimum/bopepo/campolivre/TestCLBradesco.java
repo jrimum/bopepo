@@ -58,6 +58,8 @@ import org.junit.Test;
  */
 public class TestCLBradesco extends CampoLivreBaseTest {
 
+	private static final int NOSSO_NUMERO_LENGTH = 11;
+	
 	private Titulo titulo;
 
 	@Before
@@ -130,19 +132,19 @@ public class TestCLBradesco extends CampoLivreBaseTest {
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNossoNumeroComBrancos() {
 
-		seNaoPermiteNossoNumeroComBrancos(titulo, CLBradesco.NOSSO_NUMERO_LENGTH);
+		seNaoPermiteNossoNumeroComBrancos(titulo, NOSSO_NUMERO_LENGTH);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNossoNumeroComEspacos() {
 
-		seNaoPermiteNossoNumeroComEspacos(titulo, CLBradesco.NOSSO_NUMERO_LENGTH);
+		seNaoPermiteNossoNumeroComEspacos(titulo, NOSSO_NUMERO_LENGTH);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNossoNumeroComTamanhoDiferenteDe11() {
 
-		seNaoPermiteNossoNumeroComTamanhoDiferenteDoEspecificado(titulo, CLBradesco.NOSSO_NUMERO_LENGTH - 1);
+		seNaoPermiteNossoNumeroComTamanhoDiferenteDoEspecificado(titulo, NOSSO_NUMERO_LENGTH - 1);
 	}
 
 	@Test(expected = CampoLivreException.class)
