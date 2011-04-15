@@ -115,6 +115,11 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	static final int NN11 = 11;
 	
 	/**
+	 * Nosso número com 14 posições.
+	 */
+	static final int NN14 = 14;
+
+	/**
 	 * Nosso número com 15 posições.
 	 */
 	static final int NN15 = 15;
