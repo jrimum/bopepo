@@ -571,11 +571,11 @@ class PdfViewer {
 		PdfContentByte cb = null;
 
 		// Verifcando se existe o field(campo) da imagem no template do boleto.
-		float posCampoImgLogo[] = form.getFieldPositions("txtFcCodigoBarra");
+		float posCampoImg[] = form.getFieldPositions("txtFcCodigoBarra");
 		
-		if (isNotNull(posCampoImgLogo)) {
+		if (isNotNull(posCampoImg)) {
 			
-			RectanglePDF field = new RectanglePDF(posCampoImgLogo);
+			RectanglePDF field = new RectanglePDF(posCampoImg);
 			
 			cb = stamper.getOverContent(field.getPage());
 			Image imgBarCode = barCode.createImageWithBarcode(cb, null, null);
