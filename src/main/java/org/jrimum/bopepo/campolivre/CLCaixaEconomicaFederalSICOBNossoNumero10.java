@@ -61,7 +61,7 @@ import org.jrimum.utilix.text.Filler;
  * 
  * @version 0.2
  */
-class CLCaixaEconomicaFederalSICOB extends AbstractCLCaixaEconomicaFederal {
+class CLCaixaEconomicaFederalSICOBNossoNumero10 extends AbstractCLCaixaEconomicaFederal {
 	
 	/**
 	 *
@@ -81,7 +81,7 @@ class CLCaixaEconomicaFederalSICOB extends AbstractCLCaixaEconomicaFederal {
 	 * 
 	 * @param titulo - Título com as informações para geração do campo livre
 	 */
-	CLCaixaEconomicaFederalSICOB(Titulo titulo) {
+	CLCaixaEconomicaFederalSICOBNossoNumero10(Titulo titulo) {
 		
 		super(FIELDS_LENGTH);
 		
