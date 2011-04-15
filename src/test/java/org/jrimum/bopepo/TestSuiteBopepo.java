@@ -40,6 +40,7 @@ import org.jrimum.bopepo.campolivre.TestCLBanestes;
 import org.jrimum.bopepo.campolivre.TestCLBanrisulCobrancaNaoRegistrada;
 import org.jrimum.bopepo.campolivre.TestCLBanrisulCobrancaRegistrada;
 import org.jrimum.bopepo.campolivre.TestCLBradesco;
+import org.jrimum.bopepo.campolivre.TestCLCaixaEconomicaFederalSICOBNossoNumero14;
 import org.jrimum.bopepo.campolivre.TestCLCaixaEconomicaFederalSIGCB;
 import org.jrimum.bopepo.campolivre.TestCLCaixaEconomicaFederalSINCO;
 import org.jrimum.bopepo.campolivre.TestCLHSBCCobrancaNaoRegistrada;
@@ -62,7 +63,7 @@ import org.junit.runners.Suite;
 			TestBoleto.class,
 			TestBoletoUtil.class,
 			TestFatorDeVencimento.class,
-			TestBancoSuportado.class,
+			TestBancosSuportados.class,
 			TestCLBradesco.class,
 			TestCLSicredi.class,
 			TestCodigoDeBarras.class,
@@ -78,6 +79,7 @@ import org.junit.runners.Suite;
 			TestCLBanrisulCobrancaRegistrada.class,
 			TestCLCaixaEconomicaFederalSIGCB.class,
 			TestCLCaixaEconomicaFederalSINCO.class,
+			TestCLCaixaEconomicaFederalSICOBNossoNumero14.class,
 			TestCLHSBCCobrancaNaoRegistrada.class,
 			TestCLItauComCarteirasEspeciais.class,
 			TestCLItauPadrao.class,
