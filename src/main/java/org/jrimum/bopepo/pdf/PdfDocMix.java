@@ -44,6 +44,7 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 import org.jrimum.utilix.Collections;
+import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Strings;
 
@@ -101,7 +102,7 @@ public class PdfDocMix {
 	@SuppressWarnings("unused")
 	private PdfDocMix() {
 
-		Objects.checkState(false, "Instanciação não permitida!");
+		Exceptions.throwIllegalStateException("Instanciação não permitida!");
 	}
 	
 	/**
@@ -408,9 +409,9 @@ public class PdfDocMix {
 		return this.txtMap;
 	}
 
-	public PdfDocMix putAllText(Map<String, String> txtMap) {
+	public PdfDocMix putAllTexts(Map<String, String> txtMap) {
 		
-		Collections.checkNotEmpty(txtMap,"Fields ausentes!");
+		Collections.checkNotEmpty(txtMap,"Campos ausentes!");
 		
 		this.txtMap = txtMap;
 		return this;
@@ -433,9 +434,9 @@ public class PdfDocMix {
 		return this.imgMap;
 	}
 
-	public PdfDocMix putAllImage(Map<String,java.awt.Image> imgMap) {
+	public PdfDocMix putAllImages(Map<String,java.awt.Image> imgMap) {
 		
-		Collections.checkNotEmpty(imgMap,"Fields ausentes!");
+		Collections.checkNotEmpty(imgMap,"Campos ausentes!");
 		
 		this.imgMap = imgMap;
 		
@@ -498,7 +499,7 @@ public class PdfDocMix {
 			
 			LOG.error("Erro durante a criação do arquivo! " + e.getLocalizedMessage(), e);
 			
-			throw new IllegalStateException("Erro ao tentar criar arquivo! " +"Causado por " + e.getLocalizedMessage(), e);
+			return Exceptions.throwIllegalStateException("Erro ao tentar criar arquivo! " +"Causado por " + e.getLocalizedMessage(), e);
 		}
 	}
 
@@ -522,7 +523,7 @@ public class PdfDocMix {
 			
 			LOG.error("Erro durante a criação do stream! " + e.getLocalizedMessage(), e);
 			
-			throw new IllegalStateException("Erro durante a criação do stream! " +"Causado por " + e.getLocalizedMessage(), e);
+			return Exceptions.throwIllegalStateException("Erro durante a criação do stream! " +"Causado por " + e.getLocalizedMessage(), e);
 		}
 	}
 
@@ -546,7 +547,7 @@ public class PdfDocMix {
 			
 			LOG.error("Erro durante a criação do array de bytes! " + e.getLocalizedMessage(), e);
 			
-			throw new IllegalStateException("Erro durante a criação do array de bytes! " +"Causado por " + e.getLocalizedMessage(), e);
+			return Exceptions.throwIllegalStateException("Erro durante a criação do array de bytes! " +"Causado por " + e.getLocalizedMessage(), e);
 		}
 	}
 
@@ -589,7 +590,7 @@ public class PdfDocMix {
 			setTemplate(templateUrl.openStream());
 			return this;
 		} catch (Exception e) {
-			throw new IllegalStateException(e);
+			return Exceptions.throwIllegalStateException(e);
 		}
 	}
 
@@ -606,7 +607,7 @@ public class PdfDocMix {
 			setTemplate(Files.toByteArray(templateInput));
 			return this;
 		} catch (Exception e) {
-			throw new IllegalStateException(e);
+			return Exceptions.throwIllegalStateException(e);
 		}
 	}
 
@@ -636,7 +637,7 @@ public class PdfDocMix {
 			setTemplate(Files.fileToBytes(templateFile));
 			return this;
 		} catch (Exception e) {
-			throw new IllegalStateException(e);
+			return Exceptions.throwIllegalStateException(e);
 		}
 	}
 	
@@ -689,7 +690,7 @@ public class PdfDocMix {
 			
 		}catch (Exception e) {
 			
-			throw new IllegalStateException(e);
+			Exceptions.throwIllegalStateException(e);
 		}
 	}
 	
@@ -712,7 +713,7 @@ public class PdfDocMix {
 				try {
 					form.setField(e.getKey(), e.getValue());
 				}catch (Exception ex) {
-					throw new IllegalStateException(ex);
+					Exceptions.throwIllegalStateException(ex);
 				}
 			}
 		}		
@@ -730,7 +731,7 @@ public class PdfDocMix {
 				try {
 					setImage(e.getKey(), Image.getInstance(e.getValue(),null));
 				}catch (Exception ex) {
-					throw new IllegalStateException(ex);
+					Exceptions.throwIllegalStateException(ex);
 				}
 			}
 		}
@@ -756,7 +757,7 @@ public class PdfDocMix {
 				try {
 					PDFUtil.changeFieldToImage(stamper, posImgField, image);
 				} catch (Exception e) {
-					throw new IllegalStateException(e);
+					Exceptions.throwIllegalStateException(e);
 				}
 			}
 		}
@@ -810,7 +811,7 @@ public class PdfDocMix {
 			stamper.close();
 			
 		} catch (Exception e) {
-			throw new IllegalStateException(e);
+			Exceptions.throwIllegalStateException(e);
 		}
 	}
 	
