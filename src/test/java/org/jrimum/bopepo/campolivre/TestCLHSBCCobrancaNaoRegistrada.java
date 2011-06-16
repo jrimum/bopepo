@@ -53,6 +53,8 @@ public class TestCLHSBCCobrancaNaoRegistrada {
 		
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("0000239104761");
+		titulo.setNossoNumero("0000000001473");
+		titulo.setDigitoDoNossoNumero("751");
 		titulo.setDataDoVencimento(new GregorianCalendar(2008, Calendar.JULY, 4).getTime());
 		titulo.setParametrosBancarios(new ParametrosBancariosMap(TipoIdentificadorCNR.class.getName(), TipoIdentificadorCNR.COM_VENCIMENTO));
 	}
