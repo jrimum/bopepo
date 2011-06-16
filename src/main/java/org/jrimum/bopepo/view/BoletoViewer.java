@@ -40,12 +40,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.pdf.Files;
 import org.jrimum.utilix.Collections;
+import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Strings;
 
@@ -583,7 +585,7 @@ public class BoletoViewer {
 		
 		return PdfViewerMultiProcessor.groupInOnePDF(templatesAndBoletos);
 	}
-	
+
 	/**
 	 * <p>
 	 * Agrupa os boletos das listas com seus respectivos templates em um único
@@ -612,10 +614,76 @@ public class BoletoViewer {
 			
 		} catch (Exception e) {
 
-			throw new IllegalStateException("Erro inesperado!", e);
+			return Exceptions.throwIllegalStateException("Erro inesperado!", e);
 		}
 	}
 	
+	/**
+	 * <p>
+	 * Agrupa os boletos das listas com seus respectivos templates em um único
+	 * arquivo PDF. Caso exista sequência no Map, a mesma dependerá da chamada
+	 * ao método {@link java.util.Map#entrySet() entrySet} do mesmo.
+	 * </p>
+	 * 
+	 * 
+	 * @param templatesAndBoletos
+	 *            Mapa de templates e boletos a serem agrupados
+	 * 
+	 * @return Arquivo PDF em array de bytes gerado com os boletos fornecidos
+	 * 
+	 * @since 0.2
+	 */
+	public static byte[] groupInOnePdfWithTemplates(Map<byte[], List<Boleto>> templatesAndBoletos) {
+		
+		checkTemplateBoletosEntries(templatesAndBoletos);
+		
+		return groupInOnePdfWithTemplates(templatesAndBoletos.entrySet());
+	}
+	
+	/**
+	 * <p>
+	 * Agrupa os boletos das listas com seus respectivos templates em um único
+	 * arquivo PDF. Caso exista sequência no Map, a mesma dependerá da chamada
+	 * ao método {@link java.util.Map#entrySet() entrySet} do mesmo.
+	 * </p>
+	 * 
+	 * 
+	 * @param templatesAndBoletos
+	 *            Mapa de templates e boletos a serem agrupados
+	 * 
+	 * @param destFile
+	 *            Arquivo que armazenará os boletos
+	 * 
+	 * @return Arquivo PDF em array de bytes gerado com os boletos fornecidos
+	 * 
+	 * @since 0.2
+	 */
+	public static File groupInOnePdfWithTemplates(Map<byte[], List<Boleto>> templatesAndBoletos, File destFile) {
+
+		checkTemplateBoletosEntries(templatesAndBoletos);
+		checkDestFile(destFile);
+		
+		return groupInOnePdfWithTemplates(templatesAndBoletos.entrySet(), destFile);
+	}
+	
+	/**
+	 * <p>
+	 * Agrupa os boletos das listas com seus respectivos templates em um único
+	 * arquivo PDF. Caso exista sequência no Map, a mesma dependerá da chamada
+	 * ao método {@link java.util.Map#entrySet() entrySet} do mesmo.
+	 * </p>
+	 * 
+	 * 
+	 * @param templatesAndBoletos
+	 *            Coleção de templates e boletos a serem agrupados
+	 * 
+	 * @param destFile
+	 *            Arquivo que armazenará os boletos
+	 * 
+	 * @return Arquivo PDF em array de bytes gerado com os boletos fornecidos
+	 * 
+	 * @since 0.2
+	 */
 	public static List<byte[]> onePerPDF(List<Boleto> boletos) {
 
 		checkBoletosList(boletos);
@@ -1262,7 +1330,6 @@ public class BoletoViewer {
 	private static void checkBoleto(Boleto boleto) {
 		
 		Objects.checkNotNull(boleto, "Boleto nulo!");
-		
 	}
 	
 	private static void checkBoletosList(List<Boleto> boletos) {
@@ -1274,5 +1341,10 @@ public class BoletoViewer {
 	private static void checkTemplateBoletosEntries(Collection<Entry<byte[],List<Boleto>>> templatesAndBoletos) {
 		
 		Collections.checkNotEmpty(templatesAndBoletos, "A Coleção de pares: (template,boletos) está vazia!");
+	}
+
+	private static void checkTemplateBoletosEntries(Map<byte[],List<Boleto>> templatesAndBoletos) {
+		
+		Collections.checkNotEmpty(templatesAndBoletos, "O Mapa (template,boletos) está vazio!");
 	}
 }
