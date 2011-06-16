@@ -44,6 +44,7 @@ import org.jrimum.bopepo.campolivre.CampoLivreFactory;
 import org.jrimum.bopepo.campolivre.NotSupportedBancoException;
 import org.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
 
 /**
@@ -250,10 +251,10 @@ public final class Boleto {
 		} else {
 			
 			if (length > CampoLivre.STRING_LENGTH) {
-				throw new IllegalArgumentException("O tamanho da String [" + length + "] é maior que o especificado [" + CampoLivre.STRING_LENGTH + "]!");
+				Exceptions.throwIllegalArgumentException("O tamanho da String [" + length + "] é maior que o especificado [" + CampoLivre.STRING_LENGTH + "]!");
 				
 			} else {
-				throw new IllegalArgumentException("O tamanho da String [" + length + "] é menor que o especificado [" + CampoLivre.STRING_LENGTH + "]!");
+				Exceptions.throwIllegalArgumentException("O tamanho da String [" + length + "] é menor que o especificado [" + CampoLivre.STRING_LENGTH + "]!");
 			}
 		}
 	}

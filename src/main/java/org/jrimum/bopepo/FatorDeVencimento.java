@@ -39,6 +39,7 @@ import java.util.GregorianCalendar;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.jrimum.utilix.Dates;
+import org.jrimum.utilix.Exceptions;
 
 /**
  * <p>
@@ -140,7 +141,7 @@ public class FatorDeVencimento{
 
 		if (isNull(data)) {
 			
-			throw new IllegalArgumentException("Impossível realizar o cálculo do fator de vencimento de uma data nula!");
+			return Exceptions.throwIllegalArgumentException("Impossível realizar o cálculo do fator de vencimento de uma data nula!");
 			
 		} else {
 			
@@ -196,7 +197,7 @@ public class FatorDeVencimento{
 		if(dataVencimentoTruncada.before(DATA_BASE_DO_FATOR_DE_VENCIMENTO)
 				|| dataVencimentoTruncada.after(DATA_LIMITE_DO_FATOR_DE_VENCIMENTO)) {
 			
-			throw new IllegalArgumentException(
+			Exceptions.throwIllegalArgumentException(
 					format("Para o cálculo do fator de vencimento se faz necessário informar uma data entre %s e %s.",
 					DDMMYYYY_B.format(DATA_BASE_DO_FATOR_DE_VENCIMENTO), DDMMYYYY_B.format(DATA_LIMITE_DO_FATOR_DE_VENCIMENTO)));
 					
@@ -213,7 +214,7 @@ public class FatorDeVencimento{
 
 		if (fatorDeVencimento < 0 || fatorDeVencimento > 9999) {
 
-			throw new IllegalArgumentException(
+			Exceptions.throwIllegalArgumentException(
 					"Impossível transformar em data um fator menor que zero! O fator de vencimento deve ser um número entre 0 e 9999.");
 		}
 	}

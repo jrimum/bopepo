@@ -38,6 +38,7 @@ import static org.apache.commons.lang.StringUtils.trim;
 import static org.jrimum.utilix.Objects.checkNotNull;
 import static org.jrimum.utilix.text.Strings.WHITE_SPACE;
 
+import org.jrimum.utilix.Exceptions;
 import org.jrimum.vallia.digitoverificador.BoletoLinhaDigitavelDV;
 
 /**
@@ -77,7 +78,7 @@ public final class BoletoUtil {
 	 */
 	private BoletoUtil(){
 
-		throw new AssertionError("NOT SUPORTED OPERATION!");
+		Exceptions.throwIllegalStateException("Instanciação não permitida!");
 	}
 	
 	/**
@@ -856,7 +857,7 @@ public final class BoletoUtil {
 		checkNotNull(linhaDigitavel, MSG_LINHA_INVALIDA);
 
 		if (isBlank(linhaDigitavel)) {
-			throw new IllegalArgumentException(MSG_LINHA_INVALIDA
+			Exceptions.throwIllegalArgumentException(MSG_LINHA_INVALIDA
 					+ " "
 					+ String.format(MSG_STR_VAZIA, linhaDigitavel,
 							linhaDigitavel.length()));
@@ -883,7 +884,7 @@ public final class BoletoUtil {
 		checkNotNull(codigoDeBarras, MSG_LINHA_INVALIDA);
 
 		if (isBlank(codigoDeBarras)) {
-			throw new IllegalArgumentException(MSG_CODIGO_DE_BARRAS
+			Exceptions.throwIllegalArgumentException(MSG_CODIGO_DE_BARRAS
 					+ " "
 					+ String.format(MSG_STR_VAZIA, codigoDeBarras,
 							codigoDeBarras.length()));
