@@ -3,6 +3,7 @@ package org.jrimum.bopepo.campolivre;
 import static java.lang.String.format;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
@@ -133,19 +134,19 @@ class CLCaixaEconomicaFederalSICOBNossoNumero10 extends AbstractCLCaixaEconomica
 		
 		if(!nn.startsWith("9") && !nn.startsWith("80") && !nn.startsWith("81") && !nn.startsWith("82")){
 			
-			throw new IllegalArgumentException(format("Para a cobrança SICOB o nosso número [%s] deve começar com 9 que é o identificador da \"carteira rápida\" [9NNNNNNNNN] ou 80, 81 e 82 para \"carteira sem registro\" [82NNNNNNNN]!", nn));
+			Exceptions.throwIllegalArgumentException(format("Para a cobrança SICOB o nosso número [%s] deve começar com 9 que é o identificador da \"carteira rápida\" [9NNNNNNNNN] ou 80, 81 e 82 para \"carteira sem registro\" [82NNNNNNNN]!", nn));
 		}
 	}
 	
 	@Override
 	protected void addFields(Titulo titulo) {
 		// TODO IMPLEMENTAR
-		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+		Exceptions.throwUnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
 	}
 
 	@Override
 	protected void checkValues(Titulo titulo) {
 		// TODO IMPLEMENTAR
-		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+		Exceptions.throwUnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
 	}
 }

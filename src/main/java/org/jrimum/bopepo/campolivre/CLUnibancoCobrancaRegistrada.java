@@ -7,6 +7,7 @@ import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
@@ -180,12 +181,12 @@ class CLUnibancoCobrancaRegistrada extends AbstractCLUnibanco {
 	@Override
 	protected void addFields(Titulo titulo) {
 		// TODO IMPLEMENTAR
-		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+		Exceptions.throwUnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
 	}
 
 	@Override
 	protected void checkValues(Titulo titulo) {
 		// TODO IMPLEMENTAR
-		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+		Exceptions.throwUnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
 	}
 }

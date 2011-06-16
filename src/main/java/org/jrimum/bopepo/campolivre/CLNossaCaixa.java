@@ -33,6 +33,7 @@ import java.util.Arrays;
 
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
 import org.jrimum.vallia.digitoverificador.Modulo;
@@ -350,12 +351,12 @@ class CLNossaCaixa extends AbstractCLNossaCaixa {
 	@Override
 	protected void addFields(Titulo titulo) {
 		// TODO IMPLEMENTAR
-		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+		Exceptions.throwUnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
 	}
 
 	@Override
 	protected void checkValues(Titulo titulo) {
 		// TODO IMPLEMENTAR
-		throw new UnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+		Exceptions.throwUnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
 	}
 }
