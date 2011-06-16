@@ -57,6 +57,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
 import org.jrimum.utilix.ClassLoaders;
+import org.jrimum.utilix.Exceptions;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;
@@ -181,7 +182,7 @@ class PdfViewer {
 			
 			log.error("Erro durante a criação do arquivo! " + e.getLocalizedMessage(), e);
 			
-			throw new IllegalStateException("Erro ao tentar criar arquivo! " +"Causado por " + e.getLocalizedMessage(), e);
+			return Exceptions.throwIllegalStateException("Erro ao tentar criar arquivo! " +"Causado por " + e.getLocalizedMessage(), e);
 		}
 	}
 
@@ -205,7 +206,7 @@ class PdfViewer {
 			
 			log.error("Erro durante a criação do stream! " + e.getLocalizedMessage(), e);
 			
-			throw new IllegalStateException("Erro durante a criação do stream! " +"Causado por " + e.getLocalizedMessage(), e);
+			return Exceptions.throwIllegalStateException("Erro durante a criação do stream! " +"Causado por " + e.getLocalizedMessage(), e);
 		}
 	}
 
@@ -229,7 +230,7 @@ class PdfViewer {
 			
 			log.error("Erro durante a criação do array de bytes! " + e.getLocalizedMessage(), e);
 			
-			throw new IllegalStateException("Erro durante a criação do array de bytes! " +"Causado por " + e.getLocalizedMessage(), e);
+			return Exceptions.throwIllegalStateException("Erro durante a criação do array de bytes! " +"Causado por " + e.getLocalizedMessage(), e);
 		}
 	}
 
@@ -269,7 +270,7 @@ class PdfViewer {
 		try {
 			setTemplate(templateUrl.openStream());
 		} catch (IOException e) {
-			throw new IllegalStateException(e);
+			Exceptions.throwIllegalStateException(e);
 		}
 	}
 
@@ -285,7 +286,7 @@ class PdfViewer {
 		try {
 			setTemplate(Files.toByteArray(templateInput));
 		} catch (IOException e) {
-			throw new IllegalStateException(e);
+			Exceptions.throwIllegalStateException(e);
 		}
 	}
 
@@ -313,7 +314,7 @@ class PdfViewer {
 		try {
 			setTemplate(Files.fileToBytes(templateFile));
 		} catch (IOException e) {
-			throw new IllegalStateException(e);
+			Exceptions.throwIllegalStateException(e);
 		}
 	}
 	

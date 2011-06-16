@@ -38,6 +38,7 @@ import java.util.Map.Entry;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.pdf.Files;
 import org.jrimum.bopepo.pdf.PDFUtil;
+import org.jrimum.utilix.Exceptions;
 
 /**
  * <p>
@@ -79,7 +80,7 @@ class PdfViewerMultiProcessor {
 			
 		} catch (Exception e) {
 			
-			throw new IllegalStateException("Erro durante geração do PDF! Causado por " + e.getLocalizedMessage(), e);
+			return Exceptions.throwIllegalStateException("Erro durante geração do PDF! Causado por " + e.getLocalizedMessage(), e);
 		}
 	}
 
@@ -105,7 +106,7 @@ class PdfViewerMultiProcessor {
 			
 		} catch (Exception e) {
 			
-			throw new IllegalStateException("Erro durante geração do PDF! Causado por " + e.getLocalizedMessage(), e);
+			return Exceptions.throwIllegalStateException("Erro durante geração do PDF! Causado por " + e.getLocalizedMessage(), e);
 		}
 	}
 	
