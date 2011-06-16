@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Strings;
 
@@ -115,7 +116,7 @@ public class Files {
 		Objects.checkNotNull(bytes);
 
 		if (file.length() > Integer.MAX_VALUE) {
-			throw new IllegalArgumentException(
+			Exceptions.throwIllegalArgumentException(
 					"TAMANHO DO ARQUIVO MAIOR DO QUE O SUPORTADO: "
 							+ Integer.MAX_VALUE);
 		}

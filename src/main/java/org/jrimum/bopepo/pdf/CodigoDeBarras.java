@@ -34,6 +34,7 @@ import static java.lang.String.format;
 import java.awt.Color;
 import java.awt.Image;
 
+import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Strings;
 
@@ -64,7 +65,7 @@ public class CodigoDeBarras {
 	@SuppressWarnings("unused")
 	private CodigoDeBarras() {
 
-		Objects.checkState(false, "Instanciação não permitida!");
+		Exceptions.throwIllegalStateException("Instanciação não permitida!");
 	}
 	
 	public CodigoDeBarras(String codigo){
