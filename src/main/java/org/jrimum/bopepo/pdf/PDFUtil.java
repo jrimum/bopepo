@@ -125,7 +125,7 @@ public class PDFUtil{
 
 	/**
 	 * <p>
-	 * Junta varios arquivos pdf em um soh.
+	 * Junta varios arquivos pdf em um só.
 	 * </p>
 	 * 
 	 * @param pdfFiles
