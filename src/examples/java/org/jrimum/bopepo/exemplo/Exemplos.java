@@ -54,6 +54,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
+import org.jrimum.utilix.Exceptions;
 
 /**
  * Classe utilitária para criação de objetos necessários para geração dos 
@@ -74,7 +75,7 @@ public class Exemplos {
 	 * @throws AssertionError Caso haja alguma tentativa de utilização deste construtor.
 	 */
 	private Exemplos() {
-		throw new AssertionError("Classe utilitária não instanciável.");
+		Exceptions.throwIllegalStateException("Instanciação não permitida!");
 	}
 	
 	/**

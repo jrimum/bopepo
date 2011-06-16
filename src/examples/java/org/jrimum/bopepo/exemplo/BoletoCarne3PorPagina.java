@@ -16,6 +16,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.ClassLoaders;
+import org.jrimum.utilix.Exceptions;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -71,7 +72,7 @@ public class BoletoCarne3PorPagina {
 			arq = Files.bytesToFile(filePath, mergeFilesInPages(boletosEmBytes));
 			
 		} catch (Exception e) {
-			throw new IllegalStateException("Erro durante geração do PDF! Causado por " + e.getLocalizedMessage(), e);
+			Exceptions.throwIllegalStateException("Erro durante geração do PDF! Causado por " + e.getLocalizedMessage(), e);
 		}
 
 		return arq;
