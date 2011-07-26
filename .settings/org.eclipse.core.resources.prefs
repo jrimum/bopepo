@@ -1,4 +1,9 @@
-#Sat Aug 14 21:18:09 GMT-03:00 2010
+#Sat Jun 18 10:01:43 GMT-03:00 2011
 eclipse.preferences.version=1
+encoding//src/examples/resources=UTF-8
 encoding//src/log4j.properties=UTF-8
+encoding//src/main/java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/test/java=UTF-8
+encoding//src/test/resources=UTF-8
 encoding/<project>=UTF-8

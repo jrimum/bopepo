@@ -87,7 +87,6 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.5</version>
 				<executions>
 					<execution>
 						<id>add-sources</id>
@@ -106,7 +105,6 @@
 
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.2</version>
 				<configuration>
 					<descriptors>
                         <descriptor>src/main/assembly/bopepo-dependencias-jrimum.xml</descriptor>
