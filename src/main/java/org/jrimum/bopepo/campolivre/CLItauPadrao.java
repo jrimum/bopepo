@@ -105,6 +105,8 @@ import org.jrimum.utilix.text.Filler;
  * </p>
  * 
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
+ * @author <a href="mailto:fernandohsmartin@gmail.com">Fernando Martin</a>
  * 
  * @since 0.2
  * 
@@ -159,8 +161,11 @@ class CLItauPadrao extends AbstractCLItau {
 	 * do código da conta, do código da carteira e do nosso número.
 	 * </p>
 	 * <p>
-	 * À exceção, estão as carteiras 126, 131, 146, 150 e 168 cuja obtenção 
-	 * está baseada apenas nos dados "CARTEIRA/NOSSO NÚMERO" da operação.
+	 * À exceção, estão as <b>carteiras escriturais 104, 105, 112, 113, 114, 147, 
+	 * 166 e 212</b> e na <b>modalidade direta as  carteiras 126, 131, 146, 150 
+	 * e 168</b>, cuja obtenção está baseada apenas nos dados "CARTEIRA/NOSSO NÚMERO" 
+	 * da operação. Fonte: <a href="http://pt.scribd.com/doc/38486598/Manual-ITAU">
+	 * Manual ITAÚ</a>, mais especificamente nas páginas 19 e 30.
 	 * </p>
 	 * <p>
 	 * Exemplo do cálculo:
@@ -211,16 +216,21 @@ class CLItauPadrao extends AbstractCLItau {
 	private Integer calculeDigitoDaPosicao31(Integer codigoDaAgencia,
 			Integer codigoDaConta, Integer codigoDaCarteira, String nossoNumero) {
 
-		Integer[] carteirasExcecao = {126, 131, 146, 150, 168};
-		StringBuilder campo = new StringBuilder();
+		// Carteiras "exceção".
+		Integer[] carteirasEscriturais = {104, 105, 112, 113, 114, 147, 166, 212};
+		Integer[] carteirasModalidadeDireta = {126, 131, 146, 150, 168};
 		
+		StringBuilder campo = new StringBuilder();
 		campo.append(Filler.ZERO_LEFT.fill(codigoDaCarteira.intValue(), 3));
 		campo.append(Filler.ZERO_LEFT.fill(nossoNumero, 8));
 		
 		/*
-		 * Se a carteira não estiver nas exceções, acrescenta a agência e a conta.
+		 * Se a carteira em questão não estiver nas lista de exceções então
+		 * acrescenta-se a agência e a conta para compor a base para o cálculo 
+		 * do DAC.
 		 */
-		if(Arrays.binarySearch(carteirasExcecao, codigoDaCarteira) < 0) {
+		if (Arrays.binarySearch(carteirasModalidadeDireta, codigoDaCarteira) < 0
+		    && Arrays.binarySearch(carteirasEscriturais, codigoDaCarteira) < 0) {
 			
 			campo.insert(0, Filler.ZERO_LEFT.fill(codigoDaConta.intValue(), 5));
 			campo.insert(0, Filler.ZERO_LEFT.fill(codigoDaAgencia.intValue(), 4));

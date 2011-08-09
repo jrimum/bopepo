@@ -73,6 +73,8 @@ import com.lowagie.text.pdf.PdfStamper;
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
+ * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @since 0.2
  * 
@@ -810,8 +812,9 @@ class PdfViewer {
 	}
 
 	private void setAbstractCPRFCedente() throws IOException, DocumentException {
-
-		form.setField("txtRsCpfCnpj", boleto.getTitulo().getCedente().getCPRF().getCodigoFormatado());
+		if (isNotNull(boleto.getTitulo().getCedente().getCPRF())) {
+			form.setField("txtRsCpfCnpj", boleto.getTitulo().getCedente().getCPRF().getCodigoFormatado());
+		}
 	}
 
 	private void setNumeroDocumento() throws IOException, DocumentException {

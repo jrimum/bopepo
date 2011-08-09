@@ -57,6 +57,7 @@ public class BoletoExemploExecutor {
 		AbstractBoletoExemplo.newInstance(BoletoBancoRealExemplo.class);
 		AbstractBoletoExemplo.newInstance(BoletoItauCarteirasPadroesExemplo.class);
 		AbstractBoletoExemplo.newInstance(BoletoItauCarteirasEspeciaisExemplo.class);
+		AbstractBoletoExemplo.newInstance(BoletoItauCarteirasEscrituraisExemplo.class);
 		AbstractBoletoExemplo.newInstance(BoletoHSBCCobrancaNaoRegistradaExemplo.class);
 		AbstractBoletoExemplo.newInstance(BoletoUnibancoCobrancaNaoRegistradaExemplo.class);
 		AbstractBoletoExemplo.newInstance(BoletoUnibancoCobrancaRegistradaExemplo.class);

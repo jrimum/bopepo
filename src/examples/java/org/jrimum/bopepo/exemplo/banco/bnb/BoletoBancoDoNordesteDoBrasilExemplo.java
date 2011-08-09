@@ -86,7 +86,7 @@ public class BoletoBancoDoNordesteDoBrasilExemplo {
 		/*
 		 * Nosso Número com 7 dígitos
 		 */
-		titulo.setNossoNumero("76");
+		titulo.setNossoNumero("7654321");
 		
 		/*
 		 * Dígito do Nosso Número
@@ -94,7 +94,7 @@ public class BoletoBancoDoNordesteDoBrasilExemplo {
 		titulo.setDigitoDoNossoNumero("0");
 		
 		/*
-		 * Número da conta com no máxiom 7 dígitos e necessariamente com o dígito verificador
+		 * Número da conta com no máximo 7 dígitos e necessariamente com o dígito verificador
 		 */
 		contaBancaria.setNumeroDaConta(new NumeroDaConta(13677, "9"));
 		
