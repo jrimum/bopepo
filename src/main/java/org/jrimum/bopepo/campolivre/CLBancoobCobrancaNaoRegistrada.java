@@ -30,7 +30,6 @@ package org.jrimum.bopepo.campolivre;
 
 import static org.jrimum.utilix.Objects.isNotNull;
 
-import org.jrimum.bopepo.BoletoUtil;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
@@ -210,11 +209,6 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 
 			this.add(PARCELA_UNICA);
 		}
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(BoletoUtil.getCampoLivreDaLinhaDigitavelFormatada("75691.99990 01777.777705 81234.560019 2 48860000295295"));
-		System.out.println(BoletoUtil.getCampoLivreDaLinhaDigitavelFormatada("75691.43402 01000.000107 20000.010015 1 19260000050000"));
 	}
 	
 }
