@@ -57,6 +57,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
 import org.jrimum.utilix.ClassLoaders;
+import org.jrimum.utilix.Collections;
 import org.jrimum.utilix.Exceptions;
 
 import com.lowagie.text.DocumentException;
@@ -550,7 +551,7 @@ class PdfViewer {
 
 	private void setCamposExtra() throws IOException, DocumentException {
 
-		if (isNotNull(boleto.getTextosExtras())) {
+		if (Collections.hasElement(boleto.getTextosExtras())) {
 			
 			for (String campo : boleto.getTextosExtras().keySet()) {
 				form.setField(campo, boleto.getTextosExtras().get(campo));
@@ -589,7 +590,9 @@ class PdfViewer {
 
 	private void setDataProcessamento() throws IOException, DocumentException {
 		
-		form.setField("txtFcDataProcessamento", DDMMYYYY_B.format(boleto.getDataDeProcessamento()));
+		if(isNotNull(boleto.getDataDeProcessamento())){
+			form.setField("txtFcDataProcessamento", DDMMYYYY_B.format(boleto.getDataDeProcessamento()));
+		}
 	}
 
 	private void setAceite() throws IOException, DocumentException {
@@ -600,17 +603,24 @@ class PdfViewer {
 	}
 
 	private void setEspecieDoc() throws IOException, DocumentException {
+
 		if (isNotNull(boleto.getTitulo().getTipoDeDocumento()) && isNotNull(boleto.getTitulo().getTipoDeDocumento().getSigla())) {
 			form.setField("txtFcEspecieDocumento", boleto.getTitulo().getTipoDeDocumento().getSigla());
 		}
 	}
 
 	private void setDataDocumento() throws IOException, DocumentException {
-		form.setField("txtFcDataDocumento", DDMMYYYY_B.format(boleto.getTitulo().getDataDoDocumento()));
+
+		if(isNotNull(boleto.getTitulo().getDataDoDocumento())){
+			form.setField("txtFcDataDocumento", DDMMYYYY_B.format(boleto.getTitulo().getDataDoDocumento()));
+		}
 	}
 
 	private void setLocalPagamento() throws IOException, DocumentException {
-		form.setField("txtFcLocalPagamento", (boleto.getLocalPagamento()));
+		
+		if(isNotNull(boleto.getLocalPagamento())){
+			form.setField("txtFcLocalPagamento", (boleto.getLocalPagamento()));
+		}
 	}
 
 	private void setSacado() throws IOException, DocumentException {
@@ -728,19 +738,38 @@ class PdfViewer {
 
 	private void setInstrucaoAoCaixa() throws IOException, DocumentException {
 
-		form.setField("txtFcInstrucaoAoCaixa1", boleto.getInstrucao1());
-		form.setField("txtFcInstrucaoAoCaixa2", boleto.getInstrucao2());
-		form.setField("txtFcInstrucaoAoCaixa3", boleto.getInstrucao3());
-		form.setField("txtFcInstrucaoAoCaixa4", boleto.getInstrucao4());
-		form.setField("txtFcInstrucaoAoCaixa5", boleto.getInstrucao5());
-		form.setField("txtFcInstrucaoAoCaixa6", boleto.getInstrucao6());
-		form.setField("txtFcInstrucaoAoCaixa7", boleto.getInstrucao7());
-		form.setField("txtFcInstrucaoAoCaixa8", boleto.getInstrucao8());
+		if(isNotNull(boleto.getInstrucao1())){
+			form.setField("txtFcInstrucaoAoCaixa1", boleto.getInstrucao1());
+		}
+		if(isNotNull(boleto.getInstrucao2())){
+			form.setField("txtFcInstrucaoAoCaixa2", boleto.getInstrucao2());
+		}
+		if(isNotNull(boleto.getInstrucao3())){
+			form.setField("txtFcInstrucaoAoCaixa3", boleto.getInstrucao3());
+		}
+		if(isNotNull(boleto.getInstrucao4())){
+			form.setField("txtFcInstrucaoAoCaixa4", boleto.getInstrucao4());
+		}
+		if(isNotNull(boleto.getInstrucao5())){
+			form.setField("txtFcInstrucaoAoCaixa5", boleto.getInstrucao5());
+		}
+		if(isNotNull(boleto.getInstrucao6())){
+			form.setField("txtFcInstrucaoAoCaixa6", boleto.getInstrucao6());
+		}
+		if(isNotNull(boleto.getInstrucao7())){
+			form.setField("txtFcInstrucaoAoCaixa7", boleto.getInstrucao7());
+		}
+		if(isNotNull(boleto.getInstrucao8())){
+			form.setField("txtFcInstrucaoAoCaixa8", boleto.getInstrucao8());
+		}
 	}
 
 	private void setInstrucaoAoSacado() throws IOException, DocumentException {
 
-		form.setField("txtRsInstrucaoAoSacado", boleto.getInstrucaoAoSacado());
+		if(isNotNull(boleto.getInstrucaoAoSacado())){
+			form.setField("txtRsInstrucaoAoSacado", boleto.getInstrucaoAoSacado());
+		}
+		
 	}
 
 	private void setMoraMulta() throws IOException, DocumentException {
@@ -812,22 +841,30 @@ class PdfViewer {
 	}
 
 	private void setAbstractCPRFCedente() throws IOException, DocumentException {
+		
 		if (isNotNull(boleto.getTitulo().getCedente().getCPRF())) {
+			
 			form.setField("txtRsCpfCnpj", boleto.getTitulo().getCedente().getCPRF().getCodigoFormatado());
 		}
 	}
 
 	private void setNumeroDocumento() throws IOException, DocumentException {
 
-		form.setField("txtRsNumeroDocumento", boleto.getTitulo().getNumeroDoDocumento());
-		form.setField("txtFcNumeroDocumento", boleto.getTitulo().getNumeroDoDocumento());
+		if(isNotNull(boleto.getTitulo().getNumeroDoDocumento())){
+			
+			form.setField("txtRsNumeroDocumento", boleto.getTitulo().getNumeroDoDocumento());
+			form.setField("txtFcNumeroDocumento", boleto.getTitulo().getNumeroDoDocumento());
+		}
 	}
 
 	
 	private void setCedente() throws IOException, DocumentException {
 		
-		form.setField("txtRsCedente", boleto.getTitulo().getCedente().getNome());
-		form.setField("txtFcCedente", boleto.getTitulo().getCedente().getNome());
+		if(isNotNull(boleto.getTitulo().getCedente().getNome())){
+			
+			form.setField("txtRsCedente", boleto.getTitulo().getCedente().getNome());
+			form.setField("txtFcCedente", boleto.getTitulo().getCedente().getNome());
+		}
 	}
 	
 	
@@ -849,8 +886,11 @@ class PdfViewer {
 
 	private void setEspecie() throws IOException, DocumentException {
 
-		form.setField("txtRsEspecie", boleto.getTitulo().getTipoDeMoeda().name());
-		form.setField("txtFcEspecie", boleto.getTitulo().getTipoDeMoeda().name());
+		if(isNotNull(boleto.getTitulo().getTipoDeMoeda()) && isNotNull(boleto.getTitulo().getTipoDeMoeda())){
+			
+			form.setField("txtRsEspecie", boleto.getTitulo().getTipoDeMoeda().name());
+			form.setField("txtFcEspecie", boleto.getTitulo().getTipoDeMoeda().name());
+		}
 	}
 
 	private void setLinhaDigitavel() throws DocumentException, IOException {
@@ -900,11 +940,9 @@ class PdfViewer {
 			
 		}
 		
-		
 		if (isNotNull(imgLogoBanco)) {
 			setImageLogo(imgLogoBanco);
-		} 
-		else {
+		} else {
 			// Sem imagem, um alerta é exibido.
 			log.warn("Banco sem imagem definida. O nome da instituição será usado como logo.");
 			setTextLogo(conta.getBanco().getNome());
@@ -923,7 +961,7 @@ class PdfViewer {
 	 */
 	private void setImagensNosCampos() throws DocumentException, IOException {
 
-		if (isNotNull(boleto.getImagensExtras())) {
+		if (Collections.hasElement(boleto.getImagensExtras())) {
 			
 			for (String campo : boleto.getImagensExtras().keySet()) {
 				setImagemNoCampo(campo, Image.getInstance(boleto.getImagensExtras().get(campo),null));
@@ -947,7 +985,7 @@ class PdfViewer {
 	
 		float posCampoImgLogo[];
 		
-		if (StringUtils.isNotBlank(nomeDoCampo)) {
+		if (isNotBlank(nomeDoCampo)) {
 			
 			posCampoImgLogo = form.getFieldPositions(nomeDoCampo);
 			
