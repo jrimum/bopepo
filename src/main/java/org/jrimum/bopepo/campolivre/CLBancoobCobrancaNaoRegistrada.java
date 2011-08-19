@@ -28,8 +28,7 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import static org.jrimum.utilix.Objects.isNotNull;
-
+import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
@@ -121,20 +120,14 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 	protected static final Integer AGENCIA_LENGTH = Integer.valueOf(4);
 	
 	/**
-	 * Tamanho do campo Constante = 2.
+	 * Tamanho do campo código da modalidade de cobrança = 2.
 	 */
-	protected static final Integer CONSTANT_LENGTH = Integer.valueOf(2);
+	protected static final Integer MODALIDADE_DE_COBRANCA_LENGTH = Integer.valueOf(2);
 	
 	/**
-	 * Valor do campo Constante = 1.
+	 * Valor do código da modalidade de cobrança (01) = SIMPLES.
 	 */
-	protected static final Integer CONSTANT_VALUE = Integer.valueOf(1);
-
-	/**
-	 * Constante em forma de campo {@link #CONSTANT_VALUE} e
-	 * {@link #CONSTANT_LENGTH}, valor escrito: "01".
-	 */
-	private static final Field<Integer> CONSTANT_FIELD = new Field<Integer>(CONSTANT_VALUE, CONSTANT_LENGTH, Filler.ZERO_LEFT);
+	protected static final Integer COBRANCA_SIMPLES = Integer.valueOf(1);
 	
 	/**
 	 * Tamanho do campo Nosso Número = 8.
@@ -147,19 +140,25 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 	private static final Integer CONTA_LENGTH = Integer.valueOf(7);
 	
 	/**
+	 * Valor do número de parcelas = 1.
+	 */
+	private static final Integer UMA_PARCELA = Integer.valueOf(1);
+	
+	/**
 	 * Tamanho do campo Conta = 3. 
 	 */
 	private static final Integer NUMERO_DA_PARCELA_LENGTH = 3;
+
+	/**
+	 *  Nome do parâmetro bancário contendo o código da modalidade de cobrança.
+	 */
+	private static final String MODALIDADE_DE_COBRANCA = "ModalidadeDeCobranca";
 	
 	/**
-	 * <p>Nome do parâmetro bancário contendo o número da parcela do título.</p>
+	 * Nome do parâmetro bancário contendo o número da parcela do título.
 	 */
 	private static final String NUMERO_DA_PARCELA = "NumeroDaParcela";
-	
-	/**
-	 * Parcela única - constante para o campo parcela, valor escrito: "001".
-	 */
-	private static final Field<Integer> PARCELA_UNICA = new Field<Integer>(CONSTANT_VALUE, NUMERO_DA_PARCELA_LENGTH, Filler.ZERO_LEFT);
+
 
 	/**
 	 * <p>
@@ -192,23 +191,35 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 	@Override
 	protected void addFields(Titulo titulo) {
 		
+		Integer codigoDaModalidadeDeCobranca = COBRANCA_SIMPLES;
+		Integer numeroDaParcela = UMA_PARCELA;
+		
+		if (ParametrosBancariosMap.hasElement(titulo.getParametrosBancarios())) {
+
+			if (titulo.getParametrosBancarios()
+					.contemComNome(MODALIDADE_DE_COBRANCA)) {
+
+				checkParametrosBancarios(titulo, MODALIDADE_DE_COBRANCA);
+				
+				codigoDaModalidadeDeCobranca = titulo.getParametrosBancarios().getValor(MODALIDADE_DE_COBRANCA);
+			}
+
+			if (titulo.getParametrosBancarios()
+					.contemComNome(NUMERO_DA_PARCELA)) {
+				
+				checkParametrosBancarios(titulo, NUMERO_DA_PARCELA);
+				
+				numeroDaParcela = titulo.getParametrosBancarios().getValor(NUMERO_DA_PARCELA);
+			}
+		}		
+
 		this.add(new Field<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), CARTEIRA_LENGTH, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), AGENCIA_LENGTH, Filler.ZERO_LEFT));
-		this.add(CONSTANT_FIELD);
+		this.add(new Field<Integer>(codigoDaModalidadeDeCobranca, MODALIDADE_DE_COBRANCA_LENGTH, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Filler.ZERO_LEFT));
 		this.add(new Field<String>(titulo.getNossoNumero(),NOSSO_NUMERO_LENGTH, Filler.ZERO_LEFT));
+		this.add(new Field<Integer>(numeroDaParcela, NUMERO_DA_PARCELA_LENGTH, Filler.ZERO_LEFT));
 
-		if (isNotNull(titulo.getParametrosBancarios()) 
-				&& titulo.getParametrosBancarios().contemComNome(NUMERO_DA_PARCELA)){
-
-			checkParametrosBancarios(titulo, NUMERO_DA_PARCELA);
-			
-			this.add(new Field<Object>(titulo.getParametrosBancarios().getValor(NUMERO_DA_PARCELA), NUMERO_DA_PARCELA_LENGTH, Filler.ZERO_LEFT));
-
-		} else {
-
-			this.add(PARCELA_UNICA);
-		}
 	}
 	
 }
