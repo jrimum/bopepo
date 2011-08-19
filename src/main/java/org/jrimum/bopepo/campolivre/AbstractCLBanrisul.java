@@ -234,12 +234,11 @@ abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 		return restoMod11;
 	}
 
-	@SuppressWarnings("unchecked")
 	protected String concateneOsCamposExistentesAteOMomento() {
 		
 		final StringBuilder camposExistentesAteOMomentoConcatenados = new StringBuilder(StringUtils.EMPTY);
 		
-		for (Field field : this) {
+		for (Field<?> field : this) {
 			camposExistentesAteOMomentoConcatenados.append(field.write());
 		}
 		
