@@ -134,7 +134,6 @@ public class PDFUtil{
 	 * @return Arquivo PDF em forma de byte
 	 * @since 0.2
 	 */
-	@SuppressWarnings("unchecked")
 	public static byte[] mergeFiles(List<byte[]> pdfFiles) {
 
 		// retorno
@@ -145,7 +144,7 @@ public class PDFUtil{
 			int pageOffset = 0;
 			boolean first = true;
 
-			ArrayList master = null;
+			List<Object> master = null;
 			Document document = null;
 			PdfCopy writer = null;
 			ByteArrayOutputStream byteOS = null;
@@ -153,7 +152,7 @@ public class PDFUtil{
 			try {
 
 				byteOS = new ByteArrayOutputStream();
-				master = new ArrayList();
+				master = new ArrayList<Object>();
 
 				for (byte[] doc : pdfFiles) {
 
@@ -171,7 +170,7 @@ public class PDFUtil{
 
 						// pega-se o numero total de paginas
 						int n = reader.getNumberOfPages();
-						List bookmarks = SimpleBookmark.getBookmark(reader);
+						List<?> bookmarks = SimpleBookmark.getBookmark(reader);
 
 						if (isNotNull(bookmarks)) {
 							if (pageOffset != 0) {
