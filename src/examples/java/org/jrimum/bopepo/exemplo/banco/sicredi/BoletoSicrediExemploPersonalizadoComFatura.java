@@ -1,4 +1,4 @@
-package org.jrimum.bopepo.exemplo;
+package org.jrimum.bopepo.exemplo.banco.sicredi;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.campolivre.NotSupportedBancoException;
 import org.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
@@ -16,16 +17,16 @@ import org.jrimum.bopepo.view.BoletoViewer;
 import org.jrimum.domkee.comum.pessoa.endereco.CEP;
 import org.jrimum.domkee.comum.pessoa.endereco.Endereco;
 import org.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;
-import org.jrimum.domkee.comum.pessoa.id.cprf.CNPJ;
+import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Banco;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
-import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
+import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo.Aceite;
@@ -34,7 +35,7 @@ import com.lowagie.text.DocumentException;
 
 
 
-public class MeuPrimeiroBoletoSicredi {
+public class BoletoSicrediExemploPersonalizadoComFatura {
 
 	public static void main (String[] args) throws DocumentException, IllegalArgumentException, IOException, NotSupportedBancoException, NotSupportedCampoLivreException {
 		
@@ -45,15 +46,14 @@ public class MeuPrimeiroBoletoSicredi {
 		
 		// Informando dados sobre a conta bancária do cendente.
 		
-		final Banco banco = new Banco(new CodigoDeCompensacaoBACEN(748),
-				"BANCO COOPERATIVO SICREDI S.A.", new CNPJ("01181521000155"));
+		final Banco banco = BancosSuportados.BANCO_SICREDI.create();
 		
 		//SOBREpondo a Logo do banco:
 		banco.setImgLogo(new ImageIcon("desenvolvimento/SICREDI/Template/Imagens/LogoSicredi.PNG").getImage());
 		
 		ContaBancaria contaBancariaCed = new ContaBancaria(banco);
 		contaBancariaCed.setAgencia(new Agencia(123, "6"));
-		contaBancariaCed.setCarteira(new Carteira(5));
+		contaBancariaCed.setCarteira(new Carteira(1,TipoDeCobranca.SEM_REGISTRO));
 		contaBancariaCed.setNumeroDaConta(new NumeroDaConta(7891, "0"));
 		cedente.addContaBancaria(contaBancariaCed);
 		
@@ -95,26 +95,20 @@ public class MeuPrimeiroBoletoSicredi {
 		 * */		
 		Titulo titulo = new Titulo(contaBancariaCed, sacado, cedente,sacadorAvalista);
 		titulo.setNumeroDoDocumento("123456789");
-		titulo.setNossoNumero("07200009");//NossNúmero já Vem Calculado
-		titulo.setDigitoDoNossoNumero("0");
+		titulo.setNossoNumero("07200003");//NossNúmero já Vem Calculado
+		titulo.setDigitoDoNossoNumero("1");
 		titulo.setValor(BigDecimal.valueOf(0.23));
 		titulo.setDataDoDocumento(new Date());
 		titulo.setDataDoVencimento(new Date());
 		titulo.setTipoDeDocumento(TipoDeTitulo.DM_DUPLICATA_MERCANTIL);
 		titulo.setAceite(Aceite.A);
 
-		
-		/* 
-		 * INFORMANDO OS DADOS DO CASO ESPECIFICO (CAMPO LIVRE DO BANCO) SICREDI.
-		 * */
-		
-		CampoLivreSicredi clSICREDI = new CampoLivreSicredi(titulo);
-		
+		titulo.setParametrosBancarios(new ParametrosBancariosMap("PostoDaAgencia",02));
 		
 		/* 
 		 * INFORMANDO OS DADOS SOBRE O BOLETO.
 		 * */
-		Boleto boleto = new Boleto(titulo,clSICREDI);
+		Boleto boleto = new Boleto(titulo);
 		boleto.setLocalPagamento("Pagável preferencialmente na Rede X ou em " +
 				"qualquer Banco até o Vencimento.");
 		boleto.setInstrucaoAoSacado("Senhor sacado, sabemos sim que o valor " +
@@ -189,12 +183,9 @@ public class MeuPrimeiroBoletoSicredi {
 		
 		boleto.addTextosExtras("txtFcNomeCarteira", "SIMPLES");
 		
-		//Formatação própria para Agencia/CodigoDoCedente
-		CampoLivreSicredi.InnerCooperativaDeCredito cooperativa = clSICREDI.loadCooperativaDeCredito(titulo.getContaBancaria().getAgencia());
 		
-		String codigoDoCedente = clSICREDI.componhaCodigoDoCedente(titulo.getContaBancaria().getNumeroDaConta());
 		//FORMATAÇÃO: AAAA.PP.CCCCC
-		boleto.addTextosExtras("txtFcAgenciaCodigoCedentePosto", cooperativa.codigo+"."+cooperativa.posto+"."+codigoDoCedente);
+		boleto.addTextosExtras("txtFcAgenciaCodigoCedentePosto", "12.34.56789");
 		
 		
 		/* 

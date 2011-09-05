@@ -1,4 +1,4 @@
-package org.jrimum.bopepo.exemplo;
+package org.jrimum.bopepo.exemplo.banco.sicredi;
 
 public class ItemFaturaBoletoSICREDI {
 
