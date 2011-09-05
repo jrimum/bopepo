@@ -686,8 +686,8 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	/**
 	 * <p>
 	 * Verifica se o dígito verificador do nosso número do título não é nulo,
-	 * não é vazio e se é numérico, caso contrário lança uma {@code
-	 * IllegalArgumentException}.
+	 * não é vazio e se é numérico (natural positivo), caso contrário lança uma
+	 * {@code IllegalArgumentException}.
 	 * </p>
 	 * 
 	 * @param titulo
@@ -698,7 +698,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 		
 		Objects.checkNotNull(titulo.getDigitoDoNossoNumero(), "Dígito verificador do nosso número do título não pode ser nulo!");
 		Strings.checkNotBlank(titulo.getDigitoDoNossoNumero(), format("Dígito verificador [\"%s\"] do nosso número do título não pode ser vazio!", titulo.getDigitoDoNossoNumero()));
-		Strings.checkNotNumeric(titulo.getNossoNumero(), format("Nesse contexto o dígito verificador [\"%s\"] do nosso número deve ser numérico!", titulo.getDigitoDoNossoNumero()));
+		Strings.checkNotNumeric(titulo.getDigitoDoNossoNumero(), format("Nesse contexto o dígito verificador [\"%s\"] do nosso número deve ser um número inteiro positivo!", titulo.getDigitoDoNossoNumero()));
 	}
 	
 	/**

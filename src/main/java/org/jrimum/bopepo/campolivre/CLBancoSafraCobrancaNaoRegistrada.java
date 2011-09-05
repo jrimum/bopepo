@@ -27,75 +27,65 @@
  * Criado em: 21/04/2008 - 21:54:06
  * 
  */
-	
+
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
 
 /**
- * 
  * <p>
- * Layout para a cobrança NÃO registrada:
- * <br />
- * <br />
- * <table border="1" cellpadding="3" cellspacing="0">
- * <tr>
- * <td align="center" bgcolor="#C0C0C0"><strong><font face="Arial">Posição</font></strong></td>
- * <td bgcolor="#C0C0C0"><strong><font face="Arial">Conteúdo</font></strong></td>
- * </tr>
- * <tr>
- * <td align="center"><font face="Arial">1 a 3</font></td>
- * <td><font face="Arial">Número do banco = 422</font></td>
- * </tr>
- * <tr>
- * <td align="center"><font face="Arial">4</font></td>
- * <td><font face="Arial">Código da Moeda - 9 para Real</font></td>
- * </tr>
- * <tr>
- * <td align="center"><font face="Arial">5</font></td>
- * <td><font face="Arial">Digito verificador do Código de Barras</font></td>
- * </tr>
- * <tr>
- * <td align="center"><font face="Arial">6 a 9</font></td>
- * <td><font face="Arial">Fator de Vencimento<br>
- * <small>(diferença em dias entre o vencimento e 07/10/1997)</small></font></td>
- * </tr>
- * <tr>
- * <td align="center"><font face="Arial">10 a 19</font></td>
- * <td><font face="Arial">Valor (8 inteiros e 2 decimais)</font></td>
- * </tr>
- * <tr>
- * <td align="center" bgcolor="#C0C0C0"><font face="Arial">20 a 44</font></td>
- * <td bgcolor="#C0C0C0"><font face="Arial">Campo Livre definido por cada banco</font></td>
- * </tr>
- * <tr>
- * <td align="center"><font face="Arial">20 a 20</font></td>
- * <td><font face="Arial">Sistema = 7 (Valor Fixo)</font></td>
- * </tr>
- * <tr>
- * <td align="center"><font face="Arial">21 a 26</font></td>
- * <td><font face="Arial">Identificação do cliente = FIXO ATRIBUÍDO PELO 
- * BANCO (número + dígito verificador)</font></td>
- * </tr>
- * <tr>
- * <td align="center"><font face="Arial">27 a 43</font>
- * </td>
- * <td><font face="Arial">Livre do cliente (Nosso número)</font></td>
- * </tr>
- * <tr>
- * <td align="center"><font face="Arial">44 a 44</font></td>
- * <td><font face="Arial">Tipo de cobraça = 4 (valor fixo)</font></td>
- * </tr>
- * </table>
- * </div>
+ * O campo livre do Bradesco deve seguir esta forma:
  * </p>
  * 
+ * <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="campolivre">
+ * <thead bgcolor="#DEDEDE">
+ * <tr>
+ * <th>Posição</th>
+ * <th>Tamanho</th>
+ * <th>Picture</th>
+ * <th>Conteúdo (terminologia padrão)</th>
+ * <th>Conteúdo (terminologia do banco)</th>
+ * </tr>
+ * </thead> <tbody style="text-align:center">
+ * <tr>
+ * <td >20-20</td>
+ * <td >1</td>
+ * <td >9(1)</td>
+ * <td style="text-align:left;padding-left:10">Sistema = constante 7</td>
+ * <td style="text-align:left;padding-left:10">Valor fixo 7</td>
+ * </tr>
+ * <tr>
+ * <td >21-26</td>
+ * <td >6</td>
+ * <td >9(6)</td>
+ * <td style="text-align:left;padding-left:10">Fixo atribuído pelo banco (*)
+ * Identificação numérica com cinco números + um dígito verificador</td>
+ * <td style="text-align:left;padding-left:10">Número da conta + DV</td>
+ * </tr>
+ * <tr>
+ * <td >27-43</td>
+ * <td >17</td>
+ * <td >&nbsp;9(17)</td>
+ * <td style="text-align:left;padding-left:10">Livre do cliente - Variável
+ * conforme necessidade do cliente</td>
+ * <td style="text-align:left;padding-left:10">Nosso Número (sem dígito)</td>
+ * </tr>
+ * <tr>
+ * <td >44-44</td>
+ * <td >1</td>
+ * <td >9</td>
+ * <td style="text-align:left;padding-left:10">Tipo cobrança = constante 4 -
+ * Express Emitido pelo Cliente</td>
+ * <td style="text-align:left;padding-left:10">Valor fixo 4</td>
+ * </tr>
+ * </table>
+ * 
+ * @see org.jrimum.bopepo.campolivre.AbstractCampoLivre
+ * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a> 
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @since 0.2
@@ -105,45 +95,70 @@ import org.jrimum.utilix.text.Filler;
 class CLBancoSafraCobrancaNaoRegistrada extends AbstractCLBancoSafra {
 
 	/**
-	 * 
+	 * {@code serialVersionUID = -6573340701469029151L}
 	 */
 	private static final long serialVersionUID = -6573340701469029151L;
 	
-	private static final int TIPO_COBRANCA = 4;
+	/**
+	 * Tamanho do número de campos = 5.
+	 */
+	protected static final Integer FIELDS_LENGTH = Integer.valueOf(5);
+	
+	/**
+	 * Tamanho do campo Conta = 5. 
+	 */
+	private static final Integer CONTA_LENGTH = Integer.valueOf(5);
+	
+	/**
+	 * Tamanho do campo Dígito da Conta = 1. 
+	 */
+	private static final Integer CONTA_DIGITO_LENGTH = Integer.valueOf(1);
+	
+	/**
+	 * Tamanho do campo Nosso Número = 17. 
+	 */
+	private static final Integer NOSSO_NUMERO_LENGTH = Integer.valueOf(17);
 
 	/**
-	 * <p>
-	 *   Dado um título, cria um campo livre para o padrão do Banco Safra
-	 *   que tenha o tipo de cobrança não registrada.  
-	 * </p>
-	 * @param titulo título com as informações para geração do campo livre
+	 * Cria um campo livre instanciando o número de fields ({@code FIELDS_LENGTH}
+	 * ) deste campo.
+	 * 
+	 * @since 0.2
 	 */
-	CLBancoSafraCobrancaNaoRegistrada(Titulo titulo) {
+	protected CLBancoSafraCobrancaNaoRegistrada() {
+
 		super(FIELDS_LENGTH);
-		
-		ContaBancaria conta = titulo.getContaBancaria();
-		
-		this.add(new Field<Integer>(SISTEMA, 1));
-		
-		//Referente a identificação do cliente.
-		this.add(new Field<String>(
-				Filler.ZERO_LEFT.fill(conta.getNumeroDaConta().getCodigoDaConta(), 5) +
-				conta.getNumeroDaConta().getDigitoDaConta(), 6));
-		
-		this.add(new Field<String>(titulo.getNossoNumero(), 17, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(TIPO_COBRANCA, 1));
-		
-	}
-	
-	@Override
-	protected void addFields(Titulo titulo) {
-		// TODO IMPLEMENTAR
-		Exceptions.throwUnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.jrimum.bopepo.campolivre.AbstractCampoLivre#checkValues(org.jrimum.domkee.financeiro.banco.febraban.Titulo)
+	 */
 	@Override
 	protected void checkValues(Titulo titulo) {
-		// TODO IMPLEMENTAR
-		Exceptions.throwUnsupportedOperationException("AINDA NÃO IMPLEMENTADO!");
+		
+		checkNumeroDaContaNotNull(titulo);
+		checkCodigoDoNumeroDaConta(titulo);
+		checkCodigoDoNumeroDaContaMenorOuIgualQue(titulo, 999999);
+		checkDigitoDoCodigoDoNumeroDaConta(titulo);
+		checkNossoNumero(titulo);
+		checkTamanhoDoNossoNumero(titulo, NN17);
 	}
+
+	/**
+	 *  {@inheritDoc}
+	 *  
+	 * @see org.jrimum.bopepo.campolivre.AbstractCampoLivre#addFields(org.jrimum.domkee.financeiro.banco.febraban.Titulo)
+	 */
+	@Override
+	protected void addFields(Titulo titulo) {
+
+		this.add(SISTEMA_CONSTANT_FIELD);
+		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Filler.ZERO_LEFT));
+		this.add(new Field<String>(titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta(), CONTA_DIGITO_LENGTH));
+		this.add(new Field<String>(titulo.getNossoNumero(), NOSSO_NUMERO_LENGTH));		
+		this.add(new Field<Integer>(TipoDeCobranca.EXPRESS_BOLETO_EMITIDO_PELO_CLIENTE.codigo(), TIPO_COBRANCA_FIELD_LENGTH));
+	}
+
 }
