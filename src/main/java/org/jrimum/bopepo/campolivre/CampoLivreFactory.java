@@ -93,7 +93,7 @@ public final class CampoLivreFactory {
 	 * 
 	 * @param strCampoLivre
 	 * 
-	 * @return Uma referência para um ICampoLivre.
+	 * @return Referência para uma instância anônima de CampoLivre.
 	 * 
 	 * @throws NullPointerException
 	 * @throws IllegalArgumentException
