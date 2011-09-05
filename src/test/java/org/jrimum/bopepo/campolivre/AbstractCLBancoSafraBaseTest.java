@@ -1,4 +1,4 @@
-package org.jrimum.bopepo.excludes;
+package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.campolivre.CampoLivreException;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;

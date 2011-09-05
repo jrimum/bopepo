@@ -132,7 +132,6 @@
 						<include>org/jrimum/bopepo/**/*</include>
 					</includes>
 					<excludes>
-						<exclude>org/jrimum/bopepo/excludes/**/*</exclude>
 						<exclude>org/jrimum/bopepo/**/*$*</exclude> <!-- Exclui classes internas anônimas para evitar erros -->
 					</excludes>
 				</configuration>
