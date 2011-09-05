@@ -3,7 +3,6 @@ package org.jrimum.bopepo.campolivre;
 import static org.junit.Assert.assertEquals;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.bopepo.excludes.AbstractCampoLivreBaseTest;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;

@@ -29,8 +29,10 @@
 
 package org.jrimum.bopepo.campolivre;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import org.apache.commons.lang.StringUtils;
-import org.jrimum.utilix.text.Strings;
 import org.junit.Test;
 
 /**
@@ -38,6 +40,7 @@ import org.junit.Test;
  * Teste da classe CampoLivreFactory.
  * </p>
  * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @since 0.2
@@ -46,17 +49,62 @@ import org.junit.Test;
  */
 public class TestCampoLivreFactory {
 
+	private static final String CAMPO_LIVRE_EXEMPLO = "1234567890123456789012345";
+
 	@Test(expected = IllegalArgumentException.class)
-	public void testCreateStringNull() {
+	public void seNaoPermiteCriacaoComStringNula() {
 		
-		String campoLivre = null;
-		CampoLivreFactory.create(campoLivre);
+		CampoLivreFactory.create((String)null);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
-	public void testCreateStringBlank() {
+	public void seNaoPermiteCriacaoComEmptyString() {
 		
 		CampoLivreFactory.create(StringUtils.EMPTY);
-		CampoLivreFactory.create(Strings.WHITE_SPACE);
 	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void seNaoPermiteCriacaoComBlankString() {
+		
+		CampoLivreFactory.create("   ");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void seNaoPermiteCriacaoComStringComWhiteSpaces() {
+		
+		CampoLivreFactory.create("12345678 9012345678 9012345");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void seNaoPermiteCriacaoComStringComLengthMaiorQue25() {
+		
+		CampoLivreFactory.create("12345678901234567890123456");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void seNaoPermiteCriacaoComStringComLengthMenorQue25() {
+		
+		CampoLivreFactory.create("123456789012345678901234");
+	}
+	
+	@Test
+	public void seCriacaoDoCampoLivreOcorreSemFalha() {
+		
+		assertNotNull(CampoLivreFactory.create(CAMPO_LIVRE_EXEMPLO));
+	}
+	
+	@Test
+	public void seTamanhoDoCampoLivreEscritoIgualA25() {
+		
+		assertEquals(25, CampoLivreFactory.create(CAMPO_LIVRE_EXEMPLO).write().length());
+	}
+	
+	@Test
+	public void seCampoLivreEscritoEstaCorreto() {
+		
+		CampoLivre campoLivreCriado = CampoLivreFactory.create(CAMPO_LIVRE_EXEMPLO);
+		
+		assertEquals(CAMPO_LIVRE_EXEMPLO, campoLivreCriado.write());
+	}
+	
 }
