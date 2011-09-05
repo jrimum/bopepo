@@ -1,13 +1,11 @@
 package org.jrimum.bopepo.campolivre;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.jrimum.bopepo.BancosSuportados;
+import org.jrimum.bopepo.excludes.AbstractCampoLivreBaseTest;
+import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
@@ -16,54 +14,39 @@ import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.domkee.financeiro.banco.hsbc.TipoIdentificadorCNR;
 import org.junit.Before;
-import org.junit.Test;
 
 /**
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a>
  */
-public class TestCLHSBCCobrancaRegistrada {
+public class TestCLHSBCCobrancaRegistrada  extends AbstractCampoLivreBaseTest {
 
-	private CampoLivre clHsbcCR;
 	private Titulo titulo;
-	
+
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 		
-		NumeroDaConta numeroDaConta = new NumeroDaConta();
-		numeroDaConta.setCodigoDaConta(674456);
-		numeroDaConta.setDigitoDaConta("8");
+		//TODO FAZER TESTE REAL
 
-		Agencia agencia = new Agencia(12, "1");
-		
 		ContaBancaria contaBancaria = new ContaBancaria();
+
 		contaBancaria.setBanco(BancosSuportados.HSBC.create());
-		contaBancaria.setNumeroDaConta(numeroDaConta);
-		contaBancaria.setCarteira(new Carteira(1, TipoDeCobranca.COM_REGISTRO));
-		contaBancaria.setAgencia(agencia);
+		contaBancaria.setAgencia(new Agencia(1234, "1"));
+		contaBancaria.setNumeroDaConta(new NumeroDaConta(8351202,"2"));
+		contaBancaria.setCarteira(new Carteira(1, TipoDeCobranca.SEM_REGISTRO));
 
-		Sacado sacado = new Sacado("Sacado");
-		Cedente cedente = new Cedente("Cedente");
-		
-		titulo = new Titulo(contaBancaria, sacado, cedente);
-		titulo.setNossoNumero("0039900032");
-		titulo.setDigitoDoNossoNumero("2");
-		titulo.setDataDoVencimento(new GregorianCalendar(2010, Calendar.JULY, 4).getTime());
+		titulo = new Titulo(contaBancaria, new Sacado("S"), new Cedente("C"));
+		titulo.setNossoNumero("0000239104761");
+		titulo.setDataDoVencimento(new GregorianCalendar(2008, Calendar.JULY, 4).getTime());
+		titulo.setParametrosBancarios(new ParametrosBancariosMap(TipoIdentificadorCNR.class.getName(), TipoIdentificadorCNR.COM_VENCIMENTO));
+
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+
+		setClasseGeradoraDoCampoLivre(CLHSBCCobrancaNaoRegistrada.class);
+		setCampoLivreValidoAsString("8351202000023910476118682");
 	}
 	
-	@Test
-	public final void testGetInstance() {
-		clHsbcCR = CampoLivreFactory.create(titulo);
-		assertNotNull(clHsbcCR);
-	}
-	
-	@Test
-	public final void testWrite() {
-
-		clHsbcCR = CampoLivreFactory.create(titulo);
-
-		assertTrue(clHsbcCR.write().length() == 25);
-		assertEquals("0039900032200120674456001", clHsbcCR.write());
-	}	
 
 }

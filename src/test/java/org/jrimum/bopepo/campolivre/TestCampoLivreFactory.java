@@ -46,7 +46,7 @@ import org.junit.Test;
  */
 public class TestCampoLivreFactory {
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testCreateStringNull() {
 		
 		String campoLivre = null;

@@ -63,7 +63,7 @@ public class TestCLBradesco extends AbstractCampoLivreBaseTest {
 	private Titulo titulo;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 
 		ContaBancaria contaBancaria = new ContaBancaria();
 

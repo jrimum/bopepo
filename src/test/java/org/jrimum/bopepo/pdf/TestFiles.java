@@ -50,13 +50,13 @@ import org.junit.Test;
  */
 public class TestFiles {
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testBytes2FilePathNameNull() throws FileNotFoundException, IOException {
 		String filePath = null;
 		Files.bytesToFile(filePath, new byte[] {});
 	}
 	
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testBytes2FileBytesNull() throws FileNotFoundException, IOException {
 		Files.bytesToFile("./target", null);
 	}
@@ -87,7 +87,7 @@ public class TestFiles {
 		Assert.assertNotNull(Files.bytesToFile("./target/fileExistente", new byte[] {valor1, valor2, valor3}));
 	}
 	
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testBytes2StreamBytesNull() throws IOException {
 		Files.bytesToStream(null);
 	}
