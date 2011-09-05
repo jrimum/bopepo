@@ -21,7 +21,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
+import org.jrimum.domkee.financeiro.banco.febraban.Titulo.Aceite;
 import org.jrimum.utilix.text.DateFormat;
 import org.jrimum.utilix.text.Filler;
 
@@ -97,7 +97,7 @@ public class BoletoTest3  extends TestCase {
         titulo.setDataDoDocumento(DateFormat.DDMMYYYY_B.parse("18/10/2010"));
         titulo.setDataDoVencimento(DateFormat.DDMMYYYY_B.parse("27/11/2010"));
         titulo.setTipoDeDocumento(TipoDeTitulo.RC_RECIBO);
-        titulo.setAceite(EnumAceite.N);
+        titulo.setAceite(Aceite.N);
         titulo.setDesconto(new BigDecimal(0.00));
         
         /*

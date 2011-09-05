@@ -30,7 +30,7 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.bopepo.excludes.CampoLivreBaseTest;
+import org.jrimum.bopepo.excludes.AbstractCampoLivreBaseTest;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
@@ -51,7 +51,7 @@ import org.junit.Before;
  * 
  * @version 0.2
  */
-public class TestCLCaixaEconomicaFederalSIGCB extends CampoLivreBaseTest {
+public class TestCLCaixaEconomicaFederalSIGCB extends AbstractCampoLivreBaseTest {
 	
 	private Titulo titulo;
 

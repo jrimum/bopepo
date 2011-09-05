@@ -48,7 +48,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
+import org.jrimum.domkee.financeiro.banco.febraban.Titulo.Aceite;
 /**
  * 
  * <p>
@@ -171,7 +171,7 @@ public abstract class AbstractBoletoExemplo {
 		titulo.setDataDoDocumento(DDMMYYYY_B.parse("19/09/2009"));
 		titulo.setDataDoVencimento(DDMMYYYY_B.parse("19/09/2009"));
 		titulo.setTipoDeDocumento(TipoDeTitulo.DM_DUPLICATA_MERCANTIL);
-		titulo.setAceite(EnumAceite.A);
+		titulo.setAceite(Aceite.A);
 		titulo.setDesconto(BigDecimal.ONE);
 		
 		return titulo;

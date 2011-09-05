@@ -31,7 +31,7 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.bopepo.excludes.CampoLivreBaseTest;
+import org.jrimum.bopepo.excludes.AbstractCLBancoSafraBaseTest;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
@@ -41,6 +41,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Before;
+import org.junit.Test;
 
 /**
  * <p>
@@ -57,31 +58,135 @@ import org.junit.Before;
  * @version 0.2
  *
  */
-public class TestCLBancoSafraCobrancaRegistrada extends CampoLivreBaseTest {
+public class TestCLBancoSafraCobrancaRegistrada extends AbstractCLBancoSafraBaseTest {
 	
-	private Titulo titulo;
-
+	private final int NOSSO_NUMERO_LENGTH = 9;
+	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 		
-		Sacado sacado = new Sacado("Sacado");
-		Cedente cedente = new Cedente("Cedente");
-
 		ContaBancaria contaBancaria = new ContaBancaria();
+
 		contaBancaria.setBanco(BancosSuportados.BANCO_SAFRA.create());
-		
-		contaBancaria.setAgencia(new Agencia(57, "1"));
-		contaBancaria.setNumeroDaConta(new NumeroDaConta(12345, "7"));
-		contaBancaria.setCarteira(new Carteira(123, TipoDeCobranca.COM_REGISTRO));
-		
-		titulo = new Titulo(contaBancaria, sacado, cedente);
-		titulo.setNumeroDoDocumento("1234567");
-		titulo.setNossoNumero("12345678");
-		
+		contaBancaria.setAgencia(new Agencia(100, "0"));
+		contaBancaria.setNumeroDaConta(new NumeroDaConta(727469,"8"));
+		contaBancaria.setCarteira(new Carteira(70, TipoDeCobranca.COM_REGISTRO));
+
+		titulo = new Titulo(contaBancaria, new Sacado("S"), new Cedente("C"));
+		titulo.setNossoNumero("960900152");
+
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
-		
+
 		setClasseGeradoraDoCampoLivre(CLBancoSafraCobrancaRegistrada.class);
-		setCampoLivreValidoAsString("7005710001234570123456782");
+		setCampoLivreValidoAsString("7010000072746989609001522");
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteAgenciaNula() {
+
+		seNaoPermiteAgenciaNula(titulo);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void seNaoPermiteAgenciaComCodigoNegativo() {
+
+		seNaoPermiteAgenciaComCodigoNegativo(titulo);
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteAgenciaComCodigoZero() {
+
+		seNaoPermiteAgenciaComCodigoZero(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaAgenciaAcimaDe4Digitos() {
+
+		seNaoPermiteNumeroDaAgenciaComDigitosAcimaDoLimite(titulo, 10000);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteDigitoDaAgenciaNulo() {
+		
+		seNaoPermiteDigitoDaAgenciaNulo(titulo);
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteDigitoDaAgenciaNaoNumerico() {
+		
+		seNaoPermiteDigitoDaAgenciaNaoNumerico(titulo);
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaContaNulo() {
+
+		seNaoPermiteNumeroDaContaNulo(titulo);
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaContaComCodigoZero() {
+
+		seNaoPermiteNumeroDaContaComCodigoZero(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaContaComCodigoNegativo() {
+
+		seNaoPermiteNumeroDaContaComCodigoNegativo(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaContaComCodigoAcimaDe8Digitos() {
+
+		seNaoPermiteNumeroDaContaComCodigoAcimaDoLimite(titulo, 123456789);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteDigitoDaContaNulo() {
+		
+		seNaoPermiteDigitoDaContaNulo(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteDigitoDaContaVazio() {
+		
+		seNaoPermiteDigitoDaContaVazio(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteDigitoDaContaNegativo() {
+		
+		seNaoPermiteDigitoDaContaNegativo(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteDigitoDaContaNaoNumerico() {
+		
+		seNaoPermiteDigitoDaContaNaoNumerico(titulo);
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNossoNumeroNulo() {
+
+		seNaoPermiteNossoNumeroNulo(titulo);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNossoNumeroComBrancos() {
+
+		seNaoPermiteNossoNumeroComBrancos(titulo, NOSSO_NUMERO_LENGTH);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNossoNumeroComEspacos() {
+
+		seNaoPermiteNossoNumeroComEspacos(titulo, NOSSO_NUMERO_LENGTH);
+	}
+
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNossoNumeroComTamanhoDiferenteDe9() {
+
+		seNaoPermiteNossoNumeroComTamanhoDiferenteDoEspecificado(titulo, NOSSO_NUMERO_LENGTH - 1);
 	}
 
 }

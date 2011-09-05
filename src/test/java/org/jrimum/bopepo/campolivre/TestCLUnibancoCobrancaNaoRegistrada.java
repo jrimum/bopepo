@@ -3,7 +3,7 @@ package org.jrimum.bopepo.campolivre;
 import static org.junit.Assert.assertEquals;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.bopepo.excludes.CampoLivreBaseTest;
+import org.jrimum.bopepo.excludes.AbstractCampoLivreBaseTest;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
@@ -30,7 +30,7 @@ import org.junit.Test;
  * @version 0.2
  *
  */
-public class TestCLUnibancoCobrancaNaoRegistrada extends CampoLivreBaseTest {
+public class TestCLUnibancoCobrancaNaoRegistrada extends AbstractCampoLivreBaseTest {
 
 	/**
 	 * String Campo Livre.

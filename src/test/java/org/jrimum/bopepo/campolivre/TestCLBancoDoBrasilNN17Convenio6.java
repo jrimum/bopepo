@@ -31,7 +31,7 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.bopepo.excludes.CampoLivreBaseTest;
+import org.jrimum.bopepo.excludes.AbstractCampoLivreBaseTest;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
@@ -54,7 +54,7 @@ import org.junit.Before;
  * 
  * @version 0.2
  */
-public class TestCLBancoDoBrasilNN17Convenio6 extends CampoLivreBaseTest {
+public class TestCLBancoDoBrasilNN17Convenio6 extends AbstractCampoLivreBaseTest {
 
 	@Before
 	public void setUp() throws Exception {

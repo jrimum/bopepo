@@ -53,7 +53,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
+import org.jrimum.domkee.financeiro.banco.febraban.Titulo.Aceite;
 import org.jrimum.utilix.Exceptions;
 
 /**
@@ -120,7 +120,7 @@ public class Exemplos {
 		titulo.setDataDoDocumento(DATA_DO_DOCUMENTO);
 		titulo.setDataDoVencimento(VENCIMENTO);
 		titulo.setTipoDeDocumento(TipoDeTitulo.DM_DUPLICATA_MERCANTIL);
-		titulo.setAceite(EnumAceite.A);
+		titulo.setAceite(Aceite.A);
 	
 		Boleto b1,b2,b3,b4,b5;
 		b1 = new Boleto(titulo);
@@ -290,7 +290,7 @@ public class Exemplos {
 		titulo.setDataDoDocumento(new Date());
 		titulo.setDataDoVencimento(new Date());
 		titulo.setTipoDeDocumento(TipoDeTitulo.DM_DUPLICATA_MERCANTIL);
-		titulo.setAceite(EnumAceite.A);
+		titulo.setAceite(Aceite.A);
 		titulo.setDesconto(BigDecimal.ONE);
 		
 		return titulo;

@@ -29,7 +29,8 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.bopepo.excludes.CampoLivreBaseTest;
+import org.jrimum.bopepo.BoletoUtil;
+import org.jrimum.bopepo.excludes.AbstractCampoLivreBaseTest;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
@@ -50,7 +51,7 @@ import org.junit.Before;
  * 
  * @version 0.2
  */
-public class TestCLBancoobCobrancaNaoRegistrada extends CampoLivreBaseTest{
+public class TestCLBancoobCobrancaNaoRegistrada extends AbstractCampoLivreBaseTest{
 
 	private Titulo titulo;
 
@@ -73,4 +74,8 @@ public class TestCLBancoobCobrancaNaoRegistrada extends CampoLivreBaseTest{
 		setCampoLivreValidoAsString("1434001000000102000001001");
 	}
 	
+	public static void main(String[] args) {
+		System.out.println(BoletoUtil.getCampoLivreDaLinhaDigitavelFormatada("42297.01000 00072.746985 96090.015213 5 50670000044438"));
+		System.out.println(BoletoUtil.getCampoLivreDaLinhaDigitavelFormatada("42297.10001 00072.746985 96090.015221 2 50670000044438"));
+	}
 }

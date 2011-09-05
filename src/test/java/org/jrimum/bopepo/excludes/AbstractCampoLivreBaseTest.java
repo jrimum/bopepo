@@ -29,6 +29,7 @@
 
 package org.jrimum.bopepo.excludes;
 
+import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -61,7 +62,7 @@ import org.junit.Test;
  * 
  * @version 0.2
  */
-public class CampoLivreBaseTest {
+public abstract class AbstractCampoLivreBaseTest {
 	
 	private Class<? extends CampoLivre> classeGeradoraDoCampoLivre;
 	
@@ -138,12 +139,42 @@ public class CampoLivreBaseTest {
 		writeCampoLivre();
 	}
 
+	protected void seNaoPermiteDigitoDaAgenciaNulo(Titulo titulo) throws CampoLivreException {
+		
+		titulo.getContaBancaria().setAgencia(new Agencia(1));
+		
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+	
+	protected void seNaoPermiteDigitoDaAgenciaNaoNumerico(Titulo titulo) throws CampoLivreException {
+		
+		titulo.getContaBancaria().setAgencia(new Agencia(1,"X"));
+		
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+
 	protected void seNaoPermiteCarteiraNula(Titulo titulo) throws CampoLivreException {
 
 		titulo.getContaBancaria().setCarteira(null);
 
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+	
+	protected void seNaoPermiteCarteiraSemTipoDeCobranca(Titulo titulo) throws CampoLivreException{
+		
+		titulo.getContaBancaria().setCarteira(new Carteira());
+		
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
@@ -258,6 +289,46 @@ public class CampoLivreBaseTest {
 
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+	
+	protected void seNaoPermiteDigitoDaContaNulo(Titulo titulo) throws CampoLivreException {
+		
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1));
+		
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+
+	protected void seNaoPermiteDigitoDaContaVazio(Titulo titulo) throws CampoLivreException {
+		
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1,EMPTY));
+		
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+
+	protected void seNaoPermiteDigitoDaContaNegativo(Titulo titulo) throws CampoLivreException {
+		
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1,"-1"));
+		
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
+
+	protected void seNaoPermiteDigitoDaContaNaoNumerico(Titulo titulo) throws CampoLivreException {
+		
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1,"X"));
+		
+		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}

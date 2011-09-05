@@ -23,7 +23,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeMoeda;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo.EnumAceite;
+import org.jrimum.domkee.financeiro.banco.febraban.Titulo.Aceite;
 /**
  * 
  * <p>
@@ -91,7 +91,7 @@ public class TesteBoletoBancoRuralRegistro {
 		titulo.setValor(BigDecimal.valueOf(9.65));
 		titulo.setDataDoDocumento(DDMMYYYY_B.parse("05/09/2008"));
 		titulo.setDataDoVencimento(DDMMYYYY_B.parse("25/09/2009"));
-		titulo.setAceite(EnumAceite.A);
+		titulo.setAceite(Aceite.A);
 		titulo.setTipoDeMoeda(TipoDeMoeda.REAL);
 		/*
 		 * INFORMANDO MAIS DADOS BANCÁRIOS, QUANDO NECESSÁRIO.
