@@ -25,8 +25,6 @@ import org.junit.Before;
  */
 public class TestCLHSBCCobrancaNaoRegistrada extends AbstractCampoLivreBaseTest<CLHSBCCobrancaNaoRegistrada> {
 
-	private Titulo titulo;
-
 	@Before
 	public void setUp(){
 
@@ -42,7 +40,7 @@ public class TestCLHSBCCobrancaNaoRegistrada extends AbstractCampoLivreBaseTest<
 		titulo.setDataDoVencimento(new GregorianCalendar(2008, Calendar.JULY, 4).getTime());
 		titulo.setParametrosBancarios(new ParametrosBancariosMap(TipoIdentificadorCNR.class.getName(), TipoIdentificadorCNR.COM_VENCIMENTO));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		setCampoLivreValidoAsString("8351202000023910476118682");
 	}

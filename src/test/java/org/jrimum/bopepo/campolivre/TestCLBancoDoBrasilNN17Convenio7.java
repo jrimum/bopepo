@@ -25,7 +25,7 @@ import org.junit.Before;
 public class TestCLBancoDoBrasilNN17Convenio7 extends AbstractCampoLivreBaseTest<CLBancoDoBrasilNN17Convenio7> {
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 		
 		Sacado sacado = new Sacado("Sacado");
 		Cedente cedente = new Cedente("Cedente");
@@ -38,10 +38,10 @@ public class TestCLBancoDoBrasilNN17Convenio7 extends AbstractCampoLivreBaseTest
 		contaBancaria.setNumeroDaConta(numeroDaConta);
 		contaBancaria.setCarteira(new Carteira(23));
 		
-		Titulo titulo = new Titulo(contaBancaria, sacado, cedente);
+		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("12345678901234567");
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		setCampoLivreValidoAsString("0000001234567890123456723");
 	}

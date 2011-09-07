@@ -20,8 +20,6 @@ import org.junit.Before;
  */
 public class TestCLBancoIntermedium extends AbstractCampoLivreBaseTest<CLBancoIntermedium> {
 
-	private Titulo titulo;
-
 	@Before
 	public void setUp(){
 
@@ -35,7 +33,7 @@ public class TestCLBancoIntermedium extends AbstractCampoLivreBaseTest<CLBancoIn
 		titulo = new Titulo(contaBancaria, new Sacado("S"), new Cedente("C"));
 		titulo.setNossoNumero("5611002");
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		setCampoLivreValidoAsString("0054700000561100214966660");
 	}

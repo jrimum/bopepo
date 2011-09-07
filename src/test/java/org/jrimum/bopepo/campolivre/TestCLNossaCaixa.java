@@ -57,10 +57,8 @@ import org.junit.Test;
  */
 public class TestCLNossaCaixa extends AbstractCampoLivreBaseTest<CLNossaCaixa> {
 
-	private Titulo titulo;
-	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 		
 		Sacado sacado = new Sacado("Sacado");
 		Cedente cedente = new Cedente("Cedente");
@@ -74,7 +72,7 @@ public class TestCLNossaCaixa extends AbstractCampoLivreBaseTest<CLNossaCaixa> {
 		titulo.setNossoNumero("997654321");
 		titulo.setDigitoDoNossoNumero("1");
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		setCampoLivreValidoAsString("9976543210001300281815107");
 	}
@@ -85,7 +83,7 @@ public class TestCLNossaCaixa extends AbstractCampoLivreBaseTest<CLNossaCaixa> {
 		Integer codigo = null;
 		titulo.getContaBancaria().getModalidade().setCodigo(codigo);
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 	}
 	
 	@Test(expected = CampoLivreException.class)
@@ -93,6 +91,6 @@ public class TestCLNossaCaixa extends AbstractCampoLivreBaseTest<CLNossaCaixa> {
 	
 		titulo.getContaBancaria().getModalidade().setCodigo(10);
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 	}
 }

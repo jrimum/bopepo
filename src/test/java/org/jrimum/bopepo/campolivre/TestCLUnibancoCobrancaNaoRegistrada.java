@@ -1,7 +1,5 @@
 package org.jrimum.bopepo.campolivre;
 
-import static org.junit.Assert.assertEquals;
-
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
@@ -30,13 +28,6 @@ import org.junit.Test;
  *
  */
 public class TestCLUnibancoCobrancaNaoRegistrada extends AbstractCampoLivreBaseTest<CLUnibancoCobrancaNaoRegistrada> {
-
-	/**
-	 * String Campo Livre.
-	 */
-	private static String TEST_CASE = "5123456100112233445566777";
-
-	private Titulo titulo;
 
 	/**
 	 * <p>
@@ -79,7 +70,7 @@ public class TestCLUnibancoCobrancaNaoRegistrada extends AbstractCampoLivreBaseT
 	 */
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 
 		Sacado sacado = new Sacado("Sacado");
 		Cedente cedente = new Cedente("Cedente");
@@ -95,7 +86,7 @@ public class TestCLUnibancoCobrancaNaoRegistrada extends AbstractCampoLivreBaseT
 		titulo.setNossoNumero("11223344556677");
 		titulo.setDigitoDoNossoNumero("7");
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		setCampoLivreValidoAsString("5123456100112233445566777");
 	}
@@ -104,65 +95,56 @@ public class TestCLUnibancoCobrancaNaoRegistrada extends AbstractCampoLivreBaseT
 	public final void testGetInstanceComContaNula() {
 
 		titulo.getContaBancaria().setNumeroDaConta(null);
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComContaNegativa() {
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(-23));
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComDigitoDaContaNula() {
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(23, null));
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComDigitoDaContaNegativa() {
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(2, "-3"));
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComDigitoDaContaNaoNumerico() {
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(-23, "X"));
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNula() {
 
 		titulo.setNossoNumero(null);
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNegativo() {
 
 		titulo.setNossoNumero("-012345679012345");
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNaoNumerico() {
 
 		titulo.setNossoNumero("123456790123y45");
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 	}
 
-	@Test
-	public final void testITextStream() {
-
-		assertEquals(TEST_CASE, getCampoLivreToTest().write());
-
-		getCampoLivreToTest().read(TEST_CASE);
-
-		assertEquals(TEST_CASE, getCampoLivreToTest().write());
-	}
 }

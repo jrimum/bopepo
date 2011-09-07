@@ -25,10 +25,8 @@ import org.junit.Test;
  */
 public class TestCLBancoSantander extends AbstractCampoLivreBaseTest<CLBancoSantander> {
 
-	private Titulo titulo;
-
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 		
 		Sacado sacado = new Sacado("Sacado");
 		Cedente cedente = new Cedente("Cedente");
@@ -45,7 +43,7 @@ public class TestCLBancoSantander extends AbstractCampoLivreBaseTest<CLBancoSant
 		titulo.setNossoNumero("00000000002");
 		titulo.setDigitoDoNossoNumero("7");
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		setCampoLivreValidoAsString("9162546900000000000270101");
 		
@@ -56,7 +54,7 @@ public class TestCLBancoSantander extends AbstractCampoLivreBaseTest<CLBancoSant
 		
 		titulo.setParametrosBancarios(new ParametrosBancariosMap("IOF_SEGURADORA", 8));
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		setCampoLivreValidoAsString("9162546900000000000278101");
 		
@@ -69,7 +67,7 @@ public class TestCLBancoSantander extends AbstractCampoLivreBaseTest<CLBancoSant
 		//Carteira nao autorizada
 		titulo.getContaBancaria().setCarteira(new Carteira(123));
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		seCampoLivreEscritoEstaCorreto();
 	}

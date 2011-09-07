@@ -74,7 +74,7 @@ public class TestCLBancoSafraCobrancaRegistrada extends AbstractCLBancoSafraBase
 		titulo = new Titulo(contaBancaria, new Sacado("S"), new Cedente("C"));
 		titulo.setNossoNumero("960900152");
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		setCampoLivreValidoAsString("7010000072746989609001522");
 	}

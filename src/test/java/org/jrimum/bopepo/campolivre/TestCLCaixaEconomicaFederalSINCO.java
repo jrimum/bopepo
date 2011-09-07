@@ -53,10 +53,8 @@ import org.junit.Before;
  */
 public class TestCLCaixaEconomicaFederalSINCO extends AbstractCampoLivreBaseTest<CLCaixaEconomicaFederalSINCO> {
 	
-	private Titulo titulo;
-
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 		
 		Sacado sacado = new Sacado("Sacado");
 		Cedente cedente = new Cedente("Cedente");
@@ -72,7 +70,7 @@ public class TestCLCaixaEconomicaFederalSINCO extends AbstractCampoLivreBaseTest
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("10000000020061732");
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		setCampoLivreValidoAsString("1000002910000000020061732");
 	}

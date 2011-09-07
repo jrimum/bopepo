@@ -1,7 +1,5 @@
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.bopepo.campolivre.CampoLivreException;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Test;
 
 /**
@@ -17,8 +15,6 @@ import org.junit.Test;
  */
 public abstract class AbstractCLBancoSafraBaseTest<CL extends CampoLivre> extends AbstractCampoLivreBaseTest<CL>{
 	
-	protected Titulo titulo;
-
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteCarteiraNull() {
 

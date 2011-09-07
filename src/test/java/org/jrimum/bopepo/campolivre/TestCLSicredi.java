@@ -58,10 +58,8 @@ import org.junit.Test;
  */
 public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 
-	private Titulo titulo;
-
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 
 		ContaBancaria contaBancaria = new ContaBancaria();
 		
@@ -76,7 +74,7 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 		titulo.setParametrosBancarios(new ParametrosBancariosMap("PostoDaAgencia",02));
 		titulo.setValor(new BigDecimal("150.35"));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		setCampoLivreValidoAsString("3107200003101650200623101");
 	}
@@ -87,7 +85,7 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 
 		titulo.getContaBancaria().setCarteira(null);
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		seCampoLivreEscritoEstaCorreto();
 	}
@@ -97,7 +95,7 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 
 		titulo.getContaBancaria().setCarteira(new Carteira(-1,  TipoDeCobranca.SEM_REGISTRO));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		seCampoLivreEscritoEstaCorreto();
 	}
@@ -107,7 +105,7 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 
 		titulo.getContaBancaria().setCarteira(new Carteira(3, TipoDeCobranca.SEM_REGISTRO));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		seCampoLivreEscritoEstaCorreto();
 	}
@@ -117,7 +115,7 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 
 		titulo.getContaBancaria().setCarteira(new Carteira(1));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		seCampoLivreEscritoEstaCorreto();
 	}
@@ -127,7 +125,7 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 
 		titulo.setNossoNumero(null);
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		seCampoLivreEscritoEstaCorreto();
 	}
@@ -137,7 +135,7 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 
 		titulo.setNossoNumero("           ");
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		seCampoLivreEscritoEstaCorreto();
 	}
@@ -147,7 +145,7 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 
 		titulo.setNossoNumero("01234 56789");
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		seCampoLivreEscritoEstaCorreto();
 	}
@@ -157,7 +155,7 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 
 		titulo.setNossoNumero("1234567");
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		seCampoLivreEscritoEstaCorreto();
 	}
@@ -167,7 +165,7 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 
 		titulo.setDigitoDoNossoNumero("");
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		seCampoLivreEscritoEstaCorreto();
 	}
@@ -177,7 +175,7 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 
 		titulo.setDigitoDoNossoNumero("124");
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		seCampoLivreEscritoEstaCorreto();
 	}

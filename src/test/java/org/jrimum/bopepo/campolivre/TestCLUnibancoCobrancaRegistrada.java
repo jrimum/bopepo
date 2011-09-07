@@ -30,10 +30,6 @@
 	
 package org.jrimum.bopepo.campolivre;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.Calendar;
 
 import org.jrimum.bopepo.BancosSuportados;
@@ -64,13 +60,6 @@ import org.junit.Test;
  */
 public class TestCLUnibancoCobrancaRegistrada extends AbstractCampoLivreBaseTest<CLUnibancoCobrancaRegistrada> {
 
-	/**
-	 * String Campo Livre.
-	 */
-	private static String TEST_CASE = "0401123100019112233445540";
-
-	private Titulo titulo;
-	
 	/**
 	 * <p>
 	 * Cobrança com registro<br />
@@ -111,7 +100,7 @@ public class TestCLUnibancoCobrancaRegistrada extends AbstractCampoLivreBaseTest
 	 * @since
 	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 		
 		Calendar cal = Calendar.getInstance();
 		
@@ -131,54 +120,37 @@ public class TestCLUnibancoCobrancaRegistrada extends AbstractCampoLivreBaseTest
 
 		titulo.setDataDoVencimento(cal.getTime());
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		setCampoLivreValidoAsString("0401123100019112233445540");
-	}
-
-	@Test
-	public final void testGetInstance() {
-
-		assertNotNull(getCampoLivreToTest());
-		assertTrue(getCampoLivreToTest() instanceof CLUnibancoCobrancaRegistrada);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComAgenciaNula() {
 
 		titulo.getContaBancaria().setAgencia(null);
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNulo() {
 
 		titulo.setNossoNumero(null);
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNegativo() {
 
 		titulo.setNossoNumero("-012345679012345");
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public final void testGetInstanceComNossoNumeroNaoNumerico() {
 
 		titulo.setNossoNumero("123456790123y45");
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
-	}
-
-	@Test
-	public final void testITextStream() {
-
-		assertEquals(TEST_CASE, getCampoLivreToTest().write());
-
-		getCampoLivreToTest().read(TEST_CASE);
-
-		assertEquals(TEST_CASE, getCampoLivreToTest().write());
+		createCampoLivreToTest();
 	}
 
 }

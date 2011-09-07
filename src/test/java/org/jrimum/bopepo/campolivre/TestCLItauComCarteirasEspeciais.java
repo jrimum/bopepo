@@ -57,10 +57,8 @@ import org.junit.Before;
  */
 public class TestCLItauComCarteirasEspeciais extends AbstractCampoLivreBaseTest<CLItauComCarteirasEspeciais> {
 	
-	private Titulo titulo;
-	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 		
 		Sacado sacado = new Sacado("Sacado");
 		Cedente cedente = new Cedente("Cedente");
@@ -80,7 +78,7 @@ public class TestCLItauComCarteirasEspeciais extends AbstractCampoLivreBaseTest<
 		titulo.setNumeroDoDocumento("1234567");
 		titulo.setNossoNumero("12345678");
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		setCampoLivreValidoAsString("1981234567812345671234580");
 	}

@@ -24,10 +24,8 @@ import org.junit.Before;
  */
 public class TestCLBancoRuralCobrancaRegistrada extends AbstractCampoLivreBaseTest<CLBancoRuralCobrancaRegistrada> {
 	
-	private Titulo titulo;
-	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 		
 		Sacado sacado = new Sacado("Nome do Sacado");
 		Cedente cedente = new Cedente("Nome do Cedente");
@@ -53,7 +51,7 @@ public class TestCLBancoRuralCobrancaRegistrada extends AbstractCampoLivreBaseTe
 		titulo.setNossoNumero("1234567");
 		titulo.setDigitoDoNossoNumero("1");
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		setCampoLivreValidoAsString("0133000006789112345671000");
 	}

@@ -56,10 +56,8 @@ public class TestCLCaixaEconomicaFederalSICOBNossoNumero14 extends AbstractCampo
 
 	private static final int NOSSO_NUMERO_LENGTH = 14;
 	
-	private Titulo titulo;
-
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 
 		ContaBancaria contaBancaria = new ContaBancaria();
 
@@ -71,7 +69,7 @@ public class TestCLCaixaEconomicaFederalSICOBNossoNumero14 extends AbstractCampo
 		titulo = new Titulo(contaBancaria, new Sacado("S"), new Cedente("C"));
 		titulo.setNossoNumero("00000000113732");
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		setCampoLivreValidoAsString("0007802558700000000113732");
 	}
@@ -129,7 +127,7 @@ public class TestCLCaixaEconomicaFederalSICOBNossoNumero14 extends AbstractCampo
 
 		titulo.getContaBancaria().setCarteira(null);
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		seCampoLivreEscritoEstaCorreto();
 	}
@@ -139,7 +137,7 @@ public class TestCLCaixaEconomicaFederalSICOBNossoNumero14 extends AbstractCampo
 
 		titulo.getContaBancaria().setCarteira(new Carteira(-1));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		seCampoLivreEscritoEstaCorreto();
 	}
@@ -149,7 +147,7 @@ public class TestCLCaixaEconomicaFederalSICOBNossoNumero14 extends AbstractCampo
 
 		titulo.getContaBancaria().setCarteira(new Carteira(1));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		seCampoLivreEscritoEstaCorreto();
 	}

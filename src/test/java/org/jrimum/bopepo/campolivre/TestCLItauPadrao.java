@@ -60,10 +60,8 @@ import org.junit.Test;
  */
 public class TestCLItauPadrao extends AbstractCampoLivreBaseTest<CLItauPadrao> {
 	
-	private Titulo titulo;
-	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 		
 		Sacado sacado = new Sacado("Sacado");
 		Cedente cedente = new Cedente("Cedente");
@@ -83,7 +81,7 @@ public class TestCLItauPadrao extends AbstractCampoLivreBaseTest<CLItauPadrao> {
 		titulo.setNumeroDoDocumento("1234567");
 		titulo.setNossoNumero("12345678");
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		setCampoLivreValidoAsString("1101234567880057123457000");
 	}
@@ -93,9 +91,9 @@ public class TestCLItauPadrao extends AbstractCampoLivreBaseTest<CLItauPadrao> {
 		
 		titulo.getContaBancaria().setCarteira(new Carteira(198));
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
-		assertEquals(25, getCampoLivreToTest().write().length());
-		assertEquals("1981234567812345671234580", getCampoLivreToTest().write());
+		assertEquals(25, writeCampoLivre().length());
+		assertEquals("1981234567812345671234580", writeCampoLivre());
 	}
 }

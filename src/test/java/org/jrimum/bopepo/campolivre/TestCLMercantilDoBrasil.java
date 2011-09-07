@@ -60,10 +60,8 @@ import org.junit.Test;
  */
 public class TestCLMercantilDoBrasil extends AbstractCampoLivreBaseTest<CLMercantilDoBrasil> {
 
-	private Titulo titulo;
-	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 		
 		Sacado sacado = new Sacado("Sacado");
 		Cedente cedente = new Cedente("Cedente");
@@ -78,7 +76,7 @@ public class TestCLMercantilDoBrasil extends AbstractCampoLivreBaseTest<CLMercan
 		titulo.setNossoNumero("1234567890");
 		titulo.setDigitoDoNossoNumero("5");
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		setCampoLivreValidoAsString("1234123456789051234567892"); //Sem desconto
 	}
@@ -87,8 +85,8 @@ public class TestCLMercantilDoBrasil extends AbstractCampoLivreBaseTest<CLMercan
 	public void testWriteComDesconto() {
 		
 		titulo.setDesconto(BigDecimal.TEN);
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
-		Assert.assertEquals("1234123456789051234567890", getCampoLivreToTest().write());
+		Assert.assertEquals("1234123456789051234567890", writeCampoLivre());
 	}
 }

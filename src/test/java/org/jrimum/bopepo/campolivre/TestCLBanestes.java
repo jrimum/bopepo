@@ -59,8 +59,6 @@ import org.junit.Test;
  */
 public class TestCLBanestes extends AbstractCampoLivreBaseTest<CLBanestes> {
 	
-	private Titulo titulo;
-	
 	@Before
 	public void setUp() {
 		
@@ -74,7 +72,7 @@ public class TestCLBanestes extends AbstractCampoLivreBaseTest<CLBanestes> {
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("10297");
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		setCampoLivreValidoAsString("0001029700007730070402182");
 	}
@@ -95,9 +93,9 @@ public class TestCLBanestes extends AbstractCampoLivreBaseTest<CLBanestes> {
 		carteira.setTipoCobranca(TipoDeCobranca.SEM_REGISTRO);
 		setCarteiraDoTitulo(carteira);
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
-		assertEquals("Testando um campo livre válido da carteira sem registro.", "0001029700007730070202108", getCampoLivreToTest().write());
+		assertEquals("Testando um campo livre válido da carteira sem registro.", "0001029700007730070202108", writeCampoLivre());
 	}
 	
 	@Test
@@ -105,9 +103,9 @@ public class TestCLBanestes extends AbstractCampoLivreBaseTest<CLBanestes> {
 		
 		setCarteiraDoTitulo(new Carteira(3, TipoDeCobranca.COM_REGISTRO));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
-		assertEquals("Testando um campo livre válido da carteira caucionada.", "0001029700007730070302196", getCampoLivreToTest().write());
+		assertEquals("Testando um campo livre válido da carteira caucionada.", "0001029700007730070302196", writeCampoLivre());
 	}
 	
 	@Test(expected=CampoLivreException.class)

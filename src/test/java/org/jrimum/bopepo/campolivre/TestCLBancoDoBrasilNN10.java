@@ -31,11 +31,7 @@ package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
-import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Before;
 
 /**
@@ -56,25 +52,19 @@ import org.junit.Before;
 public class TestCLBancoDoBrasilNN10 extends AbstractCampoLivreBaseTest<CLBancoDoBrasilNN10> {
 
 	@Before
-	public void setUp() throws Exception {
+	@Override
+	public void setUp(){
 		
-		Sacado sacado = new Sacado("Sacado");
-		Cedente cedente = new Cedente("Cedente");
-
-		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(BancosSuportados.BANCO_DO_BRASIL.create());
+		super.setUp();
 		
-		contaBancaria.setCarteira(new Carteira(5));
-		
-		NumeroDaConta numeroDaConta = new NumeroDaConta();
-		numeroDaConta.setCodigoDaConta(6789);
-		contaBancaria.setNumeroDaConta(numeroDaConta);
-		
-		Titulo titulo = new Titulo(contaBancaria, sacado, cedente);
+		titulo.getContaBancaria().setBanco(BancosSuportados.BANCO_DO_BRASIL.create());
+		titulo.getContaBancaria().setCarteira(new Carteira(5));
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(6789));
 		titulo.setNossoNumero("1234567890");		
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		setCampoLivreValidoAsString("0000000006789123456789005");
 	}
+	
 }

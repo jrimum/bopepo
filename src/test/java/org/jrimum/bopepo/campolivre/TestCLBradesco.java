@@ -58,8 +58,6 @@ import org.junit.Test;
 public class TestCLBradesco extends AbstractCampoLivreBaseTest<CLBradesco> {
 
 	private final int NOSSO_NUMERO_LENGTH = 11;
-	
-	private Titulo titulo;
 
 	@Before
 	public void setUp(){
@@ -74,7 +72,7 @@ public class TestCLBradesco extends AbstractCampoLivreBaseTest<CLBradesco> {
 		titulo = new Titulo(contaBancaria, new Sacado("S"), new Cedente("C"));
 		titulo.setNossoNumero("12345678901");
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		setCampoLivreValidoAsString("1234051234567890100067890");
 	}

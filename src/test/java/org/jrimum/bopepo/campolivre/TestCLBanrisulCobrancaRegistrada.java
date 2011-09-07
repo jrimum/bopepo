@@ -59,8 +59,6 @@ import org.junit.Test;
  */
 public class TestCLBanrisulCobrancaRegistrada extends AbstractCampoLivreBaseTest<CLBanrisulCobrancaRegistrada> {
 
-	private Titulo titulo;
-
 	@Before
 	public void setUp() {
 
@@ -75,7 +73,7 @@ public class TestCLBanrisulCobrancaRegistrada extends AbstractCampoLivreBaseTest
 		titulo = new Titulo(contaBancaria, sacado, cedente);
 		titulo.setNossoNumero("22832563");
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		setCampoLivreValidoAsString("1111029000150228325634071");
 	}
