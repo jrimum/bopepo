@@ -37,13 +37,13 @@ import java.lang.reflect.ParameterizedType;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import org.jrimum.bopepo.campolivre.CampoLivre;
-import org.jrimum.bopepo.campolivre.CampoLivreException;
-import org.jrimum.bopepo.campolivre.CampoLivreFactory;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
+import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
+import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Test;
 
@@ -65,29 +65,35 @@ import org.junit.Test;
  */
 public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 	
+	protected Titulo titulo;
+	
 	private String campoLivreValidoAsString;
 	
 	private CampoLivre campoLivreToTest;
 	
-	public CampoLivre getCampoLivreToTest() {
-		
-		return campoLivreToTest;
-	}
+	public void setUp(){
 
+		titulo = new Titulo(new ContaBancaria(), new Sacado("S"), new Cedente("C"));
+	}
+	
+	/*
+	 * Testes para obrigatórios de todos os campos livres.
+	 */
+	
 	@Test
-	public void seCriacaoDoCampoLivreOcorreSemFalha() {
+	public final void seCriacaoDoCampoLivreOcorreSemFalha() {
 		
 		assertNotNull(campoLivreToTest);
 	}
 	
 	@Test
-	public void seTamanhoDoCampoLivreEscritoIgualA25() {
+	public final void seTamanhoDoCampoLivreEscritoIgualA25() {
 		
 		assertEquals(25, campoLivreToTest.write().length());
 	}
 	
 	@Test
-	public void seClasseDaInstaciaDoCampoLivreEstaCorreta() {
+	public final void seClasseDaInstaciaDoCampoLivreEstaCorreta() {
 		
 		@SuppressWarnings("unchecked")
 		Class<CL> classeGeradoraDoCampoLivre = (Class<CL>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
@@ -96,7 +102,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 	}
 	
 	@Test
-	public void seCampoLivreEscritoEstaCorreto() {
+	public final void seCampoLivreEscritoEstaCorreto() {
 		
 		assertEquals(campoLivreValidoAsString, campoLivreToTest.write());
 	}
@@ -105,113 +111,113 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 	 * Testes para uso específico
 	 */
 	
-	protected void seNaoPermiteAgenciaNula(Titulo titulo) throws CampoLivreException{
+	protected final void seNaoPermiteAgenciaNula(Titulo titulo) throws CampoLivreException{
 
 		titulo.getContaBancaria().setAgencia(null);
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 	
-	protected void seNaoPermiteAgenciaComCodigoZero(Titulo titulo) throws CampoLivreException{
+	protected final void seNaoPermiteAgenciaComCodigoZero(Titulo titulo) throws CampoLivreException{
 
 		titulo.getContaBancaria().setAgencia(new Agencia(-0));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 	
-	protected void seNaoPermiteAgenciaComCodigoNegativo(Titulo titulo) throws IllegalArgumentException{
+	protected final void seNaoPermiteAgenciaComCodigoNegativo(Titulo titulo) throws IllegalArgumentException{
 
 		//uma exceção deve ser lançada aqui
 		titulo.getContaBancaria().setAgencia(new Agencia(-1));
 	}
 	
-	protected void seNaoPermiteNumeroDaAgenciaComDigitosAcimaDoLimite(Titulo titulo, int limiteAcima) throws CampoLivreException {
+	protected final void seNaoPermiteNumeroDaAgenciaComDigitosAcimaDoLimite(Titulo titulo, int limiteAcima) throws CampoLivreException {
 
 		titulo.getContaBancaria().setAgencia(new Agencia(limiteAcima));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 
-	protected void seNaoPermiteDigitoDaAgenciaNulo(Titulo titulo) throws CampoLivreException {
+	protected final void seNaoPermiteDigitoDaAgenciaNulo(Titulo titulo) throws CampoLivreException {
 		
 		titulo.getContaBancaria().setAgencia(new Agencia(1));
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 	
-	protected void seNaoPermiteDigitoDaAgenciaNaoNumerico(Titulo titulo) throws CampoLivreException {
+	protected final void seNaoPermiteDigitoDaAgenciaNaoNumerico(Titulo titulo) throws CampoLivreException {
 		
 		titulo.getContaBancaria().setAgencia(new Agencia(1,"X"));
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 
-	protected void seNaoPermiteCarteiraNula(Titulo titulo) throws CampoLivreException {
+	protected final void seNaoPermiteCarteiraNula(Titulo titulo) throws CampoLivreException {
 
 		titulo.getContaBancaria().setCarteira(null);
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 	
-	protected void seNaoPermiteCarteiraSemTipoDeCobranca(Titulo titulo) throws CampoLivreException{
+	protected final void seNaoPermiteCarteiraSemTipoDeCobranca(Titulo titulo) throws CampoLivreException{
 		
 		titulo.getContaBancaria().setCarteira(new Carteira());
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 	
-	protected void seNaoPermiteCarteiraComCodigoNegativo(Titulo titulo) throws CampoLivreException{
+	protected final void seNaoPermiteCarteiraComCodigoNegativo(Titulo titulo) throws CampoLivreException{
 
 		titulo.getContaBancaria().setCarteira(new Carteira(-1));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 
-	protected void seNaoPermiteCarteiraComCodigoAcimaDoLimite(Titulo titulo, int limiteAcima) throws CampoLivreException{
+	protected final void seNaoPermiteCarteiraComCodigoAcimaDoLimite(Titulo titulo, int limiteAcima) throws CampoLivreException{
 
 		titulo.getContaBancaria().setCarteira(new Carteira(limiteAcima));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 
-	protected void seNaoPermiteNossoNumeroNulo(Titulo titulo) throws CampoLivreException{
+	protected final void seNaoPermiteNossoNumeroNulo(Titulo titulo) throws CampoLivreException{
 
 		titulo.setNossoNumero(null);
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 
-	protected void seNaoPermiteNossoNumeroComBrancos(Titulo titulo, int nnLength) throws CampoLivreException{
+	protected final void seNaoPermiteNossoNumeroComBrancos(Titulo titulo, int nnLength) throws CampoLivreException{
 
 		StringBuilder nnBlank = new StringBuilder(nnLength);
 	
@@ -221,13 +227,13 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		
 		titulo.setNossoNumero(nnBlank.toString());
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 
-	protected void seNaoPermiteNossoNumeroComEspacos(Titulo titulo, int nnLength) throws CampoLivreException{
+	protected final void seNaoPermiteNossoNumeroComEspacos(Titulo titulo, int nnLength) throws CampoLivreException{
 
 		//Nosso número randômico
 		String nnRadom = nossoNumeroRadom(nnLength);
@@ -239,155 +245,173 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		
 		titulo.setNossoNumero(nn.toString());
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 
-	protected void seNaoPermiteNossoNumeroComTamanhoDiferenteDoEspecificado(Titulo titulo, int nnOutLength) throws CampoLivreException{
+	protected final void seNaoPermiteNossoNumeroComTamanhoDiferenteDoEspecificado(Titulo titulo, int nnOutLength) throws CampoLivreException{
 
 		titulo.setNossoNumero(nossoNumeroRadom(nnOutLength));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 
-	protected void seNaoPermiteNumeroDaContaNulo(Titulo titulo) throws CampoLivreException{
+	protected final void seNaoPermiteNumeroDaContaNulo(Titulo titulo) throws CampoLivreException{
 
 		titulo.getContaBancaria().setNumeroDaConta(null);
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 	
-	protected void seNaoPermiteNumeroDaContaComCodigoZero(Titulo titulo) throws CampoLivreException{
+	protected final void seNaoPermiteNumeroDaContaComCodigoZero(Titulo titulo) throws CampoLivreException{
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(0));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 
-	protected void seNaoPermiteNumeroDaContaComCodigoNegativo(Titulo titulo) throws CampoLivreException{
+	protected final void seNaoPermiteNumeroDaContaComCodigoNegativo(Titulo titulo) throws CampoLivreException{
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(-1));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 
-	protected void seNaoPermiteNumeroDaContaComCodigoAcimaDoLimite(Titulo titulo, int limiteAcima) throws CampoLivreException{
+	protected final void seNaoPermiteNumeroDaContaComCodigoAcimaDoLimite(Titulo titulo, int limiteAcima) throws CampoLivreException{
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(limiteAcima));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 	
-	protected void seNaoPermiteDigitoDaContaNulo(Titulo titulo) throws CampoLivreException {
+	protected final void seNaoPermiteDigitoDaContaNulo(Titulo titulo) throws CampoLivreException {
 		
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1));
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 
-	protected void seNaoPermiteDigitoDaContaVazio(Titulo titulo) throws CampoLivreException {
+	protected final void seNaoPermiteDigitoDaContaVazio(Titulo titulo) throws CampoLivreException {
 		
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1,EMPTY));
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 
-	protected void seNaoPermiteDigitoDaContaNegativo(Titulo titulo) throws CampoLivreException {
+	protected final void seNaoPermiteDigitoDaContaNegativo(Titulo titulo) throws CampoLivreException {
 		
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1,"-1"));
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 
-	protected void seNaoPermiteDigitoDaContaNaoNumerico(Titulo titulo) throws CampoLivreException {
+	protected final void seNaoPermiteDigitoDaContaNaoNumerico(Titulo titulo) throws CampoLivreException {
 		
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1,"X"));
 		
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 		
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 	
-	protected void seNaoPermiteParametroBancarioNulo(Titulo titulo) throws CampoLivreException{
+	protected final void seNaoPermiteParametroBancarioNulo(Titulo titulo) throws CampoLivreException{
 
 		titulo.setParametrosBancarios(null);
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 	
-	protected void seNaoPermiteParametroBancarioAusente(Titulo titulo) throws CampoLivreException{
+	protected final void seNaoPermiteParametroBancarioAusente(Titulo titulo) throws CampoLivreException{
 
 		titulo.setParametrosBancarios(new ParametrosBancariosMap());
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 	
-	protected void seNaoPermiteParametroBancarioSemValor(Titulo titulo, String parametro) throws IllegalArgumentException{
+	protected final void seNaoPermiteParametroBancarioSemValor(Titulo titulo, String parametro) throws IllegalArgumentException{
 		
 		//uma exceção deve ser lançada aqui
 		titulo.setParametrosBancarios(new ParametrosBancariosMap(parametro, null));
 	}
 	
-	protected void seNaoPermiteValorDoTituloNulo(Titulo titulo) throws NullPointerException{
+	protected final void seNaoPermiteValorDoTituloNulo(Titulo titulo) throws NullPointerException{
 
 		//uma exceção deve ser lançada aqui
 		titulo.setValor(null);
 	}
 	
-	protected void seNaoPermiteValorDoTituloNegativo(Titulo titulo) throws CampoLivreException{
+	protected final void seNaoPermiteValorDoTituloNegativo(Titulo titulo) throws CampoLivreException{
 
 		titulo.setValor(BigDecimal.valueOf(-23.4150));
 
-		setCampoLivreToTest(CampoLivreFactory.create(titulo));
+		createCampoLivreToTest();
 
 		//uma exceção deve ser lançada aqui
 		writeCampoLivre();
 	}
 	
 	/*
+	 * Obtenção de novas instâncias.
+	 */
+	
+	public final void createCampoLivreToTest() {
+		this.campoLivreToTest = CampoLivreFactory.create(titulo);
+	}
+	
+	/*
 	 * Acessores
 	 */
 	
-	protected void setCampoLivreValidoAsString(String campoLivreValidoAsString) {
+	/**
+	 * Simplesmente escreve o campo livre executando o método {@code write()}.
+	 * 
+	 * @return campo livre
+	 */
+	public final String writeCampoLivre(){
+		
+		return campoLivreToTest.write();
+	}
+	
+	protected final void setCampoLivreValidoAsString(String campoLivreValidoAsString) {
 		this.campoLivreValidoAsString = campoLivreValidoAsString;
 	}
 	
-	protected void setCampoLivreToTest(CampoLivre campoLivreToTest) {
-		this.campoLivreToTest = campoLivreToTest;
-	}
+	/*
+	 * Helpers
+	 */
 	
 	/**
 	 * Gera um nosso numero randomicamente com o tamanho determinado.
@@ -395,19 +419,10 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 	 * @param nnLength
 	 * @return geraNossoNumero
 	 */
-	protected String nossoNumeroRadom(int nnLength){
+	private String nossoNumeroRadom(int nnLength){
 		
 		//Nosso número randômico
 		return new BigDecimal(Math.random()).movePointRight(nnLength).setScale(0,RoundingMode.DOWN).toString();
 	}
 	
-	/**
-	 * Simplesmente escreve o campo livre executando o método {@code write()}.
-	 * 
-	 * @return campo livre
-	 */
-	protected String writeCampoLivre(){
-		
-		return campoLivreToTest.write();
-	}
 }
