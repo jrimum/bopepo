@@ -48,7 +48,7 @@ public class TestCLBancoRuralCobrancaNaoRegistradaSeguradora extends AbstractCam
 		titulo.setDigitoDoNossoNumero("7");
 		
 		ParametrosBancariosMap map = new ParametrosBancariosMap();
-		map.adicione("VALOR_IOS", new BigDecimal(4077));
+		map.adicione("VALOR_IOS", new BigDecimal("40.77"));
 		map.adicione("CODIGO_REDUZIDO", 1);
 		titulo.setParametrosBancarios(map);
 
