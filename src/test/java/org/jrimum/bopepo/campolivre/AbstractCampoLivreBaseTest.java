@@ -33,6 +33,7 @@ import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.lang.reflect.ParameterizedType;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -62,9 +63,7 @@ import org.junit.Test;
  * 
  * @version 0.2
  */
-public abstract class AbstractCampoLivreBaseTest {
-	
-	private Class<? extends CampoLivre> classeGeradoraDoCampoLivre;
+public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 	
 	private String campoLivreValidoAsString;
 	
@@ -89,6 +88,9 @@ public abstract class AbstractCampoLivreBaseTest {
 	
 	@Test
 	public void seClasseDaInstaciaDoCampoLivreEstaCorreta() {
+		
+		@SuppressWarnings("unchecked")
+		Class<CL> classeGeradoraDoCampoLivre = (Class<CL>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 		
 		assertEquals(classeGeradoraDoCampoLivre, campoLivreToTest.getClass());
 	}
@@ -378,10 +380,6 @@ public abstract class AbstractCampoLivreBaseTest {
 	/*
 	 * Acessores
 	 */
-	
-	protected void setClasseGeradoraDoCampoLivre(Class<? extends CampoLivre> classe) {
-		this.classeGeradoraDoCampoLivre = classe;
-	}
 	
 	protected void setCampoLivreValidoAsString(String campoLivreValidoAsString) {
 		this.campoLivreValidoAsString = campoLivreValidoAsString;

@@ -15,7 +15,7 @@ import org.junit.Test;
  * 
  * @version 0.2
  */
-public abstract class AbstractCLBancoSafraBaseTest extends AbstractCampoLivreBaseTest {
+public abstract class AbstractCLBancoSafraBaseTest<CL extends CampoLivre> extends AbstractCampoLivreBaseTest<CL>{
 	
 	protected Titulo titulo;
 

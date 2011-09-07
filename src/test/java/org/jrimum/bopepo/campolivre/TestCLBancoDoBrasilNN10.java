@@ -53,7 +53,7 @@ import org.junit.Before;
  * 
  * @version 0.2
  */
-public class TestCLBancoDoBrasilNN10 extends AbstractCampoLivreBaseTest {
+public class TestCLBancoDoBrasilNN10 extends AbstractCampoLivreBaseTest<CLBancoDoBrasilNN10> {
 
 	@Before
 	public void setUp() throws Exception {
@@ -75,7 +75,6 @@ public class TestCLBancoDoBrasilNN10 extends AbstractCampoLivreBaseTest {
 		
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasseGeradoraDoCampoLivre(CLBancoDoBrasilNN10.class);
 		setCampoLivreValidoAsString("0000000006789123456789005");
 	}
 }

@@ -18,7 +18,7 @@ import org.junit.Before;
  * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a>
  *  
  */
-public class TestCLBancoIntermedium extends AbstractCampoLivreBaseTest {
+public class TestCLBancoIntermedium extends AbstractCampoLivreBaseTest<CLBancoIntermedium> {
 
 	private Titulo titulo;
 
@@ -37,7 +37,6 @@ public class TestCLBancoIntermedium extends AbstractCampoLivreBaseTest {
 
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 
-		setClasseGeradoraDoCampoLivre(CLBancoIntermedium.class);
 		setCampoLivreValidoAsString("0054700000561100214966660");
 	}
 	

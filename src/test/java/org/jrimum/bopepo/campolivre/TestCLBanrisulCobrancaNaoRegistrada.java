@@ -57,7 +57,7 @@ import org.junit.Test;
  * 
  * @version 0.2
  */
-public class TestCLBanrisulCobrancaNaoRegistrada extends AbstractCampoLivreBaseTest {
+public class TestCLBanrisulCobrancaNaoRegistrada extends AbstractCampoLivreBaseTest<CLBanrisulCobrancaNaoRegistrada> {
 
 	private Titulo titulo;
 	
@@ -77,7 +77,6 @@ public class TestCLBanrisulCobrancaNaoRegistrada extends AbstractCampoLivreBaseT
 
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasseGeradoraDoCampoLivre(CLBanrisulCobrancaNaoRegistrada.class);
 		setCampoLivreValidoAsString("2111029000150228325634059");
 	}
 

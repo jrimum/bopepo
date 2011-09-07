@@ -23,7 +23,7 @@ import org.junit.Test;
  * 
  * @version 0.2
  */
-public class TestCLBancoSantander extends AbstractCampoLivreBaseTest {
+public class TestCLBancoSantander extends AbstractCampoLivreBaseTest<CLBancoSantander> {
 
 	private Titulo titulo;
 
@@ -47,7 +47,6 @@ public class TestCLBancoSantander extends AbstractCampoLivreBaseTest {
 		
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasseGeradoraDoCampoLivre(CLBancoSantander.class);
 		setCampoLivreValidoAsString("9162546900000000000270101");
 		
 	}

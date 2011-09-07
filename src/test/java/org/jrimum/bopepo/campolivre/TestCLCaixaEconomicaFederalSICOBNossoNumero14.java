@@ -52,7 +52,7 @@ import org.junit.Test;
  * 
  * @version 0.2
  */
-public class TestCLCaixaEconomicaFederalSICOBNossoNumero14 extends AbstractCampoLivreBaseTest {
+public class TestCLCaixaEconomicaFederalSICOBNossoNumero14 extends AbstractCampoLivreBaseTest<CLCaixaEconomicaFederalSICOBNossoNumero14> {
 
 	private static final int NOSSO_NUMERO_LENGTH = 14;
 	
@@ -73,7 +73,6 @@ public class TestCLCaixaEconomicaFederalSICOBNossoNumero14 extends AbstractCampo
 
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 
-		setClasseGeradoraDoCampoLivre(CLCaixaEconomicaFederalSICOBNossoNumero14.class);
 		setCampoLivreValidoAsString("0007802558700000000113732");
 	}
 	

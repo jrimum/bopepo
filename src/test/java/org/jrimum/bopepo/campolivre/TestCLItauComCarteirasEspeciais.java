@@ -55,7 +55,7 @@ import org.junit.Before;
  * @version 0.2
  *
  */
-public class TestCLItauComCarteirasEspeciais extends AbstractCampoLivreBaseTest {
+public class TestCLItauComCarteirasEspeciais extends AbstractCampoLivreBaseTest<CLItauComCarteirasEspeciais> {
 	
 	private Titulo titulo;
 	
@@ -82,7 +82,6 @@ public class TestCLItauComCarteirasEspeciais extends AbstractCampoLivreBaseTest 
 		
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasseGeradoraDoCampoLivre(CLItauComCarteirasEspeciais.class);
 		setCampoLivreValidoAsString("1981234567812345671234580");
 	}
 	

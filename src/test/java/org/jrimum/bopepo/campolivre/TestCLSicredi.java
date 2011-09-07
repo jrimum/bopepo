@@ -56,7 +56,7 @@ import org.junit.Test;
  * 
  * @version 0.2
  */
-public class TestCLSicredi extends AbstractCampoLivreBaseTest {
+public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 
 	private Titulo titulo;
 
@@ -78,7 +78,6 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest {
 
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 
-		setClasseGeradoraDoCampoLivre(CLSicredi.class);
 		setCampoLivreValidoAsString("3107200003101650200623101");
 	}
 	

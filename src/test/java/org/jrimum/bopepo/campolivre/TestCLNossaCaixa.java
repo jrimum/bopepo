@@ -55,7 +55,7 @@ import org.junit.Test;
  * 
  * @version 0.2
  */
-public class TestCLNossaCaixa extends AbstractCampoLivreBaseTest {
+public class TestCLNossaCaixa extends AbstractCampoLivreBaseTest<CLNossaCaixa> {
 
 	private Titulo titulo;
 	
@@ -76,7 +76,6 @@ public class TestCLNossaCaixa extends AbstractCampoLivreBaseTest {
 		
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasseGeradoraDoCampoLivre(CLNossaCaixa.class);
 		setCampoLivreValidoAsString("9976543210001300281815107");
 	}
 	

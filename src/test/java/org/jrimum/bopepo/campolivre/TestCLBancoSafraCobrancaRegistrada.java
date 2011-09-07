@@ -57,7 +57,7 @@ import org.junit.Test;
  * @version 0.2
  *
  */
-public class TestCLBancoSafraCobrancaRegistrada extends AbstractCLBancoSafraBaseTest {
+public class TestCLBancoSafraCobrancaRegistrada extends AbstractCLBancoSafraBaseTest<CLBancoSafraCobrancaRegistrada> {
 	
 	private final int NOSSO_NUMERO_LENGTH = 9;
 	
@@ -76,7 +76,6 @@ public class TestCLBancoSafraCobrancaRegistrada extends AbstractCLBancoSafraBase
 
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 
-		setClasseGeradoraDoCampoLivre(CLBancoSafraCobrancaRegistrada.class);
 		setCampoLivreValidoAsString("7010000072746989609001522");
 	}
 	

@@ -29,7 +29,7 @@ import org.junit.Test;
  * @version 0.2
  *
  */
-public class TestCLUnibancoCobrancaNaoRegistrada extends AbstractCampoLivreBaseTest {
+public class TestCLUnibancoCobrancaNaoRegistrada extends AbstractCampoLivreBaseTest<CLUnibancoCobrancaNaoRegistrada> {
 
 	/**
 	 * String Campo Livre.
@@ -97,7 +97,6 @@ public class TestCLUnibancoCobrancaNaoRegistrada extends AbstractCampoLivreBaseT
 
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasseGeradoraDoCampoLivre(CLUnibancoCobrancaNaoRegistrada.class);
 		setCampoLivreValidoAsString("5123456100112233445566777");
 	}
 

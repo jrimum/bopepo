@@ -51,7 +51,7 @@ import org.junit.Before;
  * 
  * @version 0.2
  */
-public class TestCLCaixaEconomicaFederalSINCO extends AbstractCampoLivreBaseTest {
+public class TestCLCaixaEconomicaFederalSINCO extends AbstractCampoLivreBaseTest<CLCaixaEconomicaFederalSINCO> {
 	
 	private Titulo titulo;
 
@@ -74,7 +74,6 @@ public class TestCLCaixaEconomicaFederalSINCO extends AbstractCampoLivreBaseTest
 		
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasseGeradoraDoCampoLivre(CLCaixaEconomicaFederalSINCO.class);
 		setCampoLivreValidoAsString("1000002910000000020061732");
 	}
 }

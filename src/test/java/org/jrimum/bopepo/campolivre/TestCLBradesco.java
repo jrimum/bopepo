@@ -55,7 +55,7 @@ import org.junit.Test;
  * 
  * @version 0.2
  */
-public class TestCLBradesco extends AbstractCampoLivreBaseTest {
+public class TestCLBradesco extends AbstractCampoLivreBaseTest<CLBradesco> {
 
 	private final int NOSSO_NUMERO_LENGTH = 11;
 	
@@ -76,7 +76,6 @@ public class TestCLBradesco extends AbstractCampoLivreBaseTest {
 
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 
-		setClasseGeradoraDoCampoLivre(CLBradesco.class);
 		setCampoLivreValidoAsString("1234051234567890100067890");
 	}
 

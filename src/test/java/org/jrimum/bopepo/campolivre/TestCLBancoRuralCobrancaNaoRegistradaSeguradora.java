@@ -25,7 +25,7 @@ import org.junit.Before;
  * 
  * @version 0.2
  */
-public class TestCLBancoRuralCobrancaNaoRegistradaSeguradora extends AbstractCampoLivreBaseTest {
+public class TestCLBancoRuralCobrancaNaoRegistradaSeguradora extends AbstractCampoLivreBaseTest<CLBancoRuralCobrancaNaoRegistradaSeguradora> {
 
 	private Titulo titulo;
 
@@ -56,7 +56,6 @@ public class TestCLBancoRuralCobrancaNaoRegistradaSeguradora extends AbstractCam
 
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 
-		setClasseGeradoraDoCampoLivre(CLBancoRuralCobrancaNaoRegistradaSeguradora.class);
 		setCampoLivreValidoAsString("4155001000002256970004077");
 	}
 }

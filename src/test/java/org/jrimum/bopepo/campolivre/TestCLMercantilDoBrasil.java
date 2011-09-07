@@ -58,7 +58,7 @@ import org.junit.Test;
  * @version 0.2
  * 
  */
-public class TestCLMercantilDoBrasil extends AbstractCampoLivreBaseTest {
+public class TestCLMercantilDoBrasil extends AbstractCampoLivreBaseTest<CLMercantilDoBrasil> {
 
 	private Titulo titulo;
 	
@@ -80,7 +80,6 @@ public class TestCLMercantilDoBrasil extends AbstractCampoLivreBaseTest {
 		
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 		
-		setClasseGeradoraDoCampoLivre(CLMercantilDoBrasil.class);
 		setCampoLivreValidoAsString("1234123456789051234567892"); //Sem desconto
 	}
 	

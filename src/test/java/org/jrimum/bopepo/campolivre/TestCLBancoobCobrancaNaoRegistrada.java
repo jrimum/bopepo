@@ -50,7 +50,7 @@ import org.junit.Before;
  * 
  * @version 0.2
  */
-public class TestCLBancoobCobrancaNaoRegistrada extends AbstractCampoLivreBaseTest{
+public class TestCLBancoobCobrancaNaoRegistrada extends AbstractCampoLivreBaseTest<CLBancoobCobrancaNaoRegistrada>{
 
 	private Titulo titulo;
 
@@ -69,7 +69,6 @@ public class TestCLBancoobCobrancaNaoRegistrada extends AbstractCampoLivreBaseTe
 
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 
-		setClasseGeradoraDoCampoLivre(CLBancoobCobrancaNaoRegistrada.class);
 		setCampoLivreValidoAsString("1434001000000102000001001");
 	}
 	

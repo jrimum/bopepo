@@ -20,7 +20,7 @@ import org.junit.Before;
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a>
  */
-public class TestCLHSBCCobrancaRegistrada  extends AbstractCampoLivreBaseTest {
+public class TestCLHSBCCobrancaRegistrada  extends AbstractCampoLivreBaseTest<CLHSBCCobrancaNaoRegistrada> {
 
 	private Titulo titulo;
 
@@ -43,7 +43,6 @@ public class TestCLHSBCCobrancaRegistrada  extends AbstractCampoLivreBaseTest {
 
 		setCampoLivreToTest(CampoLivreFactory.create(titulo));
 
-		setClasseGeradoraDoCampoLivre(CLHSBCCobrancaNaoRegistrada.class);
 		setCampoLivreValidoAsString("8351202000023910476118682");
 	}
 	
