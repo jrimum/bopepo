@@ -35,11 +35,7 @@ import java.util.Calendar;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
-import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -106,18 +102,12 @@ public class TestCLUnibancoCobrancaRegistrada extends AbstractCampoLivreBaseTest
 		
 		cal.set(2001,Calendar.DECEMBER,31);
 		
-		Sacado sacado = new Sacado("Sacado");
-		Cedente cedente = new Cedente("Cedente");
 
-		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(BancosSuportados.UNIBANCO.create());
-		contaBancaria.setAgencia(new Agencia(1, "9"));
-		contaBancaria.setCarteira(new Carteira(123,TipoDeCobranca.COM_REGISTRO));
-
-		titulo = new Titulo(contaBancaria, sacado, cedente);
+		titulo.getContaBancaria().setBanco(BancosSuportados.UNIBANCO.create());
+		titulo.getContaBancaria().setAgencia(new Agencia(1, "9"));
+		titulo.getContaBancaria().setCarteira(new Carteira(123,TipoDeCobranca.COM_REGISTRO));
 		titulo.setNumeroDoDocumento("1234567");
 		titulo.setNossoNumero("11223344554");
-
 		titulo.setDataDoVencimento(cal.getTime());
 
 		createCampoLivreToTest();

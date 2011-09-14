@@ -65,17 +65,17 @@ import org.junit.Test;
  */
 public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 	
-	protected Titulo titulo;
-	
-	private String campoLivreValidoAsString;
+	protected final Titulo titulo;
 	
 	private CampoLivre campoLivreToTest;
 	
-	public void setUp(){
-
-		titulo = new Titulo(new ContaBancaria(), new Sacado("S"), new Cedente("C"));
-	}
+	private String campoLivreValidoAsString;
 	
+	public AbstractCampoLivreBaseTest() {
+		super();
+		this.titulo = new Titulo(new ContaBancaria(), new Sacado("S"), new Cedente("C"));
+	}
+
 	/*
 	 * Testes para obrigatórios de todos os campos livres.
 	 */
@@ -111,7 +111,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 	 * Testes para uso específico
 	 */
 	
-	protected final void seNaoPermiteAgenciaNula(Titulo titulo) throws CampoLivreException{
+	protected final void testeSeNaoPermiteAgenciaNula() throws CampoLivreException{
 
 		titulo.getContaBancaria().setAgencia(null);
 
@@ -121,7 +121,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 	
-	protected final void seNaoPermiteAgenciaComCodigoZero(Titulo titulo) throws CampoLivreException{
+	protected final void testeSeNaoPermiteAgenciaComCodigoZero() throws CampoLivreException{
 
 		titulo.getContaBancaria().setAgencia(new Agencia(-0));
 
@@ -131,13 +131,13 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 	
-	protected final void seNaoPermiteAgenciaComCodigoNegativo(Titulo titulo) throws IllegalArgumentException{
+	protected final void testeSeNaoPermiteAgenciaComCodigoNegativo() throws IllegalArgumentException{
 
 		//uma exceção deve ser lançada aqui
 		titulo.getContaBancaria().setAgencia(new Agencia(-1));
 	}
 	
-	protected final void seNaoPermiteNumeroDaAgenciaComDigitosAcimaDoLimite(Titulo titulo, int limiteAcima) throws CampoLivreException {
+	protected final void testeSeNaoPermiteNumeroDaAgenciaComDigitosAcimaDoLimite(int limiteAcima) throws CampoLivreException {
 
 		titulo.getContaBancaria().setAgencia(new Agencia(limiteAcima));
 
@@ -147,7 +147,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 
-	protected final void seNaoPermiteDigitoDaAgenciaNulo(Titulo titulo) throws CampoLivreException {
+	protected final void testeSeNaoPermiteDigitoDaAgenciaNulo() throws CampoLivreException {
 		
 		titulo.getContaBancaria().setAgencia(new Agencia(1));
 		
@@ -157,7 +157,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 	
-	protected final void seNaoPermiteDigitoDaAgenciaNaoNumerico(Titulo titulo) throws CampoLivreException {
+	protected final void testeSeNaoPermiteDigitoDaAgenciaNaoNumerico() throws CampoLivreException {
 		
 		titulo.getContaBancaria().setAgencia(new Agencia(1,"X"));
 		
@@ -167,7 +167,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 
-	protected final void seNaoPermiteCarteiraNula(Titulo titulo) throws CampoLivreException {
+	protected final void testeSeNaoPermiteCarteiraNula() throws CampoLivreException {
 
 		titulo.getContaBancaria().setCarteira(null);
 
@@ -177,7 +177,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 	
-	protected final void seNaoPermiteCarteiraSemTipoDeCobranca(Titulo titulo) throws CampoLivreException{
+	protected final void testeSeNaoPermiteCarteiraSemTipoDeCobranca() throws CampoLivreException{
 		
 		titulo.getContaBancaria().setCarteira(new Carteira());
 		
@@ -187,7 +187,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 	
-	protected final void seNaoPermiteCarteiraComCodigoNegativo(Titulo titulo) throws CampoLivreException{
+	protected final void testeSeNaoPermiteCarteiraComCodigoNegativo() throws CampoLivreException{
 
 		titulo.getContaBancaria().setCarteira(new Carteira(-1));
 
@@ -197,7 +197,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 
-	protected final void seNaoPermiteCarteiraComCodigoAcimaDoLimite(Titulo titulo, int limiteAcima) throws CampoLivreException{
+	protected final void testeSeNaoPermiteCarteiraComCodigoAcimaDoLimite(int limiteAcima) throws CampoLivreException{
 
 		titulo.getContaBancaria().setCarteira(new Carteira(limiteAcima));
 
@@ -207,7 +207,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 
-	protected final void seNaoPermiteNossoNumeroNulo(Titulo titulo) throws CampoLivreException{
+	protected final void testeSeNaoPermiteNossoNumeroNulo() throws CampoLivreException{
 
 		titulo.setNossoNumero(null);
 
@@ -217,7 +217,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 
-	protected final void seNaoPermiteNossoNumeroComBrancos(Titulo titulo, int nnLength) throws CampoLivreException{
+	protected final void testeSeNaoPermiteNossoNumeroComBrancos(int nnLength) throws CampoLivreException{
 
 		StringBuilder nnBlank = new StringBuilder(nnLength);
 	
@@ -233,7 +233,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 
-	protected final void seNaoPermiteNossoNumeroComEspacos(Titulo titulo, int nnLength) throws CampoLivreException{
+	protected final void testeSeNaoPermiteNossoNumeroComEspacos(int nnLength) throws CampoLivreException{
 
 		//Nosso número randômico
 		String nnRadom = nossoNumeroRadom(nnLength);
@@ -251,7 +251,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 
-	protected final void seNaoPermiteNossoNumeroComTamanhoDiferenteDoEspecificado(Titulo titulo, int nnOutLength) throws CampoLivreException{
+	protected final void testeSeNaoPermiteNossoNumeroComTamanhoDiferenteDoEspecificado(int nnOutLength) throws CampoLivreException{
 
 		titulo.setNossoNumero(nossoNumeroRadom(nnOutLength));
 
@@ -261,7 +261,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 
-	protected final void seNaoPermiteNumeroDaContaNulo(Titulo titulo) throws CampoLivreException{
+	protected final void testeSeNaoPermiteNumeroDaContaNulo() throws CampoLivreException{
 
 		titulo.getContaBancaria().setNumeroDaConta(null);
 
@@ -271,7 +271,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 	
-	protected final void seNaoPermiteNumeroDaContaComCodigoZero(Titulo titulo) throws CampoLivreException{
+	protected final void testeSeNaoPermiteNumeroDaContaComCodigoZero() throws CampoLivreException{
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(0));
 
@@ -281,7 +281,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 
-	protected final void seNaoPermiteNumeroDaContaComCodigoNegativo(Titulo titulo) throws CampoLivreException{
+	protected final void testeSeNaoPermiteNumeroDaContaComCodigoNegativo() throws CampoLivreException{
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(-1));
 
@@ -291,7 +291,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 
-	protected final void seNaoPermiteNumeroDaContaComCodigoAcimaDoLimite(Titulo titulo, int limiteAcima) throws CampoLivreException{
+	protected final void testeSeNaoPermiteNumeroDaContaComCodigoAcimaDoLimite(int limiteAcima) throws CampoLivreException{
 
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(limiteAcima));
 
@@ -301,7 +301,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 	
-	protected final void seNaoPermiteDigitoDaContaNulo(Titulo titulo) throws CampoLivreException {
+	protected final void testeSeNaoPermiteDigitoDaContaNulo() throws CampoLivreException {
 		
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1));
 		
@@ -311,7 +311,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 
-	protected final void seNaoPermiteDigitoDaContaVazio(Titulo titulo) throws CampoLivreException {
+	protected final void testeSeNaoPermiteDigitoDaContaVazio() throws CampoLivreException {
 		
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1,EMPTY));
 		
@@ -321,7 +321,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 
-	protected final void seNaoPermiteDigitoDaContaNegativo(Titulo titulo) throws CampoLivreException {
+	protected final void testeSeNaoPermiteDigitoDaContaNegativo() throws CampoLivreException {
 		
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1,"-1"));
 		
@@ -331,7 +331,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 
-	protected final void seNaoPermiteDigitoDaContaNaoNumerico(Titulo titulo) throws CampoLivreException {
+	protected final void testeSeNaoPermiteDigitoDaContaNaoNumerico() throws CampoLivreException {
 		
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1,"X"));
 		
@@ -341,7 +341,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 	
-	protected final void seNaoPermiteParametroBancarioNulo(Titulo titulo) throws CampoLivreException{
+	protected final void testeSeNaoPermiteParametroBancarioNulo() throws CampoLivreException{
 
 		titulo.setParametrosBancarios(null);
 
@@ -351,7 +351,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 	
-	protected final void seNaoPermiteParametroBancarioAusente(Titulo titulo) throws CampoLivreException{
+	protected final void testeSeNaoPermiteParametroBancarioAusente() throws CampoLivreException{
 
 		titulo.setParametrosBancarios(new ParametrosBancariosMap());
 
@@ -361,19 +361,19 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 	
-	protected final void seNaoPermiteParametroBancarioSemValor(Titulo titulo, String parametro) throws IllegalArgumentException{
+	protected final void testeSeNaoPermiteParametroBancarioSemValor(String parametro) throws IllegalArgumentException{
 		
 		//uma exceção deve ser lançada aqui
 		titulo.setParametrosBancarios(new ParametrosBancariosMap(parametro, null));
 	}
 	
-	protected final void seNaoPermiteValorDoTituloNulo(Titulo titulo) throws NullPointerException{
+	protected final void testeSeNaoPermiteValorDoTituloNulo() throws NullPointerException{
 
 		//uma exceção deve ser lançada aqui
 		titulo.setValor(null);
 	}
 	
-	protected final void seNaoPermiteValorDoTituloNegativo(Titulo titulo) throws CampoLivreException{
+	protected final void testeSeNaoPermiteValorDoTituloNegativo() throws CampoLivreException{
 
 		titulo.setValor(BigDecimal.valueOf(-23.4150));
 
@@ -419,7 +419,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 	 * @param nnLength
 	 * @return geraNossoNumero
 	 */
-	private String nossoNumeroRadom(int nnLength){
+	private final String nossoNumeroRadom(int nnLength){
 		
 		//Nosso número randômico
 		return new BigDecimal(Math.random()).movePointRight(nnLength).setScale(0,RoundingMode.DOWN).toString();

@@ -30,11 +30,7 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Before;
 
 /**
@@ -56,18 +52,8 @@ public class TestCLCaixaEconomicaFederalSINCO extends AbstractCampoLivreBaseTest
 	@Before
 	public void setUp(){
 		
-		Sacado sacado = new Sacado("Sacado");
-		Cedente cedente = new Cedente("Cedente");
-		
-		ContaBancaria contaBancaria = new ContaBancaria();
-		
-		NumeroDaConta numeroDaConta = new NumeroDaConta();
-		numeroDaConta.setCodigoDaConta(2);
-		contaBancaria.setNumeroDaConta(numeroDaConta);
-		
-		contaBancaria.setBanco(BancosSuportados.CAIXA_ECONOMICA_FEDERAL.create());
-		
-		titulo = new Titulo(contaBancaria, sacado, cedente);
+		titulo.getContaBancaria().setBanco(BancosSuportados.CAIXA_ECONOMICA_FEDERAL.create());
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(2));
 		titulo.setNossoNumero("10000000020061732");
 		
 		createCampoLivreToTest();

@@ -32,12 +32,8 @@ package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
-import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Modalidade;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -60,15 +56,11 @@ public class TestCLNossaCaixa extends AbstractCampoLivreBaseTest<CLNossaCaixa> {
 	@Before
 	public void setUp(){
 		
-		Sacado sacado = new Sacado("Sacado");
-		Cedente cedente = new Cedente("Cedente");
 		
-		ContaBancaria contaBancaria = new ContaBancaria(BancosSuportados.NOSSA_CAIXA.create());
-		contaBancaria.setAgencia(new Agencia(1, "1"));
-		contaBancaria.setNumeroDaConta(new NumeroDaConta(2818));
-		contaBancaria.setModalidade(new Modalidade(13));
-		
-		titulo = new Titulo(contaBancaria, sacado, cedente);
+		titulo.getContaBancaria().setBanco(BancosSuportados.NOSSA_CAIXA.create());
+		titulo.getContaBancaria().setAgencia(new Agencia(1, "1"));
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(2818));
+		titulo.getContaBancaria().setModalidade(new Modalidade(13));
 		titulo.setNossoNumero("997654321");
 		titulo.setDigitoDoNossoNumero("1");
 		

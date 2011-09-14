@@ -33,12 +33,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
-import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -62,14 +58,9 @@ public class TestCLBanestes extends AbstractCampoLivreBaseTest<CLBanestes> {
 	@Before
 	public void setUp() {
 		
-		Sacado sacado = new Sacado("Sacado");
-		Cedente cedente = new Cedente("Cedente");
-
-		ContaBancaria contaBancaria = new ContaBancaria(BancosSuportados.BANCO_DO_ESTADO_DO_ESPIRITO_SANTO.create());
-		contaBancaria.setCarteira(new Carteira(4, TipoDeCobranca.COM_REGISTRO));
-		contaBancaria.setNumeroDaConta(new NumeroDaConta(7730070));
-
-		titulo = new Titulo(contaBancaria, sacado, cedente);
+		titulo.getContaBancaria().setBanco(BancosSuportados.BANCO_DO_ESTADO_DO_ESPIRITO_SANTO.create());
+		titulo.getContaBancaria().setCarteira(new Carteira(4, TipoDeCobranca.COM_REGISTRO));
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(7730070));
 		titulo.setNossoNumero("10297");
 		
 		createCampoLivreToTest();

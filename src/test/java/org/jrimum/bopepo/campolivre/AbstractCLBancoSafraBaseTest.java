@@ -18,25 +18,25 @@ public abstract class AbstractCLBancoSafraBaseTest<CL extends CampoLivre> extend
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteCarteiraNull() {
 
-		seNaoPermiteCarteiraNula(titulo);
+		testeSeNaoPermiteCarteiraNula();
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteCarteiraSemTipoDeCobranca() {
 		
-		seNaoPermiteCarteiraSemTipoDeCobranca(titulo);
+		testeSeNaoPermiteCarteiraSemTipoDeCobranca();
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteCarteiraComCodigoNegativo() {
 
-		seNaoPermiteCarteiraComCodigoNegativo(titulo);
+		testeSeNaoPermiteCarteiraComCodigoNegativo();
 		
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteCarteiraComCodigoAcimaDe2Digitos() {
 
-		seNaoPermiteCarteiraComCodigoAcimaDoLimite(titulo, 111);
+		testeSeNaoPermiteCarteiraComCodigoAcimaDoLimite(111);
 	}
 }

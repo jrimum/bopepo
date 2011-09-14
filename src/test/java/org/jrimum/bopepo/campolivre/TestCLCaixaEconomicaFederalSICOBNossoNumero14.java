@@ -32,11 +32,7 @@ package org.jrimum.bopepo.campolivre;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
-import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -59,14 +55,10 @@ public class TestCLCaixaEconomicaFederalSICOBNossoNumero14 extends AbstractCampo
 	@Before
 	public void setUp(){
 
-		ContaBancaria contaBancaria = new ContaBancaria();
-
-		contaBancaria.setBanco(BancosSuportados.CAIXA_ECONOMICA_FEDERAL.create());
-		contaBancaria.setAgencia(new Agencia(255, "5"));
-		contaBancaria.setNumeroDaConta(new NumeroDaConta(78));
-		contaBancaria.setCarteira(new Carteira(8));
-
-		titulo = new Titulo(contaBancaria, new Sacado("S"), new Cedente("C"));
+		titulo.getContaBancaria().setBanco(BancosSuportados.CAIXA_ECONOMICA_FEDERAL.create());
+		titulo.getContaBancaria().setAgencia(new Agencia(255, "5"));
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(78));
+		titulo.getContaBancaria().setCarteira(new Carteira(8));
 		titulo.setNossoNumero("00000000113732");
 
 		createCampoLivreToTest();
@@ -77,49 +69,49 @@ public class TestCLCaixaEconomicaFederalSICOBNossoNumero14 extends AbstractCampo
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNumeroDaContaNulo() {
 
-		seNaoPermiteNumeroDaContaNulo(titulo);
+		testeSeNaoPermiteNumeroDaContaNulo();
 	}
 	
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNumeroDaContaComCodigoZero() {
 
-		seNaoPermiteNumeroDaContaComCodigoZero(titulo);
+		testeSeNaoPermiteNumeroDaContaComCodigoZero();
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNumeroDaContaComCodigoNegativo() {
 
-		seNaoPermiteNumeroDaContaComCodigoNegativo(titulo);
+		testeSeNaoPermiteNumeroDaContaComCodigoNegativo();
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNumeroDaContaComCodigoAcimaDe5Digitos() {
 
-		seNaoPermiteNumeroDaContaComCodigoAcimaDoLimite(titulo, 123456);
+		testeSeNaoPermiteNumeroDaContaComCodigoAcimaDoLimite(123456);
 	}
 	
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteAgenciaNula() {
 
-		seNaoPermiteAgenciaNula(titulo);
+		testeSeNaoPermiteAgenciaNula();
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void seNaoPermiteAgenciaComCodigoNegativo() {
 
-		seNaoPermiteAgenciaComCodigoNegativo(titulo);
+		testeSeNaoPermiteAgenciaComCodigoNegativo();
 	}
 	
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteAgenciaComCodigoZero() {
 
-		seNaoPermiteAgenciaComCodigoZero(titulo);
+		testeSeNaoPermiteAgenciaComCodigoZero();
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNumeroDaAgenciaAcimaDe4Digitos() {
 
-		seNaoPermiteNumeroDaAgenciaComDigitosAcimaDoLimite(titulo, 10000);
+		testeSeNaoPermiteNumeroDaAgenciaComDigitosAcimaDoLimite(10000);
 	}
 	
 	@Test(expected = CampoLivreException.class)
@@ -155,24 +147,24 @@ public class TestCLCaixaEconomicaFederalSICOBNossoNumero14 extends AbstractCampo
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNossoNumeroNulo() {
 
-		seNaoPermiteNossoNumeroNulo(titulo);
+		testeSeNaoPermiteNossoNumeroNulo();
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNossoNumeroComBrancos() {
 
-		seNaoPermiteNossoNumeroComBrancos(titulo, NOSSO_NUMERO_LENGTH);
+		testeSeNaoPermiteNossoNumeroComBrancos(NOSSO_NUMERO_LENGTH);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNossoNumeroComEspacos() {
 
-		seNaoPermiteNossoNumeroComEspacos(titulo, NOSSO_NUMERO_LENGTH);
+		testeSeNaoPermiteNossoNumeroComEspacos(NOSSO_NUMERO_LENGTH);
 	}
 
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNossoNumeroComTamanhoDiferenteDe14() {
 
-		seNaoPermiteNossoNumeroComTamanhoDiferenteDoEspecificado(titulo, NOSSO_NUMERO_LENGTH - 1);
+		testeSeNaoPermiteNossoNumeroComTamanhoDiferenteDoEspecificado(NOSSO_NUMERO_LENGTH - 1);
 	}
 }

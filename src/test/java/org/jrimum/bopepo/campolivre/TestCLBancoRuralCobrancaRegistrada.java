@@ -3,12 +3,8 @@ package org.jrimum.bopepo.campolivre;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
-import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Before;
 
 /**
@@ -16,6 +12,7 @@ import org.junit.Before;
  * Teste unitário do campo livre do banco Rural - Cobrança Registrada.
  * </p>
  * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author <a href="mailto:fernandobgi@gmail.com">Fernando Dias</a>
  *  
  * @since 0.2
@@ -27,27 +24,10 @@ public class TestCLBancoRuralCobrancaRegistrada extends AbstractCampoLivreBaseTe
 	@Before
 	public void setUp(){
 		
-		Sacado sacado = new Sacado("Nome do Sacado");
-		Cedente cedente = new Cedente("Nome do Cedente");
-
-		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(BancosSuportados.BANCO_RURAL.create());
-
-		Agencia agencia = new Agencia(133, "1");
-		
-		NumeroDaConta numeroDaConta = new NumeroDaConta();
-		numeroDaConta.setCodigoDaConta(6789);
-		numeroDaConta.setDigitoDaConta("1");
-		
-		Carteira carteira = new Carteira();
-		carteira.setCodigo(5);
-		carteira.setTipoCobranca(TipoDeCobranca.COM_REGISTRO);
-		
-		contaBancaria.setNumeroDaConta(numeroDaConta);
-		contaBancaria.setAgencia(agencia);
-		contaBancaria.setCarteira(carteira);
-
-		titulo = new Titulo(contaBancaria, sacado, cedente);
+		titulo.getContaBancaria().setBanco(BancosSuportados.BANCO_RURAL.create());
+		titulo.getContaBancaria().setAgencia(new Agencia(133, "1"));
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(6789,"1"));
+		titulo.getContaBancaria().setCarteira(new Carteira(5,TipoDeCobranca.COM_REGISTRO));
 		titulo.setNossoNumero("1234567");
 		titulo.setDigitoDoNossoNumero("1");
 

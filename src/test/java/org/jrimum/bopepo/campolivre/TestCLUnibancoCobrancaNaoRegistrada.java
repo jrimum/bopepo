@@ -3,12 +3,8 @@ package org.jrimum.bopepo.campolivre;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
-import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -72,16 +68,10 @@ public class TestCLUnibancoCobrancaNaoRegistrada extends AbstractCampoLivreBaseT
 	@Before
 	public void setUp(){
 
-		Sacado sacado = new Sacado("Sacado");
-		Cedente cedente = new Cedente("Cedente");
-
-		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(BancosSuportados.UNIBANCO.create());
-		contaBancaria.setNumeroDaConta(new NumeroDaConta(123456, "1"));
-		contaBancaria.setCarteira(new Carteira(123, TipoDeCobranca.SEM_REGISTRO));
-		contaBancaria.setAgencia(new Agencia(01234, "1"));
-
-		titulo = new Titulo(contaBancaria, sacado, cedente);
+		titulo.getContaBancaria().setBanco(BancosSuportados.UNIBANCO.create());
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(123456, "1"));
+		titulo.getContaBancaria().setCarteira(new Carteira(123, TipoDeCobranca.SEM_REGISTRO));
+		titulo.getContaBancaria().setAgencia(new Agencia(01234, "1"));
 		titulo.setNumeroDoDocumento("1234567");
 		titulo.setNossoNumero("11223344556677");
 		titulo.setDigitoDoNossoNumero("7");

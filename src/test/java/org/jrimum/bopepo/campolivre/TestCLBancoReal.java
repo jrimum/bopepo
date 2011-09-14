@@ -32,11 +32,7 @@ package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
-import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Before;
 
 /**
@@ -59,21 +55,9 @@ public class TestCLBancoReal extends AbstractCampoLivreBaseTest<CLBancoReal> {
 	@Before
 	public void setUp(){
 		
-		Sacado sacado = new Sacado("Sacado");
-		Cedente cedente = new Cedente("Cedente");
-
-		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(BancosSuportados.BANCO_ABN_AMRO_REAL.create());
-		
-		Agencia agencia = new Agencia(1018, "1");
-		contaBancaria.setAgencia(agencia);
-		
-		NumeroDaConta numeroDaConta = new NumeroDaConta();
-		numeroDaConta.setCodigoDaConta(16324);
-		numeroDaConta.setDigitoDaConta("0");//Não importa para o CampoLivre
-		contaBancaria.setNumeroDaConta(numeroDaConta);
-		
-		titulo = new Titulo(contaBancaria, sacado, cedente);
+		titulo.getContaBancaria().setBanco(BancosSuportados.BANCO_ABN_AMRO_REAL.create());
+		titulo.getContaBancaria().setAgencia(new Agencia(1018));
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(16324));
 		titulo.setNumeroDoDocumento("1234567890123");
 		titulo.setNossoNumero("1234567890123");
 		

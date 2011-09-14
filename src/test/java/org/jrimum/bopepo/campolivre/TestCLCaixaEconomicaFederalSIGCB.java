@@ -31,12 +31,8 @@ package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
-import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Before;
 
 /**
@@ -44,6 +40,7 @@ import org.junit.Before;
  * Teste unitário do campo livre do banco caixa econômica federal para o serviço SIGCB.
  * </p>
  * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  * 
  * @since 0.2
@@ -55,18 +52,9 @@ public class TestCLCaixaEconomicaFederalSIGCB extends AbstractCampoLivreBaseTest
 	@Before
 	public void setUp(){
 		
-		Sacado sacado = new Sacado("Sacado");
-		Cedente cedente = new Cedente("Cedente");
-		
-		ContaBancaria contaBancaria = new ContaBancaria();
-		
-		NumeroDaConta numeroDaConta = new NumeroDaConta(5507,"7");
-		contaBancaria.setNumeroDaConta(numeroDaConta);
-		
-		contaBancaria.setBanco(BancosSuportados.CAIXA_ECONOMICA_FEDERAL.create());
-		contaBancaria.setCarteira(new Carteira(24, TipoDeCobranca.COM_REGISTRO));
-		
-		titulo = new Titulo(contaBancaria, sacado, cedente);
+		titulo.getContaBancaria().setBanco(BancosSuportados.CAIXA_ECONOMICA_FEDERAL.create());
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(5507,"7"));
+		titulo.getContaBancaria().setCarteira(new Carteira(24, TipoDeCobranca.COM_REGISTRO));
 		titulo.setNossoNumero("000000000000019");
 		
 		createCampoLivreToTest();

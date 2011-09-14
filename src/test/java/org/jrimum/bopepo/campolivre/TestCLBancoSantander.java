@@ -3,12 +3,8 @@ package org.jrimum.bopepo.campolivre;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
-import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,18 +24,9 @@ public class TestCLBancoSantander extends AbstractCampoLivreBaseTest<CLBancoSant
 	@Before
 	public void setUp(){
 		
-		Sacado sacado = new Sacado("Sacado");
-		Cedente cedente = new Cedente("Cedente");
-		
-		ContaBancaria contaBancaria = new ContaBancaria();
-		
-		NumeroDaConta numeroDaConta = new NumeroDaConta(162546,"9");
-		contaBancaria.setNumeroDaConta(numeroDaConta);
-		
-		contaBancaria.setBanco(BancosSuportados.BANCO_SANTANDER.create());
-		contaBancaria.setCarteira(new Carteira(101, TipoDeCobranca.COM_REGISTRO, "101- Cobrança Simples Rápida COM Registro"));
-		
-		titulo = new Titulo(contaBancaria, sacado, cedente);
+		titulo.getContaBancaria().setBanco(BancosSuportados.BANCO_SANTANDER.create());
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(162546,"9"));
+		titulo.getContaBancaria().setCarteira(new Carteira(101, TipoDeCobranca.COM_REGISTRO, "101- Cobrança Simples Rápida COM Registro"));
 		titulo.setNossoNumero("00000000002");
 		titulo.setDigitoDoNossoNumero("7");
 		

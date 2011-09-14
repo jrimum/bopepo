@@ -32,12 +32,8 @@ package org.jrimum.bopepo.campolivre;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
-import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -62,15 +58,10 @@ public class TestCLBanrisulCobrancaNaoRegistrada extends AbstractCampoLivreBaseT
 	@Before
 	public void setUp() {
 		
-		Sacado sacado = new Sacado("Sacado");
-		Cedente cedente = new Cedente("Cedente");
-
-		ContaBancaria contaBancaria = new ContaBancaria(BancosSuportados.BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.create());
-		contaBancaria.setCarteira(new Carteira(1, TipoDeCobranca.SEM_REGISTRO));
-		contaBancaria.setAgencia(new Agencia(1102));
-		contaBancaria.setNumeroDaConta(new NumeroDaConta(9000150));
-
-		titulo = new Titulo(contaBancaria, sacado, cedente);
+		titulo.getContaBancaria().setBanco(BancosSuportados.BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.create());
+		titulo.getContaBancaria().setCarteira(new Carteira(1, TipoDeCobranca.SEM_REGISTRO));
+		titulo.getContaBancaria().setAgencia(new Agencia(1102));
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(9000150));
 		titulo.setNossoNumero("22832563");
 
 		createCampoLivreToTest();

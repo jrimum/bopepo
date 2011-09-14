@@ -52,10 +52,7 @@ import org.junit.Before;
 public class TestCLBancoDoBrasilNN10 extends AbstractCampoLivreBaseTest<CLBancoDoBrasilNN10> {
 
 	@Before
-	@Override
 	public void setUp(){
-		
-		super.setUp();
 		
 		titulo.getContaBancaria().setBanco(BancosSuportados.BANCO_DO_BRASIL.create());
 		titulo.getContaBancaria().setCarteira(new Carteira(5));

@@ -2,11 +2,7 @@ package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
-import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
-import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
-import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
-import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.junit.Before;
 
 
@@ -26,19 +22,10 @@ public class TestCLBancoDoBrasilNN17Convenio7 extends AbstractCampoLivreBaseTest
 
 	@Before
 	public void setUp(){
-		
-		Sacado sacado = new Sacado("Sacado");
-		Cedente cedente = new Cedente("Cedente");
 
-		ContaBancaria contaBancaria = new ContaBancaria();
-		contaBancaria.setBanco(BancosSuportados.BANCO_DO_BRASIL.create());
-		
-		NumeroDaConta numeroDaConta = new NumeroDaConta();
-		numeroDaConta.setCodigoDaConta(1234567);
-		contaBancaria.setNumeroDaConta(numeroDaConta);
-		contaBancaria.setCarteira(new Carteira(23));
-		
-		titulo = new Titulo(contaBancaria, sacado, cedente);
+		titulo.getContaBancaria().setBanco(BancosSuportados.BANCO_DO_BRASIL.create());
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1234567));
+		titulo.getContaBancaria().setCarteira(new Carteira(23));
 		titulo.setNossoNumero("12345678901234567");
 		
 		createCampoLivreToTest();
