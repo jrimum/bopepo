@@ -37,7 +37,7 @@ import java.util.Map.Entry;
 
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.pdf.Files;
-import org.jrimum.bopepo.pdf.PDFUtil;
+import org.jrimum.bopepo.pdf.PdfUtil;
 import org.jrimum.utilix.Exceptions;
 
 /**
@@ -76,7 +76,7 @@ class PdfViewerMultiProcessor {
 		
 		try {
 			
-			return PDFUtil.mergeFiles(boletosEmBytes);
+			return PdfUtil.mergeFiles(boletosEmBytes);
 			
 		} catch (Exception e) {
 			
@@ -133,7 +133,7 @@ class PdfViewerMultiProcessor {
 			toMerge.add(groupInOnePDF(entry.getValue(), viewer.setTemplate(entry.getKey())));
 		}
 
-		return PDFUtil.mergeFiles(toMerge);
+		return PdfUtil.mergeFiles(toMerge);
 	}
 
 	/**

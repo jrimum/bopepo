@@ -49,8 +49,8 @@ import org.apache.log4j.Logger;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.pdf.Files;
-import org.jrimum.bopepo.pdf.PDFUtil;
-import org.jrimum.bopepo.pdf.RectanglePDF;
+import org.jrimum.bopepo.pdf.PdfUtil;
+import org.jrimum.bopepo.pdf.PdfRectangle;
 import org.jrimum.domkee.comum.pessoa.endereco.Endereco;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
@@ -579,12 +579,12 @@ class PdfViewer {
 		
 		if (isNotNull(posCampoImg)) {
 			
-			RectanglePDF field = new RectanglePDF(posCampoImg);
+			PdfRectangle field = new PdfRectangle(posCampoImg);
 			
 			cb = stamper.getOverContent(field.getPage());
 			Image imgBarCode = barCode.createImageWithBarcode(cb, null, null);
 			
-			PDFUtil.changeFieldToImage(stamper, field, imgBarCode);
+			PdfUtil.changeFieldToImage(stamper, field, imgBarCode);
 		}
 	}
 
@@ -990,7 +990,7 @@ class PdfViewer {
 			posCampoImgLogo = form.getFieldPositions(nomeDoCampo);
 			
 			if (isNotNull(posCampoImgLogo)) {
-				PDFUtil.changeFieldToImage(stamper, posCampoImgLogo, imagem);
+				PdfUtil.changeFieldToImage(stamper, posCampoImgLogo, imagem);
 			}
 		}
 	}
