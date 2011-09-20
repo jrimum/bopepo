@@ -44,6 +44,7 @@ import com.lowagie.text.pdf.BarcodeInter25;
 /**
  * Classe geradora  de código de barras no padrão FEBRABAN.
  * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  *
  * @version 0.2.3
