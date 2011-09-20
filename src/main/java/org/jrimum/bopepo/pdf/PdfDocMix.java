@@ -29,6 +29,7 @@
 
 package org.jrimum.bopepo.pdf;
 
+import static org.apache.commons.lang.StringUtils.isBlank;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.jrimum.utilix.Collections.hasElement;
 import static org.jrimum.utilix.Objects.isNotNull;
@@ -50,14 +51,17 @@ import org.jrimum.utilix.text.Strings;
 
 import com.lowagie.text.Image;
 import com.lowagie.text.pdf.AcroFields;
+import com.lowagie.text.pdf.PdfBoolean;
+import com.lowagie.text.pdf.PdfName;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
 
 /**
  * Classe geradora de documentos PDF utilizando templates com fields.
  * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
- *
+ * 
  * @version 0.2.3
  * 
  * @since 0.2
@@ -65,38 +69,60 @@ import com.lowagie.text.pdf.PdfStamper;
 public class PdfDocMix {
 
 	private static final Logger LOG = Logger.getLogger(PdfDocMix.class);
-
+	
 	private PdfReader reader;
 	private PdfStamper stamper;
 	private AcroFields form;
-	
+
 	private ByteArrayOutputStream outputStream;
 
+	/**
+	 * Template em byte array.
+	 */
 	private byte[] template;
 	
 	/**
+	 * Informações sobre o documento.
+	 */
+	private PdfDocInfo docInfo = PdfDocInfo.create();
+
+	/**
 	 * Map dos campos de texto do documento com nome e valor.
 	 */
-	private Map<String, String> txtMap; 
-	
+	private Map<String, String> txtMap;
+
 	/**
 	 * Map dos campos de imagem do documento com nome e valor.
 	 */
-	private Map<String, java.awt.Image> imgMap; 
+	private Map<String, java.awt.Image> imgMap;
 
 	/**
-	 * Modo full compression do PDF, default = true. 
+	 * Modo full compression do PDF, default = true.
 	 * 
 	 * @since 0.2
 	 */
 	private boolean fullCompression = true;
 
 	/**
+	 * Remove todos os campos do PDF, default = true.
+	 * 
+	 * @since 0.2
+	 */
+	private boolean removeFields = true;
+
+	/**
+	 * Indicação de que o título do documento deve ser mostrado barra superior.
+	 * 
+	 * @since 0.2
+	 */
+	private Boolean displayDocTitle;
+
+	/**
 	 * Classe não instanciável
 	 * 
 	 * @throws IllegalStateException
 	 *             Caso haja alguma tentativa de utilização deste construtor.
-	 *             
+	 * 
 	 * @since 0.2
 	 */
 	@SuppressWarnings("unused")
@@ -104,9 +130,10 @@ public class PdfDocMix {
 
 		Exceptions.throwIllegalStateException("Instanciação não permitida!");
 	}
-	
+
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o documento.
+	 * Cria uma instância com o template que será utilizado para construir o
+	 * documento.
 	 * 
 	 * @param template
 	 * 
@@ -124,7 +151,8 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o documento.
+	 * Cria uma instância com o template que será utilizado para construir o
+	 * documento.
 	 * 
 	 * @param templateUrl
 	 * 
@@ -142,7 +170,8 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o documento.
+	 * Cria uma instância com o template que será utilizado para construir o
+	 * documento.
 	 * 
 	 * @param templateInput
 	 * 
@@ -160,7 +189,8 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o documento.
+	 * Cria uma instância com o template que será utilizado para construir o
+	 * documento.
 	 * 
 	 * @param templatePath
 	 * 
@@ -178,7 +208,8 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o documento.
+	 * Cria uma instância com o template que será utilizado para construir o
+	 * documento.
 	 * 
 	 * @param templateFile
 	 * 
@@ -194,9 +225,10 @@ public class PdfDocMix {
 		checkTemplateFile(templateFile);
 		setTemplate(templateFile);
 	}
-	
+
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o documento.
+	 * Cria uma instância com o template que será utilizado para construir o
+	 * documento.
 	 * 
 	 * @param template
 	 * 
@@ -215,7 +247,8 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o documento.
+	 * Cria uma instância com o template que será utilizado para construir o
+	 * documento.
 	 * 
 	 * @param templateUrl
 	 * 
@@ -234,7 +267,8 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o documento.
+	 * Cria uma instância com o template que será utilizado para construir o
+	 * documento.
 	 * 
 	 * @param templateInput
 	 * 
@@ -253,7 +287,8 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o documento.
+	 * Cria uma instância com o template que será utilizado para construir o
+	 * documento.
 	 * 
 	 * @param templatePath
 	 * 
@@ -272,7 +307,8 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o documento.
+	 * Cria uma instância com o template que será utilizado para construir o
+	 * documento.
 	 * 
 	 * @param templateFile
 	 * 
@@ -289,9 +325,10 @@ public class PdfDocMix {
 
 		return new PdfDocMix(templateFile);
 	}
-	
+
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o documento.
+	 * Cria uma instância com o template que será utilizado para construir o
+	 * documento.
 	 * 
 	 * @param template
 	 * 
@@ -310,7 +347,8 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o documento.
+	 * Cria uma instância com o template que será utilizado para construir o
+	 * documento.
 	 * 
 	 * @param templateUrl
 	 * 
@@ -329,7 +367,8 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o documento.
+	 * Cria uma instância com o template que será utilizado para construir o
+	 * documento.
 	 * 
 	 * @param templateInput
 	 * 
@@ -348,7 +387,8 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o documento.
+	 * Cria uma instância com o template que será utilizado para construir o
+	 * documento.
 	 * 
 	 * @param templatePath
 	 * 
@@ -367,7 +407,8 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o documento.
+	 * Cria uma instância com o template que será utilizado para construir o
+	 * documento.
 	 * 
 	 * @param templateFile
 	 * 
@@ -384,9 +425,122 @@ public class PdfDocMix {
 
 		return setTemplate(templateFile);
 	}
+
+	/**
+	 * Retorna um {@code Map} com os campos e seus respectivos textos adicionados nessa
+	 * instância.
+	 * 
+	 * @return Map de campo,texto
+	 * 
+	 * @since 0.2
+	 */
+	public Map<String, String> getTextFields() {
+		return this.txtMap;
+	}
+
+	/**
+	 * Atribui um {@code Map} para uso no preenchimento de campos de Texto na
+	 * instância. Caso exista algum, esse será substituído.
+	 * 
+	 * @param txtMap
+	 *            Map com os campos(key) e textos(value)
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 */
+	public PdfDocMix putAllTexts(Map<String, String> txtMap) {
+
+		Collections.checkNotEmpty(txtMap, "Campos ausentes!");
+
+		this.txtMap = txtMap;
+		return this;
+	}
+
+	/**
+	 * Coloca um par {@code key,value} para uso no preenchimento de campos de
+	 * Texto na instância.
+	 * 
+	 * @param name
+	 *            Nome do campo
+	 * @param value
+	 *            Valor em texto do campo
+	 * 
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 */
+	public PdfDocMix put(String name, String value) {
+
+		Strings.checkNotBlank(name, "Nome do campo ausente!");
+
+		if (isNull(txtMap)) {
+			this.txtMap = new HashMap<String, String>();
+		}
+
+		this.txtMap.put(name, value);
+
+		return this;
+	}
+
+	/**
+	 * Retorna um {@code Map} com os campos e suas respectivas imagens
+	 * adicionadas nessa instância.
+	 * 
+	 * @return Map de campo,imagem
+	 * 
+	 * @since 0.2
+	 */
+	public Map<String, java.awt.Image> getImageFields() {
+		return this.imgMap;
+	}
+
+	/**
+	 * Atribui um {@code Map} para uso no preenchimento de campos de Imagem na
+	 * instância. Caso exista algum, esse será substituído.
+	 * 
+	 * @param txtMap
+	 *            Map com os campos(key) e textos(value)
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 */
+	public PdfDocMix putAllImages(Map<String, java.awt.Image> imgMap) {
+
+		Collections.checkNotEmpty(imgMap, "Campos ausentes!");
+
+		this.imgMap = imgMap;
+
+		return this;
+	}
+
+	/**
+	 * Coloca um par {@code key,value} para uso no preenchimento de campos de
+	 * Imagem na instância.
+	 * 
+	 * @param name
+	 *            Nome do campo
+	 * @param value
+	 *            Valor em {@link java.awt.Image} do campo
+	 * 
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 */
+	public PdfDocMix put(String name, java.awt.Image value) {
+
+		Strings.checkNotBlank(name, "Nome do campo ausente!");
+
+		if (isNull(imgMap)) {
+			this.imgMap = new HashMap<String, java.awt.Image>();
+		}
+
+		this.imgMap.put(name, value);
+
+		return this;
+	}
 	
 	/**
-	 * Habilita o modo full compression do PDF veja
+	 * Habilita/Desabilita o modo full compression do PDF veja
 	 * {@link com.lowagie.text.pdf.PdfStamper#setFullCompression()}.
 	 * 
 	 * <p>
@@ -395,67 +549,67 @@ public class PdfDocMix {
 	 * </p>
 	 * 
 	 * @param option
-	 *            Escolha de compressão.
-	 *            
+	 *            Escolha de compressão
+	 * 
+	 * @return Esta instância após a operação
+	 * 
 	 * @since 0.2
-	 *        
+	 * 
 	 */
-	public PdfDocMix withFullCompression(boolean option){
+	public PdfDocMix withFullCompression(boolean option) {
 		this.fullCompression = option;
 		return this;
 	}
 	
-	public Map<String, String> getTextFields() {
-		return this.txtMap;
+	/**
+	 * Habilita/Desabilita a remoção dos campos do PDF veja
+	 * {@link com.lowagie.text.pdf.PdfReader#removeFields()}.
+	 * 
+	 * @param option
+	 *            Escolha por remoção
+	 * 
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 * 
+	 */
+	public PdfDocMix removeFields(boolean option) {
+		this.removeFields = option;
+		return this;
+	}
+	
+	public PdfDocMix title(String title){
+		docInfo.title(title);
+		return this;
+	}
+	
+	public PdfDocMix author(String author){
+		docInfo.author(author);
+		return this;
+	}
+	
+	public PdfDocMix subject(String subject){
+		docInfo.subject(subject);
+		return this;
+	}
+	
+	public PdfDocMix keywords(String keywords){
+		docInfo.keywords(keywords);
+		return this;
+	}
+	
+	public PdfDocMix creator(String creator){
+		docInfo.creator(creator);
+		return this;
+	}
+	
+	public PdfDocMix displayDocTilte(boolean option){
+		
+		this.displayDocTitle = option;
+		
+		return this;
 	}
 
-	public PdfDocMix putAllTexts(Map<String, String> txtMap) {
-		
-		Collections.checkNotEmpty(txtMap,"Campos ausentes!");
-		
-		this.txtMap = txtMap;
-		return this;
-	}
-	
-	public PdfDocMix put(String name, String value) {
-		
-		Strings.checkNotBlank(name, "Nome do campo ausente!");
-		
-		if(isNull(txtMap)) {
-			this.txtMap = new HashMap<String, String>();
-		}
-		
-		this.txtMap.put(name, value);
-		
-		return this;
-	}
-	
-	public Map<String, java.awt.Image> getImageFields() {
-		return this.imgMap;
-	}
-
-	public PdfDocMix putAllImages(Map<String,java.awt.Image> imgMap) {
-		
-		Collections.checkNotEmpty(imgMap,"Campos ausentes!");
-		
-		this.imgMap = imgMap;
-		
-		return this;
-	}
-	
-	public PdfDocMix put(String name, java.awt.Image value) {
-		
-		Strings.checkNotBlank(name, "Nome do campo ausente!");
-		
-		if(isNull(imgMap)) {
-			this.imgMap = new HashMap<String, java.awt.Image>();
-		}
-		
-		this.imgMap.put(name, value);
-		
-		return this;
-	}
-	
 	/**
 	 * Retorna o documento em forma de arquivo PDF.
 	 * 
@@ -467,12 +621,12 @@ public class PdfDocMix {
 	 * 
 	 */
 	public File toFile(String destPath) {
-		
+
 		checkDestPath(destPath);
-		
+
 		return toFile(new File(destPath));
 	}
-	
+
 	/**
 	 * Retorna o documento em forma de arquivo PDF.
 	 * 
@@ -481,25 +635,29 @@ public class PdfDocMix {
 	 * @return Documento em forma de arquivo PDF
 	 * @throws IllegalStateException
 	 *             Caso ocorral algum problema imprevisto
-	 *             
+	 * 
 	 * @since 0.2
 	 * 
 	 */
 	public File toFile(File destFile) {
-		
+
 		checkDestFile(destFile);
-		
+
 		try {
 
 			process();
-			
+
 			return Files.bytesToFile(destFile, outputStream.toByteArray());
-			
+
 		} catch (Exception e) {
-			
-			LOG.error("Erro durante a criação do arquivo! " + e.getLocalizedMessage(), e);
-			
-			return Exceptions.throwIllegalStateException("Erro ao tentar criar arquivo! " +"Causado por " + e.getLocalizedMessage(), e);
+
+			LOG.error(
+					"Erro durante a criação do arquivo! "
+							+ e.getLocalizedMessage(), e);
+
+			return Exceptions.throwIllegalStateException(
+					"Erro ao tentar criar arquivo! " + "Causado por "
+							+ e.getLocalizedMessage(), e);
 		}
 	}
 
@@ -512,18 +670,22 @@ public class PdfDocMix {
 	 * 
 	 */
 	public ByteArrayOutputStream toStream() {
-		
+
 		try {
 
 			process();
-			
+
 			return Files.bytesToStream(outputStream.toByteArray());
-			
+
 		} catch (Exception e) {
-			
-			LOG.error("Erro durante a criação do stream! " + e.getLocalizedMessage(), e);
-			
-			return Exceptions.throwIllegalStateException("Erro durante a criação do stream! " +"Causado por " + e.getLocalizedMessage(), e);
+
+			LOG.error(
+					"Erro durante a criação do stream! "
+							+ e.getLocalizedMessage(), e);
+
+			return Exceptions.throwIllegalStateException(
+					"Erro durante a criação do stream! " + "Causado por "
+							+ e.getLocalizedMessage(), e);
 		}
 	}
 
@@ -536,18 +698,22 @@ public class PdfDocMix {
 	 * 
 	 */
 	public byte[] toBytes() {
-		
+
 		try {
 
 			process();
-			
+
 			return outputStream.toByteArray();
-			
+
 		} catch (Exception e) {
-			
-			LOG.error("Erro durante a criação do array de bytes! " + e.getLocalizedMessage(), e);
-			
-			return Exceptions.throwIllegalStateException("Erro durante a criação do array de bytes! " +"Causado por " + e.getLocalizedMessage(), e);
+
+			LOG.error(
+					"Erro durante a criação do array de bytes! "
+							+ e.getLocalizedMessage(), e);
+
+			return Exceptions.throwIllegalStateException(
+					"Erro durante a criação do array de bytes! "
+							+ "Causado por " + e.getLocalizedMessage(), e);
 		}
 	}
 
@@ -560,14 +726,16 @@ public class PdfDocMix {
 	 * 
 	 */
 	public byte[] getTemplate() {
-		
+
 		return template.clone();
 	}
-	
+
 	/**
 	 * Define o template que será utilizado para construir o documento.
 	 * 
 	 * @param template
+	 * 
+	 * @return Esta instância após a operação
 	 * 
 	 * @since 0.2
 	 * 
@@ -576,11 +744,13 @@ public class PdfDocMix {
 		this.template = template;
 		return this;
 	}
-	
+
 	/**
 	 * Define o template que será utilizado para construir o documento.
 	 * 
 	 * @param templateUrl
+	 * 
+	 * @return Esta instância após a operação
 	 * 
 	 * @since 0.2
 	 * 
@@ -599,6 +769,8 @@ public class PdfDocMix {
 	 * 
 	 * @param templateInput
 	 * 
+	 * @return Esta instância após a operação
+	 * 
 	 * @since 0.2
 	 * 
 	 */
@@ -616,6 +788,8 @@ public class PdfDocMix {
 	 * 
 	 * @param templatePath
 	 * 
+	 * @return Esta instância após a operação
+	 * 
 	 * @since 0.2
 	 * 
 	 */
@@ -629,6 +803,8 @@ public class PdfDocMix {
 	 * 
 	 * @param templateFile
 	 * 
+	 * @return Esta instância após a operação
+	 * 
 	 * @since 0.2
 	 * 
 	 */
@@ -640,11 +816,11 @@ public class PdfDocMix {
 			return Exceptions.throwIllegalStateException(e);
 		}
 	}
-	
+
 	/**
 	 * Indica se o viewer foi habilitado a comprimir o pdf do documento gerado.
 	 * 
-	 * @see #setFullCompression();
+	 * @see #withFullCompression(boolean);
 	 * 
 	 * @return indicativo de compressão
 	 * 
@@ -654,7 +830,22 @@ public class PdfDocMix {
 	private boolean isFullCompression() {
 		return this.fullCompression;
 	}
-	
+
+	/**
+	 * Indica se o viewer foi habilitado para remover todos os campos do pdf
+	 * gerado.
+	 * 
+	 * @see #removeFields;
+	 * 
+	 * @return indicativo de compressão
+	 * 
+	 * @since 0.2
+	 * 
+	 */
+	private boolean isRemoveFields() {
+		return removeFields;
+	}
+
 	/**
 	 * Executa os seguintes métodos na sequência:
 	 * <ol>
@@ -665,8 +856,8 @@ public class PdfDocMix {
 	 * 
 	 * @since 0.2
 	 */
-	private void process(){
-		
+	private void process() {
+
 		init();
 		fillFields();
 		end();
@@ -678,59 +869,84 @@ public class PdfDocMix {
 	 * 
 	 * @since 0.2
 	 */
-	private void init(){
-		
-		try{
-			
+	private void init() {
+
+		try {
+
 			reader = new PdfReader(getTemplate());
-	
+
 			outputStream = new ByteArrayOutputStream();
+			
 			stamper = new PdfStamper(reader, outputStream);
+			
+			final String JRIMUM = "by jrimum.org/bopepo"; 
+
+			String creator = docInfo.creator();
+			
+			if(isBlank(creator)){
+				creator(JRIMUM);
+			}else{
+				creator(creator+" "+JRIMUM);
+			}
+			
+			stamper.setMoreInfo((HashMap<?,?>)docInfo.toMap());
+			
+			if(isNotNull(displayDocTitle)){
+				stamper.addViewerPreference(PdfName.DISPLAYDOCTITLE, displayDocTitle ? PdfBoolean.PDFTRUE : PdfBoolean.PDFFALSE);
+			}
+			
 			form = stamper.getAcroFields();
 			
-		}catch (Exception e) {
-			
+		} catch (Exception e) {
+
 			Exceptions.throwIllegalStateException(e);
 		}
 	}
-	
+
 	/**
-	 * Preenche todos os campos do formulário PDF com os dados do documento contido
-	 * na instância.
+	 * Preenche todos os campos do formulário PDF com os dados do documento
+	 * contido na instância.
 	 * 
 	 * @since 0.2
 	 */
-	private void fillFields(){
-		
+	private void fillFields() {
+
 		setTextFields();
 		setImageFields();
 	}
 
-	private void setTextFields(){
+	/**
+	 * Adiciona, caso existam, os textos definidos em
+	 * {@linkplain #put(String, String)} ou {@linkplain #putAllTexts(Map)}.
+	 * 
+	 * @since 0.2
+	 */
+	private void setTextFields() {
 
 		if (hasElement(txtMap)) {
 			for (Entry<String, String> e : txtMap.entrySet()) {
 				try {
 					form.setField(e.getKey(), e.getValue());
-				}catch (Exception ex) {
+				} catch (Exception ex) {
 					Exceptions.throwIllegalStateException(ex);
 				}
 			}
-		}		
+		}
 	}
 
 	/**
-	 * Coloca as imagens dos campos no pdf de acordo com o nome dos campos do documento atribuídos no map e templante.
+	 * Coloca as imagens dos campos no pdf de acordo com o nome dos campos do
+	 * documento atribuídos no map e templante.
 	 * 
 	 * @since 0.2
 	 */
-	private void setImageFields(){
-		
+	private void setImageFields() {
+
 		if (hasElement(imgMap)) {
 			for (Entry<String, java.awt.Image> e : imgMap.entrySet()) {
 				try {
-					setImage(e.getKey(), Image.getInstance(e.getValue(),null));
-				}catch (Exception ex) {
+					setImage(e.getKey(), Image.getInstance(e.getValue(), null));
+				} catch (Exception ex) {
 					Exceptions.throwIllegalStateException(ex);
 				}
 			}
@@ -745,17 +961,17 @@ public class PdfDocMix {
 	 * 
 	 * @since 0.2
 	 */
-	private void setImage(String fieldName, Image image){
-	
+	private void setImage(String fieldName, Image image) {
+
 		float posImgField[];
-		
+
 		if (isNotBlank(fieldName)) {
-			
+
 			posImgField = form.getFieldPositions(fieldName);
-			
+
 			if (isNotNull(posImgField)) {
 				try {
-					PDFUtil.changeFieldToImage(stamper, posImgField, image);
+					PdfUtil.changeFieldToImage(stamper, posImgField, image);
 				} catch (Exception e) {
 					Exceptions.throwIllegalStateException(e);
 				}
@@ -764,67 +980,51 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Finaliza a escrita de dados no template através do fechamento do {@code
-	 * stamper}, {@code reader} e {@code outputStream}.
+	 * Finaliza a escrita de dados no template através do fechamento do
+	 * {@code stamper}, {@code reader} e {@code outputStream}.
 	 * 
 	 * @since 0.2
 	 */
-	private void end(){
+	private void end() {
 
-		reader.consolidateNamedDestinations();/*
-												 * Replaces all the local named
-												 * links with the actual
-												 * destinations.
-												 */
-
-		stamper.setFormFlattening(true);/*
-										 * Determines if the fields are
-										 * flattened on close.
-										 */
-		stamper.setRotateContents(true);/*
-										 * Flags the content to be automatically
-										 * adjusted to compensate the original
-										 * page rotation.
-										 */
-
-		reader.removeFields();/* Removes all the fields from the document. */
-
-		if(isFullCompression()){
-			
-			stamper.setFullCompression();/*
-											 * Sets the document's compression to
-											 * the new 1.5 mode with object streams
-											 * and xref streams.
-											 */
+		if (isFullCompression()) {
+			stamper.setFullCompression();
 		}
 
-		reader.eliminateSharedStreams();/*
-										 * Eliminates shared streams if they
-										 * exist.
-										 */
-		try{
+		if (isRemoveFields()) {
+			reader.removeFields();
+		} else {
+			stamper.setFormFlattening(true);
+		}
+
+		reader.consolidateNamedDestinations();
+
+		reader.eliminateSharedStreams();
+
+		try {
 			// Send immediately
 			outputStream.flush();
 			// close All in this order
 			outputStream.close();
 			reader.close();
 			stamper.close();
-			
+
 		} catch (Exception e) {
 			Exceptions.throwIllegalStateException(e);
 		}
 	}
-	
+
 	private static void checkDestPath(String path) {
 
-		checkString(path, "Caminho destinado a geração do(s) arquivo(s) não contém informação!");
+		checkString(path,
+				"Caminho destinado a geração do(s) arquivo(s) não contém informação!");
 	}
 
 	private static void checkTemplatePath(String path) {
 
 		checkString(path, "Caminho do template não contém informação!");
 	}
-	
+
 	private static void checkTemplateFile(Object template) {
 
 		Objects.checkNotNull(template, "Arquivo de template nulo!");
@@ -838,7 +1038,8 @@ public class PdfDocMix {
 
 	private static void checkDestFile(File file) {
 
-		Objects.checkNotNull(file, "Arquivo destinado a geração do(s) documentos(s) nulo!");
+		Objects.checkNotNull(file,
+				"Arquivo destinado a geração do(s) documentos(s) nulo!");
 	}
-	
+
 }

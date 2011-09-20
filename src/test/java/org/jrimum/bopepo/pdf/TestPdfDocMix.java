@@ -29,13 +29,22 @@
 
 package org.jrimum.bopepo.pdf;
 
-import static org.junit.Assert.assertNotNull;
+import static org.apache.commons.lang.StringUtils.EMPTY;
+import static org.junit.Assert.*;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.junit.Test;
 
 /**
  * Teste da classe PdfDocMix.
  * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
  *
  * @version 0.2.3
@@ -44,17 +53,95 @@ import org.junit.Test;
  */
 public class TestPdfDocMix {
 	
-	private static final byte[] BYTES = "COM_BYTES".getBytes(); 
+	private PdfDocMix doc = null;
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void seNaoPermiteCriarComTemplateNullBytes(){
+		
+		byte[] NULL_BYTE_ARRAY = null;
+		
+		doc = PdfDocMix.createWithTemplate(NULL_BYTE_ARRAY);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void seNaoPermiteCriarComTemplateNullInputStream(){
+		
+		InputStream NULL_INPUT_STREAM = null;
+		
+		doc = PdfDocMix.createWithTemplate(NULL_INPUT_STREAM);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void seNaoPermiteCriarComTemplateNullURL(){
+		
+		URL NULL_URL = null;
+		
+		doc = PdfDocMix.createWithTemplate(NULL_URL);
+	}
 
-	PdfDocMix doc = null;
-	
-	
+	@Test(expected=IllegalArgumentException.class)
+	public void seNaoPermiteCriarComTemplateNullFile(){
+		
+		File NULL_FILE = null;
+		
+		doc = PdfDocMix.createWithTemplate(NULL_FILE);
+	}
 	
 	@Test
-	public void seCriaComTemplateEmBytes(){
-	
-		doc = PdfDocMix.createWithTemplate(BYTES);
+	public void sePermiteCriarComTemplateBytes(){
+		
+		doc = PdfDocMix.createWithTemplate(EMPTY.getBytes());
 		
 		assertNotNull(doc);
 	}
+	
+	@Test
+	public void sePermiteCriarComTemplateInputStream(){
+		
+		doc = PdfDocMix.createWithTemplate(new ByteArrayInputStream(EMPTY.getBytes()));
+		
+		assertNotNull(doc);
+	}
+	
+	@Test
+	public void sePermiteCriarComTemplateURL() throws MalformedURLException{
+		
+		doc = PdfDocMix.createWithTemplate(new URL("file:///"));
+		
+		assertNotNull(doc);
+	}
+
+	@Test
+	public void sePermiteCriarComTemplateFile() throws IOException{
+		
+		doc = PdfDocMix.createWithTemplate(File.createTempFile(this.getClass().getName(), EMPTY));
+		
+		assertNotNull(doc);
+	}
+	
+	@Test
+	public void seTemplateEhAtribuidoCorretamenteNaInstancia(){
+		
+		final String X = "TEMPLATE";
+		
+		doc = new PdfDocMix(X.getBytes());
+		
+		assertEquals(X, new String(doc.getTemplate()));
+	}
+	
+	@Test
+	public void sePermiteMudarTemplateCorretamenteBytes(){
+		
+		doc = new PdfDocMix(EMPTY.getBytes());
+		
+		assertEquals("DEVE SER EMPTY=''", EMPTY, new String(doc.getTemplate()));
+		
+		final String Y = "OUTRO_TEMPLATE";
+		
+		doc.changeTemplate(Y.getBytes());
+		
+		assertEquals(Y, new String(doc.getTemplate()));
+	}
+	
+	
 }
