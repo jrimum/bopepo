@@ -309,7 +309,7 @@ public class BoletoViewer {
 	 * 
 	 * @param boletos
 	 *            Lista com os boletos a serem agrupados
-	 * @param destPath
+	 * @param destFile
 	 *            Arquivo que armazenará os boletos
 	 * 
 	 * @return Arquivo PDF gerado com os boletos da lista
@@ -672,13 +672,9 @@ public class BoletoViewer {
 	 * arquivo PDF. Caso exista sequência no Map, a mesma dependerá da chamada
 	 * ao método {@link java.util.Map#entrySet() entrySet} do mesmo.
 	 * </p>
-	 * 
-	 * 
-	 * @param templatesAndBoletos
-	 *            Coleção de templates e boletos a serem agrupados
-	 * 
-	 * @param destFile
-	 *            Arquivo que armazenará os boletos
+	 * 	 * 
+	 * @param boletos
+	 *            Lista com os boletos a serem gerados 
 	 * 
 	 * @return Arquivo PDF em array de bytes gerado com os boletos fornecidos
 	 * 
@@ -908,7 +904,7 @@ public class BoletoViewer {
 	 * 
 	 * @param boletos
 	 *            Lista com os boletos a serem agrupados
-	 * @param fileDest
+	 * @param destDir
 	 *            Diretório o qual os boletos serão criados
 	 * @param prefixo
 	 *            Prefixo do nome do arquivo

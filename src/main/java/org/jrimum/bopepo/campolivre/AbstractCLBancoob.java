@@ -65,7 +65,10 @@ abstract class AbstractCLBancoob extends AbstractCampoLivre {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @param titulo
+	 * @return um CampoLivre
+	 * 
+	 * @see org.jrimum.bopepo.campolivre.AbstractCLBancoDoNordesteDoBrasil#create(Titulo)
 	 */
 	protected static CampoLivre create(Titulo titulo) {
 

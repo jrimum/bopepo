@@ -76,7 +76,7 @@ public class Files {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 * @throws IllegalArgumentException
-	 *             Caso {@codepathName} ou {@code bytes} seja null, vazio ou
+	 *             Caso {@code pathName} ou {@code bytes} seja null, vazio ou
 	 *             contenha apenas espaços em branco
 	 * @since 0.2
 	 */
@@ -104,7 +104,7 @@ public class Files {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 * @throws IllegalArgumentException
-	 *             Caso {@codepathName} ou {@code bytes} seja null, vazio ou
+	 *             Caso {@code pathName} ou {@code bytes} seja null, vazio ou
 	 *             contenha apenas espaços em branco
 	 * 
 	 * @since 0.2

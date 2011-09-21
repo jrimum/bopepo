@@ -36,16 +36,18 @@ public abstract class AbstractCLBancoDoNordesteDoBrasil extends AbstractCampoLiv
 	 * @since 0.2
 	 */
 	protected AbstractCLBancoDoNordesteDoBrasil(Integer fieldsLength) {
+		
 		super(fieldsLength);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * @param titulo
+	 * @return um CampoLivre
+	 * 
+	 * @see org.jrimum.bopepo.campolivre.AbstractCLBancoDoNordesteDoBrasil#create(Titulo)
 	 */
 	protected static CampoLivre create(Titulo titulo){
 		return new CLBancoDoNordesteDoBrasil().build(titulo);
 	}	
 	
-
 }

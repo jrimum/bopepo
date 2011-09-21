@@ -139,8 +139,6 @@ public class PdfDocMix {
 	 * 
 	 * @since 0.2
 	 * 
-	 * @return Esta instância após a operação
-	 * 
 	 * @throws IllegalArgumentException
 	 *             Caso o {@code template} seja nulo
 	 */
@@ -157,8 +155,6 @@ public class PdfDocMix {
 	 * @param templateUrl
 	 * 
 	 * @since 0.2
-	 * 
-	 * @return Esta instância após a operação
 	 * 
 	 * @throws IllegalArgumentException
 	 *             Caso o {@code template} seja nulo
@@ -177,8 +173,6 @@ public class PdfDocMix {
 	 * 
 	 * @since 0.2
 	 * 
-	 * @return Esta instância após a operação
-	 * 
 	 * @throws IllegalArgumentException
 	 *             Caso o {@code template} seja nulo
 	 */
@@ -196,8 +190,6 @@ public class PdfDocMix {
 	 * 
 	 * @since 0.2
 	 * 
-	 * @return Esta instância após a operação
-	 * 
 	 * @throws IllegalArgumentException
 	 *             Caso o {@code template} seja nulo
 	 */
@@ -214,8 +206,6 @@ public class PdfDocMix {
 	 * @param templateFile
 	 * 
 	 * @since 0.2
-	 * 
-	 * @return Esta instância após a operação
 	 * 
 	 * @throws IllegalArgumentException
 	 *             Caso o {@code template} seja nulo
@@ -498,8 +488,8 @@ public class PdfDocMix {
 	 * Atribui um {@code Map} para uso no preenchimento de campos de Imagem na
 	 * instância. Caso exista algum, esse será substituído.
 	 * 
-	 * @param txtMap
-	 *            Map com os campos(key) e textos(value)
+	 * @param imgMap
+	 *            Map com os campos(key) e imagens(value)
 	 * @return Esta instância após a operação
 	 * 
 	 * @since 0.2
@@ -630,7 +620,7 @@ public class PdfDocMix {
 	/**
 	 * Retorna o documento em forma de arquivo PDF.
 	 * 
-	 * @param destPath
+	 * @param destFile
 	 *            Arquivo o qual o boleto será gerado
 	 * @return Documento em forma de arquivo PDF
 	 * @throws IllegalStateException
