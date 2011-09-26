@@ -41,7 +41,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.jrimum.utilix.ClassLoaders;
 import org.junit.After;
 import org.junit.Test;
 
@@ -65,7 +64,7 @@ public class TestPdfDocReader {
 		
 		PdfDocInfo info = reader.getInfo();
 		
-		assertEquals("Arquivo para insumo em testes", info.title());
+		assertEquals(Resources.DOCUMENT_TITLE, info.title());
 		assertEquals("Caso de teste", info.subject());
 		assertEquals("Teste, JRimum", info.keywords());
 		assertEquals("Gilmar P.S.L.", info.author());
@@ -129,7 +128,7 @@ public class TestPdfDocReader {
 		reader = crieReaderParaArquivoComCampos();
 		
 		Map<String,String> definicao = new HashMap<String, String>(3); 
-		definicao.put("nomeDoTestador","JRiboy Brasileiro da Orderm e do Progresso");
+		definicao.put("nomeDoTestador","JRiboy Brasileiro da Ordem do Progresso");
 		definicao.put("funcaoDoTestador","Developer");
 		definicao.put("nomeDoTeste","A definir...");
 		
@@ -145,23 +144,27 @@ public class TestPdfDocReader {
 	 * Arquivo no classpath sem fields.
 	 * 
 	 * @return reader pronto para uso
+	 * 
+	 * @see org.jrimum.bopepo.pdf.Resources#crieInputStreamParaArquivoSemCampos()
 	 */
 	private PdfDocReader crieReaderParaArquivoSemCampos(){
-		return new PdfDocReader(ClassLoaders.getResourceAsStream("ArquivoSemCampos.pdf"));
+		return new PdfDocReader(Resources.crieInputStreamParaArquivoSemCampos());
 	}
 
 	/**
 	 * Arquivo no classpath com 3 campos:
 	 * 
 	 * <ul>
-	 * <li>nomeDoTestador:"JRiboy Brasileiro da Orderm e do Progresso"</li>
+	 * <li>nomeDoTestador:"JRiboy Brasileiro da Ordem do Progresso"</li>
 	 * <li>funcaoDoTestador:"Developer"</li>
 	 * <li>nomeDoTeste:"A definir..."</li>
 	 * </u>
 	 * 
 	 * @return reader pronto para uso
+	 * 
+	 * org.jrimum.bopepo.pdf.Resources#crieInputStreamParaArquivoComCampos()
 	 */
 	private PdfDocReader crieReaderParaArquivoComCampos(){
-		return new PdfDocReader(ClassLoaders.getResourceAsStream("ArquivoComCampos.pdf"));
+		return new PdfDocReader(Resources.crieInputStreamParaArquivoComCampos());
 	}
 }
