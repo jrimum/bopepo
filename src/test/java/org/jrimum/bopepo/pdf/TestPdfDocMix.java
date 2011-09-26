@@ -30,19 +30,24 @@
 package org.jrimum.bopepo.pdf;
 
 import static org.apache.commons.lang.StringUtils.EMPTY;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import java.awt.Image;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Test;
 
 /**
- * Teste da classe PdfDocMix.
+ * Teste unitário da classe PdfDocMix.
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
@@ -134,7 +139,7 @@ public class TestPdfDocMix {
 		
 		doc = new PdfDocMix(EMPTY.getBytes());
 		
-		assertEquals("DEVE SER EMPTY=''", EMPTY, new String(doc.getTemplate()));
+		assertEquals("DEVE SER EMPTY", EMPTY, new String(doc.getTemplate()));
 		
 		final String Y = "OUTRO_TEMPLATE";
 		
@@ -142,6 +147,250 @@ public class TestPdfDocMix {
 		
 		assertEquals(Y, new String(doc.getTemplate()));
 	}
+		
+	@Test
+	public void seColocaTextoCorretamenteNaVariavel(){
+		
+		doc = createDoc();
+		
+		doc.put("k1", "v1");
+		
+		Map<String,String> definido = new HashMap<String, String>(1);
+		definido.put("k1", "v1");
+		
+		assertEquals(definido, doc.getTextFields());
+	}
+
+	@Test
+	public void seColocaTextosCorretamenteNaVariavel(){
+		
+		doc = createDoc();
+		
+		Map<String,String> old = new HashMap<String, String>(3);
+		old.put("k1", "v1"); 
+		old.put("k2", "v2"); 
+		
+		doc.putAllTexts(old);
+
+		assertNotNull(doc.getTextFields());
+		
+		Map<String,String> newOne = new HashMap<String, String>(old);
+		newOne.put("k3", "v3");
+		
+		doc.putAllTexts(newOne);
+		
+		assertEquals(newOne, doc.getTextFields());
+	}
 	
+	@Test
+	public void seColocaImagemCorretamenteNaVariavel(){
+		
+		doc = createDoc();
+		
+		final Image img = null;
+		
+		doc.put("k1", img);
+		
+		Map<String,Image> definido = new HashMap<String, Image>(1);
+		definido.put("k1", img);
+		
+		assertEquals(definido, doc.getImageFields());
+	}
 	
+	@Test
+	public void seColocaImagensCorretamenteNaVariavel(){
+		
+		final Image img1 = null;
+		final Image img2 = null;
+		final Image img3 = null;
+		
+		doc = createDoc();	
+		
+		Map<String,Image> old = new HashMap<String, Image>(3);
+		old.put("k1", img1); 
+		old.put("k2", img2); 
+		
+		doc.putAllImages(old);
+
+		assertNotNull(doc.getImageFields());
+		
+		Map<String,Image> newOne = new HashMap<String, Image>(old);
+		newOne.put("k3", img3);
+		
+		doc.putAllImages(newOne);
+		
+		assertEquals(newOne, doc.getImageFields());
+	}
+	
+	@Test
+	public void seGeraDocumentoCorretamenteEmBytes() throws IOException{
+		
+		doc = createDoc();
+		
+		PdfDocReader readerArqBase = new PdfDocReader(Resources.crieInputStreamParaArquivoComCampos());
+		
+		PdfDocReader readerArqNovo = new PdfDocReader(doc.toBytes());
+
+		assertTrue("DEVEM SER IGUAIS",
+				Resources.DOCUMENT_TITLE.equals(readerArqBase.getInfo().title())
+				&& 
+				Resources.DOCUMENT_TITLE.equals(readerArqNovo.getInfo().title()));
+		
+		readerArqBase.close();
+		readerArqNovo.close();
+	}
+	
+	@Test
+	public void seRemoveCamposDeTextoCorretamente(){
+		
+		doc = createDoc();
+		
+		doc.put("k1", "v1");
+		
+		PdfDocReader reader = new PdfDocReader(doc.toBytes());
+		
+		assertTrue(reader.getFields().isEmpty());
+		
+		reader.close();
+	}
+	
+	@Test
+	public void seColocaTextoCorretamenteNoArquivo(){
+
+		doc = createDoc();
+		
+		doc.put("nomeDoTestador", "Gilmar P.S.L.");
+		doc.put("funcaoDoTestador", "Tester");
+		doc.put("nomeDoTeste", "sePutTextCorretamenteNoArquivo");
+		
+		doc.removeFields(false);
+		
+		PdfDocReader reader = new PdfDocReader(doc.toBytes());
+		
+		assertEquals(doc.getTextFields(), reader.getFields());
+		
+		reader.close();
+	}
+	
+	@Test
+	public void seColocaTituloCorretamenteNoArquivo(){
+		
+		final String TITULO = "Titulo Corretamente No Arquivo?";
+		
+		doc = createDoc();
+		
+		doc.title(TITULO);
+		
+		PdfDocReader reader = new PdfDocReader(doc.toBytes());
+		
+		assertEquals(TITULO, reader.getInfo().title());
+		
+		reader.close();
+	}
+	
+	@Test
+	public void seColocaAssuntoCorretamenteNoArquivo(){
+		
+		final String ASSUNTO = "Assunto Correto No Arquivo?";
+		
+		doc = createDoc();
+		
+		doc.subject(ASSUNTO);
+		
+		PdfDocReader reader = new PdfDocReader(doc.toBytes());
+		
+		assertEquals(ASSUNTO, reader.getInfo().subject());
+		
+		reader.close();
+	}
+	
+	@Test
+	public void seColocaPalavrasChaveCorretamenteNoArquivo(){
+		
+		final String PALAVRA_CHAVE = "palavras, chave, corretas, no arquivo?";
+		
+		doc = createDoc();
+		
+		doc.keywords(PALAVRA_CHAVE);
+		
+		PdfDocReader reader = new PdfDocReader(doc.toBytes());
+		
+		assertEquals(PALAVRA_CHAVE, reader.getInfo().keywords());
+		
+		reader.close();
+	}
+
+	@Test
+	public void seColocaAutorCorretamenteNoArquivo(){
+		
+		final String AUTOR = "Este (você) é o autor do arquivo?";
+		
+		doc = createDoc();
+		
+		doc.author(AUTOR);
+		
+		PdfDocReader reader = new PdfDocReader(doc.toBytes());
+		
+		assertEquals(AUTOR, reader.getInfo().author());
+		
+		reader.close();
+	}
+
+	@Test
+	public void seColocaCriadorCorretamenteNoArquivo(){
+		
+		final String CRIADOR = "Minha Aplicação";
+		
+		doc = createDoc();
+		
+		doc.creator(CRIADOR);
+		
+		PdfDocReader reader = new PdfDocReader(doc.toBytes());
+		
+		assertEquals(CRIADOR+" by jrimum.org/bopepo", reader.getInfo().creator());
+		
+		reader.close();
+	}
+	
+	@Test
+	public void seGeraDocumentoEmArquivoViaParamentroFile() throws IOException{
+
+		final String TEMP_FILE = "./src/test/resources/seGeraDocumentoEmArquivoViaParamentroFile.pdf";
+		
+		doc = createDoc();
+		
+		PdfDocReader readerArqBase = new PdfDocReader(Resources.crieInputStreamParaArquivoComCampos());
+		
+		final File arqNovo = new File(TEMP_FILE); 
+		
+		doc.toFile(arqNovo);
+		
+		PdfDocReader readerArqNovo = new PdfDocReader(arqNovo);
+
+		assertTrue("DEVEM SER IGUAIS",
+				Resources.DOCUMENT_TITLE.equals(readerArqBase.getInfo().title())
+				&& 
+				Resources.DOCUMENT_TITLE.equals(readerArqNovo.getInfo().title()));
+		
+		readerArqBase.close();
+		readerArqNovo.close();
+		arqNovo.delete();
+	}
+	
+	/**
+	 * Arquivo no classpath com 3 campos:
+	 * 
+	 * <ul>
+	 * <li>nomeDoTestador:"JRiboy Brasileiro da Ordem do Progresso"</li>
+	 * <li>funcaoDoTestador:"Developer"</li>
+	 * <li>nomeDoTeste:"A definir..."</li>
+	 * </u>
+	 * 
+	 * @return doc pronto para uso
+	 * 
+	 * @see org.jrimum.bopepo.pdf.Resources#crieInputStreamParaArquivoComCampos()
+	 */
+	private PdfDocMix createDoc(){
+		return new PdfDocMix(Resources.crieInputStreamParaArquivoComCampos());
+	}
 }

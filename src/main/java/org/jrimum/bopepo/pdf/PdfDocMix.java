@@ -552,8 +552,11 @@ public class PdfDocMix {
 	}
 	
 	/**
-	 * Habilita/Desabilita a remoção dos campos do PDF veja
-	 * {@link com.lowagie.text.pdf.PdfReader#removeFields()}.
+	 * Habilita/Desabilita a remoção dos campos do PDF.
+	 * 
+	 * <p>
+	 * Por padrão os campos são removidos, ou seja, default = true.
+	 * </p>
 	 * 
 	 * @param option
 	 *            Escolha por remoção
@@ -568,31 +571,77 @@ public class PdfDocMix {
 		return this;
 	}
 	
+	/**
+	 * Define o Título do documento.
+	 * 
+	 * @param title
+	 * 
+	 * @return Esta instância após a operação
+	 */
 	public PdfDocMix title(String title){
 		docInfo.title(title);
 		return this;
 	}
 	
+	/**
+	 * Define o Autor do documento.
+	 * 
+	 * @param author
+	 * 
+	 * @return Esta instância após a operação
+	 */
 	public PdfDocMix author(String author){
 		docInfo.author(author);
 		return this;
 	}
 	
+	/**
+	 * Define o Assunto do documento.
+	 * 
+	 * @param subject
+	 * 
+	 * @return Esta instância após a operação
+	 */
 	public PdfDocMix subject(String subject){
 		docInfo.subject(subject);
 		return this;
 	}
 	
+	/**
+	 * Define as Palavras-chave do documento.
+	 * 
+	 * @param keywords
+	 * 
+	 * @return Esta instância após a operação
+	 */
 	public PdfDocMix keywords(String keywords){
 		docInfo.keywords(keywords);
 		return this;
 	}
 	
+	/**
+	 * Define o Software/Ferramenta de criação do documento.
+	 * 
+	 * @param creator
+	 * 
+	 * @return Esta instância após a operação
+	 */
 	public PdfDocMix creator(String creator){
 		docInfo.creator(creator);
 		return this;
 	}
 	
+	/**
+	 * Define se o título do documento será exibido na barra superior do PDF.
+	 * 
+	 * <p>
+	 * Caso não seja informada uma opção, prevalece a definição do template PDF.
+	 * </p>
+	 * 
+	 * @param option
+	 * 
+	 * @return Esta instância após a operação
+	 */
 	public PdfDocMix displayDocTilte(boolean option){
 		
 		this.displayDocTitle = option;
@@ -615,6 +664,36 @@ public class PdfDocMix {
 		checkDestPath(destPath);
 
 		return toFile(new File(destPath));
+	}
+	
+	/**
+	 * Retorna o documento em forma de arquivo PDF.
+	 * 
+	 * @param destURL
+	 *            URL do arquivo o qual o documento será gerado
+	 * @return Documento em forma de arquivo PDF
+	 * 
+	 * @since 0.2
+	 * 
+	 */
+	public File toFile(URL destURL){
+
+		checkDestURL(destURL);
+				
+		try {
+		
+			return toFile(new File(destURL.toURI()));
+			
+		} catch (Exception e) {
+			
+			LOG.error(
+					"Erro durante a criação do arquivo! "
+							+ e.getLocalizedMessage(), e);
+
+			return Exceptions.throwIllegalStateException(
+					"Erro ao tentar criar arquivo! " + "Causado por "
+							+ e.getLocalizedMessage(), e);
+		}
 	}
 
 	/**
@@ -982,9 +1061,12 @@ public class PdfDocMix {
 		}
 
 		if (isRemoveFields()) {
+			stamper.setFreeTextFlattening(true);
+			stamper.setFormFlattening(true);
 			reader.removeFields();
 		} else {
-			stamper.setFormFlattening(true);
+			stamper.setFreeTextFlattening(false);
+			stamper.setFormFlattening(false);
 		}
 
 		reader.consolidateNamedDestinations();
@@ -1026,10 +1108,16 @@ public class PdfDocMix {
 		Strings.checkNotBlank(str, msg);
 	}
 
-	private static void checkDestFile(File file) {
+	private static void checkDestURL(URL url) {
 
+		Objects.checkNotNull(url,
+				"URL destinada a geração do(s) documentos(s) nula!");
+	}
+	
+	private static void checkDestFile(File file) {
+		
 		Objects.checkNotNull(file,
-				"Arquivo destinado a geração do(s) documentos(s) nulo!");
+		"Arquivo destinado a geração do(s) documentos(s) nulo!");
 	}
 
 }
