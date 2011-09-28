@@ -948,14 +948,14 @@ public class PdfDocMix {
 			
 			stamper = new PdfStamper(reader, outputStream);
 			
-			final String JRIMUM = "by jrimum.org/bopepo"; 
+			final String JRIMUM = "jrimum.org/bopepo"; 
 
 			String creator = docInfo.creator();
 			
 			if(isBlank(creator)){
 				creator(JRIMUM);
 			}else{
-				creator(creator+" "+JRIMUM);
+				creator(creator+" by "+JRIMUM);
 			}
 			
 			stamper.setMoreInfo((HashMap<?,?>)docInfo.toMap());
@@ -1044,6 +1044,8 @@ public class PdfDocMix {
 				} catch (Exception e) {
 					Exceptions.throwIllegalStateException(e);
 				}
+			}else{
+				LOG.warn("Posicionamento do campo de imagem nao encontrado! CAMPO: "+fieldName);
 			}
 		}
 	}
