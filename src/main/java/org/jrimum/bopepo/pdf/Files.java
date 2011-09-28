@@ -60,6 +60,17 @@ import org.jrimum.utilix.text.Strings;
 public class Files {
 
 	private static final int DEFAULT_BUFFER_SIZE = 4096;
+	
+	/**
+	 * Utility class pattern: classe não instanciável
+	 * 
+	 * @throws IllegalStateException
+	 *             Caso haja alguma tentativa de utilização deste construtor.
+	 */
+	private Files() {
+
+		Exceptions.throwIllegalStateException("Instanciação não permitida!");
+	}
 
 	/**
 	 * <p>
@@ -193,6 +204,10 @@ public class Files {
 
 	/**
 	 * Retorna o conteúdo do {@code InputStream} em um array de bytes.
+	 * 
+	 * <p>
+	 * Não fecha o {@code InputStream} após leitura.
+	 * </p>
 	 * 
 	 * @param input
 	 * @return Conteúdo em um array de bytes.
