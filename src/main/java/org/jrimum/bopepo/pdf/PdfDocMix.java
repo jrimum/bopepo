@@ -39,6 +39,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -630,6 +631,18 @@ public class PdfDocMix {
 		docInfo.creator(creator);
 		return this;
 	}
+
+	/**
+	 * Define a data de criação do documento.
+	 * 
+	 * @param date Data de criação
+	 * 
+	 * @return Esta instância após a operação
+	 */
+	public PdfDocMix creation(Calendar date){
+		docInfo.creation(date);
+		return this;
+	}
 	
 	/**
 	 * Define se o título do documento será exibido na barra superior do PDF.
@@ -957,6 +970,10 @@ public class PdfDocMix {
 			}else{
 				creator(creator+" by "+JRIMUM);
 			}
+
+			if(isNull(docInfo.creation())){
+				docInfo.creation(Calendar.getInstance());
+			}			
 			
 			stamper.setMoreInfo((HashMap<?,?>)docInfo.toMap());
 			
@@ -1040,7 +1057,7 @@ public class PdfDocMix {
 
 			if (isNotNull(posImgField)) {
 				try {
-					PdfUtil.changeFieldToImage(stamper, posImgField, image);
+					PDFs.changeFieldToImage(stamper, posImgField, image);
 				} catch (Exception e) {
 					Exceptions.throwIllegalStateException(e);
 				}
