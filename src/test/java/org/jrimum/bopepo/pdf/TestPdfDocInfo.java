@@ -29,14 +29,13 @@
 
 package org.jrimum.bopepo.pdf;
 
-import static java.lang.String.format;
-import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,18 +47,13 @@ import org.junit.Test;
  */
 public class TestPdfDocInfo {
 	
-	/**
-	 * Zero left format.
-	 */
-	private final String ZL = "%02d";
-	
 	private final String TITLE = "Modelo Geral";
 	private final String SUBJECT = "Template para uso geral";
 	private final String KEYWORDS = "Modelo, Artefato, Exemplo";
 	private final String AUTHOR = "Gilmar P.S.L.";
 	private final String CREATOR = "Writer";
-	private final String CREATION_DATE = "D:20110314170209-03'00'";
-	private final String MOD_DATE = "D:20110314191242-03'00'";
+	private final String CREATION_DATE = "D:20110414170209-03'00'";
+	private final String MOD_DATE = "D:20110414191242-03'00'";
 	private final String PRODUCER = "BrOffice 3.3; modified using iText 5.0.6 (c) 1T3XT BVBA";
 	
 	private Map<String,String> info;
@@ -136,26 +130,24 @@ public class TestPdfDocInfo {
 
 	@Test
 	public void creation(){
-		
-		// "D:20110314170209-03'00'"
 
 		PdfDocInfo docInfo = PdfDocInfo.create(info);
-
-		Calendar cal = docInfo.creation();
 		
-		StringBuilder dateTime = new StringBuilder("D:")
-		.append(cal.get(Calendar.YEAR))
-		.append(format(ZL, cal.get(Calendar.MONTH)+1))
-		.append(format(ZL, cal.get(Calendar.DAY_OF_MONTH)))
-		.append(format(ZL, cal.get(Calendar.HOUR_OF_DAY)))
-		.append(format(ZL, cal.get(Calendar.MINUTE)))
-		.append(format(ZL, cal.get(Calendar.SECOND)));
+		assertEquals(CREATION_DATE, PdfDateConverter.convert(docInfo.creation()));
+	}
+	
+	@Test
+	public void creationWithCalendar(){
 		
-		String zone = cal.getTimeZone().getDisplayName().replace("GMT", EMPTY).replace(":", "'")+"'";
+		final Calendar c = Calendar.getInstance();
+		c.set(2011, Calendar.APRIL, 14, 17, 2, 9);
+		c.setTimeZone(TimeZone.getTimeZone("GMT-03:00"));
 		
-		dateTime.append(zone);
+		PdfDocInfo docInfo = PdfDocInfo.create();
 		
-		assertEquals(CREATION_DATE, dateTime.toString());
+		docInfo.creation(c);
+		
+		assertEquals(CREATION_DATE, PdfDateConverter.convert(docInfo.creation()));
 	}
 
 	@Test
@@ -169,25 +161,23 @@ public class TestPdfDocInfo {
 	@Test
 	public void modification(){
 		
-		// "D:20110314191242-03'00'"
-		
 		PdfDocInfo docInfo = PdfDocInfo.create(info);
 		
-		Calendar cal = docInfo.modification();
+		assertEquals(MOD_DATE, PdfDateConverter.convert(docInfo.modification()));
+	}
+	
+	@Test
+	public void modificationWithCalendar(){
 		
-		StringBuilder dateTime = new StringBuilder("D:")
-		.append(cal.get(Calendar.YEAR))
-		.append(format(ZL, cal.get(Calendar.MONTH)+1))
-		.append(format(ZL, cal.get(Calendar.DAY_OF_MONTH)))
-		.append(format(ZL, cal.get(Calendar.HOUR_OF_DAY)))
-		.append(format(ZL, cal.get(Calendar.MINUTE)))
-		.append(format(ZL, cal.get(Calendar.SECOND)));
+		final Calendar c = Calendar.getInstance();
+		c.set(2011, Calendar.APRIL, 14, 19, 12, 42);
+		c.setTimeZone(TimeZone.getTimeZone("GMT-03:00"));
 		
-		String zone = cal.getTimeZone().getDisplayName().replace("GMT", EMPTY).replace(":", "'")+"'";
+		PdfDocInfo docInfo = PdfDocInfo.create();
 		
-		dateTime.append(zone);
+		docInfo.modification(c);
 		
-		assertEquals(MOD_DATE, dateTime.toString());
+		assertEquals(MOD_DATE, PdfDateConverter.convert(docInfo.modification()));
 	}
 
 	@Test
