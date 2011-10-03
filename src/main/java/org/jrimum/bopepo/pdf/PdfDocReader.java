@@ -49,6 +49,10 @@ import com.lowagie.text.pdf.PdfReader;
  * Leitor de documentos PDF.
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+ * 
+ * @version 0.2.3
+ * 
+ * @since 0.2
  */
 public class PdfDocReader{
 	
