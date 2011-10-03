@@ -39,7 +39,6 @@ import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
 /**
- * 
  * Teste da classe Files.
  * 
  * @author <a href="mailto:romulomail@gmail.com">Rômulo Augusto</a>
