@@ -37,6 +37,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jrimum.utilix.Exceptions;
+import org.jrimum.utilix.Objects;
 
 import com.lowagie.text.pdf.PdfDate;
 
@@ -49,9 +50,9 @@ import com.lowagie.text.pdf.PdfDate;
  * 
  */
 public class PdfDocInfo {
-
+	
 	/*
-	 * Mesmas chaves usadas pelo itext.
+	 * Mesmas chaves de pesquisa usadas pelo itext.
 	 */
 	
 	/**
@@ -217,57 +218,129 @@ public class PdfDocInfo {
 		return this;
 	}
 
+	/**
+	 * Define a Data de criação do documento.
+	 * 
+	 * @param date
+	 * 
+	 * @return Esta instância após a operação
+	 * 
+	 * @throws IllegalArgumentException
+	 *             quando a date é nula
+	 */
+	public PdfDocInfo creation(Calendar date) {
+		
+		Objects.checkNotNull(date);
+		
+		docInfo.put(DOC_CREATION_DATE, PdfDateConverter.convert(date));
+		
+		return this;
+	}
+	
+	/**
+	 * Define a Data de modificação do documento.
+	 * 
+	 * @param date
+	 * 
+	 * @return Esta instância após a operação
+	 * 
+	 * @throws IllegalArgumentException
+	 *             quando a date é nula
+	 */
+	public PdfDocInfo modification(Calendar date) {
+		
+		Objects.checkNotNull(date);
+		
+		docInfo.put(DOC_MODIFACTION_DATE, PdfDateConverter.convert(date));
+		
+		return this;
+	}
+
+	/**
+	 * @return Título do documento
+	 */
 	public String title() {
 
 		return docInfo.get(DOC_TITLE);
 	}
 
+	/**
+	 * @return Autor do documento
+	 */
 	public String author() {
 
 		return docInfo.get(DOC_AUTHOR);
 	}
 
+	/**
+	 * @return Assunto do documento
+	 */
 	public String subject() {
 
 		return docInfo.get(DOC_SUBJECT);
 	}
 
+	/**
+	 * @return Palavras-chave do documento
+	 */
 	public String keywords() {
 
 		return docInfo.get(DOC_KEYWORDS);
 	}
 
+	/**
+	 * @return Criador do documento
+	 */
 	public String creator() {
 
 		return docInfo.get(DOC_CREATOR);
 	}
 
+	/**
+	 * Data de criação do documento em string, provalvelmento no seguinte
+	 * formato: (<b>D:YYYYMMDDHHmmSSOHH'mm'</b>).
+	 * 
+	 * @return Data de criação do documento
+	 */
 	public String creationRaw() {
 
 		return docInfo.get(DOC_CREATION_DATE);
 	}
 
+	/**
+	 * @return Data de criação do documento
+	 */
 	public Calendar creation() {
 		
 		return PdfDate.decode(docInfo.get(DOC_CREATION_DATE));
 	}
 	
+	/**
+	 * Data de modificação do documento em string, provalvelmento no seguinte
+	 * formato: (<b>D:YYYYMMDDHHmmSSOHH'mm'</b>).
+	 * 
+	 * @return Data de modificação do documento
+	 */
 	public String modificationRaw() {
 
 		return docInfo.get(DOC_MODIFACTION_DATE);
 	}
 	
+	/**
+	 * @return Data de modificação do documento
+	 */
 	public Calendar modification() {
 		
 		return PdfDate.decode(docInfo.get(DOC_MODIFACTION_DATE));
+		
 	}
 	
 	/**
 	 * Retorna a descrição do produtor do documento.
-	 *  
+	 * 
 	 * <p>
-	 * You can’t change this without breaking the software license that allows
-	 * you to use iText for free.
+	 * Obs: <i>"You can’t change this without breaking the software license that
+	 * allows you to use iText for free."</i>
 	 * </p>
 	 * 
 	 * @return Descrição do produtor
