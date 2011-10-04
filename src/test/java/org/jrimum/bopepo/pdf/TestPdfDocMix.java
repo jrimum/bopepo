@@ -172,14 +172,14 @@ public class TestPdfDocMix {
 		
 		doc.putAllTexts(old);
 
-		assertNotNull(doc.getTextFields());
+		assertEquals(old, doc.getTextFields());
 		
 		Map<String,String> newOne = new HashMap<String, String>(old);
 		newOne.put("k3", "v3");
 		
 		doc.putAllTexts(newOne);
-		
-		assertEquals(newOne, doc.getTextFields());
+
+		assertEquals(old, doc.getTextFields());
 	}
 	
 	@Test
@@ -212,7 +212,7 @@ public class TestPdfDocMix {
 		
 		doc.putAllImages(old);
 
-		assertNotNull(doc.getImageFields());
+		assertEquals(old,doc.getImageFields());
 		
 		Map<String,Image> newOne = new HashMap<String, Image>(old);
 		newOne.put("k3", img3);
@@ -316,6 +316,25 @@ public class TestPdfDocMix {
 		PdfDocReader reader = new PdfDocReader(doc.toBytes());
 		
 		assertEquals(PALAVRA_CHAVE, reader.getInfo().keywords());
+		
+		reader.close();
+	}
+	
+	@Test
+	public void seMudaDocinfo(){
+		
+		final String NOVO_TITULO = "Título mudado agora!";
+		
+		PdfDocInfo docInfo = PdfDocInfo.create();
+		docInfo.title(NOVO_TITULO);
+		
+		doc = createDoc();
+		
+		doc.changeDocInfo(docInfo);
+		
+		PdfDocReader reader = new PdfDocReader(doc.toBytes());
+		
+		assertEquals(NOVO_TITULO, reader.getInfo().title());
 		
 		reader.close();
 	}

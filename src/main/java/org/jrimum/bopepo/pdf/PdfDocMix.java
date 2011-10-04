@@ -32,6 +32,7 @@ package org.jrimum.bopepo.pdf;
 import static org.apache.commons.lang.StringUtils.isBlank;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.jrimum.utilix.Collections.hasElement;
+import static org.jrimum.utilix.Objects.checkNotNull;
 import static org.jrimum.utilix.Objects.isNotNull;
 import static org.jrimum.utilix.Objects.isNull;
 
@@ -430,8 +431,10 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Atribui um {@code Map} para uso no preenchimento de campos de Texto na
-	 * instância. Caso exista algum, esse será substituído.
+	 * Coloca todos chave-valor na instância, caso uma chave existe o valor será
+	 * substituído. Caso a instância não contenha valores ainda, atribui o
+	 * {@code Map} informado para uso no preenchimento de campos de Texto na
+	 * instância.
 	 * 
 	 * @param txtMap
 	 *            Map com os campos(key) e textos(value)
@@ -443,7 +446,12 @@ public class PdfDocMix {
 
 		Collections.checkNotEmpty(txtMap, "Campos ausentes!");
 
-		this.txtMap = txtMap;
+		if (isNull(this.txtMap)) {			
+			this.txtMap = txtMap;
+		}else{
+			this.txtMap.putAll(txtMap);
+		}
+		
 		return this;
 	}
 
@@ -486,8 +494,10 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Atribui um {@code Map} para uso no preenchimento de campos de Imagem na
-	 * instância. Caso exista algum, esse será substituído.
+	 * Coloca todos chave-valor na instância, caso uma chave existe o valor
+	 * será substituído. Caso a instância não contenha valores ainda, atribui o
+	 * {@code Map} informado para uso no preenchimento de campos de Imagem na
+	 * instância.
 	 * 
 	 * @param imgMap
 	 *            Map com os campos(key) e imagens(value)
@@ -499,7 +509,11 @@ public class PdfDocMix {
 
 		Collections.checkNotEmpty(imgMap, "Campos ausentes!");
 
-		this.imgMap = imgMap;
+		if (isNull(this.imgMap)) {			
+			this.imgMap = imgMap;
+		}else{
+			this.imgMap.putAll(imgMap);
+		}
 
 		return this;
 	}
@@ -641,6 +655,32 @@ public class PdfDocMix {
 	 */
 	public PdfDocMix creation(Calendar date){
 		docInfo.creation(date);
+		return this;
+	}
+	
+	/**
+	 * Redefine as meta-informações do documento, ex: título, autor, data de
+	 * criação, etc.
+	 * 
+	 * <p>
+	 * Todas as informações anteriormente atribuídas por:
+	 * {@linkplain #title(String)}, {@linkplain #subject(String)}, etc. serão
+	 * substituídas pelo conteúdo do {@code docInfo} nessa operação.
+	 * </p>
+	 * 
+	 * @param docInfo
+	 *            Informações sobre o documento
+	 * 
+	 * @return Esta instância após a operação
+	 * 
+	 * @see org.jrimum.bopepo.pdf.PdfDocInfo
+	 */
+	public PdfDocMix changeDocInfo(PdfDocInfo docInfo){
+		
+		checkNotNull(docInfo, "Valor null para docInfo não permitido!");
+		
+		this.docInfo = docInfo;
+		
 		return this;
 	}
 	
