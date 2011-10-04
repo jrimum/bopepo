@@ -222,6 +222,7 @@ public class PdfDocInfo {
 	 * Define a Data de criação do documento.
 	 * 
 	 * @param date
+	 *            Data de criação
 	 * 
 	 * @return Esta instância após a operação
 	 * 
@@ -230,7 +231,7 @@ public class PdfDocInfo {
 	 */
 	public PdfDocInfo creation(Calendar date) {
 		
-		Objects.checkNotNull(date);
+		Objects.checkNotNull(date, "Valor null não permitido para data de criação do documento!");
 		
 		docInfo.put(DOC_CREATION_DATE, PdfDateConverter.convert(date));
 		
@@ -241,6 +242,7 @@ public class PdfDocInfo {
 	 * Define a Data de modificação do documento.
 	 * 
 	 * @param date
+	 *            Data de modificação
 	 * 
 	 * @return Esta instância após a operação
 	 * 
@@ -249,7 +251,7 @@ public class PdfDocInfo {
 	 */
 	public PdfDocInfo modification(Calendar date) {
 		
-		Objects.checkNotNull(date);
+		Objects.checkNotNull(date, "Valor null não permitido para data de modificação do documento!");Objects.checkNotNull(date);
 		
 		docInfo.put(DOC_MODIFACTION_DATE, PdfDateConverter.convert(date));
 		
