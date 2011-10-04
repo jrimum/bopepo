@@ -28,11 +28,6 @@
 		<url>http://www.jrimum.org/bopepo</url>
 	</issueManagement>
 
-	<ciManagement>
-		<system>hudson</system>
-		<url>http://localhost:8080/hudson</url>
-	</ciManagement>
-
 	<scm>
 		<connection>scm:svn:http://www.jrimum.org/svn/bopepo</connection>
 		<developerConnection>scm:svn:http://www.jrimum.org/svn/bopepo</developerConnection>
@@ -58,21 +53,11 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.build.finalName>jrimum-${project.artifactId}-${project.version}</project.build.finalName>
 	</properties>
 
 	<build>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-			<resource>
-				<directory>src/test/resources</directory>
-			</resource>
-			<resource>
-				<directory>src/examples/resources</directory>
-			</resource>
-		</resources>
-
+		<finalName>${project.build.finalName}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -85,30 +70,11 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>add-sources</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>src/examples/java</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
 					<descriptors>
-                        <descriptor>src/main/assembly/bopepo-dependencias-jrimum.xml</descriptor>
-                        <descriptor>src/main/assembly/bopepo-dependencias-jrimum-src.xml</descriptor>
+                        <!-- <descriptor>src/main/assembly/jrimum-bopepo-with-dependencies.xml</descriptor> -->
+                        <descriptor>src/main/assembly/jrimum-bopepo-with-dependencies-src.xml</descriptor>
                     </descriptors>
 				</configuration>
 				<executions>
@@ -128,6 +94,7 @@
 				<version>2.5</version>
 				<configuration>
 					<skipTests>false</skipTests>
+					<forkMode>always</forkMode>
 					<includes>
 						<include>org/jrimum/bopepo/**/*</include>
 					</includes>
@@ -136,16 +103,31 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<configuration>
+					<finalName>${project.build.finalName}</finalName>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.7</version>
 				<configuration>
-					<includeDependencySources>true</includeDependencySources>
-					<dependencySourceIncludes>
-						<dependencySourceInclude>org.jrimum:*</dependencySourceInclude>
-					</dependencySourceIncludes>
+					<finalName>${project.build.finalName}</finalName>
 				</configuration>
 				<executions>
 					<execution>
@@ -159,16 +141,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.7</version>
-			</plugin>
-		</plugins>
-	</reporting>
 
 	<dependencies>
 		<dependency>
