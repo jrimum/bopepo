@@ -29,6 +29,7 @@
 
 package org.jrimum.bopepo.pdf;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,6 +38,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.Normalizer;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.WeakHashMap;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
@@ -60,6 +69,8 @@ import org.jrimum.utilix.text.Strings;
 public class Files {
 
 	private static final int DEFAULT_BUFFER_SIZE = 4096;
+	
+	public static final String ZIP_SUFFIX = ".zip";
 	
 	/**
 	 * Utility class pattern: classe não instanciável
@@ -206,7 +217,7 @@ public class Files {
 	 * Retorna o conteúdo do {@code InputStream} em um array de bytes.
 	 * 
 	 * <p>
-	 * Não fecha o {@code InputStream} após leitura.
+	 * Fecha o {@code InputStream} após leitura.
 	 * </p>
 	 * 
 	 * @param input
@@ -231,7 +242,221 @@ public class Files {
 			output.write(buffer, 0, n);
 			count += n;
 		}
+		
+		input.close();
 
 		return output.toByteArray();
+	}
+
+	public static File zip(File f){
+
+		return zip(f.getName(), f);
+	}
+
+	public static File zip(String zipedName, File f){
+
+		try {
+			
+			return bytesToFile(File.createTempFile(zipedName, ZIP_SUFFIX),zip(toByteArray(f), f.getName()));
+			
+		} catch (IOException e) {
+			
+			throw new IllegalStateException(e);
+		}
+	}
+	
+	public static byte[] zip(byte[] fileToZip, String fileZipedName){
+
+		ByteArrayOutputStream obout = new ByteArrayOutputStream();
+
+		ZipOutputStream out = null;
+
+		try {
+			
+			out = new ZipOutputStream(obout);
+			out.setMethod(ZipOutputStream.DEFLATED);
+			out.putNextEntry(new ZipEntry(fileZipedName));
+			
+			out.write(fileToZip);
+
+			
+		} catch (IOException e) {
+			
+			throw new IllegalStateException(e);
+			
+		}finally{
+			
+			if(out != null){
+				
+				try {
+					
+					// Close the input stream and return bytes
+					out.close();
+					
+				} catch (Exception e) {
+					
+					return Exceptions.throwIllegalStateException(e);
+				}
+			}
+		}
+		
+		return obout.toByteArray();
+	}
+	
+	public static File zip(Collection<File> files){
+		
+		Map<String,File> toZip = new WeakHashMap<String, File>(files.size());
+		
+		for(File f : files){
+			toZip.put(f.getName(), f);
+		}
+
+		return zip(toZip);
+	}
+
+	public static File zip(Map<String, File> files){
+
+		return zip("ZipedFiles", files);
+	}
+
+	public static File zip(String zipedName, Map<String, File> files){
+
+		Map<String, byte[]> bytFiles = new HashMap<String, byte[]>(files.size());
+
+		for (Entry<String, File> nameAndFile : files.entrySet()) {
+
+			bytFiles.put(nameAndFile.getKey(), toByteArray(nameAndFile
+					.getValue()));
+		}
+
+		try {
+			
+			return bytesToFile(File.createTempFile(zipedName,ZIP_SUFFIX),zipBytes(bytFiles));
+			
+		} catch (IOException e) {
+
+			throw new IllegalStateException(e);
+		}
+	}
+
+	public static byte[] zipBytes(Map<String, byte[]> files) {
+
+		// Create a buffer for reading the files
+		byte[] buf = new byte[DEFAULT_BUFFER_SIZE];
+
+		ByteArrayOutputStream outs = new ByteArrayOutputStream();
+
+		try {
+			// Create the ZIP file
+			ZipOutputStream out = new ZipOutputStream(outs);
+
+			// Compress the files
+			for (Entry<String, byte[]> entry : files.entrySet()) {
+
+				if (entry.getValue() != null) {
+
+					ByteArrayInputStream in = new ByteArrayInputStream(entry
+							.getValue());
+
+					// Add ZIP entry to output stream.
+					out.putNextEntry(new ZipEntry(normalizeName(entry.getKey())));
+
+					// Transfer bytes from the file to the ZIP file
+					int len;
+
+					while ((len = in.read(buf)) > 0) {
+						out.write(buf, 0, len);
+					}
+
+					// Complete the entry
+					out.closeEntry();
+					in.close();
+				}
+			}
+
+			// Complete the ZIP file
+			out.close();
+
+			return outs.toByteArray();
+
+		} catch (IOException e) {
+			
+			throw new IllegalStateException(e);
+		}
+	}
+	
+    public static byte[] toByteArray(File file){
+    	
+    	try{
+    		
+	        InputStream is = new FileInputStream(file);
+	    
+	        // Get the size of the file
+	        long length = file.length();
+	    
+	        // You cannot create an array using a long type.
+	        // It needs to be an int type.
+	        // Before converting to an int type, check
+	        // to ensure that file is not larger than Integer.MAX_VALUE.
+	        if (length > Integer.MAX_VALUE) {
+	            // File is too large
+	        }
+	    
+	        // Create the byte array to hold the data
+	        byte[] bytes = new byte[(int)length];
+	    
+	        // Read in the bytes
+	        int offset = 0;
+	        int numRead = 0;
+	        while ((offset < bytes.length)
+	               && ((numRead=is.read(bytes, offset, bytes.length-offset)) >= 0)) {
+	            offset += numRead;
+	        }
+	    
+	        // Ensure all the bytes have been read in
+	        if (offset < bytes.length) {
+	            throw new IOException("Could not completely read file "+file.getName());
+	        }
+	    
+	        // Close the input stream and return bytes
+	        is.close();
+	        
+	        return bytes;
+	        
+    	}catch (Exception e) {
+    		
+			return Exceptions.throwIllegalStateException(e);
+		}
+    }
+	
+	/**
+	 * Gera uma string para ser utilizada como nome de arquivo. Ou como base de
+	 * código para retirar acentos de um texto com Java Os nomes são sem acento
+	 * e ao invés de " " é usado _ .
+	 * 
+	 * @param name
+	 *            string a ser usada como nome borderoArquivo
+	 * @return retorna o nome do borderoArquivo alterado.
+	 */
+	public static String normalizeName(String name) {
+		name = name.replaceAll(" ", "_");
+		name = Normalizer.normalize(name, Normalizer.Form.NFD);
+		name = name.replaceAll("[^\\p{ASCII}]", "");
+		return name;
+	}
+	
+
+	public static void openOnDesktop(File arq) {
+
+		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+
+		try {
+
+			desktop.open(arq);
+
+		} catch (IOException e) {
+			
+			Exceptions.throwIllegalStateException(e);
+		}
 	}
 }
