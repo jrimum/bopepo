@@ -1283,7 +1283,7 @@ public class BoletoViewer {
 
 		if (isNotNull(this.pdfViewer)) {
 
-			this.pdfViewer = new PdfViewer(boleto, this.pdfViewer.getTemplate());
+			this.pdfViewer.setBoleto(boleto);
 
 		} else {
 
