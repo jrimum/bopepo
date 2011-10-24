@@ -68,6 +68,8 @@ class PdfViewerMultiProcessor {
 	 */
 	protected static byte[] groupInOnePDF(List<Boleto> boletos, BoletoViewer boletoViewer) {
 		
+		byte[] file = null;
+		
 		List<byte[]> boletosEmBytes = new ArrayList<byte[]>(boletos.size());
 		
 		for (Boleto bop : boletos) {
@@ -76,7 +78,11 @@ class PdfViewerMultiProcessor {
 		
 		try {
 			
-			return PDFs.mergeFiles(boletosEmBytes);
+			file =  PDFs.mergeFiles(boletosEmBytes);
+			
+			boletosEmBytes.clear();
+			
+			return file;
 			
 		} catch (Exception e) {
 			
@@ -124,6 +130,8 @@ class PdfViewerMultiProcessor {
 	 */
 	protected static byte[] groupInOnePDF(Collection<Entry<byte[],List<Boleto>>> templatesAndBoletos) {
 		
+		byte[] file = null;
+		
 		List<byte[]> toMerge = new ArrayList<byte[]>(templatesAndBoletos.size());
 		
 		BoletoViewer viewer = new BoletoViewer();
@@ -133,7 +141,11 @@ class PdfViewerMultiProcessor {
 			toMerge.add(groupInOnePDF(entry.getValue(), viewer.setTemplate(entry.getKey())));
 		}
 
-		return PDFs.mergeFiles(toMerge);
+		file = PDFs.mergeFiles(toMerge);
+		
+		toMerge.clear();
+		
+		return file;
 	}
 
 	/**
