@@ -34,9 +34,10 @@ import static org.jrimum.utilix.Objects.isNotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.jrimum.utilix.Exceptions;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -45,6 +46,7 @@ import com.lowagie.text.pdf.PdfCopy;
 import com.lowagie.text.pdf.PdfImportedPage;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
+import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.pdf.SimpleBookmark;
 
 /**
@@ -59,8 +61,6 @@ import com.lowagie.text.pdf.SimpleBookmark;
  */
 public class PDFs{
 
-	private static final Logger LOG = Logger.getLogger(PDFs.class);
-	
 	/**
 	 * <p>
 	 * Muda um input field para uma imgem com as dimensões e possição do field.
@@ -119,108 +119,151 @@ public class PDFs{
 		return rect;
 	}
 
+	public static byte[] mergeFiles(Collection<byte[]> pdfFiles) {
+		
+		try{
+			
+			ByteArrayOutputStream byteOS = new ByteArrayOutputStream();
+			
+			Document document = new Document();
+			
+			PdfCopy copy = new PdfCopy(document, byteOS);
+			
+			document.open();
+			
+			for (byte[] f : pdfFiles) {
+
+				PdfReader reader = new PdfReader(f);
+
+				for (int page = 1; page <= reader.getNumberOfPages(); page++) {
+
+					copy.addPage(copy.getImportedPage(reader, page));
+				}
+
+				reader.close();
+			}
+			
+			document.addCreationDate();
+//			document.addAuthor(author);
+//			document.addCreator(creator);
+//			document.addTitle(title);
+//			document.addSubject(subject);
+//			document.addKeywords(keywords);
+			
+			copy.close();
+			document.close();
+			byteOS.close();
+
+			return byteOS.toByteArray();
+			
+		}catch (Exception e) {
+			return Exceptions.throwIllegalStateException(e);
+		}
+	}
+	
 	/**
 	 * <p>
 	 * Junta varios arquivos pdf em um só.
 	 * </p>
 	 * 
 	 * @param pdfFiles
-	 *            Lista de array de bytes
+	 *            Coleção de array de bytes
 	 * 
 	 * @return Arquivo PDF em forma de byte
 	 * @since 0.2
 	 */
-	public static byte[] mergeFiles(List<byte[]> pdfFiles) {
-
-		// retorno
-		byte[] bytes = null;
-
-		if (isNotNull(pdfFiles) && !pdfFiles.isEmpty()) {
-
-			int pageOffset = 0;
-			boolean first = true;
-
-			List<Object> master = null;
-			Document document = null;
-			PdfCopy writer = null;
-			ByteArrayOutputStream byteOS = null;
-
-			try {
-
-				byteOS = new ByteArrayOutputStream();
-				master = new ArrayList<Object>();
-
-				for (byte[] doc : pdfFiles) {
-
-					if (isNotNull(doc)) {
-
-						// cria-se um reader para cada documento
-
-						PdfReader reader = new PdfReader(doc);
-
-						if (reader.isEncrypted()) {
-							reader = new PdfReader(doc, "".getBytes());
-						}
-
-						reader.consolidateNamedDestinations();
-
-						// pega-se o numero total de paginas
-						int n = reader.getNumberOfPages();
-						List<?> bookmarks = SimpleBookmark.getBookmark(reader);
-
-						if (isNotNull(bookmarks)) {
-							if (pageOffset != 0) {
-								SimpleBookmark.shiftPageNumbers(bookmarks,
-										pageOffset, null);
-							}
-							master.addAll(bookmarks);
-						}
-
-						pageOffset += n;
-
-						if (first) {
-
-							// passo 1: criar um document-object
-							document = new Document(reader
-									.getPageSizeWithRotation(1));
-
-							// passo 2: criar um writer que observa o documento
-							writer = new PdfCopy(document, byteOS);
-							document.addAuthor("JRimum Group");
-							document.addSubject("JRimum Merged Document");
-							document.addCreator("JRimum Utilix");
-
-							// passo 3: abre-se o documento
-							document.open();
-							first = false;
-						}
-
-						// passo 4: adciona-se o conteudo
-						PdfImportedPage page;
-						for (int i = 0; i < n;) {
-							++i;
-							page = writer.getImportedPage(reader, i);
-
-							writer.addPage(page);
-						}
-					}
-				}
-
-				if (master.size() > 0) {
-					writer.setOutlines(master);
-				}
-
-				// passo 5: fecha-se o documento
-				if (isNotNull(document)) {
-					document.close();
-				}
-
-				bytes = byteOS.toByteArray();
-
-			} catch (Exception e) {
-				LOG.error("", e);
-			}
-		}
-		return bytes;
-	}
+//	public static byte[] mergeFiles(Collection<byte[]> pdfFiles) {
+//
+//		// retorno
+//		byte[] bytes = null;
+//
+//		if (isNotNull(pdfFiles) && !pdfFiles.isEmpty()) {
+//
+//			int pageOffset = 0;
+//			boolean first = true;
+//
+//			List<Object> master = null;
+//			Document document = null;
+//			PdfCopy writer = null;
+//			ByteArrayOutputStream byteOS = null;
+//
+//			try {
+//
+//				byteOS = new ByteArrayOutputStream();
+//				master = new ArrayList<Object>();
+//
+//				for (byte[] doc : pdfFiles) {
+//
+//					if (isNotNull(doc)) {
+//
+//						PdfReader reader = new PdfReader(doc);
+//
+//						if (reader.isEncrypted()) {
+//							reader = new PdfReader(doc, "".getBytes());
+//						}
+//
+//						reader.consolidateNamedDestinations();
+//
+//						int n = reader.getNumberOfPages();
+//						List<?> bookmarks = SimpleBookmark.getBookmark(reader);
+//
+//						if (isNotNull(bookmarks)) {
+//							if (pageOffset != 0) {
+//								SimpleBookmark.shiftPageNumbers(bookmarks,
+//										pageOffset, null);
+//							}
+//							master.addAll(bookmarks);
+//						}
+//
+//						pageOffset += n;
+//
+//						if (first) {
+//
+//							document = new Document(reader
+//									.getPageSizeWithRotation(1));
+//
+//							writer = new PdfCopy(document, byteOS);
+//							
+//							document.addAuthor("JRimum Group");
+//							document.addSubject("JRimum Merged Document");
+//							document.addCreator("JRimum Utilix");
+//
+//							document.open();
+//							first = false;
+//						}
+//
+//						PdfImportedPage page;
+//						
+//						for (int i = 0; i < n;) {
+//							++i;
+//							page = writer.getImportedPage(reader, i);
+//
+//							writer.addPage(page);
+//						}
+//						
+//						reader.close();
+//					}
+//				}
+//
+//				if (master.size() > 0) {
+//					writer.setOutlines(master);
+//				}
+//
+//				if (isNotNull(document)) {
+//					writer.close();
+//					document.close();
+//				}
+//
+//				bytes = byteOS.toByteArray();
+//				
+//				byteOS.close();
+//				
+//				pdfFiles.clear();
+//
+//			} catch (Exception e) {
+//				Exceptions.throwIllegalStateException(e);
+//			}
+//		}
+//		return bytes;
+//	}
 }
