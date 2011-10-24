@@ -59,15 +59,33 @@ import org.jrimum.utilix.text.Strings;
  */
 public class ResourceBundle {
 
+	/**
+	 * Imagens usadas na instancia. 
+	 */
 	private final Map<String,Image> imagensLogoBanco;
 
+	/**
+	 * Template do projeto usando na isntancia.
+	 */
 	private byte[] defaultTemplateComSacadorAvalista;
+	
+	/**
+	 * Template do projeto usando na isntancia.
+	 */
 	private byte[] defaultTemplateSemSacadorAvalista;
 	
+	/**
+	 * Inicia a instancia com os valores padrões necessários.
+	 */
 	public ResourceBundle(){
 		imagensLogoBanco = new TreeMap<String, Image>();
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return template em bytes
+	 */
 	public byte[] getTemplateComSacadorAvalista() {
 
 		if (isNull(defaultTemplateComSacadorAvalista)) {
