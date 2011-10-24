@@ -35,9 +35,9 @@ import static org.jrimum.utilix.text.DateFormat.DDMMYYYY_B;
 import static org.jrimum.utilix.text.DecimalFormat.MONEY_DD_BR;
 
 import java.awt.Image;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.WeakHashMap;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -69,13 +69,12 @@ class BoletoDataBuilder {
 	private static final String HIFEN_SEPERADOR = "-";
 	
 	private final ResourceBundle resourceBundle;
-
-	private final Boleto boleto;
-
+	
 	private final Map<String,String> text;
 	
 	private final Map<String,Image> image;
 	
+	private Boleto boleto;
 	
 	/**
 	 * Modo de instanciação não permitido.
@@ -87,41 +86,59 @@ class BoletoDataBuilder {
 	private BoletoDataBuilder(){
 		Exceptions.throwIllegalStateException("Instanciação não permitida!");
 		resourceBundle = null;
-		boleto = null;
 		text = null;
 		image = null;
 	}
 	
-	BoletoDataBuilder(ResourceBundle resourceBundle, Boleto boleto){
+	BoletoDataBuilder(ResourceBundle resourceBundle){
 		
 		Objects.checkNotNull(resourceBundle);
-		Objects.checkNotNull(boleto);
 		
 		this.resourceBundle = resourceBundle;
-		this.boleto = boleto;
 		
-		text = new HashMap<String, String>();
-		image = new HashMap<String, Image>();
+		text = new WeakHashMap<String, String>();
+		image = new WeakHashMap<String, Image>();
+	}
+	
+	BoletoDataBuilder(ResourceBundle resourceBundle, Boleto boleto){
+		
+		this(resourceBundle);
+		Objects.checkNotNull(boleto);
+		
+		this.boleto = boleto;
 		
 		build();
 	}
 	
-	public Map<String,String> texts(){
+	Map<String,String> texts(){
 		
-		return this.text;
+		return new WeakHashMap<String, String>(text);
 	}
 	
-	public Map<String,Image> images(){
+	Map<String,Image> images(){
 		
-		return image;
+		return new WeakHashMap<String, Image>(image);
 	}
+	
+	BoletoDataBuilder with(Boleto boleto){
+		
+		this.boleto = boleto;
+		
+		text.clear();
+		image.clear();
+		
+		return build();
+	}
+
 
 	/**
 	 * Preenche todos os campos com os dados do boleto contido na instância.
 	 * 
+	 * @return Esta instância após operação
+	 * 
 	 * @since 0.2
 	 */
-	private void build(){
+	private BoletoDataBuilder build(){
 		
 		setLogotipoDoBanco();
 		setCodigoDoBanco();
@@ -153,6 +170,8 @@ class BoletoDataBuilder {
 		setCarteira();
 		setCamposExtra();
 		setImagensNosCampos();
+		
+		return this;
 	}
 
 	private void setDataProcessamento(){
