@@ -60,14 +60,13 @@ class PdfViewer {
 
 	private static Logger log = Logger.getLogger(PdfViewer.class);
 
-	private Boleto boleto;
+	private final ResourceBundle resourceBundle;
+	private final BoletoDataBuilder boletoDataBuilder;
 
+	private PdfDocMix doc;
+	private Boleto boleto;
 	private byte[] template;
 	
-	private ResourceBundle resourceBundle;
-	
-	private PdfDocMix doc;
-
 	/**
 	 * Para uso interno do componente
 	 * 
@@ -77,6 +76,7 @@ class PdfViewer {
 	protected PdfViewer() {
 		
 		resourceBundle = new ResourceBundle();
+		boletoDataBuilder = new BoletoDataBuilder(resourceBundle);
 	}
 	
 	/**
@@ -89,7 +89,7 @@ class PdfViewer {
 	 */
 	protected PdfViewer(Boleto boleto) {
 
-		resourceBundle = new ResourceBundle();
+		this();
 
 		this.boleto = boleto;
 	}
@@ -105,9 +105,7 @@ class PdfViewer {
 	 */
 	protected PdfViewer(Boleto boleto, byte[] template) {
 		
-		resourceBundle = new ResourceBundle();
-		
-		this.boleto = boleto;
+		this(boleto);
 		
 		setTemplate(template);
 	}
@@ -316,6 +314,18 @@ class PdfViewer {
 	protected Boleto getBoleto() {
 		return this.boleto;
 	}
+
+	/**
+	 * Define o boleto a ser usado no preenchimento do PDF.
+	 * 
+	 * @param boleto
+	 * 
+	 * @since 0.2
+	 */
+	protected void setBoleto(Boleto boleto) {
+		this.boleto = boleto;
+	}
+	
 	
 	/**
 	 * Executa os seguintes métodos na sequência:
@@ -329,17 +339,24 @@ class PdfViewer {
 	 */
 	private void processarPdf(){
 		
+		byte[] template = null;
+		
 		if (isTemplateFromResource()) {
-			doc = PdfDocMix.createWithTemplate(getTemplateFromResource());
-			
+			template = getTemplateFromResource();
 		} else {
-			doc = PdfDocMix.createWithTemplate(getTemplate());
+			template = getTemplate();
 		}
 		
-		BoletoDataBuilder boletoData =  new BoletoDataBuilder(resourceBundle, boleto);
+		if(isNull(doc)){
+			doc = PdfDocMix.createWithTemplate(template);
+		}else{
+			doc.changeTemplate(template);
+		}
 		
-		doc.putAllTexts(boletoData.texts());
-		doc.putAllImages(boletoData.images());
+		boletoDataBuilder.with(boleto);
+		
+		doc.putAllTexts(boletoDataBuilder.texts());
+		doc.putAllImages(boletoDataBuilder.images());
 	}
 
 	/**
