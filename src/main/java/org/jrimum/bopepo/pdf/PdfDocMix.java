@@ -44,6 +44,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.WeakHashMap;
 
 import org.apache.log4j.Logger;
 import org.jrimum.utilix.Collections;
@@ -77,6 +78,8 @@ public class PdfDocMix {
 	private AcroFields form;
 
 	private ByteArrayOutputStream outputStream;
+	
+	private Map<java.awt.Image, Image> imagesInUseMap = new WeakHashMap<java.awt.Image, Image>();
 
 	/**
 	 * Template em byte array.
@@ -473,7 +476,7 @@ public class PdfDocMix {
 		Strings.checkNotBlank(name, "Nome do campo ausente!");
 
 		if (isNull(txtMap)) {
-			this.txtMap = new HashMap<String, String>();
+			this.txtMap = new WeakHashMap<String, String>();
 		}
 
 		this.txtMap.put(name, value);
@@ -536,7 +539,7 @@ public class PdfDocMix {
 		Strings.checkNotBlank(name, "Nome do campo ausente!");
 
 		if (isNull(imgMap)) {
-			this.imgMap = new HashMap<String, java.awt.Image>();
+			this.imgMap = new WeakHashMap<String, java.awt.Image>();
 		}
 
 		this.imgMap.put(name, value);
@@ -1008,7 +1011,7 @@ public class PdfDocMix {
 			if(isBlank(creator)){
 				creator(JRIMUM);
 			}else{
-				creator(creator+" by "+JRIMUM);
+				creator(creator+" by ("+JRIMUM+")");
 			}
 
 			if(isNull(docInfo.creation())){
@@ -1070,11 +1073,7 @@ public class PdfDocMix {
 
 		if (hasElement(imgMap)) {
 			for (Entry<String, java.awt.Image> e : imgMap.entrySet()) {
-				try {
-					setImage(e.getKey(), Image.getInstance(e.getValue(), null));
-				} catch (Exception ex) {
-					Exceptions.throwIllegalStateException(ex);
-				}
+					setImage(e.getKey(),e.getValue());
 			}
 		}
 	}
@@ -1087,7 +1086,7 @@ public class PdfDocMix {
 	 * 
 	 * @since 0.2
 	 */
-	private void setImage(String fieldName, Image image) {
+	private void setImage(String fieldName, java.awt.Image image) {
 
 		float posImgField[];
 
@@ -1097,7 +1096,7 @@ public class PdfDocMix {
 
 			if (isNotNull(posImgField)) {
 				try {
-					PDFs.changeFieldToImage(stamper, posImgField, image);
+					PDFs.changeFieldToImage(stamper, posImgField, getPdfImage(image));
 				} catch (Exception e) {
 					Exceptions.throwIllegalStateException(e);
 				}
@@ -1105,6 +1104,21 @@ public class PdfDocMix {
 				LOG.warn("Posicionamento do campo de imagem nao encontrado! CAMPO: "+fieldName);
 			}
 		}
+	}
+	
+	public Image getPdfImage(java.awt.Image image){
+		
+		Image pdfImage = imagesInUseMap.get(image);
+		
+		if(isNull(pdfImage)){
+			try {
+				pdfImage = Image.getInstance(image, null);
+				imagesInUseMap.put(image, pdfImage);
+			} catch (Exception ex) {
+				Exceptions.throwIllegalStateException(ex);
+			}
+		}
+		return pdfImage;
 	}
 
 	/**
