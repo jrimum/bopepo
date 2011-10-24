@@ -100,8 +100,8 @@ import org.jrimum.vallia.digitoverificador.TipoDeModulo;
  * <tr>
  * <td >42-42</td>
  * <td >1</td>
- * <td style="text-align:left;padding-left:10">Filler: 1 (um) quando o campo "valor do documento" diferente de 0 (zero) e cobrança sem registro, caso contrário zero.</td>
  * <td style="text-align:left;padding-left:10">Filler: 1 (um) quando o campo "valor do documento" diferente de 0 (zero), caso contrário zero.</td>
+ * <td style="text-align:left;padding-left:10">1 (um) quando o campo "valor do documento" diferente de 0 (zero), caso contrário zero.</td>
  * </tr>
  * <tr>
  * <td >43-43</td>
@@ -226,7 +226,7 @@ class CLSicredi extends AbstractCLSicredi {
 		this.add(new Field<Object>(titulo.getParametrosBancarios().getValor(POSTO_DA_AGENCIA), 2, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 5, Filler.ZERO_LEFT));
 		
-		if (titulo.getContaBancaria().getCarteira().isSemRegistro() && titulo.getValor().compareTo(ZERO) == 1) {
+		if (titulo.getValor().compareTo(ZERO) == 1) {
 			
 			this.add(new Field<String>("1", 1));
 			

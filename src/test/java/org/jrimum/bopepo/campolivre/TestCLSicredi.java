@@ -67,10 +67,22 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 		titulo.setDigitoDoNossoNumero("1");
 		titulo.setParametrosBancarios(new ParametrosBancariosMap("PostoDaAgencia",02));
 		titulo.setValor(new BigDecimal("150.35"));
-
+		
 		createCampoLivreToTest();
 
 		setCampoLivreValidoAsString("3107200003101650200623101");
+	}
+	
+	@Test
+	public void seEscritaOndeTituloNaoTemValorEstahCorreta(){
+		
+		titulo.setValor(new BigDecimal("0.00"));
+		
+		createCampoLivreToTest();
+
+		setCampoLivreValidoAsString("3107200003101650200623004");
+		
+		seCampoLivreEscritoEstaCorreto();
 	}
 
 	@Test(expected = CampoLivreException.class)
