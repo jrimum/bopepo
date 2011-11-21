@@ -44,6 +44,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 /**
@@ -374,17 +375,21 @@ public class TestPdfDocMix {
 	@Test
 	public void seGeraDocumentoEmArquivoViaParamentroFile() throws IOException{
 
-		final String TEMP_FILE = "./src/test/resources/seGeraDocumentoEmArquivoViaParamentroFile.pdf";
+		final String file = "seGeraDocumentoEmArquivoViaParamentroFile";
+		final String filePath = "./src/test/resources/"+file+".pdf";
 		
 		doc = createDoc();
 		
 		PdfDocReader readerArqBase = new PdfDocReader(Resources.crieInputStreamParaArquivoComCampos());
 		
-		final File arqNovo = new File(TEMP_FILE); 
+		final File arqBase = new File(filePath); 
+		final File arqTest = File.createTempFile(file, ".pdf");
 		
-		doc.toFile(arqNovo);
+		FileUtils.copyFile(arqBase, arqTest);
 		
-		PdfDocReader readerArqNovo = new PdfDocReader(arqNovo);
+		doc.toFile(arqBase);
+		
+		PdfDocReader readerArqNovo = new PdfDocReader(arqBase);
 
 		assertTrue("DEVEM SER IGUAIS",
 				Resources.DOCUMENT_TITLE.equals(readerArqBase.getInfo().title())
@@ -393,7 +398,7 @@ public class TestPdfDocMix {
 		
 		readerArqBase.close();
 		readerArqNovo.close();
-		arqNovo.delete();
+		arqBase.delete();
 	}
 	
 	/**

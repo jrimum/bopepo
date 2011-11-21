@@ -183,6 +183,12 @@
 			</exclusions>
 		</dependency>
 		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.8.2</version>
@@ -190,11 +196,11 @@
 		</dependency>
 	</dependencies>
 
-<!-- 	<distributionManagement> -->
-<!-- 		<snapshotRepository> -->
-<!-- 			<id>org.jrimum.snapshots</id> -->
-<!-- 			<url>http://jrimum.org/maven/content/repositories/org.jrimum.snapshots/</url> -->
-<!-- 		</snapshotRepository> -->
-<!-- 	</distributionManagement> -->
+	<distributionManagement>
+		<snapshotRepository>
+			<id>org.jrimum.snapshots</id>
+			<url>http://jrimum.org/maven/content/repositories/org.jrimum.snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>
