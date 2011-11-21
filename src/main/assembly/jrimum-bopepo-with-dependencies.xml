@@ -12,7 +12,6 @@
 			<outputDirectory>/</outputDirectory>
 			<useProjectArtifact>true</useProjectArtifact>
 			<unpack>true</unpack>
-			<scope>runtime</scope>
 			<excludes>
 				<exclude>commons-lang:commons-lang</exclude>
 				<exclude>log4j:log4j</exclude>
