@@ -446,6 +446,11 @@ public class Files {
 	}
 	
 
+	/**
+	 * Abre um determinado arquivo para exibir no desktop.
+	 * 
+	 * @param arq
+	 */
 	public static void openOnDesktop(File arq) {
 
 		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();

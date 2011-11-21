@@ -218,8 +218,6 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 		if(log.isDebugEnabled() || log.isTraceEnabled())
 			log.debug("codigoDeBarra instanciado : "+this);
 	}
-
-	
 	
 	private void calculateAndSetDigitoVerificadorGeral() {
 		
