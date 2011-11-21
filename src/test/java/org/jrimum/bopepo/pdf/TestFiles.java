@@ -30,6 +30,7 @@
 package org.jrimum.bopepo.pdf;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -83,7 +84,9 @@ public class TestFiles {
 		byte valor3 = (byte) 3;
 		
 		//Criar o arquivo antes de testar
-		Assert.assertNotNull(Files.bytesToFile("./target/fileExistente", new byte[] {valor1, valor2, valor3}));
+		String file = "./target/fileExistente";
+		Assert.assertNotNull(Files.bytesToFile(file, new byte[] {valor1, valor2, valor3}));
+		new File(file).delete();
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -104,4 +107,5 @@ public class TestFiles {
 		
 		out.close();
 	}
+	
 }
