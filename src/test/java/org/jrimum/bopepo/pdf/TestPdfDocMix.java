@@ -366,7 +366,7 @@ public class TestPdfDocMix {
 		
 		PdfDocReader reader = new PdfDocReader(doc.toBytes());
 		
-		assertEquals(CRIADOR+" by jrimum.org/bopepo", reader.getInfo().creator());
+		assertEquals(CRIADOR+" by (jrimum.org/bopepo)", reader.getInfo().creator());
 		
 		reader.close();
 	}
