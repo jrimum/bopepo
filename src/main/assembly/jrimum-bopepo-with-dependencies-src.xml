@@ -7,42 +7,46 @@
 		<format>jar</format>
 	</formats>
 	<includeBaseDirectory>false</includeBaseDirectory>
-	<dependencySets>
-		<dependencySet>
-			<outputDirectory>/</outputDirectory>
-			<useProjectArtifact>true</useProjectArtifact>
-			<unpack>true</unpack>
-			<includes>
-				<include>org.jrimum:utilix:jar:sources</include>
-			</includes>
-			<excludes>
-				<exclude>commons-lang:commons-lang</exclude>
-				<exclude>log4j:log4j</exclude>
-				<exclude>com.lowagie:itext</exclude>
-			</excludes>
-		</dependencySet>
-	</dependencySets>
 	<fileSets>
 		<fileSet>
-			<directory>${project.basedir}</directory>
-			<includes>
-					<include>README*</include>
-				<include>LICENSE*</include>
-				<include>NOTICE*</include>
-				<include>pom.xml</include>
-			</includes>
+			<directory>/src/main/java</directory>
 			<useDefaultExcludes>true</useDefaultExcludes>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>**/*.java</include>
+			</includes>	
 		</fileSet>
 		<fileSet>
-			<directory>${project.basedir}</directory>
+			<directory>/src/main/resources</directory>
 			<useDefaultExcludes>true</useDefaultExcludes>
+			<outputDirectory>/</outputDirectory>
 			<includes>
-				<include>${project.build.sourceDirectory}</include>
-				<include>src/main/resources</include>
-			</includes>
-			<excludes>
-				<exclude>${project.build.testSourceDirectory}</exclude>
-			</excludes>
+				<include>**/**</include>
+			</includes>	
+		</fileSet>
+		<fileSet>
+			<directory>../Utilix/src/main/java</directory>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>**/*.java</include>
+			</includes>		
+		</fileSet>
+		<fileSet>
+			<directory>../Vallia/src/main/java</directory>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>**/*.java</include>
+			</includes>		
+		</fileSet>
+		<fileSet>
+			<directory>../Domkee/src/main/java</directory>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>**/*.java</include>
+			</includes>		
 		</fileSet>
 	</fileSets>
 </assembly>		

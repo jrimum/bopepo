@@ -8,14 +8,20 @@
 	</formats>
 	<fileSets>
 		<fileSet>
-			<directory>src/examples</directory>
+			<directory>src/examples/java</directory>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<outputDirectory>/</outputDirectory>
 			<includes>
-				<include>README*</include>
-				<include>LICENSE*</include>
-				<include>NOTICE*</include>
 				<include>**/*.java</include>
 			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>src/examples/resources</directory>
 			<useDefaultExcludes>true</useDefaultExcludes>
+			<outputDirectory>/resources</outputDirectory>
+			<includes>
+				<include>**/**</include>
+			</includes>	
 		</fileSet>
 	</fileSets>
 </assembly>		
