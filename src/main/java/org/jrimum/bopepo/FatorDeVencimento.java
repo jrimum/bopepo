@@ -141,7 +141,7 @@ public class FatorDeVencimento{
 
 		if (isNull(data)) {
 			
-			return Exceptions.throwIllegalArgumentException("Impossível realizar o cálculo do fator de vencimento de uma data nula!");
+			return (Integer) Exceptions.throwIllegalArgumentException("Impossível realizar o cálculo do fator de vencimento de uma data nula!");
 			
 		} else {
 			

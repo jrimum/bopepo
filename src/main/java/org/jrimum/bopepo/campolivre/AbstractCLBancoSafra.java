@@ -84,7 +84,7 @@ abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
 			case EXPRESS_BOLETO_EMITIDO_PELO_CLIENTE:
 				return 4;
 			default:
-				return Exceptions.throwIllegalStateException(format(
+				return (Integer) Exceptions.throwIllegalStateException(format(
 						"Tipo \"%s\" sem código atribuído!", this));
 			}
 		}
