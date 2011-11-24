@@ -3,7 +3,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jrimum</groupId>
-	<artifactId>bopepo</artifactId>
+	<artifactId>jrimum-bopepo</artifactId>
 	<packaging>jar</packaging>
 	<name>Projeto Bopepo</name>
 	<version>0.2.3-SNAPSHOT</version>
@@ -53,7 +53,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<project.build.finalName>jrimum-${project.artifactId}-${project.version}</project.build.finalName>
 	</properties>
 
 	<build>
@@ -67,7 +66,6 @@
 			</resource>
 		</resources>
 	
-		<finalName>${project.build.finalName}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -119,9 +117,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>2.1.2</version>
-				<configuration>
-					<finalName>${project.build.finalName}</finalName>
-				</configuration>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -137,9 +132,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.7</version>
-				<configuration>
-					<finalName>${project.build.finalName}</finalName>
-				</configuration>
 				<executions>
 					<execution>
 						<id>attach-javadoc</id>
@@ -157,7 +149,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.jrimum</groupId>
-			<artifactId>domkee</artifactId>
+			<artifactId>jrimum-domkee</artifactId>
 			<version>0.2.3-SNAPSHOT</version>
 		</dependency>
 		<dependency>
