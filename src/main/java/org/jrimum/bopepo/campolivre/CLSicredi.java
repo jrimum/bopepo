@@ -267,14 +267,14 @@ class CLSicredi extends AbstractCLSicredi {
 
 		final int resto = modulo11.calcule(writeFields());
 
-		if (resto != 0 && resto != 1) {
+		if (resto == 0 || resto == 1) {
 
-			return Integer.valueOf(modulo11.valor() - resto);
+			return Integer.valueOf(0);
 			
 		} else{
 			
-			return Integer.valueOf(resto);
+			return Integer.valueOf(modulo11.valor() - resto);
 		}
 	}
-
+	
 }
