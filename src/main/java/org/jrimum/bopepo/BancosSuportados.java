@@ -94,6 +94,8 @@ import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
  *         Colaborador com o banco Rural (453)
  * @author <a href="mailto:pporto@gmail.com">Paulo Porto</a> - 
  * 		   Colaborador com o Banco do Nordeste do Brasil (004).
+ * @author <a href="mailto:fabianojustino@gmail.com">Fabiano Carrijo</a> - 
+ * 		   Colaborador com o Banco Citibank (756).
  * 
  * @see org.jrimum.bopepo.campolivre.CampoLivre
  * @see org.jrimum.domkee.financeiro.banco.Banco
@@ -248,13 +250,13 @@ public enum BancosSuportados implements Serializable{
 	BANCO_SAFRA("422", "58160789000128", "BANCO SAFRA S.A.", "Banco Múltiplo"),
 	
 	/**
-	 * Tipo enumerado que representa o <strong>Banco Rural</strong>, código de
-	 * compensação <strong><tt>453</tt></strong> <a
-	 * href="http://www.rural.com.br/">site</a>.
+	 * Tipo enumerado que representa o <strong>Citibank</strong>, código de
+	 * compensação <strong><tt>756</tt></strong> <a
+	 * href="http://www.citibank.com.br/">site</a>.
 	 * 
 	 * @since 0.2
 	 */
-	BANCO_RURAL("453", "58160789000128", "BANCO RURAL S.A.", "Banco Múltiplo"),
+	CITIBANK("745", "33479023000180", "BANCO CITIBANK S.A.", "Banco Múltiplo"),
 	
 	/**
 	 * Tipo enumerado que representa o <strong>Banco Sicredi</strong>, código de
@@ -264,6 +266,15 @@ public enum BancosSuportados implements Serializable{
 	 * @since 0.2
 	 */
 	BANCO_SICREDI("748", "01181521000155", "BANCO COOPERATIVO SICREDI S.A.", "Banco Mútiplo Cooperativo"),
+	
+	/**
+	 * Tipo enumerado que representa o <strong>Banco Rural</strong>, código de
+	 * compensação <strong><tt>453</tt></strong> <a
+	 * href="http://www.rural.com.br/">site</a>.
+	 * 
+	 * @since 0.2
+	 */
+	BANCO_RURAL("453", "58160789000128", "BANCO RURAL S.A.", "Banco Múltiplo"),
 
 	/**
 	 * Tipo enumerado que representa o <strong>Bancoob</strong>, código de
@@ -273,7 +284,7 @@ public enum BancosSuportados implements Serializable{
 	 * @since 0.2
 	 */
 	BANCOOB("756", "02038232000164", "BANCO COOPERATIVO DO BRASIL S.A. - BANCOOB", "Banco Comercial Cooperativo"),
-
+	
 	;
 
 	/**
@@ -322,6 +333,9 @@ public enum BancosSuportados implements Serializable{
 		suportados.put(BANCO_SICREDI.codigoDeCompensacaoBACEN, BANCO_SICREDI);
 
 		suportados.put(BANCOOB.codigoDeCompensacaoBACEN, BANCOOB);
+		
+		suportados.put(CITIBANK.codigoDeCompensacaoBACEN, CITIBANK);
+		
 	}
 
 	/**
