@@ -37,7 +37,7 @@ import org.jrimum.utilix.text.Filler;
  * <td>4</td>
  * <td>9(4)</td>
  * <td style="text-align:left;padding-left:10">Código da Agência</td>
- * <td style="text-align:left;padding-left:10">CNPJ da Agência Cedente</td>
+ * <td style="text-align:left;padding-left:10">Código da Agência Cedente</td>
  * </tr>
  * <tr>
  * <td>34-36</td>
@@ -57,6 +57,7 @@ import org.jrimum.utilix.text.Filler;
  * </table>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
  * 
  * @since 0.2
  * 
@@ -120,6 +121,7 @@ class CLCaixaEconomicaFederalSICOBNossoNumero10 extends AbstractCLCaixaEconomica
 	 * <p>
 	 * Padrões aceitos de 10 dígitos:
 	 * <ul>
+	 * <li>3NNNNNNNNN (a ser validado com os colegas da Neogrid)</li>
 	 * <li>9NNNNNNNNN</li>
 	 * <li>80NNNNNNNN</li>
 	 * <li>81NNNNNNNN</li>
@@ -132,8 +134,7 @@ class CLCaixaEconomicaFederalSICOBNossoNumero10 extends AbstractCLCaixaEconomica
 	 */
 	private void checkPadraoNossoNumero(String nn){
 		
-		if(!nn.startsWith("9") && !nn.startsWith("80") && !nn.startsWith("81") && !nn.startsWith("82")){
-			
+		if(!nn.startsWith("3") && !nn.startsWith("9") && !nn.startsWith("80") && !nn.startsWith("81") && !nn.startsWith("82")){
 			Exceptions.throwIllegalArgumentException(format("Para a cobrança SICOB o nosso número [%s] deve começar com 9 que é o identificador da \"carteira rápida\" [9NNNNNNNNN] ou 80, 81 e 82 para \"carteira sem registro\" [82NNNNNNNN]!", nn));
 		}
 	}

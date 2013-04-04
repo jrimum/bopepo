@@ -40,6 +40,8 @@ import org.jrimum.utilix.ClassLoaders;
  * Banco fictício usado para exemplos genéricos.
  * 
  * @author Rômulo Augusto
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
+ * 
  */
 public class JRimumBank extends Banco {
 	

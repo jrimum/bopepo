@@ -84,6 +84,8 @@ import org.jrimum.utilix.text.Filler;
  * </table>
  * 
  * @author Rômulo Augusto
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
+ * 
  */
 public class CampoLivreJRimumBank implements CampoLivre {
 	
