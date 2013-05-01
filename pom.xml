@@ -19,20 +19,17 @@
 	</licenses>
 
 	<organization>
-		<name>Grupo JRimum</name>
-		<url>http://www.jrimum.org/</url>
+		<name>Projeto JRimum</name>
+		<url>http://www.jrimum.org</url>
 	</organization>
 
 	<issueManagement>
-		<system>TRAC</system>
-		<url>http://www.jrimum.org/bopepo</url>
+		<url>http://github.com/jrimum/bopepo/issues</url>
+		<system>GitHub</system>
 	</issueManagement>
 
 	<scm>
-		<connection>scm:svn:http://www.jrimum.org/svn/bopepo</connection>
-		<developerConnection>scm:svn:http://www.jrimum.org/svn/bopepo</developerConnection>
-		<tag>HEAD</tag>
-		<url>http://www.jrimum.org/svn/bopepo</url>
+		<url>http://github.com/jrimum/bopepo</url>
 	</scm>
 	
 	<developers>
