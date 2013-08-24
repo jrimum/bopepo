@@ -96,6 +96,8 @@ import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
  * 		   Colaborador com o Banco do Nordeste do Brasil (004).
  * @author <a href="mailto:fabianojustino@gmail.com">Fabiano Carrijo</a> - 
  * 		   Colaborador com o Banco Citibank (756).
+ * @author <a href="mailto:contato@douglasramiro.com.br">Douglas Ramiro</a> - 
+ * 		   Colaborador com o Banco de Brasília (070).
  * 
  * @see org.jrimum.bopepo.campolivre.CampoLivre
  * @see org.jrimum.domkee.financeiro.banco.Banco
@@ -160,6 +162,15 @@ public enum BancosSuportados implements Serializable{
 	BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL("041", "92702067000196", "BANCO DO ESTADO DO RIO GRANDE DO SUL S.A.", "Banco Múltiplo"),
 			
 	/**
+	 * Tipo enumerado que representa o Banco <strong>BRB - Banco de Brasília</strong>,
+	 * código de compensação <strong><tt>070</tt></strong> <a
+	 * href="http://www.brb.com.br">site</a>.
+	 * 
+	 * @since 0.2
+	 */
+	BANCO_DE_BRASILIA("070","00000208000100","BRB- Banco de Brasília S.A.","Banco Múltiplo"),
+	
+	/**
 	 * Tipo enumerado que representa o BANISA, Banco <strong>Intermedium</strong>,
 	 * código de compensação <strong><tt>077</tt></strong> <a href="http://www.bancointermedium.com.br/">
 	 * site</a>.
@@ -167,7 +178,7 @@ public enum BancosSuportados implements Serializable{
 	 * @since 0.2
 	 */
 	BANCO_INTEMEDIUM("077", "00416968000101", "BANCO INTERMEDIUM S.A.", "Banco Múltiplo"),	
-			
+	
 	/**
 	 * Tipo enumerado que representa o Banco <strong>Caixa Econômica Federal</strong>,
 	 * código de compensação <strong><tt>104</tt></strong> <a
@@ -283,10 +294,8 @@ public enum BancosSuportados implements Serializable{
 	 * 
 	 * @since 0.2
 	 */
-	BANCOOB("756", "02038232000164", "BANCO COOPERATIVO DO BRASIL S.A. - BANCOOB", "Banco Comercial Cooperativo"),
+	BANCOOB("756", "02038232000164", "BANCO COOPERATIVO DO BRASIL S.A. - BANCOOB", "Banco Comercial Cooperativo");
 	
-	;
-
 	/**
 	 * Singleton <code>Map</code> para pesquisa por bancos suportados no
 	 * componente.
@@ -335,7 +344,8 @@ public enum BancosSuportados implements Serializable{
 		suportados.put(BANCOOB.codigoDeCompensacaoBACEN, BANCOOB);
 		
 		suportados.put(CITIBANK.codigoDeCompensacaoBACEN, CITIBANK);
-		
+
+		suportados.put(BANCO_DE_BRASILIA.codigoDeCompensacaoBACEN, BANCO_DE_BRASILIA);
 	}
 
 	/**

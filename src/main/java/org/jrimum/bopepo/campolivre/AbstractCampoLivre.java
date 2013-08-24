@@ -74,6 +74,8 @@ import org.jrimum.utilix.text.Strings;
  * 		   Colaborador com o Banco do Nordeste do Brasil (004).
  * @author <a href="mailto:fabianojustino@gmail.com">Fabiano Carrijo</a> - 
  * 		   Colaborador com o Banco Citibank (756).
+ * @author <a href="mailto:contato@douglasramiro.com.br">Douglas Ramiro</a> - 
+ * 		   Colaborador com o Banco de Brasília (070).
  * 
  * @since 0.2
  * 
@@ -252,6 +254,9 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 						
 					case CITIBANK:
 						return AbstractCLBancoCitibank.create(titulo); 
+						
+					case BANCO_DE_BRASILIA:
+						return AbstractCLBancoDeBrasilia.create(titulo);
 						
 					default:
 						/*
