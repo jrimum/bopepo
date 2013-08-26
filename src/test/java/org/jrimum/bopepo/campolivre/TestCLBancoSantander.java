@@ -32,7 +32,7 @@ public class TestCLBancoSantander extends AbstractCampoLivreBaseTest<CLBancoSant
 		
 		createCampoLivreToTest();
 		
-		setCampoLivreValidoAsString("9162546900000000000270101");
+		setCampoLivreEsperadoComoString("9162546900000000000270101");
 		
 	}
 	
@@ -43,7 +43,7 @@ public class TestCLBancoSantander extends AbstractCampoLivreBaseTest<CLBancoSant
 		
 		createCampoLivreToTest();
 		
-		setCampoLivreValidoAsString("9162546900000000000278101");
+		setCampoLivreEsperadoComoString("9162546900000000000278101");
 		
 		seCampoLivreEscritoEstaCorreto();
 	}

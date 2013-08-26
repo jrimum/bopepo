@@ -60,7 +60,7 @@ public class TestCLBancoDoBrasilNN17Convenio6 extends AbstractCampoLivreBaseTest
 		
 		createCampoLivreToTest();
 		
-		setCampoLivreValidoAsString("1234561234567890123456721");
+		setCampoLivreEsperadoComoString("1234561234567890123456721");
 	}
 
 }

@@ -33,7 +33,7 @@ public class TestCLHSBCCobrancaRegistrada  extends AbstractCampoLivreBaseTest<CL
 
 		createCampoLivreToTest();
 
-		setCampoLivreValidoAsString("8351202000023910476118682");
+		setCampoLivreEsperadoComoString("8351202000023910476118682");
 	}
 	
 

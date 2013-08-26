@@ -65,7 +65,7 @@ public class TestCLItauComCarteirasEspeciais extends AbstractCampoLivreBaseTest<
 		
 		createCampoLivreToTest();
 		
-		setCampoLivreValidoAsString("1981234567812345671234580");
+		setCampoLivreEsperadoComoString("1981234567812345671234580");
 	}
 	
 }

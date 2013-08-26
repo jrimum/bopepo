@@ -405,7 +405,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		return campoLivreToTest.write();
 	}
 	
-	protected final void setCampoLivreValidoAsString(String campoLivreValidoAsString) {
+	protected final void setCampoLivreEsperadoComoString(String campoLivreValidoAsString) {
 		this.campoLivreValidoAsString = campoLivreValidoAsString;
 	}
 	

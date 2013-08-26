@@ -68,7 +68,7 @@ public class TestCLItauPadrao extends AbstractCampoLivreBaseTest<CLItauPadrao> {
 		
 		createCampoLivreToTest();
 		
-		setCampoLivreValidoAsString("1101234567880057123457000");
+		setCampoLivreEsperadoComoString("1101234567880057123457000");
 	}
 
 	@Test

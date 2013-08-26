@@ -70,7 +70,7 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 		
 		createCampoLivreToTest();
 
-		setCampoLivreValidoAsString("3107200003101650200623101");
+		setCampoLivreEsperadoComoString("3107200003101650200623101");
 	}
 	
 	@Test
@@ -80,7 +80,7 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 		
 		createCampoLivreToTest();
 
-		setCampoLivreValidoAsString("3107200003101650200623004");
+		setCampoLivreEsperadoComoString("3107200003101650200623004");
 		
 		seCampoLivreEscritoEstaCorreto();
 	}

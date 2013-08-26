@@ -65,7 +65,7 @@ public class TestCLBanestes extends AbstractCampoLivreBaseTest<CLBanestes> {
 		
 		createCampoLivreToTest();
 
-		setCampoLivreValidoAsString("0001029700007730070402182");
+		setCampoLivreEsperadoComoString("0001029700007730070402182");
 	}
 	
 	/**

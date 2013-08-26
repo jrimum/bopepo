@@ -66,7 +66,7 @@ public class TestCLNossaCaixa extends AbstractCampoLivreBaseTest<CLNossaCaixa> {
 		
 		createCampoLivreToTest();
 		
-		setCampoLivreValidoAsString("9976543210001300281815107");
+		setCampoLivreEsperadoComoString("9976543210001300281815107");
 	}
 	
 	@Test(expected = CampoLivreException.class)

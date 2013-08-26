@@ -63,6 +63,6 @@ public class TestCLBancoDoBrasilNN11 extends AbstractCampoLivreBaseTest<CLBancoD
 		
 		createCampoLivreToTest();
 		
-		setCampoLivreValidoAsString("1234567890112340000678905");
+		setCampoLivreEsperadoComoString("1234567890112340000678905");
 	}
 }

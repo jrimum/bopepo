@@ -28,7 +28,7 @@ public class TestCLBancoIntermedium extends AbstractCampoLivreBaseTest<CLBancoIn
 
 		createCampoLivreToTest();
 
-		setCampoLivreValidoAsString("0054700000561100214966660");
+		setCampoLivreEsperadoComoString("0054700000561100214966660");
 	}
 	
 }

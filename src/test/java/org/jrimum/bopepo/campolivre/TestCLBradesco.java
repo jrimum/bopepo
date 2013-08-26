@@ -66,7 +66,7 @@ public class TestCLBradesco extends AbstractCampoLivreBaseTest<CLBradesco> {
 
 		createCampoLivreToTest();
 
-		setCampoLivreValidoAsString("1234051234567890100067890");
+		setCampoLivreEsperadoComoString("1234051234567890100067890");
 	}
 
 	@Test(expected = CampoLivreException.class)

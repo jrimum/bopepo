@@ -43,6 +43,6 @@ public class TestCLBancoRuralCobrancaNaoRegistradaSeguradora extends AbstractCam
 
 		createCampoLivreToTest();
 
-		setCampoLivreValidoAsString("4155001000002256970004077");
+		setCampoLivreEsperadoComoString("4155001000002256970004077");
 	}
 }

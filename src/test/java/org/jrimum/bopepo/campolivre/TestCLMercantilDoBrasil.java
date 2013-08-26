@@ -67,7 +67,7 @@ public class TestCLMercantilDoBrasil extends AbstractCampoLivreBaseTest<CLMercan
 		
 		createCampoLivreToTest();
 		
-		setCampoLivreValidoAsString("1234123456789051234567892"); //Sem desconto
+		setCampoLivreEsperadoComoString("1234123456789051234567892"); //Sem desconto
 	}
 	
 	@Test
