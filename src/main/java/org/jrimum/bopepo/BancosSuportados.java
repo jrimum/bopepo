@@ -308,43 +308,24 @@ public enum BancosSuportados implements Serializable{
 	static {
 
 		suportados.put(BANCO_DO_BRASIL.codigoDeCompensacaoBACEN, BANCO_DO_BRASIL);
-
 		suportados.put(BANCO_DO_NORDESTE_DO_BRASIL.codigoDeCompensacaoBACEN, BANCO_DO_NORDESTE_DO_BRASIL);
-
 		suportados.put(CAIXA_ECONOMICA_FEDERAL.codigoDeCompensacaoBACEN, CAIXA_ECONOMICA_FEDERAL);
-
 		suportados.put(BANCO_BRADESCO.codigoDeCompensacaoBACEN, BANCO_BRADESCO);
-
 		suportados.put(BANCO_ABN_AMRO_REAL.codigoDeCompensacaoBACEN, BANCO_ABN_AMRO_REAL);
-
 		suportados.put(UNIBANCO.codigoDeCompensacaoBACEN, UNIBANCO);
-
 		suportados.put(HSBC.codigoDeCompensacaoBACEN, HSBC);
-
 		suportados.put(BANCO_ITAU.codigoDeCompensacaoBACEN, BANCO_ITAU);
-
 		suportados.put(BANCO_SAFRA.codigoDeCompensacaoBACEN, BANCO_SAFRA);
-		
 		suportados.put(BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.codigoDeCompensacaoBACEN, BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL);
-		
 		suportados.put(MERCANTIL_DO_BRASIL.codigoDeCompensacaoBACEN, MERCANTIL_DO_BRASIL);
-		
 		suportados.put(NOSSA_CAIXA.codigoDeCompensacaoBACEN, NOSSA_CAIXA);
-		
 		suportados.put(BANCO_DO_ESTADO_DO_ESPIRITO_SANTO.codigoDeCompensacaoBACEN, BANCO_DO_ESTADO_DO_ESPIRITO_SANTO);
-		
 		suportados.put(BANCO_RURAL.codigoDeCompensacaoBACEN, BANCO_RURAL);
-		
 		suportados.put(BANCO_SANTANDER.codigoDeCompensacaoBACEN, BANCO_SANTANDER);
-		
 		suportados.put(BANCO_INTEMEDIUM.codigoDeCompensacaoBACEN, BANCO_INTEMEDIUM);
-
 		suportados.put(BANCO_SICREDI.codigoDeCompensacaoBACEN, BANCO_SICREDI);
-
 		suportados.put(BANCOOB.codigoDeCompensacaoBACEN, BANCOOB);
-		
 		suportados.put(CITIBANK.codigoDeCompensacaoBACEN, CITIBANK);
-
 		suportados.put(BANCO_DE_BRASILIA.codigoDeCompensacaoBACEN, BANCO_DE_BRASILIA);
 	}
 
@@ -485,4 +466,5 @@ public enum BancosSuportados implements Serializable{
 	public String getSegmento() {
 		return segmento;
 	}
+
 }

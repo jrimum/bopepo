@@ -46,7 +46,7 @@ public class TestBancosSuportados{
 	@Test
 	public void testQuantidade() {
 		
-		assertEquals(BancosSuportados.suportados.size(), 19);
+		assertEquals(BancosSuportados.suportados.size(), 20);
 	}
 
 	/**
@@ -74,5 +74,6 @@ public class TestBancosSuportados{
 		assertEquals(BancosSuportados.BANCO_SICREDI.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "748");
 		assertEquals(BancosSuportados.BANCOOB.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "756");
 		assertEquals(BancosSuportados.CITIBANK.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "745");
+		assertEquals(BancosSuportados.BANCO_DE_BRASILIA.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "070");
 	}
 }
