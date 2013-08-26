@@ -398,7 +398,7 @@ public class TestPdfDocMix {
 		
 		readerArqBase.close();
 		readerArqNovo.close();
-		arqBase.delete();
+		arqTest.delete();
 	}
 	
 	/**

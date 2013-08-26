@@ -71,11 +71,6 @@ public class TestFiles {
 		Files.bytesToFile(StringUtils.EMPTY, new byte[] {});
 	}
 	
-	@Test(expected = FileNotFoundException.class)
-	public void testBytes2FileFileNotFound() throws FileNotFoundException, IOException {
-		Files.bytesToFile("./\fileInexistente\\-/", new byte[] {1, 2, 3});
-	}
-	
 	@Test
 	public void testBytes2File() throws FileNotFoundException, IOException {
 		
