@@ -198,65 +198,26 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 
 				switch (banco) {
 
-					case BANCO_BRADESCO:
-						return AbstractCLBradesco.create(titulo);
-					
-					case BANCO_DO_BRASIL:
-						return AbstractCLBancoDoBrasil.create(titulo);
-	
-					case BANCO_DO_NORDESTE_DO_BRASIL:
-						return AbstractCLBancoDoNordesteDoBrasil.create(titulo);
-	
-					case BANCO_ABN_AMRO_REAL:
-						return AbstractCLBancoReal.create(titulo);
-	
-					case CAIXA_ECONOMICA_FEDERAL:
-						return AbstractCLCaixaEconomicaFederal.create(titulo);
-	
-					case HSBC:
-						return AbstractCLHSBC.create(titulo);
-						
-					case UNIBANCO:
-						return AbstractCLUnibanco.create(titulo);
-	
-					case BANCO_ITAU:
-						return AbstractCLItau.create(titulo);
-	
-					case BANCO_SAFRA:
-						return AbstractCLBancoSafra.create(titulo);
-	
-					case BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL:
-						return AbstractCLBanrisul.create(titulo);
-						
-					case MERCANTIL_DO_BRASIL:
-						return AbstractCLMercantilDoBrasil.create(titulo);
-						
-					case NOSSA_CAIXA:
-						return AbstractCLNossaCaixa.create(titulo);
-					
-					case BANCO_DO_ESTADO_DO_ESPIRITO_SANTO:
-						return AbstractCLBanestes.create(titulo);
-						
-					case BANCO_RURAL:
-						return AbstractCLBancoRural.create(titulo);
-						
-					case BANCO_SANTANDER:
-						return AbstractCLSantander.create(titulo);
-						
-					case BANCO_INTEMEDIUM:
-						return AbstractCLBancoIntermedium.create(titulo);
-						
-					case BANCO_SICREDI:
-						return AbstractCLSicredi.create(titulo);
-						
-					case BANCOOB:
-						return AbstractCLBancoob.create(titulo);
-						
-					case CITIBANK:
-						return AbstractCLBancoCitibank.create(titulo); 
-						
-					case BANCO_DE_BRASILIA:
-						return AbstractCLBancoDeBrasilia.create(titulo);
+					case BANCO_BRADESCO: return AbstractCLBradesco.create(titulo);
+					case BANCO_DO_BRASIL: return AbstractCLBancoDoBrasil.create(titulo);
+					case BANCO_DO_NORDESTE_DO_BRASIL: return AbstractCLBancoDoNordesteDoBrasil.create(titulo);
+					case BANCO_ABN_AMRO_REAL: return AbstractCLBancoReal.create(titulo);
+					case CAIXA_ECONOMICA_FEDERAL: return AbstractCLCaixaEconomicaFederal.create(titulo);
+					case HSBC: return AbstractCLHSBC.create(titulo);
+					case UNIBANCO: return AbstractCLUnibanco.create(titulo);
+					case BANCO_ITAU: return AbstractCLItau.create(titulo);
+					case BANCO_SAFRA: return AbstractCLBancoSafra.create(titulo);
+					case BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL: return AbstractCLBanrisul.create(titulo);
+					case MERCANTIL_DO_BRASIL: return AbstractCLMercantilDoBrasil.create(titulo);
+					case NOSSA_CAIXA: return AbstractCLNossaCaixa.create(titulo);
+					case BANCO_DO_ESTADO_DO_ESPIRITO_SANTO: return AbstractCLBanestes.create(titulo);
+					case BANCO_RURAL: return AbstractCLBancoRural.create(titulo);
+					case BANCO_SANTANDER: return AbstractCLSantander.create(titulo);
+					case BANCO_INTEMEDIUM: return AbstractCLBancoIntermedium.create(titulo);
+					case BANCO_SICREDI: return AbstractCLSicredi.create(titulo);
+					case BANCOOB: return AbstractCLBancoob.create(titulo);
+					case CITIBANK: return AbstractCLBancoCitibank.create(titulo); 
+					case BANCO_DE_BRASILIA: return AbstractCLBancoDeBrasilia.create(titulo);
 						
 					default:
 						/*
