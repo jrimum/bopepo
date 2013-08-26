@@ -288,13 +288,13 @@ class BoletoDataBuilder {
 			}
 			
 			if (isNotBlank(endereco.getLocalidade())) {
-				sb.append(HIFEN_SEPERADOR);
-				sb.append(endereco.getLocalidade());
+				sb.append(HIFEN_SEPERADOR)
+				.append(endereco.getLocalidade());
 			}
 			
 			if (isNotNull(endereco.getUF())) {
-				sb.append(" / ");
-				sb.append(endereco.getUF().getNome());
+				sb.append(" / ")
+				.append(endereco.getUF().getNome());
 			}
 
 			text.put(campoEndereco1, sb.toString());
@@ -306,15 +306,20 @@ class BoletoDataBuilder {
 			}
 
 			if (isNotBlank(endereco.getNumero())) {
-				sb.append(", n°: ");
-				sb.append(endereco.getNumero());
+				sb.append(", n°: ")
+				.append(endereco.getNumero());
+			}
+			
+			if (isNotBlank(endereco.getComplemento())) {
+				sb.append(" / ")
+				.append(endereco.getComplemento());
 			}
 
 			if (isNotNull(endereco.getCEP()) && isNotBlank(endereco.getCEP().getCep())) {
-				sb.append(" ");
-				sb.append(HIFEN_SEPERADOR);
-				sb.append(" CEP: ");
-				sb.append(endereco.getCEP().getCep());
+				sb.append(" ")
+				.append(HIFEN_SEPERADOR)
+				.append(" CEP: ")
+				.append(endereco.getCEP().getCep());
 			}
 
 			text.put(campoEndereco2, sb.toString());
