@@ -133,7 +133,7 @@ class CLBancoSantander extends AbstractCLSantander implements CampoLivre {
 
 		// IOF – Seguradoras
 
-		if (Objects.isNotNull(titulo.getParametrosBancarios())
+		if (titulo.hasParametrosBancarios()
 				&& Objects.isNotNull(titulo.getParametrosBancarios().getValor(
 						IOF_SEGURADORA))) {
 

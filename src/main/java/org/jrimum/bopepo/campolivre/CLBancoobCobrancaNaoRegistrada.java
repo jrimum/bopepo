@@ -194,7 +194,7 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 		Integer codigoDaModalidadeDeCobranca = COBRANCA_SIMPLES;
 		Integer numeroDaParcela = UMA_PARCELA;
 		
-		if (ParametrosBancariosMap.hasElement(titulo.getParametrosBancarios())) {
+		if (titulo.hasParametrosBancarios()) {
 
 			if (titulo.getParametrosBancarios()
 					.contemComNome(MODALIDADE_DE_COBRANCA)) {
