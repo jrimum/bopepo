@@ -144,7 +144,7 @@ class BoletoDataBuilder {
 		setCodigoDoBanco();
 		setLinhaDigitavel();
 		setCedente();
-		setAgenciaCondigoCedente();
+		setAgenciaCodigoCedente();
 		setEspecie();
 		setQuantidade();
 		setNossoNumero();
@@ -491,7 +491,7 @@ class BoletoDataBuilder {
 		text.put("txtFcCodBanco", codigoCompensacao + HIFEN_SEPERADOR + digitoCompensacao);
 	}
 
-	private void setAgenciaCondigoCedente(){
+	private void setAgenciaCodigoCedente(){
 
 		StringBuilder sb = new StringBuilder(StringUtils.EMPTY);
 		ContaBancaria conta = boleto.getTitulo().getContaBancaria();
