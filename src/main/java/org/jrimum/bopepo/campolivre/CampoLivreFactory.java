@@ -62,11 +62,6 @@ import org.jrimum.utilix.text.Strings;
  */
 public final class CampoLivreFactory {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8572635342980404937L;
-	
 	private static Logger log = Logger.getLogger(CampoLivreFactory.class);
 
 	/**
