@@ -31,6 +31,7 @@ package org.jrimum.bopepo;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.jrimum.domkee.comum.pessoa.id.cprf.CNPJ;
 import org.jrimum.domkee.financeiro.banco.febraban.Banco;
@@ -206,7 +207,7 @@ public enum BancosSuportados implements Serializable{
 	/**
 	 * Tipo enumerado que representa o <strong>Banco Itaú</strong>, código de
 	 * compensação <strong><tt>341</tt></strong> <a
-	 * href="http://www.itau.com.br">site</a>.
+	 * href="http://www.	.com.br">site</a>.
 	 * 
 	 * @since 0.2
 	 */
@@ -302,7 +303,7 @@ public enum BancosSuportados implements Serializable{
 	 * 
 	 * @since 0.2
 	 */
-	public static final HashMap<String, BancosSuportados> suportados = new HashMap<String, BancosSuportados>(
+	public static final Map<String, BancosSuportados> suportados = new HashMap<String, BancosSuportados>(
 			BancosSuportados.values().length);
 
 	static {

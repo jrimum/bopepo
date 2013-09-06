@@ -36,24 +36,25 @@ import org.junit.Test;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a> 
- *
  */
 public class TestBancosSuportados{
 	
 	/**
-	 * Quantidade atual 
+	 * Quantidade atual
 	 */
 	@Test
-	public void testQuantidade() {
+	public void deve_ser_igual_a_quantidade_de_bancos_declarados_no_enum_e_a_quantidade_disponivel_como_suportado() {
 		
-		assertEquals(BancosSuportados.suportados.size(), 20);
+		assertEquals(BancosSuportados.values().length, BancosSuportados.suportados.size());
 	}
 
 	/**
 	 * Conferência de códigos 
 	 */
 	@Test
-	public void testGetCodigo() {
+	public void deve_ter_o_codigos_bacen_igual_o_da_especificacao_febraban() {
+		
+		
 		//Bancos implementados:
 		assertEquals(BancosSuportados.BANCO_DO_BRASIL.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "001");
 		assertEquals(BancosSuportados.BANCO_DO_NORDESTE_DO_BRASIL.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "004");
