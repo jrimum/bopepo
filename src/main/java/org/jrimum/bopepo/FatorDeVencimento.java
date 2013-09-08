@@ -60,11 +60,6 @@ import org.jrimum.utilix.Exceptions;
 public class FatorDeVencimento{
 
 	/**
-	 *
-	 */
-	private static final long serialVersionUID = -9041865935492749542L;
-
-	/**
 	 * <p>
 	 * Data base para o cálculo do fator de vencimento fixada em 07/10/1997 pela
 	 * FEBRABAN.

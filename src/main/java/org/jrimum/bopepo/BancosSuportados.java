@@ -29,7 +29,6 @@
 
 package org.jrimum.bopepo;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -107,7 +106,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
  * 
  * @version 0.2
  */
-public enum BancosSuportados implements Serializable{
+public enum BancosSuportados{
 
 	/*
 	 * <=====================================================================>
