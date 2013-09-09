@@ -33,6 +33,7 @@ import static java.lang.String.format;
 import static org.jrimum.utilix.Objects.isNull;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -58,6 +59,16 @@ import org.jrimum.utilix.text.Strings;
  * @version 0.2
  */
 public class ResourceBundle {
+	
+	/**
+	 * Nome do arquivo pdf.
+	 */
+	public static final String BOLETO_TEMPLATE_COM_SACADOR_AVALISTA = "BoletoTemplateComSacadorAvalista.pdf";
+	
+	/**
+	 * Nome do arquivo pdf.
+	 */
+	public static final String BOLETO_TEMPLATE_SEM_SACADOR_AVALISTA = "BoletoTemplateSemSacadorAvalista.pdf";
 
 	/**
 	 * Imagens usadas na instancia. 
@@ -118,7 +129,7 @@ public class ResourceBundle {
 		return logo;
 	}
 	
-	private Image loadLogotipoDoBanco(String codigo){	
+	private BufferedImage loadLogotipoDoBanco(String codigo){	
 		
 		final String path = "/img/%s.png";
 		
@@ -130,7 +141,7 @@ public class ResourceBundle {
 		
 		Objects.checkNotNull(url, format("Logo não \"%s\" não encontrada!",logo));		
 
-		Image imageLogo = null;
+		BufferedImage imageLogo = null;
 		
 		try {
 			imageLogo = ImageIO.read(url);
