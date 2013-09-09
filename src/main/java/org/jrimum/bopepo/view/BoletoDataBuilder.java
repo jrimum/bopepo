@@ -147,6 +147,8 @@ class BoletoDataBuilder {
 		setAgenciaCodigoCedente();
 		setEspecie();
 		setQuantidade();
+		setUsoBanco();
+		setValor();
 		setNossoNumero();
 		setNumeroDocumento();
 		setAbstractCPRFCedente();
@@ -471,6 +473,16 @@ class BoletoDataBuilder {
 		text.put("txtFcQuantidade", StringUtils.EMPTY);
 	}
 
+	private void setUsoBanco(){
+		
+		text.put("txtFcUsoBanco", StringUtils.EMPTY);
+	}
+
+	private void setValor(){
+		
+		text.put("txtFcValor", StringUtils.EMPTY);
+	}
+
 	private void setEspecie(){
 
 		if(isNotNull(boleto.getTitulo().getTipoDeMoeda()) && isNotNull(boleto.getTitulo().getTipoDeMoeda())){
@@ -559,19 +571,20 @@ class BoletoDataBuilder {
 
 			if (BancosSuportados.isSuportado(conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado())) {
 				
-					imgLogoBanco = resourceBundle.getLogotipoDoBanco(conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado());
+					String codigoFormatado = conta.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado();
+					
+					imgLogoBanco = resourceBundle.getLogotipoDoBanco(codigoFormatado);
 	
 					if (isNotNull(imgLogoBanco)) {
 
 						conta.getBanco().setImgLogo(imgLogoBanco);
 	
 						if (log.isDebugEnabled()) {
-							log.debug("Banco sem imagem da logo informada. "
+							log.debug(codigoFormatado+"-Banco sem imagem da logo informada. "
 									+ "Com base no código de compensação do banco, uma imagem foi "
 									+ "encontrada no resource e está sendo utilizada.");
 						}
 					}
-					
 			} 
 		}
 		
