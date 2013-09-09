@@ -328,12 +328,7 @@ class PdfViewer {
 	
 	
 	/**
-	 * Executa os seguintes métodos na sequência:
-	 * <ol>
-	 * <li>{@linkplain #inicializar()}</li>
-	 * <li>{@linkplain #preencher()}</li>
-	 * <li>{@linkplain #finalizar()}</li>
-	 * </ol>
+	 * Processa o PDF colocando os dados do Boleto no PDF.
 	 * 
 	 * @since 0.2
 	 */
