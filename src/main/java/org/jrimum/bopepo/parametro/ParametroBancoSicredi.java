@@ -30,8 +30,20 @@
 
 package org.jrimum.bopepo.parametro;
 
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.ParametroBancario;
 
+
+/**
+ * Parâmetros bancários específicos para o
+ * {@link BancosSuportados#BANCO_SICREDI}.
+ * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+ * 
+ * @version 0.2.3
+ * 
+ * @since 0.2
+ */
 public enum ParametroBancoSicredi implements ParametroBancario<ParametroBancoSicredi>{
 	/**
 	 * Nome do parâmetro bancário contendo o valor do posto da agência SICREDI.
