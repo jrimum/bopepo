@@ -30,8 +30,20 @@
 
 package org.jrimum.bopepo.parametro;
 
+import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.ParametroBancario;
 
+
+/**
+ * Parâmetros bancários específicos para o
+ * {@link BancosSuportados#CAIXA_ECONOMICA_FEDERAL}.
+ * 
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+ * 
+ * @version 0.2.3
+ * 
+ * @since 0.2
+ */
 public enum ParametroCaixaEconomicaFederal implements ParametroBancario<ParametroCaixaEconomicaFederal>{
 	CODIGO_OPERACAO;
 }
