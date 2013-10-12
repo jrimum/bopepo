@@ -1,9 +1,11 @@
 package org.jrimum.bopepo.campolivre;
 
+import static org.jrimum.bopepo.parametro.ParametroBancoRural.CODIGO_REDUZIDO;
+import static org.jrimum.bopepo.parametro.ParametroBancoRural.VALOR_IOS;
+
 import java.math.BigDecimal;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.bopepo.parametro.ParametroBancoRural;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
@@ -37,8 +39,8 @@ public class TestCLBancoRuralCobrancaNaoRegistradaSeguradora extends AbstractCam
 		titulo.setDigitoDoNossoNumero("7");
 		
 		ParametrosBancariosMap map = new ParametrosBancariosMap();
-		map.adicione(ParametroBancoRural.VALOR_IOS, new BigDecimal("40.77"));
-		map.adicione(ParametroBancoRural.CODIGO_REDUZIDO, 1);
+		map.adicione(VALOR_IOS, new BigDecimal("40.77"));
+		map.adicione(CODIGO_REDUZIDO, 1);
 		
 		titulo.setParametrosBancarios(map);
 

@@ -1,6 +1,7 @@
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.bopepo.parametro.ParametroBancoSantander;
+import static org.jrimum.bopepo.parametro.ParametroBancoSantander.IOF_SEGURADORA;
+
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.Exceptions;
@@ -129,10 +130,10 @@ class CLBancoSantander extends AbstractCLSantander implements CampoLivre {
 
 		if (titulo.hasParametrosBancarios()
 				&& Objects.isNotNull(titulo.getParametrosBancarios().getValor(
-						ParametroBancoSantander.IOF_SEGURADORA))) {
+						IOF_SEGURADORA))) {
 
 			this.add(new Field<Integer>((Integer) titulo
-					.getParametrosBancarios().getValor(ParametroBancoSantander.IOF_SEGURADORA), 1));
+					.getParametrosBancarios().getValor(IOF_SEGURADORA), 1));
 
 		} else {
 

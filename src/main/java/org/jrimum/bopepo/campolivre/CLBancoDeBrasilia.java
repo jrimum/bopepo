@@ -30,8 +30,9 @@
 package org.jrimum.bopepo.campolivre;
 
 import static java.lang.String.format;
+import static org.jrimum.bopepo.parametro.ParametroBancoDeBrasilia.CHAVE_ASBACE_DIGITO1;
+import static org.jrimum.bopepo.parametro.ParametroBancoDeBrasilia.CHAVE_ASBACE_DIGITO2;
 
-import org.jrimum.bopepo.parametro.ParametroBancoDeBrasilia;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.Objects;
@@ -329,8 +330,8 @@ public class CLBancoDeBrasilia extends AbstractCLBancoDeBrasilia{
 			parametrosBancarios = new ParametrosBancariosMap();
 		}
 		
-		parametrosBancarios.adicione(ParametroBancoDeBrasilia.CHAVE_ASBACE_DIGITO1, this.digitoVerificador1DaChaveASBACE);
-		parametrosBancarios.adicione(ParametroBancoDeBrasilia.CHAVE_ASBACE_DIGITO2, this.digitoVerificador2DaChaveASBACE);
+		parametrosBancarios.adicione(CHAVE_ASBACE_DIGITO1, this.digitoVerificador1DaChaveASBACE);
+		parametrosBancarios.adicione(CHAVE_ASBACE_DIGITO2, this.digitoVerificador2DaChaveASBACE);
 		
 		titulo.setParametrosBancarios(parametrosBancarios);
 	}

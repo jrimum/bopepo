@@ -28,7 +28,9 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.bopepo.parametro.ParametroBancoob;
+import static org.jrimum.bopepo.parametro.ParametroBancoob.MODALIDADE_DE_COBRANCA;
+import static org.jrimum.bopepo.parametro.ParametroBancoob.NUMERO_DA_PARCELA;
+
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Filler;
@@ -186,19 +188,19 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 		if (titulo.hasParametrosBancarios()) {
 
 			if (titulo.getParametrosBancarios()
-					.contemComNome(ParametroBancoob.MODALIDADE_DE_COBRANCA)) {
+					.contemComNome(MODALIDADE_DE_COBRANCA)) {
 
-				checkParametrosBancarios(titulo, ParametroBancoob.MODALIDADE_DE_COBRANCA);
+				checkParametrosBancarios(titulo, MODALIDADE_DE_COBRANCA);
 				
-				codigoDaModalidadeDeCobranca = titulo.getParametrosBancarios().getValor(ParametroBancoob.MODALIDADE_DE_COBRANCA);
+				codigoDaModalidadeDeCobranca = titulo.getParametrosBancarios().getValor(MODALIDADE_DE_COBRANCA);
 			}
 
 			if (titulo.getParametrosBancarios()
-					.contemComNome(ParametroBancoob.NUMERO_DA_PARCELA)) {
+					.contemComNome(NUMERO_DA_PARCELA)) {
 				
-				checkParametrosBancarios(titulo, ParametroBancoob.NUMERO_DA_PARCELA);
+				checkParametrosBancarios(titulo, NUMERO_DA_PARCELA);
 				
-				numeroDaParcela = titulo.getParametrosBancarios().getValor(ParametroBancoob.NUMERO_DA_PARCELA);
+				numeroDaParcela = titulo.getParametrosBancarios().getValor(NUMERO_DA_PARCELA);
 			}
 		}		
 

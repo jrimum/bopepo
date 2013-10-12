@@ -1,10 +1,11 @@
 package org.jrimum.bopepo.campolivre;
 
+import static org.jrimum.bopepo.parametro.ParametroHSBC.IDENTIFICADOR_CNR;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.bopepo.parametro.ParametroHSBC;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
@@ -30,7 +31,7 @@ public class TestCLHSBCCobrancaRegistrada  extends AbstractCampoLivreBaseTest<CL
 		titulo.getContaBancaria().setCarteira(new Carteira(1, TipoDeCobranca.SEM_REGISTRO));
 		titulo.setNossoNumero("0000239104761");
 		titulo.setDataDoVencimento(new GregorianCalendar(2008, Calendar.JULY, 4).getTime());
-		titulo.setParametrosBancarios(new ParametrosBancariosMap(ParametroHSBC.IDENTIFICADOR_CNR, TipoIdentificadorCNR.COM_VENCIMENTO.getConstante()));
+		titulo.setParametrosBancarios(new ParametrosBancariosMap(IDENTIFICADOR_CNR, TipoIdentificadorCNR.COM_VENCIMENTO.getConstante()));
 
 		createCampoLivreToTest();
 

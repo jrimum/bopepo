@@ -29,10 +29,11 @@
 
 package org.jrimum.bopepo.campolivre;
 
+import static org.jrimum.bopepo.parametro.ParametroHSBC.IDENTIFICADOR_CNR;
+
 import java.util.Calendar;
 import java.util.Date;
 
-import org.jrimum.bopepo.parametro.ParametroHSBC;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
@@ -136,7 +137,7 @@ class CLHSBCCobrancaNaoRegistrada extends AbstractCLHSBC {
 				.getParametrosBancarios());
 
 		Integer tipoIdentificadorCNR = titulo
-				.getParametrosBancarios().getValor(ParametroHSBC.IDENTIFICADOR_CNR);
+				.getParametrosBancarios().getValor(IDENTIFICADOR_CNR);
 
 		ContaBancaria conta = titulo.getContaBancaria();
 		String nossoNumero = titulo.getNossoNumero();
@@ -202,7 +203,7 @@ class CLHSBCCobrancaNaoRegistrada extends AbstractCLHSBC {
 	private void checkExistsParametroTipoIdentificadorCNR(ParametrosBancariosMap parametros) {
 
 		Integer tipoIdentificadorCNR = parametros
-				.getValor(ParametroHSBC.IDENTIFICADOR_CNR);
+				.getValor(IDENTIFICADOR_CNR);
 
 		if (Objects.isNull(tipoIdentificadorCNR)) {
 

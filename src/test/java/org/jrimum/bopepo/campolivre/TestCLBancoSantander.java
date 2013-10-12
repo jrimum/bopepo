@@ -1,7 +1,8 @@
 package org.jrimum.bopepo.campolivre;
 
+import static org.jrimum.bopepo.parametro.ParametroBancoSantander.IOF_SEGURADORA;
+
 import org.jrimum.bopepo.BancosSuportados;
-import org.jrimum.bopepo.parametro.ParametroBancoSantander;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
@@ -40,7 +41,7 @@ public class TestCLBancoSantander extends AbstractCampoLivreBaseTest<CLBancoSant
 	@Test
 	public void testIofSeguradora(){
 		
-		titulo.setParametrosBancarios(new ParametrosBancariosMap(ParametroBancoSantander.IOF_SEGURADORA, 8));
+		titulo.setParametrosBancarios(new ParametrosBancariosMap(IOF_SEGURADORA, 8));
 		
 		createCampoLivreToTest();
 		

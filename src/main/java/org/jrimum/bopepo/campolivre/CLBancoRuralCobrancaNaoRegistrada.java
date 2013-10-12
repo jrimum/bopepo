@@ -1,6 +1,7 @@
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.bopepo.parametro.ParametroBancoRural;
+import static org.jrimum.bopepo.parametro.ParametroBancoRural.CODIGO_REDUZIDO;
+
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.text.Field;
@@ -100,7 +101,7 @@ class CLBancoRuralCobrancaNaoRegistrada extends AbstractCLBancoRural{
 		
 		this.add( new Field<Integer>( TIPO_COBRANCA , 1 ) );
 		this.add( new Field<Integer>( titulo.getContaBancaria().getAgencia().getCodigo(), 3 , Filler.ZERO_LEFT ) );
-		this.add( new Field<Integer>((Integer)titulo.getParametrosBancarios().getValor(ParametroBancoRural.CODIGO_REDUZIDO), 3, Filler.ZERO_LEFT ) );
+		this.add( new Field<Integer>((Integer)titulo.getParametrosBancarios().getValor(CODIGO_REDUZIDO), 3, Filler.ZERO_LEFT ) );
 		this.add( new Field<String>( titulo.getNossoNumero(), 15 , Filler.ZERO_LEFT ) );
 		this.add( new Field<String>( ZEROS, 3));
 	}
