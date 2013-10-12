@@ -37,6 +37,7 @@ import java.lang.reflect.ParameterizedType;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import org.jrimum.domkee.financeiro.banco.ParametroBancario;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
@@ -361,7 +362,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 	
-	protected final void testeSeNaoPermiteParametroBancarioSemValor(String parametro) throws IllegalArgumentException{
+	protected final void testeSeNaoPermiteParametroBancarioSemValor(ParametroBancario<?> parametro) throws IllegalArgumentException{
 		
 		//uma exceção deve ser lançada aqui
 		titulo.setParametrosBancarios(new ParametrosBancariosMap(parametro, null));

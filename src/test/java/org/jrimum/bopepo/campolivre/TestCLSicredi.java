@@ -32,6 +32,7 @@ package org.jrimum.bopepo.campolivre;
 import java.math.BigDecimal;
 
 import org.jrimum.bopepo.BancosSuportados;
+import org.jrimum.bopepo.parametro.ParametroBancoSicredi;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
@@ -65,7 +66,7 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(623));
 		titulo.setNossoNumero("07200003");
 		titulo.setDigitoDoNossoNumero("1");
-		titulo.setParametrosBancarios(new ParametrosBancariosMap("PostoDaAgencia",02));
+		titulo.setParametrosBancarios(new ParametrosBancariosMap(ParametroBancoSicredi.POSTO_DA_AGENCIA, 2));
 		titulo.setValor(new BigDecimal("150.35"));
 		
 		createCampoLivreToTest();
@@ -194,7 +195,7 @@ public class TestCLSicredi extends AbstractCampoLivreBaseTest<CLSicredi> {
 	@Test(expected = IllegalArgumentException.class)
 	public void seNaoPermiteParametroBancarioPostoDaAgenciaSemValor() {
 
-		testeSeNaoPermiteParametroBancarioSemValor("PostoDaAgencia");
+		testeSeNaoPermiteParametroBancarioSemValor(ParametroBancoSicredi.POSTO_DA_AGENCIA);
 	}
 	
 	@Test(expected = CampoLivreException.class)

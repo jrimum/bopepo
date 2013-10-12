@@ -2,6 +2,7 @@ package org.jrimum.bopepo.campolivre;
 
 import java.math.BigDecimal;
 
+import org.jrimum.bopepo.parametro.ParametroBancoRural;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.text.Field;
@@ -103,10 +104,10 @@ class CLBancoRuralCobrancaNaoRegistradaSeguradora extends AbstractCLBancoRural{
 		
 		this.add( new Field<Integer>( TIPO_COBRANCA , 1 ) );
 		this.add( new Field<Integer>( titulo.getContaBancaria().getAgencia().getCodigo(), 3 , Filler.ZERO_LEFT ) );
-		this.add( new Field<Integer>((Integer)titulo.getParametrosBancarios().getValor(CODIGO_REDUZIDO), 3, Filler.ZERO_LEFT ) );
+		this.add( new Field<Integer>((Integer)titulo.getParametrosBancarios().getValor(ParametroBancoRural.CODIGO_REDUZIDO), 3, Filler.ZERO_LEFT ) );
 		this.add( new Field<String>( titulo.getNossoNumero(), 10 , Filler.ZERO_LEFT ) );
 		this.add( new Field<String>( titulo.getDigitoDoNossoNumero(), 1 , Filler.ZERO_LEFT ) );
-		this.add( new Field<BigDecimal>(((BigDecimal)titulo.getParametrosBancarios().getValor("VALOR_IOS")).setScale(2, BigDecimal.ROUND_DOWN), 7, Filler.ZERO_LEFT));
+		this.add( new Field<BigDecimal>(((BigDecimal)titulo.getParametrosBancarios().getValor(ParametroBancoRural.VALOR_IOS)).setScale(2, BigDecimal.ROUND_DOWN), 7, Filler.ZERO_LEFT));
 	}
 	
 	@Override

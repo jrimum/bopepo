@@ -1,5 +1,6 @@
 package org.jrimum.bopepo.campolivre;
 
+import org.jrimum.bopepo.parametro.ParametroBancoSantander;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.Exceptions;
@@ -97,13 +98,6 @@ class CLBancoSantander extends AbstractCLSantander implements CampoLivre {
 	private static final Integer CONSTANTE = Integer.valueOf(9);
 
 	/**
-	 * Chave de pesquisa em parâmetros bancários para saber se o boelto deve
-	 * usar IOF – Seguradoras: (Se 7% informar 7. Limitado a 9%); Demais
-	 * clientes usar 0 (zero).
-	 */
-	private static final String IOF_SEGURADORA = "IOF_SEGURADORA";
-
-	/**
 	 * 101- Cobrança Simples Rápida COM Registro
 	 */
 	private static final int CARTEIRA_RAPIDA_COM_REGISTRO = 101;
@@ -135,10 +129,10 @@ class CLBancoSantander extends AbstractCLSantander implements CampoLivre {
 
 		if (titulo.hasParametrosBancarios()
 				&& Objects.isNotNull(titulo.getParametrosBancarios().getValor(
-						IOF_SEGURADORA))) {
+						ParametroBancoSantander.IOF_SEGURADORA))) {
 
 			this.add(new Field<Integer>((Integer) titulo
-					.getParametrosBancarios().getValor(IOF_SEGURADORA), 1));
+					.getParametrosBancarios().getValor(ParametroBancoSantander.IOF_SEGURADORA), 1));
 
 		} else {
 

@@ -36,6 +36,7 @@ import static org.jrimum.domkee.financeiro.banco.febraban.Banco.isCodigoDeCompen
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jrimum.bopepo.BancosSuportados;
+import org.jrimum.domkee.financeiro.banco.ParametroBancario;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.AbstractLineOfFields;
@@ -741,7 +742,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * 
 	 * @since 0.2
 	 */
-	protected final static void checkParametrosBancarios(Titulo titulo, String param){
+	protected final static void checkParametrosBancarios(Titulo titulo, ParametroBancario<?> param){
 		
 		Objects.checkNotNull(titulo.getParametrosBancarios(), format("O parâmetro bancário [\"%s\"] é necessário! [titulo.getParametrosBancarios() == null]",param));
 		Objects.checkArgument(titulo.getParametrosBancarios().contemComNome(param),format("Parâmetro bancário [\"%s\"] não encontrado!",param));

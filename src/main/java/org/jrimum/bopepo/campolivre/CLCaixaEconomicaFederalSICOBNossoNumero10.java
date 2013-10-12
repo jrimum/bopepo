@@ -2,7 +2,7 @@ package org.jrimum.bopepo.campolivre;
 
 import static java.lang.String.format;
 
-import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
+import org.jrimum.bopepo.parametro.ParametroCaixaEconomicaFederal;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
@@ -116,9 +116,9 @@ class CLCaixaEconomicaFederalSICOBNossoNumero10 extends AbstractCLCaixaEconomica
 	
 		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
 		
-		if(titulo.getParametrosBancarios().contemComNome("CodigoOperacao")){
+		if(titulo.getParametrosBancarios().contemComNome(ParametroCaixaEconomicaFederal.CODIGO_OPERACAO)){
 			
-			Integer cnpv = titulo.getParametrosBancarios().getValor("CodigoOperacao");
+			Integer cnpv = titulo.getParametrosBancarios().getValor(ParametroCaixaEconomicaFederal.CODIGO_OPERACAO);
 		
 			Objects.checkNotNull(titulo.getParametrosBancarios(), "Parâmetro bancário código operação inválido [CodigoOperacao==null]!");
 				

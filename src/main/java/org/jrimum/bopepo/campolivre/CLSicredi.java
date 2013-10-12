@@ -33,6 +33,7 @@ package org.jrimum.bopepo.campolivre;
 import static java.lang.String.format;
 import static java.math.BigDecimal.ZERO;
 
+import org.jrimum.bopepo.parametro.ParametroBancoSicredi;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.Objects;
 import org.jrimum.utilix.text.Field;
@@ -153,11 +154,6 @@ class CLSicredi extends AbstractCLSicredi {
 	private static final Integer CARTEIRA_SIMPLES_VALUE = Integer.valueOf(1);
 	
 	/**
-	 * Nome do parâmetro bancário contendo o valor do posto da agência SICREDI.
-	 */
-	private static final String POSTO_DA_AGENCIA = "PostoDaAgencia";
-	
-	/**
 	 * Segunda posição do campo livre.
 	 */
 	private static final Field<Integer> FIELD_CARTEIRA = new Field<Integer>(CARTEIRA_SIMPLES_VALUE, 1);
@@ -195,7 +191,7 @@ class CLSicredi extends AbstractCLSicredi {
 		checkTamanhoDigitoDoNossoNumero(titulo, 1);
 		checkCodigoDaAgencia(titulo);
 		checkCodigoDaAgenciaMenorOuIgualQue(titulo, 99999);
-		checkParametrosBancarios(titulo, POSTO_DA_AGENCIA);
+		checkParametrosBancarios(titulo, ParametroBancoSicredi.POSTO_DA_AGENCIA);
 		checkNumeroDaContaNotNull(titulo);
 		checkCodigoDoNumeroDaConta(titulo);
 		checkCodigoDoNumeroDaContaMenorOuIgualQue(titulo, 99999);
@@ -223,7 +219,7 @@ class CLSicredi extends AbstractCLSicredi {
 		this.add(new Field<String>(titulo.getNossoNumero(), 8, Filler.ZERO_LEFT));
 		this.add(new Field<String>(titulo.getDigitoDoNossoNumero(), 1, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
-		this.add(new Field<Object>(titulo.getParametrosBancarios().getValor(POSTO_DA_AGENCIA), 2, Filler.ZERO_LEFT));
+		this.add(new Field<Object>(titulo.getParametrosBancarios().getValor(ParametroBancoSicredi.POSTO_DA_AGENCIA), 2, Filler.ZERO_LEFT));
 		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 5, Filler.ZERO_LEFT));
 		
 		if (titulo.getValor().compareTo(ZERO) == 1) {

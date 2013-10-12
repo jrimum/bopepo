@@ -32,6 +32,7 @@ package org.jrimum.bopepo.campolivre;
 import static org.junit.Assert.assertEquals;
 
 import org.jrimum.bopepo.BancosSuportados;
+import org.jrimum.bopepo.parametro.ParametroBancoDeBrasilia;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
@@ -68,8 +69,8 @@ public class TestCLBancoDeBrasilia extends AbstractCampoLivreBaseTest<CLBancoDeB
 		createCampoLivreToTest();
 		
 		setCampoLivreEsperadoComoString("0000586002006100000107045");
-		assertEquals(4, titulo.getParametrosBancarios().getValor("ChaveASBACE_Digito1"));
-		assertEquals(5, titulo.getParametrosBancarios().getValor("ChaveASBACE_Digito2"));
+		assertEquals(4, titulo.getParametrosBancarios().getValor(ParametroBancoDeBrasilia.CHAVE_ASBACE_DIGITO1));
+		assertEquals(5, titulo.getParametrosBancarios().getValor(ParametroBancoDeBrasilia.CHAVE_ASBACE_DIGITO2));
 	}
 	
 	@Test
@@ -82,8 +83,8 @@ public class TestCLBancoDeBrasilia extends AbstractCampoLivreBaseTest<CLBancoDeB
 		setCampoLivreEsperadoComoString("0000586002006200000107031");
 		
 		seCampoLivreEscritoEstaCorreto();
-		assertEquals(3, titulo.getParametrosBancarios().getValor("ChaveASBACE_Digito1"));
-		assertEquals(1, titulo.getParametrosBancarios().getValor("ChaveASBACE_Digito2"));
+		assertEquals(3, titulo.getParametrosBancarios().getValor(ParametroBancoDeBrasilia.CHAVE_ASBACE_DIGITO1));
+		assertEquals(1, titulo.getParametrosBancarios().getValor(ParametroBancoDeBrasilia.CHAVE_ASBACE_DIGITO2));
 	}
 
 	@Test(expected = CampoLivreException.class)

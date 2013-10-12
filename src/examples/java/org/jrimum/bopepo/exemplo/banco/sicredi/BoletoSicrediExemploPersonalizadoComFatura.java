@@ -13,6 +13,7 @@ import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.campolivre.NotSupportedBancoException;
 import org.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
+import org.jrimum.bopepo.parametro.ParametroBancoSicredi;
 import org.jrimum.bopepo.view.BoletoViewer;
 import org.jrimum.domkee.comum.pessoa.endereco.CEP;
 import org.jrimum.domkee.comum.pessoa.endereco.Endereco;
@@ -103,7 +104,7 @@ public class BoletoSicrediExemploPersonalizadoComFatura {
 		titulo.setTipoDeDocumento(TipoDeTitulo.DM_DUPLICATA_MERCANTIL);
 		titulo.setAceite(Aceite.A);
 
-		titulo.setParametrosBancarios(new ParametrosBancariosMap("PostoDaAgencia",02));
+		titulo.setParametrosBancarios(new ParametrosBancariosMap(ParametroBancoSicredi.POSTO_DA_AGENCIA, 2));
 		
 		/* 
 		 * INFORMANDO OS DADOS SOBRE O BOLETO.

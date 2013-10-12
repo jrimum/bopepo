@@ -1,6 +1,7 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.bopepo.BancosSuportados;
+import org.jrimum.bopepo.parametro.ParametroBancoRural;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
@@ -32,7 +33,7 @@ public class TestCLBancoRuralCobrancaNaoRegistrada extends AbstractCampoLivreBas
 		titulo.setNossoNumero("123456789012345");
 		
 		// Código Reduzido do Cliente fornecido pelo Banco
-		titulo.setParametrosBancarios( new ParametrosBancariosMap(AbstractCLBancoRural.CODIGO_REDUZIDO, 123));
+		titulo.setParametrosBancarios( new ParametrosBancariosMap(ParametroBancoRural.CODIGO_REDUZIDO, 123));
 				
 		createCampoLivreToTest();
 		
