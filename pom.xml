@@ -150,6 +150,11 @@
 			<version>0.2.3-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>org.jrimum</groupId>
+			<artifactId>jrimum-texgit</artifactId>
+			<version>0.2.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>com.lowagie</groupId>
 			<artifactId>itext</artifactId>
 			<version>2.0.8</version>
