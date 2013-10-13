@@ -38,9 +38,9 @@ import org.apache.log4j.Logger;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.ParametroBancario;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.FixedField;
+import org.jrimum.texgit.type.component.BlockOfFields;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.AbstractLineOfFields;
-import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Strings;
 
 /**
@@ -82,7 +82,7 @@ import org.jrimum.utilix.text.Strings;
  * 
  * @version 0.2
  */
-abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoLivre {
+abstract class AbstractCampoLivre extends BlockOfFields implements CampoLivre {
 
 	/**
 	 * {@code serialVersionUID = 4605730904122445595L}
@@ -135,27 +135,27 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	static final int NN17 = 17;
 
 	/**
-	 * <p>Subclasses não precisam definir o tamanho.</p>
+	 * Subclasses não precisam definir o tamanho.
 	 */
+	@SuppressWarnings("unused")
 	private AbstractCampoLivre(Integer fieldsLength, Integer stringLength) {
-		
-		super(fieldsLength, stringLength);
-	}
-	
-	/**
-	 * <p>Cria um campo livre com um determinado número de campos</p>
-	 * 
-	 * @param fieldsLength - Número de campos
-	 */
-	protected AbstractCampoLivre(Integer fieldsLength) {
-		
-		super (fieldsLength, CampoLivre.STRING_LENGTH);
+		super(null,null);
 	}
 
 	/**
-	 * <p>
+	 * Cria um campo livre com um determinado número de campos
+	 * 
+	 * @param fieldsLength
+	 *            - Número de campos
+	 */
+	protected AbstractCampoLivre(Integer fieldsLength) {
+		super();
+		setLength(CampoLivre.STRING_LENGTH);
+		setSize(fieldsLength);
+	}
+
+	/**
 	 * Cria um campo livre a partir dos dados contidos no título fornecido.
-	 * </p>
 	 * 
 	 * @param titulo
 	 *            com todos os dados para a geração do campo livre
@@ -322,7 +322,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 
 		StringBuilder campoLivreAtual = new StringBuilder();
 		
-		for(Field<?> f : this){
+		for(FixedField<?> f : this){
 			campoLivreAtual.append(f.write());
 		}
 		

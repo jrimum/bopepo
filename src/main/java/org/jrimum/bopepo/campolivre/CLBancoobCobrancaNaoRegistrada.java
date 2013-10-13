@@ -32,8 +32,8 @@ import static org.jrimum.bopepo.parametro.ParametroBancoob.MODALIDADE_DE_COBRANC
 import static org.jrimum.bopepo.parametro.ParametroBancoob.NUMERO_DA_PARCELA;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 
 /**
  * <p>
@@ -204,12 +204,12 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 			}
 		}		
 
-		this.add(new Field<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), CARTEIRA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), AGENCIA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(codigoDaModalidadeDeCobranca, MODALIDADE_DE_COBRANCA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<String>(titulo.getNossoNumero(),NOSSO_NUMERO_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(numeroDaParcela, NUMERO_DA_PARCELA_LENGTH, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), CARTEIRA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), AGENCIA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(codigoDaModalidadeDeCobranca, MODALIDADE_DE_COBRANCA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getNossoNumero(),NOSSO_NUMERO_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(numeroDaParcela, NUMERO_DA_PARCELA_LENGTH, Fillers.ZERO_LEFT));
 
 	}
 	

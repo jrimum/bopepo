@@ -36,9 +36,9 @@ import static org.apache.commons.lang.StringUtils.strip;
 
 import org.apache.log4j.Logger;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 import org.jrimum.utilix.text.Strings;
 
 
@@ -113,8 +113,8 @@ public final class CampoLivreFactory {
 
 						private static final long serialVersionUID = -7592488081807235080L;
 
-						Field<String> campo = new Field<String>(EMPTY,
-								STRING_LENGTH, Filler.ZERO_LEFT);
+						FixedField<String> campo = new FixedField<String>(EMPTY,
+								STRING_LENGTH, Fillers.ZERO_LEFT);
 
 						
 						public void read(String str) {

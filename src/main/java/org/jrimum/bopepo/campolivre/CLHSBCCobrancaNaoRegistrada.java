@@ -37,10 +37,10 @@ import java.util.Date;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 
 /**
  * <p>
@@ -143,19 +143,19 @@ class CLHSBCCobrancaNaoRegistrada extends AbstractCLHSBC {
 		String nossoNumero = titulo.getNossoNumero();
 
 		// Conta do cedente (sem dígito)
-		this.add(new Field<Integer>(
+		this.add(new FixedField<Integer>(
 				conta.getNumeroDaConta().getCodigoDaConta(), 7,
-				Filler.ZERO_LEFT));
+				Fillers.ZERO_LEFT));
 
 		// Nosso número (sem dígito)
-		this.add(new Field<String>(nossoNumero, 13, Filler.ZERO_LEFT));
+		this.add(new FixedField<String>(nossoNumero, 13, Fillers.ZERO_LEFT));
 
-		this.add(new Field<String>(getDataVencimentoFormatoJuliano(
+		this.add(new FixedField<String>(getDataVencimentoFormatoJuliano(
 				tipoIdentificadorCNR, titulo.getDataDoVencimento()), 4,
-				Filler.ZERO_LEFT));
+				Fillers.ZERO_LEFT));
 
 		// 2 FIXO (Código do Aplicativo CNR - Cob. Não Registrada)
-		this.add(new Field<Integer>(2, 1));
+		this.add(new FixedField<Integer>(2, 1));
 
 	}
 

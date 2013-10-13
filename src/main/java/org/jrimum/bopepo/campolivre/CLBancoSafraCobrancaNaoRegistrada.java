@@ -31,8 +31,8 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 
 /**
  * <p>
@@ -155,10 +155,10 @@ class CLBancoSafraCobrancaNaoRegistrada extends AbstractCLBancoSafra {
 	protected void addFields(Titulo titulo) {
 
 		this.add(SISTEMA_CONSTANT_FIELD);
-		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<String>(titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta(), CONTA_DIGITO_LENGTH));
-		this.add(new Field<String>(titulo.getNossoNumero(), NOSSO_NUMERO_LENGTH));		
-		this.add(new Field<Integer>(TipoDeCobranca.EXPRESS_BOLETO_EMITIDO_PELO_CLIENTE.codigo(), TIPO_COBRANCA_FIELD_LENGTH));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta(), CONTA_DIGITO_LENGTH));
+		this.add(new FixedField<String>(titulo.getNossoNumero(), NOSSO_NUMERO_LENGTH));		
+		this.add(new FixedField<Integer>(TipoDeCobranca.EXPRESS_BOLETO_EMITIDO_PELO_CLIENTE.codigo(), TIPO_COBRANCA_FIELD_LENGTH));
 	}
 
 }

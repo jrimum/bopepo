@@ -32,8 +32,8 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 
 /**
  * <p>
@@ -207,12 +207,12 @@ class CLBancoDoNordesteDoBrasil extends AbstractCLBancoDoNordesteDoBrasil {
 	@Override
 	protected void addFields(Titulo titulo) {
 		
-		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), AGENCIA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<String>(titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta(), DIGITO_CONTA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<String>(titulo.getNossoNumero(), NOSSO_NUMERO_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<String>(titulo.getDigitoDoNossoNumero(), DIGITO_NOSSO_NUMERO_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), CARTEIRA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(CAMPO_ZERADO_VALUE, CAMPO_ZERADO_LENGTH,  Filler.ZERO_LEFT));		
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), AGENCIA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta(), DIGITO_CONTA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getNossoNumero(), NOSSO_NUMERO_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getDigitoDoNossoNumero(), DIGITO_NOSSO_NUMERO_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), CARTEIRA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(CAMPO_ZERADO_VALUE, CAMPO_ZERADO_LENGTH,  Fillers.ZERO_LEFT));		
 	}
 }

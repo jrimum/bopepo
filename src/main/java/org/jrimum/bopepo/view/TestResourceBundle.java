@@ -31,7 +31,9 @@ package org.jrimum.bopepo.view;
 
 import static org.jrimum.bopepo.view.ResourceBundle.BOLETO_TEMPLATE_COM_SACADOR_AVALISTA;
 import static org.jrimum.bopepo.view.ResourceBundle.BOLETO_TEMPLATE_SEM_SACADOR_AVALISTA;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;

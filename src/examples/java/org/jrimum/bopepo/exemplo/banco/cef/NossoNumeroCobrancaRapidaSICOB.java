@@ -28,8 +28,8 @@
  */
 package org.jrimum.bopepo.exemplo.banco.cef;
 
+import org.jrimum.texgit.type.component.Fillers;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Filler;
 import org.jrimum.vallia.digitoverificador.Modulo;
 
 /**
@@ -83,7 +83,7 @@ public class NossoNumeroCobrancaRapidaSICOB {
 	private void create(){
 		
 		nossoNumero.append(9);
-		nossoNumero.append(Filler.ZERO_LEFT.fill(numero, 9));
+		nossoNumero.append(Fillers.ZERO_LEFT.fill(numero, 9));
 		
 		String formula = nossoNumero.toString();
 		
@@ -115,7 +115,7 @@ public class NossoNumeroCobrancaRapidaSICOB {
 	 * @return nosso número
 	 */
 	public String writeRaw(){
-		return Filler.ZERO_LEFT.fill(numero, 10);
+		return Fillers.ZERO_LEFT.fill(numero, 10);
 	}
 	
 	/**
@@ -133,7 +133,7 @@ public class NossoNumeroCobrancaRapidaSICOB {
 	 * @return nosso número
 	 */
 	public String writeFormated(){
-		return "9"+Filler.ZERO_LEFT.fill(numero, 9)+"-"+dv;
+		return "9"+Fillers.ZERO_LEFT.fill(numero, 9)+"-"+dv;
 	}
 	
 	/**

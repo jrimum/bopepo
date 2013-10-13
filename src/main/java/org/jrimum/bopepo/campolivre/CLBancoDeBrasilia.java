@@ -35,9 +35,9 @@ import static org.jrimum.bopepo.parametro.ParametroBancoDeBrasilia.CHAVE_ASBACE_
 
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 import org.jrimum.vallia.digitoverificador.Modulo;
 
 /**
@@ -244,15 +244,15 @@ public class CLBancoDeBrasilia extends AbstractCLBancoDeBrasilia{
 	@Override
 	protected void addFields(Titulo titulo) {
 		
-		this.add(new Field<String>(CAMPO_ZERADO_VALUE, CAMPO_ZERADO_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), AGENCIA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), CARTEIRA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<String>(titulo.getNossoNumero(), NOSSO_NUMERO_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigo(), BANCO_LENGTH, Filler.ZERO_LEFT));
+		this.add(new FixedField<String>(CAMPO_ZERADO_VALUE, CAMPO_ZERADO_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), AGENCIA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), CARTEIRA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getNossoNumero(), NOSSO_NUMERO_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigo(), BANCO_LENGTH, Fillers.ZERO_LEFT));
 		calculeDigitosNecessariosDaChaveASBACE();
-		this.add(new Field<Integer>(this.digitoVerificador1DaChaveASBACE, DIGITO_CHAVE_ASBACE_LENGTH));
-		this.add(new Field<Integer>(this.digitoVerificador2DaChaveASBACE, DIGITO_CHAVE_ASBACE_LENGTH));	
+		this.add(new FixedField<Integer>(this.digitoVerificador1DaChaveASBACE, DIGITO_CHAVE_ASBACE_LENGTH));
+		this.add(new FixedField<Integer>(this.digitoVerificador2DaChaveASBACE, DIGITO_CHAVE_ASBACE_LENGTH));	
 		
 		disponibilizeDigitosDaChaveAsbaceNeste(titulo);
 	}

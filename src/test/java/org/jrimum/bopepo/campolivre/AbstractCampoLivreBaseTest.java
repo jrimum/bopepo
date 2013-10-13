@@ -89,7 +89,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 	
 	@Test
 	public final void seTamanhoDoCampoLivreEscritoIgualA25() {
-		
+		 campoLivreToTest.write().length();
 		assertEquals(25, campoLivreToTest.write().length());
 	}
 	
@@ -104,7 +104,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 	
 	@Test
 	public final void seCampoLivreEscritoEstaCorreto() {
-		
+		campoLivreToTest.write();
 		assertEquals(campoLivreValidoAsString, campoLivreToTest.write());
 	}
 	

@@ -33,9 +33,7 @@ package org.jrimum.bopepo;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import org.jrimum.bopepo.campolivre.CampoLivre;
 import org.jrimum.bopepo.campolivre.CampoLivreFactory;
@@ -47,6 +45,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeMoeda;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.utilix.text.DateFormat;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -64,7 +63,7 @@ public class TestLinhaDigitavel{
 	
 	private LinhaDigitavel linhaDigitavel;
 	
-	private Date VENCIMENTO = new GregorianCalendar(2000, Calendar.JULY, 3).getTime();
+	private Date VENCIMENTO = DateFormat.DDMMYYYY_B.parse("03/07/2000");
 
 	@Before
 	public void setUp() throws Exception {

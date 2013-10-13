@@ -3,9 +3,9 @@ package org.jrimum.bopepo.campolivre;
 import static org.jrimum.bopepo.parametro.ParametroBancoRural.CODIGO_REDUZIDO;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 
 /**
  * <p>
@@ -99,11 +99,11 @@ class CLBancoRuralCobrancaNaoRegistrada extends AbstractCLBancoRural{
 		
 		super(FIELDS_LENGTH);
 		
-		this.add( new Field<Integer>( TIPO_COBRANCA , 1 ) );
-		this.add( new Field<Integer>( titulo.getContaBancaria().getAgencia().getCodigo(), 3 , Filler.ZERO_LEFT ) );
-		this.add( new Field<Integer>((Integer)titulo.getParametrosBancarios().getValor(CODIGO_REDUZIDO), 3, Filler.ZERO_LEFT ) );
-		this.add( new Field<String>( titulo.getNossoNumero(), 15 , Filler.ZERO_LEFT ) );
-		this.add( new Field<String>( ZEROS, 3));
+		this.add( new FixedField<Integer>( TIPO_COBRANCA , 1 ) );
+		this.add( new FixedField<Integer>( titulo.getContaBancaria().getAgencia().getCodigo(), 3 , Fillers.ZERO_LEFT ) );
+		this.add( new FixedField<Integer>((Integer)titulo.getParametrosBancarios().getValor(CODIGO_REDUZIDO), 3, Fillers.ZERO_LEFT ) );
+		this.add( new FixedField<String>( titulo.getNossoNumero(), 15 , Fillers.ZERO_LEFT ) );
+		this.add( new FixedField<String>( ZEROS, 3));
 	}
 	
 	@Override

@@ -4,10 +4,10 @@ import static java.lang.String.format;
 import static org.jrimum.bopepo.parametro.ParametroCaixaEconomicaFederal.CODIGO_OPERACAO;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 
 /**
  * <p>
@@ -112,9 +112,9 @@ class CLCaixaEconomicaFederalSICOBNossoNumero10 extends AbstractCLCaixaEconomica
 		}
 		*/
 		
-		this.add(new Field<String>(titulo.getNossoNumero(), 10));
+		this.add(new FixedField<String>(titulo.getNossoNumero(), 10));
 	
-		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Fillers.ZERO_LEFT));
 		
 		if(titulo.getParametrosBancarios().contemComNome(CODIGO_OPERACAO)){
 			
@@ -122,9 +122,9 @@ class CLCaixaEconomicaFederalSICOBNossoNumero10 extends AbstractCLCaixaEconomica
 		
 			Objects.checkNotNull(titulo.getParametrosBancarios(), "Parâmetro bancário código operação inválido [CodigoOperacao==null]!");
 				
-			this.add(new Field<Integer>(cnpv, 3, Filler.ZERO_LEFT));
+			this.add(new FixedField<Integer>(cnpv, 3, Fillers.ZERO_LEFT));
 			
-			this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 8, Filler.ZERO_LEFT));
+			this.add(new FixedField<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 8, Fillers.ZERO_LEFT));
 			
 		}else{
 			

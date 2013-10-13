@@ -32,9 +32,9 @@ package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 
 /**
  * 
@@ -133,19 +133,19 @@ class CLItauComCarteirasEspeciais extends AbstractCLItau {
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		
-		this.add(new Field<Integer>(conta.getCarteira().getCodigo(), 3, Filler.ZERO_LEFT));
-		this.add(new Field<String>(titulo.getNossoNumero(), 8, Filler.ZERO_LEFT));
-		this.add(new Field<String>(titulo.getNumeroDoDocumento(), 7, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(conta.getCarteira().getCodigo(), 3, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getNossoNumero(), 8, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getNumeroDoDocumento(), 7, Fillers.ZERO_LEFT));
 		
 		//Aqui é o código do cedente, simbolizado pelo código da conta bancária.
-		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 5, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 5, Fillers.ZERO_LEFT));
 		
-		this.add(new Field<Integer>(calculeDigitoDoCampoLivreEspecial(
+		this.add(new FixedField<Integer>(calculeDigitoDoCampoLivreEspecial(
 											conta.getCarteira().getCodigo(), 
 											titulo.getNossoNumero(),
 											titulo.getNumeroDoDocumento(),
 											conta.getNumeroDaConta().getCodigoDaConta()), 1));
-		this.add(new Field<Integer>(0, 1));
+		this.add(new FixedField<Integer>(0, 1));
 	}
 	
 	/**
@@ -169,10 +169,10 @@ class CLItauComCarteirasEspeciais extends AbstractCLItau {
 
 		StringBuilder campo = new StringBuilder();
 		
-		campo.append(Filler.ZERO_LEFT.fill(codigoDaCarteira.intValue(), 3));
-		campo.append(Filler.ZERO_LEFT.fill(nossoNumero, 8));
-		campo.append(Filler.ZERO_LEFT.fill(numeroDoDocumento, 7));
-		campo.append(Filler.ZERO_LEFT.fill(codigoDaConta, 5));
+		campo.append(Fillers.ZERO_LEFT.fill(codigoDaCarteira.intValue(), 3));
+		campo.append(Fillers.ZERO_LEFT.fill(nossoNumero, 8));
+		campo.append(Fillers.ZERO_LEFT.fill(numeroDoDocumento, 7));
+		campo.append(Fillers.ZERO_LEFT.fill(codigoDaConta, 5));
 		
 		return calculeDigitoVerificador(campo.toString());
 	}

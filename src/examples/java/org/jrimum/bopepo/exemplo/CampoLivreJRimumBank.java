@@ -29,11 +29,12 @@
  */
 package org.jrimum.bopepo.exemplo;
 
+import static org.jrimum.texgit.type.component.Fillers.ZERO_LEFT;
+
 import org.jrimum.bopepo.campolivre.CampoLivre;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
+import org.jrimum.texgit.type.component.FixedField;
 
 /**
  * <p>
@@ -106,10 +107,10 @@ public class CampoLivreJRimumBank implements CampoLivre {
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		
-		Field<Integer> fieldConta = new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT);
-		Field<Integer> fieldAgencia = new Field<Integer>(conta.getAgencia().getCodigo(), 4, Filler.ZERO_LEFT);
-		Field<Integer> fieldZeros = new Field<Integer>(0, 6, Filler.ZERO_LEFT);
-		Field<String> fieldNossoNumero = new Field<String>(titulo.getNossoNumero(), 9);
+		FixedField<Integer> fieldConta = new FixedField<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, ZERO_LEFT);
+		FixedField<Integer> fieldAgencia = new FixedField<Integer>(conta.getAgencia().getCodigo(), 4, ZERO_LEFT);
+		FixedField<Integer> fieldZeros = new FixedField<Integer>(0, 6, ZERO_LEFT);
+		FixedField<String> fieldNossoNumero = new FixedField<String>(titulo.getNossoNumero(), 9);
 		
 		return fieldConta.write() + fieldAgencia.write() + fieldZeros.write() + fieldNossoNumero.write();
 	}

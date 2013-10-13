@@ -34,9 +34,9 @@ import java.util.Arrays;
 
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 
 /**
  * 
@@ -136,23 +136,23 @@ class CLItauPadrao extends AbstractCLItau {
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		
-		this.add(new Field<Integer>(conta.getCarteira().getCodigo(), 3, Filler.ZERO_LEFT));
-		this.add(new Field<String>(titulo.getNossoNumero(), 8, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(conta.getCarteira().getCodigo(), 3, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getNossoNumero(), 8, Fillers.ZERO_LEFT));
 		
-		this.add(new Field<Integer>(calculeDigitoDaPosicao31(
+		this.add(new FixedField<Integer>(calculeDigitoDaPosicao31(
 									conta.getAgencia().getCodigo(), 
 									conta.getNumeroDaConta().getCodigoDaConta(), 
 									conta.getCarteira().getCodigo(), 
 									titulo.getNossoNumero()), 1));
 		
-		this.add(new Field<Integer>(conta.getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 5, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(conta.getAgencia().getCodigo(), 4, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 5, Fillers.ZERO_LEFT));
 		
-		this.add(new Field<Integer>(calculeDigitoDaPosicao41(
+		this.add(new FixedField<Integer>(calculeDigitoDaPosicao41(
 									conta.getAgencia().getCodigo(), 
 									conta.getNumeroDaConta().getCodigoDaConta()), 1));
 		
-		this.add(new Field<String>("000", 3));
+		this.add(new FixedField<String>("000", 3));
 	}
 	
 	/**
@@ -221,8 +221,8 @@ class CLItauPadrao extends AbstractCLItau {
 		Integer[] carteirasModalidadeDireta = {126, 131, 146, 150, 168};
 		
 		StringBuilder campo = new StringBuilder();
-		campo.append(Filler.ZERO_LEFT.fill(codigoDaCarteira.intValue(), 3));
-		campo.append(Filler.ZERO_LEFT.fill(nossoNumero, 8));
+		campo.append(Fillers.ZERO_LEFT.fill(codigoDaCarteira.intValue(), 3));
+		campo.append(Fillers.ZERO_LEFT.fill(nossoNumero, 8));
 		
 		/*
 		 * Se a carteira em questão não estiver nas lista de exceções então
@@ -232,8 +232,8 @@ class CLItauPadrao extends AbstractCLItau {
 		if (Arrays.binarySearch(carteirasModalidadeDireta, codigoDaCarteira) < 0
 		    && Arrays.binarySearch(carteirasEscriturais, codigoDaCarteira) < 0) {
 			
-			campo.insert(0, Filler.ZERO_LEFT.fill(codigoDaConta.intValue(), 5));
-			campo.insert(0, Filler.ZERO_LEFT.fill(codigoDaAgencia.intValue(), 4));
+			campo.insert(0, Fillers.ZERO_LEFT.fill(codigoDaConta.intValue(), 5));
+			campo.insert(0, Fillers.ZERO_LEFT.fill(codigoDaAgencia.intValue(), 4));
 		}
 		
 		return calculeDigitoVerificador(campo.toString());
@@ -276,8 +276,8 @@ class CLItauPadrao extends AbstractCLItau {
 			Integer codigoDaConta) {
 
 		StringBuilder campo = new StringBuilder();
-		campo.append(Filler.ZERO_LEFT.fill(codigoDaAgencia.intValue(), 4));
-		campo.append(Filler.ZERO_LEFT.fill(codigoDaConta.intValue(), 5));
+		campo.append(Fillers.ZERO_LEFT.fill(codigoDaAgencia.intValue(), 4));
+		campo.append(Fillers.ZERO_LEFT.fill(codigoDaConta.intValue(), 5));
 		
 		return calculeDigitoVerificador(campo.toString());
 	}

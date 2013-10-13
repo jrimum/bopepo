@@ -33,8 +33,8 @@ package org.jrimum.bopepo.campolivre;
 import static java.lang.String.format;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
-import org.jrimum.utilix.text.Field;
 
 /**
  * <p>
@@ -107,7 +107,7 @@ abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
 	/**
 	 * Constante em forma de campo {@link #CONSTANT_VALUE} e {@link #CONSTANT_LENGTH}.
 	 */
-	protected static final Field<Integer> SISTEMA_CONSTANT_FIELD = new Field<Integer>(CONSTANT_VALUE_SISTEMA, CONSTANT_LENGTH_SISTEMA);
+	protected static final FixedField<Integer> SISTEMA_CONSTANT_FIELD = new FixedField<Integer>(CONSTANT_VALUE_SISTEMA, CONSTANT_LENGTH_SISTEMA);
 	
 	/**
 	 * Tamanho do campo = 1, chamado de "TIPO DE COBRANÇA", definido pelo Banco

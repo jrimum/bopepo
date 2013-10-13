@@ -35,9 +35,9 @@ import static java.math.BigDecimal.ZERO;
 import static org.jrimum.bopepo.parametro.ParametroBancoSicredi.POSTO_DA_AGENCIA;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 import org.jrimum.vallia.digitoverificador.Modulo;
 import org.jrimum.vallia.digitoverificador.TipoDeModulo;
 
@@ -156,7 +156,7 @@ class CLSicredi extends AbstractCLSicredi {
 	/**
 	 * Segunda posição do campo livre.
 	 */
-	private static final Field<Integer> FIELD_CARTEIRA = new Field<Integer>(CARTEIRA_SIMPLES_VALUE, 1);
+	private static final FixedField<Integer> FIELD_CARTEIRA = new FixedField<Integer>(CARTEIRA_SIMPLES_VALUE, 1);
 	
 	/**
 	 * Instância de módulo 11 para cálculo do DV do campo livre.   
@@ -208,31 +208,31 @@ class CLSicredi extends AbstractCLSicredi {
 		
 		if(titulo.getContaBancaria().getCarteira().isComRegistro()){
 			
-			this.add(new Field<String>(COBRANCA_COM_REGISTRO, 1));
+			this.add(new FixedField<String>(COBRANCA_COM_REGISTRO, 1));
 			
 		}else{
 			
-			this.add(new Field<String>(COBRANCA_SEM_REGISTRO, 1));
+			this.add(new FixedField<String>(COBRANCA_SEM_REGISTRO, 1));
 		}
 		
 		this.add(FIELD_CARTEIRA);
-		this.add(new Field<String>(titulo.getNossoNumero(), 8, Filler.ZERO_LEFT));
-		this.add(new Field<String>(titulo.getDigitoDoNossoNumero(), 1, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
-		this.add(new Field<Object>(titulo.getParametrosBancarios().getValor(POSTO_DA_AGENCIA), 2, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 5, Filler.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getNossoNumero(), 8, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getDigitoDoNossoNumero(), 1, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Object>(titulo.getParametrosBancarios().getValor(POSTO_DA_AGENCIA), 2, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 5, Fillers.ZERO_LEFT));
 		
 		if (titulo.getValor().compareTo(ZERO) == 1) {
 			
-			this.add(new Field<String>("1", 1));
+			this.add(new FixedField<String>("1", 1));
 			
 		} else {
 			
-			this.add(new Field<String>("0", 1));
+			this.add(new FixedField<String>("0", 1));
 		}
 
-		this.add(new Field<String>("0", 1));
-		this.add(new Field<Integer>(calculeDigitoVerificador(), 1));
+		this.add(new FixedField<String>("0", 1));
+		this.add(new FixedField<Integer>(calculeDigitoVerificador(), 1));
 	}
 	
 	/**

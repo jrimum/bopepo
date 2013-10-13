@@ -29,8 +29,8 @@
 
 package org.jrimum.bopepo.exemplo.banco.banrisul;
 
+import org.jrimum.texgit.type.component.Fillers;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Filler;
 import org.jrimum.vallia.digitoverificador.Modulo;
 
 /**
@@ -75,7 +75,7 @@ public class NossoNumero {
 	 */
 	private void create(){
 		
-		nossoNumero.append(Filler.ZERO_LEFT.fill(numero, 8));
+		nossoNumero.append(Fillers.ZERO_LEFT.fill(numero, 8));
 		
 		calculeDvMod10();
 		calculeDvMod11();
@@ -191,7 +191,7 @@ public class NossoNumero {
 	 * @return nosso número
 	 */
 	public String writeRaw(){
-		return Filler.ZERO_LEFT.fill(numero, 8);
+		return Fillers.ZERO_LEFT.fill(numero, 8);
 	}
 	
 	/**
@@ -209,7 +209,7 @@ public class NossoNumero {
 	 * @return nosso número
 	 */
 	public String writeFormated(){
-		return Filler.ZERO_LEFT.fill(numero, 8)+"."+getDv();
+		return Fillers.ZERO_LEFT.fill(numero, 8)+"."+getDv();
 	}
 	
 	/**

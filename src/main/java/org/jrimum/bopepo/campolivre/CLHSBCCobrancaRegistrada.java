@@ -30,9 +30,9 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 
 /**
  * <p>
@@ -122,12 +122,12 @@ class CLHSBCCobrancaRegistrada extends AbstractCLHSBC{
 		
 		super(FIELDS_LENGTH);
 		
-		this.add(new Field<String>(titulo.getNossoNumero(), 10, Filler.ZERO_LEFT));	
-		this.add(new Field<String>(titulo.getDigitoDoNossoNumero(), 1));	
-		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
-		this.add(new Field<String>(CODIGO_DA_CARTEIRA, 2));
-		this.add(new Field<Integer>(CODIGO_DO_APLICATIVO, 1));
+		this.add(new FixedField<String>(titulo.getNossoNumero(), 10, Fillers.ZERO_LEFT));	
+		this.add(new FixedField<String>(titulo.getDigitoDoNossoNumero(), 1));	
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 7, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(CODIGO_DA_CARTEIRA, 2));
+		this.add(new FixedField<Integer>(CODIGO_DO_APLICATIVO, 1));
 	}
 	
 	@Override

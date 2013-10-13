@@ -33,9 +33,9 @@ import java.util.Arrays;
 
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 import org.jrimum.vallia.digitoverificador.Modulo;
 import org.jrimum.vallia.digitoverificador.TipoDeModulo;
 
@@ -164,24 +164,24 @@ class CLNossaCaixa extends AbstractCLNossaCaixa {
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		Integer modalidadeContaConvertida = convertaModalidadeDaConta(contaBancaria.getModalidade().getCodigoAsInteger());
 		
-		this.add(new Field<Integer>(getIdentificacaoDoSistemaPeloNossoNumero(titulo.getNossoNumero()), 1));
+		this.add(new FixedField<Integer>(getIdentificacaoDoSistemaPeloNossoNumero(titulo.getNossoNumero()), 1));
 		
-		this.add(new Field<String>(getNossoNumeroCom8Posicoes(titulo.getNossoNumero()), 8));
+		this.add(new FixedField<String>(getNossoNumeroCom8Posicoes(titulo.getNossoNumero()), 8));
 		
-		this.add(new Field<Integer>(contaBancaria.getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(contaBancaria.getAgencia().getCodigo(), 4, Fillers.ZERO_LEFT));
 		
-		this.add(new Field<Integer>(modalidadeContaConvertida, 1));
+		this.add(new FixedField<Integer>(modalidadeContaConvertida, 1));
 		
-		this.add(new Field<Integer>(contaBancaria.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(contaBancaria.getNumeroDaConta().getCodigoDaConta(), 6, Fillers.ZERO_LEFT));
 		
-		this.add(new Field<Integer>(contaBancaria.getBanco().getCodigoDeCompensacaoBACEN().getCodigo(), 3));
+		this.add(new FixedField<Integer>(contaBancaria.getBanco().getCodigoDeCompensacaoBACEN().getCodigo(), 3));
 		
 		digito1ASBACE = calculeDigito1ASBACE(titulo, modalidadeContaConvertida);
 		int digito2ASBACE = calculeDigito2ASBACE(titulo, modalidadeContaConvertida, digito1ASBACE);
 		
-		this.add(new Field<Integer>(digito1ASBACE, 1));
+		this.add(new FixedField<Integer>(digito1ASBACE, 1));
 		
-		this.add(new Field<Integer>(digito2ASBACE, 1));
+		this.add(new FixedField<Integer>(digito2ASBACE, 1));
 	}
 	
 	/**
@@ -274,9 +274,9 @@ class CLNossaCaixa extends AbstractCLNossaCaixa {
 		StringBuilder numeroParaCalculo = new StringBuilder();
 		numeroParaCalculo.append(getIdentificacaoDoSistemaPeloNossoNumero(titulo.getNossoNumero()));
 		numeroParaCalculo.append(getNossoNumeroCom8Posicoes(titulo.getNossoNumero()));
-		numeroParaCalculo.append(Filler.ZERO_LEFT.fill(titulo.getContaBancaria().getAgencia().getCodigo(), 4));
+		numeroParaCalculo.append(Fillers.ZERO_LEFT.fill(titulo.getContaBancaria().getAgencia().getCodigo(), 4));
 		numeroParaCalculo.append(modalidadeDaConta);
-		numeroParaCalculo.append(Filler.ZERO_LEFT.fill(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 6));
+		numeroParaCalculo.append(Fillers.ZERO_LEFT.fill(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 6));
 		numeroParaCalculo.append(titulo.getContaBancaria().getBanco().getCodigoDeCompensacaoBACEN().getCodigo());
 		
 		return numeroParaCalculo.toString();

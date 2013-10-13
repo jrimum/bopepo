@@ -32,9 +32,9 @@ package org.jrimum.bopepo;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.jrimum.texgit.type.component.BlockOfFields;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.AbstractLineOfFields;
-import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Strings;
 import org.jrimum.vallia.digitoverificador.BoletoLinhaDigitavelDV;
 
@@ -162,7 +162,7 @@ import org.jrimum.vallia.digitoverificador.BoletoLinhaDigitavelDV;
  * 
  * @version 0.2
  */
-public final class LinhaDigitavel extends AbstractLineOfFields {
+public final class LinhaDigitavel extends BlockOfFields {
 	
 	/**
 	 * 
@@ -186,29 +186,29 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 	/**
 	 * 
 	 */
-	private Field<InnerCampo1> innerCampo1;
+	private FixedField<InnerCampo1> innerCampo1;
 	
 	/**
 	 * 
 	 */
-	private Field<InnerCampo2> innerCampo2;
+	private FixedField<InnerCampo2> innerCampo2;
 	
 	/**
 	 * 
 	 */
-	private Field<InnerCampo3> innerCampo3;
+	private FixedField<InnerCampo3> innerCampo3;
 	
 	/**
 	 * <p>
 	 * Digito verificador geral.
 	 * </p>
 	 */
-	private Field<Integer> campo4;
+	private FixedField<Integer> campo4;
 	
 	/**
 	 * 
 	 */
-	private Field<InnerCampo5> innerCampo5;
+	private FixedField<InnerCampo5> innerCampo5;
 
 
 	/**
@@ -223,7 +223,9 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 	 * @since 0.2
 	 */
 	LinhaDigitavel(CodigoDeBarras codigoDeBarras) {
-		super(FIELDS_LENGTH,STRING_LENGTH);
+		super();
+		setLength(STRING_LENGTH);
+		setSize(FIELDS_LENGTH);
 		
 		if(log.isTraceEnabled())
 			log.trace("Instanciando Linha Digitável");
@@ -231,11 +233,11 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 		if(log.isDebugEnabled())
 			log.debug("codigoDeBarra instance : "+codigoDeBarras);
 		
-		innerCampo1 = new Field<InnerCampo1>(new InnerCampo1(4,11),11);
-		innerCampo2 = new Field<InnerCampo2>(new InnerCampo2(2,12),12);
-		innerCampo3 = new Field<InnerCampo3>(new InnerCampo3(2,12),12);
-		campo4 = new Field<Integer>(new Integer(0),1);
-		innerCampo5 = new Field<InnerCampo5>(new InnerCampo5(2,14),14);
+		innerCampo1 = new FixedField<InnerCampo1>(new InnerCampo1(4,11),11);
+		innerCampo2 = new FixedField<InnerCampo2>(new InnerCampo2(2,12),12);
+		innerCampo3 = new FixedField<InnerCampo3>(new InnerCampo3(2,12),12);
+		campo4 = new FixedField<Integer>(new Integer(0),1);
+		innerCampo5 = new FixedField<InnerCampo5>(new InnerCampo5(2,14),14);
 		
 		add(innerCampo1);
 		add(innerCampo2);
@@ -261,7 +263,7 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 	/**
 	 * Escreve a linha digitável foramatada (com espaço entre os campos).
 	 * 
-	 * @see org.jrimum.utilix.text.AbstractLineOfFields#write()
+	 * @see org.jrimum.AbstractLineOfFields#write()
 	 */
 	@Override
 	public String write(){
@@ -278,7 +280,7 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 
 	}
 
-	private abstract class InnerCampo extends AbstractLineOfFields {
+	private abstract class InnerCampo extends BlockOfFields {
 		
 		/**
 		 * 
@@ -291,7 +293,9 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 		
 		
 		protected InnerCampo(Integer fieldsLength, Integer stringLength) {
-			super(fieldsLength, stringLength);
+			super();
+			setLength(stringLength);
+			setSize(fieldsLength);
 		}
 		
 	}
@@ -319,19 +323,18 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 		 * </p>
 		 * 
 		 * 
-		 * @see org.jrimum.utilix.text.AbstractLineOfFields#write()
+		 * @see org.jrimum.AbstractLineOfFields#write()
 		 */
 		@Override
 		public String write(){
 			
 			StringBuilder lineOfFields = new StringBuilder(StringUtils.EMPTY);
 			
-			for(Field<?> field : this)
+			for(FixedField<?> field : this){
 				lineOfFields.append(field.write());
+			}
 			
 			lineOfFields.insert(5, ".");
-			
-			isConsistent(lineOfFields);
 			
 			return lineOfFields.toString();
 		}
@@ -375,10 +378,10 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 				if(log.isTraceEnabled())
 					log.trace("Compondo campo 1 da Linha Digitável");
 
-				add(new Field<String>(codigoDeBarras.write().substring(0, 3),3));
-				add(new Field<String>(codigoDeBarras.write().substring(3, 4),1));
-				add(new Field<String>(codigoDeBarras.write().substring(19, 24),5));				
-				add(new Field<Integer>(calculadorDV.calcule(get(0).write() + get(1).write() + get(2).write()),1));
+				add(new FixedField<String>(codigoDeBarras.write().substring(0, 3),3));
+				add(new FixedField<String>(codigoDeBarras.write().substring(3, 4),1));
+				add(new FixedField<String>(codigoDeBarras.write().substring(19, 24),5));
+				add(new FixedField<Integer>(calculadorDV.calcule(get(0).write() + get(1).write() + get(2).write()),1));
 				
 				if(log.isDebugEnabled())
 					log.debug("Digito verificador do Field 1 da Linha Digitável : "+get(3).getValue());
@@ -425,8 +428,8 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 			if(log.isTraceEnabled())
 				log.trace("Compondo campo 2 da Linha Digitável");
 			
-			add(new Field<String>(codigoDeBarras.write().substring(24, 34),10));				
-			add(new Field<Integer>(calculadorDV.calcule(get(0).write()),1));
+			add(new FixedField<String>(codigoDeBarras.write().substring(24, 34),10));				
+			add(new FixedField<Integer>(calculadorDV.calcule(get(0).write()),1));
 			
 			if(log.isDebugEnabled())
 				log.debug("Digito verificador do campo 2 da Linha Digitável : "+get(1).getValue());
@@ -471,8 +474,8 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 			if(log.isTraceEnabled())
 				log.trace("Compondo campo 3 da Linha Digitável");
 			
-			add(new Field<String>(codigoDeBarras.write().substring(34, 44),10));				
-			add(new Field<Integer>(calculadorDV.calcule(get(0).write()),1));
+			add(new FixedField<String>(codigoDeBarras.write().substring(34, 44),10));				
+			add(new FixedField<Integer>(calculadorDV.calcule(get(0).write()),1));
 			
 			if(log.isDebugEnabled())
 				log.debug("Digito verificador do campo 3 da Linha Digitável : "+get(1).getValue());
@@ -518,8 +521,8 @@ public final class LinhaDigitavel extends AbstractLineOfFields {
 			if(log.isTraceEnabled())
 				log.trace("Compondo campo 5 da Linha Digitável");
 			
-			add(new Field<String>(codigoDeBarras.write().substring(5, 9),4));
-			add(new Field<String>(codigoDeBarras.write().substring(9, 19),10));
+			add(new FixedField<String>(codigoDeBarras.write().substring(5, 9),4));
+			add(new FixedField<String>(codigoDeBarras.write().substring(9, 19),10));
 			
 			if(log.isDebugEnabled() || log.isTraceEnabled())
 				log.debug("InnerCampo 5 da Linha Digitável composto : "+write());
