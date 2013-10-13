@@ -45,8 +45,6 @@ import org.jrimum.utilix.ClassLoaders;
  */
 public class JRimumBank extends Banco {
 	
-	private static final long serialVersionUID = -1249001983382787936L;
-
 	public JRimumBank() {
 		super(new CodigoDeCompensacaoBACEN("999"), "JRimum Bank", new CNPJ("02756617000167"), 
 				"Banco Múltiplo", new ImageIcon(ClassLoaders.getResource("/img/999.png")).getImage());
