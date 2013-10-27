@@ -263,7 +263,7 @@ abstract class AbstractCampoLivre extends BlockOfFields implements CampoLivre {
 	/**
 	 * <p>
 	 * Constrói um campo livre após executar os métodos
-	 * {@link #checkValues(Titulo)} e {@link #addFields(Titulo)}, retornando em
+	 * {@link AbstractCampoLivre#checkValues(Titulo)} e {@link AbstractCampoLivre#addFields(Titulo)}, retornando em
 	 * seguida esta instância pronta para escrita.
 	 * </p>
 	 * 
@@ -284,7 +284,7 @@ abstract class AbstractCampoLivre extends BlockOfFields implements CampoLivre {
 	
 	/**
 	 * <p>
-	 * Usado pelo método {@link #build(Titulo)} para verificar a consistência do
+	 * Usado pelo método {@link AbstractCampoLivre#build(Titulo)} para verificar a consistência do
 	 * campo livre. Se algum inconsistência for verificada, este método deverá
 	 * lança-la.
 	 * </p>
@@ -297,7 +297,7 @@ abstract class AbstractCampoLivre extends BlockOfFields implements CampoLivre {
 	
 	/**
 	 * <p>
-	 * Usado pelo método {@link #build(Titulo)}, adiciona os campos do campo
+	 * Usado pelo método {@link AbstractCampoLivre#build(Titulo)}, adiciona os campos do campo
 	 * livre deixando-o pronto para escrita.
 	 * </p>
 	 * 

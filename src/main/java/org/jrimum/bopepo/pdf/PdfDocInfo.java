@@ -363,7 +363,7 @@ public class PdfDocInfo {
 	}
 	
 	/**
-	 * Geração a partir do {@code hashCode()} do {@link #docInfo}.
+	 * Geração a partir do {@code hashCode()} do {@linkplain #docInfo}.
 	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -376,7 +376,7 @@ public class PdfDocInfo {
 	}
 
 	/**
-	 * Comparação com base no {@link #docInfo}. 
+	 * Comparação com base no {@linkplain #docInfo}. 
 	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -398,7 +398,7 @@ public class PdfDocInfo {
 	}
 
 	/**
-	 * Informação contida em {@link #docInfo}. 
+	 * Informação contida em {@linkplain #docInfo}. 
 	 * 
 	 * @see java.lang.Object#toString()
 	 */

@@ -151,7 +151,7 @@ public class FatorDeVencimento{
 	/**
 	 * <p>
 	 * Transforma um fator de vencimento em um objeto data da forma inversa
-	 * descrita em {@link #toFator(Date)}.
+	 * descrita em {@linkplain #toFator(Date)}.
 	 * </p>
 	 * 
 	 * @param fator
@@ -174,8 +174,8 @@ public class FatorDeVencimento{
 	/**
 	 * <p>
 	 * Lança exceção caso a {@code dataVencimentoTruncada} esteja fora do
-	 * intervalo entre a {@link #DATA_BASE_DO_FATOR_DE_VENCIMENTO} e a
-	 * {@link #DATA_LIMITE_DO_FATOR_DE_VENCIMENTO}.
+	 * intervalo entre a {@linkplain #DATA_BASE_DO_FATOR_DE_VENCIMENTO} e a
+	 * {@linkplain #DATA_LIMITE_DO_FATOR_DE_VENCIMENTO}.
 	 * </p>
 	 * 
 	 * @param dataVencimentoTruncada
@@ -184,8 +184,8 @@ public class FatorDeVencimento{
 	 * @throws IllegalArgumentException
 	 *             Caso a data esteja {@code dataVencimentoTruncada} esteja fora
 	 *             do intervalo entre a
-	 *             {@link #DATA_BASE_DO_FATOR_DE_VENCIMENTO} e a
-	 *             {@link #DATA_LIMITE_DO_FATOR_DE_VENCIMENTO}
+	 *             {@linkplain #DATA_BASE_DO_FATOR_DE_VENCIMENTO} e a
+	 *             {@linkplain #DATA_LIMITE_DO_FATOR_DE_VENCIMENTO}
 	 */
 	private static void checkIntervalo(Date dataVencimentoTruncada) throws IllegalArgumentException {
 		
