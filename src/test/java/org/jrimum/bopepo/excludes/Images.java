@@ -27,7 +27,7 @@
  * 
  */
 
-package org.jrimum.bopepo;
+package org.jrimum.bopepo.excludes;
 
 import java.awt.Graphics2D;
 import java.awt.Image;

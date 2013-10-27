@@ -27,10 +27,12 @@
  * 
  */
 
-package org.jrimum.bopepo;
+package org.jrimum.bopepo.excludes;
 
 import java.math.BigDecimal;
 
+import org.jrimum.bopepo.BancosSuportados;
+import org.jrimum.bopepo.Boleto;
 import org.jrimum.domkee.comum.pessoa.endereco.CEP;
 import org.jrimum.domkee.comum.pessoa.endereco.Endereco;
 import org.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;

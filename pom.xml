@@ -67,7 +67,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.1</version>
+				<version>3.1</version>
 				<configuration>
 					<source>1.5</source>
 					<target>1.5</target>
@@ -76,6 +76,7 @@
 
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4</version>
 				<configuration>
 					<descriptors>
 						<descriptor>src/main/assembly/jrimum-bopepo-with-dependencies.xml</descriptor>
@@ -97,7 +98,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.5</version>
+				<version>2.16</version>
 				<configuration>
 					<skipTests>false</skipTests>
 					<forkMode>always</forkMode>
@@ -105,6 +106,7 @@
 						<include>org/jrimum/bopepo/**/*</include>
 					</includes>
 					<excludes>
+						<exclude>org/jrimum/bopepo/excludes/**/*</exclude>
 						<exclude>org/jrimum/bopepo/**/*$*</exclude> <!-- Exclui classes internas anônimas para evitar erros -->
 					</excludes>
 				</configuration>
@@ -113,7 +115,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.1.2</version>
+				<version>2.2.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -128,7 +130,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.7</version>
+				<version>2.9.1</version>
 				<executions>
 					<execution>
 						<id>attach-javadoc</id>
@@ -138,6 +140,16 @@
 						</goals>
 					</execution>
 				</executions>
+				 <configuration>
+			        <charset>UTF-8</charset>
+					<docencoding>UTF-8</docencoding>
+					<docfilessubdirs>true</docfilessubdirs>
+					<links>
+						<link>http://http://docs.oracle.com/javase/1.5.0/docs/api/</link>
+					</links>
+					<show>protected</show>
+					<source>1.5</source>
+		    	</configuration>
 			</plugin>
 			
 		</plugins>

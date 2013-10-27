@@ -41,7 +41,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import org.jrimum.bopepo.Images;
+import org.jrimum.bopepo.excludes.Images;
 import org.junit.Test;
 
 import com.google.common.io.Resources;
