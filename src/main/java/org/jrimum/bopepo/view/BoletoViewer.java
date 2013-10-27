@@ -88,7 +88,7 @@ public class BoletoViewer {
 	 * </p>
 	 */
 	private PdfViewer pdfViewer;
-
+	
 	/**
 	 * <p>
 	 * Instancia o visualizador com o template padrão.
@@ -228,6 +228,14 @@ public class BoletoViewer {
 	protected BoletoViewer() {
 
 		this.pdfViewer = new PdfViewer();		
+	}
+
+	/**
+	 * Para uso interno do componente
+	 */
+	protected BoletoViewer(PdfViewer pdfViewer) {
+		
+		this.pdfViewer = pdfViewer;		
 	}
 	
 	/**
@@ -1009,6 +1017,8 @@ public class BoletoViewer {
 	 * @param option  Escolha de compressão
 	 * 
 	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
 	 */
 	public BoletoViewer setPdfFullCompression(boolean option){
 		
@@ -1017,17 +1027,50 @@ public class BoletoViewer {
 		return this;
 	}
 	
+	
+	/**
+	 * Define o título do documento PDF gerado.
+	 * 
+	 * @param titulo
+	 *            para ser exibido como título do documento PDF
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 */
+	public BoletoViewer setPdfTitulo(String titulo) {
+
+		pdfViewer.setTitle(titulo);
+
+		return this;
+	}
+	
+	/**
+	 * Define o título do documento PDF gerado.
+	 * 
+	 * @param titulo
+	 *            para ser exibido como título do documento PDF
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 */
+//	public BoletoViewer setPdfTitulo(String titulo) {
+//		
+//		pdfViewer.setTitle(titulo);
+//		
+//		return this;
+//	}
+	
 	/**
 	 * Define o template que será utilizado para construir o boleto.
 	 * 
 	 * @param template
 	 * 
-	 * @since 0.2
-	 * 
 	 * @return Esta instância após a operação
 	 * 
 	 * @throws IllegalArgumentException
 	 *             Caso o {@code template} seja nulo
+	 * 
+	 * @since 0.2
 	 */
 	public BoletoViewer setTemplate(byte[] template) {
 
@@ -1343,4 +1386,5 @@ public class BoletoViewer {
 		
 		Collections.checkNotEmpty(templatesAndBoletos, "O Mapa (template,boletos) está vazio!");
 	}
+
 }

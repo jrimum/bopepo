@@ -305,6 +305,15 @@ class PdfViewer {
 		doc.withFullCompression(option);
 	}
 	
+	protected void setTitle(String title){
+		
+	}
+
+	protected void setAuthor(String author){
+		
+	}
+	
+	
 	/**
 	 * @return the boleto
 	 * 
