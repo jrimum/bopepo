@@ -39,8 +39,8 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import org.jrimum.bopepo.Boleto;
-import org.jrimum.bopepo.BoletoBuilder;
-import org.jrimum.bopepo.Images;
+import org.jrimum.bopepo.excludes.BoletoBuilder;
+import org.jrimum.bopepo.excludes.Images;
 import org.jrimum.bopepo.pdf.CodigoDeBarras;
 import org.junit.Before;
 import org.junit.Test;

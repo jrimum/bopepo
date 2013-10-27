@@ -31,8 +31,51 @@
 
 package org.jrimum.bopepo.view;
 
+import static org.mockito.Mockito.verify;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+	
+
+/**
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+ */
+@RunWith(MockitoJUnitRunner.class)
 public class BoletoViewTest {
 
+	@Mock
+	private PdfViewer pdfViewer;
+	
+	@Test
+	public void deve_chamar_metodo_de_definicao_da_compressao_em_pdfview(){
+		BoletoViewer boletoViewer = new BoletoViewer(pdfViewer);
+		boolean option = true;
+		
+		boletoViewer.setPdfFullCompression(option);
+		
+		verify(pdfViewer).setFullCompression(option);
+	}
+
+	@Test
+	public void deve_chamar_metodo_de_definicao_do_titulo_em_pdfview(){
+		BoletoViewer boletoViewer = new BoletoViewer(pdfViewer);
+		String titulo = "Boleto de Pagamento";
+		
+		boletoViewer.setPdfTitulo(titulo);
+		
+		verify(pdfViewer).setTitle(titulo);
+	}
+
+	@Test
+	public void deve_chamar_metodo_de_definicao_do_autor_em_pdfview(){
+		BoletoViewer boletoViewer = new BoletoViewer(pdfViewer);
+		String autor = "Eu";
+		
+//		boletoViewer.setPdfAutor(autor);
+		
+//		verify(pdfViewer).setAuthor(autor);
+	}
 	
 }
