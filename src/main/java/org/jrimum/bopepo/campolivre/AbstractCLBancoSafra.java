@@ -105,7 +105,7 @@ abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
 	private static final Integer CONSTANT_VALUE_SISTEMA = Integer.valueOf(7);
 	
 	/**
-	 * Constante em forma de campo {@link #CONSTANT_VALUE} e {@link #CONSTANT_LENGTH}.
+	 * Constante em forma de campo {@link AbstractCLBancoSafra#CONSTANT_VALUE_SISTEMA} e {@link AbstractCLBancoSafra#CONSTANT_LENGTH_SISTEMA}.
 	 */
 	protected static final FixedField<Integer> SISTEMA_CONSTANT_FIELD = new FixedField<Integer>(CONSTANT_VALUE_SISTEMA, CONSTANT_LENGTH_SISTEMA);
 	
@@ -131,9 +131,6 @@ abstract class AbstractCLBancoSafra extends AbstractCampoLivre {
 		super(fieldsLength);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	protected static CampoLivre create(Titulo titulo)
 			throws NotSupportedCampoLivreException {
 

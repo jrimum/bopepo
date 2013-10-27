@@ -66,9 +66,6 @@ abstract class AbstractCLBancoReal extends AbstractCampoLivre {
 		super(fieldsLength);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	protected static CampoLivre create(Titulo titulo){
 		
 		return new CLBancoReal(titulo);

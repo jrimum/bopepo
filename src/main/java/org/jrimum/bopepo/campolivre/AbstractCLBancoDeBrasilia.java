@@ -55,9 +55,6 @@ public abstract class AbstractCLBancoDeBrasilia extends AbstractCampoLivre {
 		super(fieldsLength);
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	protected static CampoLivre create(Titulo titulo){
 		return new CLBancoDeBrasilia().build(titulo);
 	}	

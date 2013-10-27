@@ -191,12 +191,12 @@ public class CLBancoDeBrasilia extends AbstractCLBancoDeBrasilia{
 	private static final Integer CARTEIRA_COM_REGISTRO = Integer.valueOf(2);
 
 	/**
-	 * Dígito verificador calculado em função da CHAVE ASBACE e necessário para o cálculo do {@linkplain #digitoVerificador2DaChaveASBACE}.
+	 * Dígito verificador calculado em função da CHAVE ASBACE e necessário para o cálculo do {@link #digitoVerificador2DaChaveASBACE}.
 	 */
 	private Integer digitoVerificador1DaChaveASBACE;
 
 	/**
-	 * Dígito verificador calculado em função da CHAVE ASBACE + {@linkplain #digitoVerificador1DaChaveASBACE}.
+	 * Dígito verificador calculado em função da CHAVE ASBACE + {@link #digitoVerificador1DaChaveASBACE}.
 	 */
 	private Integer digitoVerificador2DaChaveASBACE;
 	

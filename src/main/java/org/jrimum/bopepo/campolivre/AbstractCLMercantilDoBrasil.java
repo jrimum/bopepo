@@ -63,9 +63,6 @@ abstract class AbstractCLMercantilDoBrasil extends AbstractCampoLivre {
 		super(fieldsLength);
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	protected static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 
 		return new CLMercantilDoBrasil(titulo);

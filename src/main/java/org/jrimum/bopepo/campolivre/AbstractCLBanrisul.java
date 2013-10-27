@@ -68,9 +68,6 @@ abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 		super(fieldsLength);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	protected static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 		
 		checkCarteiraNotNull(titulo);

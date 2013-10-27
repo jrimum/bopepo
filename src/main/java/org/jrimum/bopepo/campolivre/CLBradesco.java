@@ -143,7 +143,7 @@ class CLBradesco extends AbstractCLBradesco {
 	private static final Integer CONSTANT_VALUE = Integer.valueOf(0);
 
 	/**
-	 * Constante em forma de campo {@link #CONSTANT_VALUE} e {@link #CONSTANT_LENGTH}.
+	 * Constante em forma de campo {@linkplain #CONSTANT_VALUE} e {@linkplain #CONSTANT_LENGTH}.
 	 */
 	private static final FixedField<Integer> CONSTANT_FIELD = new FixedField<Integer>(CONSTANT_VALUE, CONSTANT_LENGTH);
 	

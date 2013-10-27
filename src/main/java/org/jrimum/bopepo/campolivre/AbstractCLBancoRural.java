@@ -35,9 +35,6 @@ abstract class AbstractCLBancoRural extends AbstractCampoLivre {
 		super(fieldsLength);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	protected static CampoLivre create(Titulo titulo) {
 		
 		checkCarteiraNotNull(titulo);
