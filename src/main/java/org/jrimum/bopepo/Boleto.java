@@ -70,7 +70,7 @@ import org.jrimum.utilix.Objects;
  * 
  * @version 0.2
  */
-public final class Boleto {
+public class Boleto {
 	
 	private static Logger log = Logger.getLogger(Boleto.class);
 
