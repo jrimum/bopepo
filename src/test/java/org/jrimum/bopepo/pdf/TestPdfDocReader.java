@@ -32,9 +32,9 @@ package org.jrimum.bopepo.pdf;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
-import static org.jrimum.utilix.text.DateFormat.DDMMYYYY_B;
-import static org.jrimum.utilix.text.DateFormat.HHMMSS_24C;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -58,7 +58,7 @@ public class TestPdfDocReader {
 	private PdfDocReader reader;
 	
 	@Test
-	public void seDocInfoEstahCorreto(){
+	public void seDocInfoEstahCorreto() throws ParseException{
 		
 		reader = crieReaderParaArquivoSemCampos();
 		
@@ -71,9 +71,10 @@ public class TestPdfDocReader {
 		assertEquals("Writer", info.creator());
 		assertEquals("BrOffice 3.3", info.producer());
 		
-		Date creation = info.creation().getTime();
+		Date expectedCreationDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse("23/09/2011 11:27:41");
+		Date currentCreationDate = info.creation().getTime();
 		
-		assertEquals("23/09/2011 11:27:41", DDMMYYYY_B.format(creation)+" "+HHMMSS_24C.format(creation));
+		assertEquals(expectedCreationDate, currentCreationDate);
 	}
 	
 	@Test
