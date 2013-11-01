@@ -34,8 +34,6 @@ import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -70,11 +68,7 @@ public class TestPdfDocReader {
 		assertEquals("Gilmar P.S.L.", info.author());
 		assertEquals("Writer", info.creator());
 		assertEquals("BrOffice 3.3", info.producer());
-		
-		Date expectedCreationDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse("23/09/2011 11:27:41");
-		Date currentCreationDate = info.creation().getTime();
-		
-		assertEquals(expectedCreationDate, currentCreationDate);
+		assertEquals("D:20110923112741-03'00'", info.creationRaw());
 	}
 	
 	@Test
