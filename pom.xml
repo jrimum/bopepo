@@ -6,7 +6,7 @@
 	<artifactId>jrimum-bopepo</artifactId>
 	<packaging>jar</packaging>
 	<name>Projeto Bopepo</name>
-	<version>0.2.3-SNAPSHOT</version>
+	<version>0.2.3-SNAPSHOT-prev</version>
 	<description>Projeto open source de componentes de software para o domínio de negócios do Brasil.</description>
 	<url>http://www.jrimum.org/bopepo</url>
 
@@ -107,7 +107,7 @@
 					</includes>
 					<excludes>
 						<exclude>org/jrimum/bopepo/excludes/**/*</exclude>
-						<exclude>org/jrimum/bopepo/**/*$*</exclude> <!-- Exclui classes internas anônimas para evitar erros -->
+						<exclude>org/jrimum/bopepo/**/*$*</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
@@ -144,9 +144,6 @@
 			        <charset>UTF-8</charset>
 					<docencoding>UTF-8</docencoding>
 					<docfilessubdirs>true</docfilessubdirs>
-					<links>
-						<link>http://http://docs.oracle.com/javase/1.5.0/docs/api/</link>
-					</links>
 					<show>protected</show>
 					<source>1.5</source>
 		    	</configuration>
