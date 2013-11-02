@@ -221,5 +221,5 @@
 			<url>http://jrimum.org/maven/content/repositories/org.jrimum.snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
-
+	
 </project>
