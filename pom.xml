@@ -73,7 +73,6 @@
 					<target>1.5</target>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.4</version>
@@ -94,14 +93,12 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.16</version>
 				<configuration>
 					<skipTests>false</skipTests>
-					<forkMode>always</forkMode>
 					<includes>
 						<include>org/jrimum/bopepo/**/*</include>
 					</includes>
@@ -111,7 +108,6 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -126,7 +122,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -144,26 +139,24 @@
 			        <charset>UTF-8</charset>
 					<docencoding>UTF-8</docencoding>
 					<docfilessubdirs>true</docfilessubdirs>
-					<show>protected</show>
+					<show>private</show>
 					<source>1.5</source>
 		    	</configuration>
 			</plugin>
-			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
 				<version>2.8.1</version>
-				<goals>deploy</goals>
 			</plugin>
-			
 		</plugins>
+		
 	</build>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.jrimum</groupId>
 			<artifactId>jrimum-domkee</artifactId>
-			<version>0.2.3-SNAPSHOT</version>
+			<version>0.2.3-DEV-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jrimum</groupId>
@@ -211,16 +204,26 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.1</version>
+			<version>2.4</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>jrimum.org</id>
+			<url>http://jrimum.org/maven/content/groups/public/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 	<distributionManagement>
 		<snapshotRepository>
