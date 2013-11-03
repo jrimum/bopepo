@@ -6,7 +6,7 @@
 	<artifactId>jrimum-bopepo</artifactId>
 	<packaging>jar</packaging>
 	<name>Projeto Bopepo</name>
-	<version>0.2.3-SNAPSHOT-pre-release</version>
+	<version>0.2.3-DEV-SNAPSHOT</version>
 	<description>Projeto open source de componentes de software para o domínio de negócios do Brasil.</description>
 	<url>http://www.jrimum.org/bopepo</url>
 
