@@ -6,7 +6,7 @@
 	<artifactId>jrimum-bopepo</artifactId>
 	<packaging>jar</packaging>
 	<name>Projeto Bopepo</name>
-	<version>0.2.3-SNAPSHOT-prev</version>
+	<version>0.2.3-SNAPSHOT-pre-release</version>
 	<description>Projeto open source de componentes de software para o domínio de negócios do Brasil.</description>
 	<url>http://www.jrimum.org/bopepo</url>
 
@@ -147,6 +147,13 @@
 					<show>protected</show>
 					<source>1.5</source>
 		    	</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.1</version>
+				<goals>deploy</goals>
 			</plugin>
 			
 		</plugins>
