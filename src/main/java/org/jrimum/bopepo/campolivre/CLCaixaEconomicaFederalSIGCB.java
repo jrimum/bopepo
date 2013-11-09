@@ -167,9 +167,8 @@ class CLCaixaEconomicaFederalSIGCB extends AbstractCLCaixaEconomicaFederal {
 	}
 
 	/**
-	 * <p>
 	 * Gera o número que serve para calcular o digito verificador do campoLivre, que é todo o campo livre menos o dígito verificador.
-	 * </p>
+
 	 * <p>
 	 * Os campos utilizados são:
 	 * <ul>
@@ -183,11 +182,7 @@ class CLCaixaEconomicaFederalSIGCB extends AbstractCLCaixaEconomicaFederal {
 	 * </ul>
 	 * </p>
 	 * 
-	 * @param titulo
-	 *            - Título com os dados para geração do campo livre.
-	 * @param dVCodigoDoCedente
-	 *            - Dígito verificador do código do cedente.
-	 * @return String com os dígitos que compõem o campo livro, exceto o dígito verificador.
+	 * @return String com campos, exceto o dígito verificador.
 	 * 
 	 * @since 0.2
 	 */
@@ -197,9 +192,7 @@ class CLCaixaEconomicaFederalSIGCB extends AbstractCLCaixaEconomicaFederal {
 	}
 
 	/**
-	 * <p>
 	 * Este dígito é calculado através do Módulo 11 com os pesos 2 e 9.
-	 * </p>
 	 * 
 	 * @param numeroParaCalculo
 	 * @return digito

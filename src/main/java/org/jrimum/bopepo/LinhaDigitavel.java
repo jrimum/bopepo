@@ -323,7 +323,7 @@ public final class LinhaDigitavel extends BlockOfFields {
 		 * </p>
 		 * 
 		 * 
-		 * @see org.jrimum.AbstractLineOfFields#write()
+		 * @see org.jrimum.texgit.type.component.BlockOfFields#write()
 		 */
 		@Override
 		public String write(){

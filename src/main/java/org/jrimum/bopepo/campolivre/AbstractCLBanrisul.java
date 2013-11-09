@@ -180,7 +180,7 @@ abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 	 * </p>
 	 * 
 	 * @param somaMod10
-	 * @return
+	 * @return Resto do modúlo 10
 	 * 
 	 * @since 0.2
 	 */

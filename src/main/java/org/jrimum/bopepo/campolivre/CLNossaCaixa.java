@@ -192,7 +192,7 @@ class CLNossaCaixa extends AbstractCLNossaCaixa {
 	 * 
 	 * @param titulo
 	 * @param modalidadeDaConta
-	 * @return
+	 * @return dv2
 	 * 
 	 * @since
 	 */
@@ -225,14 +225,13 @@ class CLNossaCaixa extends AbstractCLNossaCaixa {
 	}
 
 	/**
-	 * 
 	 * Este dígito é calculado através do Módulo 10
 	 * 
 	 * @param titulo
 	 * @param modalidadeDaConta
-	 * @return
+	 * @return dv1
 	 * 
-	 * @since
+	 * @since 0.2
 	 */
 	private int calculeDigito1ASBACE(Titulo titulo, Integer modalidadeDaConta) {
 		
@@ -248,10 +247,8 @@ class CLNossaCaixa extends AbstractCLNossaCaixa {
 	}
 	
 	/**
+	 * Gera o número que server para calcular os dígitos 1 e 2 da ASBACE.
 	 * 
-	 * <p>
-	 * Gera o número que server para calcular os dígitos 1 e 2 da ASBACE
-	 * </p>
 	 * <p>
 	 * Os campos utilizados são:
 	 * <ul>
@@ -265,9 +262,9 @@ class CLNossaCaixa extends AbstractCLNossaCaixa {
 	 * 
 	 * @param titulo
 	 * @param modalidadeDaConta
-	 * @return
+	 * @return Número para cálculo
 	 * 
-	 * @since
+	 * @since 0.2
 	 */
 	private String gereNumeroParaCalculoDosDigitosASBACE(Titulo titulo, Integer modalidadeDaConta) {
 		
@@ -283,16 +280,13 @@ class CLNossaCaixa extends AbstractCLNossaCaixa {
 	}
 
 	/**
-	 * 
-	 * <p>
 	 * A identificação do sistema é o primeiro dígito do Nosso Número, que por obrigatoriedade 
 	 * deve ser '9'.
-	 * </p>
 	 * 
 	 * @param nossoNumero
-	 * @return primeira posição do campo Nosso Número (9)
+	 * @return Primeira posição do campo Nosso Número (9)
 	 * 
-	 * @since
+	 * @since 0.2
 	 */
 	private Integer getIdentificacaoDoSistemaPeloNossoNumero(String nossoNumero) {
 		
@@ -309,7 +303,7 @@ class CLNossaCaixa extends AbstractCLNossaCaixa {
 	 * @param nossoNumero completo
 	 * @return Nosso Número sem a primeira posição.
 	 * 
-	 * @since
+	 * @since 0.2
 	 */
 	private String getNossoNumeroCom8Posicoes(String nossoNumero) {
 		
@@ -320,16 +314,13 @@ class CLNossaCaixa extends AbstractCLNossaCaixa {
 	}
 
 	/**
-	 * 
-	 * <p>
 	 * Realiza a conversão da modalidade da conta de acordo com a tabela de conversões.
-	 * </p>
 	 * 
 	 * @param modalidadeDaConta
 	 * @throws CampoLivreException caso a modalidade fornecida não seja um valor válido.
-	 * @return
+	 * @return Modalidade
 	 * 
-	 * @since
+	 * @since 0.2
 	 */
 	private Integer convertaModalidadeDaConta(Integer modalidadeDaConta) {
 	

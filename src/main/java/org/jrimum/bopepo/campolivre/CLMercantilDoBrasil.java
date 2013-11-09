@@ -127,21 +127,21 @@ class CLMercantilDoBrasil extends AbstractCLMercantilDoBrasil {
 		this.add(new FixedField<Integer>(desconto, 1));
 	}
 	
-	/**
-	 * 
-	 * <p>
-	 * Calcula o dígito verificador do Nosso Número.
-	 * </p>
-	 * <p>
-	 * É calculado através do módulo 11 a partir do código da agência e do Nosso Número.
-	 * </p>
-	 * 
-	 * @param agencia Código da agência
-	 * @param nossoNumero Nosso Número
-	 * @return
-	 * 
-	 * @since 0.2
-	 */
+//	/**
+//	 * 
+//	 * <p>
+//	 * Calcula o dígito verificador do Nosso Número.
+//	 * </p>
+//	 * <p>
+//	 * É calculado através do módulo 11 a partir do código da agência e do Nosso Número.
+//	 * </p>
+//	 * 
+//	 * @param agencia Código da agência
+//	 * @param nossoNumero Nosso Número
+//	 * @return digito verificador
+//	 * 
+//	 * @since 0.2
+//	 */
 //	private int calculeDigitoVerificadorDoNossoNumero(Integer agencia, String nossoNumero) {
 //		
 //		Modulo modulo = new Modulo(EnumModulo.MODULO11);

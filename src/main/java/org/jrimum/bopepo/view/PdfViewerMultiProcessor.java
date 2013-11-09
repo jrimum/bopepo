@@ -168,7 +168,7 @@ class PdfViewerMultiProcessor {
 	 * 
 	 * @param boletos
 	 *            Lista com os boletos a serem agrupados
-	 * @param fileDest
+	 * @param destDir
 	 *            Diretório o qual os boletos serão criados
 	 * @param prefixo
 	 *            Prefixo do nome do arquivo

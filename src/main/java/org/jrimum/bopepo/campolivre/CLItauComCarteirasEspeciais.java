@@ -37,11 +37,7 @@ import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
 
 /**
- * 
- * 
- * <p>
  * Campo livre padrão do Banco Itaú
- * </p>
  * 
  * <p>
  * Constrói o campo livre no caso especial, ou seja, quando a carteira for:
@@ -123,10 +119,11 @@ class CLItauComCarteirasEspeciais extends AbstractCLItau {
 	private static final Integer FIELDS_LENGTH = 6;
 	
 	/**
-	 * <p>
-	 *   Dado um título, cria o campo livre do Banco Itaú para carteiras especiais.
-	 * </p>
-	 * @param titulo título com as informações para geração do campo livre
+	 * Dado um título, cria o campo livre do Banco Itaú para carteiras
+	 * especiais.
+	 * 
+	 * @param titulo
+	 *            título com as informações para geração do campo livre
 	 */
 	public CLItauComCarteirasEspeciais(Titulo titulo) {
 		super(FIELDS_LENGTH);
@@ -149,18 +146,15 @@ class CLItauComCarteirasEspeciais extends AbstractCLItau {
 	}
 	
 	/**
-	 * <p>
-	 * Calcula o dígito verificador para o campo livre especial a partir do 
-	 * código da carteira, do nosso número, do número do documento e do código da conta.
-	 * </p>
+	 * Calcula o dígito verificador para o campo livre especial a partir do
+	 * código da carteira, do nosso número, do número do documento e do código
+	 * da conta.
 	 * 
 	 * @param codigoDaCarteira
 	 * @param nossoNumero
 	 * @param numeroDoDocumento
 	 * @param codigoDaConta
 	 * @return Integer digito
-	 * 
-	 * @see #calculeDigitoDaPosicao41(Integer, Integer)
 	 * 
 	 * @since 0.2
 	 */

@@ -129,7 +129,7 @@ class PdfViewer {
 	/**
 	 * Retorna o boleto em forma de arquivo PDF.
 	 * 
-	 * @param destPath
+	 * @param destFile
 	 *            Arquivo o qual o boleto será gerado
 	 * @return Boleto em forma de arquivo PDF
 	 * @throws IllegalStateException

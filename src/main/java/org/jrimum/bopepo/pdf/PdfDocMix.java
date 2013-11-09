@@ -945,7 +945,7 @@ public class PdfDocMix {
 	/**
 	 * Indica se o viewer foi habilitado a comprimir o pdf do documento gerado.
 	 * 
-	 * @see #withFullCompression(boolean);
+	 * @see #withFullCompression(boolean)
 	 * 
 	 * @return indicativo de compressão
 	 * 
@@ -960,12 +960,11 @@ public class PdfDocMix {
 	 * Indica se o viewer foi habilitado para remover todos os campos do pdf
 	 * gerado.
 	 * 
-	 * @see #removeFields;
+	 * @see #removeFields
 	 * 
 	 * @return indicativo de compressão
 	 * 
 	 * @since 0.2
-	 * 
 	 */
 	private boolean isRemoveFields() {
 		return removeFields;
