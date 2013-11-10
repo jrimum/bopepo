@@ -163,13 +163,17 @@ public class Boleto {
 			}
 			
 		}else {
-			IllegalArgumentException e = new IllegalArgumentException("Título nulo!");
-			log.error("Valor Não Permitido!",e);
-			throw e;
+			
+			if(log.isDebugEnabled()){
+				log.debug("Título Nulo - Valor Não Permitido!");
+			}
+			
+			Exceptions.throwIllegalArgumentException("Título nulo!");
 		}
 		
-		if(log.isDebugEnabled() || log.isTraceEnabled())
+		if(log.isDebugEnabled() || log.isTraceEnabled()){
 			log.trace("Boleto Instanciado : "+this);
+		}
 
 	}
 
