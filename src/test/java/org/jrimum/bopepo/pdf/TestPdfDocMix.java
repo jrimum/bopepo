@@ -387,7 +387,7 @@ public class TestPdfDocMix {
 		
 		FileUtils.copyFile(arqBase, arqTest);
 		
-		doc.toFile(arqBase);
+		doc.toFile(arqTest);
 		
 		PdfDocReader readerArqNovo = new PdfDocReader(arqBase);
 
