@@ -375,7 +375,7 @@ public class TestPdfDocMix {
 	@Test
 	public void seGeraDocumentoEmArquivoViaParamentroFile() throws IOException{
 
-		final String file = "seGeraDocumentoEmArquivoViaParamentroFile";
+		final String file = "ArquivoComCampos";
 		final String filePath = "./src/test/resources/"+file+".pdf";
 		
 		doc = createDoc();
