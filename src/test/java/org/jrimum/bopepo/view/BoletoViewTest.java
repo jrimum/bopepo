@@ -33,6 +33,7 @@ package org.jrimum.bopepo.view;
 
 import static org.mockito.Mockito.verify;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -48,9 +49,15 @@ public class BoletoViewTest {
 	@Mock
 	private PdfViewer pdfViewer;
 	
+	private BoletoViewer boletoViewer;
+	
+	@Before
+	public void setup(){
+		boletoViewer = new BoletoViewer(pdfViewer);
+	}
+	
 	@Test
 	public void deve_chamar_metodo_de_definicao_da_compressao_em_pdfview(){
-		BoletoViewer boletoViewer = new BoletoViewer(pdfViewer);
 		boolean option = true;
 		
 		boletoViewer.setPdfFullCompression(option);
@@ -60,7 +67,6 @@ public class BoletoViewTest {
 
 	@Test
 	public void deve_chamar_metodo_de_definicao_do_titulo_em_pdfview(){
-		BoletoViewer boletoViewer = new BoletoViewer(pdfViewer);
 		String titulo = "Boleto de Pagamento";
 		
 		boletoViewer.setPdfTitulo(titulo);
@@ -70,12 +76,29 @@ public class BoletoViewTest {
 
 	@Test
 	public void deve_chamar_metodo_de_definicao_do_autor_em_pdfview(){
-		BoletoViewer boletoViewer = new BoletoViewer(pdfViewer);
 		String autor = "Eu";
 		
-//		boletoViewer.setPdfAutor(autor);
+		boletoViewer.setPdfAutor(autor);
 		
-//		verify(pdfViewer).setAuthor(autor);
+		verify(pdfViewer).setAuthor(autor);
 	}
-	
+
+	@Test
+	public void deve_chamar_metodo_de_definicao_do_assunto_em_pdfview(){
+		String assunto = "Importante";
+		
+		boletoViewer.setPdfAssunto(assunto);
+		
+		verify(pdfViewer).setSubject(assunto);
+	}
+
+	@Test
+	public void deve_chamar_metodo_de_definicao_das_palavras_chave_em_pdfview(){
+		String palavrasChave = "minhas, palavras, chaves";
+		
+		boletoViewer.setPdfPalavrasChave(palavrasChave);
+		
+		verify(pdfViewer).setKeywords(palavrasChave);
+	}
+
 }

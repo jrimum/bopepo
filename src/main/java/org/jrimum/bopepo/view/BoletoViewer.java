@@ -1045,20 +1045,52 @@ public class BoletoViewer {
 	}
 	
 	/**
-	 * Define o título do documento PDF gerado.
+	 * Define o autor do documento PDF gerado.
 	 * 
-	 * @param titulo
-	 *            para ser exibido como título do documento PDF
+	 * @param autor
+	 *            do documento PDF
 	 * @return Esta instância após a operação
 	 * 
 	 * @since 0.2
 	 */
-//	public BoletoViewer setPdfTitulo(String titulo) {
-//		
-//		pdfViewer.setTitle(titulo);
-//		
-//		return this;
-//	}
+	public BoletoViewer setPdfAutor(String autor) {
+		
+		pdfViewer.setAuthor(autor);
+		
+		return this;
+	}
+	
+	/**
+	 * Define o assunto do documento PDF gerado.
+	 * 
+	 * @param assunto
+	 *            do documento PDF
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 */
+	public BoletoViewer setPdfAssunto(String assunto) {
+		
+		pdfViewer.setSubject(assunto);
+		
+		return this;
+	}
+	
+	/**
+	 * Define as palavras chave do documento PDF gerado.
+	 * 
+	 * @param palavrasChave
+	 *            do documento PDF
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 */
+	public BoletoViewer setPdfPalavrasChave(String palavrasChave) {
+		
+		pdfViewer.setKeywords(palavrasChave);
+		
+		return this;
+	}
 	
 	/**
 	 * Define o template que será utilizado para construir o boleto.

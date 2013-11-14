@@ -313,6 +313,13 @@ class PdfViewer {
 		
 	}
 	
+	protected void setSubject(String subject) {
+		
+	}
+	
+	protected void setKeywords(String keywords) {
+		
+	}
 	
 	/**
 	 * @return the boleto
