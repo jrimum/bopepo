@@ -16,14 +16,14 @@
 				<include>**/*.java</include>
 			</includes>	
 		</fileSet>
-		<fileSet>
-			<directory>/src/main/resources</directory>
-			<useDefaultExcludes>true</useDefaultExcludes>
-			<outputDirectory>/</outputDirectory>
-			<includes>
-				<include>**/**</include>
-			</includes>	
-		</fileSet>
+<!-- 		<fileSet> -->
+<!-- 			<directory>/src/main/resources</directory> -->
+<!-- 			<useDefaultExcludes>true</useDefaultExcludes> -->
+<!-- 			<outputDirectory>/</outputDirectory> -->
+<!-- 			<includes> -->
+<!-- 				<include>**/**</include> -->
+<!-- 			</includes>	 -->
+<!-- 		</fileSet> -->
 		<fileSet>
 			<directory>../Texgit/src/main/java</directory>
 			<useDefaultExcludes>true</useDefaultExcludes>
@@ -32,29 +32,29 @@
 				<include>**/*.java</include>
 			</includes>		
 		</fileSet>
-		<fileSet>
-			<directory>../Utilix/src/main/java</directory>
-			<useDefaultExcludes>true</useDefaultExcludes>
-			<outputDirectory>/</outputDirectory>
-			<includes>
-				<include>**/*.java</include>
-			</includes>		
-		</fileSet>
-		<fileSet>
-			<directory>../Vallia/src/main/java</directory>
-			<useDefaultExcludes>true</useDefaultExcludes>
-			<outputDirectory>/</outputDirectory>
-			<includes>
-				<include>**/*.java</include>
-			</includes>		
-		</fileSet>
-		<fileSet>
-			<directory>../Domkee/src/main/java</directory>
-			<useDefaultExcludes>true</useDefaultExcludes>
-			<outputDirectory>/</outputDirectory>
-			<includes>
-				<include>**/*.java</include>
-			</includes>		
-		</fileSet>
+<!-- 		<fileSet> -->
+<!-- 			<directory>../Utilix/src/main/java</directory> -->
+<!-- 			<useDefaultExcludes>true</useDefaultExcludes> -->
+<!-- 			<outputDirectory>/</outputDirectory> -->
+<!-- 			<includes> -->
+<!-- 				<include>**/*.java</include> -->
+<!-- 			</includes>		 -->
+<!-- 		</fileSet> -->
+<!-- 		<fileSet> -->
+<!-- 			<directory>../Vallia/src/main/java</directory> -->
+<!-- 			<useDefaultExcludes>true</useDefaultExcludes> -->
+<!-- 			<outputDirectory>/</outputDirectory> -->
+<!-- 			<includes> -->
+<!-- 				<include>**/*.java</include> -->
+<!-- 			</includes>		 -->
+<!-- 		</fileSet> -->
+<!-- 		<fileSet> -->
+<!-- 			<directory>../Domkee/src/main/java</directory> -->
+<!-- 			<useDefaultExcludes>true</useDefaultExcludes> -->
+<!-- 			<outputDirectory>/</outputDirectory> -->
+<!-- 			<includes> -->
+<!-- 				<include>**/*.java</include> -->
+<!-- 			</includes>		 -->
+<!-- 		</fileSet> -->
 	</fileSets>
 </assembly>		
