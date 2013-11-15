@@ -25,6 +25,14 @@
 			</includes>	
 		</fileSet>
 		<fileSet>
+			<directory>../Texgit/src/main/java</directory>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>**/*.java</include>
+			</includes>		
+		</fileSet>
+		<fileSet>
 			<directory>../Utilix/src/main/java</directory>
 			<useDefaultExcludes>true</useDefaultExcludes>
 			<outputDirectory>/</outputDirectory>
