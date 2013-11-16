@@ -1027,7 +1027,6 @@ public class BoletoViewer {
 		return this;
 	}
 	
-	
 	/**
 	 * Define o título do documento PDF gerado.
 	 * 
@@ -1043,7 +1042,23 @@ public class BoletoViewer {
 
 		return this;
 	}
-	
+
+	/**
+	 * Define se o título do documento PDF gerado será mostrado ou não (padrão true).
+	 * 
+	 * @param opcao
+	 *            para exibir título do documento PDF (true)
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 */
+	public BoletoViewer setPdfExibirTitulo(boolean opcao) {
+
+		pdfViewer.setDisplayTitle(opcao);
+
+		return this;
+	}
+
 	/**
 	 * Define o autor do documento PDF gerado.
 	 * 
@@ -1089,6 +1104,22 @@ public class BoletoViewer {
 		
 		pdfViewer.setKeywords(palavrasChave);
 		
+		return this;
+	}
+	
+	/**
+	 * Define se o os campos do documento PDF gerado devem ser removidos ou não (padrão true).
+	 * 
+	 * @param opcao
+	 *            para remover campos do documento PDF (true)
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 */
+	public BoletoViewer setPdfRemoverCampos(boolean opcao) {
+		
+		pdfViewer.setRemoveFields(opcao);
+
 		return this;
 	}
 	

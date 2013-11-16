@@ -28,6 +28,7 @@
  */
 
 package org.jrimum.bopepo.view;
+
 import static org.jrimum.utilix.Objects.isNull;
 
 import java.io.ByteArrayOutputStream;
@@ -305,20 +306,77 @@ class PdfViewer {
 		doc.withFullCompression(option);
 	}
 	
+	/**
+	 * Define o título do documento PDF gerado.
+	 * 
+	 * @param title
+	 *            para ser exibido como título do documento PDF
+	 * 
+	 * @since 0.2
+	 */
 	protected void setTitle(String title){
+		doc.title(title);
 		
+	}
+	
+	/**
+	 * Define se o título do documento PDF gerado será mostrado ou não (padrão true).
+	 * 
+	 * @param option
+	 *            para exibir título do documento PDF (true)
+	 * 
+	 * @since 0.2
+	 */
+	protected void setDisplayTitle(boolean option) {
+		doc.displayDocTilte(option);
 	}
 
+	/**
+	 * Define o autor do documento PDF gerado.
+	 * 
+	 * @param author
+	 *            do documento PDF
+	 * 
+	 * @since 0.2
+	 */
 	protected void setAuthor(String author){
-		
+		doc.author(author);
 	}
 	
+	/**
+	 * Define o assunto do documento PDF gerado.
+	 * 
+	 * @param subject
+	 *            do documento PDF
+	 * 
+	 * @since 0.2
+	 */
 	protected void setSubject(String subject) {
-		
+		doc.subject(subject);
 	}
 	
+	/**
+	 * Define as palavras chave do documento PDF gerado.
+	 * 
+	 * @param keywords
+	 *            do documento PDF
+	 * 
+	 * @since 0.2
+	 */
 	protected void setKeywords(String keywords) {
-		
+		doc.keywords(keywords);
+	}
+	
+	/**
+	 * Define se o os campos do documento PDF gerado devem ser removidos ou não (padrão true).
+	 * 
+	 * @param option
+	 *            para remover campos do documento PDF (true)
+	 * 
+	 * @since 0.2
+	 */
+	public void setRemoveFields(boolean option) {
+		doc.removeFields(option);
 	}
 	
 	/**

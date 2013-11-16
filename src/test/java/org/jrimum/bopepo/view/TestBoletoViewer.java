@@ -75,6 +75,15 @@ public class TestBoletoViewer {
 	}
 
 	@Test
+	public void deve_chamar_metodo_de_definicao_da_opcao_de_mostrar_titulo_em_pdfview(){
+		boolean opcao = true;
+		
+		boletoViewer.setPdfExibirTitulo(opcao);
+		
+		verify(pdfViewer).setDisplayTitle(opcao);
+	}
+
+	@Test
 	public void deve_chamar_metodo_de_definicao_do_autor_em_pdfview(){
 		String autor = "Eu";
 		
@@ -99,6 +108,15 @@ public class TestBoletoViewer {
 		boletoViewer.setPdfPalavrasChave(palavrasChave);
 		
 		verify(pdfViewer).setKeywords(palavrasChave);
+	}
+
+	@Test
+	public void deve_chamar_metodo_de_definicao_da_opcao_de_remover_os_campos_em_pdfview(){
+		boolean opcao = true;
+		
+		boletoViewer.setPdfRemoverCampos(opcao);
+		
+		verify(pdfViewer).setRemoveFields(opcao);
 	}
 
 }
