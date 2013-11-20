@@ -140,7 +140,6 @@
 					<docencoding>UTF-8</docencoding>
 					<docfilessubdirs>true</docfilessubdirs>
 					<show>private</show>
-					<source>1.5</source>
 		    	</configuration>
 			</plugin>
 			<plugin>
