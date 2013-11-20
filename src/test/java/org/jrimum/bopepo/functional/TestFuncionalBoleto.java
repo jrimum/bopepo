@@ -1,4 +1,4 @@
-package org.jrimum.bopepo;
+package org.jrimum.bopepo.functional;
 
 import org.junit.Test;
 
