@@ -44,8 +44,6 @@ import java.util.GregorianCalendar;
 
 import javax.imageio.ImageIO;
 
-import junit.framework.Assert;
-
 import org.jrimum.bopepo.campolivre.CampoLivre;
 import org.jrimum.bopepo.campolivre.NotSupportedBancoException;
 import org.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
@@ -183,9 +181,9 @@ public class TestBoleto{
 			}
 		});
 		
-		Assert.assertNotNull(boleto.getCampoLivre());
-		Assert.assertNotNull(boleto.getCampoLivre().write());
-		Assert.assertEquals(CampoLivre.STRING_LENGTH.intValue(), boleto.getCampoLivre().write().length());
+		assertNotNull(boleto.getCampoLivre());
+		assertNotNull(boleto.getCampoLivre().write());
+		assertEquals(CampoLivre.STRING_LENGTH.intValue(), boleto.getCampoLivre().write().length());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
