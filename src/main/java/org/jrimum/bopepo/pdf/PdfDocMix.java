@@ -123,18 +123,12 @@ public class PdfDocMix {
 	private Boolean displayDocTitle;
 
 	/**
-	 * Classe não instanciável
-	 * 
-	 * @throws IllegalStateException
-	 *             Caso haja alguma tentativa de utilização deste construtor.
+	 * Cria uma instância sem o template que será utilizado para construir o
+	 * documento.
 	 * 
 	 * @since 0.2
 	 */
-	@SuppressWarnings("unused")
-	private PdfDocMix() {
-
-		Exceptions.throwIllegalStateException("Instanciação não permitida!");
-	}
+	private PdfDocMix() {}
 
 	/**
 	 * Cria uma instância com o template que será utilizado para construir o
@@ -221,6 +215,19 @@ public class PdfDocMix {
 		setTemplate(templateFile);
 	}
 
+	/**
+	 * Cria uma instância sem o template que será utilizado para construir o
+	 * documento.
+	 * 
+	 * @since 0.2
+	 * 
+	 * @return Esta instância após a operação
+	 */
+	public static PdfDocMix create() {
+
+		return new PdfDocMix();
+	}
+	
 	/**
 	 * Cria uma instância com o template que será utilizado para construir o
 	 * documento.
@@ -322,7 +329,7 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o
+	 * Define o template que será utilizado para construir o
 	 * documento.
 	 * 
 	 * @param template
@@ -334,7 +341,7 @@ public class PdfDocMix {
 	 * @throws IllegalArgumentException
 	 *             Caso o {@code template} seja nulo
 	 */
-	public PdfDocMix changeTemplate(byte[] template) {
+	public PdfDocMix withTemplate(byte[] template) {
 
 		checkTemplateFile(template);
 
@@ -342,7 +349,7 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o
+	 * Define o template que será utilizado para construir o
 	 * documento.
 	 * 
 	 * @param templateUrl
@@ -354,7 +361,7 @@ public class PdfDocMix {
 	 * @throws IllegalArgumentException
 	 *             Caso o {@code template} seja nulo
 	 */
-	public PdfDocMix changeTemplate(URL templateUrl) {
+	public PdfDocMix withTemplate(URL templateUrl) {
 
 		checkTemplateFile(templateUrl);
 
@@ -362,7 +369,7 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o
+	 * Define o template que será utilizado para construir o
 	 * documento.
 	 * 
 	 * @param templateInput
@@ -374,7 +381,7 @@ public class PdfDocMix {
 	 * @throws IllegalArgumentException
 	 *             Caso o {@code template} seja nulo
 	 */
-	public PdfDocMix changeTemplate(InputStream templateInput) {
+	public PdfDocMix withTemplate(InputStream templateInput) {
 
 		checkTemplateFile(templateInput);
 
@@ -382,7 +389,7 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o
+	 * Define o template que será utilizado para construir o
 	 * documento.
 	 * 
 	 * @param templatePath
@@ -394,7 +401,7 @@ public class PdfDocMix {
 	 * @throws IllegalArgumentException
 	 *             Caso o {@code template} seja nulo
 	 */
-	public PdfDocMix changeTemplate(String templatePath) {
+	public PdfDocMix withTemplate(String templatePath) {
 
 		checkTemplatePath(templatePath);
 
@@ -402,7 +409,7 @@ public class PdfDocMix {
 	}
 
 	/**
-	 * Cria uma instância com o template que será utilizado para construir o
+	 * Define o template que será utilizado para construir o
 	 * documento.
 	 * 
 	 * @param templateFile
@@ -414,7 +421,7 @@ public class PdfDocMix {
 	 * @throws IllegalArgumentException
 	 *             Caso o {@code template} seja nulo
 	 */
-	public PdfDocMix changeTemplate(File templateFile) {
+	public PdfDocMix withTemplate(File templateFile) {
 
 		checkTemplateFile(templateFile);
 
@@ -596,7 +603,7 @@ public class PdfDocMix {
 	 * 
 	 * @return Esta instância após a operação
 	 */
-	public PdfDocMix title(String title){
+	public PdfDocMix withTitle(String title){
 		docInfo.title(title);
 		return this;
 	}
@@ -608,7 +615,7 @@ public class PdfDocMix {
 	 * 
 	 * @return Esta instância após a operação
 	 */
-	public PdfDocMix author(String author){
+	public PdfDocMix withAuthor(String author){
 		docInfo.author(author);
 		return this;
 	}
@@ -620,7 +627,7 @@ public class PdfDocMix {
 	 * 
 	 * @return Esta instância após a operação
 	 */
-	public PdfDocMix subject(String subject){
+	public PdfDocMix withSubject(String subject){
 		docInfo.subject(subject);
 		return this;
 	}
@@ -632,7 +639,7 @@ public class PdfDocMix {
 	 * 
 	 * @return Esta instância após a operação
 	 */
-	public PdfDocMix keywords(String keywords){
+	public PdfDocMix withKeywords(String keywords){
 		docInfo.keywords(keywords);
 		return this;
 	}
@@ -644,7 +651,7 @@ public class PdfDocMix {
 	 * 
 	 * @return Esta instância após a operação
 	 */
-	public PdfDocMix creator(String creator){
+	public PdfDocMix withCreator(String creator){
 		docInfo.creator(creator);
 		return this;
 	}
@@ -656,7 +663,7 @@ public class PdfDocMix {
 	 * 
 	 * @return Esta instância após a operação
 	 */
-	public PdfDocMix creation(Calendar date){
+	public PdfDocMix withCreation(Calendar date){
 		docInfo.creation(date);
 		return this;
 	}
@@ -667,7 +674,7 @@ public class PdfDocMix {
 	 * 
 	 * <p>
 	 * Todas as informações anteriormente atribuídas por:
-	 * {@linkplain #title(String)}, {@linkplain #subject(String)}, etc. serão
+	 * {@linkplain #withTitle(String)}, {@linkplain #withSubject(String)}, etc. serão
 	 * substituídas pelo conteúdo do {@code docInfo} nessa operação.
 	 * </p>
 	 * 
@@ -678,7 +685,7 @@ public class PdfDocMix {
 	 * 
 	 * @see org.jrimum.bopepo.pdf.PdfDocInfo
 	 */
-	public PdfDocMix changeDocInfo(PdfDocInfo docInfo){
+	public PdfDocMix withDocInfo(PdfDocInfo docInfo){
 		
 		checkNotNull(docInfo, "Valor null para docInfo não permitido!");
 		
@@ -698,7 +705,7 @@ public class PdfDocMix {
 	 * 
 	 * @return Esta instância após a operação
 	 */
-	public PdfDocMix displayDocTilte(boolean option){
+	public PdfDocMix withDisplayDocTilteOption(boolean option){
 		
 		this.displayDocTitle = option;
 		
@@ -1008,9 +1015,9 @@ public class PdfDocMix {
 			String creator = docInfo.creator();
 			
 			if(isBlank(creator)){
-				creator(JRIMUM);
+				withCreator(JRIMUM);
 			}else{
-				creator(creator+" by ("+JRIMUM+")");
+				withCreator(creator+" by ("+JRIMUM+")");
 			}
 
 			if(isNull(docInfo.creation())){

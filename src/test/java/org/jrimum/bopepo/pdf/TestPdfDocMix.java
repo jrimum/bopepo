@@ -144,7 +144,7 @@ public class TestPdfDocMix {
 		
 		final String Y = "OUTRO_TEMPLATE";
 		
-		doc.changeTemplate(Y.getBytes());
+		doc.withTemplate(Y.getBytes());
 		
 		assertEquals(Y, new String(doc.getTemplate()));
 	}
@@ -280,7 +280,7 @@ public class TestPdfDocMix {
 		
 		doc = createDoc();
 		
-		doc.title(TITULO);
+		doc.withTitle(TITULO);
 		
 		PdfDocReader reader = new PdfDocReader(doc.toBytes());
 		
@@ -296,7 +296,7 @@ public class TestPdfDocMix {
 		
 		doc = createDoc();
 		
-		doc.subject(ASSUNTO);
+		doc.withSubject(ASSUNTO);
 		
 		PdfDocReader reader = new PdfDocReader(doc.toBytes());
 		
@@ -312,7 +312,7 @@ public class TestPdfDocMix {
 		
 		doc = createDoc();
 		
-		doc.keywords(PALAVRA_CHAVE);
+		doc.withKeywords(PALAVRA_CHAVE);
 		
 		PdfDocReader reader = new PdfDocReader(doc.toBytes());
 		
@@ -331,7 +331,7 @@ public class TestPdfDocMix {
 		
 		doc = createDoc();
 		
-		doc.changeDocInfo(docInfo);
+		doc.withDocInfo(docInfo);
 		
 		PdfDocReader reader = new PdfDocReader(doc.toBytes());
 		
@@ -347,7 +347,7 @@ public class TestPdfDocMix {
 		
 		doc = createDoc();
 		
-		doc.author(AUTOR);
+		doc.withAuthor(AUTOR);
 		
 		PdfDocReader reader = new PdfDocReader(doc.toBytes());
 		
@@ -363,7 +363,7 @@ public class TestPdfDocMix {
 		
 		doc = createDoc();
 		
-		doc.creator(CRIADOR);
+		doc.withCreator(CRIADOR);
 		
 		PdfDocReader reader = new PdfDocReader(doc.toBytes());
 		

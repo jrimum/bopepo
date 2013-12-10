@@ -78,6 +78,7 @@ class PdfViewer {
 		
 		resourceBundle = new ResourceBundle();
 		boletoDataBuilder = new BoletoDataBuilder(resourceBundle);
+		doc = PdfDocMix.create();
 	}
 	
 	/**
@@ -315,8 +316,7 @@ class PdfViewer {
 	 * @since 0.2
 	 */
 	protected void setTitle(String title){
-		doc.title(title);
-		
+		doc.withTitle(title);
 	}
 	
 	/**
@@ -328,7 +328,7 @@ class PdfViewer {
 	 * @since 0.2
 	 */
 	protected void setDisplayTitle(boolean option) {
-		doc.displayDocTilte(option);
+		doc.withDisplayDocTilteOption(option);
 	}
 
 	/**
@@ -340,7 +340,7 @@ class PdfViewer {
 	 * @since 0.2
 	 */
 	protected void setAuthor(String author){
-		doc.author(author);
+		doc.withAuthor(author);
 	}
 	
 	/**
@@ -352,7 +352,7 @@ class PdfViewer {
 	 * @since 0.2
 	 */
 	protected void setSubject(String subject) {
-		doc.subject(subject);
+		doc.withSubject(subject);
 	}
 	
 	/**
@@ -364,7 +364,7 @@ class PdfViewer {
 	 * @since 0.2
 	 */
 	protected void setKeywords(String keywords) {
-		doc.keywords(keywords);
+		doc.withKeywords(keywords);
 	}
 	
 	/**
@@ -375,7 +375,7 @@ class PdfViewer {
 	 * 
 	 * @since 0.2
 	 */
-	public void setRemoveFields(boolean option) {
+	protected void setRemoveFields(boolean option) {
 		doc.removeFields(option);
 	}
 	
@@ -416,11 +416,7 @@ class PdfViewer {
 			template = getTemplate();
 		}
 		
-		if(isNull(doc)){
-			doc = PdfDocMix.createWithTemplate(template);
-		}else{
-			doc.changeTemplate(template);
-		}
+		doc.withTemplate(template);
 		
 		boletoDataBuilder.with(boleto);
 		
