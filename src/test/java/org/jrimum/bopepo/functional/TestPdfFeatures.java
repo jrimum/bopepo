@@ -33,6 +33,7 @@ package org.jrimum.bopepo.functional;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import org.jrimum.bopepo.excludes.BoletoBuilder;
 import org.jrimum.bopepo.pdf.PdfDocInfo;
@@ -40,23 +41,31 @@ import org.jrimum.bopepo.pdf.PdfDocReader;
 import org.jrimum.bopepo.view.BoletoViewer;
 import org.junit.Test;
 
-public class TestPdfMetaDados {
+public class TestPdfFeatures {
 
 	@Test
 	public void deve_ter_todos_os_meta_dados_do_boleto_em_pdf_definidos_pelo_usuario() {
-		byte[] boletoPdfAsByteArray = BoletoViewer.create(BoletoBuilder.create())
+		byte[] boletoPdf = BoletoViewer.create(BoletoBuilder.create())
 		.setPdfTitulo("Titulo")
 		.setPdfAssunto("Assunto")
 		.setPdfPalavrasChave("Palavras Chave")
 		.setPdfAutor("Autor")
 		.getPdfAsByteArray();
 
-		PdfDocInfo pdfMetaInfo = new PdfDocReader(boletoPdfAsByteArray).getInfo();
+		PdfDocInfo pdfMetaInfo = new PdfDocReader(boletoPdf).getInfo();
 
 		assertThat(pdfMetaInfo.title(), equalTo("Titulo"));
 		assertThat(pdfMetaInfo.subject(), equalTo("Assunto"));
 		assertThat(pdfMetaInfo.keywords(), equalTo("Palavras Chave"));
 		assertThat(pdfMetaInfo.author(), equalTo("Autor"));
+	}
+
+	@Test
+	public void deve_comprimir_pdf_por_padrao() {
+		byte[] boletoPdfComprimido = BoletoViewer.create(BoletoBuilder.create()).getPdfAsByteArray();
+		byte[] boletoPdfNaoComprimido = BoletoViewer.create(BoletoBuilder.create()).setPdfFullCompression(false).getPdfAsByteArray();
+
+		assertTrue(boletoPdfComprimido.length < boletoPdfNaoComprimido.length);
 	}
 
 }
