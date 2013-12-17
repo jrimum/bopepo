@@ -63,7 +63,7 @@ public class TestBoletoDataBuilder {
 		this.resourceBundle = new ResourceBundle();
 		this.boleto = BoletoBuilder.createWithSacadorAvalista();
 		this.boletoDataBuilder = new BoletoDataBuilder(resourceBundle,boleto );
-		this.boletoDadosEsperados = java.util.ResourceBundle.getBundle("BoletoView_DadosEsperados");
+		this.boletoDadosEsperados = java.util.ResourceBundle.getBundle("ValoresEsperadosDosCamposParaBoletoBradescoPDF");
 	}
 	
 	@Test
