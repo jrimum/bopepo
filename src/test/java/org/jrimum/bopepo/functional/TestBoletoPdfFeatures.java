@@ -32,6 +32,7 @@
 package org.jrimum.bopepo.functional;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -41,7 +42,7 @@ import org.jrimum.bopepo.pdf.PdfDocReader;
 import org.jrimum.bopepo.view.BoletoViewer;
 import org.junit.Test;
 
-public class TestPdfFeatures {
+public class TestBoletoPdfFeatures {
 
 	@Test
 	public void deve_ter_todos_os_meta_dados_do_boleto_em_pdf_definidos_pelo_usuario() {
@@ -62,10 +63,24 @@ public class TestPdfFeatures {
 
 	@Test
 	public void deve_comprimir_pdf_por_padrao() {
+		final boolean NAO = false;
 		byte[] boletoPdfComprimido = BoletoViewer.create(BoletoBuilder.create()).getPdfAsByteArray();
-		byte[] boletoPdfNaoComprimido = BoletoViewer.create(BoletoBuilder.create()).setPdfFullCompression(false).getPdfAsByteArray();
+		byte[] boletoPdfNaoComprimido = BoletoViewer.create(BoletoBuilder.create()).setPdfFullCompression(NAO).getPdfAsByteArray();
 
 		assertTrue(boletoPdfComprimido.length < boletoPdfNaoComprimido.length);
+	}
+
+	@Test
+	public void deve_remover_campos_por_padrao() {
+		final boolean NAO = false;
+		byte[] boletoPdfSemCampos = BoletoViewer.create(BoletoBuilder.create()).getPdfAsByteArray();
+		byte[] boletoPdfComCampos = BoletoViewer.create(BoletoBuilder.create()).setPdfRemoverCampos(NAO).getPdfAsByteArray();
+		
+		PdfDocReader pdfDocSemCampos = new PdfDocReader(boletoPdfSemCampos);
+		PdfDocReader pdfDocComCampos = new PdfDocReader(boletoPdfComCampos);
+		
+		assertThat(pdfDocSemCampos.getFields().size(), equalTo(0));
+		assertThat(pdfDocComCampos.getFields().size(), not(equalTo(0)));
 	}
 
 }
