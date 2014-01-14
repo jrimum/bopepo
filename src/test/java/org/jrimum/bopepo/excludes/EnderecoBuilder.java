@@ -34,6 +34,9 @@ import org.jrimum.domkee.comum.pessoa.endereco.CEP;
 import org.jrimum.domkee.comum.pessoa.endereco.Endereco;
 import org.jrimum.domkee.comum.pessoa.endereco.UnidadeFederativa;
 
+/**
+ * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+ */
 public class EnderecoBuilder {
 	
 	private Endereco end;
