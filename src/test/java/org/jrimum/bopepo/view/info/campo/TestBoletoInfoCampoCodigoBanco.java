@@ -32,6 +32,7 @@
 package org.jrimum.bopepo.view.info.campo;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.jrimum.bopepo.view.info.campo.BoletoInfoCampoCodigoBanco.getTextoCodigoDoBanco;
 import static org.junit.Assert.*;
 
 import org.jrimum.bopepo.excludes.ContaBancariaBuilder;
@@ -48,6 +49,6 @@ public class TestBoletoInfoCampoCodigoBanco {
 	public void deve_retornar_codigo_de_compensacao_com_dv(){
 		ContaBancaria conta = ContaBancariaBuilder.defaultValue();
 
-		assertThat(BoletoInfoCampoCodigoBanco.getTextoCodigoDoBanco(conta), equalTo("237-2"));
+		assertThat(getTextoCodigoDoBanco(conta), equalTo("237-2"));
 	}
 }
