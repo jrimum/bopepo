@@ -44,11 +44,21 @@ import org.junit.Test;
 public class TestBoletoInfoCampoNossoNumero {
 	
 	@Test
-	public void deve_retornar_nosso_numero_sem_dv_quando_dv_ausente(){
+	public void deve_retornar_nosso_numero_sem_dv_quando_dv_null(){
 		Titulo titulo = TituloBuilder.defaultValue();
 		
 		titulo.setNossoNumero("123456");
 		titulo.setDigitoDoNossoNumero(null);
+		
+		assertThat(getTextoNossoNumero(titulo), equalTo("123456"));
+	}
+
+	@Test
+	public void deve_retornar_nosso_numero_sem_dv_quando_dv_vazio(){
+		Titulo titulo = TituloBuilder.defaultValue();
+		
+		titulo.setNossoNumero("123456");
+		titulo.setDigitoDoNossoNumero("");
 		
 		assertThat(getTextoNossoNumero(titulo), equalTo("123456"));
 	}
@@ -61,6 +71,26 @@ public class TestBoletoInfoCampoNossoNumero {
 		titulo.setDigitoDoNossoNumero("7");
 		
 		assertThat(getTextoNossoNumero(titulo), equalTo("123456-7"));
+	}
+
+	@Test
+	public void deve_retornar_string_vaiza_caso_nao_nosso_numero_null(){
+		Titulo titulo = TituloBuilder.defaultValue();
+		
+		titulo.setNossoNumero(null);
+		titulo.setDigitoDoNossoNumero("7");
+		
+		assertThat(getTextoNossoNumero(titulo), equalTo(""));
+	}
+
+	@Test
+	public void deve_retornar_string_vaiza_caso_nao_nosso_numero_vazio(){
+		Titulo titulo = TituloBuilder.defaultValue();
+		
+		titulo.setNossoNumero("");
+		titulo.setDigitoDoNossoNumero("7");
+		
+		assertThat(getTextoNossoNumero(titulo), equalTo(""));
 	}
 
 }
