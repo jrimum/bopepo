@@ -66,4 +66,26 @@ public class TestBoletoInfoCampoPessoa {
 		assertThat(getTextoNomeCprfDaPessoa(pessoa), equalTo(textoExperado));
 	}
 	
+	@Test
+	public void deve_retornar_apenas_nome_quando_cprf_null(){
+		String nome = "Nome da Pessoa";
+		pessoa = new EntidadeDeCobranca(nome);
+		
+		assertThat(getTextoNomeCprfDaPessoa(pessoa), equalTo(nome));
+	}
+
+	@Test
+	public void deve_retornar_apenas_cprf_quando_nome_null(){
+		String cprf = "222.222.222-22";
+		pessoa = new EntidadeDeCobranca(null,"222.222.222-22");
+		
+		assertThat(getTextoNomeCprfDaPessoa(pessoa), equalTo("CPF: "+cprf));
+	}
+
+	@Test
+	public void deve_retornar_string_vazia_quando_pessoa_null(){
+		
+		assertThat(getTextoNomeCprfDaPessoa(null), equalTo(""));
+	}
+	
 }

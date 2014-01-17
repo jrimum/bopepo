@@ -54,17 +54,21 @@ public class BoletoInfoCampoPessoa {
 	 * @return string formatada para ser exibida no boleto
 	 */
 	public static String getTextoNomeCprfDaPessoa(EntidadeDeCobranca pessoa) {
-
 		StringBuilder sb = new StringBuilder(EMPTY);
+		boolean temNome = false;
 
 		if (isNotNull(pessoa)) {
 
 			if (isNotNull(pessoa.getNome())) {
+				temNome = true;
 				sb.append(pessoa.getNome());
 			}
 
 			if (isNotNull(pessoa.getCPRF())) {
-				sb.append(", ");
+				
+				if(temNome){
+					sb.append(", ");
+				}
 
 				if (pessoa.getCPRF().isFisica()) {
 					sb.append("CPF: ");
