@@ -47,7 +47,7 @@ public class TestBoletoInfoCampoPessoa {
 	private EntidadeDeCobranca pessoa;
 
 	@Test
-	public void deve_escrever_texto_em_formato_correto_para_pessoa_fisica(){
+	public void deve_retornar_texto_formatado_para_pessoa_fisica(){
 		String nome = "Uma Pessoa Física Desconhecida";
 		String cpf = "222.222.222-22";
 		pessoa = new EntidadeDeCobranca(nome, cpf);
@@ -57,7 +57,7 @@ public class TestBoletoInfoCampoPessoa {
 	}
 
 	@Test
-	public void deve_escrever_texto_em_formato_correto_para_pessoa_juridica(){
+	public void deve_retornar_texto_formatado_para_pessoa_juridica(){
 		String nome = "Uma Pessoa Jurídica Qualquer";
 		String cpf = "00.000.000/0001-91";
 		pessoa = new EntidadeDeCobranca(nome, cpf);
