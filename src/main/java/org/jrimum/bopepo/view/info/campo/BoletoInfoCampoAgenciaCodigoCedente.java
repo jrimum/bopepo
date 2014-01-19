@@ -64,8 +64,7 @@ public class BoletoInfoCampoAgenciaCodigoCedente {
 				texto.append(conta.getAgencia().getCodigo());
 			}
 	
-			if (isNotNull(conta.getAgencia().getDigitoVerificador())
-					&& isNotBlank(conta.getAgencia().getDigitoVerificador().toString())) {
+			if (isNotBlank(conta.getAgencia().getDigitoVerificador().toString())) {
 	
 				texto.append("-");
 				texto.append(conta.getAgencia().getDigitoVerificador());
@@ -82,7 +81,7 @@ public class BoletoInfoCampoAgenciaCodigoCedente {
 	
 				texto.append(conta.getNumeroDaConta().getCodigoDaConta());
 	
-				if (isNotNull(conta.getNumeroDaConta().getDigitoDaConta()) && isNotBlank(conta.getNumeroDaConta().getDigitoDaConta())) {
+				if (isNotBlank(conta.getNumeroDaConta().getDigitoDaConta())) {
 	
 					texto.append("-");
 					texto.append(conta.getNumeroDaConta().getDigitoDaConta());
