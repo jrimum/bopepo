@@ -32,7 +32,6 @@ package org.jrimum.bopepo.view.info.campo;
 
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
-import static org.jrimum.utilix.Objects.isNotNull;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
@@ -54,10 +53,10 @@ public class BoletoInfoCampoNossoNumero {
 
 		StringBuilder texto = new StringBuilder(EMPTY);
 
-		if (isNotNull(titulo.getNossoNumero()) && isNotBlank(titulo.getNossoNumero())) {
+		if (isNotBlank(titulo.getNossoNumero())) {
 			texto.append(titulo.getNossoNumero());
 
-			if (isNotNull(titulo.getDigitoDoNossoNumero()) && isNotBlank(titulo.getDigitoDoNossoNumero())) {
+			if (isNotBlank(titulo.getDigitoDoNossoNumero())) {
 				texto.append("-" + titulo.getDigitoDoNossoNumero());
 			}
 		}
