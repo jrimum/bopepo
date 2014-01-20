@@ -46,7 +46,7 @@ public class TestBoletoPdfFeatures {
 
 	@Test
 	public void deve_ter_todos_os_meta_dados_do_boleto_em_pdf_definidos_pelo_usuario() {
-		byte[] boletoPdf = BoletoViewer.create(BoletoBuilder.create())
+		byte[] boletoPdf = BoletoViewer.create(BoletoBuilder.defaultValue())
 		.setPdfTitulo("Titulo")
 		.setPdfAssunto("Assunto")
 		.setPdfPalavrasChave("Palavras Chave")
@@ -64,8 +64,8 @@ public class TestBoletoPdfFeatures {
 	@Test
 	public void deve_comprimir_pdf_por_padrao() {
 		final boolean NAO = false;
-		byte[] boletoPdfComprimido = BoletoViewer.create(BoletoBuilder.create()).getPdfAsByteArray();
-		byte[] boletoPdfNaoComprimido = BoletoViewer.create(BoletoBuilder.create()).setPdfFullCompression(NAO).getPdfAsByteArray();
+		byte[] boletoPdfComprimido = BoletoViewer.create(BoletoBuilder.defaultValue()).getPdfAsByteArray();
+		byte[] boletoPdfNaoComprimido = BoletoViewer.create(BoletoBuilder.defaultValue()).setPdfFullCompression(NAO).getPdfAsByteArray();
 
 		assertTrue(boletoPdfComprimido.length < boletoPdfNaoComprimido.length);
 	}
@@ -73,8 +73,8 @@ public class TestBoletoPdfFeatures {
 	@Test
 	public void deve_remover_campos_por_padrao() {
 		final boolean NAO = false;
-		byte[] boletoPdfSemCampos = BoletoViewer.create(BoletoBuilder.create()).getPdfAsByteArray();
-		byte[] boletoPdfComCampos = BoletoViewer.create(BoletoBuilder.create()).setPdfRemoverCampos(NAO).getPdfAsByteArray();
+		byte[] boletoPdfSemCampos = BoletoViewer.create(BoletoBuilder.defaultValue()).getPdfAsByteArray();
+		byte[] boletoPdfComCampos = BoletoViewer.create(BoletoBuilder.defaultValue()).setPdfRemoverCampos(NAO).getPdfAsByteArray();
 		
 		PdfDocReader pdfDocSemCampos = new PdfDocReader(boletoPdfSemCampos);
 		PdfDocReader pdfDocComCampos = new PdfDocReader(boletoPdfComCampos);

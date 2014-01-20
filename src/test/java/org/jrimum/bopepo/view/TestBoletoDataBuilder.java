@@ -29,23 +29,23 @@
 
 package org.jrimum.bopepo.view;
 
+import static org.apache.commons.lang.StringUtils.EMPTY;
+import static org.jrimum.utilix.Objects.whenNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.excludes.BoletoBuilder;
 import org.jrimum.bopepo.excludes.Images;
 import org.jrimum.bopepo.pdf.CodigoDeBarras;
+import org.jrimum.bopepo.view.info.BoletoInfoViewBuilder;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.google.common.collect.Sets;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
@@ -54,33 +54,26 @@ public class TestBoletoDataBuilder {
 	
 	private Boleto boleto;
 	private ResourceBundle resourceBundle; 
-	private BoletoDataBuilder boletoDataBuilder;
+	private BoletoInfoViewBuilder boletoInfoViewBuilder;
 	private java.util.ResourceBundle boletoDadosEsperados;
 	
 	@Before
 	public void setup(){
 		
 		this.resourceBundle = new ResourceBundle();
-		this.boleto = BoletoBuilder.createWithSacadorAvalista();
-		this.boletoDataBuilder = new BoletoDataBuilder(resourceBundle,boleto );
+		this.boleto = BoletoBuilder.defaultValueSacadorAvalista();
+		this.boletoInfoViewBuilder = new BoletoInfoViewBuilder(resourceBundle, boleto).build();
 		this.boletoDadosEsperados = java.util.ResourceBundle.getBundle("ValoresEsperadosDosCamposParaBoletoBradescoPDF");
 	}
 	
 	@Test
 	public void deve_ter_todos_os_campos_de_texto_padrao_preenchidos_com_textos_formatados_para_exibir_no_boleto(){
-		Set<BoletoCampo> camposNaoTexto = Sets.newHashSet(BoletoCampo.txtRsLogoBanco,BoletoCampo.txtFcLogoBanco,BoletoCampo.txtFcCodigoBarra);
-		Set<BoletoCampo> camposTextoDefinidosComoPadrao = Sets.newTreeSet();
+		
+		Map<String, String> camposTextoNoBoleto = new TreeMap<String, String> (boletoInfoViewBuilder.texts());
+		
 		for(BoletoCampo campo: BoletoCampo.values()){
-			if(!camposNaoTexto.contains(campo)){
-				camposTextoDefinidosComoPadrao.add(campo);
-			}
-		}
-		
-		Map<String, String> camposTextoNoBoleto = new TreeMap<String, String> (boletoDataBuilder.texts());
-		
-		for(BoletoCampo campo: camposTextoDefinidosComoPadrao){
 			String textoEsperado = boletoDadosEsperados.getString(campo.name());
-			String textoAtual = camposTextoNoBoleto.get(campo.name());
+			String textoAtual = whenNull(camposTextoNoBoleto.get(campo.name()), EMPTY);
 			assertEquals("CAMPO: "+campo,textoEsperado,textoAtual);
 		}
 	}
@@ -88,7 +81,7 @@ public class TestBoletoDataBuilder {
 	@Test
 	public void deve_ter_todos_os_campos_de_imagem_padrao_preenchidos_com_as_imagens_corretas_para_exibir_no_boleto(){
 
-		Map<String, Image> camposImagem = boletoDataBuilder.images();
+		Map<String, Image> camposImagem = boletoInfoViewBuilder.images();
 		
 		Image logoBancoBradescoEsperada = resourceBundle.getLogotipoDoBanco("237");
 		assertEquals(logoBancoBradescoEsperada, camposImagem.get(BoletoCampo.txtRsLogoBanco.name()));

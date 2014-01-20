@@ -42,6 +42,7 @@ import org.apache.log4j.Logger;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.pdf.Files;
 import org.jrimum.bopepo.pdf.PdfDocMix;
+import org.jrimum.bopepo.view.info.BoletoInfoViewBuilder;
 import org.jrimum.utilix.Exceptions;
 
 /**
@@ -62,7 +63,6 @@ class PdfViewer {
 	private static Logger log = Logger.getLogger(PdfViewer.class);
 
 	private final ResourceBundle resourceBundle;
-	private final BoletoDataBuilder boletoDataBuilder;
 
 	private PdfDocMix doc;
 	private Boleto boleto;
@@ -77,7 +77,6 @@ class PdfViewer {
 	protected PdfViewer() {
 		
 		resourceBundle = new ResourceBundle();
-		boletoDataBuilder = new BoletoDataBuilder(resourceBundle);
 		doc = PdfDocMix.create();
 	}
 	
@@ -418,10 +417,10 @@ class PdfViewer {
 		
 		doc.withTemplate(template);
 		
-		boletoDataBuilder.with(boleto);
+		BoletoInfoViewBuilder builder = new BoletoInfoViewBuilder(this.resourceBundle,this.boleto).build();
 		
-		doc.putAllTexts(boletoDataBuilder.texts());
-		doc.putAllImages(boletoDataBuilder.images());
+		doc.putAllTexts(builder.texts());
+		doc.putAllImages(builder.images());
 	}
 
 	/**
