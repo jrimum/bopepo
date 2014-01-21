@@ -27,7 +27,7 @@
  * 
  */
 
-package org.jrimum.bopepo.view;
+package org.jrimum.bopepo.view.info;
 
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.jrimum.utilix.Objects.whenNull;
@@ -43,6 +43,8 @@ import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.excludes.BoletoBuilder;
 import org.jrimum.bopepo.excludes.Images;
 import org.jrimum.bopepo.pdf.CodigoDeBarras;
+import org.jrimum.bopepo.view.BoletoCampo;
+import org.jrimum.bopepo.view.ResourceBundle;
 import org.jrimum.bopepo.view.info.BoletoInfoViewBuilder;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,7 +52,7 @@ import org.junit.Test;
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  */
-public class TestBoletoDataBuilder {
+public class TestBoletoInfoViewBuilder {
 	
 	private Boleto boleto;
 	private ResourceBundle resourceBundle; 
