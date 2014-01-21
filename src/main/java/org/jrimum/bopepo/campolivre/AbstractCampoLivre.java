@@ -219,6 +219,7 @@ abstract class AbstractCampoLivre extends BlockOfFields implements CampoLivre {
 					case BANCOOB: return AbstractCLBancoob.create(titulo);
 					case CITIBANK: return AbstractCLBancoCitibank.create(titulo); 
 					case BANCO_DE_BRASILIA: return AbstractCLBancoDeBrasilia.create(titulo);
+					case CECRED: return AbstractCLCecred.create(titulo);
 						
 					default:
 						/*
@@ -738,7 +739,7 @@ abstract class AbstractCampoLivre extends BlockOfFields implements CampoLivre {
 	 * 
 	 * @param titulo
 	 * @param param
-	 *            - Parâmetro a ser validado
+	 *            Parâmetro a ser validado
 	 * 
 	 * @since 0.2
 	 */
@@ -747,6 +748,32 @@ abstract class AbstractCampoLivre extends BlockOfFields implements CampoLivre {
 		Objects.checkNotNull(titulo.getParametrosBancarios(), format("O parâmetro bancário [\"%s\"] é necessário! [titulo.getParametrosBancarios() == null]",param));
 		Objects.checkArgument(titulo.getParametrosBancarios().contemComNome(param),format("Parâmetro bancário [\"%s\"] não encontrado!",param));
 		Objects.checkNotNull(titulo.getParametrosBancarios().getValor(param), format("Parâmetro bancário [\"%s\"] não contém valor!", param));
+	}
+	
+	/**
+	 * <p>
+	 * Verifica se o título com o parâmetro informado é um número inteiro menor
+	 * que ou igual ao limite informado, caso contrário lança uma
+	 * {@code IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * @param param
+	 *            Parâmetro a ser validado
+	 * @param limite
+	 *            Limite máximo permitido
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkParametrosBancariosMenorOuIgualQue(Titulo titulo, ParametroBancario<?> param, int limite){
+		
+		checkParametrosBancarios(titulo, param);
+		
+		int valor = titulo.getParametrosBancarios().getValor(param).intValue();
+		
+		boolean expression = valor <= limite; 
+
+		Objects.checkArgument(expression, format("Parâmetro [%s] com valor [%s] deve ser um número menor que ou igual a [%s].", param, valor, limite));
 	}
 	
 	/**

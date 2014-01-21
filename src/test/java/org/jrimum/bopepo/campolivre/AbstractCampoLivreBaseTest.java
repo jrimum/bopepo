@@ -367,6 +367,16 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		//uma exceção deve ser lançada aqui
 		titulo.setParametrosBancarios(new ParametrosBancariosMap(parametro, null));
 	}
+
+	protected final void testeSeNaoPermiteParametroBancarioComValorAcimaDoLimite(ParametroBancario<?> parametro, Integer limiteAcima) throws IllegalArgumentException{
+		
+		titulo.setParametrosBancarios(new ParametrosBancariosMap(parametro, limiteAcima));
+		
+		createCampoLivreToTest();
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
+	}
 	
 	protected final void testeSeNaoPermiteValorDoTituloNulo() throws NullPointerException{
 
