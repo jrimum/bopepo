@@ -177,7 +177,16 @@ public enum BancosSuportados{
 	 * 
 	 * @since 0.2
 	 */
-	BANCO_INTEMEDIUM("077", "00416968000101", "BANCO INTERMEDIUM S.A.", "Banco Múltiplo"),	
+	BANCO_INTEMEDIUM("077", "00416968000101", "BANCO INTERMEDIUM S.A.", "Banco Múltiplo"),
+
+	/**
+	 * Tipo enumerado que representa o CECRED, <strong>Cooperativa Central de Crédito Urbano</strong>,
+	 * código de compensação <strong><tt>085</tt></strong> <a href="http://www.cecred.coop.br/">
+	 * site</a>.
+	 * 
+	 * @since 0.2
+	 */
+	CECRED("085", "05.463.212/0001-29", "COOPERATIVA CENTRAL DE CRÉDITO URBANO - CECRED", "Cooperativa de Crédito"),
 	
 	/**
 	 * Tipo enumerado que representa o Banco <strong>Caixa Econômica Federal</strong>,
@@ -327,6 +336,7 @@ public enum BancosSuportados{
 		suportados.put(BANCOOB.codigoDeCompensacaoBACEN, BANCOOB);
 		suportados.put(CITIBANK.codigoDeCompensacaoBACEN, CITIBANK);
 		suportados.put(BANCO_DE_BRASILIA.codigoDeCompensacaoBACEN, BANCO_DE_BRASILIA);
+		suportados.put(CECRED.codigoDeCompensacaoBACEN, CECRED);
 	}
 
 	/**
