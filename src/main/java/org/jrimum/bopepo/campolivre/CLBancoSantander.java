@@ -132,8 +132,8 @@ class CLBancoSantander extends AbstractCLSantander implements CampoLivre {
 				&& Objects.isNotNull(titulo.getParametrosBancarios().getValor(
 						IOF_SEGURADORA))) {
 
-			this.add(new FixedField<Integer>((Integer) titulo
-					.getParametrosBancarios().getValor(IOF_SEGURADORA), 1));
+			this.add(new FixedField<Integer>(titulo
+					.getParametrosBancarios().<Integer>getValor(IOF_SEGURADORA), 1));
 
 		} else {
 

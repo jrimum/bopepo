@@ -97,7 +97,7 @@ public class CLCecred extends AbstractCLBancoDeBrasilia{
 	@Override
 	protected void addFields(Titulo titulo) {
 		
-		this.add(new FixedField<Number>(titulo.getParametrosBancarios().getValor(ParametroCECRED.CODIGO_DO_CONVENIO), CONVENIO_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getParametrosBancarios().<Integer>getValor(ParametroCECRED.CODIGO_DO_CONVENIO), CONVENIO_LENGTH, Fillers.ZERO_LEFT));
 		this.add(new FixedField<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Fillers.ZERO_LEFT));
 		this.add(new FixedField<String>(titulo.getNossoNumero(), NOSSO_NUMERO_LENGTH, Fillers.ZERO_LEFT));
 		this.add(new FixedField<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), CARTEIRA_LENGTH, Fillers.ZERO_LEFT));
