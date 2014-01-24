@@ -191,7 +191,7 @@ class CLSicredi extends AbstractCLSicredi {
 		checkTamanhoDigitoDoNossoNumero(titulo, 1);
 		checkCodigoDaAgencia(titulo);
 		checkCodigoDaAgenciaMenorOuIgualQue(titulo, 99999);
-		checkParametrosBancarios(titulo, POSTO_DA_AGENCIA);
+		checkParametroBancario(titulo, POSTO_DA_AGENCIA);
 		checkNumeroDaContaNotNull(titulo);
 		checkCodigoDoNumeroDaConta(titulo);
 		checkCodigoDoNumeroDaContaMenorOuIgualQue(titulo, 99999);

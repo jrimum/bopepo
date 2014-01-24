@@ -743,7 +743,7 @@ abstract class AbstractCampoLivre extends BlockOfFields implements CampoLivre {
 	 * 
 	 * @since 0.2
 	 */
-	protected final static void checkParametrosBancarios(Titulo titulo, ParametroBancario<?> param){
+	protected final static void checkParametroBancario(Titulo titulo, ParametroBancario<?> param){
 		
 		Objects.checkNotNull(titulo.getParametrosBancarios(), format("O parâmetro bancário [\"%s\"] é necessário! [titulo.getParametrosBancarios() == null]",param));
 		Objects.checkArgument(titulo.getParametrosBancarios().contemComNome(param),format("Parâmetro bancário [\"%s\"] não encontrado!",param));
@@ -765,9 +765,9 @@ abstract class AbstractCampoLivre extends BlockOfFields implements CampoLivre {
 	 * 
 	 * @since 0.2
 	 */
-	protected final static void checkParametrosBancariosMenorOuIgualQue(Titulo titulo, ParametroBancario<?> param, int limite){
+	protected final static void checkParametroBancarioMenorOuIgualQue(Titulo titulo, ParametroBancario<?> param, int limite){
 		
-		checkParametrosBancarios(titulo, param);
+		checkParametroBancario(titulo, param);
 		
 		int valor = titulo.getParametrosBancarios().getValor(param).intValue();
 		

@@ -75,8 +75,8 @@ public class CLCecred extends AbstractCLBancoDeBrasilia{
 	@Override
 	protected void checkValues(Titulo titulo) {
 
-		checkParametrosBancarios(titulo, ParametroCECRED.CODIGO_DO_CONVENIO);
-		checkParametrosBancariosMenorOuIgualQue(titulo, ParametroCECRED.CODIGO_DO_CONVENIO, 999999);
+		checkParametroBancario(titulo, ParametroCECRED.CODIGO_DO_CONVENIO);
+		checkParametroBancarioMenorOuIgualQue(titulo, ParametroCECRED.CODIGO_DO_CONVENIO, 999999);
 		checkNumeroDaContaNotNull(titulo);
 		checkCodigoDoNumeroDaConta(titulo);
 		checkCodigoDoNumeroDaContaMenorOuIgualQue(titulo, 99999999);

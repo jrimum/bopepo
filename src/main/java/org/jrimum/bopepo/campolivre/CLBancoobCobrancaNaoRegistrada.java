@@ -190,7 +190,7 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 			if (titulo.getParametrosBancarios()
 					.contemComNome(MODALIDADE_DE_COBRANCA)) {
 
-				checkParametrosBancarios(titulo, MODALIDADE_DE_COBRANCA);
+				checkParametroBancario(titulo, MODALIDADE_DE_COBRANCA);
 				
 				codigoDaModalidadeDeCobranca = titulo.getParametrosBancarios().getValor(MODALIDADE_DE_COBRANCA);
 			}
@@ -198,7 +198,7 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 			if (titulo.getParametrosBancarios()
 					.contemComNome(NUMERO_DA_PARCELA)) {
 				
-				checkParametrosBancarios(titulo, NUMERO_DA_PARCELA);
+				checkParametroBancario(titulo, NUMERO_DA_PARCELA);
 				
 				numeroDaParcela = titulo.getParametrosBancarios().getValor(NUMERO_DA_PARCELA);
 			}
