@@ -37,8 +37,7 @@ import org.jrimum.bopepo.view.ResourceBundle;
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  *
  */
-class BoletoInfoViewDefault extends AbstractBoletoInfoCampoView
-		implements BoletoInfoCampoView {
+class BoletoInfoViewDefault extends AbstractBoletoInfoCampoView{
 
 	BoletoInfoViewDefault(ResourceBundle resourceBundle, Boleto boleto) {
 		super(resourceBundle, boleto);
