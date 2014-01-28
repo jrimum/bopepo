@@ -37,7 +37,6 @@ import org.jrimum.bopepo.parametro.ParametroCECRED;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
-import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
@@ -74,19 +73,14 @@ public class BoletoCecredExemplo {
 		contaBancaria.setBanco(BancosSuportados.CECRED.create());
 		
 		/*
-		 * Número da conta com no máximo 8 dígitos
-		 */
-		contaBancaria.setNumeroDaConta(new NumeroDaConta(12345,"5"));
-
-		/*
 		 * Carteira com no máximo 2 dígitos 
 		 */
 		contaBancaria.setCarteira(new Carteira(12));
 		
 		/*
-		 * Nosso número com 9 dígitos
+		 * Nosso número com 17 dígitos
 		 */
-		titulo.setNossoNumero("123456789");
+		titulo.setNossoNumero("12345000123456789");
 		
 		/*
 		 * Código do convênio com no máxiom 6 dígitos

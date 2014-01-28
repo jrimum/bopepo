@@ -30,9 +30,9 @@ public class CLCecred extends AbstractCLBancoDeBrasilia{
 	private static final long serialVersionUID = 7075964070090557563L;
 	
 	/**
-	 * Número de campos = 4.
+	 * Número de campos = 3.
 	 */
-	private static final Integer FIELDS_LENGTH = Integer.valueOf(4);
+	private static final Integer FIELDS_LENGTH = Integer.valueOf(3);
 
 	/**
 	 * Tamanho do campo Convênio = 6. 
@@ -40,14 +40,9 @@ public class CLCecred extends AbstractCLBancoDeBrasilia{
 	private static final Integer CONVENIO_LENGTH = Integer.valueOf(6);
 
 	/**
-	 * Tamanho do campo Convênio = 8. 
-	 */
-	private static final Integer CONTA_LENGTH = Integer.valueOf(8);
-
-	/**
 	 * Tamanho do campo Nosso Número = 17. 
 	 */
-	private static final Integer NOSSO_NUMERO_LENGTH = Integer.valueOf(9);
+	private static final Integer NOSSO_NUMERO_LENGTH = Integer.valueOf(17);
 
 	/**
 	 * Tamanho do campo Carteira = 2. 
@@ -77,11 +72,8 @@ public class CLCecred extends AbstractCLBancoDeBrasilia{
 
 		checkParametroBancario(titulo, ParametroCECRED.CODIGO_DO_CONVENIO);
 		checkParametroBancarioMenorOuIgualQue(titulo, ParametroCECRED.CODIGO_DO_CONVENIO, 999999);
-		checkNumeroDaContaNotNull(titulo);
-		checkCodigoDoNumeroDaConta(titulo);
-		checkCodigoDoNumeroDaContaMenorOuIgualQue(titulo, 99999999);
 		checkNossoNumero(titulo);
-		checkTamanhoDoNossoNumero(titulo, 9);
+		checkTamanhoDoNossoNumero(titulo, 17);
 		checkCarteiraNotNull(titulo);
 		checkCodigoDaCarteira(titulo);
 		checkCodigoDaCarteiraMenorOuIgualQue(titulo, 99);
@@ -98,7 +90,6 @@ public class CLCecred extends AbstractCLBancoDeBrasilia{
 	protected void addFields(Titulo titulo) {
 		
 		this.add(new FixedField<Integer>(titulo.getParametrosBancarios().<Integer>getValor(ParametroCECRED.CODIGO_DO_CONVENIO), CONVENIO_LENGTH, Fillers.ZERO_LEFT));
-		this.add(new FixedField<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Fillers.ZERO_LEFT));
 		this.add(new FixedField<String>(titulo.getNossoNumero(), NOSSO_NUMERO_LENGTH, Fillers.ZERO_LEFT));
 		this.add(new FixedField<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), CARTEIRA_LENGTH, Fillers.ZERO_LEFT));
 	}
