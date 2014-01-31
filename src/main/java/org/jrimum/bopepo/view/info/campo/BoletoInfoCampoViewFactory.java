@@ -50,9 +50,8 @@ public class BoletoInfoCampoViewFactory {
 				.getCodigoDeCompensacaoBACEN().getCodigoFormatado());
 
 		if (isNotNull(banco)) {
-			// switch (banco) {
-			// case BANCO_BRADESCO: return new
-			// BoletoInfoViewBradesco(resourceBundle,boleto);
+			 switch (banco) {
+			 case BANCO_BRADESCO: return new BoletoInfoViewBradesco(resourceBundle, boleto);
 			// case BANCO_DO_BRASIL: return new ..;
 			// case BANCO_DO_NORDESTE_DO_BRASIL: return new ..;
 			// case BANCO_ABN_AMRO_REAL: return new ..;
@@ -68,11 +67,11 @@ public class BoletoInfoCampoViewFactory {
 			// case BANCO_RURAL: return new ..;
 			// case BANCO_SANTANDER: return new ..;
 			// case BANCO_INTEMEDIUM: return nCew ..;
-			// case BANCO_SICREDI: return new ..;
+			 case BANCO_SICREDI: return new BoletoInfoViewSicredi(resourceBundle, boleto);
 			// case BANCOOB: return new ..;
 			// case CITIBANK: return new ..;
 			// case BANCO_DE_BRASILIA: return new ..;
-			// }
+			 }
 		}
 
 		return new BoletoInfoViewDefault(resourceBundle, boleto);
