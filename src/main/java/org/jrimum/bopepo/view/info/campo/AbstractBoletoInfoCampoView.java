@@ -308,6 +308,10 @@ abstract class AbstractBoletoInfoCampoView implements BoletoInfoCampoView{
 	public Image getImagemFcCodigoBarra(){
 		return CodigoDeBarras.valueOf(boleto.getCodigoDeBarras().write()).toImage();
 	}
+	
+	protected final Boleto getBoleto(){
+		return this.boleto;
+	}
 
 	private String getValue(String value){
 		if(isNotBlank(value)){
