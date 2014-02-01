@@ -33,6 +33,7 @@ package org.jrimum.bopepo.view.info.campo;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.parametro.ParametroBancoSicredi;
 import org.jrimum.bopepo.view.ResourceBundle;
+import org.jrimum.domkee.financeiro.banco.febraban.Titulo.Aceite;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
@@ -73,7 +74,6 @@ public class BoletoInfoViewSicredi extends AbstractBoletoInfoCampoView{
 	 */
 	@Override
 	public String getTextoRsAgenciaCodigoCedente() {
-		// TODO Auto-generated method stub
 		return getAgenciaCodigoCedente();
 	}
 
@@ -82,7 +82,6 @@ public class BoletoInfoViewSicredi extends AbstractBoletoInfoCampoView{
 	 */
 	@Override
 	public String getTextoFcAgenciaCodigoCedente() {
-		// TODO Auto-generated method stub
 		return getAgenciaCodigoCedente();
 	}
 
@@ -102,12 +101,24 @@ public class BoletoInfoViewSicredi extends AbstractBoletoInfoCampoView{
 		return getTextoNossoNumero(); 
 	}
 	
+	/**
+	 * @see org.jrimum.bopepo.view.info.campo.AbstractBoletoInfoCampoView#getTextoFcAceite()
+	 */
+	@Override
+	public String getTextoFcAceite() {
+		Aceite aceite = super.getBoleto().getTitulo().getAceite();
+		if(aceite == Aceite.A){
+			return "SIM";
+		}
+		return "NÃO";
+	}
+
 	private String getAgenciaCodigoCedente(){
 		Integer agencia = super.getBoleto().getTitulo().getContaBancaria().getAgencia().getCodigo();
 		Integer posto = super.getBoleto().getTitulo().getParametrosBancarios().getValor(ParametroBancoSicredi.POSTO_DA_AGENCIA);
 		Integer codigoCedente = super.getBoleto().getTitulo().getContaBancaria().getNumeroDaConta().getCodigoDaConta();
 		
-		return String.format("%04d.%02d.%06d", agencia, posto, codigoCedente);
+		return String.format("%04d.%02d.%05d", agencia, posto, codigoCedente);
 	}
 	
 	private String getTextoNossoNumero() {
