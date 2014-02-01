@@ -41,54 +41,49 @@ import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 /**
  * Exemplo do boleto para CECRED.
-
+ * 
  * <p>
- * Mostra um exemplo funcional que gera um boleto para a implementação de campo livre
- * da CECRED.
+ * Mostra um exemplo funcional que gera um boleto para a implementação padrão do
+ * CECRED.
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  * 
  * @version 0.2
  */
-/**
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
- *
- */
 public class BoletoCecredExemplo {
 
 	public static void main(String[] args) {
-		
+
 		Titulo titulo = Exemplos.crieTitulo();
-		
+
 		/*
-		 * Campos específicos para o Banco Bradesco.
+		 * Campos específicos para o CECRED.
 		 */
-		
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
-		
+
 		/*
 		 * Banco 085
 		 */
 		contaBancaria.setBanco(BancosSuportados.CECRED.create());
-		
+
 		/*
-		 * Carteira com no máximo 2 dígitos 
+		 * Carteira com no máximo 2 dígitos
 		 */
 		contaBancaria.setCarteira(new Carteira(12));
-		
+
 		/*
 		 * Nosso número com 17 dígitos
 		 */
 		titulo.setNossoNumero("12345000123456789");
-		
+
 		/*
 		 * Código do convênio com no máxiom 6 dígitos
 		 */
 		titulo.setParametrosBancarios(new ParametrosBancariosMap(ParametroCECRED.CODIGO_DO_CONVENIO, 123));
-		
+
 		Boleto boleto = Exemplos.crieBoleto(titulo);
-		
+
 		Exemplos.execute(boleto);
 	}
 }
