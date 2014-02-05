@@ -71,6 +71,7 @@ public class BoletoInfoCampoViewFactory {
 			// case BANCOOB: return new ..;
 			// case CITIBANK: return new ..;
 			// case BANCO_DE_BRASILIA: return new ..;
+			  case CECRED: return new BoletoInfoViewCecred(resourceBundle, boleto);
 			 }
 		}
 
