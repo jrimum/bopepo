@@ -38,7 +38,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.text.Normalizer;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -428,28 +427,9 @@ public class Files {
 	 */
 	public static String normalizeName(String name) {
 		name = name.replaceAll(" ", "_");
-		name = Normalizer.normalize(name, Normalizer.Form.NFD);
+		name = Strings.eliminateAccent(name);
 		name = name.replaceAll("[^\\p{ASCII}]", "");
 		return name;
 	}
-	
 
-	/**
-	 * Abre um determinado arquivo para exibir no desktop.
-	 * 
-	 * @param arq
-	 */
-	public static void openOnDesktop(File arq) {
-
-		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
-
-		try {
-
-			desktop.open(arq);
-
-		} catch (IOException e) {
-			
-			Exceptions.throwIllegalStateException(e);
-		}
-	}
 }

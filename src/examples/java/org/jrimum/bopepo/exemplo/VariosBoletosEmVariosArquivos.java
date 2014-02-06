@@ -74,12 +74,9 @@ public class VariosBoletosEmVariosArquivos {
 		/*
 		 * Pronto, agora vamos conferir um: 
 		 */
-		
-		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
-			
 		try{
-	
-			desktop.open(new File("prefixo-boleto-1-sufixo-DePagamento.pdf"));
+			 // Descomente se estiver usando java 6 ou superior
+			 //java.awt.Desktop.getDesktop().open(new File("prefixo-boleto-1-sufixo-DePagamento.pdf"));
 	
 		}catch(Exception e){
 			throw new RuntimeException("Arquivo não gerado!",e);

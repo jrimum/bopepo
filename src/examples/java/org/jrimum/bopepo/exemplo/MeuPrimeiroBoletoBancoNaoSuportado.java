@@ -30,7 +30,6 @@
 package org.jrimum.bopepo.exemplo;
 
 import java.io.File;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -188,11 +187,10 @@ public class MeuPrimeiroBoletoBancoNaoSuportado {
 	 */
 	private static void mostreBoletoNaTela(File arquivoBoleto) {
 
-		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
-		
 		try {
-			desktop.open(arquivoBoleto);
-		} catch (IOException e) {
+			// Descomente se estiver usando java 6 ou superior
+			// java.awt.Desktop.getDesktop().open(arquivoBoleto);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

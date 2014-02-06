@@ -35,7 +35,6 @@ import static org.jrimum.utilix.Objects.isNotNull;
 
 import java.util.Calendar;
 import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 import org.jrimum.utilix.Objects;
 
@@ -128,6 +127,8 @@ public class PdfDateConverter {
 	private static String convertTimeZone(final Calendar date) {
 
 		final int MINUTES_PER_HOUR = 60;
+		final int MILLISECONDS_PER_SECOND = 1000;
+		final int SECONDS_PER_MINUTE = 60;
 
 		final TimeZone tz = date.getTimeZone();
 
@@ -137,8 +138,7 @@ public class PdfDateConverter {
 
 			final long offset = tz.getOffset(date.getTimeInMillis());
 
-			final long timeInMinutes = TimeUnit.MILLISECONDS.toMinutes(Math
-					.abs(offset));
+			final long timeInMinutes = Math.abs(offset)/MILLISECONDS_PER_SECOND/SECONDS_PER_MINUTE;
 
 			final String signal = offset == 0 ? "Z" : (offset > 0 ? "+" : "-");
 
@@ -159,5 +159,5 @@ public class PdfDateConverter {
 
 		return timeZone;
 	}
-
+	
 }
