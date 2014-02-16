@@ -162,7 +162,7 @@ import org.jrimum.vallia.digitoverificador.BoletoLinhaDigitavelDV;
  * 
  * @version 0.2
  */
-public final class LinhaDigitavel extends BlockOfFields {
+public class LinhaDigitavel extends BlockOfFields {
 	
 	/**
 	 * 

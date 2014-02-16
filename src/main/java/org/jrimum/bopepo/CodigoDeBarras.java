@@ -112,7 +112,7 @@ import org.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV;
  * 
  * @version 0.2
  */
-public final class CodigoDeBarras extends BlockOfFields{
+public class CodigoDeBarras extends BlockOfFields{
 
 	/**
 	 * 
