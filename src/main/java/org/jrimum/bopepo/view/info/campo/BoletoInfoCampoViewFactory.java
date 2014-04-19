@@ -62,7 +62,6 @@ public class BoletoInfoCampoViewFactory {
 			// case BANCO_SAFRA: return new ..;
 			// case BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL: return new ..;
 			// case MERCANTIL_DO_BRASIL: return new ..;
-			// case NOSSA_CAIXA: return new ..;
 			// case BANCO_DO_ESTADO_DO_ESPIRITO_SANTO: return new ..;
 			// case BANCO_RURAL: return new ..;
 			// case BANCO_SANTANDER: return new ..;
