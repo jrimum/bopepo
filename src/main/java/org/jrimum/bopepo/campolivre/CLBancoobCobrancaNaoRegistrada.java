@@ -51,42 +51,56 @@ import org.jrimum.texgit.type.component.FixedField;
  * </tr>
  * </thead> <tbody style="text-align:center">
  * <tr>
- * <td >20-23</td>
+ * <td >20-20</td>
+ * <td >1</td>
+ * <td >9(1)</td>
+ * <td style="text-align:left;padding-left:10">Carteira</td>
+ * <td style="text-align:left;padding-left:10">Carteira</td>
+ * </tr>
+ * <tr>
+ * <td >21-24</td>
  * <td >4</td>
  * <td >9(4)</td>
- * <td style="text-align:left;padding-left:10">Agência Cedente (Sem o digito
+ * <td style="text-align:left;padding-left:10">Agência Cedente (Cooperativa) (sem o dígito
  * verificador, completar com zeros a esquerda quando necessário)</td>
  * <td style="text-align:left;padding-left:10">Código da Agência (sem dígito)</td>
  * </tr>
  * <tr>
- * <td >24-25</td>
+ * <td >25-26</td>
  * <td >2</td>
  * <td >9(2)</td>
- * <td style="text-align:left;padding-left:10">Código da Carteira</td>
- * <td style="text-align:left;padding-left:10">Código da Carteira</td>
+ * <td style="text-align:left;padding-left:10">Modalidade</td>
+ * <td style="text-align:left;padding-left:10">Modalidade</td>
  * </tr>
  * <tr>
- * <td >26-36</td>
- * <td >11</td>
- * <td >&nbsp;9(11)</td>
- * <td style="text-align:left;padding-left:10">Número do Nosso Número(Sem o
- * digito verificador)</td>
+ * <td >27-33</td>
+ * <td >7</td>
+ * <td >9(7)</td>
+ * <td style="text-align:left;padding-left:10">Código do Cliente (sem o dígito
+ * verificador, completar com zeros a esquerda quando necessário)</td>
+ * <td style="text-align:left;padding-left:10">Conta do Beneficiário (sem dígito)</td>
+ * </tr>
+ * <tr>
+ * <td >34-40</td>
+ * <td >7</td>
+ * <td >9(7)</td>
+ * <td style="text-align:left;padding-left:10">Número do título(sem o dígito
+ * verificador, completar com zeros a esquerda quando necessário)</td>
  * <td style="text-align:left;padding-left:10">Nosso Número (sem dígito)</td>
  * </tr>
  * <tr>
- * <td >37-43</td>
- * <td >7</td>
- * <td >&nbsp;9(7)</td>
- * <td style="text-align:left;padding-left:10">Conta do Cedente (Sem o digito
- * verificador, completar com zeros a esquerda quando necessário)</td>
- * <td style="text-align:left;padding-left:10">Conta do Cedente (sem dígito)</td>
+ * <td >41-41</td>
+ * <td >1</td>
+ * <td >9(1)</td>
+ * <td style="text-align:left;padding-left:10">Dígito verificador do Nosso Número</td>
+ * <td style="text-align:left;padding-left:10">Dígito verificador do Nosso Número</td>
  * </tr>
  * <tr>
- * <td >44-44</td>
- * <td >1</td>
- * <td >9</td>
- * <td style="text-align:left;padding-left:10">Constante "0"</td>
- * <td style="text-align:left;padding-left:10">Zero Fixo</td>
+ * <td >42-44</td>
+ * <td >3</td>
+ * <td >9(3)</td>
+ * <td style="text-align:left;padding-left:10">Número da Parcela (completar com zeros a esquerda quando necessário)</td>
+ * <td style="text-align:left;padding-left:10">Número da Parcela</td>
  * </tr>
  * </table>
  * 
@@ -94,6 +108,7 @@ import org.jrimum.texgit.type.component.FixedField;
  * 
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Rômulo Augusto
  * 
  * @since 0.2
  * 
@@ -109,7 +124,7 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 	/**
 	 * Número de campos = 6.
 	 */
-	protected static final Integer FIELDS_LENGTH = 6;
+	protected static final Integer FIELDS_LENGTH = 7;
 	
 	/**
 	 * Tamanho do campo Carteira = 1. 
@@ -132,9 +147,14 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 	protected static final Integer COBRANCA_SIMPLES = Integer.valueOf(1);
 	
 	/**
-	 * Tamanho do campo Nosso Número = 8.
+	 * Tamanho do campo Nosso Número = 7.
 	 */
-	private static final Integer NOSSO_NUMERO_LENGTH = Integer.valueOf(8);
+	private static final Integer NOSSO_NUMERO_LENGTH = Integer.valueOf(7);
+	
+	/**
+	 * Tamanho do campo Dígito Verificador do Nosso Número = 1.
+	 */
+	private static final Integer DV_NOSSO_NUMERO_LENGTH = Integer.valueOf(1);
 	
 	/**
 	 * Tamanho do campo Conta = 7. 
@@ -159,7 +179,6 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 	 * @since 0.2
 	 */
 	protected CLBancoobCobrancaNaoRegistrada() {
-		
 		super(FIELDS_LENGTH);
 	}
 
@@ -173,7 +192,9 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 		checkCodigoDaAgencia(titulo);
 		checkCodigoDaAgenciaMenorOuIgualQue(titulo, 9999);
 		checkNossoNumero(titulo);
-		checkTamanhoDoNossoNumero(titulo, NN8);
+		checkTamanhoDoNossoNumero(titulo, NN7);
+		checkDigitoDoNossoNumero(titulo);
+		checkTamanhoDigitoDoNossoNumero(titulo, DV_NOSSO_NUMERO_LENGTH);
 		checkNumeroDaContaNotNull(titulo);
 		checkCodigoDoNumeroDaConta(titulo);
 		checkCodigoDoNumeroDaContaMenorOuIgualQue(titulo, 9999999);
@@ -187,19 +208,13 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 		
 		if (titulo.hasParametrosBancarios()) {
 
-			if (titulo.getParametrosBancarios()
-					.contemComNome(MODALIDADE_DE_COBRANCA)) {
-
+			if (titulo.getParametrosBancarios().contemComNome(MODALIDADE_DE_COBRANCA)) {
 				checkParametroBancario(titulo, MODALIDADE_DE_COBRANCA);
-				
 				codigoDaModalidadeDeCobranca = titulo.getParametrosBancarios().getValor(MODALIDADE_DE_COBRANCA);
 			}
 
-			if (titulo.getParametrosBancarios()
-					.contemComNome(NUMERO_DA_PARCELA)) {
-				
+			if (titulo.getParametrosBancarios().contemComNome(NUMERO_DA_PARCELA)) {
 				checkParametroBancario(titulo, NUMERO_DA_PARCELA);
-				
 				numeroDaParcela = titulo.getParametrosBancarios().getValor(NUMERO_DA_PARCELA);
 			}
 		}		
@@ -209,8 +224,7 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 		this.add(new FixedField<Integer>(codigoDaModalidadeDeCobranca, MODALIDADE_DE_COBRANCA_LENGTH, Fillers.ZERO_LEFT));
 		this.add(new FixedField<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Fillers.ZERO_LEFT));
 		this.add(new FixedField<String>(titulo.getNossoNumero(),NOSSO_NUMERO_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getDigitoDoNossoNumero(),DV_NOSSO_NUMERO_LENGTH));
 		this.add(new FixedField<Integer>(numeroDaParcela, NUMERO_DA_PARCELA_LENGTH, Fillers.ZERO_LEFT));
-
 	}
-	
 }

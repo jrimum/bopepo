@@ -33,6 +33,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.junit.Before;
+import org.junit.Test;
 
 /**
  * <p>
@@ -40,12 +41,15 @@ import org.junit.Before;
  * </p>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
+ * @author Rômulo Augusto
  * 
  * @since 0.2
  * 
  * @version 0.2
  */
 public class TestCLBancoobCobrancaNaoRegistrada extends AbstractCampoLivreBaseTest<CLBancoobCobrancaNaoRegistrada>{
+	
+	private final int NOSSO_NUMERO_LENGTH = 7;
 
 	@Before
 	public void setUp(){
@@ -54,11 +58,16 @@ public class TestCLBancoobCobrancaNaoRegistrada extends AbstractCampoLivreBaseTe
 		titulo.getContaBancaria().setAgencia(new Agencia(4340));
 		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1));
 		titulo.getContaBancaria().setCarteira(new Carteira(1));
-		titulo.setNossoNumero("02000001");
+		titulo.setNossoNumero("0200000");
+		titulo.setDigitoDoNossoNumero("1");
 
 		createCampoLivreToTest();
 
 		setCampoLivreEsperadoComoString("1434001000000102000001001");
 	}
 	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNossoNumeroComTamanhoDiferenteDe7() {
+		testeSeNaoPermiteNossoNumeroComTamanhoDiferenteDoEspecificado(NOSSO_NUMERO_LENGTH + 1);
+	}
 }
