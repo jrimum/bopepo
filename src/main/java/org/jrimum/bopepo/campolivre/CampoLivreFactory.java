@@ -30,15 +30,14 @@
 package org.jrimum.bopepo.campolivre;
 
 import static org.apache.commons.lang.StringUtils.EMPTY;
+import static org.apache.commons.lang.StringUtils.containsAny;
 import static org.apache.commons.lang.StringUtils.isNumeric;
-import static org.apache.commons.lang.StringUtils.remove;
 import static org.apache.commons.lang.StringUtils.strip;
 
-import org.apache.log4j.Logger;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 import org.jrimum.utilix.text.Strings;
 
 
@@ -61,13 +60,6 @@ import org.jrimum.utilix.text.Strings;
  * @version 0.2
  */
 public final class CampoLivreFactory {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8572635342980404937L;
-	
-	private static Logger log = Logger.getLogger(CampoLivreFactory.class);
 
 	/**
 	 * <p>
@@ -99,66 +91,35 @@ public final class CampoLivreFactory {
 	 * @throws IllegalArgumentException
 	 */
 	public static CampoLivre create(String strCampoLivre) {
-		
-		CampoLivre campoLivre = null;
-		
 		Objects.checkNotNull(strCampoLivre);
 		
+		strCampoLivre = strip(strCampoLivre);
+		
 		Strings.checkNotBlank(strCampoLivre, "O Campo Livre não deve ser vazio!");
-		
-		strCampoLivre = strip(strCampoLivre); 
-		
-		if (strCampoLivre.length() == CampoLivre.STRING_LENGTH) {
+		 
+		Objects.checkArgument(strCampoLivre.length() == CampoLivre.STRING_LENGTH, "O tamanho do Campo Livre [ " + strCampoLivre + " ] deve ser igual a 25 e não ["+strCampoLivre.length()+"]!");
+		Objects.checkArgument(!containsAny(strCampoLivre, " "), "O Campo Livre [ " + strCampoLivre + " ] não deve conter espaços em branco!");
+		Objects.checkArgument(isNumeric(strCampoLivre),"O Campo Livre [ " + strCampoLivre + " ] deve ser uma String numérica!");
 
-			if (remove(strCampoLivre, ' ').length() == CampoLivre.STRING_LENGTH) {
+		return valueOf(strCampoLivre);
+	}
 
-				if (isNumeric(strCampoLivre)) {
+	private static CampoLivre valueOf(String strCampoLivre) {
+		 CampoLivre campoLivre = new CampoLivre() {
+			private static final long serialVersionUID = -7592488081807235080L;
 
-					campoLivre = new CampoLivre() {
+			FixedField<String> campo = new FixedField<String>(EMPTY,
+					STRING_LENGTH, Fillers.ZERO_LEFT);
 
-						private static final long serialVersionUID = -7592488081807235080L;
-
-						Field<String> campo = new Field<String>(EMPTY,
-								STRING_LENGTH, Filler.ZERO_LEFT);
-
-						
-						public void read(String str) {
-							campo.read(str);
-						}
-
-						
-						public String write() {
-							return campo.write();
-						}
-					};
-					
-					campoLivre.read(strCampoLivre);
-					
-				} else {
-					
-					IllegalArgumentException e = new IllegalArgumentException("O Campo Livre [ " + strCampoLivre + " ] deve ser uma String numérica!");
-					
-					log.error(EMPTY, e);
-					
-					throw e;
-				}
-			} else {
-				
-				IllegalArgumentException e = new IllegalArgumentException("O Campo Livre [ " + strCampoLivre + " ] não deve conter espaços em branco!");
-				
-				log.error(EMPTY, e);
-				
-				throw e;
+			public void read(String str) {
+				campo.read(str);
 			}
-		} else {
-			
-			IllegalArgumentException e = new IllegalArgumentException("O tamanho do Campo Livre [ " + strCampoLivre + " ] deve ser igual a 25 e não ["+strCampoLivre.length()+"]!");
-			
-			log.error(EMPTY, e);
-			
-			throw e;
-		}
-			
+
+			public String write() {
+				return campo.write();
+			}
+		};
+		campoLivre.read(strCampoLivre);
 		return campoLivre;
 	}
 
@@ -169,4 +130,5 @@ public final class CampoLivreFactory {
 	public String toString() {
 		return Objects.toString(this);
 	}
+	
 }

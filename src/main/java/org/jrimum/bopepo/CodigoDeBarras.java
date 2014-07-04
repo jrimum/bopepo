@@ -38,10 +38,11 @@ import org.apache.log4j.Logger;
 import org.jrimum.bopepo.campolivre.CampoLivre;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.BlockOfFields;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.AbstractLineOfFields;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
+import org.jrimum.utilix.text.DecimalFormat;
 import org.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV;
 
 
@@ -95,7 +96,7 @@ import org.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV;
  * <td>20-44 </td>
  * <td>25 </td>
  * <td style="text-align:right;padding-right:10px">9(25) </td>
- * <td style="text-align:left;padding-left:10px">Field livre – utilizado de acordo com a especificação interna do banco
+ * <td style="text-align:left;padding-left:10px">FixedField livre – utilizado de acordo com a especificação interna do banco
  * emissor</td>
  * </tr>
  * </tbody>
@@ -111,7 +112,7 @@ import org.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV;
  * 
  * @version 0.2
  */
-public final class CodigoDeBarras extends AbstractLineOfFields{
+public class CodigoDeBarras extends BlockOfFields{
 
 	/**
 	 * 
@@ -133,19 +134,19 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 	/**
 	 * Código do Banco.
 	 */
-	private Field<String> codigoDoBanco;
+	private FixedField<String> codigoDoBanco;
 	
 	/**
 	 * Código da moeda usada no boleto.
 	 */
-	private Field<Integer> codigoDaMoeda;
+	private FixedField<Integer> codigoDaMoeda;
 	
 	/**
 	 * Mecanismo de autenticação usado no composição de barras.
 	 * 
 	 * @see org.jrimum.vallia.digitoverificador.BoletoCodigoDeBarrasDV
 	 */
-	private Field<Integer> digitoVerificadorGeral;
+	private FixedField<Integer> digitoVerificadorGeral;
 	
 	/**
 	 * Representa a quantidade de dias decorridos da data base à data de
@@ -153,17 +154,17 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 	 * 
 	 * @see FatorDeVencimento#toFator(Date)
 	 */
-	private Field<Integer> fatorDeVencimento;
+	private FixedField<Integer> fatorDeVencimento;
 	
 	/**
 	 * Valor do título.
 	 */
-	private Field<BigDecimal> valorNominalDoTitulo;
+	private FixedField<BigDecimal> valorNominalDoTitulo;
 	
 	/**
 	 * @see org.jrimum.bopepo.campolivre.CampoLivre
 	 */
-	private Field<String> campoLivre;
+	private FixedField<String> campoLivre;
 	
 	/**
 	 * <p>
@@ -176,7 +177,9 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 	 * @see CampoLivre
 	 */
 	CodigoDeBarras(Titulo titulo, CampoLivre campoLivre) {
-		super(FIELDS_LENGTH ,STRING_LENGTH);
+		super();
+		setLength(STRING_LENGTH);
+		setSize(FIELDS_LENGTH);
 		
 		if(log.isTraceEnabled())
 			log.trace("Instanciando o CodigoDeBarras");
@@ -186,12 +189,12 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 			log.debug("campoLivre instance : "+campoLivre);
 		}
 
-		codigoDoBanco = new Field<String>("0", 3, Filler.ZERO_LEFT );
-		codigoDaMoeda = new Field<Integer>(0, 1, Filler.ZERO_LEFT);
-		digitoVerificadorGeral = new Field<Integer>(0, 1, Filler.ZERO_LEFT);
-		fatorDeVencimento = new Field<Integer>(0, 4, Filler.ZERO_LEFT);
-		valorNominalDoTitulo = new Field<BigDecimal>(new BigDecimal(0), 10, Filler.ZERO_LEFT);
-		this.campoLivre = new Field<String>(StringUtils.EMPTY, 25);
+		codigoDoBanco = new FixedField<String>("0", 3, Fillers.ZERO_LEFT);
+		codigoDaMoeda = new FixedField<Integer>(0, 1, Fillers.ZERO_LEFT);
+		digitoVerificadorGeral = new FixedField<Integer>(0, 1, Fillers.ZERO_LEFT);
+		fatorDeVencimento = new FixedField<Integer>(0, 4, Fillers.ZERO_LEFT);
+		valorNominalDoTitulo = new FixedField<BigDecimal>(new BigDecimal(0), 10,DecimalFormat.NUMBER_DD_BR.copy(),Fillers.ZERO_LEFT);
+		this.campoLivre = new FixedField<String>(StringUtils.EMPTY, 25);
 		
 		add(codigoDoBanco);
 		add(codigoDaMoeda);
@@ -202,17 +205,10 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 	
 		ContaBancaria contaBancaria = titulo.getContaBancaria();
 		this.codigoDoBanco.setValue(contaBancaria.getBanco().getCodigoDeCompensacaoBACEN().getCodigoFormatado());
-		
 		this.codigoDaMoeda.setValue(titulo.getTipoDeMoeda().getCodigo());
-		
-		//Was here DigitoVerificador 
-		//But wait
 		this.calculateAndSetFatorDeVencimento(titulo.getDataDoVencimento());
-		
-		this.valorNominalDoTitulo.setValue(titulo.getValor().movePointRight(2));
+		this.valorNominalDoTitulo.setValue(titulo.getValor());
 		this.campoLivre.setValue(campoLivre.write());
-		
-		//Now you can
 		this.calculateAndSetDigitoVerificadorGeral();
 		
 		if(log.isDebugEnabled() || log.isTraceEnabled())
@@ -275,84 +271,84 @@ public final class CodigoDeBarras extends AbstractLineOfFields{
 	/**
 	 * @return the codigoDoBanco
 	 */
-	Field<String> getCodigoDoBanco() {
+	FixedField<String> getCodigoDoBanco() {
 		return codigoDoBanco;
 	}
 
 	/**
 	 * @param codigoDoBanco the codigoDoBanco to set
 	 */
-	void setCodigoDoBanco(Field<String> codigoDoBanco) {
+	void setCodigoDoBanco(FixedField<String> codigoDoBanco) {
 		this.codigoDoBanco = codigoDoBanco;
 	}
 
 	/**
 	 * @return the codigoDaMoeda
 	 */
-	Field<Integer> getCodigoDaMoeda() {
+	FixedField<Integer> getCodigoDaMoeda() {
 		return codigoDaMoeda;
 	}
 
 	/**
 	 * @param codigoDaMoeda the codigoDaMoeda to set
 	 */
-	void setCodigoDaMoeda(Field<Integer> codigoDaMoeda) {
+	void setCodigoDaMoeda(FixedField<Integer> codigoDaMoeda) {
 		this.codigoDaMoeda = codigoDaMoeda;
 	}
 
 	/**
 	 * @return the digitoVerificadorGeral
 	 */
-	Field<Integer> getDigitoVerificadorGeral() {
+	FixedField<Integer> getDigitoVerificadorGeral() {
 		return digitoVerificadorGeral;
 	}
 
 	/**
 	 * @param digitoVerificadorGeral the digitoVerificadorGeral to set
 	 */
-	void setDigitoVerificadorGeral(Field<Integer> digitoVerificadorGeral) {
+	void setDigitoVerificadorGeral(FixedField<Integer> digitoVerificadorGeral) {
 		this.digitoVerificadorGeral = digitoVerificadorGeral;
 	}
 
 	/**
 	 * @return the fatorDeVencimento
 	 */
-	Field<Integer> getFatorDeVencimento() {
+	FixedField<Integer> getFatorDeVencimento() {
 		return fatorDeVencimento;
 	}
 
 	/**
 	 * @param fatorDeVencimento the fatorDeVencimento to set
 	 */
-	void setFatorDeVencimento(Field<Integer> fatorDeVencimento) {
+	void setFatorDeVencimento(FixedField<Integer> fatorDeVencimento) {
 		this.fatorDeVencimento = fatorDeVencimento;
 	}
 
 	/**
 	 * @return the valorNominalDoTitulo
 	 */
-	Field<BigDecimal> getValorNominalDoTitulo() {
+	FixedField<BigDecimal> getValorNominalDoTitulo() {
 		return valorNominalDoTitulo;
 	}
 
 	/**
 	 * @param valorNominalDoTitulo the valorNominalDoTitulo to set
 	 */
-	void setValorNominalDoTitulo(Field<BigDecimal> valorNominalDoTitulo) {
+	void setValorNominalDoTitulo(FixedField<BigDecimal> valorNominalDoTitulo) {
 		this.valorNominalDoTitulo = valorNominalDoTitulo;
 	}
 
 	/**
 	 * @return the campoLivre
 	 */
-	Field<String> getCampoLivre() {
+	FixedField<String> getCampoLivre() {
 		return campoLivre;
 	}
 
 	/**
 	 * @param campoLivre the campoLivre to set
 	 */
-	void setCampoLivre(Field<String> campoLivre) {
+	void setCampoLivre(FixedField<String> campoLivre) {
 		this.campoLivre = campoLivre;
 	}
 

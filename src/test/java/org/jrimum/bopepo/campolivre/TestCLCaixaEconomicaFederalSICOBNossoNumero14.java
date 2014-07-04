@@ -63,7 +63,7 @@ public class TestCLCaixaEconomicaFederalSICOBNossoNumero14 extends AbstractCampo
 
 		createCampoLivreToTest();
 
-		setCampoLivreValidoAsString("0007802558700000000113732");
+		setCampoLivreEsperadoComoString("0007802558700000000113732");
 	}
 	
 	@Test(expected = CampoLivreException.class)

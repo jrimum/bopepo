@@ -22,9 +22,6 @@ abstract class AbstractCLUnibanco extends AbstractCampoLivre {
 		super(fieldsLength);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	protected static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 
 		checkCarteiraNotNull(titulo);

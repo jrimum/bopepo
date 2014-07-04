@@ -29,8 +29,8 @@
 
 package org.jrimum.bopepo;
 
-import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.jrimum.domkee.comum.pessoa.id.cprf.CNPJ;
 import org.jrimum.domkee.financeiro.banco.febraban.Banco;
@@ -96,6 +96,8 @@ import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
  * 		   Colaborador com o Banco do Nordeste do Brasil (004).
  * @author <a href="mailto:fabianojustino@gmail.com">Fabiano Carrijo</a> - 
  * 		   Colaborador com o Banco Citibank (756).
+ * @author <a href="mailto:contato@douglasramiro.com.br">Douglas Ramiro</a> - 
+ * 		   Colaborador com o Banco de Brasília (070).
  * 
  * @see org.jrimum.bopepo.campolivre.CampoLivre
  * @see org.jrimum.domkee.financeiro.banco.Banco
@@ -104,7 +106,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.CodigoDeCompensacaoBACEN;
  * 
  * @version 0.2
  */
-public enum BancosSuportados implements Serializable{
+public enum BancosSuportados{
 
 	/*
 	 * <=====================================================================>
@@ -160,14 +162,32 @@ public enum BancosSuportados implements Serializable{
 	BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL("041", "92702067000196", "BANCO DO ESTADO DO RIO GRANDE DO SUL S.A.", "Banco Múltiplo"),
 			
 	/**
+	 * Tipo enumerado que representa o Banco <strong>BRB - Banco de Brasília</strong>,
+	 * código de compensação <strong><tt>070</tt></strong> <a
+	 * href="http://www.brb.com.br">site</a>.
+	 * 
+	 * @since 0.2
+	 */
+	BANCO_DE_BRASILIA("070","00000208000100","BRB- Banco de Brasília S.A.","Banco Múltiplo"),
+	
+	/**
 	 * Tipo enumerado que representa o BANISA, Banco <strong>Intermedium</strong>,
 	 * código de compensação <strong><tt>077</tt></strong> <a href="http://www.bancointermedium.com.br/">
 	 * site</a>.
 	 * 
 	 * @since 0.2
 	 */
-	BANCO_INTEMEDIUM("077", "00416968000101", "BANCO INTERMEDIUM S.A.", "Banco Múltiplo"),	
-			
+	BANCO_INTEMEDIUM("077", "00416968000101", "BANCO INTERMEDIUM S.A.", "Banco Múltiplo"),
+
+	/**
+	 * Tipo enumerado que representa o CECRED, <strong>Cooperativa Central de Crédito Urbano</strong>,
+	 * código de compensação <strong><tt>085</tt></strong> <a href="http://www.cecred.coop.br/">
+	 * site</a>.
+	 * 
+	 * @since 0.2
+	 */
+	CECRED("085", "05.463.212/0001-29", "COOPERATIVA CENTRAL DE CRÉDITO URBANO - CECRED", "Cooperativa de Crédito"),
+	
 	/**
 	 * Tipo enumerado que representa o Banco <strong>Caixa Econômica Federal</strong>,
 	 * código de compensação <strong><tt>104</tt></strong> <a
@@ -177,12 +197,6 @@ public enum BancosSuportados implements Serializable{
 	 */
 	CAIXA_ECONOMICA_FEDERAL("104", "00360305000104", "CAIXA ECONOMICA FEDERAL", "Caixa Econômica Federal"),
 
-	/**
-	 * Tipo enumerado que representa o Banco <strong>Nossa Caixa</strong>, código
-	 * de compensação <strong><tt>151</tt></strong> <a href="http://www.nossacaixa.com.br/">site</a>.
-	 */
-	NOSSA_CAIXA("151", "43073394000110", "BANCO NOSSA CAIXA S.A.", "Banco Múltiplo"),	
-			
 	/**
 	 * Tipo enumerado que representa o Banco <strong>Bradesco</strong>, código
 	 * de compensação <strong><tt>237</tt></strong> <a
@@ -195,7 +209,7 @@ public enum BancosSuportados implements Serializable{
 	/**
 	 * Tipo enumerado que representa o <strong>Banco Itaú</strong>, código de
 	 * compensação <strong><tt>341</tt></strong> <a
-	 * href="http://www.itau.com.br">site</a>.
+	 * href="http://www.	.com.br">site</a>.
 	 * 
 	 * @since 0.2
 	 */
@@ -283,59 +297,39 @@ public enum BancosSuportados implements Serializable{
 	 * 
 	 * @since 0.2
 	 */
-	BANCOOB("756", "02038232000164", "BANCO COOPERATIVO DO BRASIL S.A. - BANCOOB", "Banco Comercial Cooperativo"),
+	BANCOOB("756", "02038232000164", "BANCO COOPERATIVO DO BRASIL S.A. - BANCOOB", "Banco Comercial Cooperativo");
 	
-	;
-
 	/**
 	 * Singleton <code>Map</code> para pesquisa por bancos suportados no
 	 * componente.
 	 * 
 	 * @since 0.2
 	 */
-	public static final HashMap<String, BancosSuportados> suportados = new HashMap<String, BancosSuportados>(
+	public static final Map<String, BancosSuportados> suportados = new HashMap<String, BancosSuportados>(
 			BancosSuportados.values().length);
 
 	static {
 
 		suportados.put(BANCO_DO_BRASIL.codigoDeCompensacaoBACEN, BANCO_DO_BRASIL);
-
 		suportados.put(BANCO_DO_NORDESTE_DO_BRASIL.codigoDeCompensacaoBACEN, BANCO_DO_NORDESTE_DO_BRASIL);
-
 		suportados.put(CAIXA_ECONOMICA_FEDERAL.codigoDeCompensacaoBACEN, CAIXA_ECONOMICA_FEDERAL);
-
 		suportados.put(BANCO_BRADESCO.codigoDeCompensacaoBACEN, BANCO_BRADESCO);
-
 		suportados.put(BANCO_ABN_AMRO_REAL.codigoDeCompensacaoBACEN, BANCO_ABN_AMRO_REAL);
-
 		suportados.put(UNIBANCO.codigoDeCompensacaoBACEN, UNIBANCO);
-
 		suportados.put(HSBC.codigoDeCompensacaoBACEN, HSBC);
-
 		suportados.put(BANCO_ITAU.codigoDeCompensacaoBACEN, BANCO_ITAU);
-
 		suportados.put(BANCO_SAFRA.codigoDeCompensacaoBACEN, BANCO_SAFRA);
-		
 		suportados.put(BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.codigoDeCompensacaoBACEN, BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL);
-		
 		suportados.put(MERCANTIL_DO_BRASIL.codigoDeCompensacaoBACEN, MERCANTIL_DO_BRASIL);
-		
-		suportados.put(NOSSA_CAIXA.codigoDeCompensacaoBACEN, NOSSA_CAIXA);
-		
 		suportados.put(BANCO_DO_ESTADO_DO_ESPIRITO_SANTO.codigoDeCompensacaoBACEN, BANCO_DO_ESTADO_DO_ESPIRITO_SANTO);
-		
 		suportados.put(BANCO_RURAL.codigoDeCompensacaoBACEN, BANCO_RURAL);
-		
 		suportados.put(BANCO_SANTANDER.codigoDeCompensacaoBACEN, BANCO_SANTANDER);
-		
 		suportados.put(BANCO_INTEMEDIUM.codigoDeCompensacaoBACEN, BANCO_INTEMEDIUM);
-
 		suportados.put(BANCO_SICREDI.codigoDeCompensacaoBACEN, BANCO_SICREDI);
-
 		suportados.put(BANCOOB.codigoDeCompensacaoBACEN, BANCOOB);
-		
 		suportados.put(CITIBANK.codigoDeCompensacaoBACEN, CITIBANK);
-		
+		suportados.put(BANCO_DE_BRASILIA.codigoDeCompensacaoBACEN, BANCO_DE_BRASILIA);
+		suportados.put(CECRED.codigoDeCompensacaoBACEN, CECRED);
 	}
 
 	/**
@@ -475,4 +469,5 @@ public enum BancosSuportados implements Serializable{
 	public String getSegmento() {
 		return segmento;
 	}
+
 }

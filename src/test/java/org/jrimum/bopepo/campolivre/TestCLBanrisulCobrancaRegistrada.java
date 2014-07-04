@@ -66,7 +66,7 @@ public class TestCLBanrisulCobrancaRegistrada extends AbstractCampoLivreBaseTest
 
 		createCampoLivreToTest();
 		
-		setCampoLivreValidoAsString("1111029000150228325634071");
+		setCampoLivreEsperadoComoString("1111029000150228325634071");
 	}
 
 	@Test(expected=CampoLivreException.class)

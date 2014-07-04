@@ -29,17 +29,18 @@
 
 package org.jrimum.bopepo.campolivre;
 
+import static org.jrimum.bopepo.parametro.ParametroHSBC.IDENTIFICADOR_CNR;
+
 import java.util.Calendar;
 import java.util.Date;
 
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.domkee.financeiro.banco.hsbc.TipoIdentificadorCNR;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 
 /**
  * <p>
@@ -135,31 +136,33 @@ class CLHSBCCobrancaNaoRegistrada extends AbstractCLHSBC {
 		checkExistsParametroTipoIdentificadorCNR(titulo
 				.getParametrosBancarios());
 
-		TipoIdentificadorCNR tipoIdentificadorCNR = titulo
-				.getParametrosBancarios().getValor(
-						TipoIdentificadorCNR.class.getName());
+		Integer tipoIdentificadorCNR = titulo
+				.getParametrosBancarios().getValor(IDENTIFICADOR_CNR);
 
 		ContaBancaria conta = titulo.getContaBancaria();
 		String nossoNumero = titulo.getNossoNumero();
 
 		// Conta do cedente (sem dígito)
-		this.add(new Field<Integer>(
+		this.add(new FixedField<Integer>(
 				conta.getNumeroDaConta().getCodigoDaConta(), 7,
-				Filler.ZERO_LEFT));
+				Fillers.ZERO_LEFT));
 
 		// Nosso número (sem dígito)
-		this.add(new Field<String>(nossoNumero, 13, Filler.ZERO_LEFT));
+		this.add(new FixedField<String>(nossoNumero, 13, Fillers.ZERO_LEFT));
 
-		this.add(new Field<String>(getDataVencimentoFormatoJuliano(
+		this.add(new FixedField<String>(getDataVencimentoFormatoJuliano(
 				tipoIdentificadorCNR, titulo.getDataDoVencimento()), 4,
-				Filler.ZERO_LEFT));
+				Fillers.ZERO_LEFT));
 
 		// 2 FIXO (Código do Aplicativo CNR - Cob. Não Registrada)
-		this.add(new Field<Integer>(2, 1));
+		this.add(new FixedField<Integer>(2, 1));
 
 	}
 
-	private String getDataVencimentoFormatoJuliano(TipoIdentificadorCNR tipoIdentificadorCNR, Date vencimento) {
+	private String getDataVencimentoFormatoJuliano(Integer tipoIdentificadorCNR, Date vencimento) {
+		
+		final int SEM_VENCIMENTO = 5;
+		final int COM_VENCIMENTO = 4;
 
 		switch (tipoIdentificadorCNR) {
 
@@ -192,24 +195,20 @@ class CLHSBCCobrancaNaoRegistrada extends AbstractCLHSBC {
 				&& titulo.getParametrosBancarios().isVazio()) {
 
 			throw new CampoLivreException(
-					"Parâmetros bancários nulos em \"Titulo.parametrosBancarios\". O parâmetro bancário de nome e tipo [ "
-							+ TipoIdentificadorCNR.class.getName()
-							+ " ] deve ser fornecido para este caso.");
+					"Parâmetros bancários nulos em \"Titulo.parametrosBancarios\". O parâmetro bancário de nome e tipo [ IDENTIFICADOR_CNR ] deve ser fornecido para este caso.");
 
 		}
 	}
 
 	private void checkExistsParametroTipoIdentificadorCNR(ParametrosBancariosMap parametros) {
 
-		TipoIdentificadorCNR tipoIdentificadorCNR = parametros
-				.getValor(TipoIdentificadorCNR.class.getName());
+		Integer tipoIdentificadorCNR = parametros
+				.getValor(IDENTIFICADOR_CNR);
 
 		if (Objects.isNull(tipoIdentificadorCNR)) {
 
 			throw new CampoLivreException(
-					"Parâmetro bancário ["
-							+ TipoIdentificadorCNR.class.getName()
-							+ " ] não encontrado em \"Titulo.parametrosBancarios\". O nome do parâmetro deve ser o \"qualify name\" da classe.");
+					"Parâmetro bancário [ IDENTIFICADOR_CNR ] não encontrado em \"Titulo.parametrosBancarios\". O nome do parâmetro deve ser IDENTIFICADOR_CNR.");
 		}
 	}
 	

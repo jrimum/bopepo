@@ -32,8 +32,6 @@ package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 
 /**
  * Interface comum para todos os campos livres do CITIBANK
@@ -53,12 +51,12 @@ class CLBancoCitiBankNN11 extends AbstractCLBancoDoBrasil {
 	        super(FIELDS_LENGTH);
 	        ContaBancaria conta = titulo.getContaBancaria();
 	        String nossoNumero = titulo.getNossoNumero();
-//	        add(new Field(conta.getProduto().getCodigo(), Integer.valueOf(1), Filler.ZERO_LEFT));
-//	        add(new Field(conta.getPortifolio().getCodigo(), Integer.valueOf(3), Filler.ZERO_LEFT));
-//	        add(new Field(conta.getCosmos().getCodigo(), Integer.valueOf(1), Filler.ZERO_LEFT));
-//	        add(new Field(conta.getCosmosConta().getCodigo(), Integer.valueOf(8), Filler.ZERO_LEFT));
-//	        add(new Field(nossoNumero, Integer.valueOf(11), Filler.ZERO_LEFT));
-//	        add(new Field(conta.getProduto().getCodigo(), Integer.valueOf(1), Filler.ZERO_LEFT));
+//	        add(new Field(conta.getProduto().getCodigo(), Integer.valueOf(1), Fillers.ZERO_LEFT));
+//	        add(new Field(conta.getPortifolio().getCodigo(), Integer.valueOf(3), Fillers.ZERO_LEFT));
+//	        add(new Field(conta.getCosmos().getCodigo(), Integer.valueOf(1), Fillers.ZERO_LEFT));
+//	        add(new Field(conta.getCosmosConta().getCodigo(), Integer.valueOf(8), Fillers.ZERO_LEFT));
+//	        add(new Field(nossoNumero, Integer.valueOf(11), Fillers.ZERO_LEFT));
+//	        add(new Field(conta.getProduto().getCodigo(), Integer.valueOf(1), Fillers.ZERO_LEFT));
 	    }
 
 	    protected void addFields(Titulo titulo)

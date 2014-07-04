@@ -43,6 +43,7 @@ import org.jrimum.bopepo.campolivre.CampoLivre;
 import org.jrimum.bopepo.campolivre.CampoLivreFactory;
 import org.jrimum.bopepo.campolivre.NotSupportedBancoException;
 import org.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
+import org.jrimum.bopepo.view.BoletoCampo;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
@@ -69,7 +70,7 @@ import org.jrimum.utilix.Objects;
  * 
  * @version 0.2
  */
-public final class Boleto {
+public class Boleto {
 	
 	private static Logger log = Logger.getLogger(Boleto.class);
 
@@ -162,13 +163,17 @@ public final class Boleto {
 			}
 			
 		}else {
-			IllegalArgumentException e = new IllegalArgumentException("Título nulo!");
-			log.error("Valor Não Permitido!",e);
-			throw e;
+			
+			if(log.isDebugEnabled()){
+				log.debug("Título Nulo - Valor Não Permitido!");
+			}
+			
+			Exceptions.throwIllegalArgumentException("Título nulo!");
 		}
 		
-		if(log.isDebugEnabled() || log.isTraceEnabled())
+		if(log.isDebugEnabled() || log.isTraceEnabled()){
 			log.trace("Boleto Instanciado : "+this);
+		}
 
 	}
 
@@ -223,9 +228,7 @@ public final class Boleto {
 	}
 	
 	/**
-	 * <p></p>
-	 * 
-	 * @return the campoLivre
+	 * @return O campoLivre da isntância.
 	 */
 	public CampoLivre getCampoLivre() {
 		
@@ -233,10 +236,6 @@ public final class Boleto {
 	}
 
 	/**
-	 * <p>
-	 * 
-	 * </p>
-	 * 
 	 * @param campoLivre the campoLivre to set
 	 */
 	private void setCampoLivre(CampoLivre campoLivre) {
@@ -477,41 +476,93 @@ public final class Boleto {
 	public void setInstrucao8(String instrucao8) {
 		this.instrucao8 = instrucao8;
 	}
-
+	
+	/**
+	 * Sobrescreve um campo padrão do boleto.
+	 * 
+	 * @param campo
+	 *            Nome do campo no template
+	 * @param conteudo
+	 *            Texto a ser adicionado ao campo no template
+	 */
+	public void sobrescrevaCampo(BoletoCampo campo, String conteudo){
+		addTextosExtras(campo.name(), conteudo);
+	}
+	
+	
+	/**
+	 * @return Todas os campos de texto usados como extra ou sobrescrita no
+	 *         template.
+	 */
 	public Map<String, String> getTextosExtras() {
 		
 		return this.textosExtras;
 	}
 
+	
+	/**
+	 * Substitui todos os campos extra da instância caso exista.
+	 * 
+	 * @param textosExtras
+	 *            Campos atribuídos
+	 */
 	public void setTextosExtras(Map<String,String> textosExtras) {
 
 		this.textosExtras = textosExtras;
 	}
 	
-	public void addTextosExtras(String nome, String valor) {
+	/**
+	 * Adiciona um campo de texto no boleto caso o campo informado tenha o mesmo
+	 * nome no template da instância.
+	 * 
+	 * @param campo
+	 *            Nome do campo no template
+	 * @param conteudo
+	 *            Texto a ser adicionado ao campo no template
+	 */
+	public void addTextosExtras(String campo, String conteudo) {
 		
 		if(isNull(getTextosExtras())) {
 			setTextosExtras(new HashMap<String, String>());
 		}
 		
-		getTextosExtras().put(nome, valor);
+		getTextosExtras().put(campo, conteudo);
 	}
 	
+	/**
+	 * @return Todas os campos de imagem usados como extra ou sobrescrita no
+	 *         template.
+	 */
 	public Map<String, Image> getImagensExtras() {
 		return this.imagensExtras;
 	}
 
+	/**
+	 * Substitui todos os campos extra da instância caso exista.
+	 * 
+	 * @param imagensExtras
+	 *            Campos atribuídos
+	 */
 	public void setImagensExtras(Map<String,Image> imagensExtras) {
 		this.imagensExtras = imagensExtras;
 	}
 	
-	public void addImagensExtras(String fieldName, Image image) {
+	/**
+	 * Adiciona um campo de imagem no boleto caso o campo informado tenha o
+	 * mesmo nome no template da instância.
+	 * 
+	 * @param campo
+	 *            Nome do campo no template
+	 * @param conteudo
+	 *            Imagem a ser adicionada ao campo no template
+	 */
+	public void addImagensExtras(String campo, Image conteudo) {
 		
 		if(isNull(getImagensExtras())) {
 			setImagensExtras(new HashMap<String, Image>());
 		}
 		
-		getImagensExtras().put(fieldName, image);
+		getImagensExtras().put(campo, conteudo);
 	}
 
 	@Override

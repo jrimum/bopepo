@@ -32,9 +32,9 @@ package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 
 /**
  * 
@@ -116,10 +116,10 @@ class CLBancoDoBrasilNN17Convenio6 extends AbstractCLBancoDoBrasil{
 		ContaBancaria conta = titulo.getContaBancaria();
 		String nossoNumero = titulo.getNossoNumero();
 		
-		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Fillers.ZERO_LEFT));
 		
-		this.add(new Field<String>(nossoNumero, 17, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(SERVICO, 2));
+		this.add(new FixedField<String>(nossoNumero, 17, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(SERVICO, 2));
 		
 	}
 	

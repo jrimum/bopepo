@@ -212,7 +212,6 @@ public class TestBoletoUtil {
 				BoletoUtil.checkFormatoCodigoDeBarras(inputTest);
 				fail("Controle de formatação falho.");
 			} catch (CodigoDeBarrasException e) {
-				System.out.println(e.getMessage());
 				assertTrue(true);
 			}
 		}
@@ -234,7 +233,6 @@ public class TestBoletoUtil {
 				BoletoUtil.checkExistsCodigoDeBarras(emptyInput.toString());
 				fail("Controle de espaços falho.");
 			} catch (IllegalArgumentException e) {
-				System.out.println(e.getMessage());
 				assertTrue(true);
 			}
 			emptyInput.append(" ");
@@ -277,7 +275,6 @@ public class TestBoletoUtil {
 				BoletoUtil.checkFormatoLinhaDigitavelFormatada(inputTest);
 				fail("Controle de formatação falho.");
 			} catch (LinhaDigitavelException e) {
-				System.out.println(e.getMessage());
 				assertTrue(true);
 			}
 		}
@@ -290,7 +287,6 @@ public class TestBoletoUtil {
 				BoletoUtil.checkFormatoLinhaDigitavelNumerica(inputTest);
 				fail("Controle de formatação falho.");
 			} catch (LinhaDigitavelException e) {
-				System.out.println(e.getMessage());
 				assertTrue(true);
 			}
 		}
@@ -312,7 +308,6 @@ public class TestBoletoUtil {
 				BoletoUtil.checkExistsLinhaDigitavel(emptyInput.toString());
 				fail("Controle de espaços falho.");
 			} catch (IllegalArgumentException e) {
-				System.out.println(e.getMessage());
 				assertTrue(true);
 			}
 			emptyInput.append(" ");
@@ -336,7 +331,6 @@ public class TestBoletoUtil {
 						.toString());
 				fail("Controle de espaços falho.");
 			} catch (IllegalArgumentException e) {
-				System.out.println(e.getMessage());
 				assertTrue(true);
 			}
 			emptyInput.append(" ");
@@ -351,7 +345,6 @@ public class TestBoletoUtil {
 				BoletoUtil.linhaDigitavelFormatadaEmNumerica(inputTest);
 				fail("Controle de formatação falho.");
 			} catch (LinhaDigitavelException e) {
-				System.out.println(e.getMessage());
 				assertTrue(true);
 			}
 		}
@@ -382,7 +375,6 @@ public class TestBoletoUtil {
 						.toString());
 				fail("Controle de espaços falho.");
 			} catch (IllegalArgumentException e) {
-				System.out.println(e.getMessage());
 				assertTrue(true);
 			}
 			emptyInput.append(" ");
@@ -397,7 +389,6 @@ public class TestBoletoUtil {
 				BoletoUtil.linhaDigitavelNumericaEmFormatada(inputTest);
 				fail("Controle de formatação falho.");
 			} catch (LinhaDigitavelException e) {
-				System.out.println(e.getMessage());
 				assertTrue(true);
 			}
 		}

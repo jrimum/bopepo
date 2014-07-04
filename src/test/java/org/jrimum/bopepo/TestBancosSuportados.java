@@ -36,24 +36,25 @@ import org.junit.Test;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a> 
- *
  */
 public class TestBancosSuportados{
 	
 	/**
-	 * Quantidade atual 
+	 * Quantidade atual
 	 */
 	@Test
-	public void testQuantidade() {
+	public void deve_ser_igual_a_quantidade_de_bancos_declarados_no_enum_e_a_quantidade_disponivel_como_suportado() {
 		
-		assertEquals(BancosSuportados.suportados.size(), 19);
+		assertEquals(BancosSuportados.values().length, BancosSuportados.suportados.size());
 	}
 
 	/**
 	 * Conferência de códigos 
 	 */
 	@Test
-	public void testGetCodigo() {
+	public void deve_ter_o_codigos_bacen_igual_o_da_especificacao_febraban() {
+		
+		
 		//Bancos implementados:
 		assertEquals(BancosSuportados.BANCO_DO_BRASIL.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "001");
 		assertEquals(BancosSuportados.BANCO_DO_NORDESTE_DO_BRASIL.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "004");
@@ -66,7 +67,6 @@ public class TestBancosSuportados{
 		assertEquals(BancosSuportados.BANCO_SAFRA.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "422");
 		assertEquals(BancosSuportados.BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "041");
 		assertEquals(BancosSuportados.MERCANTIL_DO_BRASIL.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "389");
-		assertEquals(BancosSuportados.NOSSA_CAIXA.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "151");
 		assertEquals(BancosSuportados.BANCO_DO_ESTADO_DO_ESPIRITO_SANTO.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "021");
 		assertEquals(BancosSuportados.BANCO_RURAL.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "453");
 		assertEquals(BancosSuportados.BANCO_SANTANDER.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "033");
@@ -74,5 +74,6 @@ public class TestBancosSuportados{
 		assertEquals(BancosSuportados.BANCO_SICREDI.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "748");
 		assertEquals(BancosSuportados.BANCOOB.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "756");
 		assertEquals(BancosSuportados.CITIBANK.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "745");
+		assertEquals(BancosSuportados.BANCO_DE_BRASILIA.create().getCodigoDeCompensacaoBACEN().getCodigoFormatado(), "070");
 	}
 }

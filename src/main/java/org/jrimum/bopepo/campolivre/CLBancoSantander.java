@@ -1,11 +1,13 @@
 package org.jrimum.bopepo.campolivre;
 
+import static org.jrimum.bopepo.parametro.ParametroBancoSantander.IOF_SEGURADORA;
+
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 
 /**
  * <p>
@@ -97,13 +99,6 @@ class CLBancoSantander extends AbstractCLSantander implements CampoLivre {
 	private static final Integer CONSTANTE = Integer.valueOf(9);
 
 	/**
-	 * Chave de pesquisa em parâmetros bancários para saber se o boelto deve
-	 * usar IOF – Seguradoras: (Se 7% informar 7. Limitado a 9%); Demais
-	 * clientes usar 0 (zero).
-	 */
-	private static final String IOF_SEGURADORA = "IOF_SEGURADORA";
-
-	/**
 	 * 101- Cobrança Simples Rápida COM Registro
 	 */
 	private static final int CARTEIRA_RAPIDA_COM_REGISTRO = 101;
@@ -125,24 +120,24 @@ class CLBancoSantander extends AbstractCLSantander implements CampoLivre {
 		StringBuilder nossoNumero = new StringBuilder(titulo.getNossoNumero());
 		nossoNumero.append(titulo.getDigitoDoNossoNumero());
 
-		this.add(new Field<Integer>(CONSTANTE, 1));
-		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
-		this.add(new Field<String>(conta.getNumeroDaConta().getDigitoDaConta(), 1));
+		this.add(new FixedField<Integer>(CONSTANTE, 1));
+		this.add(new FixedField<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(conta.getNumeroDaConta().getDigitoDaConta(), 1));
 		
-		this.add(new Field<String>(nossoNumero.toString(), 13, Filler.ZERO_LEFT));
+		this.add(new FixedField<String>(nossoNumero.toString(), 13, Fillers.ZERO_LEFT));
 
 		// IOF – Seguradoras
 
-		if (Objects.isNotNull(titulo.getParametrosBancarios())
+		if (titulo.hasParametrosBancarios()
 				&& Objects.isNotNull(titulo.getParametrosBancarios().getValor(
 						IOF_SEGURADORA))) {
 
-			this.add(new Field<Integer>((Integer) titulo
-					.getParametrosBancarios().getValor(IOF_SEGURADORA), 1));
+			this.add(new FixedField<Integer>(titulo
+					.getParametrosBancarios().<Integer>getValor(IOF_SEGURADORA), 1));
 
 		} else {
 
-			this.add(new Field<Integer>(0, 1));
+			this.add(new FixedField<Integer>(0, 1));
 		}
 
 		// Tipo de Modalidade Carteira
@@ -153,8 +148,8 @@ class CLBancoSantander extends AbstractCLSantander implements CampoLivre {
 		case CARTEIRA_RAPIDA_SEM_REGISTRO:
 		case CARTEIRA_SIMPLES_SEM_REGISTRO:
 
-			this.add(new Field<Integer>(conta.getCarteira().getCodigo(), 3,
-					Filler.ZERO_LEFT));
+			this.add(new FixedField<Integer>(conta.getCarteira().getCodigo(), 3,
+					Fillers.ZERO_LEFT));
 
 			break;
 

@@ -78,7 +78,7 @@ public class TestCLUnibancoCobrancaNaoRegistrada extends AbstractCampoLivreBaseT
 
 		createCampoLivreToTest();
 		
-		setCampoLivreValidoAsString("5123456100112233445566777");
+		setCampoLivreEsperadoComoString("5123456100112233445566777");
 	}
 
 	@Test(expected = CampoLivreException.class)

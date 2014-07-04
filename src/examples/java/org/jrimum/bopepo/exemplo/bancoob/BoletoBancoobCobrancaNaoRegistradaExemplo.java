@@ -31,6 +31,7 @@ package org.jrimum.bopepo.exemplo.bancoob;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.exemplo.Exemplos;
+import org.jrimum.bopepo.parametro.ParametroBancoob;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
@@ -73,7 +74,7 @@ public class BoletoBancoobCobrancaNaoRegistradaExemplo {
 		contaBancaria.setCarteira(new Carteira(1));
 
 		titulo.setNossoNumero("11000001");
-		titulo.setParametrosBancarios(new ParametrosBancariosMap("NumeroDaParcela",Integer.valueOf(0)));
+		titulo.setParametrosBancarios(new ParametrosBancariosMap(ParametroBancoob.NUMERO_DA_PARCELA,Integer.valueOf(0)));
 
 		Boleto boleto = Exemplos.crieBoleto(titulo);
 

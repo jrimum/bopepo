@@ -28,10 +28,12 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
+import static org.jrimum.bopepo.parametro.ParametroBancoob.MODALIDADE_DE_COBRANCA;
+import static org.jrimum.bopepo.parametro.ParametroBancoob.NUMERO_DA_PARCELA;
+
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 
 /**
  * <p>
@@ -150,17 +152,6 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 	private static final Integer NUMERO_DA_PARCELA_LENGTH = 3;
 
 	/**
-	 *  Nome do parâmetro bancário contendo o código da modalidade de cobrança.
-	 */
-	private static final String MODALIDADE_DE_COBRANCA = "ModalidadeDeCobranca";
-	
-	/**
-	 * Nome do parâmetro bancário contendo o número da parcela do título.
-	 */
-	private static final String NUMERO_DA_PARCELA = "NumeroDaParcela";
-
-
-	/**
 	 * <p>
 	 *   Cria um campo livre instanciando o número de fields ({@code FIELDS_LENGTH}) deste campo.
 	 * </p>
@@ -194,12 +185,12 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 		Integer codigoDaModalidadeDeCobranca = COBRANCA_SIMPLES;
 		Integer numeroDaParcela = UMA_PARCELA;
 		
-		if (ParametrosBancariosMap.hasElement(titulo.getParametrosBancarios())) {
+		if (titulo.hasParametrosBancarios()) {
 
 			if (titulo.getParametrosBancarios()
 					.contemComNome(MODALIDADE_DE_COBRANCA)) {
 
-				checkParametrosBancarios(titulo, MODALIDADE_DE_COBRANCA);
+				checkParametroBancario(titulo, MODALIDADE_DE_COBRANCA);
 				
 				codigoDaModalidadeDeCobranca = titulo.getParametrosBancarios().getValor(MODALIDADE_DE_COBRANCA);
 			}
@@ -207,18 +198,18 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 			if (titulo.getParametrosBancarios()
 					.contemComNome(NUMERO_DA_PARCELA)) {
 				
-				checkParametrosBancarios(titulo, NUMERO_DA_PARCELA);
+				checkParametroBancario(titulo, NUMERO_DA_PARCELA);
 				
 				numeroDaParcela = titulo.getParametrosBancarios().getValor(NUMERO_DA_PARCELA);
 			}
 		}		
 
-		this.add(new Field<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), CARTEIRA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), AGENCIA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(codigoDaModalidadeDeCobranca, MODALIDADE_DE_COBRANCA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<String>(titulo.getNossoNumero(),NOSSO_NUMERO_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(numeroDaParcela, NUMERO_DA_PARCELA_LENGTH, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), CARTEIRA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), AGENCIA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(codigoDaModalidadeDeCobranca, MODALIDADE_DE_COBRANCA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getNossoNumero(),NOSSO_NUMERO_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(numeroDaParcela, NUMERO_DA_PARCELA_LENGTH, Fillers.ZERO_LEFT));
 
 	}
 	

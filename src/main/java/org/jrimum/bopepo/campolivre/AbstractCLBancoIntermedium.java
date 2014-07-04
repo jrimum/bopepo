@@ -66,9 +66,6 @@ abstract class AbstractCLBancoIntermedium extends AbstractCampoLivre {
 		super(fieldsLength);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	protected static CampoLivre create(Titulo titulo){
 		
 		return new CLBancoIntermedium(titulo);

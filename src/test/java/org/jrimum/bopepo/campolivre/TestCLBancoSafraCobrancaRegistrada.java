@@ -68,7 +68,7 @@ public class TestCLBancoSafraCobrancaRegistrada extends AbstractCLBancoSafraBase
 
 		createCampoLivreToTest();
 
-		setCampoLivreValidoAsString("7010000072746989609001522");
+		setCampoLivreEsperadoComoString("7010000072746989609001522");
 	}
 	
 	@Test(expected = CampoLivreException.class)

@@ -1,8 +1,8 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 
 /**
  * 
@@ -77,7 +77,7 @@ class CLBancoDoBrasilNN17Convenio7 extends AbstractCLBancoDoBrasil {
 	 * Constante em forma de campo {@link #CONSTANT_VALUE} e
 	 * {@link #CONSTANT_LENGTH}, valor escrito: "000000".
 	 */
-	private static final Field<Integer> CONSTANT_FIELD = new Field<Integer>(CONSTANT_VALUE, CONSTANT_LENGTH, Filler.ZERO_LEFT);
+	private static final FixedField<Integer> CONSTANT_FIELD = new FixedField<Integer>(CONSTANT_VALUE, CONSTANT_LENGTH, Fillers.ZERO_LEFT);
 
 	/**
 	 * Tamanho do campo Nosso Número = 17.
@@ -116,8 +116,8 @@ class CLBancoDoBrasilNN17Convenio7 extends AbstractCLBancoDoBrasil {
 	protected void addFields(Titulo titulo) {
 
 		this.add(CONSTANT_FIELD);
-		this.add(new Field<String>(titulo.getNossoNumero(),NOSSO_NUMERO_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), CARTEIRA_LENGTH, Filler.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getNossoNumero(),NOSSO_NUMERO_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getCarteira().getCodigo(), CARTEIRA_LENGTH, Fillers.ZERO_LEFT));
 	}
 
 }

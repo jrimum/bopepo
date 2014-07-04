@@ -33,6 +33,6 @@ public class TestCLBancoRuralCobrancaRegistrada extends AbstractCampoLivreBaseTe
 
 		createCampoLivreToTest();
 		
-		setCampoLivreValidoAsString("0133000006789112345671000");
+		setCampoLivreEsperadoComoString("0133000006789112345671000");
 	}
 }

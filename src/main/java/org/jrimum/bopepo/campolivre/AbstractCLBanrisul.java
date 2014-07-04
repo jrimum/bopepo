@@ -31,7 +31,7 @@ package org.jrimum.bopepo.campolivre;
 
 import org.apache.commons.lang.StringUtils;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
-import org.jrimum.utilix.text.Field;
+import org.jrimum.texgit.type.FixedField;
 import org.jrimum.vallia.digitoverificador.Modulo;
 
 /**
@@ -68,9 +68,6 @@ abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 		super(fieldsLength);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	protected static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 		
 		checkCarteiraNotNull(titulo);
@@ -183,7 +180,7 @@ abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 	 * </p>
 	 * 
 	 * @param somaMod10
-	 * @return
+	 * @return Resto do modúlo 10
 	 * 
 	 * @since 0.2
 	 */
@@ -238,7 +235,7 @@ abstract class AbstractCLBanrisul extends AbstractCampoLivre {
 		
 		final StringBuilder camposExistentesAteOMomentoConcatenados = new StringBuilder(StringUtils.EMPTY);
 		
-		for (Field<?> field : this) {
+		for (FixedField<?> field : this) {
 			camposExistentesAteOMomentoConcatenados.append(field.write());
 		}
 		

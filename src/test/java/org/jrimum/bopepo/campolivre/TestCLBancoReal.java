@@ -63,7 +63,7 @@ public class TestCLBancoReal extends AbstractCampoLivreBaseTest<CLBancoReal> {
 		
 		createCampoLivreToTest();
 		
-		setCampoLivreValidoAsString("1018001632491234567890123");
+		setCampoLivreEsperadoComoString("1018001632491234567890123");
 	}
 
 }

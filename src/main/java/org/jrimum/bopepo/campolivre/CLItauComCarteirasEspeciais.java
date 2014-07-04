@@ -32,16 +32,12 @@ package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 
 /**
- * 
- * 
- * <p>
  * Campo livre padrão do Banco Itaú
- * </p>
  * 
  * <p>
  * Constrói o campo livre no caso especial, ou seja, quando a carteira for:
@@ -123,44 +119,42 @@ class CLItauComCarteirasEspeciais extends AbstractCLItau {
 	private static final Integer FIELDS_LENGTH = 6;
 	
 	/**
-	 * <p>
-	 *   Dado um título, cria o campo livre do Banco Itaú para carteiras especiais.
-	 * </p>
-	 * @param titulo título com as informações para geração do campo livre
+	 * Dado um título, cria o campo livre do Banco Itaú para carteiras
+	 * especiais.
+	 * 
+	 * @param titulo
+	 *            título com as informações para geração do campo livre
 	 */
 	public CLItauComCarteirasEspeciais(Titulo titulo) {
 		super(FIELDS_LENGTH);
 		
 		ContaBancaria conta = titulo.getContaBancaria();
 		
-		this.add(new Field<Integer>(conta.getCarteira().getCodigo(), 3, Filler.ZERO_LEFT));
-		this.add(new Field<String>(titulo.getNossoNumero(), 8, Filler.ZERO_LEFT));
-		this.add(new Field<String>(titulo.getNumeroDoDocumento(), 7, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(conta.getCarteira().getCodigo(), 3, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getNossoNumero(), 8, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getNumeroDoDocumento(), 7, Fillers.ZERO_LEFT));
 		
 		//Aqui é o código do cedente, simbolizado pelo código da conta bancária.
-		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 5, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 5, Fillers.ZERO_LEFT));
 		
-		this.add(new Field<Integer>(calculeDigitoDoCampoLivreEspecial(
+		this.add(new FixedField<Integer>(calculeDigitoDoCampoLivreEspecial(
 											conta.getCarteira().getCodigo(), 
 											titulo.getNossoNumero(),
 											titulo.getNumeroDoDocumento(),
 											conta.getNumeroDaConta().getCodigoDaConta()), 1));
-		this.add(new Field<Integer>(0, 1));
+		this.add(new FixedField<Integer>(0, 1));
 	}
 	
 	/**
-	 * <p>
-	 * Calcula o dígito verificador para o campo livre especial a partir do 
-	 * código da carteira, do nosso número, do número do documento e do código da conta.
-	 * </p>
+	 * Calcula o dígito verificador para o campo livre especial a partir do
+	 * código da carteira, do nosso número, do número do documento e do código
+	 * da conta.
 	 * 
 	 * @param codigoDaCarteira
 	 * @param nossoNumero
 	 * @param numeroDoDocumento
 	 * @param codigoDaConta
 	 * @return Integer digito
-	 * 
-	 * @see #calculeDigitoDaPosicao41(Integer, Integer)
 	 * 
 	 * @since 0.2
 	 */
@@ -169,10 +163,10 @@ class CLItauComCarteirasEspeciais extends AbstractCLItau {
 
 		StringBuilder campo = new StringBuilder();
 		
-		campo.append(Filler.ZERO_LEFT.fill(codigoDaCarteira.intValue(), 3));
-		campo.append(Filler.ZERO_LEFT.fill(nossoNumero, 8));
-		campo.append(Filler.ZERO_LEFT.fill(numeroDoDocumento, 7));
-		campo.append(Filler.ZERO_LEFT.fill(codigoDaConta, 5));
+		campo.append(Fillers.ZERO_LEFT.fill(codigoDaCarteira.intValue(), 3));
+		campo.append(Fillers.ZERO_LEFT.fill(nossoNumero, 8));
+		campo.append(Fillers.ZERO_LEFT.fill(numeroDoDocumento, 7));
+		campo.append(Fillers.ZERO_LEFT.fill(codigoDaConta, 5));
 		
 		return calculeDigitoVerificador(campo.toString());
 	}

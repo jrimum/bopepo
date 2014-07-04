@@ -34,9 +34,9 @@ import java.math.RoundingMode;
 
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 
 /**
  * 
@@ -118,34 +118,34 @@ class CLMercantilDoBrasil extends AbstractCLMercantilDoBrasil {
 			desconto = 0;
 		}
 		
-		this.add(new Field<Integer>(contaBancaria.getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(contaBancaria.getAgencia().getCodigo(), 4, Fillers.ZERO_LEFT));
 		
-		this.add(new Field<String>(titulo.getNossoNumero() + titulo.getDigitoDoNossoNumero(), 11, Filler.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getNossoNumero() + titulo.getDigitoDoNossoNumero(), 11, Fillers.ZERO_LEFT));
 		
-		this.add(new Field<Integer>(contaBancaria.getNumeroDaConta().getCodigoDaConta(), 9, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(contaBancaria.getNumeroDaConta().getCodigoDaConta(), 9, Fillers.ZERO_LEFT));
 		
-		this.add(new Field<Integer>(desconto, 1));
+		this.add(new FixedField<Integer>(desconto, 1));
 	}
 	
-	/**
-	 * 
-	 * <p>
-	 * Calcula o dígito verificador do Nosso Número.
-	 * </p>
-	 * <p>
-	 * É calculado através do módulo 11 a partir do código da agência e do Nosso Número.
-	 * </p>
-	 * 
-	 * @param agencia Código da agência
-	 * @param nossoNumero Nosso Número
-	 * @return
-	 * 
-	 * @since 0.2
-	 */
+//	/**
+//	 * 
+//	 * <p>
+//	 * Calcula o dígito verificador do Nosso Número.
+//	 * </p>
+//	 * <p>
+//	 * É calculado através do módulo 11 a partir do código da agência e do Nosso Número.
+//	 * </p>
+//	 * 
+//	 * @param agencia Código da agência
+//	 * @param nossoNumero Nosso Número
+//	 * @return digito verificador
+//	 * 
+//	 * @since 0.2
+//	 */
 //	private int calculeDigitoVerificadorDoNossoNumero(Integer agencia, String nossoNumero) {
 //		
 //		Modulo modulo = new Modulo(EnumModulo.MODULO11);
-//		int resto = modulo.calcule(Filler.ZERO_LEFT.fill(agencia, 4) + nossoNumero);
+//		int resto = modulo.calcule(Fillers.ZERO_LEFT.fill(agencia, 4) + nossoNumero);
 //		
 //		int digito = modulo.valor() - resto;
 //		

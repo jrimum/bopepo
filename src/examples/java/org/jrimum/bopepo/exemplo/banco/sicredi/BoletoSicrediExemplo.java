@@ -33,6 +33,7 @@ package org.jrimum.bopepo.exemplo.banco.sicredi;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.exemplo.Exemplos;
+import org.jrimum.bopepo.parametro.ParametroBancoSicredi;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
@@ -78,7 +79,7 @@ public static void main(String[] args) {
 		titulo.setNossoNumero("07200003");
 		titulo.setDigitoDoNossoNumero("1");
 
-		titulo.setParametrosBancarios(new ParametrosBancariosMap("PostoDaAgencia",02));
+		titulo.setParametrosBancarios(new ParametrosBancariosMap(ParametroBancoSicredi.POSTO_DA_AGENCIA, 2));
 		
 		Boleto boleto = Exemplos.crieBoleto(titulo);
 		

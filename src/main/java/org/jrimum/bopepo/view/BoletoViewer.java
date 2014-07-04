@@ -88,7 +88,7 @@ public class BoletoViewer {
 	 * </p>
 	 */
 	private PdfViewer pdfViewer;
-
+	
 	/**
 	 * <p>
 	 * Instancia o visualizador com o template padrão.
@@ -228,6 +228,14 @@ public class BoletoViewer {
 	protected BoletoViewer() {
 
 		this.pdfViewer = new PdfViewer();		
+	}
+
+	/**
+	 * Para uso interno do componente
+	 */
+	protected BoletoViewer(PdfViewer pdfViewer) {
+		
+		this.pdfViewer = pdfViewer;		
 	}
 	
 	/**
@@ -1009,6 +1017,8 @@ public class BoletoViewer {
 	 * @param option  Escolha de compressão
 	 * 
 	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
 	 */
 	public BoletoViewer setPdfFullCompression(boolean option){
 		
@@ -1018,16 +1028,112 @@ public class BoletoViewer {
 	}
 	
 	/**
+	 * Define o título do documento PDF gerado.
+	 * 
+	 * @param titulo
+	 *            para ser exibido como título do documento PDF
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 */
+	public BoletoViewer setPdfTitulo(String titulo) {
+
+		pdfViewer.setTitle(titulo);
+
+		return this;
+	}
+
+	/**
+	 * Define se o título do documento PDF gerado será mostrado ou não (padrão true).
+	 * 
+	 * @param opcao
+	 *            para exibir título do documento PDF (true)
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 */
+	public BoletoViewer setPdfExibirTitulo(boolean opcao) {
+
+		pdfViewer.setDisplayTitle(opcao);
+
+		return this;
+	}
+
+	/**
+	 * Define o autor do documento PDF gerado.
+	 * 
+	 * @param autor
+	 *            do documento PDF
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 */
+	public BoletoViewer setPdfAutor(String autor) {
+		
+		pdfViewer.setAuthor(autor);
+		
+		return this;
+	}
+	
+	/**
+	 * Define o assunto do documento PDF gerado.
+	 * 
+	 * @param assunto
+	 *            do documento PDF
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 */
+	public BoletoViewer setPdfAssunto(String assunto) {
+		
+		pdfViewer.setSubject(assunto);
+		
+		return this;
+	}
+	
+	/**
+	 * Define as palavras chave do documento PDF gerado.
+	 * 
+	 * @param palavrasChave
+	 *            do documento PDF
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 */
+	public BoletoViewer setPdfPalavrasChave(String palavrasChave) {
+		
+		pdfViewer.setKeywords(palavrasChave);
+		
+		return this;
+	}
+	
+	/**
+	 * Define se o os campos do documento PDF gerado devem ser removidos ou não (padrão true).
+	 * 
+	 * @param opcao
+	 *            para remover campos do documento PDF (true)
+	 * @return Esta instância após a operação
+	 * 
+	 * @since 0.2
+	 */
+	public BoletoViewer setPdfRemoverCampos(boolean opcao) {
+		
+		pdfViewer.setRemoveFields(opcao);
+
+		return this;
+	}
+	
+	/**
 	 * Define o template que será utilizado para construir o boleto.
 	 * 
 	 * @param template
-	 * 
-	 * @since 0.2
 	 * 
 	 * @return Esta instância após a operação
 	 * 
 	 * @throws IllegalArgumentException
 	 *             Caso o {@code template} seja nulo
+	 * 
+	 * @since 0.2
 	 */
 	public BoletoViewer setTemplate(byte[] template) {
 
@@ -1343,4 +1449,5 @@ public class BoletoViewer {
 		
 		Collections.checkNotEmpty(templatesAndBoletos, "O Mapa (template,boletos) está vazio!");
 	}
+
 }

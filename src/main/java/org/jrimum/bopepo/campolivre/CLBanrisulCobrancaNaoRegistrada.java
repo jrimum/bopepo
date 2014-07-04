@@ -30,9 +30,9 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 
 /**
  * <p>
@@ -133,14 +133,14 @@ class CLBanrisulCobrancaNaoRegistrada extends AbstractCLBanrisul {
 	CLBanrisulCobrancaNaoRegistrada(Titulo titulo) {
 		super(FIELDS_LENGTH);
 
-		this.add(new Field<Integer>(2, 1));
-		this.add(new Field<String>("1", 1));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(Integer.valueOf(titulo.getNossoNumero()), 8, Filler.ZERO_LEFT));
-		this.add(new Field<String>("40", 2));
+		this.add(new FixedField<Integer>(2, 1));
+		this.add(new FixedField<String>("1", 1));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 7, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(Integer.valueOf(titulo.getNossoNumero()), 8, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>("40", 2));
 
-		this.add(new Field<String>(calculaDuploDigito(concateneOsCamposExistentesAteOMomento()), 2));
+		this.add(new FixedField<String>(calculaDuploDigito(concateneOsCamposExistentesAteOMomento()), 2));
 
 	}
 

@@ -36,10 +36,11 @@ import static org.jrimum.domkee.financeiro.banco.febraban.Banco.isCodigoDeCompen
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jrimum.bopepo.BancosSuportados;
+import org.jrimum.domkee.financeiro.banco.ParametroBancario;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.FixedField;
+import org.jrimum.texgit.type.component.BlockOfFields;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.AbstractLineOfFields;
-import org.jrimum.utilix.text.Field;
 import org.jrimum.utilix.text.Strings;
 
 /**
@@ -74,12 +75,14 @@ import org.jrimum.utilix.text.Strings;
  * 		   Colaborador com o Banco do Nordeste do Brasil (004).
  * @author <a href="mailto:fabianojustino@gmail.com">Fabiano Carrijo</a> - 
  * 		   Colaborador com o Banco Citibank (756).
+ * @author <a href="mailto:contato@douglasramiro.com.br">Douglas Ramiro</a> - 
+ * 		   Colaborador com o Banco de Brasília (070).
  * 
  * @since 0.2
  * 
  * @version 0.2
  */
-abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoLivre {
+abstract class AbstractCampoLivre extends BlockOfFields implements CampoLivre {
 
 	/**
 	 * {@code serialVersionUID = 4605730904122445595L}
@@ -132,27 +135,27 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	static final int NN17 = 17;
 
 	/**
-	 * <p>Subclasses não precisam definir o tamanho.</p>
+	 * Subclasses não precisam definir o tamanho.
 	 */
+	@SuppressWarnings("unused")
 	private AbstractCampoLivre(Integer fieldsLength, Integer stringLength) {
-		
-		super(fieldsLength, stringLength);
-	}
-	
-	/**
-	 * <p>Cria um campo livre com um determinado número de campos</p>
-	 * 
-	 * @param fieldsLength - Número de campos
-	 */
-	protected AbstractCampoLivre(Integer fieldsLength) {
-		
-		super (fieldsLength, CampoLivre.STRING_LENGTH);
+		super(null,null);
 	}
 
 	/**
-	 * <p>
+	 * Cria um campo livre com um determinado número de campos
+	 * 
+	 * @param fieldsLength
+	 *            - Número de campos
+	 */
+	protected AbstractCampoLivre(Integer fieldsLength) {
+		super();
+		setLength(CampoLivre.STRING_LENGTH);
+		setSize(fieldsLength);
+	}
+
+	/**
 	 * Cria um campo livre a partir dos dados contidos no título fornecido.
-	 * </p>
 	 * 
 	 * @param titulo
 	 *            com todos os dados para a geração do campo livre
@@ -196,62 +199,26 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 
 				switch (banco) {
 
-					case BANCO_BRADESCO:
-						return AbstractCLBradesco.create(titulo);
-					
-					case BANCO_DO_BRASIL:
-						return AbstractCLBancoDoBrasil.create(titulo);
-	
-					case BANCO_DO_NORDESTE_DO_BRASIL:
-						return AbstractCLBancoDoNordesteDoBrasil.create(titulo);
-	
-					case BANCO_ABN_AMRO_REAL:
-						return AbstractCLBancoReal.create(titulo);
-	
-					case CAIXA_ECONOMICA_FEDERAL:
-						return AbstractCLCaixaEconomicaFederal.create(titulo);
-	
-					case HSBC:
-						return AbstractCLHSBC.create(titulo);
-						
-					case UNIBANCO:
-						return AbstractCLUnibanco.create(titulo);
-	
-					case BANCO_ITAU:
-						return AbstractCLItau.create(titulo);
-	
-					case BANCO_SAFRA:
-						return AbstractCLBancoSafra.create(titulo);
-	
-					case BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL:
-						return AbstractCLBanrisul.create(titulo);
-						
-					case MERCANTIL_DO_BRASIL:
-						return AbstractCLMercantilDoBrasil.create(titulo);
-						
-					case NOSSA_CAIXA:
-						return AbstractCLNossaCaixa.create(titulo);
-					
-					case BANCO_DO_ESTADO_DO_ESPIRITO_SANTO:
-						return AbstractCLBanestes.create(titulo);
-						
-					case BANCO_RURAL:
-						return AbstractCLBancoRural.create(titulo);
-						
-					case BANCO_SANTANDER:
-						return AbstractCLSantander.create(titulo);
-						
-					case BANCO_INTEMEDIUM:
-						return AbstractCLBancoIntermedium.create(titulo);
-						
-					case BANCO_SICREDI:
-						return AbstractCLSicredi.create(titulo);
-						
-					case BANCOOB:
-						return AbstractCLBancoob.create(titulo);
-						
-					case CITIBANK:
-						return AbstractCLBancoCitibank.create(titulo); 
+					case BANCO_BRADESCO: return AbstractCLBradesco.create(titulo);
+					case BANCO_DO_BRASIL: return AbstractCLBancoDoBrasil.create(titulo);
+					case BANCO_DO_NORDESTE_DO_BRASIL: return AbstractCLBancoDoNordesteDoBrasil.create(titulo);
+					case BANCO_ABN_AMRO_REAL: return AbstractCLBancoReal.create(titulo);
+					case CAIXA_ECONOMICA_FEDERAL: return AbstractCLCaixaEconomicaFederal.create(titulo);
+					case HSBC: return AbstractCLHSBC.create(titulo);
+					case UNIBANCO: return AbstractCLUnibanco.create(titulo);
+					case BANCO_ITAU: return AbstractCLItau.create(titulo);
+					case BANCO_SAFRA: return AbstractCLBancoSafra.create(titulo);
+					case BANCO_DO_ESTADO_DO_RIO_GRANDE_DO_SUL: return AbstractCLBanrisul.create(titulo);
+					case MERCANTIL_DO_BRASIL: return AbstractCLMercantilDoBrasil.create(titulo);
+					case BANCO_DO_ESTADO_DO_ESPIRITO_SANTO: return AbstractCLBanestes.create(titulo);
+					case BANCO_RURAL: return AbstractCLBancoRural.create(titulo);
+					case BANCO_SANTANDER: return AbstractCLSantander.create(titulo);
+					case BANCO_INTEMEDIUM: return AbstractCLBancoIntermedium.create(titulo);
+					case BANCO_SICREDI: return AbstractCLSicredi.create(titulo);
+					case BANCOOB: return AbstractCLBancoob.create(titulo);
+					case CITIBANK: return AbstractCLBancoCitibank.create(titulo); 
+					case BANCO_DE_BRASILIA: return AbstractCLBancoDeBrasilia.create(titulo);
+					case CECRED: return AbstractCLCecred.create(titulo);
 						
 					default:
 						/*
@@ -296,7 +263,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	/**
 	 * <p>
 	 * Constrói um campo livre após executar os métodos
-	 * {@link #checkValues(Titulo)} e {@link #addFields(Titulo)}, retornando em
+	 * {@link AbstractCampoLivre#checkValues(Titulo)} e {@link AbstractCampoLivre#addFields(Titulo)}, retornando em
 	 * seguida esta instância pronta para escrita.
 	 * </p>
 	 * 
@@ -317,7 +284,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	
 	/**
 	 * <p>
-	 * Usado pelo método {@link #build(Titulo)} para verificar a consistência do
+	 * Usado pelo método {@link AbstractCampoLivre#build(Titulo)} para verificar a consistência do
 	 * campo livre. Se algum inconsistência for verificada, este método deverá
 	 * lança-la.
 	 * </p>
@@ -330,7 +297,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	
 	/**
 	 * <p>
-	 * Usado pelo método {@link #build(Titulo)}, adiciona os campos do campo
+	 * Usado pelo método {@link AbstractCampoLivre#build(Titulo)}, adiciona os campos do campo
 	 * livre deixando-o pronto para escrita.
 	 * </p>
 	 * 
@@ -355,7 +322,7 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 
 		StringBuilder campoLivreAtual = new StringBuilder();
 		
-		for(Field<?> f : this){
+		for(FixedField<?> f : this){
 			campoLivreAtual.append(f.write());
 		}
 		
@@ -771,15 +738,41 @@ abstract class AbstractCampoLivre extends AbstractLineOfFields implements CampoL
 	 * 
 	 * @param titulo
 	 * @param param
-	 *            - Parâmetro a ser validado
+	 *            Parâmetro a ser validado
 	 * 
 	 * @since 0.2
 	 */
-	protected final static void checkParametrosBancarios(Titulo titulo, String param){
+	protected final static void checkParametroBancario(Titulo titulo, ParametroBancario<?> param){
 		
 		Objects.checkNotNull(titulo.getParametrosBancarios(), format("O parâmetro bancário [\"%s\"] é necessário! [titulo.getParametrosBancarios() == null]",param));
 		Objects.checkArgument(titulo.getParametrosBancarios().contemComNome(param),format("Parâmetro bancário [\"%s\"] não encontrado!",param));
 		Objects.checkNotNull(titulo.getParametrosBancarios().getValor(param), format("Parâmetro bancário [\"%s\"] não contém valor!", param));
+	}
+	
+	/**
+	 * <p>
+	 * Verifica se o título com o parâmetro informado é um número inteiro menor
+	 * que ou igual ao limite informado, caso contrário lança uma
+	 * {@code IllegalArgumentException}.
+	 * </p>
+	 * 
+	 * @param titulo
+	 * @param param
+	 *            Parâmetro a ser validado
+	 * @param limite
+	 *            Limite máximo permitido
+	 * 
+	 * @since 0.2
+	 */
+	protected final static void checkParametroBancarioMenorOuIgualQue(Titulo titulo, ParametroBancario<?> param, int limite){
+		
+		checkParametroBancario(titulo, param);
+		
+		int valor = titulo.getParametrosBancarios().getValor(param).intValue();
+		
+		boolean expression = valor <= limite; 
+
+		Objects.checkArgument(expression, format("Parâmetro [%s] com valor [%s] deve ser um número menor que ou igual a [%s].", param, valor, limite));
 	}
 	
 	/**

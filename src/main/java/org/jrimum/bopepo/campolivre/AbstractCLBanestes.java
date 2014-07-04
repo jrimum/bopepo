@@ -65,9 +65,6 @@ abstract class AbstractCLBanestes extends AbstractCampoLivre {
 		super(fieldsLength);
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	protected static CampoLivre create(Titulo titulo) throws NotSupportedCampoLivreException {
 		
 		return new CLBanestes(titulo);

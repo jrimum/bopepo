@@ -30,7 +30,8 @@
 
 package org.jrimum.bopepo.campolivre;
 
-import org.jrimum.utilix.text.TextStream;
+import org.jrimum.texgit.TextStream;
+
 
 /**
  * <p>

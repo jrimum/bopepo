@@ -66,9 +66,6 @@ abstract class AbstractCLSicredi extends AbstractCampoLivre {
 		super(fieldsLength);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	protected static CampoLivre create(Titulo titulo) {
 
 		return new CLSicredi().build(titulo);

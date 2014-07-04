@@ -59,6 +59,6 @@ public class TestCLCaixaEconomicaFederalSIGCB extends AbstractCampoLivreBaseTest
 		
 		createCampoLivreToTest();
 		
-		setCampoLivreValidoAsString("0055077000100040000000190");
+		setCampoLivreEsperadoComoString("0055077000100040000000190");
 	}
 }

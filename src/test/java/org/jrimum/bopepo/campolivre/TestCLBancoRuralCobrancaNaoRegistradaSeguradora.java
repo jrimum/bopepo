@@ -1,5 +1,8 @@
 package org.jrimum.bopepo.campolivre;
 
+import static org.jrimum.bopepo.parametro.ParametroBancoRural.CODIGO_REDUZIDO;
+import static org.jrimum.bopepo.parametro.ParametroBancoRural.VALOR_IOS;
+
 import java.math.BigDecimal;
 
 import org.jrimum.bopepo.BancosSuportados;
@@ -36,13 +39,13 @@ public class TestCLBancoRuralCobrancaNaoRegistradaSeguradora extends AbstractCam
 		titulo.setDigitoDoNossoNumero("7");
 		
 		ParametrosBancariosMap map = new ParametrosBancariosMap();
-		map.adicione("VALOR_IOS", new BigDecimal("40.77"));
-		map.adicione("CODIGO_REDUZIDO", 1);
+		map.adicione(VALOR_IOS, new BigDecimal("40.77"));
+		map.adicione(CODIGO_REDUZIDO, 1);
 		
 		titulo.setParametrosBancarios(map);
 
 		createCampoLivreToTest();
 
-		setCampoLivreValidoAsString("4155001000002256970004077");
+		setCampoLivreEsperadoComoString("4155001000002256970004077");
 	}
 }

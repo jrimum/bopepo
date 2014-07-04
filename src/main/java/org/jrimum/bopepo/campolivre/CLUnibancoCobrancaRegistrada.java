@@ -7,10 +7,10 @@ import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 import org.jrimum.utilix.text.Strings;
 
 /**
@@ -104,12 +104,12 @@ class CLUnibancoCobrancaRegistrada extends AbstractCLUnibanco {
 		Objects.checkNotNull(conta.getAgencia().getDigitoVerificador(),"Dígito da Agência Bancária NULO!");
 		Objects.checkNotNull(titulo.getNossoNumero(),"Nosso Número NULO!");
 		
-		this.add(new Field<String>(CODIGO_TRANSACAO, 2));
-		this.add(new Field<Date>(titulo.getDataDoVencimento(), 6, YYMMDD.copy()));
+		this.add(new FixedField<String>(CODIGO_TRANSACAO, 2));
+		this.add(new FixedField<Date>(titulo.getDataDoVencimento(), 6, YYMMDD.copy()));
 			
 		if(conta.getAgencia().getCodigo() > 0){
 			
-			this.add(new Field<Integer>(conta.getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
+			this.add(new FixedField<Integer>(conta.getAgencia().getCodigo(), 4, Fillers.ZERO_LEFT));
 			
 		}else{
 			
@@ -123,7 +123,7 @@ class CLUnibancoCobrancaRegistrada extends AbstractCLUnibanco {
 			
 			if(digitoDaAgencia>=0){
 				
-				this.add(new Field<Integer>(Integer.valueOf(digitoDaAgencia), 1));
+				this.add(new FixedField<Integer>(Integer.valueOf(digitoDaAgencia), 1));
 			}else{
 				
 				throw new CampoLivreException(new IllegalArgumentException("O dígito da agência deve ser um número interio não-negativo, e não: ["+conta.getAgencia().getDigitoVerificador()+"]"));
@@ -137,7 +137,7 @@ class CLUnibancoCobrancaRegistrada extends AbstractCLUnibanco {
 			
 			if(Long.valueOf(Strings.removeStartWithZeros(titulo.getNossoNumero()))>0){
 				
-				this.add(new Field<String>(titulo.getNossoNumero(), 11,Filler.ZERO_LEFT));
+				this.add(new FixedField<String>(titulo.getNossoNumero(), 11,Fillers.ZERO_LEFT));
 			}else{
 				
 				throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser um número natural positivo, e não: ["+titulo.getNossoNumero()+"]"));
@@ -147,7 +147,7 @@ class CLUnibancoCobrancaRegistrada extends AbstractCLUnibanco {
 			throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser numérico, e não: ["+titulo.getNossoNumero()+"]"));
 		}
 		
-		this.add(new Field<String>(calculeSuperDigito(titulo.getNossoNumero()), 1));
+		this.add(new FixedField<String>(calculeSuperDigito(titulo.getNossoNumero()), 1));
 	}
 
 	/**

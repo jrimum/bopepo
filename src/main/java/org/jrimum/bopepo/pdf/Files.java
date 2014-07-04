@@ -38,7 +38,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.text.Normalizer;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -234,13 +233,11 @@ public class Files {
 
 		byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
 
-		int count = 0;
 		int n = 0;
 
 		while (-1 != (n = input.read(buffer))) {
 
 			output.write(buffer, 0, n);
-			count += n;
 		}
 		
 		input.close();
@@ -391,21 +388,14 @@ public class Files {
     		
 	        InputStream is = new FileInputStream(file);
 	    
-	        // Get the size of the file
 	        long length = file.length();
 	    
-	        // You cannot create an array using a long type.
-	        // It needs to be an int type.
-	        // Before converting to an int type, check
-	        // to ensure that file is not larger than Integer.MAX_VALUE.
 	        if (length > Integer.MAX_VALUE) {
-	            // File is too large
+	        	Exceptions.throwIllegalArgumentException(String.format("File is too large! Max file length capacity is %s bytes.",length));
 	        }
 	    
-	        // Create the byte array to hold the data
 	        byte[] bytes = new byte[(int)length];
 	    
-	        // Read in the bytes
 	        int offset = 0;
 	        int numRead = 0;
 	        while ((offset < bytes.length)
@@ -413,18 +403,15 @@ public class Files {
 	            offset += numRead;
 	        }
 	    
-	        // Ensure all the bytes have been read in
+	        is.close();
+	        
 	        if (offset < bytes.length) {
 	            throw new IOException("Could not completely read file "+file.getName());
 	        }
 	    
-	        // Close the input stream and return bytes
-	        is.close();
-	        
 	        return bytes;
 	        
     	}catch (Exception e) {
-    		
 			return Exceptions.throwIllegalStateException(e);
 		}
     }
@@ -440,28 +427,9 @@ public class Files {
 	 */
 	public static String normalizeName(String name) {
 		name = name.replaceAll(" ", "_");
-		name = Normalizer.normalize(name, Normalizer.Form.NFD);
+		name = Strings.eliminateAccent(name);
 		name = name.replaceAll("[^\\p{ASCII}]", "");
 		return name;
 	}
-	
 
-	/**
-	 * Abre um determinado arquivo para exibir no desktop.
-	 * 
-	 * @param arq
-	 */
-	public static void openOnDesktop(File arq) {
-
-		java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
-
-		try {
-
-			desktop.open(arq);
-
-		} catch (IOException e) {
-			
-			Exceptions.throwIllegalStateException(e);
-		}
-	}
 }

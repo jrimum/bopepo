@@ -31,7 +31,7 @@ package org.jrimum.bopepo.campolivre;
 
 import java.math.BigDecimal;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
@@ -67,7 +67,7 @@ public class TestCLMercantilDoBrasil extends AbstractCampoLivreBaseTest<CLMercan
 		
 		createCampoLivreToTest();
 		
-		setCampoLivreValidoAsString("1234123456789051234567892"); //Sem desconto
+		setCampoLivreEsperadoComoString("1234123456789051234567892"); //Sem desconto
 	}
 	
 	@Test

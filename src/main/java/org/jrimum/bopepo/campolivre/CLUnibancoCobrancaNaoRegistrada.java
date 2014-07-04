@@ -3,10 +3,10 @@ package org.jrimum.bopepo.campolivre;
 import org.apache.commons.lang.StringUtils;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 import org.jrimum.utilix.text.Strings;
 
 /**
@@ -100,11 +100,11 @@ class CLUnibancoCobrancaNaoRegistrada extends AbstractCLUnibanco {
 		Objects.checkNotNull(conta.getNumeroDaConta().getDigitoDaConta(),"Dígito da Conta Bancária NULO!");
 		Objects.checkNotNull(titulo.getNossoNumero(),"Nosso Número NULO!");
 		
-		this.add(new Field<Integer>(CODIGO_TRANSACAO, 1));
+		this.add(new FixedField<Integer>(CODIGO_TRANSACAO, 1));
 
 		if(conta.getNumeroDaConta().getCodigoDaConta() > 0){
 			
-			this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
+			this.add(new FixedField<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Fillers.ZERO_LEFT));
 			
 		}else{
 			throw new CampoLivreException(new IllegalArgumentException("Conta bancária com valor inválido, a conta deve ser um número inteiro positivo, e não: "+conta.getNumeroDaConta().getCodigoDaConta()));
@@ -116,7 +116,7 @@ class CLUnibancoCobrancaNaoRegistrada extends AbstractCLUnibanco {
 			
 			if(digitoDaConta >= 0){
 				
-				this.add(new Field<Integer>(Integer.valueOf(digitoDaConta), 1));
+				this.add(new FixedField<Integer>(Integer.valueOf(digitoDaConta), 1));
 			}else{
 				
 				throw new CampoLivreException(new IllegalArgumentException("O dígito da conta deve ser um número inteiro não-negativo, e não: ["+conta.getNumeroDaConta().getDigitoDaConta()+"]"));
@@ -127,13 +127,13 @@ class CLUnibancoCobrancaNaoRegistrada extends AbstractCLUnibanco {
 			throw new CampoLivreException(new IllegalArgumentException("O dígito da conta deve ser numérico, e não: ["+conta.getNumeroDaConta().getDigitoDaConta()+"]"));
 		}
 		
-		this.add(new Field<Integer>(RESERVADO, 2, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(RESERVADO, 2, Fillers.ZERO_LEFT));
 		
 		if(StringUtils.isNumeric(titulo.getNossoNumero())){
 			
 			if(Long.valueOf(Strings.removeStartWithZeros(titulo.getNossoNumero()))>0){
 				
-				this.add(new Field<String>(titulo.getNossoNumero(), 14,Filler.ZERO_LEFT));
+				this.add(new FixedField<String>(titulo.getNossoNumero(), 14,Fillers.ZERO_LEFT));
 				
 			}else{
 				
@@ -144,7 +144,7 @@ class CLUnibancoCobrancaNaoRegistrada extends AbstractCLUnibanco {
 			throw new CampoLivreException(new IllegalArgumentException("O campo (nosso número) do título deve ser numérico, e não: ["+titulo.getNossoNumero()+"]"));			
 		}
 		
-		this.add(new Field<String>(calculeDigitoEmModulo11(titulo.getNossoNumero()), 1));			
+		this.add(new FixedField<String>(calculeDigitoEmModulo11(titulo.getNossoNumero()), 1));			
 	}
 	
 	@Override

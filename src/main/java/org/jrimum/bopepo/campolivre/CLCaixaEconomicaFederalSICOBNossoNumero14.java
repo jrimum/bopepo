@@ -32,9 +32,9 @@ package org.jrimum.bopepo.campolivre;
 import static java.lang.String.format;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 
 /**
  * <p>
@@ -134,7 +134,7 @@ class CLCaixaEconomicaFederalSICOBNossoNumero14 extends AbstractCLCaixaEconomica
 	/**
 	 * Constante "7".
 	 */
-	private static final Field<Integer> CONSTANT_FIELD = new Field<Integer>(7, 1);
+	private static final FixedField<Integer> CONSTANT_FIELD = new FixedField<Integer>(7, 1);
 	
 	/**
 	 * Valor constante do campo "Carteira" = 8 - Carteira Sem Registro Eletrônica.
@@ -144,7 +144,7 @@ class CLCaixaEconomicaFederalSICOBNossoNumero14 extends AbstractCLCaixaEconomica
 	/**
 	 * Código da carteira: sempre 8.
 	 */
-	private static final Field<Integer> CARTEIRA_FIELD = new Field<Integer>(CARTEIRA_SEM_REGISTRO, 1);
+	private static final FixedField<Integer> CARTEIRA_FIELD = new FixedField<Integer>(CARTEIRA_SEM_REGISTRO, 1);
 	
 	/**
 	 * <p>
@@ -188,11 +188,11 @@ class CLCaixaEconomicaFederalSICOBNossoNumero14 extends AbstractCLCaixaEconomica
 	@Override
 	protected void addFields(Titulo titulo) {
 		
-		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), AGENCIA_LENGTH, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), AGENCIA_LENGTH, Fillers.ZERO_LEFT));
 		this.add(CARTEIRA_FIELD);
 		this.add(CONSTANT_FIELD);
-		this.add(new Field<String>(titulo.getNossoNumero(), NOSSO_NUMERO_LENGTH, Filler.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getNossoNumero(), NOSSO_NUMERO_LENGTH, Fillers.ZERO_LEFT));
 	}
 
 	/**

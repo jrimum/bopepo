@@ -58,6 +58,6 @@ public class TestCLCaixaEconomicaFederalSINCO extends AbstractCampoLivreBaseTest
 		
 		createCampoLivreToTest();
 		
-		setCampoLivreValidoAsString("1000002910000000020061732");
+		setCampoLivreEsperadoComoString("1000002910000000020061732");
 	}
 }

@@ -29,8 +29,8 @@
 
 package org.jrimum.bopepo.exemplo.banco.bradesco;
 
+import org.jrimum.texgit.type.component.Fillers;
 import org.jrimum.utilix.Objects;
-import org.jrimum.utilix.text.Filler;
 import org.jrimum.vallia.digitoverificador.Modulo;
 
 /**
@@ -61,7 +61,7 @@ public class NossoNumero {
 
 		NossoNumero nn = new NossoNumero();
 		nn.numero = numero;
-		nn.carteira = Filler.ZERO_LEFT.fill(carteira, 2);
+		nn.carteira = Fillers.ZERO_LEFT.fill(carteira, 2);
 		nn.create();
 
 		return nn;
@@ -76,7 +76,7 @@ public class NossoNumero {
 	 */
 	private void create(){
 		
-		nossoNumero.append(Filler.ZERO_LEFT.fill(numero, 11));
+		nossoNumero.append(Fillers.ZERO_LEFT.fill(numero, 11));
 		
 		String formula = this.carteira+nossoNumero.toString();
 		
@@ -111,7 +111,7 @@ public class NossoNumero {
 	 * @return nosso número
 	 */
 	public String writeRaw(){
-		return Filler.ZERO_LEFT.fill(numero, 11);
+		return Fillers.ZERO_LEFT.fill(numero, 11);
 	}
 	
 	/**
@@ -129,7 +129,7 @@ public class NossoNumero {
 	 * @return nosso número
 	 */
 	public String writeFormated(){
-		return Filler.ZERO_LEFT.fill(numero, 11)+"-"+dv;
+		return Fillers.ZERO_LEFT.fill(numero, 11)+"-"+dv;
 	}
 	
 	/**

@@ -37,6 +37,7 @@ import java.lang.reflect.ParameterizedType;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import org.jrimum.domkee.financeiro.banco.ParametroBancario;
 import org.jrimum.domkee.financeiro.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
@@ -88,7 +89,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 	
 	@Test
 	public final void seTamanhoDoCampoLivreEscritoIgualA25() {
-		
+		 campoLivreToTest.write().length();
 		assertEquals(25, campoLivreToTest.write().length());
 	}
 	
@@ -103,7 +104,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 	
 	@Test
 	public final void seCampoLivreEscritoEstaCorreto() {
-		
+		campoLivreToTest.write();
 		assertEquals(campoLivreValidoAsString, campoLivreToTest.write());
 	}
 	
@@ -361,10 +362,20 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		writeCampoLivre();
 	}
 	
-	protected final void testeSeNaoPermiteParametroBancarioSemValor(String parametro) throws IllegalArgumentException{
+	protected final void testeSeNaoPermiteParametroBancarioSemValor(ParametroBancario<?> parametro) throws IllegalArgumentException{
 		
 		//uma exceção deve ser lançada aqui
 		titulo.setParametrosBancarios(new ParametrosBancariosMap(parametro, null));
+	}
+
+	protected final void testeSeNaoPermiteParametroBancarioComValorAcimaDoLimite(ParametroBancario<?> parametro, Integer limiteAcima) throws IllegalArgumentException{
+		
+		titulo.setParametrosBancarios(new ParametrosBancariosMap(parametro, limiteAcima));
+		
+		createCampoLivreToTest();
+
+		//uma exceção deve ser lançada aqui
+		writeCampoLivre();
 	}
 	
 	protected final void testeSeNaoPermiteValorDoTituloNulo() throws NullPointerException{
@@ -405,7 +416,7 @@ public abstract class AbstractCampoLivreBaseTest <CL extends CampoLivre>{
 		return campoLivreToTest.write();
 	}
 	
-	protected final void setCampoLivreValidoAsString(String campoLivreValidoAsString) {
+	protected final void setCampoLivreEsperadoComoString(String campoLivreValidoAsString) {
 		this.campoLivreValidoAsString = campoLivreValidoAsString;
 	}
 	

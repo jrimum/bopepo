@@ -34,6 +34,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.awt.Image;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -41,11 +42,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import junit.framework.Assert;
+import javax.imageio.ImageIO;
 
 import org.jrimum.bopepo.campolivre.CampoLivre;
 import org.jrimum.bopepo.campolivre.NotSupportedBancoException;
 import org.jrimum.bopepo.campolivre.NotSupportedCampoLivreException;
+import org.jrimum.bopepo.view.BoletoCampo;
 import org.jrimum.domkee.financeiro.banco.febraban.Agencia;
 import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.Cedente;
@@ -54,6 +56,7 @@ import org.jrimum.domkee.financeiro.banco.febraban.NumeroDaConta;
 import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeMoeda;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.utilix.ClassLoaders;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -178,9 +181,9 @@ public class TestBoleto{
 			}
 		});
 		
-		Assert.assertNotNull(boleto.getCampoLivre());
-		Assert.assertNotNull(boleto.getCampoLivre().write());
-		Assert.assertEquals(CampoLivre.STRING_LENGTH.intValue(), boleto.getCampoLivre().write().length());
+		assertNotNull(boleto.getCampoLivre());
+		assertNotNull(boleto.getCampoLivre().write());
+		assertEquals(CampoLivre.STRING_LENGTH.intValue(), boleto.getCampoLivre().write().length());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -213,5 +216,39 @@ public class TestBoleto{
 			public void read(String g) {
 			}
 		});
+	}
+	
+	@Test
+	public void deve_sobrescrever_os_campos_texto_padrao_do_boleto() throws Exception {
+		final String campoCendente = "txtFcCedente";
+		final String conteudoOriginal = "Banco dos Desenvolvedores";
+		final String conteudoSobrescrito = "Banco JRimum";
+		boleto.addTextosExtras(campoCendente, conteudoOriginal);
+		assertEquals(boleto.getTextosExtras().get(campoCendente), conteudoOriginal);
+		
+		boleto.sobrescrevaCampo(BoletoCampo.txtFcCedente, conteudoSobrescrito);
+
+		assertEquals(boleto.getTextosExtras().get(campoCendente), conteudoSobrescrito);
+	}
+
+	@Test
+	public void deve_adicionar_campos_texto_ao_boleto() throws Exception {
+		final String campo = "meuCampo";
+		final String conteudo = "Meu conteudo especial!";
+		
+		boleto.addTextosExtras(campo, conteudo);
+		
+		assertEquals(boleto.getTextosExtras().get(campo), conteudo);
+	}
+
+	@Test
+	public void deve_adicionar_campos_imagem_ao_boleto() throws Exception {
+		final String campo = "meuCampo";
+		final Image conteudo = ImageIO.read(ClassLoaders.getResource("img/001.png"));
+		assertNotNull(conteudo);
+		
+		boleto.addImagensExtras(campo, conteudo);
+		
+		assertEquals(boleto.getImagensExtras().get(campo), conteudo);
 	}
 }

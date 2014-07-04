@@ -34,7 +34,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
@@ -69,11 +69,6 @@ public class TestFiles {
 	@Test(expected = IllegalArgumentException.class)
 	public void testBytes2FilePathNameBlank() throws FileNotFoundException, IOException {
 		Files.bytesToFile(StringUtils.EMPTY, new byte[] {});
-	}
-	
-	@Test(expected = FileNotFoundException.class)
-	public void testBytes2FileFileNotFound() throws FileNotFoundException, IOException {
-		Files.bytesToFile("./\fileInexistente\\-/", new byte[] {1, 2, 3});
 	}
 	
 	@Test

@@ -24,12 +24,6 @@ abstract class AbstractCLBancoRural extends AbstractCampoLivre {
 	private static final long serialVersionUID = -602454445158254612L;
 
 	/**
-	 * O código reduzido campos livre: {@code CLBancoRuralCobrancaNaoRegistrada}
-	 * e {@code CLBancoRuralCobrancaNaoRegistradaSeguradora}
-	 */
-	static final String CODIGO_REDUZIDO = "CODIGO_REDUZIDO";
-
-	/**
 	 * <p>Cria um campo livre com um determinado número de campos</p>
 	 * 
 	 * @see AbstractCampoLivre
@@ -41,9 +35,6 @@ abstract class AbstractCLBancoRural extends AbstractCampoLivre {
 		super(fieldsLength);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	protected static CampoLivre create(Titulo titulo) {
 		
 		checkCarteiraNotNull(titulo);

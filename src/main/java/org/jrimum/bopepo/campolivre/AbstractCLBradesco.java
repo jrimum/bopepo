@@ -69,9 +69,6 @@ abstract class AbstractCLBradesco extends AbstractCampoLivre {
 		super(fieldsLength);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	protected static CampoLivre create(Titulo titulo){
 		
 		return new CLBradesco().build(titulo);

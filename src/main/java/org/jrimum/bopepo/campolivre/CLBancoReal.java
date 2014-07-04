@@ -31,9 +31,9 @@
 package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 import org.jrimum.utilix.text.Strings;
 import org.jrimum.vallia.digitoverificador.Modulo;
 import org.jrimum.vallia.digitoverificador.TipoDeModulo;
@@ -114,10 +114,10 @@ class CLBancoReal extends AbstractCLBancoReal {
 		
 		super(FIELDS_LENGTH);
 		
-		this.add(new Field<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Filler.ZERO_LEFT));
-		this.add(new Field<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 7, Filler.ZERO_LEFT));
-		this.add(new Field<String>(calculeDigitoDaPosicao31(titulo.getNossoNumero(), titulo.getContaBancaria().getAgencia().getCodigo(), titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta()), 1, Filler.ZERO_LEFT));
-		this.add(new Field<String>(Strings.eliminateSymbols(titulo.getNossoNumero()), 13, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), 4, Fillers.ZERO_LEFT));
+		this.add(new FixedField<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), 7, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(calculeDigitoDaPosicao31(titulo.getNossoNumero(), titulo.getContaBancaria().getAgencia().getCodigo(), titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta()), 1, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(Strings.eliminateSymbols(titulo.getNossoNumero()), 13, Fillers.ZERO_LEFT));
 	}
 	
 	/**
@@ -162,9 +162,9 @@ class CLBancoReal extends AbstractCLBancoReal {
 		StringBuilder formula = new StringBuilder();
 		String dV = null;
 
-		formula.append(Filler.ZERO_LEFT.fill(nossoNumero, 13));
-		formula.append(Filler.ZERO_LEFT.fill(agencia, 4));
-		formula.append(Filler.ZERO_LEFT.fill(contaCorrente, 7));
+		formula.append(Fillers.ZERO_LEFT.fill(nossoNumero, 13));
+		formula.append(Fillers.ZERO_LEFT.fill(agencia, 4));
+		formula.append(Fillers.ZERO_LEFT.fill(contaCorrente, 7));
 
 		int restoDivisao = modulo10.calcule(formula.toString());
 

@@ -28,6 +28,7 @@
  */
 
 package org.jrimum.bopepo.view;
+
 import static org.jrimum.utilix.Objects.isNull;
 
 import java.io.ByteArrayOutputStream;
@@ -41,6 +42,7 @@ import org.apache.log4j.Logger;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.pdf.Files;
 import org.jrimum.bopepo.pdf.PdfDocMix;
+import org.jrimum.bopepo.view.info.BoletoInfoViewBuilder;
 import org.jrimum.utilix.Exceptions;
 
 /**
@@ -61,7 +63,6 @@ class PdfViewer {
 	private static Logger log = Logger.getLogger(PdfViewer.class);
 
 	private final ResourceBundle resourceBundle;
-	private final BoletoDataBuilder boletoDataBuilder;
 
 	private PdfDocMix doc;
 	private Boleto boleto;
@@ -76,7 +77,7 @@ class PdfViewer {
 	protected PdfViewer() {
 		
 		resourceBundle = new ResourceBundle();
-		boletoDataBuilder = new BoletoDataBuilder(resourceBundle);
+		doc = PdfDocMix.create();
 	}
 	
 	/**
@@ -129,7 +130,7 @@ class PdfViewer {
 	/**
 	 * Retorna o boleto em forma de arquivo PDF.
 	 * 
-	 * @param destPath
+	 * @param destFile
 	 *            Arquivo o qual o boleto será gerado
 	 * @return Boleto em forma de arquivo PDF
 	 * @throws IllegalStateException
@@ -306,6 +307,78 @@ class PdfViewer {
 	}
 	
 	/**
+	 * Define o título do documento PDF gerado.
+	 * 
+	 * @param title
+	 *            para ser exibido como título do documento PDF
+	 * 
+	 * @since 0.2
+	 */
+	protected void setTitle(String title){
+		doc.withTitle(title);
+	}
+	
+	/**
+	 * Define se o título do documento PDF gerado será mostrado ou não (padrão true).
+	 * 
+	 * @param option
+	 *            para exibir título do documento PDF (true)
+	 * 
+	 * @since 0.2
+	 */
+	protected void setDisplayTitle(boolean option) {
+		doc.withDisplayDocTilteOption(option);
+	}
+
+	/**
+	 * Define o autor do documento PDF gerado.
+	 * 
+	 * @param author
+	 *            do documento PDF
+	 * 
+	 * @since 0.2
+	 */
+	protected void setAuthor(String author){
+		doc.withAuthor(author);
+	}
+	
+	/**
+	 * Define o assunto do documento PDF gerado.
+	 * 
+	 * @param subject
+	 *            do documento PDF
+	 * 
+	 * @since 0.2
+	 */
+	protected void setSubject(String subject) {
+		doc.withSubject(subject);
+	}
+	
+	/**
+	 * Define as palavras chave do documento PDF gerado.
+	 * 
+	 * @param keywords
+	 *            do documento PDF
+	 * 
+	 * @since 0.2
+	 */
+	protected void setKeywords(String keywords) {
+		doc.withKeywords(keywords);
+	}
+	
+	/**
+	 * Define se o os campos do documento PDF gerado devem ser removidos ou não (padrão true).
+	 * 
+	 * @param option
+	 *            para remover campos do documento PDF (true)
+	 * 
+	 * @since 0.2
+	 */
+	protected void setRemoveFields(boolean option) {
+		doc.removeFields(option);
+	}
+	
+	/**
 	 * @return the boleto
 	 * 
 	 * @since 0.2
@@ -328,12 +401,7 @@ class PdfViewer {
 	
 	
 	/**
-	 * Executa os seguintes métodos na sequência:
-	 * <ol>
-	 * <li>{@linkplain #inicializar()}</li>
-	 * <li>{@linkplain #preencher()}</li>
-	 * <li>{@linkplain #finalizar()}</li>
-	 * </ol>
+	 * Processa o PDF colocando os dados do Boleto no PDF.
 	 * 
 	 * @since 0.2
 	 */
@@ -347,16 +415,12 @@ class PdfViewer {
 			template = getTemplate();
 		}
 		
-		if(isNull(doc)){
-			doc = PdfDocMix.createWithTemplate(template);
-		}else{
-			doc.changeTemplate(template);
-		}
+		doc.withTemplate(template);
 		
-		boletoDataBuilder.with(boleto);
+		BoletoInfoViewBuilder builder = new BoletoInfoViewBuilder(this.resourceBundle,this.boleto).build();
 		
-		doc.putAllTexts(boletoDataBuilder.texts());
-		doc.putAllImages(boletoDataBuilder.images());
+		doc.putAllTexts(builder.texts());
+		doc.putAllImages(builder.images());
 	}
 
 	/**

@@ -31,9 +31,9 @@ package org.jrimum.bopepo.campolivre;
 
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
+import org.jrimum.texgit.type.component.Fillers;
+import org.jrimum.texgit.type.component.FixedField;
 import org.jrimum.utilix.Exceptions;
-import org.jrimum.utilix.text.Field;
-import org.jrimum.utilix.text.Filler;
 
 /**
  * <p>
@@ -104,12 +104,12 @@ class CLCaixaEconomicaFederalSINCO extends AbstractCLCaixaEconomicaFederal {
 		
 		String nossoNumero = titulo.getNossoNumero();
 		
-		this.add(new Field<Integer>(1, 1));
+		this.add(new FixedField<Integer>(1, 1));
 		
-		this.add(new Field<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Filler.ZERO_LEFT));
+		this.add(new FixedField<Integer>(conta.getNumeroDaConta().getCodigoDaConta(), 6, Fillers.ZERO_LEFT));
 		
-		this.add(new Field<Integer>(9, 1));
-		this.add(new Field<String>(nossoNumero, 17));
+		this.add(new FixedField<Integer>(9, 1));
+		this.add(new FixedField<String>(nossoNumero, 17));
 	}
 	
 	@Override

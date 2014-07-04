@@ -58,7 +58,7 @@ public class TestCLBancoobCobrancaNaoRegistrada extends AbstractCampoLivreBaseTe
 
 		createCampoLivreToTest();
 
-		setCampoLivreValidoAsString("1434001000000102000001001");
+		setCampoLivreEsperadoComoString("1434001000000102000001001");
 	}
 	
 }
