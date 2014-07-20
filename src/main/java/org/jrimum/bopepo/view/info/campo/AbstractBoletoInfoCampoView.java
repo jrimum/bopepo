@@ -59,7 +59,7 @@ import org.jrimum.utilix.Objects;
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
  *
  */
-abstract class AbstractBoletoInfoCampoView implements BoletoInfoCampoView{
+public abstract class AbstractBoletoInfoCampoView implements BoletoInfoCampoView{
 	
 	private final ResourceBundle resourceBundle;
 	
@@ -78,7 +78,7 @@ abstract class AbstractBoletoInfoCampoView implements BoletoInfoCampoView{
 		boleto = null;
 	}
 	
-	AbstractBoletoInfoCampoView(ResourceBundle resourceBundle, Boleto boleto){
+	public AbstractBoletoInfoCampoView(ResourceBundle resourceBundle, Boleto boleto){
 		Objects.checkNotNull(resourceBundle);
 		Objects.checkNotNull(boleto);
 		this.resourceBundle = resourceBundle;
