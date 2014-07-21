@@ -1,5 +1,7 @@
 package org.jrimum.bopepo.view.info.campo.caixa;
 
+import static org.apache.commons.lang.StringUtils.isBlank;
+
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.view.ResourceBundle;
 import org.jrimum.bopepo.view.info.campo.AbstractBoletoInfoCampoView;
@@ -26,5 +28,11 @@ public class BoletoInfoViewCaixaSIGCB extends AbstractBoletoInfoCampoView {
 	@Override
 	public String getTextoFcCarteira() {
 		return (getBoleto().getTitulo().getContaBancaria().getCarteira().isComRegistro()) ? "RG" : "SR";
+	}
+	
+	@Override
+	public String getTextoFcLocalPagamento() {
+		String textoFcLocalPagamento = super.getTextoFcLocalPagamento();
+		return isBlank(textoFcLocalPagamento) ? "PREFERENCIALMENTE NAS CASAS LOTÉRICAS ATÉ O VALOR LIMITE" : textoFcLocalPagamento;
 	}
 }

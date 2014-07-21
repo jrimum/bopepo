@@ -61,4 +61,10 @@ public class TestBoletoInfoViewCaixaSIGCB {
 		boleto.getTitulo().getContaBancaria().getCarteira().setTipoCobranca(TipoDeCobranca.SEM_REGISTRO);
 		assertEquals("SR", view.getTextoFcCarteira());
 	}
+	
+	@Test
+	public void deve_retornar_local_de_pagamento_padrao_quando_nenhum_informado() {
+		boleto.setLocalPagamento(null);
+		assertEquals("PREFERENCIALMENTE NAS CASAS LOTÉRICAS ATÉ O VALOR LIMITE", view.getTextoFcLocalPagamento());
+	}
 }
