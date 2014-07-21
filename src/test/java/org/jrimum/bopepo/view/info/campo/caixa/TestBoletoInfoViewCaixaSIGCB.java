@@ -15,7 +15,7 @@ import org.junit.Test;
  */
 public class TestBoletoInfoViewCaixaSIGCB {
 	
-	private static final int CARTEIRA_COBRANCA_RAPIDA = 1;
+	private static final int CARTEIRA_REGISTRADA = 1;
 	private static final int CARTEIRA_SEM_REGISTRO = 2;
 	private static final String EMISSAO_BENEFICIARIO = "4";
 	private static final String NOSSO_NUMERO = "000000000000019";
@@ -35,11 +35,11 @@ public class TestBoletoInfoViewCaixaSIGCB {
 	}
 
 	@Test
-	public void deve_retornar_nosso_numero_no_formato_correto_para_carteira_cobranca_rapida() {
-		boleto.getTitulo().getContaBancaria().getCarteira().setCodigo(CARTEIRA_COBRANCA_RAPIDA);
+	public void deve_retornar_nosso_numero_no_formato_correto_para_carteira_registrada() {
+		boleto.getTitulo().getContaBancaria().getCarteira().setCodigo(CARTEIRA_REGISTRADA);
 		
-		assertEquals(CARTEIRA_COBRANCA_RAPIDA + EMISSAO_BENEFICIARIO + NOSSO_NUMERO + "-" + DIGITO_NOSSO_NUMERO, view.getTextoFcNossoNumero());
-		assertEquals(CARTEIRA_COBRANCA_RAPIDA + EMISSAO_BENEFICIARIO + NOSSO_NUMERO + "-" + DIGITO_NOSSO_NUMERO, view.getTextoRsNossoNumero());
+		assertEquals(CARTEIRA_REGISTRADA + EMISSAO_BENEFICIARIO + NOSSO_NUMERO + "-" + DIGITO_NOSSO_NUMERO, view.getTextoFcNossoNumero());
+		assertEquals(CARTEIRA_REGISTRADA + EMISSAO_BENEFICIARIO + NOSSO_NUMERO + "-" + DIGITO_NOSSO_NUMERO, view.getTextoRsNossoNumero());
 	}
 	
 	@Test
@@ -51,7 +51,7 @@ public class TestBoletoInfoViewCaixaSIGCB {
 	}
 	
 	@Test
-	public void deve_retornar_carteira_rg_para_cobranca_rapida() {
+	public void deve_retornar_carteira_rg_para_registrada() {
 		boleto.getTitulo().getContaBancaria().getCarteira().setTipoCobranca(TipoDeCobranca.COM_REGISTRO);
 		assertEquals("RG", view.getTextoFcCarteira());
 	}
