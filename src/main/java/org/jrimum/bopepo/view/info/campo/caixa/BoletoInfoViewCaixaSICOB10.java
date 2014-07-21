@@ -11,7 +11,8 @@ import org.jrimum.domkee.financeiro.banco.febraban.Carteira;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeCobranca;
 
 /**
- * View para o convênio SICOB, Nosso número com 10 dígitos, da CAIXA
+ * View para o convênio SICOB, Nosso número com 10 dígitos, da CAIXA.
+ * 
  * @author Rômulo Augusto
  */
 public class BoletoInfoViewCaixaSICOB10 extends AbstractBoletoInfoCampoView {

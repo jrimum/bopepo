@@ -8,7 +8,8 @@ import org.jrimum.bopepo.view.ResourceBundle;
 import org.jrimum.bopepo.view.info.campo.AbstractBoletoInfoCampoView;
 
 /**
- * View para o convênio SICOB, Nosso número com 14 dígitos, da CAIXA
+ * View para o convênio SICOB, Nosso número com 14 dígitos, da CAIXA.
+ * 
  * @author Rômulo Augusto
  */
 public class BoletoInfoViewCaixaSICOB14 extends AbstractBoletoInfoCampoView {

@@ -7,7 +7,8 @@ import org.jrimum.bopepo.view.ResourceBundle;
 import org.jrimum.bopepo.view.info.campo.AbstractBoletoInfoCampoView;
 
 /**
- * View para o convênio SIGCB da CAIXA
+ * View para o convênio SIGCB da CAIXA.
+ * 
  * @author Rômulo Augusto
  */
 public class BoletoInfoViewCaixaSIGCB extends AbstractBoletoInfoCampoView {
