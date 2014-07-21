@@ -44,9 +44,10 @@ public class TestBoletoInfoViewCaixaSICOB10 {
 	public void deve_retornar_agencia_codigo_cliente_no_formato_correto() {
 		boleto.getTitulo().getContaBancaria().setAgencia(new Agencia(34));
 		boleto.getTitulo().getContaBancaria().getNumeroDaConta().setCodigoDaConta(12345);
+		boleto.getTitulo().getContaBancaria().getNumeroDaConta().setDigitoDaConta("0");
 		boleto.getTitulo().setParametrosBancarios(new ParametrosBancariosMap(ParametroCaixaEconomicaFederal.CODIGO_OPERACAO, 870));
 		
-		assertEquals("0034.870.00012345", view.getTextoFcAgenciaCodigoCedente());
-		assertEquals("0034.870.00012345", view.getTextoRsAgenciaCodigoCedente());
+		assertEquals("0034.870.00012345-0", view.getTextoFcAgenciaCodigoCedente());
+		assertEquals("0034.870.00012345-0", view.getTextoRsAgenciaCodigoCedente());
 	}
 }
