@@ -11,12 +11,14 @@ import org.jrimum.bopepo.view.info.campo.BoletoInfoCampoView;
 public class BoletoInfoViewCaixaFactory {
 
 	private static final int NN15 = 15;
+	private static final int NN17 = 17;
 
 	public static BoletoInfoCampoView create(ResourceBundle resourceBundle, Boleto boleto) {
 		String nossoNumero = boleto.getTitulo().getNossoNumero();
 		switch (nossoNumero.length()) {
 			
 			case NN15: return new BoletoInfoViewCaixaSIGCB(resourceBundle, boleto);
+			case NN17: return new BoletoInfoViewCaixaSINCO(resourceBundle, boleto);
 		}
 		
 		return null;

@@ -39,6 +39,6 @@ public class TestBoletoInfoViewCaixaFactory {
 		boleto.getTitulo().setNossoNumero(NN17);
 		BoletoInfoCampoView view = BoletoInfoViewCaixaFactory.create(resourceBundle, boleto);
 		
-		assertTrue(view instanceof BoletoInfoViewCaixaSIGCB);
+		assertTrue(view instanceof BoletoInfoViewCaixaSINCO);
 	}
 }
