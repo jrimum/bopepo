@@ -20,7 +20,7 @@ public class BoletoInfoViewCaixaSIGCB extends AbstractBoletoInfoCampoView {
 	public String getTextoFcNossoNumero() {
 		return getBoleto().getTitulo().getContaBancaria().getCarteira().getCodigo() 
 				+ EMISSAO_BENEFICIARIO 
-				+ getBoleto().getTitulo().getNossoNumero();
+				+ super.getTextoFcNossoNumero();
 	}
 	
 	@Override

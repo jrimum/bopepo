@@ -19,6 +19,7 @@ public class TestBoletoInfoViewCaixaSIGCB {
 	private static final int CARTEIRA_SEM_REGISTRO = 2;
 	private static final String EMISSAO_BENEFICIARIO = "4";
 	private static final String NOSSO_NUMERO = "000000000000019";
+	private static final String DIGITO_NOSSO_NUMERO = "5";
 	
 	private BoletoInfoViewCaixaSIGCB view;
 	
@@ -27,25 +28,26 @@ public class TestBoletoInfoViewCaixaSIGCB {
 	@Before
 	public void setUp() {
 		boleto = BoletoBuilder.defaultValue();
+		boleto.getTitulo().setNossoNumero(NOSSO_NUMERO);
+		boleto.getTitulo().setDigitoDoNossoNumero(DIGITO_NOSSO_NUMERO);
+
 		view = new BoletoInfoViewCaixaSIGCB(mock(ResourceBundle.class), boleto);
 	}
 
 	@Test
 	public void deve_retornar_nosso_numero_no_formato_correto_para_carteira_cobranca_rapida() {
-		boleto.getTitulo().setNossoNumero(NOSSO_NUMERO);
 		boleto.getTitulo().getContaBancaria().getCarteira().setCodigo(CARTEIRA_COBRANCA_RAPIDA);
 		
-		assertEquals(CARTEIRA_COBRANCA_RAPIDA + EMISSAO_BENEFICIARIO + NOSSO_NUMERO, view.getTextoFcNossoNumero());
-		assertEquals(CARTEIRA_COBRANCA_RAPIDA + EMISSAO_BENEFICIARIO + NOSSO_NUMERO, view.getTextoRsNossoNumero());
+		assertEquals(CARTEIRA_COBRANCA_RAPIDA + EMISSAO_BENEFICIARIO + NOSSO_NUMERO + "-" + DIGITO_NOSSO_NUMERO, view.getTextoFcNossoNumero());
+		assertEquals(CARTEIRA_COBRANCA_RAPIDA + EMISSAO_BENEFICIARIO + NOSSO_NUMERO + "-" + DIGITO_NOSSO_NUMERO, view.getTextoRsNossoNumero());
 	}
 	
 	@Test
 	public void deve_retornar_nosso_numero_no_formato_correto_para_carteira_sem_registro() {
-		boleto.getTitulo().setNossoNumero(NOSSO_NUMERO);
 		boleto.getTitulo().getContaBancaria().getCarteira().setCodigo(CARTEIRA_SEM_REGISTRO);
 		
-		assertEquals(CARTEIRA_SEM_REGISTRO + EMISSAO_BENEFICIARIO + NOSSO_NUMERO, view.getTextoFcNossoNumero());
-		assertEquals(CARTEIRA_SEM_REGISTRO + EMISSAO_BENEFICIARIO + NOSSO_NUMERO, view.getTextoRsNossoNumero());
+		assertEquals(CARTEIRA_SEM_REGISTRO + EMISSAO_BENEFICIARIO + NOSSO_NUMERO + "-" + DIGITO_NOSSO_NUMERO, view.getTextoFcNossoNumero());
+		assertEquals(CARTEIRA_SEM_REGISTRO + EMISSAO_BENEFICIARIO + NOSSO_NUMERO + "-" + DIGITO_NOSSO_NUMERO, view.getTextoRsNossoNumero());
 	}
 	
 	@Test
