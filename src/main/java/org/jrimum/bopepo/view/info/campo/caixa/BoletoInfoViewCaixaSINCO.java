@@ -4,6 +4,10 @@ import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.view.ResourceBundle;
 import org.jrimum.bopepo.view.info.campo.AbstractBoletoInfoCampoView;
 
+/**
+ * View para o convênio SINCO da CAIXA
+ * @author Rômulo Augusto
+ */
 public class BoletoInfoViewCaixaSINCO extends AbstractBoletoInfoCampoView {
 
 	private static final String CARTEIRA_SINCO = "01";

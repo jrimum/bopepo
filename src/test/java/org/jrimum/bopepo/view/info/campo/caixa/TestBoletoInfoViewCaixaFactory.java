@@ -14,8 +14,9 @@ import org.junit.Test;
 
 public class TestBoletoInfoViewCaixaFactory {
 	
-	private static final String NN15 = "000001234567890";
-	private static final String NN17 = "00000001234567890";
+	private static final String NN10 = "0123456789";
+	private static final String NN15 = "012345678901234";
+	private static final String NN17 = "01234567890123456";
 	
 	private Boleto boleto;
 	private ResourceBundle resourceBundle;
@@ -40,5 +41,13 @@ public class TestBoletoInfoViewCaixaFactory {
 		BoletoInfoCampoView view = BoletoInfoViewCaixaFactory.create(resourceBundle, boleto);
 		
 		assertTrue(view instanceof BoletoInfoViewCaixaSINCO);
+	}
+	
+	@Test
+	public void deve_retornar_implementacao_para_convenio_sicob_nn_10_digitos() {
+		boleto.getTitulo().setNossoNumero(NN10);
+		BoletoInfoCampoView view = BoletoInfoViewCaixaFactory.create(resourceBundle, boleto);
+		
+		assertTrue(view instanceof BoletoInfoViewCaixaSICOB10);
 	}
 }
