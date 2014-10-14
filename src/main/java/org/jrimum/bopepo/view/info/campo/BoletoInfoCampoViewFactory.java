@@ -36,6 +36,7 @@ import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.view.ResourceBundle;
 import org.jrimum.bopepo.view.info.campo.caixa.BoletoInfoViewCaixaFactory;
+import org.jrimum.bopepo.view.info.campo.hsbc.AbstractBoletoInfoViewHSBC;
 
 /**
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
@@ -57,7 +58,7 @@ public class BoletoInfoCampoViewFactory {
 			// case BANCO_DO_NORDESTE_DO_BRASIL: return new ..;
 			// case BANCO_ABN_AMRO_REAL: return new ..;
 			 case CAIXA_ECONOMICA_FEDERAL: return BoletoInfoViewCaixaFactory.create(resourceBundle, boleto);
-			// case HSBC: return new ..;
+			 case HSBC: return AbstractBoletoInfoViewHSBC.create(resourceBundle, boleto);
 			// case UNIBANCO: return new ..;
 			// case BANCO_ITAU: return new ..;
 			// case BANCO_SAFRA: return new ..;
