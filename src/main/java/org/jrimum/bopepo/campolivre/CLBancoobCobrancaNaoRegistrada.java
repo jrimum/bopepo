@@ -204,7 +204,7 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 		checkCodigoDoNumeroDaConta(titulo);
 		checkCodigoDoNumeroDaContaMenorOuIgualQue(titulo, 9999999);
 		checkDigitoDoCodigoDoNumeroDaConta(titulo);
-		checkCodigoDoNumeroDaContaMenorOuIgualQue(titulo, CONTA_LENGTH);
+		checkCodigoDoNumeroDaContaMenorOuIgualQue(titulo, 999999);
 	}
 
 	@Override
