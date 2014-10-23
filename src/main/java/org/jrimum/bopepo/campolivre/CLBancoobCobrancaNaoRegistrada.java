@@ -124,7 +124,7 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 	/**
 	 * Número de campos = 6.
 	 */
-	protected static final Integer FIELDS_LENGTH = 7;
+	protected static final Integer FIELDS_LENGTH = 8;
 	
 	/**
 	 * Tamanho do campo Carteira = 1. 
@@ -157,9 +157,14 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 	private static final Integer DV_NOSSO_NUMERO_LENGTH = Integer.valueOf(1);
 	
 	/**
-	 * Tamanho do campo Conta = 7. 
+	 * Tamanho do campo Conta = 6. 
 	 */
-	private static final Integer CONTA_LENGTH = Integer.valueOf(7);
+	private static final Integer CONTA_LENGTH = Integer.valueOf(6);
+	
+	/**
+	 * Tamanho do campo Dígito da conta = 1
+	 */
+	private static final Integer DV_CONTA_LENGTH = 1;
 	
 	/**
 	 * Valor do número de parcelas = 1.
@@ -198,6 +203,8 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 		checkNumeroDaContaNotNull(titulo);
 		checkCodigoDoNumeroDaConta(titulo);
 		checkCodigoDoNumeroDaContaMenorOuIgualQue(titulo, 9999999);
+		checkDigitoDoCodigoDoNumeroDaConta(titulo);
+		checkCodigoDoNumeroDaContaMenorOuIgualQue(titulo, CONTA_LENGTH);
 	}
 
 	@Override
@@ -223,6 +230,7 @@ public class CLBancoobCobrancaNaoRegistrada extends AbstractCLBancoob{
 		this.add(new FixedField<Integer>(titulo.getContaBancaria().getAgencia().getCodigo(), AGENCIA_LENGTH, Fillers.ZERO_LEFT));
 		this.add(new FixedField<Integer>(codigoDaModalidadeDeCobranca, MODALIDADE_DE_COBRANCA_LENGTH, Fillers.ZERO_LEFT));
 		this.add(new FixedField<Integer>(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta(), CONTA_LENGTH, Fillers.ZERO_LEFT));
+		this.add(new FixedField<String>(titulo.getContaBancaria().getNumeroDaConta().getDigitoDaConta(), DV_CONTA_LENGTH, Fillers.ZERO_LEFT));
 		this.add(new FixedField<String>(titulo.getNossoNumero(),NOSSO_NUMERO_LENGTH, Fillers.ZERO_LEFT));
 		this.add(new FixedField<String>(titulo.getDigitoDoNossoNumero(),DV_NOSSO_NUMERO_LENGTH));
 		this.add(new FixedField<Integer>(numeroDaParcela, NUMERO_DA_PARCELA_LENGTH, Fillers.ZERO_LEFT));

@@ -56,18 +56,43 @@ public class TestCLBancoobCobrancaNaoRegistrada extends AbstractCampoLivreBaseTe
 
 		titulo.getContaBancaria().setBanco(BancosSuportados.BANCOOB.create());
 		titulo.getContaBancaria().setAgencia(new Agencia(4340));
-		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1));
+		titulo.getContaBancaria().setNumeroDaConta(new NumeroDaConta(1, "0"));
 		titulo.getContaBancaria().setCarteira(new Carteira(1));
 		titulo.setNossoNumero("0200000");
 		titulo.setDigitoDoNossoNumero("1");
 
 		createCampoLivreToTest();
 
-		setCampoLivreEsperadoComoString("1434001000000102000001001");
+		setCampoLivreEsperadoComoString("1434001000001002000001001");
 	}
 	
 	@Test(expected = CampoLivreException.class)
 	public void seNaoPermiteNossoNumeroComTamanhoDiferenteDe7() {
 		testeSeNaoPermiteNossoNumeroComTamanhoDiferenteDoEspecificado(NOSSO_NUMERO_LENGTH + 1);
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteDigitoDaContaNulo() {
+		testeSeNaoPermiteDigitoDaContaNulo();
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteDigitoDaContaNaoNumero() {
+		testeSeNaoPermiteDigitoDaContaNaoNumerico();
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteDigitoDaContaNegativo() {
+		testeSeNaoPermiteDigitoDaContaNegativo();
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteDigitoDaContaVazio() {
+		testeSeNaoPermiteDigitoDaContaVazio();
+	}
+	
+	@Test(expected = CampoLivreException.class)
+	public void seNaoPermiteNumeroDaContaMaiorQueSeisDigitos() {
+		testeSeNaoPermiteNumeroDaContaComCodigoAcimaDoLimite(1000000);
 	}
 }
