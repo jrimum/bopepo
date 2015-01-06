@@ -44,6 +44,16 @@ public class TestBoletoInfoViewCaixaSICOB14 {
 	}
 	
 	@Test
+	public void deve_retornar_agencia_codigo_cliente_no_formato_correto_quando_parametro_bancario_nao_informado() {
+		boleto.getTitulo().getContaBancaria().setAgencia(new Agencia(34));
+		boleto.getTitulo().getContaBancaria().getNumeroDaConta().setCodigoDaConta(12345);
+		boleto.getTitulo().getContaBancaria().getNumeroDaConta().setDigitoDaConta("0");
+		
+		assertEquals("0034.870.00012345-0", view.getTextoFcAgenciaCodigoCedente());
+		assertEquals("0034.870.00012345-0", view.getTextoRsAgenciaCodigoCedente());
+	}
+	
+	@Test
 	public void deve_retornar_local_de_pagamento_padrao_quando_nenhum_informado() {
 		boleto.setLocalPagamento(null);
 		assertEquals("PREFERENCIALMENTE NAS CASAS LOTÉRICAS ATÉ O VALOR LIMITE", view.getTextoFcLocalPagamento());
