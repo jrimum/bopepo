@@ -61,7 +61,7 @@ public class BoletoInfoViewBradesco extends AbstractBoletoInfoCampoView{
 		
 		return leftPad(agencia.getCodigo().toString(), 4, "0")
 				+ "-" + agencia.getDigitoVerificador()
-				+ "/"
+				+ " / "
 				+ leftPad(numeroDaConta.getCodigoDaConta().toString(), 7, "0")
 				+ "-" + numeroDaConta.getDigitoDaConta();
 	}
