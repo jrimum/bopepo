@@ -30,6 +30,8 @@
 
 package org.jrimum.bopepo.view.info.campo;
 
+import static org.apache.commons.lang.StringUtils.isBlank;
+
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.view.ResourceBundle;
 
@@ -40,6 +42,12 @@ public class BoletoInfoViewCecred extends AbstractBoletoInfoCampoView {
 
 	BoletoInfoViewCecred(ResourceBundle resourceBundle, Boleto boleto) {
 		super(resourceBundle, boleto);
+	}
+	
+	@Override
+	public String getTextoFcLocalPagamento() {
+		String textoFcLocalPagamento = super.getTextoFcLocalPagamento();
+		return isBlank(textoFcLocalPagamento) ? "PAGAVEL PREFERENCIALMENTE NAS COOPERATIVAS DO SISTEMA CECRED." : textoFcLocalPagamento;
 	}
 	
 	/**
@@ -61,9 +69,10 @@ public class BoletoInfoViewCecred extends AbstractBoletoInfoCampoView {
 	private String getAgenciaCodigoCedente(){
 		Integer agencia = super.getBoleto().getTitulo().getContaBancaria().getAgencia().getCodigo();
 		String agDv = super.getBoleto().getTitulo().getContaBancaria().getAgencia().getDigitoVerificador();
-		Integer codigoCedente = super.getBoleto().getTitulo().getContaBancaria().getNumeroDaConta().getCodigoDaConta();
+		Integer numeroDaConta = super.getBoleto().getTitulo().getContaBancaria().getNumeroDaConta().getCodigoDaConta();
+		String contaDv = super.getBoleto().getTitulo().getContaBancaria().getNumeroDaConta().getDigitoDaConta();
 		
-		return String.format("%04d-%s / %08d", agencia, agDv, codigoCedente);
+		return String.format("%04d-%s / %07d-%s", agencia, agDv, numeroDaConta, contaDv);
 	}
 
 }
