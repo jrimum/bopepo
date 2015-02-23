@@ -45,7 +45,7 @@ import org.junit.Test;
  */
 public class TestBoletoInfoCampoEndereco {
 
-	private static final String ENDERECO_ESPERADO_LINHA1 = "Grande Centro - Natal / Rio Grande do Norte";
+	private static final String ENDERECO_ESPERADO_LINHA1 = "Grande Centro - Natal / RN";
 	private static final String ENDERECO_ESPERADO_LINHA2 = "Rua poeta dos programas, n°: 1 / Apt 101 - CEP: 59064-120";
 	
 	//LINHA1
@@ -90,7 +90,7 @@ public class TestBoletoInfoCampoEndereco {
 		
 		endereco.setBairro(null);
 		
-		assertThat(BoletoInfoCampoEndereco.getTextoEnderecoLinha1(endereco), equalTo("Natal / Rio Grande do Norte"));
+		assertThat(BoletoInfoCampoEndereco.getTextoEnderecoLinha1(endereco), equalTo("Natal / RN"));
 	}
 
 	@Test
@@ -99,7 +99,7 @@ public class TestBoletoInfoCampoEndereco {
 		
 		endereco.setBairro(EMPTY);
 		
-		assertThat(BoletoInfoCampoEndereco.getTextoEnderecoLinha1(endereco), equalTo("Natal / Rio Grande do Norte"));
+		assertThat(BoletoInfoCampoEndereco.getTextoEnderecoLinha1(endereco), equalTo("Natal / RN"));
 	}
 
 	@Test
@@ -108,7 +108,7 @@ public class TestBoletoInfoCampoEndereco {
 		
 		endereco.setLocalidade(null);
 		
-		assertThat(BoletoInfoCampoEndereco.getTextoEnderecoLinha1(endereco), equalTo("Grande Centro / Rio Grande do Norte"));
+		assertThat(BoletoInfoCampoEndereco.getTextoEnderecoLinha1(endereco), equalTo("Grande Centro / RN"));
 	}
 
 	@Test
@@ -117,7 +117,7 @@ public class TestBoletoInfoCampoEndereco {
 		
 		endereco.setLocalidade(null);
 		
-		assertThat(BoletoInfoCampoEndereco.getTextoEnderecoLinha1(endereco), equalTo("Grande Centro / Rio Grande do Norte"));
+		assertThat(BoletoInfoCampoEndereco.getTextoEnderecoLinha1(endereco), equalTo("Grande Centro / RN"));
 	}
 
 	@Test

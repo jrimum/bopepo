@@ -75,7 +75,7 @@ public class BoletoInfoCampoEndereco {
 				if(temBairro || temLocalidade){
 					texto.append(" / ");
 				}
-				texto.append(endereco.getUF().getNome());
+				texto.append(endereco.getUF().getSigla());
 			}
 		}
 		
