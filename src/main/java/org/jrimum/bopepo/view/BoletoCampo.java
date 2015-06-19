@@ -103,5 +103,22 @@ public enum BoletoCampo {
 	txtRsQuantidade,
 	txtRsSacado,
 	txtRsValorCobrado,
-	txtRsValorDocumento
+	txtRsValorDocumento,
+	
+	//Recibo do Sacado
+	txtReAgenciaCodigoCedente,
+	txtReCedente,
+	txtReCodBanco,
+	txtReCpfCnpj,
+	txtReDataVencimento,
+	txtReDescontoAbatimento,
+	txtReEspecie,
+	txtReLinhaDigitavel,
+	txtReLogoBanco,
+	txtReNossoNumero,
+	txtReNumeroDocumento,
+	txtReQuantidade,
+	txtReSacado,
+	txtReValorDocumento,
+	txtReLocalPagamento
 }

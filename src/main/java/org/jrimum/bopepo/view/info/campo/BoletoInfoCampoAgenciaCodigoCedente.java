@@ -34,6 +34,7 @@ import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.jrimum.utilix.Objects.isNotNull;
 
+import org.apache.commons.lang.StringUtils;
 import org.jrimum.domkee.financeiro.banco.febraban.ContaBancaria;
 
 /**
@@ -61,7 +62,11 @@ public class BoletoInfoCampoAgenciaCodigoCedente {
 			temAgencia = true;
 			
 			if (isNotNull(conta.getAgencia().getCodigo())){
-				texto.append(conta.getAgencia().getCodigo());
+				if (conta.getAgencia().getNumeroDigAgencia() != null) {
+					texto.append(StringUtils.leftPad(conta.getAgencia().getCodigo().toString(),conta.getAgencia().getNumeroDigAgencia().intValue(),"0"));
+				} else {
+					texto.append(conta.getAgencia().getCodigo());
+				}
 			}
 	
 			if (isNotBlank(conta.getAgencia().getDigitoVerificador().toString())) {
@@ -79,7 +84,11 @@ public class BoletoInfoCampoAgenciaCodigoCedente {
 
 			if (isNotNull(conta.getNumeroDaConta().getCodigoDaConta())) {
 	
-				texto.append(conta.getNumeroDaConta().getCodigoDaConta());
+				if (conta.getNumeroDaConta().getNumeroDigConta() != null) {
+					texto.append(StringUtils.leftPad(conta.getNumeroDaConta().getCodigoDaConta().toString(),conta.getNumeroDaConta().getNumeroDigConta().intValue(),"0"));
+				} else {
+					texto.append(conta.getNumeroDaConta().getCodigoDaConta());
+				}
 	
 				if (isNotBlank(conta.getNumeroDaConta().getDigitoDaConta())) {
 	

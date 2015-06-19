@@ -156,6 +156,7 @@ public class BoletoInfoViewBuilder {
 	
 	private void setCprfCedente(){
 		text.put(BoletoCampo.txtRsCpfCnpj.name(), boletoInfoCampo.getTextoRsCpfCnpj());
+		text.put(BoletoCampo.txtReCpfCnpj.name(), boletoInfoCampo.getTextoRsCpfCnpj());
 	}
 
 	private void setDataProcessamento(){
@@ -164,6 +165,7 @@ public class BoletoInfoViewBuilder {
 
 	private void setLocalPagamento(){
 		text.put(BoletoCampo.txtFcLocalPagamento.name(), boletoInfoCampo.getTextoFcLocalPagamento());
+		text.put(BoletoCampo.txtReLocalPagamento.name(), boletoInfoCampo.getTextoFcLocalPagamento());		
 	}
 
 	private void setAceite(){
@@ -184,6 +186,7 @@ public class BoletoInfoViewBuilder {
 
 	private void setSacado(){
 		text.put(BoletoCampo.txtRsSacado.name(), boletoInfoCampo.getTextoRsSacado());
+		text.put(BoletoCampo.txtReSacado.name(), boletoInfoCampo.getTextoRsSacado());
 		text.put(BoletoCampo.txtFcSacadoL1.name(), boletoInfoCampo.getTextoFcSacadoL1());
 		text.put(BoletoCampo.txtFcSacadoL2.name(), boletoInfoCampo.getTextoFcSacadoL2());
 		text.put(BoletoCampo.txtFcSacadoL3.name(), boletoInfoCampo.getTextoFcSacadoL3());
@@ -223,10 +226,12 @@ public class BoletoInfoViewBuilder {
 
 	private void setDescontoAbatimento(){
 		text.put(BoletoCampo.txtRsDescontoAbatimento.name(), boletoInfoCampo.getTextoRsDescontoAbatimento());
+		text.put(BoletoCampo.txtReDescontoAbatimento.name(), boletoInfoCampo.getTextoRsDescontoAbatimento());
 		text.put(BoletoCampo.txtFcDescontoAbatimento.name(), boletoInfoCampo.getTextoFcDescontoAbatimento());
 	}
 	private void setValorDocumento(){
 		text.put(BoletoCampo.txtRsValorDocumento.name(), boletoInfoCampo.getTextoRsValorDocumento());
+		text.put(BoletoCampo.txtReValorDocumento.name(), boletoInfoCampo.getTextoRsValorDocumento());
 		text.put(BoletoCampo.txtFcValorDocumento.name(), boletoInfoCampo.getTextoFcValorDocumento());
 	}
 
@@ -237,52 +242,62 @@ public class BoletoInfoViewBuilder {
 
 	private void setDataVencimeto(){
 		text.put(BoletoCampo.txtRsDataVencimento.name(),  boletoInfoCampo.getTextoRsDataVencimento());
+		text.put(BoletoCampo.txtReDataVencimento.name(),  boletoInfoCampo.getTextoRsDataVencimento());	
 		text.put(BoletoCampo.txtFcDataVencimento.name(),  boletoInfoCampo.getTextoFcDataVencimento());
 	}
 
 	private void setNumeroDocumento(){
 		text.put(BoletoCampo.txtRsNumeroDocumento.name(), boletoInfoCampo.getTextoRsNumeroDocumento());
+		text.put(BoletoCampo.txtReNumeroDocumento.name(), boletoInfoCampo.getTextoRsNumeroDocumento());
 		text.put(BoletoCampo.txtFcNumeroDocumento.name(), boletoInfoCampo.getTextoFcNumeroDocumento());
 	}
 	
 	private void setCedente(){
 		text.put(BoletoCampo.txtRsCedente.name(), boletoInfoCampo.getTextoRsCedente());
+		text.put(BoletoCampo.txtReCedente.name(), boletoInfoCampo.getTextoRsCedente());
 		text.put(BoletoCampo.txtFcCedente.name(), boletoInfoCampo.getTextoFcCedente());
 	}
 	
 	private void setEspecie(){
 		text.put(BoletoCampo.txtRsEspecie.name(), boletoInfoCampo.getTextoRsEspecie());
+		text.put(BoletoCampo.txtReEspecie.name(), boletoInfoCampo.getTextoRsEspecie());
 		text.put(BoletoCampo.txtFcEspecie.name(), boletoInfoCampo.getTextoFcEspecie());
 	}
 	
 	private void setCodigoDoBanco(){
 		text.put(BoletoCampo.txtRsCodBanco.name(), boletoInfoCampo.getTextoRsCodigoBanco());
+		text.put(BoletoCampo.txtReCodBanco.name(), boletoInfoCampo.getTextoRsCodigoBanco());
 		text.put(BoletoCampo.txtFcCodBanco.name(), boletoInfoCampo.getTextoFcCodigoBanco());
 	}
 
 	private void setAgenciaCodigoCedente(){
 		text.put(BoletoCampo.txtRsAgenciaCodigoCedente.name(), boletoInfoCampo.getTextoRsAgenciaCodigoCedente());
+		text.put(BoletoCampo.txtReAgenciaCodigoCedente.name(), boletoInfoCampo.getTextoRsAgenciaCodigoCedente());
 		text.put(BoletoCampo.txtFcAgenciaCodigoCedente.name(), boletoInfoCampo.getTextoFcAgenciaCodigoCedente());
 	}
 
 	private void setNossoNumero(){
 		text.put(BoletoCampo.txtRsNossoNumero.name(), boletoInfoCampo.getTextoRsNossoNumero());
+		text.put(BoletoCampo.txtReNossoNumero.name(), boletoInfoCampo.getTextoRsNossoNumero());
 		text.put(BoletoCampo.txtFcNossoNumero.name(), boletoInfoCampo.getTextoFcNossoNumero());
 	}
 	
 	private void setLogotipoDoBanco(){
 		if (isNotNull(boletoInfoCampo.getImagemFcLogoBanco())) {
 			image.put(BoletoCampo.txtRsLogoBanco.name(),boletoInfoCampo.getImagemRsLogoBanco());
+			image.put(BoletoCampo.txtReLogoBanco.name(),boletoInfoCampo.getImagemRsLogoBanco());
 			image.put(BoletoCampo.txtFcLogoBanco.name(),boletoInfoCampo.getImagemFcLogoBanco());
 		} else {
 			log.warn("Banco sem imagem definida. O nome da instituição será usado como logo.");
 			text.put(BoletoCampo.txtRsLogoBanco.name(),boletoInfoCampo.getTextoRsLogoBanco());
+			text.put(BoletoCampo.txtReLogoBanco.name(),boletoInfoCampo.getTextoRsLogoBanco());
 			text.put(BoletoCampo.txtFcLogoBanco.name(),boletoInfoCampo.getTextoFcLogoBanco());
 		}		
 	}
 
 	private void setLinhaDigitavel(){
 		text.put(BoletoCampo.txtRsLinhaDigitavel.name(), boletoInfoCampo.getTextoRsLinhaDigitavel());
+		text.put(BoletoCampo.txtReLinhaDigitavel.name(), boletoInfoCampo.getTextoRsLinhaDigitavel());
 		text.put(BoletoCampo.txtFcLinhaDigitavel.name(), boletoInfoCampo.getTextoFcLinhaDigitavel());
 	}
 	

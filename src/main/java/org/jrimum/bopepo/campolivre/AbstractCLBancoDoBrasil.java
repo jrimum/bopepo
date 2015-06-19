@@ -78,7 +78,13 @@ abstract class AbstractCLBancoDoBrasil extends AbstractCampoLivre {
 		case NN11:
 			return new CLBancoDoBrasilNN11(titulo);
 		case NN17:
-			if(titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta() < 1000000){
+			int nrDigConvenio;
+			if (titulo.getContaBancaria().getNumeroDigConvenio() != null) {
+				nrDigConvenio = titulo.getContaBancaria().getNumeroDigConvenio().intValue();
+			} else {
+				nrDigConvenio = titulo.getContaBancaria().getNumeroDaConta().getCodigoDaConta() < 1000000 ? 6 : 7;
+			}
+			if(nrDigConvenio == 6){
 				return new CLBancoDoBrasilNN17Convenio6(titulo);
 			}else{
 				return new CLBancoDoBrasilNN17Convenio7().build(titulo);
