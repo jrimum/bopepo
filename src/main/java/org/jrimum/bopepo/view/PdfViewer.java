@@ -67,6 +67,7 @@ class PdfViewer {
 	private PdfDocMix doc;
 	private Boleto boleto;
 	private byte[] template;
+	private boolean imprimeReciboEntrega;
 	
 	/**
 	 * Para uso interno do componente
@@ -434,13 +435,18 @@ class PdfViewer {
 	 */
 	private byte[] getTemplateFromResource() {
 		
-		if (boleto.getTitulo().hasSacadorAvalista()) {
-			
-			return resourceBundle.getTemplateComSacadorAvalista();
-			
+		if (imprimeReciboEntrega) {
+			if (boleto.getTitulo().hasSacadorAvalista()) {			
+				return resourceBundle.getTemplateComSacadorAvalistaComRecEntrega();
+			} else {
+				return resourceBundle.getTemplateSemSacadorAvalistaComRecEntrega();
+			}
 		} else {
-			
-			return resourceBundle.getTemplateSemSacadorAvalista();
+			if (boleto.getTitulo().hasSacadorAvalista()) {			
+				return resourceBundle.getTemplateComSacadorAvalista();			
+			} else {			
+				return resourceBundle.getTemplateSemSacadorAvalista();
+			}
 		}
 	}
 
@@ -475,4 +481,13 @@ class PdfViewer {
 		return tsb.toString();
 	}
 
+	public boolean isImprimeReciboEntrega() {
+		return imprimeReciboEntrega;
+	}
+
+	public void setImprimeReciboEntrega(boolean imprimeReciboEntrega) {
+		this.imprimeReciboEntrega = imprimeReciboEntrega;
+	}
+
+	
 }
