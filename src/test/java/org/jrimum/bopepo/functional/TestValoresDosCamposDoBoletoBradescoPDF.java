@@ -122,8 +122,9 @@ public class TestValoresDosCamposDoBoletoBradescoPDF {
 	@Test
 	public void deve_gerar_boleto_com_os_campos_texto_formatados_corretamente() throws IOException {
 		boolean NAO = false;
-		byte[] boletoPdf = BoletoViewer
-				.create(BoletoBuilder.defaultValueSacadorAvalista())
+		BoletoViewer viewer = BoletoViewer.create(BoletoBuilder.defaultValueSacadorAvalista());
+		viewer.setImprimeReciboEntrega(true);
+		byte[] boletoPdf = viewer
 				.setPdfRemoverCampos(NAO)
 				.getPdfAsByteArray();
 

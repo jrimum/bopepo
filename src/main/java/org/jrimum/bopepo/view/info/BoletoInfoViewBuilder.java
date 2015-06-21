@@ -225,8 +225,7 @@ public class BoletoInfoViewBuilder {
 	}
 
 	private void setDescontoAbatimento(){
-		text.put(BoletoCampo.txtRsDescontoAbatimento.name(), boletoInfoCampo.getTextoRsDescontoAbatimento());
-		text.put(BoletoCampo.txtReDescontoAbatimento.name(), boletoInfoCampo.getTextoRsDescontoAbatimento());
+		text.put(BoletoCampo.txtRsDescontoAbatimento.name(), boletoInfoCampo.getTextoRsDescontoAbatimento());		
 		text.put(BoletoCampo.txtFcDescontoAbatimento.name(), boletoInfoCampo.getTextoFcDescontoAbatimento());
 	}
 	private void setValorDocumento(){

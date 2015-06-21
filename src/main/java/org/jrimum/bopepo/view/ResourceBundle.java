@@ -69,6 +69,10 @@ public class ResourceBundle {
 	 * Nome do arquivo pdf.
 	 */
 	public static final String BOLETO_TEMPLATE_SEM_SACADOR_AVALISTA = "BoletoTemplateSemSacadorAvalista.pdf";
+	
+	public static final String BOLETO_TEMPLATE_COM_SACADOR_AVALISTA_COM_REC_ENTREGA = "BoletoTemplateComSacadorAvalistaComRecEntrega.pdf";
+	
+	public static final String BOLETO_TEMPLATE_SEM_SACADOR_AVALISTA_COM_REC_ENTREGA = "BoletoTemplateSemSacadorAvalistaComRecEntrega.pdf";
 
 	/**
 	 * Imagens usadas na instancia. 
@@ -84,6 +88,10 @@ public class ResourceBundle {
 	 * Template do projeto usando na isntancia.
 	 */
 	private byte[] defaultTemplateSemSacadorAvalista;
+	
+	private byte[] defaultTemplateComSacadorAvalistaComRecEntrega;
+	
+	private byte[] defaultTemplateSemSacadorAvalistaComRecEntrega;
 	
 	/**
 	 * Inicia a instancia com os valores padrões necessários.
@@ -115,6 +123,27 @@ public class ResourceBundle {
 		}
 
 		return defaultTemplateSemSacadorAvalista;
+	}
+	
+	
+	public byte[] getTemplateSemSacadorAvalistaComRecEntrega() {
+
+		if (isNull(defaultTemplateSemSacadorAvalistaComRecEntrega)) {
+
+			defaultTemplateSemSacadorAvalistaComRecEntrega = loadPdf(BOLETO_TEMPLATE_SEM_SACADOR_AVALISTA_COM_REC_ENTREGA);
+		}
+
+		return defaultTemplateSemSacadorAvalistaComRecEntrega;
+	}
+	
+	public byte[] getTemplateComSacadorAvalistaComRecEntrega() {
+
+		if (isNull(defaultTemplateComSacadorAvalistaComRecEntrega)) {
+
+			defaultTemplateComSacadorAvalistaComRecEntrega = loadPdf(BOLETO_TEMPLATE_COM_SACADOR_AVALISTA_COM_REC_ENTREGA);
+		}
+
+		return defaultTemplateComSacadorAvalistaComRecEntrega;
 	}
 	
 	public Image getLogotipoDoBanco(String codigo){

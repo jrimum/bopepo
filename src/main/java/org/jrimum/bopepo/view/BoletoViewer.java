@@ -343,6 +343,32 @@ public class BoletoViewer {
 	 * 
 	 * @param boletos
 	 *            Lista com os boletos a serem agrupados
+	 * @param destFile
+	 *            Arquivo que armazenará os boletos
+	 * @param imprimeReciboEntrega
+	 *            Se true, imprime a área de recibo de entrega acima do recibo do pagador
+	 * @return Arquivo PDF gerado com os boletos da lista
+	 * 
+	 * @since 0.2.4
+	 */
+	public static File groupInOnePDF(List<Boleto> boletos, File destFile, boolean imprimeReciboEntrega) {
+		checkBoletosList(boletos);
+		checkDestFile(destFile);		
+		BoletoViewer boletoViewer = new BoletoViewer();
+		boletoViewer.setImprimeReciboEntrega(imprimeReciboEntrega);
+		return PdfViewerMultiProcessor.groupInOnePDF(boletos, boletoViewer, destFile);		
+	}
+	/**
+	 * <p>
+	 * Agrupa os boletos da lista em um único arquivo PDF.
+	 * Ex: Se a lista contém 10 boletos, ao final será gerado
+	 * um único arquivo PDF contendo os 10 boletos, sendo 1
+	 * boleto em cada página.
+	 * </p>
+	 * 
+	 * 
+	 * @param boletos
+	 *            Lista com os boletos a serem agrupados
 	 * @param templatePath
 	 *            Caminho para o arquivo com o template para geração
 	 * @return Arquivo PDF em array de bytes gerado com os boletos da lista
@@ -1142,6 +1168,10 @@ public class BoletoViewer {
 		this.pdfViewer.setTemplate(template);
 
 		return this;
+	}
+	
+	public void setImprimeReciboEntrega(boolean imprimeReciboEntrega) {
+		this.pdfViewer.setImprimeReciboEntrega(imprimeReciboEntrega);
 	}
 
 	/**

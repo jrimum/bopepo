@@ -52,7 +52,6 @@ import java.util.Date;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.pdf.CodigoDeBarras;
 import org.jrimum.bopepo.view.ResourceBundle;
-import org.jrimum.domkee.financeiro.banco.febraban.TipoDeMoeda;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
 
@@ -255,11 +254,7 @@ public abstract class AbstractBoletoInfoCampoView implements BoletoInfoCampoView
 	}
 
 	public String getTextoFcEspecie(){
-		if (TipoDeMoeda.REAL.equals(boleto.getTitulo().getTipoDeMoeda())) {
-			return "R$";
-		} else {
-			return getValue(boleto.getTitulo().getTipoDeMoeda());
-		}
+		return getValue(boleto.getTitulo().getTipoDeMoeda());
 	}
 		
 	public String getTextoRsCodigoBanco(){
