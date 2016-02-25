@@ -142,11 +142,10 @@ public class Files {
 							+ Integer.MAX_VALUE);
 		}
 
-		OutputStream out = new FileOutputStream(file);
-
-		out.write(bytes);
-		out.flush();
-		out.close();
+            try (OutputStream out = new FileOutputStream(file)) {
+                out.write(bytes);
+                out.flush();
+            }
 
 		return file;
 	}
@@ -191,19 +190,17 @@ public class Files {
 
 		Objects.checkNotNull(file);
 
-		InputStream is = new FileInputStream(file);
-
-		byte[] bytes = new byte[(int) file.length()];
-
-		int offset = 0;
-		int numRead = 0;
-
-		while ((offset < bytes.length)
-				&& ((numRead = is.read(bytes, offset, bytes.length - offset)) >= 0)) {
-			offset += numRead;
-		}
-
-		is.close();
+                byte[] bytes;
+                int offset;
+            try (InputStream is = new FileInputStream(file)) {
+                bytes = new byte[(int) file.length()];
+                offset = 0;
+                int numRead = 0;
+                while ((offset < bytes.length)
+                        && ((numRead = is.read(bytes, offset, bytes.length - offset)) >= 0)) {
+                    offset += numRead;
+                }
+            }
 
 		Objects.checkArgument(offset == bytes.length,
 				"Não foi possível completar a leitura do arquivo: "
@@ -343,67 +340,60 @@ public class Files {
 
 		ByteArrayOutputStream outs = new ByteArrayOutputStream();
 
-		try {
-			// Create the ZIP file
-			ZipOutputStream out = new ZipOutputStream(outs);
+		try ( // Create the ZIP file
+                        ZipOutputStream out = new ZipOutputStream(outs)) {
 
 			// Compress the files
 			for (Entry<String, byte[]> entry : files.entrySet()) {
 
 				if (entry.getValue() != null) {
 
-					ByteArrayInputStream in = new ByteArrayInputStream(entry
-							.getValue());
-
-					// Add ZIP entry to output stream.
-					out.putNextEntry(new ZipEntry(normalizeName(entry.getKey())));
-
-					// Transfer bytes from the file to the ZIP file
-					int len;
-
-					while ((len = in.read(buf)) > 0) {
-						out.write(buf, 0, len);
-					}
-
-					// Complete the entry
-					out.closeEntry();
-					in.close();
+                                    // Add ZIP entry to output stream.
+                                    try (ByteArrayInputStream in = new ByteArrayInputStream(entry
+                                            .getValue())) {
+                                        // Add ZIP entry to output stream.
+                                        out.putNextEntry(new ZipEntry(normalizeName(entry.getKey())));
+                                        
+                                        // Transfer bytes from the file to the ZIP file
+                                        int len;
+                                        
+                                        while ((len = in.read(buf)) > 0) {
+                                            out.write(buf, 0, len);
+                                        }
+                                        
+                                        // Complete the entry
+                                        out.closeEntry();
+                                    }
 				}
 			}
-
-			// Complete the ZIP file
-			out.close();
-
-			return outs.toByteArray();
+                // Complete the ZIP file
+                
 
 		} catch (IOException e) {
 			
 			throw new IllegalStateException(e);
 		}
+                return outs.toByteArray();
 	}
 	
     public static byte[] toByteArray(File file){
     	
     	try{
     		
-	        InputStream is = new FileInputStream(file);
-	    
-	        long length = file.length();
-	    
-	        if (length > Integer.MAX_VALUE) {
-	        	Exceptions.throwIllegalArgumentException(String.format("File is too large! Max file length capacity is %s bytes.",length));
-	        }
-	    
-	        byte[] bytes = new byte[(int)length];
-	    
-	        int offset = 0;
-	        int numRead = 0;
-	        while ((offset < bytes.length)
-	               && ((numRead=is.read(bytes, offset, bytes.length-offset)) >= 0)) {
-	            offset += numRead;
-	        }
-	    
-	        is.close();
+            byte[] bytes;
+            int offset;
+                try (InputStream is = new FileInputStream(file)) {
+                    long length = file.length();
+                    if (length > Integer.MAX_VALUE) {
+                        Exceptions.throwIllegalArgumentException(String.format("File is too large! Max file length capacity is %s bytes.",length));
+                    }   bytes = new byte[(int)length];
+                    offset = 0;
+                    int numRead = 0;
+                    while ((offset < bytes.length)
+                            && ((numRead=is.read(bytes, offset, bytes.length-offset)) >= 0)) {
+                        offset += numRead;
+                    }
+                }
 	        
 	        if (offset < bytes.length) {
 	            throw new IOException("Could not completely read file "+file.getName());

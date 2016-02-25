@@ -141,9 +141,10 @@ public class PDFs{
 	 */
 	public static byte[] mergeFiles(Collection<byte[]> pdfFiles, PdfDocInfo info) {
 		
-		try{
+            byte[] bytes;
+		try(ByteArrayOutputStream byteOS = new ByteArrayOutputStream()){
 			
-			ByteArrayOutputStream byteOS = new ByteArrayOutputStream();
+			
 			
 			Document document = new Document();
 			
@@ -176,9 +177,11 @@ public class PDFs{
 			
 			copy.close();
 			document.close();
-			byteOS.close();
+			
+                        
+                        bytes = byteOS.toByteArray();
 
-			return byteOS.toByteArray();
+			return bytes;
 			
 		}catch (Exception e) {
 			return Exceptions.throwIllegalStateException(e);

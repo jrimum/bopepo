@@ -156,13 +156,13 @@ public class ResourceBundle {
 	private byte[] loadPdf(String fileName){
 		
 		byte[] pdf = null;
-		InputStream is = null;
 		
-		try {
-			
-			is = ClassLoaders.getResource(
+		
+		try (InputStream is = ClassLoaders.getResource(
 						"/pdf/"+fileName,
-						this.getClass()).openStream();
+						this.getClass()).openStream()){
+			
+			
 			
 			pdf = Files.toByteArray(is);
 			
@@ -170,14 +170,6 @@ public class ResourceBundle {
 			
 			Exceptions.throwIllegalStateException(e);
 			
-		}finally{
-			if(is != null){
-				try {
-					is.close();
-				} catch (Exception e) {
-					Exceptions.throwIllegalStateException(e);
-				}
-			}
 		}
 		
 		return pdf;
