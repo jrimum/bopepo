@@ -145,6 +145,8 @@ public class Files {
             try (OutputStream out = new FileOutputStream(file)) {
                 out.write(bytes);
                 out.flush();
+            } catch (IOException ex) {
+                throw  new IOException(ex);
             }
 
 		return file;
@@ -186,28 +188,32 @@ public class Files {
 	 * @throws IllegalArgumentException
 	 *             Caso o {@code file} seja {@code null}.
 	 */
-	public static byte[] fileToBytes(File file) throws IOException {
+	   public static byte[] fileToBytes(File file) throws IOException {
 
-		Objects.checkNotNull(file);
+        Objects.checkNotNull(file);
 
-                byte[] bytes;
-                int offset;
-            try (InputStream is = new FileInputStream(file)) {
-                bytes = new byte[(int) file.length()];
-                offset = 0;
-                int numRead = 0;
-                while ((offset < bytes.length)
-                        && ((numRead = is.read(bytes, offset, bytes.length - offset)) >= 0)) {
-                    offset += numRead;
-                }
+        byte[] bytes;
+        int offset;
+        try (InputStream is = new FileInputStream(file)) {
+            bytes = new byte[(int) file.length()];
+            offset = 0;
+            int numRead = 0;
+            while ((offset < bytes.length)
+                    && ((numRead = is.read(bytes, offset, bytes.length - offset)) >= 0)) {
+                offset += numRead;
             }
+        } catch (IOException e) {
 
-		Objects.checkArgument(offset == bytes.length,
-				"Não foi possível completar a leitura do arquivo: "
-						+ file.getName());
+            throw new IllegalStateException(e);
 
-		return bytes;
-	}
+        }
+
+        Objects.checkArgument(offset == bytes.length,
+                "Não foi possível completar a leitura do arquivo: "
+                + file.getName());
+
+        return bytes;
+    }
 
 	/**
 	 * Retorna o conteúdo do {@code InputStream} em um array de bytes.
@@ -222,25 +228,29 @@ public class Files {
 	 * @throws IllegalArgumentException
 	 *             Caso o {@code input} seja {@code null}.
 	 */
-	public static byte[] toByteArray(InputStream input) throws IOException {
+    public static byte[] toByteArray(InputStream input) throws IOException {
 
-		Objects.checkNotNull(input);
+        Objects.checkNotNull(input);
 
-		ByteArrayOutputStream output = new ByteArrayOutputStream();
+        
+        try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
 
-		byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+            byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
 
-		int n = 0;
+            int n = 0;
 
-		while (-1 != (n = input.read(buffer))) {
+            while (-1 != (n = input.read(buffer))) {
 
-			output.write(buffer, 0, n);
-		}
-		
-		input.close();
+                output.write(buffer, 0, n);
+            }
+            input.close();
+            return output.toByteArray();
 
-		return output.toByteArray();
-	}
+        } catch (IOException ex) {
+            throw new IOException(ex);
+        }
+
+    }
 
 	public static File zip(File f){
 
@@ -261,40 +271,28 @@ public class Files {
 	
 	public static byte[] zip(byte[] fileToZip, String fileZipedName){
 
-		ByteArrayOutputStream obout = new ByteArrayOutputStream();
+                byte[] bytes;	
 
-		ZipOutputStream out = null;
-
-		try {
+		try (ByteArrayOutputStream obout = new ByteArrayOutputStream();
+                        ZipOutputStream out= new ZipOutputStream(obout);)  {			
 			
-			out = new ZipOutputStream(obout);
 			out.setMethod(ZipOutputStream.DEFLATED);
 			out.putNextEntry(new ZipEntry(fileZipedName));
 			
 			out.write(fileToZip);
+                        
+                         bytes = obout.toByteArray();                         
 
 			
 		} catch (IOException e) {
 			
 			throw new IllegalStateException(e);
 			
-		}finally{
-			
-			if(out != null){
-				
-				try {
-					
-					// Close the input stream and return bytes
-					out.close();
-					
-				} catch (Exception e) {
-					
-					return Exceptions.throwIllegalStateException(e);
-				}
-			}
-		}
 		
-		return obout.toByteArray();
+		}
+               
+		
+		return bytes;
 	}
 	
 	public static File zip(Collection<File> files){
@@ -338,9 +336,11 @@ public class Files {
 		// Create a buffer for reading the files
 		byte[] buf = new byte[DEFAULT_BUFFER_SIZE];
 
-		ByteArrayOutputStream outs = new ByteArrayOutputStream();
+                byte[] bytes;
+		
 
 		try ( // Create the ZIP file
+                       ByteArrayOutputStream outs = new ByteArrayOutputStream();
                         ZipOutputStream out = new ZipOutputStream(outs)) {
 
 			// Compress the files
@@ -368,12 +368,12 @@ public class Files {
 			}
                 // Complete the ZIP file
                 
-
+                 bytes = outs.toByteArray();
 		} catch (IOException e) {
 			
 			throw new IllegalStateException(e);
 		}
-                return outs.toByteArray();
+                return bytes;
 	}
 	
     public static byte[] toByteArray(File file){
