@@ -71,15 +71,18 @@ import org.jrimum.utilix.Objects;
  * <td >9(3)</td>
  * <td >
  *    <ul>
- *       <li>101-Cobrança Simples Rápida COM Registro</li>
- *       <li>102- Cobrança simples – SEM Registro</li>
- *       <li>201- Penhor Rápida com Registro</li>
+ *       <li>101 - Cobrança Simples Rápida COM Registro</li>
+ *       <li>102 - Cobrança simples – SEM Registro</li>
+ *       <li>104 - Cobrança Simples Eletrônica - COM Registro</li>
+ *       <li>201 - Penhor Rápida com Registro</li>
  *    </ul>
  * </td>
  * </tr>
  * </table>
  * 
  * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L.</a>
+ * @author <a href="mailto:misaelbarreto@gmail.com">Misael Barreto</a>
+ * @author <a href="mailto:">Dani Schinniger</a>
  */
 class CLBancoSantander extends AbstractCLSantander implements CampoLivre {
 
@@ -112,6 +115,11 @@ class CLBancoSantander extends AbstractCLSantander implements CampoLivre {
 	 * 102- Cobrança simples – SEM Registro
 	 */
 	private static final int CARTEIRA_SIMPLES_SEM_REGISTRO = 102;
+	
+	/**
+	 * 104- Cobrança Simples Eletrônica - COM Registro
+	 */
+	private static final int COBRANCA_SIMPLES_ELETRONICA_COM_REGISTRO = 104;	
 
 	CLBancoSantander(Titulo titulo) {
 		super(FIELDS_LENGTH);
@@ -147,6 +155,7 @@ class CLBancoSantander extends AbstractCLSantander implements CampoLivre {
 		case CARTEIRA_RAPIDA_COM_REGISTRO:
 		case CARTEIRA_RAPIDA_SEM_REGISTRO:
 		case CARTEIRA_SIMPLES_SEM_REGISTRO:
+		case COBRANCA_SIMPLES_ELETRONICA_COM_REGISTRO:
 
 			this.add(new FixedField<Integer>(conta.getCarteira().getCodigo(), 3,
 					Fillers.ZERO_LEFT));
