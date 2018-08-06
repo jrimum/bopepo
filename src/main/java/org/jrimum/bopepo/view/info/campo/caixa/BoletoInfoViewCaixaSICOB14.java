@@ -53,4 +53,10 @@ public class BoletoInfoViewCaixaSICOB14 extends AbstractBoletoInfoCampoView {
 		String textoFcLocalPagamento = super.getTextoFcLocalPagamento();
 		return isBlank(textoFcLocalPagamento) ? "PREFERENCIALMENTE NAS CASAS LOTÉRICAS ATÉ O VALOR LIMITE" : textoFcLocalPagamento;
 	}
+        
+        @Override
+	public String getTextoFcNossoNumero() {
+		return getBoleto().getTitulo().getContaBancaria().getCarteira().getCodigo()
+                        + super.getTextoFcNossoNumero();
+	}
 }
