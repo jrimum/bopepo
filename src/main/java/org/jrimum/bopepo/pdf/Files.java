@@ -142,11 +142,12 @@ public class Files {
 							+ Integer.MAX_VALUE);
 		}
 
-		OutputStream out = new FileOutputStream(file);
-
-		out.write(bytes);
-		out.flush();
-		out.close();
+            try (OutputStream out = new FileOutputStream(file)) {
+                out.write(bytes);
+                out.flush();
+            } catch (IOException ex) {
+                throw  new IOException(ex);
+            }
 
 		return file;
 	}
@@ -187,30 +188,32 @@ public class Files {
 	 * @throws IllegalArgumentException
 	 *             Caso o {@code file} seja {@code null}.
 	 */
-	public static byte[] fileToBytes(File file) throws IOException {
+	   public static byte[] fileToBytes(File file) throws IOException {
 
-		Objects.checkNotNull(file);
+        Objects.checkNotNull(file);
 
-		InputStream is = new FileInputStream(file);
+        byte[] bytes;
+        int offset;
+        try (InputStream is = new FileInputStream(file)) {
+            bytes = new byte[(int) file.length()];
+            offset = 0;
+            int numRead = 0;
+            while ((offset < bytes.length)
+                    && ((numRead = is.read(bytes, offset, bytes.length - offset)) >= 0)) {
+                offset += numRead;
+            }
+        } catch (IOException e) {
 
-		byte[] bytes = new byte[(int) file.length()];
+            throw new IllegalStateException(e);
 
-		int offset = 0;
-		int numRead = 0;
+        }
 
-		while ((offset < bytes.length)
-				&& ((numRead = is.read(bytes, offset, bytes.length - offset)) >= 0)) {
-			offset += numRead;
-		}
+        Objects.checkArgument(offset == bytes.length,
+                "Não foi possível completar a leitura do arquivo: "
+                + file.getName());
 
-		is.close();
-
-		Objects.checkArgument(offset == bytes.length,
-				"Não foi possível completar a leitura do arquivo: "
-						+ file.getName());
-
-		return bytes;
-	}
+        return bytes;
+    }
 
 	/**
 	 * Retorna o conteúdo do {@code InputStream} em um array de bytes.
@@ -225,25 +228,29 @@ public class Files {
 	 * @throws IllegalArgumentException
 	 *             Caso o {@code input} seja {@code null}.
 	 */
-	public static byte[] toByteArray(InputStream input) throws IOException {
+    public static byte[] toByteArray(InputStream input) throws IOException {
 
-		Objects.checkNotNull(input);
+        Objects.checkNotNull(input);
 
-		ByteArrayOutputStream output = new ByteArrayOutputStream();
+        
+        try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
 
-		byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+            byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
 
-		int n = 0;
+            int n = 0;
 
-		while (-1 != (n = input.read(buffer))) {
+            while (-1 != (n = input.read(buffer))) {
 
-			output.write(buffer, 0, n);
-		}
-		
-		input.close();
+                output.write(buffer, 0, n);
+            }
+            input.close();
+            return output.toByteArray();
 
-		return output.toByteArray();
-	}
+        } catch (IOException ex) {
+            throw new IOException(ex);
+        }
+
+    }
 
 	public static File zip(File f){
 
@@ -264,40 +271,28 @@ public class Files {
 	
 	public static byte[] zip(byte[] fileToZip, String fileZipedName){
 
-		ByteArrayOutputStream obout = new ByteArrayOutputStream();
+                byte[] bytes;	
 
-		ZipOutputStream out = null;
-
-		try {
+		try (ByteArrayOutputStream obout = new ByteArrayOutputStream();
+                        ZipOutputStream out= new ZipOutputStream(obout);)  {			
 			
-			out = new ZipOutputStream(obout);
 			out.setMethod(ZipOutputStream.DEFLATED);
 			out.putNextEntry(new ZipEntry(fileZipedName));
 			
 			out.write(fileToZip);
+                        
+                         bytes = obout.toByteArray();                         
 
 			
 		} catch (IOException e) {
 			
 			throw new IllegalStateException(e);
 			
-		}finally{
-			
-			if(out != null){
-				
-				try {
-					
-					// Close the input stream and return bytes
-					out.close();
-					
-				} catch (Exception e) {
-					
-					return Exceptions.throwIllegalStateException(e);
-				}
-			}
-		}
 		
-		return obout.toByteArray();
+		}
+               
+		
+		return bytes;
 	}
 	
 	public static File zip(Collection<File> files){
@@ -341,69 +336,64 @@ public class Files {
 		// Create a buffer for reading the files
 		byte[] buf = new byte[DEFAULT_BUFFER_SIZE];
 
-		ByteArrayOutputStream outs = new ByteArrayOutputStream();
+                byte[] bytes;
+		
 
-		try {
-			// Create the ZIP file
-			ZipOutputStream out = new ZipOutputStream(outs);
+		try ( // Create the ZIP file
+                       ByteArrayOutputStream outs = new ByteArrayOutputStream();
+                        ZipOutputStream out = new ZipOutputStream(outs)) {
 
 			// Compress the files
 			for (Entry<String, byte[]> entry : files.entrySet()) {
 
 				if (entry.getValue() != null) {
 
-					ByteArrayInputStream in = new ByteArrayInputStream(entry
-							.getValue());
-
-					// Add ZIP entry to output stream.
-					out.putNextEntry(new ZipEntry(normalizeName(entry.getKey())));
-
-					// Transfer bytes from the file to the ZIP file
-					int len;
-
-					while ((len = in.read(buf)) > 0) {
-						out.write(buf, 0, len);
-					}
-
-					// Complete the entry
-					out.closeEntry();
-					in.close();
+                                    // Add ZIP entry to output stream.
+                                    try (ByteArrayInputStream in = new ByteArrayInputStream(entry
+                                            .getValue())) {
+                                        // Add ZIP entry to output stream.
+                                        out.putNextEntry(new ZipEntry(normalizeName(entry.getKey())));
+                                        
+                                        // Transfer bytes from the file to the ZIP file
+                                        int len;
+                                        
+                                        while ((len = in.read(buf)) > 0) {
+                                            out.write(buf, 0, len);
+                                        }
+                                        
+                                        // Complete the entry
+                                        out.closeEntry();
+                                    }
 				}
 			}
-
-			// Complete the ZIP file
-			out.close();
-
-			return outs.toByteArray();
-
+                // Complete the ZIP file
+                
+                 bytes = outs.toByteArray();
 		} catch (IOException e) {
 			
 			throw new IllegalStateException(e);
 		}
+                return bytes;
 	}
 	
     public static byte[] toByteArray(File file){
     	
     	try{
     		
-	        InputStream is = new FileInputStream(file);
-	    
-	        long length = file.length();
-	    
-	        if (length > Integer.MAX_VALUE) {
-	        	Exceptions.throwIllegalArgumentException(String.format("File is too large! Max file length capacity is %s bytes.",length));
-	        }
-	    
-	        byte[] bytes = new byte[(int)length];
-	    
-	        int offset = 0;
-	        int numRead = 0;
-	        while ((offset < bytes.length)
-	               && ((numRead=is.read(bytes, offset, bytes.length-offset)) >= 0)) {
-	            offset += numRead;
-	        }
-	    
-	        is.close();
+            byte[] bytes;
+            int offset;
+                try (InputStream is = new FileInputStream(file)) {
+                    long length = file.length();
+                    if (length > Integer.MAX_VALUE) {
+                        Exceptions.throwIllegalArgumentException(String.format("File is too large! Max file length capacity is %s bytes.",length));
+                    }   bytes = new byte[(int)length];
+                    offset = 0;
+                    int numRead = 0;
+                    while ((offset < bytes.length)
+                            && ((numRead=is.read(bytes, offset, bytes.length-offset)) >= 0)) {
+                        offset += numRead;
+                    }
+                }
 	        
 	        if (offset < bytes.length) {
 	            throw new IOException("Could not completely read file "+file.getName());
