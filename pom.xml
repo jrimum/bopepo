@@ -6,7 +6,7 @@
 	<artifactId>jrimum-bopepo</artifactId>
 	<packaging>jar</packaging>
 	<name>Projeto Bopepo</name>
-	<version>0.2.3-DEV-SNAPSHOT</version>
+	<version>0.2.3-DEV-SETTE</version>
 	<description>Projeto open source de componentes de software para o domínio de negócios do Brasil.</description>
 	<url>http://www.jrimum.org/bopepo</url>
 
@@ -69,8 +69,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>

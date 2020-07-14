@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.jrimum:jrimum-vallia:0.2.3-DEV-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jrimum/jrimum-vallia/0.2.3-DEV-SNAPSHOT/jrimum-vallia-0.2.3-DEV-20190203.191806-32.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jrimum/jrimum-vallia/0.2.3-DEV-SNAPSHOT/jrimum-vallia-0.2.3-DEV-20190203.191806-32-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jrimum/jrimum-vallia/0.2.3-DEV-SNAPSHOT/jrimum-vallia-0.2.3-DEV-20190203.191806-32-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
