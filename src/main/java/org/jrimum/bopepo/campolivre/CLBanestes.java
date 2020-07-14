@@ -167,18 +167,26 @@ class CLBanestes extends AbstractCLBanestes {
 		
 		final byte segundoDV;
 		
-		// resto proveniente do módulo 11 com pesos de 2 a 7
+		// Resto proveniente do módulo 11 com pesos de 2 a 7
 		int restoDoModulo11 = new Modulo(TipoDeModulo.MODULO11, 7, 2).calcule(fields + primeiroDV);
 		
 		if (restoDoModulo11 == 0) {
 			segundoDV = 0;
 		} else	if (restoDoModulo11 == 1) {
+                        // Se D1=9, D1 passa a ser 10. Neste caso, considere D1=0
 			if (primeiroDV == 9) {
 				primeiroDV = 0;
 			} else {
 				primeiroDV++;
 			}
-			segundoDV = (byte) new Modulo(TipoDeModulo.MODULO11, 7, 2).calcule(fields + primeiroDV);
+                        // Se o Resto = 1, então some 1 a D1 e recalcule D2.
+                        restoDoModulo11 = new Modulo(TipoDeModulo.MODULO11, 7, 2).calcule(fields + primeiroDV);
+                        // Se o Reste > 1, então D2 = 11 - resto
+                        if( restoDoModulo11 > 1) {
+                            segundoDV = (byte) (11 - restoDoModulo11);
+                        } else {
+                            segundoDV = (byte) restoDoModulo11;
+                        }
 		} else {
 			segundoDV = (byte) (11 - restoDoModulo11);
 		}
