@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.jrimum:jrimum-texgit:0.2.3-DEV-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/jrimum/jrimum-texgit/0.2.3-DEV-SNAPSHOT/jrimum-texgit-0.2.3-DEV-20190203.191940-21.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/jrimum/jrimum-texgit/0.2.3-DEV-SNAPSHOT/jrimum-texgit-0.2.3-DEV-SNAPSHOT.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/org/jrimum/jrimum-texgit/0.2.3-DEV-SNAPSHOT/jrimum-texgit-0.2.3-DEV-20190203.191940-21-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/jrimum/jrimum-texgit/0.2.3-DEV-SNAPSHOT/jrimum-texgit-0.2.3-DEV-SNAPSHOT-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/jrimum/jrimum-texgit/0.2.3-DEV-SNAPSHOT/jrimum-texgit-0.2.3-DEV-20190203.191940-21-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/jrimum/jrimum-texgit/0.2.3-DEV-SNAPSHOT/jrimum-texgit-0.2.3-DEV-SNAPSHOT-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

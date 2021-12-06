@@ -370,7 +370,7 @@ public enum BancosSuportados{
 	 * </p>
 	 * 
 	 * @param codigoDeCompensacaoBACEN
-	 * @param cNPJ
+	 * @param cnpj
 	 * @param instituicao
 	 * @param segmento
 	 * 

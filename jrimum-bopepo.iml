@@ -13,13 +13,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: org.jrimum:jrimum-domkee:0.2.3-DEV-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: org.jrimum:jrimum-vallia:0.2.3-DEV-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.jrimum:jrimum-texgit:0.2.3-DEV-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: org.jrimum:jrimum-utilix:0.2.3-DEV-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.4" level="project" />
-    <orderEntry type="library" name="Maven: log4j:log4j:1.2.15" level="project" />
-    <orderEntry type="library" name="Maven: sun-jaxb:jaxb-api:2.2" level="project" />
-    <orderEntry type="library" name="Maven: sun-jaxb:jaxb-impl:2.2" level="project" />
     <orderEntry type="library" name="Maven: com.lowagie:itext:2.0.8" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.itextpdf:itextpdf:5.4.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.google.guava:guava-jdk5:14.0.1" level="project" />
