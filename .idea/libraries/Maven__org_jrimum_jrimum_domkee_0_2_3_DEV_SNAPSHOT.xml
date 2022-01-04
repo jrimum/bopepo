@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.jrimum:jrimum-domkee:0.2.3-DEV-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jrimum/jrimum-domkee/0.2.3-DEV-SNAPSHOT/jrimum-domkee-0.2.3-DEV-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jrimum/jrimum-domkee/0.2.3-DEV-SNAPSHOT/jrimum-domkee-0.2.3-DEV-SNAPSHOT-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jrimum/jrimum-domkee/0.2.3-DEV-SNAPSHOT/jrimum-domkee-0.2.3-DEV-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
